@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+.wizard-progress {
+  display: flex;
+  width: 100%;
+  margin: 40px 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.step {
+  position: relative;
+  flex: 1;
+  padding: 16px 20px;
+  background: linear-gradient(145deg, #f0f0f0, #dcdcdc);
+  color: #333;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  clip-path: polygon(
+    0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%,
+    0 100%, 20px 50%
+  );
+  margin-left: -20px;
+  z-index: 1;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+}
+/* primeira etapa*/
+.step:first-child {
+  margin-left: 0;
+  clip-path: polygon(
+    0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%,
+    0 100%
+  );
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+/* última etapa */
+.step:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  clip-path: polygon(
+    0 0, calc(100% - 20px) 0, 100% 0, 100% 100%, calc(100% - 20px) 100%,
+    0 100%, 20px 50%
+  );
+}
+
+/* etapa ativa */
+.step.active {
+  background: linear-gradient(135deg, #ffe259, #ffa751);
+  color: #000;
+  z-index: 2;
+  box-shadow: 0 8px 16px rgba(255, 193, 7, 0.25);
+  transform: scale(1.02);
+}
+
+/* etapa concluída verde*/
+.step.completed {
+  background: linear-gradient(to right, #43cea2, #185a9d);
+  color: white;
+}
+
+/* Hover para qualquer etapa (exceto ativa) */
+.step:not(.active):hover {
+  box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
