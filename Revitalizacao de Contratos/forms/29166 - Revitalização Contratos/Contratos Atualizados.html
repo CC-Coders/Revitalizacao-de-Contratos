@@ -13,12 +13,54 @@
 <form name="form" role="form">
 
 <div class="wizard-progress">
-<div class="step active">Negocia��o</div>
-<div class="step">Revis�o</div>
+<div class="step active">Negociação</div>
+<div class="step">Revisão</div>
 <div class="step">Cadastramento</div>
 <div class="step">Assinatura</div>
 </div>
 <br/>
+
+<!-- Progress Bar circulos -->
+
+<!-- <div class="bubble-progress"> -->
+<!-- <div class="bubble-step completed"> -->
+<!--   <div class="bubble-icon">✔</div> -->
+<!--   <div class="label">Negociação</div> -->
+<!-- </div> -->
+<!-- <div class="bubble-step active"> -->
+<!--   <div class="bubble-icon"></div> -->
+<!--   <div class="label">Revisão</div> -->
+<!-- </div> -->
+<!-- <div class="bubble-step"> -->
+<!--   <div class="bubble-icon"></div> -->
+<!--   <div class="label">Cadastramento</div> -->
+<!-- </div> -->
+<!-- <div class="bubble-step"> -->
+<!--   <div class="bubble-icon"></div> -->
+<!--   <div class="label">Assinatura</div> -->
+<!-- </div> -->
+<!-- </div> -->
+
+
+<!-- Progress Bar um circulo grande -->
+
+<!-- <div class="circle-progress-container"> -->
+<!-- <svg class="circle-progress" viewBox="0 0 200 200"> -->
+<!--   <circle class="segment segment1" r="90" cx="100" cy="100" /> -->
+<!--   <circle class="segment segment2" r="90" cx="100" cy="100" /> -->
+<!--   <circle class="segment segment3" r="90" cx="100" cy="100" /> -->
+<!--   <circle class="segment segment4" r="90" cx="100" cy="100" /> -->
+<!-- </svg> -->
+<!-- <div class="center-text" id="etapaAtual">Negociação</div> -->
+<!-- <div class="circle-labels"> -->
+<!--   <div class="circle-label" style="--angle: 0deg">Negociação</div> -->
+<!--   <div class="circle-label" style="--angle: 90deg">Revisão</div> -->
+<!--   <div class="circle-label" style="--angle: 180deg">Cadastramento</div> -->
+<!--   <div class="circle-label" style="--angle: 270deg">Assinatura</div> -->
+<!-- </div> -->
+<!-- </div> -->
+
+
 
 <br/>
 <div class="row">
@@ -26,6 +68,10 @@
 <div class="form-input">
     <label>Origem do Contrato:</label><select name="origemContrato"
         id="origemContrato" class="form-control inputInfoChamado">
+                <option value="">Selecione</option>
+                <option value="Novo">Novo</option>
+                <option value="Aditivos">Aditivos</option>
+                <option value="Rescisões">Rescisões</option>
     </select>
 </div>
 </div>
@@ -33,6 +79,9 @@
 <div class="form-input">
     <label>Modelo de Contrato:</label><select name="modeloContrato"
         id="modeloContrato" class="form-control inputInfoChamado">
+                <option value="">Selecione</option>
+                <option value="Modelo Castilho">Modelo Castilho</option>
+                <option value="Contrato fora do modelo">Contrato fora do modelo</option>
     </select>
 </div>
 </div>
@@ -40,10 +89,118 @@
 <div class="form-input">
     <label>Tipo de Contrato:</label><select name="tipoContrato"
         id="tipoContrato" class="form-control inputInfoChamado">
+           <option value="">Selecione</option>
+                <option value="Ferrovias - Locação de Equipamento">Ferrovias - Locação de Equipamento</option>
+                <option value="Ferrovias – Locação de Imóvel">Ferrovias – Locação de Imóvel</option>
+                <option value="Locação de Container">Locação de Container</option>
+                <option value="Locação de Equipamento">Locação de Equipamento</option>
+                <option value="Locação de Imóvel">Locação de Imóvel</option>
+                <option value="Locação de Sanitários">Locação de Sanitários</option>
+                <option value="Prestação de Serviços">Prestação de Serviços</option>
+                <option value="Transporte de Material">Transporte de Material</option>
+                <option value="Transporte de Funcionários">Transporte de Funcionários</option>
     </select>
 </div>
 </div>
 </div>
+<br/>
+
+                       <div class="row">
+                      <div class="col-md-6">
+                            <div class="form-input">
+                                <label>Obra:</label><strong class="strongAlert">*</strong><select name="obra"
+                                    id="obra" class="form-control inputInfoChamado">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input">
+                                <label>Locador:</label> <strong class="strongAlert">*</strong>
+                                <select name="locador" id="locador" class="form-control inputInfoChamado">
+                                </select>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                    <br/>
+                     <div class="row">
+                      <div class="col-md-6">
+                            <div class="form-input">
+                                <label>Procurador:</label><strong class="strongAlert">*</strong>  <input type="text" id="procurador" name="procurador"
+                                    class="form-control inputInfoChamado" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input">
+                               <label>Representante:</label><strong class="strongAlert">*</strong>  <input type="text" id="representante" name="representante"
+                                    class="form-control inputInfoChamado" />
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                    <br/>
+                     <div class="row">
+                      <div class="col-md-6">
+                            <div class="form-input">
+                                <label>Contratante Principal:</label><strong class="strongAlert">*</strong>  <input type="text" id="contratantePrincipal" name="contratantePrincipal"
+                                    class="form-control inputInfoChamado" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input">
+                               <label>Endereço do Imóvel:</label><strong class="strongAlert">*</strong>  <input type="text" id="enderecoImovel" name="enderecoImovel"
+                                    class="form-control inputInfoChamado" />
+                            </div>
+                        </div>
+                    </div>
+                                            <br/>
+                                         <div class="row">
+                      <div class="col-md-6">
+                            <div class="form-input">
+                                <label>Matrícula do Imóvel:</label><strong class="strongAlert">*</strong>  <input type="text" id="matriculaImovel" name="matriculaImovel"
+                                    class="form-control inputInfoChamado" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input">
+                               <label>Finalidade da Locação:</label><strong class="strongAlert">*</strong>  <input type="text" id="finalidadeLocacao" name="finalidadeLocacao"
+                                    class="form-control inputInfoChamado" />
+                            </div>
+                        </div>
+                    </div>
+                                  <br/>
+                                   <div class="row">
+                      <div class="col-md-6">
+                            <div class="form-input">
+                                <label>Período de Locação:</label><strong class="strongAlert">*</strong>  <input type="text" id="periodoLocacao" name="periodoLocacao"
+                                    class="form-control inputInfoChamado" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input">
+                               <label>Data de Pagamento do Caução:</label><strong class="strongAlert">*</strong>  <input type="text" id="dataPagamentoCaucao" name="dataPagamentoCaucao"
+                                    class="form-control inputInfoChamado" />
+                            </div>
+                        </div>
+                    </div>
+                                  <br/>
+                       <div class="row">
+                      <div class="col-md-6">
+                            <div class="form-input">
+                                <label>Valor do Caução:</label><strong class="strongAlert">*</strong>  <input type="text" id="valorCaucao" name="valorCaucao"
+                                    class="form-control inputInfoChamado" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-input">
+                               <label>Janela de Pagamento:</label><strong class="strongAlert">*</strong>  <input type="text" id="janelaPagamento" name="janelaPagamento"
+                                    class="form-control inputInfoChamado" />
+                            </div>
+                        </div>
+                    </div>
+                                  <br/>
+                    
+
 </form>
 </div>
 </body>
