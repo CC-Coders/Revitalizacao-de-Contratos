@@ -1,33 +1,52 @@
-$(document).ready(function(){   
-        const etapas = [
-          { nome: 'Negociação', cor: '#ffc107' },
-          { nome: 'Revisão', cor: '#4caf50' },
-          { nome: 'Cadastramento', cor: '#2196f3' },
-          { nome: 'Assinatura', cor: '#9c27b0' }
-        ];
-
-        let etapaAtual = 0;
-
-        function atualizarEtapas(index) {
-          etapaAtual = index;
-          const etapa = etapas[index];
-          const centro = document.getElementById('etapaAtual');
-          centro.innerText = etapa.nome;
-          centro.style.backgroundColor = etapa.cor + '33';
-
-          const segmentos = document.querySelectorAll('.segment');
-          segmentos.forEach((seg, i) => {
-            seg.classList.remove('current');
-            if (i === index) seg.classList.add('current');
-          });
-        }
-
-        document.getElementById('etapaAtual').addEventListener('click', () => {
-          const proxima = (etapaAtual + 1) % etapas.length;
-          atualizarEtapas(proxima);
+$(document).ready(function(){          
+	
+//Chamada de Funções
+        preencherObrasDoUsuario()
+        BuscaFornecedores()
+        buscaBancos()
+        inicializarCalendario()
+        inicializarPeriodoLocacao();
+        
+//Mostrar/Ocultar Funções
+        $("#tipoContrato").on("change", function () {
+                if ($(this).val() == "Locação de Imóvel") {
+                        $("#formContainer").show();
+                }else{
+                        $("#formContainer").hide();
+                }
         });
-
-        // Inicializa
-        atualizarEtapas(0);
-
+        $("#caucao").on("change", function () {
+                if ($(this).val() == "Sim") {
+                        $("#divValorCaucao, #divDataPagamentoCaucao").show();
+                }else{
+                        $("#divValorCaucao, #divDataPagamentoCaucao").hide();
+                }
+        });
+        $("#tipoPagamento").on("change", function () {
+                if ($(this).val() == "Depósito") {
+                        $("#divPagamento").show();
+                }else{
+                        $("#divPagamento").hide();
+                }
+        });
+        $('#locador').on('change', function () {
+            var cgccfo = $(this).val();
+            if (cgccfo) {
+                buscarEnderecoFornecedor(cgccfo);
+            } else {
+                $(".endereco-fornecedor").slideUp();
+            }
+        });
+        
+//Máscaras
+        $('#agencia').mask('0000-0', {placeholder: "____-_"});
+        $('#contaCorrente').mask('00000-0', {placeholder: "_____-_"});              
+        $('#valorCaucao').maskMoney({
+            prefix: 'R$ ',
+            thousands: '.',
+            decimal: ',',
+            allowZero: true,
+            affixesStay: true  
+    });
+        
 })
