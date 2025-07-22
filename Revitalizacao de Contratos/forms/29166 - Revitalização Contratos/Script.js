@@ -1,13 +1,10 @@
-$(document).ready(function(){          
-	
-//Chamada de Funções
+$(document).ready(function(){   
+        
         preencherObrasDoUsuario()
-        BuscaFornecedores()
+        buscaFornecedores()
         buscaBancos()
         inicializarCalendario()
         inicializarPeriodoLocacao();
-        
-//Mostrar/Ocultar Funções
         $("#tipoContrato").on("change", function () {
                 if ($(this).val() == "Locação de Imóvel") {
                         $("#formContainer").show();
@@ -24,29 +21,29 @@ $(document).ready(function(){
         });
         $("#tipoPagamento").on("change", function () {
                 if ($(this).val() == "Depósito") {
-                        $("#divPagamento").show();
+                        $("#divPagamento, #divBanco").show();
                 }else{
-                        $("#divPagamento").hide();
+                        $("#divPagamento, #divBanco").hide();
                 }
         });
-        $('#locador').on('change', function () {
-            var cgccfo = $(this).val();
-            if (cgccfo) {
-                buscarEnderecoFornecedor(cgccfo);
-            } else {
-                $(".endereco-fornecedor").slideUp();
-            }
-        });
-        
-//Máscaras
-        $('#agencia').mask('0000-0', {placeholder: "____-_"});
-        $('#contaCorrente').mask('00000-0', {placeholder: "_____-_"});              
         $('#valorCaucao').maskMoney({
-            prefix: 'R$ ',
-            thousands: '.',
-            decimal: ',',
-            allowZero: true,
-            affixesStay: true  
-    });
-        
+                prefix: 'R$ ',
+                thousands: '.',
+                decimal: ',',
+                allowZero: true,
+                affixesStay: true  
+            });
+        $('#agencia').mask('0000-0', {placeholder: "____-_"});
+        $('#contaCorrente').mask('00000-0', {placeholder: "_____-_"});
+                
+        $('#locador').on('change', function () {
+                var cgccfo = $(this).val();
+
+                if (cgccfo) {
+                        buscaInfosFornecedor(cgccfo);
+                } else {
+                    $(".endereco-fornecedor").slideUp();
+                }
+            });
+
 })
