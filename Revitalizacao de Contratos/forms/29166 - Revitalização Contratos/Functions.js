@@ -53,7 +53,7 @@ function preencherObrasDoUsuario() {
     }
 }
 
-function BuscaFornecedores() {
+function buscaFornecedores() {
         DatasetFactory.getDataset("FCFO", ["CGCCFO", "NOMEFANTASIA"], [
             DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST),
             DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST),
@@ -68,12 +68,15 @@ function BuscaFornecedores() {
                 } else {
                     var optSelected = $("#locador").val();
                     $("#locador").html("<option></option>");
+
                     fornecedores.values.forEach(fornecedor => {
                         $("#locador").append($("<option></option>")
                             .attr("value", fornecedor.CGCCFO)
                             .text(fornecedor.CGCCFO + " - " + fornecedor.NOMEFANTASIA));
                     });
+
                     $("#locador").val(optSelected);
+
                     $('#locador').select2({
                         height: "34px",
                         width: "100%",
@@ -84,6 +87,7 @@ function BuscaFornecedores() {
                             searching: () => "Buscando..."
                         }
                     });
+
                     $(".select2-container").off("click").on("click", function () {
                         $(this).removeClass("has-error");
                     });
@@ -99,19 +103,37 @@ function BuscaFornecedores() {
         });
 }
 
-function buscarEnderecoFornecedor(cgccfo) {
+function buscaInfosFornecedor(cgccfo) {
         DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [
             DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)
         ], null, {
             success: (dataset) => {
                 if (dataset.values && dataset.values.length > 0) {
                     const endereco = dataset.values[0];
+                    const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrangeiro";
+                    
+                    if (endereco.PESSOAFISOUJUR == 'F') {
+                        $(".pessoa-fisica").show();
+                        $(".pessoa-juridica").hide();
+                        
+                        $("#nacionalidadeFornecedor").val(nacionalidadeTexto);
+                        $("#estadoCivilFornecedor").val(endereco.ESTADOCIVIL || "");
+                    } else if (endereco.PESSOAFISOUJUR == 'J') {
+                        $(".pessoa-fisica").hide();
+                        $(".pessoa-juridica").show();
+                        
+                        $("#administradorFornecedor").val(endereco.ADMINISTRADOR || "");
+                        $("#cpfFornecedor").val(endereco.CPF || "");
+                    }
+                    
+                    $("#rgFornecedor").val(endereco.CGCCFO || "");
                     $("#ruaFornecedor").val(endereco.RUA || "");
                     $("#numeroFornecedor").val(endereco.NUMERO || "");
                     $("#bairroFornecedor").val(endereco.BAIRRO || "");
                     $("#cidadeFornecedor").val(endereco.CIDADE || "");
                     $("#cepFornecedor").val(endereco.CEP || "");
                     $("#estadoFornecedor").val(endereco.CODETD || "");
+                    
                     $(".endereco-fornecedor").slideDown();
                 } else {
                     FLUIGC.toast({
@@ -131,7 +153,7 @@ function buscarEnderecoFornecedor(cgccfo) {
                 });
             }
         });
-    }
+}
 
 function buscaBancos() {
         DatasetFactory.getDataset("GBANCO", null, null, null, {
@@ -172,9 +194,9 @@ function inicializarCalendario() {
 }
 
 
-function inicializarPeriodoLocacao() {
-           const periodoLocacao = document.getElementById("periodoLocacao");
-           
+        function inicializarPeriodoLocacao() {
+            const periodoLocacao = document.getElementById("periodoLocacao");
+            
             if (periodoLocacao) {
                 flatpickr(periodoLocacao, {
                     mode: "range",
@@ -182,9 +204,9 @@ function inicializarPeriodoLocacao() {
                     locale: "pt",
                     minDate: "01/01/2024",
                     maxDate: "31/12/2030",
-                    allowInput: true,  
-                    clickOpens: true,   
-                    disableMobile: true, 
+                    allowInput: true, 
+                    clickOpens: true,  
+                    disableMobile: true,
                     onOpen: function() {
                         periodoLocacao.classList.remove("disabled");
                     },
@@ -204,6 +226,6 @@ function inicializarPeriodoLocacao() {
                     }
                 });
             }
-}
+        }
 
    
