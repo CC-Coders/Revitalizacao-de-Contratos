@@ -33,7 +33,6 @@ function preencherObrasDoUsuario() {
 
                 optionsObra += `<option value="${optionValue}">${optionLabel}</option>`;
             });
-            
             optionsObra += "</optgroup>";
             selectObra.append(optionsObra);
         } else {
