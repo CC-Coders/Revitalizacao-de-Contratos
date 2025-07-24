@@ -1,5 +1,5 @@
 $(document).ready(function(){   
-        
+        bindings();
         preencherObrasDoUsuario()
         buscaFornecedores()
         buscaBancos()
@@ -47,3 +47,11 @@ $(document).ready(function(){
             });
 
 })
+
+
+function bindings() {
+	// Amarra eventos e elementos do HTML, mantendo todas definições de evento agrupadas
+	$("#btnGerarArquivo").on("click", ()=>{buscaModeloDoContrato()});
+	$("#btnEditarArquivo").on("click", ()=>{editarArquivo()});
+	$("#btnSalvarArquivo").on("click", ()=>{salvaWord()});
+}
