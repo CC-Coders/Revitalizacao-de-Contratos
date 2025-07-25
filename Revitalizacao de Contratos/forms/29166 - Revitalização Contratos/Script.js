@@ -38,6 +38,7 @@ $(document).ready(function(){
                 
         $('#locador').on('change', function () {
                 var cgccfo = $(this).val();
+                console.log("Selecionado no #locador:", cgccfo);
 
                 if (cgccfo) {
                         buscaInfosFornecedor(cgccfo);
@@ -45,5 +46,5 @@ $(document).ready(function(){
                     $(".endereco-fornecedor").slideUp();
                 }
             });
-
+ 
 })

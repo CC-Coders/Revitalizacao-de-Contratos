@@ -194,7 +194,7 @@ function inicializarCalendario() {
 }
 
 
-        function inicializarPeriodoLocacao() {
+function inicializarPeriodoLocacao() {
             const periodoLocacao = document.getElementById("periodoLocacao");
             
             if (periodoLocacao) {
@@ -204,9 +204,9 @@ function inicializarCalendario() {
                     locale: "pt",
                     minDate: "01/01/2024",
                     maxDate: "31/12/2030",
-                    allowInput: true, 
-                    clickOpens: true,  
-                    disableMobile: true,
+                    allowInput: true,  
+                    clickOpens: true,   
+                    disableMobile: true, 
                     onOpen: function() {
                         periodoLocacao.classList.remove("disabled");
                     },
@@ -226,6 +226,6 @@ function inicializarCalendario() {
                     }
                 });
             }
-        }
+}
 
    
