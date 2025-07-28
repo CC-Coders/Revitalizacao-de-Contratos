@@ -1,132 +1,154 @@
 // Modelo de Conrato
 const pastaDeAnexos = 18386;
 async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
-    var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
-    var file = await geraFileFromURL(url);
-    carregaFileProDocxTemplatereEPreencheOsValores_retornaFile(file)
+	var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
+	var file = await geraFileFromURL(url);
+	carregaFileProDocxTemplatereEPreencheOsValores_retornaFile(file)
 
-    function geraFileFromURL(url) {
-        return new Promise((resolve, reject) => {
-            PizZipUtils.getBinaryContent(url, function (error, content) {
-                if (error) {
-                    reject(error);
-                }
-                resolve(content);
-            });
-        });
-    }
-    async function carregaFileProDocxTemplatereEPreencheOsValores_retornaFile(content) {
-        const zip = new PizZip(content);
-        const doc = new window.docxtemplater(zip, {
-            paragraphLoop: true,
-            linebreaks: true,
-            syntax: {
-                changeDelimiterPrefix: "$",
-            },
-        });
-        doc.render(buscaDadosDoFormulario());
-        var file = doc.toBlob()
-        var file = new File([file], "file.docx", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
-        return file;
-    }
-    function buscaDadosDoFormulario() {
-        var retorno = {
-            FORNECEDOR: "SEM CAMPO",
-            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$("#cidadeFornecedor").val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
-            FORNECEDOR_CNPJ: $("#locador").val(),
-            FORNECEDOR_NOME_REPRESENTANTE: $("#representante").val(),
-            FORNECEDOR_CPF_REPRESENTANTE: "SEM CAMPO",
-            IMOVEL_DESCRICAO: "SEM CAMPO",
-            IMOVEL_MATRICULA: $("#matriculaImovel").val(),
-            IMOVEL_FINALIDADE: $("#finalidadeLocacao").val(),
-            LOCACAO_PERIODO: $("#periodoLocacao").val(),
-            LOCACAO_VALOR: "SEM CAMPO",
-            LOCACAO_DIA_VENCIMENTO: $("#periodoLocacao").val(),
-            LOCACAO_VALOR_CAUCAO: $("#valorCaucao").val(),
-            LOCACAO_DATA_CAUCAO: $("#dataPagamentoCaucao").val(),
-            BANCO: $("#banco").val(),
-            BANCO_AGENCIA: $("#agencia").val(),
-            BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
-            DIA: "22",
-            MES: "Julho",
-            ANO: "2025",
-        }
-        return retorno;
-    }
+	function geraFileFromURL(url) {
+		return new Promise((resolve, reject) => {
+			PizZipUtils.getBinaryContent(url, function (error, content) {
+				if (error) {
+					reject(error);
+				}
+				resolve(content);
+			});
+		});
+	}
+	async function carregaFileProDocxTemplatereEPreencheOsValores_retornaFile(content) {
+		const zip = new PizZip(content);
+		const doc = new window.docxtemplater(zip, {
+			paragraphLoop: true,
+			linebreaks: true,
+			syntax: {
+				changeDelimiterPrefix: "$",
+			},
+		});
+		doc.render(buscaDadosDoFormulario());
+		var file = doc.toBlob()
+		var file = new File([file], "file.docx", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+		return file;
+	}
+	function buscaDadosDoFormulario() {
+		var retorno = {
+			FORNECEDOR: "SEM CAMPO",
+			FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$("#cidadeFornecedor").val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
+			FORNECEDOR_CNPJ: $("#locador").val(),
+			FORNECEDOR_NOME_REPRESENTANTE: $("#representante").val(),
+			FORNECEDOR_CPF_REPRESENTANTE: "SEM CAMPO",
+			IMOVEL_DESCRICAO: "SEM CAMPO",
+			IMOVEL_MATRICULA: $("#matriculaImovel").val(),
+			IMOVEL_FINALIDADE: $("#finalidadeLocacao").val(),
+			LOCACAO_PERIODO: $("#periodoLocacao").val(),
+			LOCACAO_VALOR: "SEM CAMPO",
+			LOCACAO_DIA_VENCIMENTO: $("#periodoLocacao").val(),
+			LOCACAO_VALOR_CAUCAO: $("#valorCaucao").val(),
+			LOCACAO_DATA_CAUCAO: $("#dataPagamentoCaucao").val(),
+			BANCO: $("#banco").val(),
+			BANCO_AGENCIA: $("#agencia").val(),
+			BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
+			DIA: "22",
+			MES: "Julho",
+			ANO: "2025",
+		}
+		return retorno;
+	}
 }
 async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
-    const documentIdModelo = 29328;
-    var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentIdModelo);
-    const response = await fetch(url);
-    const blob = await response.blob();
-     const file = new File([blob], 'document.docx', {
-            type: blob.type
-        });
-    var documentId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDeAnexos);
-    $("#contratoDocumentId").val(documentId);
+	const documentIdModelo = 29328;
+	var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentIdModelo);
+	const response = await fetch(url);
+	const blob = await response.blob();
+	const file = new File([blob], 'document.docx', {
+		type: blob.type
+	});
+	var documentId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDeAnexos);
+	$("#contratoDocumentId").val(documentId);
 }
 async function salvaModeloAlterado() {
-    try {
-        var response = await promiseConverteEditorParaDocx();
-
-        const blob = new Blob([response.data], {
-            type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        });
-
-        const file = new File([blob], 'document.docx', {
-            type: blob.type
-        });
-        await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val());
-
-    } catch (error) {
-
+	try {
+Swal.fire({
+    icon: "info",
+    title: "Salvando Contrato, por favor aguarde...",
+    showConfirmButton: false,
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+        Swal.showLoading();
     }
+});
 
-    function promiseConverteEditorParaDocx() {
-        return new Promise((resolve, reject) => {
-            const data = {
-                html: ckeditor.getData(),
-                css: "",
-                config: {
-                    document: {
-                        orientation: "portrait",
-                        size: "Tabloid",
-                        margins: {
-                            top: "20mm",
-                            bottom: "20mm",
-                            right: "24mm",
-                            left: "24mm"
-                        },
-                        language: "en"
-                    },
-                    merge_fields: {
-                        prefix: "{{",
-                        suffix: "}}"
-                    },
-                    headers: {
-                        default: {
-                            html: header,
-                            css: ""
-                        }
-                    },
-                    footers: {
-                        default: {
-                            html: footer,
-                            css: ""
-                        }
-                    }
-                }
-            };
 
-            axios.post('https://docx-converter.cke-cs.com/v2/convert/html-docx', data, { responseType: 'arraybuffer' })
-                .then(async response => {
-                    resolve(response);
-                }).catch(error => {
-                    console.error('Conversion error', error);
-                    reject(error);
-                });
-        });
-    }
+		var response = await promiseConverteEditorParaDocx();
+
+		const blob = new Blob([response.data], {
+			type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+		});
+
+		const file = new File([blob], 'document.docx', {
+			type: blob.type
+		});
+		await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val());
+		
+		Swal.fire({
+			position: "top-end",
+			icon: "success",
+			toast: true,
+			title: "Contrato Salvo!",
+			timer: 1500,
+			preConfirm: false
+		});
+
+
+	} catch (error) {
+
+	}
+
+	function promiseConverteEditorParaDocx() {
+		return new Promise((resolve, reject) => {
+			const data = {
+				html: ckeditor.getData(),
+				css: "",
+				config: {
+					document: {
+						orientation: "portrait",
+						size: "Tabloid",
+						margins: {
+							top: "20mm",
+							bottom: "20mm",
+							right: "24mm",
+							left: "24mm"
+						},
+						language: "en"
+					},
+					merge_fields: {
+						prefix: "{{",
+						suffix: "}}"
+					},
+					headers: {
+						default: {
+							html: header,
+							css: ""
+						}
+					},
+					footers: {
+						default: {
+							html: footer,
+							css: ""
+						}
+					}
+				}
+			};
+
+			axios.post('https://docx-converter.cke-cs.com/v2/convert/html-docx', data, { responseType: 'arraybuffer' })
+				.then(async response => {
+					resolve(response);
+				}).catch(error => {
+					console.error('Conversion error', error);
+					reject(error);
+				});
+		});
+	}
 }
 
 
@@ -134,10 +156,44 @@ async function salvaModeloAlterado() {
 // CK5 Editor
 var ckeditor = null;
 async function editarArquivo() {
-    await loadCkEditor();
-    setTimeout(async () => {
-        await carregaDocumentoParaOCKEditor($("#contratoDocumentId").val());
-    }, 200);
+	openModal();
+	await loadCkEditor();
+	setTimeout(async () => {
+		await carregaDocumentoParaOCKEditor($("#contratoDocumentId").val());
+	}, 200);
+
+	function openModal() {
+		var html =
+			`<div class="main-container">
+                <div class="editor-container editor-container_classic-editor editor-container_include-style editor-container_include-fullscreen"
+                    id="editor-container">
+                    <div class="editor-container__editor">
+                        <div id="editor"></div>
+                    </div>
+                </div>
+            </div>`;
+
+		var myModal = FLUIGC.modal({
+			title: 'Title',
+			content: html,
+			id: 'fluig-modal',
+			size: 'full',
+			actions: [{
+				'label': 'Salvar',
+				'bind': 'data-open-modal',
+				'autoClose': true
+			}, {
+				'label': 'Cancelar',
+				'autoClose': true
+			}]
+		}, function (err, data) {
+			if (err) {
+				// do error handling
+			} else {
+				$("[data-open-modal]").on("click", salvaModeloAlterado);
+			}
+		});
+	}
 }
 
 async function loadCkEditor() {
@@ -423,7 +479,7 @@ async function loadCkEditor() {
 				}
 			}
 		},
-        importWord: {
+		importWord: {
 			tokenUrl: 'https://kgpduuc7hd0x.cke-cs.com/token/dev/407f4638faf927a773c40624a83b760abd427256264bba2c07f63af67045?limit=10'
 		},
 		fontFamily: {
@@ -671,108 +727,108 @@ async function loadCkEditor() {
 var header = null;//Salva o cabeçalho importado do docx para usar quando for salvar pra docx novamente
 var footer = null;//Salva o rodape importado do docx para usar quando for salvar pra docx novamente
 async function carregaDocumentoParaOCKEditor(documentId) {
-    const fileUrl = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
-    const response = await fetch(fileUrl);
-    const blob = await response.blob();
+	const fileUrl = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
+	const response = await fetch(fileUrl);
+	const blob = await response.blob();
 
-    const formData = new FormData();
-    formData.append('file', blob, 'file.docx');
-    axios.post('https://docx-converter.cke-cs.com/v2/convert/docx-html', formData)
-        .then(response => {
-            console.log('Conversion result', response.data);
-            header = response.data.headers.default.html;
-            footer = response.data.footers.default.html;
-            ckeditor.setData(`${response.data.html}`);
-        }).catch(error => {
-            console.log('Conversion error', error);
-        });
+	const formData = new FormData();
+	formData.append('file', blob, 'file.docx');
+	axios.post('https://docx-converter.cke-cs.com/v2/convert/docx-html', formData)
+		.then(response => {
+			console.log('Conversion result', response.data);
+			header = response.data.headers.default.html;
+			footer = response.data.footers.default.html;
+			ckeditor.setData(`${response.data.html}`);
+		}).catch(error => {
+			console.log('Conversion error', error);
+		});
 }
 
-async function carregaDocumentoProIframe(){
-    var documnetId = $("#contratoDocumentId").val();
-    var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documnetId);
-    $("#frameContrato").attr("src",url);
+async function carregaDocumentoProIframe() {
+	var documnetId = $("#contratoDocumentId").val();
+	var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documnetId);
+	$("#frameContrato").attr("src", url);
 }
-function visualizaDocumento(){
-    var documentId = $("#contratoDocumentId").val();
-    var attachments = parent.WKFViewAttachment.getAllAttachments();
-    for (const attachment of attachments) {
-        if (attachment.documentId == documentId) {
-            parent.WKFViewAttachment.openAttachmentView($("#userCode").val(),documentId,attachment.version)   ;
-        }
-    }
+function visualizaDocumento() {
+	var documentId = $("#contratoDocumentId").val();
+	var attachments = parent.WKFViewAttachment.getAllAttachments();
+	for (const attachment of attachments) {
+		if (attachment.documentId == documentId) {
+			parent.WKFViewAttachment.openAttachmentView($("#userCode").val(), documentId, attachment.version);
+		}
+	}
 }
 
 
 // Utils
 function promiseGeraFileFromURL(url) {
-    return new Promise((resolve, reject) => {
-        PizZipUtils.getBinaryContent(url, function (error, content) {
-            if (error) {
-                reject(error);
-            }
-            resolve(content);
-        });
-    });
+	return new Promise((resolve, reject) => {
+		PizZipUtils.getBinaryContent(url, function (error, content) {
+			if (error) {
+				reject(error);
+			}
+			resolve(content);
+		});
+	});
 }
 function promiseAtualizaDocumentoNoGED(file, documentId) {
-    var name = "Teste.docx";
-    var parentId = "18386";
-    var parentId = "18386";
+	var name = "Teste.docx";
+	var parentId = "18386";
+	var parentId = "18386";
 
-    return new Promise((resolve, reject) => {
-        var reader = new FileReader();
+	return new Promise((resolve, reject) => {
+		var reader = new FileReader();
 
-        reader.readAsDataURL(file);
-        reader.onload = function (e) {
-            var bytes = e.target.result.split("base64,")[1];
-            var ds = DatasetFactory.getDataset("dsAtualizaDocumentosFluig", null, [
-                DatasetFactory.createConstraint("name", name, name, ConstraintType.MUST),
-                DatasetFactory.createConstraint("ParentDocumentId", parentId, parentId, ConstraintType.MUST),
-                DatasetFactory.createConstraint("documentId", documentId, documentId, ConstraintType.MUST),
-                DatasetFactory.createConstraint("conteudo", bytes, bytes, ConstraintType.MUST),
-            ], null);
+		reader.readAsDataURL(file);
+		reader.onload = function (e) {
+			var bytes = e.target.result.split("base64,")[1];
+			var ds = DatasetFactory.getDataset("dsAtualizaDocumentosFluig", null, [
+				DatasetFactory.createConstraint("name", name, name, ConstraintType.MUST),
+				DatasetFactory.createConstraint("ParentDocumentId", parentId, parentId, ConstraintType.MUST),
+				DatasetFactory.createConstraint("documentId", documentId, documentId, ConstraintType.MUST),
+				DatasetFactory.createConstraint("conteudo", bytes, bytes, ConstraintType.MUST),
+			], null);
 
-            resolve(ds);
-        };
-    });
+			resolve(ds);
+		};
+	});
 }
 function promiseCriaDocFluig_retornaDocumentId(file, parentId) {
-    return new Promise((resolve, reject) => {
-        var reader = new FileReader();
-        var fileName = file.name;
+	return new Promise((resolve, reject) => {
+		var reader = new FileReader();
+		var fileName = file.name;
 
-        reader.readAsDataURL(file);
-        reader.onload = function (e) {
-            var bytes = e.target.result.split("base64,")[1];
+		reader.readAsDataURL(file);
+		reader.onload = function (e) {
+			var bytes = e.target.result.split("base64,")[1];
 
-            // Chama Dataset de Criação de Documento
-            DatasetFactory.getDataset("CriacaoDocumentosFluig", null, [
-                DatasetFactory.createConstraint("conteudo", bytes, bytes, ConstraintType.MUST),
-                DatasetFactory.createConstraint("nome", fileName, fileName, ConstraintType.SHOULD),
-                DatasetFactory.createConstraint("descricao", fileName, fileName, ConstraintType.SHOULD),
-                DatasetFactory.createConstraint("pasta", parentId, parentId, ConstraintType.SHOULD),
-            ], null, {
-                success: function (dataset) {
-                    if (!dataset || dataset == "" || dataset == null) {
-                        // Retorna com erro
-                        reject("Houve um erro na comunicação com o webservice de criação de documentos. Tente novamente!");
-                    }
+			// Chama Dataset de Criação de Documento
+			DatasetFactory.getDataset("CriacaoDocumentosFluig", null, [
+				DatasetFactory.createConstraint("conteudo", bytes, bytes, ConstraintType.MUST),
+				DatasetFactory.createConstraint("nome", fileName, fileName, ConstraintType.SHOULD),
+				DatasetFactory.createConstraint("descricao", fileName, fileName, ConstraintType.SHOULD),
+				DatasetFactory.createConstraint("pasta", parentId, parentId, ConstraintType.SHOULD),
+			], null, {
+				success: function (dataset) {
+					if (!dataset || dataset == "" || dataset == null) {
+						// Retorna com erro
+						reject("Houve um erro na comunicação com o webservice de criação de documentos. Tente novamente!");
+					}
 
-                    if (dataset.values[0][0] == "false") {
-                        // Retorna com erro
-                        reject("Erro ao criar arquivo. Favor entrar em contato com o administrador do sistema. Mensagem: " + dataset.values[0][1]);
-                    }
-                    else {
-                        // Retorna com Sucesso
-                        console.log("### GEROU docID = " + dataset.values[0].Resultado);
-                        resolve(dataset.values[0].Resultado);
-                    }
-                },
-                error: function (error) {
-                    reject(error);
-                }
-            });
-        };
-    });
+					if (dataset.values[0][0] == "false") {
+						// Retorna com erro
+						reject("Erro ao criar arquivo. Favor entrar em contato com o administrador do sistema. Mensagem: " + dataset.values[0][1]);
+					}
+					else {
+						// Retorna com Sucesso
+						console.log("### GEROU docID = " + dataset.values[0].Resultado);
+						resolve(dataset.values[0].Resultado);
+					}
+				},
+				error: function (error) {
+					reject(error);
+				}
+			});
+		};
+	});
 }

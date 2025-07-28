@@ -54,6 +54,8 @@
     <!-- Precisa? Acho que não, deve dar pra usar o Ajax no lugar, mas peguei de uma documentação do CK5 Editor uma chamada com Axios e mantive -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <!-- Swal -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -403,8 +405,10 @@
             </div>
 
 
+            
+
             <!-- Painel Aprovacao -->
-            <div id="panelAprovacao">
+            <div id="panelAprovacao" style="display: none;">
                 <div style="max-width: 1400px;">
                     <h3>Contrato - Locação de Imóvel - Locação de Imóvel - PF</h3>
                     
@@ -563,28 +567,19 @@
                         </div>
                     </div>
 
-                    <div>
-                        <iframe src="" id="frameContrato" frameborder="0"></iframe>
+                    <div style="text-align: center;">
+                        <button class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button>
+                        <button class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button>
                     </div>
                 </div>
+            </div>
 
+            <div style="text-align: center;">
+                <button class="btn btn-primary" id="btnEnviarSolicitacao">Enviar</button>
             </div>
 
             <!-- Editor de Documentos -->
-            <div style="text-align: center;">
-                <button class="btn btn-primary" id="btnGerarArquivo">Gerar Arquivo</button>
-                <button class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button>
-                <button class="btn btn-primary" id="btnSalvarArquivo">Salvar Arquivo</button>
-                <button class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button>
-            </div>
-            <div class="main-container">
-                <div class="editor-container editor-container_classic-editor editor-container_include-style editor-container_include-fullscreen"
-                    id="editor-container">
-                    <div class="editor-container__editor">
-                        <div id="editor"></div>
-                    </div>
-                </div>
-            </div>
+           
         </form>
     </div>
 </body>

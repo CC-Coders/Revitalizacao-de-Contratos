@@ -39,6 +39,8 @@ function bindings() {
 	$("#btnSalvarArquivo").on("click", () => { salvaModeloAlterado() });
 	$("#btnVisualizarArquivo").on("click",visualizaDocumento);
 
+	$("#btnEnviarSolicitacao").on("click", enviarSolicitacao);
+
 
 	$('#locador').on('change', function () {
 		var cgccfo = $(this).val();
@@ -96,7 +98,7 @@ function loadTelaInicio() {
 
 function loadTelaJuridico() {
 	$("#informacoesIniciais").hide();
-
+	$("#panelAprovacao").show();
 	setAtividadeAtivaProgresso(1);
 	carregaDadosDoContratoParaTelaAprovacao();
 
