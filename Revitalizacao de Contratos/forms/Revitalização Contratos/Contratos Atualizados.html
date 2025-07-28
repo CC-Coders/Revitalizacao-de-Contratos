@@ -1,8 +1,5 @@
 <html>
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/gera-modelo-preenchido
 <head>
     <!-- CSS primeiro -->
     <link rel="stylesheet" type="text/css" href="/style-guide/css/fluig-style-guide.min.css" />
@@ -55,10 +52,8 @@
 <div class="step">Cadastramento</div>
 <div class="step">Assinatura</div>
 </div>
-<br/>
 
-<br/>
-<div class="row">
+<div class="row" style="padding: 24px">
 <div class="col-md-4">
 <div class="form-input">
     <label>Origem do Contrato:</label><select name="origemContrato"
@@ -101,7 +96,8 @@
 <br/>
 
 	<div id="formContainer" class="panel-body"
-				style="display:none; margin-bottom: 20px;">
+				style="display:none; margin-bottom: 20px; box-shadow:0px 20px 20px rgba(0, 0, 0, 0.15)">
+				  <div id="pagina-1" class="pagina">
 					<div class="panel panel-default">
 						<div class="panel-heading" style="background-color: #eaeaea;">
 							<h4 class="panel-title" style="color: #58595B">Dados Gerais</h4>
@@ -353,9 +349,135 @@
                     </div>
     </div>
     </fieldset>
-    </div></div>
+    </div>    
     </div>
-    
+
+  </div>
+<div id="pagina-2" class="pagina">
+	<div class="panel panel-default" id="anexos">
+						<div class="panel-heading" style="background-color: #eaeaea;">
+							<h4 class="panel-title" style="color: #58595B">Anexos</h4>
+						</div>
+				 <div class="panel-body">
+        <fieldset>
+            <div class="row" id ="divAnexoPF">
+              <div class="col-md-6 divAnexo" id="divAnexoTermoSolImovel">
+				    <label for="inputFileTermoSolImovel">Termo de Solicitação de Imóvel:</label>
+				    <div style="display: flex; align-items: baseline">
+				        <input type="file" name="inputTermoSolImovel" id="inputTermoSolImovel"
+				            class="form-control inputFile classe-anexo" style="display: none" />
+				        <button type="button" id="buttonTermoSolImovel" class="btn btn-primary classe-anexo"
+				            onclick="handleFileUpload('inputTermoSolImovel', 'Termo de Solicitação de Imóvel')">
+				            Escolher arquivo
+				        </button>
+				        <div class="fileSelectionStatus" id="textFileOrcamento"
+				            style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-left: 5px">
+				            Nenhum arquivo selecionado
+				        </div>
+				    </div>
+				</div>
+              <div class="col-md-6 divAnexo" id="divAnexoCNH">
+				    <label for="inputCNH">CNH:</label>
+				    <div style="display: flex; align-items: baseline">
+				        <input type="file" name="inputCNH" id="inputCNH"
+				            class="form-control inputFile classe-anexo" style="display: none" />
+				        <button type="button" id="buttonCNH" class="btn btn-primary classe-anexo"
+				            onclick="handleFileUpload('inputCNH', 'CNH')">
+				            Escolher arquivo
+				        </button>
+				        <div class="fileSelectionStatus" id="textCNH"
+				            style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-left: 5px">
+				            Nenhum arquivo selecionado
+				        </div>
+				    </div>
+				</div>
+            </div>
+           <br/>
+            <div class="row" id ="divAnexoPJ">
+              <div class="col-md-6 divAnexo" id="divAnexoCartaoCNPJ">
+				    <label for="inputFileCartaoCNPJ">Cartão CNPJ:</label>
+				    <div style="display: flex; align-items: baseline">
+				        <input type="file" name="inputTermoCartaoCNPJ" id="inputCartaoCNPJ"
+				            class="form-control inputFile classe-anexo" style="display: none" />
+				        <button type="button" id="buttonCartaoCNPJ" class="btn btn-primary classe-anexo"
+				            onclick="handleFileUpload('inputCartaoCNPJ', 'Cartão CNPJ')">
+				            Escolher arquivo
+				        </button>
+				        <div class="fileSelectionStatus" id="textCartaoCNPJ"
+				            style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-left: 5px">
+				            Nenhum arquivo selecionado
+				        </div>
+				    </div>
+				</div>
+                <div class="col-md-6 divAnexo" id="divAnexoCartaoQSA">
+				    <label for="inputFileCartaoCNPJ">Cartão QSA:</label>
+				    <div style="display: flex; align-items: baseline">
+				        <input type="file" name="inputTermoCartaoQSA" id="inputCartaoQSA"
+				            class="form-control inputFile classe-anexo" style="display: none" />
+				        <button type="button" id="buttonCartaoQSA" class="btn btn-primary classe-anexo"
+				            onclick="handleFileUpload('inputCartaoQSA', 'Cartão QSA')">
+				            Escolher arquivo
+				        </button>
+				        <div class="fileSelectionStatus" id="textCartaoQSA"
+				            style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-left: 5px">
+				            Nenhum arquivo selecionado
+				        </div>
+				    </div>
+				</div>
+            </div>
+                  <br/>
+             <div class="row">
+              <div class="col-md-6 divAnexo" id="divAnexoOutros">
+				    <label for="inputFileOutros">Outros:</label>
+				    <div style="display: flex; align-items: baseline">
+				        <input type="file" name="inputOutros" id="inputOutros"
+				            class="form-control inputFile classe-anexo" style="display: none" />
+				        <button type="button" id="buttonOutros" class="btn btn-primary classe-anexo"
+				            onclick="handleFileUpload('inputOutros', 'Outros')">
+				            Escolher arquivo
+				        </button>
+				        <div class="fileSelectionStatus" id="textOutros"
+				            style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-left: 5px">
+				            Nenhum arquivo selecionado
+				        </div>
+				    </div>
+				</div>              
+            </div>
+
+        </fieldset>
+    </div>
+</div>
+</div>
+<div id="pagina-3" class="pagina">
+  	<div class="panel panel-default" id="anexos">
+						<div class="panel-heading" style="background-color: #eaeaea;">
+							<h4 class="panel-title" style="color: #58595B">Observações</h4>
+						</div>
+				 <div class="panel-body">
+        <fieldset>
+    <div class="form-group">
+      <textarea name="observacoes" class="form-control" rows="6"></textarea>
+    </div>
+  </div>
+</div>
+</div>
+<div class="navegacao-formulario" style="display: flex; align-items: center; justify-content: center;">
+  <button id="btn-voltar">←</button>
+
+  <div class="bolinhas">
+    <div class="bolinha"></div>
+    <div class="bolinha"></div>
+    <div class="bolinha"></div>
+  </div>
+
+  <button id="btn-avancar">→</button>
+</div>
+</div>
+
+
+
+  
+  
 
 			    <div class="hidden" style="display: none">
 	  				<input type="hidden" id="solicitante" name="solicitante" />

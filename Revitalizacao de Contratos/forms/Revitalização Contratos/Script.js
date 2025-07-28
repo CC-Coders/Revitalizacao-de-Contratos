@@ -5,13 +5,20 @@ $(document).ready(function(){
         buscaBancos()
         inicializarCalendario()
         inicializarPeriodoLocacao();
+
         $("#tipoContrato").on("change", function () {
-                if ($(this).val() == "Locação de Imóvel") {
-                        $("#formContainer").show();
-                }else{
-                        $("#formContainer").hide();
-                }
-        });
+            if ($(this).val() === "Locação de Imóvel") {
+              $("#formContainer").show();
+              paginaAtual = 0;
+              mostrarPagina(paginaAtual);
+            } else {
+              $("#formContainer").hide();
+            }
+          });
+
+          $("#btn-avancar").on("click", avancarPagina);
+          $("#btn-voltar").on("click", voltarPagina);
+        
         $("#caucao").on("change", function () {
                 if ($(this).val() == "Sim") {
                         $("#divValorCaucao, #divDataPagamentoCaucao").show();

@@ -193,7 +193,7 @@ function inicializarCalendario() {
 }
 
 
-        function inicializarPeriodoLocacao() {
+function inicializarPeriodoLocacao() {
             const periodoLocacao = document.getElementById("periodoLocacao");
             
             if (periodoLocacao) {
@@ -226,5 +226,132 @@ function inicializarCalendario() {
                 });
             }
         }
+let paginaAtual = 0;
 
-   
+function mostrarPagina(indice) {
+	  const paginas = document.querySelectorAll(".pagina");
+	  const totalPaginas = paginas.length;
+
+	  paginas.forEach((p, i) => {
+	    p.classList.remove("ativa", "escondida-para-direita", "escondida-para-esquerda");
+
+	    if (i === indice) {
+	      p.classList.add("ativa");
+	      p.style.position = "relative";
+	    } else if (i < indice) {
+	      p.classList.add("escondida-para-esquerda");
+	      p.style.position = "absolute";
+	    } else {
+	      p.classList.add("escondida-para-direita");
+	      p.style.position = "absolute";
+	    }
+	  });
+
+	  document.querySelectorAll(".bolinha").forEach((b, i) => {
+	    b.classList.toggle("ativa", i === indice);
+	  });
+	}
+
+	function avancarPagina() {
+	  const totalPaginas = document.querySelectorAll(".pagina").length;
+	  if (paginaAtual < totalPaginas - 1) {
+	    paginaAtual++;
+	    mostrarPagina(paginaAtual);
+	  }
+	}
+
+	function voltarPagina() {
+	  if (paginaAtual > 0) {
+	    paginaAtual--;
+	    mostrarPagina(paginaAtual);
+	  }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	function handleFileUpload(inputId, descricaoArquivo) {
+	    const input = document.getElementById(inputId);
+	    const statusText = document.getElementById("textFileOrcamento");
+
+	    input.click(); // Abre o seletor de arquivos
+
+	    input.onchange = async function () {
+	        const file = input.files[0];
+
+	        if (!file) {
+	            statusText.textContent = "Nenhum arquivo selecionado";
+	            return;
+	        }
+
+	        try {
+	            statusText.textContent = "Enviando arquivo...";
+	            const pastaDestino = "12345"; // Substitua pelo ID da pasta no GED
+
+	            const docId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDestino);
+
+	            statusText.textContent = `Arquivo enviado: ${file.name}`;
+
+	            // Anexa ao processo
+	            anexarDocumentoAoProcesso(docId);
+
+	            console.log(`Arquivo ${file.name} enviado e anexado com sucesso!`);
+	        } catch (err) {
+	            statusText.textContent = "Erro ao enviar arquivo";
+	            console.error("Erro ao fazer upload do arquivo:", err);
+	        }
+	    };
+	}
+
+	function promiseCriaDocFluig_retornaDocumentId(file, parentId) {
+	    return new Promise((resolve, reject) => {
+	        const reader = new FileReader();
+	        const fileName = file.name;
+
+	        reader.readAsDataURL(file);
+	        reader.onload = function (e) {
+	            const bytes = e.target.result.split("base64,")[1];
+
+	            DatasetFactory.getDataset("CriacaoDocumentosFluig", null, [
+	                DatasetFactory.createConstraint("conteudo", bytes, bytes, ConstraintType.MUST),
+	                DatasetFactory.createConstraint("nome", fileName, fileName, ConstraintType.SHOULD),
+	                DatasetFactory.createConstraint("descricao", fileName, fileName, ConstraintType.SHOULD),
+	                DatasetFactory.createConstraint("pasta", parentId, parentId, ConstraintType.SHOULD),
+	            ], null, {
+	                success: function (dataset) {
+	                    if (!dataset || dataset.values.length === 0) {
+	                        reject("Erro ao comunicar com dataset");
+	                    } else if (dataset.values[0][0] === "false") {
+	                        reject("Erro na criação do documento: " + dataset.values[0][1]);
+	                    } else {
+	                        console.log("Documento criado, ID:", dataset.values[0].Resultado);
+	                        resolve(dataset.values[0].Resultado);
+	                    }
+	                },
+	                error: function (err) {
+	                    reject(err);
+	                }
+	            });
+	        };
+	    });
+	}
+
+	function anexarDocumentoAoProcesso(docId) {
+	    try {
+	        if (parent?.ECM?.workflowView?.attachDocument) {
+	            parent.ECM.workflowView.attachDocument(docId);
+	            console.log(`Documento ${docId} anexado ao processo`);
+	        } else {
+	            console.warn("Função de anexo ao processo não disponível.");
+	        }
+	    } catch (e) {
+	        console.error("Erro ao anexar documento ao processo:", e);
+	    }
+	}
