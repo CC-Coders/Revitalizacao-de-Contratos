@@ -247,7 +247,6 @@
 }
 
 
-
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
@@ -273,7 +272,6 @@
 	max-width: 795px;
 }
 
-/* CK5 Editor */
 
 Container principal do formulário com efeito 3D
 .aba-container {
@@ -290,7 +288,6 @@ Container principal do formulário com efeito 3D
   perspective: 1200px;
 }
 
-/* Páginas (cada etapa do formulário) */
 .pagina {
   position: absolute;
   width: 100%;
@@ -304,7 +301,6 @@ Container principal do formulário com efeito 3D
   transform-origin: left center;
 }
 
-/* Página visível (ativa) */
 .pagina.ativa {
   opacity: 1;
   pointer-events: auto;
@@ -313,7 +309,6 @@ Container principal do formulário com efeito 3D
   z-index: 2;
 }
 
-/* Página escondida girando para a direita */
 .pagina.escondida-para-direita {
   opacity: 0;
   pointer-events: none;
@@ -321,15 +316,7 @@ Container principal do formulário com efeito 3D
   z-index: 1;
 }
 
-/* /* Página escondida girando para a esquerda */ */
-/* .pagina.escondida-para-esquerda { */
-/*   opacity: 0; */
-/*   pointer-events: none; */
-/*   transform: rotateY(-90deg); */
-/*   z-index: 1; */
-/* } */
 
-/* Navegação entre páginas */
 .navegacao-formulario {
   display: flex;
   justify-content: center;
@@ -338,7 +325,6 @@ Container principal do formulário com efeito 3D
   margin-top: 10px;
 }
 
-/* Bolinhas de etapa */
 .bolinhas {
   display: flex;
   gap: 10px;
@@ -356,7 +342,6 @@ Container principal do formulário com efeito 3D
   background-color: #007bff;
 }
 
-/* Botões de navegação (avançar/voltar) */
 #btn-voltar,
 #btn-avancar {
   background-color: transparent;

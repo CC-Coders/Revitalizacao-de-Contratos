@@ -353,101 +353,43 @@
     </div>
 
   </div>
-<div id="pagina-2" class="pagina">
-	<div class="panel panel-default" id="anexos">
-						<div class="panel-heading" style="background-color: #eaeaea;">
-							<h4 class="panel-title" style="color: #58595B">Anexos</h4>
-						</div>
-				 <div class="panel-body">
-        <fieldset>
-            <div class="row" id ="divAnexoPF">
-              <div class="col-md-6 divAnexo" id="divAnexoTermoSolImovel">
-				    <label for="inputFileTermoSolImovel">Termo de Solicitação de Imóvel:</label>
-				    <div style="display: flex; align-items: baseline">
-				        <input type="file" name="inputTermoSolImovel" id="inputTermoSolImovel"
-				            class="form-control inputFile classe-anexo" style="display: none" />
-				        <button type="button" id="buttonTermoSolImovel" class="btn btn-primary classe-anexo"
-				            onclick="handleFileUpload('inputTermoSolImovel', 'Termo de Solicitação de Imóvel')">
-				            Escolher arquivo
-				        </button>
-				        <div class="fileSelectionStatus" id="textFileOrcamento"
-				            style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-left: 5px">
-				            Nenhum arquivo selecionado
-				        </div>
-				    </div>
-				</div>
-              <div class="col-md-6 divAnexo" id="divAnexoCNH">
-				    <label for="inputCNH">CNH:</label>
-				    <div style="display: flex; align-items: baseline">
-				        <input type="file" name="inputCNH" id="inputCNH"
-				            class="form-control inputFile classe-anexo" style="display: none" />
-				        <button type="button" id="buttonCNH" class="btn btn-primary classe-anexo"
-				            onclick="handleFileUpload('inputCNH', 'CNH')">
-				            Escolher arquivo
-				        </button>
-				        <div class="fileSelectionStatus" id="textCNH"
-				            style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-left: 5px">
-				            Nenhum arquivo selecionado
-				        </div>
-				    </div>
-				</div>
-            </div>
-           <br/>
-            <div class="row" id ="divAnexoPJ">
-              <div class="col-md-6 divAnexo" id="divAnexoCartaoCNPJ">
-				    <label for="inputFileCartaoCNPJ">Cartão CNPJ:</label>
-				    <div style="display: flex; align-items: baseline">
-				        <input type="file" name="inputTermoCartaoCNPJ" id="inputCartaoCNPJ"
-				            class="form-control inputFile classe-anexo" style="display: none" />
-				        <button type="button" id="buttonCartaoCNPJ" class="btn btn-primary classe-anexo"
-				            onclick="handleFileUpload('inputCartaoCNPJ', 'Cartão CNPJ')">
-				            Escolher arquivo
-				        </button>
-				        <div class="fileSelectionStatus" id="textCartaoCNPJ"
-				            style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-left: 5px">
-				            Nenhum arquivo selecionado
-				        </div>
-				    </div>
-				</div>
-                <div class="col-md-6 divAnexo" id="divAnexoCartaoQSA">
-				    <label for="inputFileCartaoCNPJ">Cartão QSA:</label>
-				    <div style="display: flex; align-items: baseline">
-				        <input type="file" name="inputTermoCartaoQSA" id="inputCartaoQSA"
-				            class="form-control inputFile classe-anexo" style="display: none" />
-				        <button type="button" id="buttonCartaoQSA" class="btn btn-primary classe-anexo"
-				            onclick="handleFileUpload('inputCartaoQSA', 'Cartão QSA')">
-				            Escolher arquivo
-				        </button>
-				        <div class="fileSelectionStatus" id="textCartaoQSA"
-				            style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-left: 5px">
-				            Nenhum arquivo selecionado
-				        </div>
-				    </div>
-				</div>
-            </div>
-                  <br/>
-             <div class="row">
-              <div class="col-md-6 divAnexo" id="divAnexoOutros">
-				    <label for="inputFileOutros">Outros:</label>
-				    <div style="display: flex; align-items: baseline">
-				        <input type="file" name="inputOutros" id="inputOutros"
-				            class="form-control inputFile classe-anexo" style="display: none" />
-				        <button type="button" id="buttonOutros" class="btn btn-primary classe-anexo"
-				            onclick="handleFileUpload('inputOutros', 'Outros')">
-				            Escolher arquivo
-				        </button>
-				        <div class="fileSelectionStatus" id="textOutros"
-				            style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; margin-left: 5px">
-				            Nenhum arquivo selecionado
-				        </div>
-				    </div>
-				</div>              
-            </div>
 
-        </fieldset>
+<div id="pagina-2" class="pagina">
+  <div class="panel panel-default" id="anexos">
+    <div class="panel-heading" style="background-color: #eaeaea;">
+      <h4 class="panel-title" style="color: #58595B">Anexos</h4>
     </div>
+    <div class="panel-body">
+      <fieldset>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="tipoDocumentacao">Documentação:</label>
+            <select name="tipoDocumentacao" id="tipoDocumentacao" class="form-control">
+              <option value="">Selecione</option>
+              <option value="Termo de Solicitação de Imóvel">Termo de Solicitação de Imóvel</option>
+              <option value="Cartão CNPJ">Cartão CNPJ</option>
+              <option value="Cartão QSA">Cartão QSA</option>
+              <option value="CNH">CNH</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+
+          <div class="col-md-6" id="divAnexo" style="opacity: 0; visibility: hidden; transition: all 0.3s;">
+            <label id="labelAnexo" for="inputAnexo">Anexo:</label>
+            <input type="file" id="inputAnexo" name="anexoGenerico" class="form-control" />
+          </div>
+        </div>
+
+        <br />
+        <h5>Documentos já anexados:</h5>
+        <ul id="listaAnexos" style="list-style: none; padding-left: 0;"></ul>
+      </fieldset>
+    </div>
+  </div>
 </div>
-</div>
+
+
+
 <div id="pagina-3" class="pagina">
   	<div class="panel panel-default" id="anexos">
 						<div class="panel-heading" style="background-color: #eaeaea;">
@@ -473,11 +415,6 @@
   <button id="btn-avancar">→</button>
 </div>
 </div>
-
-
-
-  
-  
 
 			    <div class="hidden" style="display: none">
 	  				<input type="hidden" id="solicitante" name="solicitante" />
