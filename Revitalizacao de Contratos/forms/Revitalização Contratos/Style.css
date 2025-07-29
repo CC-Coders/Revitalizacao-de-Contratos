@@ -311,4 +311,15 @@
 	max-width: 795px;
 }
 
+.watermark {
+	font-size: 50px;
+	opacity: 0.5;
+	color: black;
+	position: fixed;
+	left: 20%;
+	top: 50%;
+	transform: rotate(25deg);
+	letter-spacing: 10px
+}
 /* CK5 Editor - end*/
+

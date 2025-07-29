@@ -3,7 +3,7 @@ const pastaDeAnexos = 18386;
 async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
 	var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
 	var file = await geraFileFromURL(url);
-	carregaFileProDocxTemplatereEPreencheOsValores_retornaFile(file)
+	return carregaFileProDocxTemplatereEPreencheOsValores_retornaFile(file)
 
 	function geraFileFromURL(url) {
 		return new Promise((resolve, reject) => {
@@ -67,16 +67,16 @@ async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
 }
 async function salvaModeloAlterado() {
 	try {
-Swal.fire({
-    icon: "info",
-    title: "Salvando Contrato, por favor aguarde...",
-    showConfirmButton: false,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    didOpen: () => {
-        Swal.showLoading();
-    }
-});
+		Swal.fire({
+			icon: "info",
+			title: "Salvando Contrato, por favor aguarde...",
+			showConfirmButton: false,
+			allowEscapeKey: false,
+			allowOutsideClick: false,
+			didOpen: () => {
+				Swal.showLoading();
+			}
+		});
 
 
 		var response = await promiseConverteEditorParaDocx();
@@ -89,7 +89,7 @@ Swal.fire({
 			type: blob.type
 		});
 		await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val());
-		
+
 		Swal.fire({
 			position: "top-end",
 			icon: "success",
@@ -151,7 +151,57 @@ Swal.fire({
 	}
 }
 
+async function geraPreContrato(){
+	var file = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
+	var pdf = await convertDocxToPdf(file);
+	saveAs(pdf, "teste.pdf");
+}
+async function convertDocxToPdf(docxBlob) {
+	const formData = new FormData();
+	formData.append('file', docxBlob, 'file.docx');
+	let html, headerHtml, footerHtml;
+	try {
+		const docxHtmlResponse = await axios.post(
+			'https://docx-converter.cke-cs.com/v2/convert/docx-html',
+			formData,
+			{ responseType: 'json' }
+		);
+		html = docxHtmlResponse.data.html;
+		headerHtml = docxHtmlResponse.data.headers?.default?.html || '';
+		footerHtml = docxHtmlResponse.data.footers?.default?.html || '';
+	} catch (error) {
+		console.error('DOCX to HTML conversion error', error);
+		throw error;
+	}
+	headerHtml = headerHtml.replace("absolute","static");
 
+
+	const composedHtml = `<div>${html}</div>`;
+
+	try {
+		const pdfResponse = await axios.post(
+			'https://pdf-converter.cke-cs.com/v1/convert',
+			{ 
+				html: composedHtml,
+	        	options: {
+					format: 'Tabloid',
+					margin_top: '20mm',
+					margin_bottom: '25mm',
+					margin_right: '24mm',
+					margin_left: '24mm',
+					page_orientation: 'portrait',
+					header_html: headerHtml,
+					footer_html: footerHtml,
+				},
+			},
+			{ responseType: 'arraybuffer' }
+		);
+		return new Blob([pdfResponse.data], { type: 'application/pdf' });
+	} catch (error) {
+		console.error('HTML to PDF conversion error', error);
+		throw error;
+	}
+}
 
 // CK5 Editor
 var ckeditor = null;
@@ -165,13 +215,13 @@ async function editarArquivo() {
 	function openModal() {
 		var html =
 			`<div class="main-container">
-                <div class="editor-container editor-container_classic-editor editor-container_include-style editor-container_include-fullscreen"
-                    id="editor-container">
-                    <div class="editor-container__editor">
-                        <div id="editor"></div>
-                    </div>
-                </div>
-            </div>`;
+				<div class="editor-container editor-container_classic-editor editor-container_include-style editor-container_include-fullscreen"
+					id="editor-container">
+					<div class="editor-container__editor">
+						<div id="editor"></div>
+					</div>
+				</div>
+			</div>`;
 
 		var myModal = FLUIGC.modal({
 			title: 'Title',
@@ -441,11 +491,19 @@ async function loadCkEditor() {
 			stylesheets: [
 				/* This path should point to the content stylesheets on your assets server. */
 				/* See: https://ckeditor.com/docs/ckeditor5/latest/features/converters/export-pdf.html */
-				'./style.css',
+				'Style.css',
 				/* Export PDF needs access to stylesheets that style the content. */
 				'https://cdn.ckeditor.com/ckeditor5/46.0.0/ckeditor5.css',
 				'https://cdn.ckeditor.com/ckeditor5-premium-features/46.0.0/ckeditor5-premium-features.css'
 			],
+			dataCallback: ( editor ) => {
+				return `
+					${ editor.getData() }
+					<div class="watermark">SEM VALOR CONTRATUAL</div>
+					<div class="header" style="position: fixed;left: 70;top: -5;">${header}</div>
+					<div class="footer" style="position: fixed;left: 30;top: 95;">${footer}</div>
+				`;
+			},
 			fileName: 'export-pdf-demo.pdf',
 			converterOptions: {
 				format: 'Tabloid',
@@ -453,8 +511,11 @@ async function loadCkEditor() {
 				margin_bottom: '20mm',
 				margin_right: '24mm',
 				margin_left: '24mm',
-				page_orientation: 'portrait'
+				page_orientation: 'portrait',
+				header_html: undefined,
+				footer_html: undefined,
 			}
+
 		},
 		exportWord: {
 			stylesheets: [
@@ -670,56 +731,7 @@ async function loadCkEditor() {
 		}
 	};
 
-	configUpdateAlert(editorConfig);
-
 	ckeditor = await ClassicEditor.create(document.querySelector('#editor'), editorConfig);
-
-
-	/**
-	 * This function exists to remind you to update the config needed for premium features.
-	 * The function can be safely removed. Make sure to also remove call to this function when doing so.
-	 */
-	function configUpdateAlert(config) {
-		if (configUpdateAlert.configUpdateAlertShown) {
-			return;
-		}
-
-		const isModifiedByUser = (currentValue, forbiddenValue) => {
-			if (currentValue === forbiddenValue) {
-				return false;
-			}
-
-			if (currentValue === undefined) {
-				return false;
-			}
-
-			return true;
-		};
-
-		const valuesToUpdate = [];
-
-		configUpdateAlert.configUpdateAlertShown = true;
-
-		if (!isModifiedByUser(config.licenseKey, '<YOUR_LICENSE_KEY>')) {
-			valuesToUpdate.push('LICENSE_KEY');
-		}
-
-		if (!isModifiedByUser(config.cloudServices?.tokenUrl, '<YOUR_CLOUD_SERVICES_TOKEN_URL>')) {
-			valuesToUpdate.push('CLOUD_SERVICES_TOKEN_URL');
-		}
-
-		if (valuesToUpdate.length) {
-			window.alert(
-				[
-					'Please update the following values in your editor config',
-					'to receive full access to Premium Features:',
-					'',
-					...valuesToUpdate.map(value => ` - ${value}`)
-				].join('\n')
-			);
-		}
-	}
-
 }
 
 
@@ -739,6 +751,8 @@ async function carregaDocumentoParaOCKEditor(documentId) {
 			header = response.data.headers.default.html;
 			footer = response.data.footers.default.html;
 			ckeditor.setData(`${response.data.html}`);
+			ckeditor.config._config.exportPdf.converterOptions.header_html = header;
+			ckeditor.config._config.exportPdf.converterOptions.footer_html = footer;
 		}).catch(error => {
 			console.log('Conversion error', error);
 		});
