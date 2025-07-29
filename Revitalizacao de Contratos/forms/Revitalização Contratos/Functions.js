@@ -102,6 +102,57 @@ function buscaFornecedores() {
     });
 }
 
+//function buscaInfosFornecedor(cgccfo) {
+//    DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [
+//        DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)
+//    ], null, {
+//        success: (dataset) => {
+//            if (dataset.values && dataset.values.length > 0) {
+//                const endereco = dataset.values[0];
+//                const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrangeiro";
+//
+//                if (endereco.PESSOAFISOUJUR == 'F') {
+//                    $(".pessoa-fisica").show();
+//                    $(".pessoa-juridica").hide();
+//
+//                    $("#nacionalidadeFornecedor").val(nacionalidadeTexto);
+//                    $("#estadoCivilFornecedor").val(endereco.ESTADOCIVIL || "");
+//                } else if (endereco.PESSOAFISOUJUR == 'J') {
+//                    $(".pessoa-fisica").hide();
+//                    $(".pessoa-juridica").show();
+//
+//                    $("#administradorFornecedor").val(endereco.ADMINISTRADOR || "");
+//                    $("#cpfFornecedor").val(endereco.CPF || "");
+//                }
+//
+//                $("#rgFornecedor").val(endereco.CGCCFO || "");
+//                $("#ruaFornecedor").val(endereco.RUA || "");
+//                $("#numeroFornecedor").val(endereco.NUMERO || "");
+//                $("#bairroFornecedor").val(endereco.BAIRRO || "");
+//                $("#cidadeFornecedor").val(endereco.CIDADE || "");
+//                $("#cepFornecedor").val(endereco.CEP || "");
+//                $("#estadoFornecedor").val(endereco.CODETD || "");
+//
+//                $(".endereco-fornecedor").slideDown();
+//            } else {
+//                FLUIGC.toast({
+//                    title: "Endereço não encontrado",
+//                    message: "Nenhum endereço localizado para este CGCCFO",
+//                    type: "warning"
+//                });
+//                $(".endereco-fornecedor").slideUp();
+//            }
+//        },
+//        error: (err) => {
+//            console.error("Erro ao buscar endereço:", err);
+//            FLUIGC.toast({
+//                title: "Erro ao buscar endereço",
+//                message: err.message || "Erro desconhecido",
+//                type: "danger"
+//            });
+//        }
+//    });
+//}
 function buscaInfosFornecedor(cgccfo) {
     DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [
         DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)
@@ -109,15 +160,16 @@ function buscaInfosFornecedor(cgccfo) {
         success: (dataset) => {
             if (dataset.values && dataset.values.length > 0) {
                 const endereco = dataset.values[0];
+                const tipoPessoa = endereco.PESSOAFISOUJUR;
                 const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrangeiro";
 
-                if (endereco.PESSOAFISOUJUR == 'F') {
+                if (tipoPessoa === 'F') {
                     $(".pessoa-fisica").show();
                     $(".pessoa-juridica").hide();
 
                     $("#nacionalidadeFornecedor").val(nacionalidadeTexto);
                     $("#estadoCivilFornecedor").val(endereco.ESTADOCIVIL || "");
-                } else if (endereco.PESSOAFISOUJUR == 'J') {
+                } else if (tipoPessoa === 'J') {
                     $(".pessoa-fisica").hide();
                     $(".pessoa-juridica").show();
 
@@ -134,6 +186,8 @@ function buscaInfosFornecedor(cgccfo) {
                 $("#estadoFornecedor").val(endereco.CODETD || "");
 
                 $(".endereco-fornecedor").slideDown();
+
+                atualizaOpcoesDocumentos(tipoPessoa);
             } else {
                 FLUIGC.toast({
                     title: "Endereço não encontrado",
@@ -152,6 +206,24 @@ function buscaInfosFornecedor(cgccfo) {
             });
         }
     });
+}
+
+function atualizaOpcoesDocumentos(tipoPessoa) {
+    const select = $("#tipoDocumentacao");
+    select.empty();
+    select.append('<option value="">Selecione</option>');
+
+    if (tipoPessoa === 'F') {
+        select.append('<option value="Termo de Solicitação de Imóvel">Termo de Solicitação de Imóvel</option>');
+        select.append('<option value="CNH">CNH</option>');
+        select.append('<option value="RG e CPF">RG e CPF</option>');
+    } else if (tipoPessoa === 'J') {
+        select.append('<option value="Termo de Solicitação de Imóvel">Termo de Solicitação de Imóvel</option>');
+        select.append('<option value="Cartão CNPJ">Cartão CNPJ</option>');
+        select.append('<option value="Cartão QSA">Cartão QSA</option>');
+    }
+
+    select.append('<option value="Outros">Outros</option>');
 }
 
 function buscaBancos() {
@@ -375,7 +447,7 @@ function handleFileUpload(inputId, descricaoArquivo) {
         }
     };
 }
-function promiseCriaDocFluig_retornaDocumentId(file, parentId) {
+function criaDocFluigRetornaDocumentId(file, parentId) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         const fileName = file.name;
