@@ -193,41 +193,41 @@ function inicializarCalendario() {
 }
 
 
-function inicializarPeriodoLocacao() {
-    const periodoLocacao = document.getElementById("periodoLocacao");
-
-    if (periodoLocacao) {
-        flatpickr(periodoLocacao, {
-            mode: "range",
-            dateFormat: "d/m/Y",
-            locale: "pt",
-            minDate: "01/01/2024",
-            maxDate: "31/12/2030",
-            allowInput: true,
-            clickOpens: true,
-            disableMobile: true,
-            onOpen: function () {
-                periodoLocacao.classList.remove("disabled");
-            },
-            onClose: function (selectedDates) {
-                if (selectedDates.length === 2) {
-                    const [start, end] = selectedDates;
-                    const diffInMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-
-                    if (diffInMonths > 12) {
-                        FLUIGC.toast({
-                            message: "Período máximo: 12 meses.",
-                            type: "warning"
-                        });
-                        periodoLocacao.value = "";
+        function inicializarPeriodoLocacao() {
+            const periodoLocacao = document.getElementById("periodoLocacao");
+            
+            if (periodoLocacao) {
+                flatpickr(periodoLocacao, {
+                    mode: "range",
+                    dateFormat: "d/m/Y",
+                    locale: "pt",
+                    minDate: "01/01/2024",
+                    maxDate: "31/12/2030",
+                    allowInput: true, 
+                    clickOpens: true,  
+                    disableMobile: true,
+                    onOpen: function() {
+                        periodoLocacao.classList.remove("disabled");
+                    },
+                    onClose: function(selectedDates) {
+                        if (selectedDates.length === 2) {
+                            const [start, end] = selectedDates;
+                            const diffInMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+                            
+                            if (diffInMonths > 12) {
+                                FLUIGC.toast({
+                                    message: "Período máximo: 12 meses.",
+                                    type: "warning"
+                                });
+                                periodoLocacao.value = "";
+                            }
+                        }
                     }
-                }
+                });
             }
-        });
-    }
-}
+        }
 
-
+   
 
 function carregaDadosDoContratoParaTelaAprovacao(){
     var obra = $("#obra").val();
