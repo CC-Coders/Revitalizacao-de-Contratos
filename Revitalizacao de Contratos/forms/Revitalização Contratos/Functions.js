@@ -288,6 +288,84 @@ function setAtividadeAtivaProgresso(atividadesConcluidas) {
         if (counter < atividadesConcluidas) {
             $(this).addClass("completed");
         }
+let paginaAtual = 0;
+
+function mostrarPagina(indice) {
+	  const paginas = document.querySelectorAll(".pagina");
+	  const totalPaginas = paginas.length;
+
+	  paginas.forEach((p, i) => {
+	    p.classList.remove("ativa", "escondida-para-direita", "escondida-para-esquerda");
+
+	    if (i === indice) {
+	      p.classList.add("ativa");
+	      p.style.position = "relative";
+	    } else if (i < indice) {
+	      p.classList.add("escondida-para-esquerda");
+	      p.style.position = "absolute";
+	    } else {
+	      p.classList.add("escondida-para-direita");
+	      p.style.position = "absolute";
+	    }
+	  });
+
+	  document.querySelectorAll(".bolinha").forEach((b, i) => {
+	    b.classList.toggle("ativa", i === indice);
+	  });
+	}
+
+	function avancarPagina() {
+	  const totalPaginas = document.querySelectorAll(".pagina").length;
+	  if (paginaAtual < totalPaginas - 1) {
+	    paginaAtual++;
+	    mostrarPagina(paginaAtual);
+	  }
+	}
+
+	function voltarPagina() {
+	  if (paginaAtual > 0) {
+	    paginaAtual--;
+	    mostrarPagina(paginaAtual);
+	  }
+	}
+	
+	
+	function criaDocFluigRetornaDocumentId(file, parentId) {
+		  return new Promise((resolve, reject) => {
+		    var reader = new FileReader();
+		    var fileName = file.name;
+
+		    reader.readAsDataURL(file);
+		    reader.onload = function (e) {
+		      var bytes = e.target.result.split("base64,")[1];
+
+		      DatasetFactory.getDataset("CriacaoDocumentosFluig", null, [
+		        DatasetFactory.createConstraint("conteudo", bytes, bytes, ConstraintType.MUST),
+		        DatasetFactory.createConstraint("nome", fileName, fileName, ConstraintType.SHOULD),
+		        DatasetFactory.createConstraint("descricao", fileName, fileName, ConstraintType.SHOULD),
+		        DatasetFactory.createConstraint("pasta", parentId, parentId, ConstraintType.SHOULD),
+		      ], null, {
+		        success: function (dataset) {
+		          if (!dataset || dataset == "" || dataset == null) {
+		            reject("Erro na comunicação com o dataset.");
+		          }
+
+		          if (dataset.values[0][0] == "false") {
+		            reject("Erro ao criar documento: " + dataset.values[0][1]);
+		          } else {
+		            console.log("Documento criado com ID:", dataset.values[0].Resultado);
+		            resolve(dataset.values[0].Resultado);
+		          }
+		        },
+		        error: function (error) {
+		          reject(error);
+		        }
+		      });
+		    };
+		  });
+		}
+
+	
         else if (counter == atividadesConcluidas) {
             $(this).addClass("active");
         }
@@ -305,3 +383,4 @@ async function enviarSolicitacao() {
         $("#workflowActions > button:first-child", window.parent.document).click();
     }
 }
+
