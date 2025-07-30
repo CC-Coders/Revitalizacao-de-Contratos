@@ -102,6 +102,57 @@ function buscaFornecedores() {
     });
 }
 
+//function buscaInfosFornecedor(cgccfo) {
+//    DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [
+//        DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)
+//    ], null, {
+//        success: (dataset) => {
+//            if (dataset.values && dataset.values.length > 0) {
+//                const endereco = dataset.values[0];
+//                const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrangeiro";
+//
+//                if (endereco.PESSOAFISOUJUR == 'F') {
+//                    $(".pessoa-fisica").show();
+//                    $(".pessoa-juridica").hide();
+//
+//                    $("#nacionalidadeFornecedor").val(nacionalidadeTexto);
+//                    $("#estadoCivilFornecedor").val(endereco.ESTADOCIVIL || "");
+//                } else if (endereco.PESSOAFISOUJUR == 'J') {
+//                    $(".pessoa-fisica").hide();
+//                    $(".pessoa-juridica").show();
+//
+//                    $("#administradorFornecedor").val(endereco.ADMINISTRADOR || "");
+//                    $("#cpfFornecedor").val(endereco.CPF || "");
+//                }
+//
+//                $("#rgFornecedor").val(endereco.CGCCFO || "");
+//                $("#ruaFornecedor").val(endereco.RUA || "");
+//                $("#numeroFornecedor").val(endereco.NUMERO || "");
+//                $("#bairroFornecedor").val(endereco.BAIRRO || "");
+//                $("#cidadeFornecedor").val(endereco.CIDADE || "");
+//                $("#cepFornecedor").val(endereco.CEP || "");
+//                $("#estadoFornecedor").val(endereco.CODETD || "");
+//
+//                $(".endereco-fornecedor").slideDown();
+//            } else {
+//                FLUIGC.toast({
+//                    title: "Endereço não encontrado",
+//                    message: "Nenhum endereço localizado para este CGCCFO",
+//                    type: "warning"
+//                });
+//                $(".endereco-fornecedor").slideUp();
+//            }
+//        },
+//        error: (err) => {
+//            console.error("Erro ao buscar endereço:", err);
+//            FLUIGC.toast({
+//                title: "Erro ao buscar endereço",
+//                message: err.message || "Erro desconhecido",
+//                type: "danger"
+//            });
+//        }
+//    });
+//}
 function buscaInfosFornecedor(cgccfo) {
     DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [
         DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)
@@ -109,15 +160,16 @@ function buscaInfosFornecedor(cgccfo) {
         success: (dataset) => {
             if (dataset.values && dataset.values.length > 0) {
                 const endereco = dataset.values[0];
+                const tipoPessoa = endereco.PESSOAFISOUJUR;
                 const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrangeiro";
 
-                if (endereco.PESSOAFISOUJUR == 'F') {
+                if (tipoPessoa === 'F') {
                     $(".pessoa-fisica").show();
                     $(".pessoa-juridica").hide();
 
                     $("#nacionalidadeFornecedor").val(nacionalidadeTexto);
                     $("#estadoCivilFornecedor").val(endereco.ESTADOCIVIL || "");
-                } else if (endereco.PESSOAFISOUJUR == 'J') {
+                } else if (tipoPessoa === 'J') {
                     $(".pessoa-fisica").hide();
                     $(".pessoa-juridica").show();
 
@@ -134,6 +186,8 @@ function buscaInfosFornecedor(cgccfo) {
                 $("#estadoFornecedor").val(endereco.CODETD || "");
 
                 $(".endereco-fornecedor").slideDown();
+
+                atualizaOpcoesDocumentos(tipoPessoa);
             } else {
                 FLUIGC.toast({
                     title: "Endereço não encontrado",
@@ -152,6 +206,24 @@ function buscaInfosFornecedor(cgccfo) {
             });
         }
     });
+}
+
+function atualizaOpcoesDocumentos(tipoPessoa) {
+    const select = $("#tipoDocumentacao");
+    select.empty();
+    select.append('<option value="">Selecione</option>');
+
+    if (tipoPessoa === 'F') {
+        select.append('<option value="Termo de Solicitação de Imóvel">Termo de Solicitação de Imóvel</option>');
+        select.append('<option value="CNH">CNH</option>');
+        select.append('<option value="RG e CPF">RG e CPF</option>');
+    } else if (tipoPessoa === 'J') {
+        select.append('<option value="Termo de Solicitação de Imóvel">Termo de Solicitação de Imóvel</option>');
+        select.append('<option value="Cartão CNPJ">Cartão CNPJ</option>');
+        select.append('<option value="Cartão QSA">Cartão QSA</option>');
+    }
+
+    select.append('<option value="Outros">Outros</option>');
 }
 
 function buscaBancos() {
@@ -288,84 +360,6 @@ function setAtividadeAtivaProgresso(atividadesConcluidas) {
         if (counter < atividadesConcluidas) {
             $(this).addClass("completed");
         }
-let paginaAtual = 0;
-
-function mostrarPagina(indice) {
-	  const paginas = document.querySelectorAll(".pagina");
-	  const totalPaginas = paginas.length;
-
-	  paginas.forEach((p, i) => {
-	    p.classList.remove("ativa", "escondida-para-direita", "escondida-para-esquerda");
-
-	    if (i === indice) {
-	      p.classList.add("ativa");
-	      p.style.position = "relative";
-	    } else if (i < indice) {
-	      p.classList.add("escondida-para-esquerda");
-	      p.style.position = "absolute";
-	    } else {
-	      p.classList.add("escondida-para-direita");
-	      p.style.position = "absolute";
-	    }
-	  });
-
-	  document.querySelectorAll(".bolinha").forEach((b, i) => {
-	    b.classList.toggle("ativa", i === indice);
-	  });
-	}
-
-	function avancarPagina() {
-	  const totalPaginas = document.querySelectorAll(".pagina").length;
-	  if (paginaAtual < totalPaginas - 1) {
-	    paginaAtual++;
-	    mostrarPagina(paginaAtual);
-	  }
-	}
-
-	function voltarPagina() {
-	  if (paginaAtual > 0) {
-	    paginaAtual--;
-	    mostrarPagina(paginaAtual);
-	  }
-	}
-	
-	
-	function criaDocFluigRetornaDocumentId(file, parentId) {
-		  return new Promise((resolve, reject) => {
-		    var reader = new FileReader();
-		    var fileName = file.name;
-
-		    reader.readAsDataURL(file);
-		    reader.onload = function (e) {
-		      var bytes = e.target.result.split("base64,")[1];
-
-		      DatasetFactory.getDataset("CriacaoDocumentosFluig", null, [
-		        DatasetFactory.createConstraint("conteudo", bytes, bytes, ConstraintType.MUST),
-		        DatasetFactory.createConstraint("nome", fileName, fileName, ConstraintType.SHOULD),
-		        DatasetFactory.createConstraint("descricao", fileName, fileName, ConstraintType.SHOULD),
-		        DatasetFactory.createConstraint("pasta", parentId, parentId, ConstraintType.SHOULD),
-		      ], null, {
-		        success: function (dataset) {
-		          if (!dataset || dataset == "" || dataset == null) {
-		            reject("Erro na comunicação com o dataset.");
-		          }
-
-		          if (dataset.values[0][0] == "false") {
-		            reject("Erro ao criar documento: " + dataset.values[0][1]);
-		          } else {
-		            console.log("Documento criado com ID:", dataset.values[0].Resultado);
-		            resolve(dataset.values[0].Resultado);
-		          }
-		        },
-		        error: function (error) {
-		          reject(error);
-		        }
-		      });
-		    };
-		  });
-		}
-
-	
         else if (counter == atividadesConcluidas) {
             $(this).addClass("active");
         }
@@ -381,6 +375,120 @@ async function enviarSolicitacao() {
 
     } else {
         $("#workflowActions > button:first-child", window.parent.document).click();
+    }
+}
+
+let paginaAtual = 0;
+function mostrarPagina(indice) {
+    const paginas = document.querySelectorAll(".pagina");
+    const totalPaginas = paginas.length;
+
+    paginas.forEach((p, i) => {
+        p.classList.remove("ativa", "escondida-para-direita", "escondida-para-esquerda");
+
+        if (i === indice) {
+            p.classList.add("ativa");
+            p.style.position = "relative";
+        } else if (i < indice) {
+            p.classList.add("escondida-para-esquerda");
+            p.style.position = "absolute";
+        } else {
+            p.classList.add("escondida-para-direita");
+            p.style.position = "absolute";
+        }
+    });
+
+    document.querySelectorAll(".bolinha").forEach((b, i) => {
+        b.classList.toggle("ativa", i === indice);
+    });
+}
+function avancarPagina() {
+    const totalPaginas = document.querySelectorAll(".pagina").length;
+    if (paginaAtual < totalPaginas - 1) {
+        paginaAtual++;
+        mostrarPagina(paginaAtual);
+    }
+}
+function voltarPagina() {
+    if (paginaAtual > 0) {
+        paginaAtual--;
+        mostrarPagina(paginaAtual);
+    }
+}
+function handleFileUpload(inputId, descricaoArquivo) {
+    const input = document.getElementById(inputId);
+    const statusText = document.getElementById("textFileOrcamento");
+
+    input.click(); // Abre o seletor de arquivos
+
+    input.onchange = async function () {
+        const file = input.files[0];
+
+        if (!file) {
+            statusText.textContent = "Nenhum arquivo selecionado";
+            return;
+        }
+
+        try {
+            statusText.textContent = "Enviando arquivo...";
+            const pastaDestino = "12345"; // Substitua pelo ID da pasta no GED
+
+            const docId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDestino);
+
+            statusText.textContent = `Arquivo enviado: ${file.name}`;
+
+            // Anexa ao processo
+            anexarDocumentoAoProcesso(docId);
+
+            console.log(`Arquivo ${file.name} enviado e anexado com sucesso!`);
+        } catch (err) {
+            statusText.textContent = "Erro ao enviar arquivo";
+            console.error("Erro ao fazer upload do arquivo:", err);
+        }
+    };
+}
+function criaDocFluigRetornaDocumentId(file, parentId) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        const fileName = file.name;
+
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            const bytes = e.target.result.split("base64,")[1];
+
+            DatasetFactory.getDataset("CriacaoDocumentosFluig", null, [
+                DatasetFactory.createConstraint("conteudo", bytes, bytes, ConstraintType.MUST),
+                DatasetFactory.createConstraint("nome", fileName, fileName, ConstraintType.SHOULD),
+                DatasetFactory.createConstraint("descricao", fileName, fileName, ConstraintType.SHOULD),
+                DatasetFactory.createConstraint("pasta", parentId, parentId, ConstraintType.SHOULD),
+            ], null, {
+                success: function (dataset) {
+                    if (!dataset || dataset.values.length === 0) {
+                        reject("Erro ao comunicar com dataset");
+                    } else if (dataset.values[0][0] === "false") {
+                        reject("Erro na criação do documento: " + dataset.values[0][1]);
+                    } else {
+                        console.log("Documento criado, ID:", dataset.values[0].Resultado);
+                        resolve(dataset.values[0].Resultado);
+                    }
+                },
+                error: function (err) {
+                    reject(err);
+                }
+            });
+        };
+    });
+}
+function anexarDocumentoAoProcesso(docId) {
+    try {
+        if (parent?.ECM?.workflowView?.attachDocument) {
+            parent.ECM.workflowView.attachDocument(docId);
+            console.log(`Documento ${docId} anexado ao processo`);
+        } else {
+            console.warn("Função de anexo ao processo não disponível.");
+        }
+    } catch (e) {
+        console.error("Erro ao anexar documento ao processo:", e);
     }
 }
 
