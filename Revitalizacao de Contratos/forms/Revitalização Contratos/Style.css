@@ -1,427 +1,427 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
 
 .wizard-progress {
-	display: flex;
-	width: 100%;
-	margin: 40px 0;
-	font-family: 'Inter', sans-serif;
+    display: flex;
+    width: 100%;
+    margin: 40px 0;
+    font-family: "Inter", sans-serif;
 }
 
 .step {
-	position: relative;
-	flex: 1;
-	padding: 16px 20px;
-	background: linear-gradient(145deg, #f0f0f0, #dcdcdc);
-	color: #333;
-	text-align: center;
-	font-weight: 600;
-	text-transform: uppercase;
-	clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%,
-			0 100%, 20px 50%);
-	margin-left: -20px;
-	z-index: 1;
-	transition: all 0.3s ease;
-	letter-spacing: 0.5px;
-	box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+    position: relative;
+    flex: 1;
+    padding: 16px 20px;
+    background: linear-gradient(145deg, #f0f0f0, #dcdcdc);
+    color: #333;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 20px 50%);
+    margin-left: -20px;
+    z-index: 1;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
 }
 
 /* first etapa*/
 .step:first-child {
-	margin-left: 0;
-	clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%,
-			0 100%);
-	border-top-left-radius: 8px;
-	border-bottom-left-radius: 8px;
+    margin-left: 0;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 /* LAST ETAPA */
 .step:last-child {
-	border-top-right-radius: 8px;
-	border-bottom-right-radius: 8px;
-	clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 0, 100% 100%, calc(100% - 20px) 100%,
-			0 100%, 20px 50%);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 0, 100% 100%, calc(100% - 20px) 100%, 0 100%, 20px 50%);
 }
 
 /* Etapa ativa */
 .step.active {
-	background: linear-gradient(135deg, #ffe259, #ffa751);
-	color: #000;
-	z-index: 2;
-	box-shadow: 0 8px 16px rgba(255, 193, 7, 0.25);
-	transform: scale(1.02);
+    background: linear-gradient(135deg, #ffe259, #ffa751);
+    color: #000;
+    z-index: 2;
+    box-shadow: 0 8px 16px rgba(255, 193, 7, 0.25);
+    transform: scale(1.02);
 }
 
 /* Etapa concluída (verde moderna) */
 .step.completed {
-	background: linear-gradient(to right, #43cea2, #185a9d);
-	color: white;
+    background: linear-gradient(to right, #43cea2, #185a9d);
+    color: white;
 }
 
 .strongAlert {
-	color: red;
+    color: red;
 }
 
 /* Hover para qualquer etapa (exceto ativa) */
 .step:not(.active):hover {
-	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-	transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 
 /********************************************************************************************************/
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
 
 .bubble-progress {
-	position: relative;
-	display: flex;
-	justify-content: space-between;
-	font-family: 'Quicksand', sans-serif;
-	margin: 40px auto;
-	max-width: 600px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Quicksand", sans-serif;
+    margin: 40px auto;
+    max-width: 600px;
 }
 
 /* Linha de fundo */
 .bubble-progress::before {
-	content: '';
-	position: absolute;
-	top: 24px;
-	left: 40px;
-	right: 40px;
-	height: 4px;
-	background-color: #ccc;
-	z-index: 0;
+    content: "";
+    position: absolute;
+    top: 24px;
+    left: 40px;
+    right: 40px;
+    height: 4px;
+    background-color: #ccc;
+    z-index: 0;
 }
 
 .bubble-step {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 6px;
-	position: relative;
-	z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    z-index: 1;
 }
 
 /* Bolha circular */
 .bubble-icon {
-	width: 48px;
-	height: 48px;
-	border-radius: 50%;
-	background: #e0e0e0;
-	color: #444;
-	font-size: 18px;
-	font-weight: bold;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #444;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 /* Nome da etapa */
 .label {
-	font-size: 12px;
-	font-weight: 600;
-	color: #666;
-	text-align: center;
-	width: 80px;
-	color: #666 !important;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-align: center;
+    width: 80px;
+    color: #666 !important;
 }
 
 /* Etapa ativa */
 .bubble-step.active .bubble-icon {
-	background: radial-gradient(circle at 30% 30%, #ffe259, #ffa751);
-	box-shadow: 0 0 8px rgba(255, 193, 7, 0.6);
-	transform: scale(1.1);
-	color: #000;
+    background: radial-gradient(circle at 30% 30%, #ffe259, #ffa751);
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.6);
+    transform: scale(1.1);
+    color: #000;
 }
 
 /* Etapa concluída */
 .bubble-step.completed .bubble-icon {
-	background-color: #4caf50;
-	color: white;
-	font-size: 20px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 20px;
 }
-
 
 /**************************************************************************************/
 .circle-progress-container {
-	position: relative;
-	width: 250px;
-	height: 250px;
-	margin: 60px auto;
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 60px auto;
 }
 
 .circle-progress {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .segment {
-	fill: none;
-	stroke-width: 12;
-	stroke-dasharray: 141.37 424.12;
-	stroke-linecap: round;
-	transform: rotate(322deg);
-	/* começa no topo */
-	transform-origin: 50% 50%;
-	opacity: 0.3;
-	transition: all 0.4s ease;
+    fill: none;
+    stroke-width: 12;
+    stroke-dasharray: 141.37 424.12;
+    stroke-linecap: round;
+    transform: rotate(322deg);
+    /* começa no topo */
+    transform-origin: 50% 50%;
+    opacity: 0.3;
+    transition: all 0.4s ease;
 }
 
 .segment1 {
-	stroke: #ffc107;
-	stroke-dashoffset: 0;
+    stroke: #ffc107;
+    stroke-dashoffset: 0;
 }
 
 .segment2 {
-	stroke: #4caf50;
-	stroke-dashoffset: -141.37;
+    stroke: #4caf50;
+    stroke-dashoffset: -141.37;
 }
 
 .segment3 {
-	stroke: #2196f3;
-	stroke-dashoffset: -282.74;
+    stroke: #2196f3;
+    stroke-dashoffset: -282.74;
 }
 
 .segment4 {
-	stroke: #9c27b0;
-	stroke-dashoffset: -424.11;
+    stroke: #9c27b0;
+    stroke-dashoffset: -424.11;
 }
 
 .segment.current {
-	opacity: 1;
-	stroke-width: 14;
+    opacity: 1;
+    stroke-width: 14;
 }
 
 .center-text {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 84%;
-	height: 85%;
-	background-color: #ffffff;
-	border-radius: 50%;
-	transform: translate(-50%, -50%);
-	font-family: 'Quicksand', sans-serif;
-	font-weight: bold;
-	font-size: 16px;
-	color: #333;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	z-index: 1;
-	cursor: pointer;
-	transition: background-color 0.5s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 84%;
+    height: 85%;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
 }
 
 .circle-labels {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 100%;
-	height: 100%;
-	pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
 .circle-label {
-	position: absolute;
-	transform: rotate(var(--angle)) translate(130px) rotate(calc(-1 * var(--angle)));
-	transform-origin: center;
-	font-family: 'Quicksand', sans-serif;
-	font-size: 11px;
-	text-align: center;
-	width: max-content;
-	color: #444;
-	white-space: nowrap;
+    position: absolute;
+    transform: rotate(var(--angle)) translate(130px) rotate(calc(-1 * var(--angle)));
+    transform-origin: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 11px;
+    text-align: center;
+    width: max-content;
+    color: #444;
+    white-space: nowrap;
 }
 
-
-
-
-
-
-
-
 .flatpickr-input {
-	background-color: #fff !important;
-	border: 1px solid #ccc !important;
-	padding: 6px 12px !important;
-	font-size: 14px !important;
-	cursor: pointer !important;
+    background-color: #fff !important;
+    border: 1px solid #ccc !important;
+    padding: 6px 12px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
 }
 
 .flatpickr-input:hover {
-	border-color: #66afe9 !important;
+    border-color: #66afe9 !important;
 }
 
 .flatpickr-input:focus {
-	border-color: #66afe9 !important;
-	box-shadow: 0 0 5px rgba(102, 175, 233, 0.5) !important;
-	outline: none !important;
+    border-color: #66afe9 !important;
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.5) !important;
+    outline: none !important;
 }
 
-
-@import url('https://fonts.googleapis.com/css2?family=Oswald&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 @media print {
-	body {
-		margin: 0 !important;
-	}
+    body {
+        margin: 0 !important;
+    }
 }
 
 :root {
-	--ck-content-font-family: 'Lato';
+    --ck-content-font-family: "Lato";
 }
 
 .main-container {
-	font-family: var(--ck-content-font-family);
-	width: fit-content;
-	margin-left: auto;
-	margin-right: auto;
+    font-family: var(--ck-content-font-family);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .editor-container_classic-editor .editor-container__editor {
-	min-width: 795px;
-	max-width: 795px;
+    min-width: 795px;
+    max-width: 795px;
 }
 
-
-Container principal do formul�rio com efeito 3D
+/* Container principal do formul�rio com efeito 3D */
 .aba-container {
-  position: relative;
-  perspective: 1200px;
-  min-height: 400px;
+    position: relative;
+    perspective: 1200px;
+    min-height: 400px;
 }
 
 .painel-formulario {
-  position: relative;
-  width: 100%;
-  min-height: 500px;
-  margin-bottom: 30px;
-  perspective: 1200px;
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    margin-bottom: 30px;
+    perspective: 1200px;
 }
 
 .pagina {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  pointer-events: none;
-  backface-visibility: hidden;
-  transition: transform 0.6s ease, opacity 0.6s ease;
-  transform-style: preserve-3d;
-  transform-origin: left center;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    transform-style: preserve-3d;
+    transform-origin: left center;
 }
 
 .pagina.ativa {
-  opacity: 1;
-  pointer-events: auto;
-  transform: rotateY(0deg);
-  position: relative;
-  z-index: 2;
+    opacity: 1;
+    pointer-events: auto;
+    transform: rotateY(0deg);
+    position: relative;
+    z-index: 2;
 }
 
 .pagina.escondida-para-direita {
-  opacity: 0;
-  pointer-events: none;
-  transform: rotateY(90deg);
-  z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    transform: rotateY(90deg);
+    z-index: 1;
 }
 
-
 .navegacao-formulario {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
 }
 
 .bolinhas {
-  display: flex;
-  gap: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 .bolinha {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background-color: #ccc;
-  cursor: pointer;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
 }
 
 .bolinha.ativa {
-  background-color: #007bff;
+    background-color: #007bff;
 }
 
 #btn-voltar,
 #btn-avancar {
-  background-color: transparent;
-  border: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  user-select: none;
+    background-color: transparent;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    user-select: none;
 }
 
 /* Painel Aprovacao - init */
 .divLinhaAprovacao {
-	height: 20px !important
+    height: 20px !important;
 }
 
 #panelAprovacao {
-	background-color: #edf5ff;
-	border-radius: 20px;
-	padding: 20px 50px;
-	max-width: 1400px;
-	margin: auto;
+    background-color: #edf5ff;
+    border-radius: 20px;
+    padding: 20px 50px;
+    max-width: 1400px;
+    margin: auto;
 }
-#panelAprovacao label,#panelAprovacao h3,#panelAprovacao h4,#panelAprovacao hr{
-	color: royalblue;
+#panelAprovacao label,
+#panelAprovacao h3,
+#panelAprovacao h4,
+#panelAprovacao hr {
+    color: royalblue;
 }
-#panelAprovacao span{
-	color: black;
+#panelAprovacao span {
+    color: black;
 }
 
 /* Painel Aprovacao - end */
 
 /* CK5 Editor - init*/
 
-@import url('https://fonts.googleapis.com/css2?family=Oswald&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 @media print {
-	body {
-		margin: 0 !important;
-	}
+    body {
+        margin: 0 !important;
+    }
 }
 
 :root {
-	--ck-content-font-family: 'Lato';
+    --ck-content-font-family: "Lato";
 }
 
 .main-container {
-	font-family: var(--ck-content-font-family);
-	width: fit-content;
-	margin-left: auto;
-	margin-right: auto;
+    font-family: var(--ck-content-font-family);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .editor-container_classic-editor .editor-container__editor {
-	min-width: 795px;
-	max-width: 795px;
+    min-width: 795px;
+    max-width: 795px;
 }
 
 .watermark {
-	font-size: 50px;
-	opacity: 0.5;
-	color: black;
-	position: fixed;
-	left: 20%;
-	top: 50%;
-	transform: rotate(25deg);
-	letter-spacing: 10px
+    font-size: 50px;
+    opacity: 0.5;
+    color: black;
+    position: fixed;
+    left: 20%;
+    top: 50%;
+    transform: rotate(25deg);
+    letter-spacing: 10px;
 }
 
-/* CK5 Editor - end */
+.visible {
+    display: block !important;
+}
+.has-error {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+    display: inline - block;
+    border: 1px red solid !important;
+    color: black !important;
+}
