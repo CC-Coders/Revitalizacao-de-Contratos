@@ -1,493 +1,485 @@
 <html>
+    <head>
+        <!-- CSS primeiro -->
+        <link rel="stylesheet" type="text/css" href="/style-guide/css/fluig-style-guide.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flaticon/2.1.2/css/flaticon.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+        <link rel="stylesheet" href="/castilho_dev_guide/resources/css/castilho-cards.css" />
+        <link rel="stylesheet" href="Style.css" />
 
-<head>
-    <!-- CSS primeiro -->
-    <link rel="stylesheet" type="text/css" href="/style-guide/css/fluig-style-guide.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flaticon/2.1.2/css/flaticon.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="/castilho_dev_guide/resources/css/castilho-cards.css">
-    <link rel="stylesheet" href="Style.css" />
+        <!-- Scripts (jQuery e dependências) -->
+        <script src="/resources/js/jquery/jquery.js"></script>
+        <script src="/resources/js/jquery/jquery-ui.min.js"></script>
+        <script src="/webdesk/vcXMLRPC.js"></script>
+        <script src="/resources/js/mustache/mustache-min.js"></script>
+        <script src="/style-guide/js/fluig-style-guide.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+        <script src="Functions.js"></script>
+        <script src="Script.js"></script>
 
-    <!-- Scripts (jQuery e dependências) -->
-    <script src="/resources/js/jquery/jquery.js"></script>
-    <script src="/resources/js/jquery/jquery-ui.min.js"></script>
-    <script src="/webdesk/vcXMLRPC.js"></script>
-    <script src="/resources/js/mustache/mustache-min.js"></script>
-    <script src="/style-guide/js/fluig-style-guide.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-    <script src="Functions.js"></script>
-    <script src="Script.js"></script>
+        <!-- Castilho Dev Guida -->
+        <script src="/castilho_dev_guide/resources/js/castilho-utils.js"></script>
+        <script src="/castilho_dev_guide/resources/js/castilho-consultas-rm.js"></script>
 
+        <!-- Docxtemplater -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.65.2/docxtemplater.js"></script>
+        <script src="https://unpkg.com/pizzip@3.2.0/dist/pizzip.js"></script>
+        <script src="https://unpkg.com/pizzip@3.2.0/dist/pizzip-utils.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
 
-    <!-- Castilho Dev Guida -->
-    <script src="/castilho_dev_guide/resources/js/castilho-utils.js"></script>
-    <script src="/castilho_dev_guide/resources/js/castilho-consultas-rm.js"></script>
+        <!-- CK5 Editor -->
+        <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/46.0.0/ckeditor5.css" crossorigin />
+        <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5-premium-features/46.0.0/ckeditor5-premium-features.css" crossorigin />
+    </head>
 
-    <!-- Docxtemplater -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.65.2/docxtemplater.js"></script>
-    <script src="https://unpkg.com/pizzip@3.2.0/dist/pizzip.js"></script>
-    <script src="https://unpkg.com/pizzip@3.2.0/dist/pizzip-utils.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
-
-    <!-- CK5 Editor -->
-    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/46.0.0/ckeditor5.css" crossorigin>
-    <link rel="stylesheet"
-        href="https://cdn.ckeditor.com/ckeditor5-premium-features/46.0.0/ckeditor5-premium-features.css" crossorigin>
-</head>
-
-<body>
-    <div class="fluig-style-guide">
-        <form name="form" role="form">
-
-            <div class="wizard-progress">
-                <div class="step active">Negociação</div>
-                <div class="step">Revisão</div>
-                <div class="step">Cadastramento</div>
-                <div class="step">Assinatura</div>
-            </div>
-
-            <div class="row" style="padding: 24px">
-                <div class="col-md-4">
-                    <div class="form-input">
-                        <label>Origem do Contrato:</label><select name="origemContrato" id="origemContrato"
-                            class="form-control inputInfoChamado">
-                            <option value="">Selecione</option>
-                            <option value="Novo">Novo</option>
-                            <option value="Aditivos">Aditivos</option>
-                            <option value="Rescisões">Rescisões</option>
-                        </select>
-                    </div>
+    <body>
+        <div class="fluig-style-guide">
+            <form name="form" role="form">
+                <div class="wizard-progress">
+                    <div class="step active">Negociação</div>
+                    <div class="step">Revisão</div>
+                    <div class="step">Cadastramento</div>
+                    <div class="step">Assinatura</div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-input">
-                        <label>Modelo de Contrato:</label><select name="modeloContrato" id="modeloContrato"
-                            class="form-control inputInfoChamado">
-                            <option value="">Selecione</option>
-                            <option value="Modelo Castilho">Modelo Castilho</option>
-                            <option value="Contrato fora do modelo">Contrato fora do modelo</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-input">
-                        <label>Tipo de Contrato:</label><select name="tipoContrato" id="tipoContrato"
-                            class="form-control inputInfoChamado">
-                            <option value="">Selecione</option>
-                            <option value="Ferrovias - Locação de Equipamento">Ferrovias - Locação de Equipamento
-                            </option>
-                            <option value="Ferrovias – Locação de Imóvel">Ferrovias – Locação de Imóvel</option>
-                            <option value="Locação de Container">Locação de Container</option>
-                            <option value="Locação de Equipamento">Locação de Equipamento</option>
-                            <option value="Locação de Imóvel">Locação de Imóvel</option>
-                            <option value="Locação de Sanitários">Locação de Sanitários</option>
-                            <option value="Prestação de Serviços">Prestação de Serviços</option>
-                            <option value="Transporte de Material">Transporte de Material</option>
-                            <option value="Transporte de Funcionários">Transporte de Funcionários</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-<<<<<<< Updated upstream
-            <br />
-            <div id="formContainer" class="panel-body"
-                style="display:none; margin-bottom: 20px; box-shadow:0px 20px 20px rgba(0, 0, 0, 0.15)">
-                <div id="pagina-1" class="pagina">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background-color: #eaeaea;">
-                            <h4 class="panel-title" style="color: #58595B">Dados Gerais</h4>
+
+                <div class="row" style="padding: 24px">
+                    <div class="col-md-4">
+                        <div class="form-input">
+                            <label>Origem do Contrato:</label
+                            ><select name="origemContrato" id="origemContrato" class="form-control inputInfoChamado">
+                                <option value="">Selecione</option>
+                                <option value="Novo">Novo</option>
+                                <option value="Aditivos">Aditivos</option>
+                                <option value="Rescisões">Rescisões</option>
+                            </select>
                         </div>
-                        <div class="panel-body">
-                            <fieldset>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Descrição do Imóvel:</label><strong class="strongAlert">*</strong>
-                                            <input type="text" class="form-control" id="descricaoImovel"
-                                                name="descricaoImovel">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Valor Mensal do Aluguel:</label><strong
-                                                class="strongAlert">*</strong>
-                                            <input type="text" class="form-control" id="valorMensalAluguel"
-                                                name="valorMensalAluguel">
-=======
-            
-            
-   <div class="row endereco-fornecedor" style="display: none;">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Informações do Locador:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-input">
+                            <label>Modelo de Contrato:</label
+                            ><select name="modeloContrato" id="modeloContrato" class="form-control inputInfoChamado">
+                                <option value="">Selecione</option>
+                                <option value="Modelo Castilho">Modelo Castilho</option>
+                                <option value="Contrato fora do modelo">Contrato fora do modelo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-input">
+                            <label>Tipo de Contrato:</label
+                            ><select name="tipoContrato" id="tipoContrato" class="form-control inputInfoChamado">
+                                <option value="">Selecione</option>
+                                <option value="Ferrovias - Locação de Equipamento">Ferrovias - Locação de Equipamento</option>
+                                <option value="Ferrovias – Locação de Imóvel">Ferrovias – Locação de Imóvel</option>
+                                <option value="Locação de Container">Locação de Container</option>
+                                <option value="Locação de Equipamento">Locação de Equipamento</option>
+                                <option value="Locação de Imóvel">Locação de Imóvel</option>
+                                <option value="Locação de Sanitários">Locação de Sanitários</option>
+                                <option value="Prestação de Serviços">Prestação de Serviços</option>
+                                <option value="Transporte de Material">Transporte de Material</option>
+                                <option value="Transporte de Funcionários">Transporte de Funcionários</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div id="formContainer" class="panel-body" style="display: none; margin-bottom: 20px; box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.15)">
+                    <div id="pagina-1" class="pagina">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="background-color: #eaeaea">
+                                <h4 class="panel-title" style="color: #58595b">Dados Gerais</h4>
+                            </div>
+                            <div class="panel-body">
+                                <fieldset>
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" id="cpfFornecedor" name="cpfFornecedor" placeholder="CPF">
-                                            <small class="form-text text-muted">CPF/CNPJ</small>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Descrição do Imóvel:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" class="form-control" id="descricaoImovel" name="descricaoImovel" />
+                                            </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <input type="text" class="form-control" id="rgFornecedor" name="rgFornecedor" placeholder="RG">
-                                            <small class="form-text text-muted">RG</small>
-                                        </div>
-                                        <!-- Pessoa Física -->
-                                        <div class="col-md-3 pessoa-fisica">
-                                            <input type="text" class="form-control" id="nacionalidadeFornecedor" name="nacionalidadeFornecedor" placeholder="Nacionalidade">
-                                            <small class="form-text text-muted">Nacionalidade</small>
-                                        </div>  
-                                        <div class="col-md-3 pessoa-fisica">
-                                            <input type="text" class="form-control" id="estadoCivilFornecedor" name="estadoCivilFornecedor" placeholder="Estado Civil">
-                                            <small class="form-text text-muted">Estado Civil</small>
-                                        </div>
-                                        <!-- Pessoa Jurídica -->
-                                        <div class="col-md-3 pessoa-juridica" style="display: none;">
-                                            <input type="text" class="form-control" id="administradorFornecedor" name="administradorFornecedor" placeholder="Administrador">
-                                            <small class="form-text text-muted">Administrador</small>
-                                        </div>
-                                        <div class="col-md-3 pessoa-juridica" style="display: none;">
-                                            <input type="text" class="form-control" id="cpfAdministrador" name="cpfAdministrador" placeholder="CPF">
-                                            <small class="form-text text-muted">CPF do Administrador</small>
->>>>>>> Stashed changes
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Valor Mensal do Aluguel:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" class="form-control" id="valorMensalAluguel" name="valorMensalAluguel" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Obra:</label><strong class="strongAlert">*</strong><select
-                                                name="obra" id="obra" class="form-control inputInfoChamado">
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Locador:</label><strong class="strongAlert">*</strong>
-                                            <select name="locador" id="locador" class="form-control inputInfoChamado">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
 
-
-                                <div class="row endereco-fornecedor" style="display: none;">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Informações do Locador:</label>
+                                    <div class="row endereco-fornecedor" style="display: none">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Informações do Locador:</label>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" id="cpfFornecedor" name="cpfFornecedor" placeholder="CPF" />
+                                                        <small class="form-text text-muted">CPF/CNPJ</small>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" id="rgFornecedor" name="rgFornecedor" placeholder="RG" />
+                                                        <small class="form-text text-muted">RG</small>
+                                                    </div>
+                                                    <!-- Pessoa Física -->
+                                                    <div class="col-md-3 pessoa-fisica">
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="nacionalidadeFornecedor"
+                                                            name="nacionalidadeFornecedor"
+                                                            placeholder="Nacionalidade"
+                                                        />
+                                                        <small class="form-text text-muted">Nacionalidade</small>
+                                                    </div>
+                                                    <div class="col-md-3 pessoa-fisica">
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="estadoCivilFornecedor"
+                                                            name="estadoCivilFornecedor"
+                                                            placeholder="Estado Civil"
+                                                        />
+                                                        <small class="form-text text-muted">Estado Civil</small>
+                                                    </div>
+                                                    <!-- Pessoa Jurídica -->
+                                                    <div class="col-md-3 pessoa-juridica" style="display: none">
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="administradorFornecedor"
+                                                            name="administradorFornecedor"
+                                                            placeholder="Administrador"
+                                                        />
+                                                        <small class="form-text text-muted">Administrador</small>
+                                                    </div>
+                                                    <div class="col-md-3 pessoa-juridica" style="display: none">
+                                                        <input type="text" class="form-control" id="cpfAdministrador" name="cpfAdministrador" placeholder="CPF" />
+                                                        <small class="form-text text-muted">CPF do Administrador</small>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="rgFornecedor"
-                                                        name="rgFornecedor" placeholder="RG">
-                                                    <small class="form-text text-muted">RG/CNPJ</small>
+                                                    <div class="form-group">
+                                                        <label>Obra:</label><strong class="strongAlert">*</strong
+                                                        ><select name="obra" id="obra" class="form-control inputInfoChamado"></select>
+                                                    </div>
                                                 </div>
-                                                <!-- Pessoa Física -->
-                                                <div class="col-md-3 pessoa-fisica">
-                                                    <input type="text" class="form-control" id="nacionalidadeFornecedor"
-                                                        name="nacionalidadeFornecedor" placeholder="Nacionalidade">
-                                                    <small class="form-text text-muted">Nacionalidade</small>
-                                                </div>
-                                                <div class="col-md-3 pessoa-fisica">
-                                                    <input type="text" class="form-control" id="estadoCivilFornecedor"
-                                                        name="estadoCivilFornecedor" placeholder="Estado Civil">
-                                                    <small class="form-text text-muted">Estado Civil</small>
-                                                </div>
-                                                <!-- Pessoa Jurídica -->
-                                                <div class="col-md-3 pessoa-juridica" style="display: none;">
-                                                    <input type="text" class="form-control" id="administradorFornecedor"
-                                                        name="administradorFornecedor" placeholder="Administrador">
-                                                    <small class="form-text text-muted">Administrador</small>
-                                                </div>
-                                                <div class="col-md-3 pessoa-juridica" style="display: none;">
-                                                    <input type="text" class="form-control" id="cpfFornecedor"
-                                                        name="cpfFornecedor" placeholder="CPF">
-                                                    <small class="form-text text-muted">CPF</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Endereço do Locador:</label>
-                                            <div class="row">
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="ruaFornecedor"
-                                                        name="ruaFornecedor" placeholder="Rua">
-                                                    <small class="form-text text-muted">Rua</small>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control" id="numeroFornecedor"
-                                                        name="numeroFornecedor" placeholder="Nº">
-                                                    <small class="form-text text-muted">Número</small>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control" id="bairroFornecedor"
-                                                        name="bairroFornecedor" placeholder="Bairro">
-                                                    <small class="form-text text-muted">Bairro</small>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="margin-top: 10px;">
-                                                <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="cidadeFornecedor"
-                                                        name="cidadeFornecedor" placeholder="Cidade">
-                                                    <small class="form-text text-muted">Cidade</small>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control" id="estadoFornecedor"
-                                                        name="estadoFornecedor" placeholder="UF" maxlength="2">
-                                                    <small class="form-text text-muted">UF</small>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <input type="text" class="form-control" id="cepFornecedor"
-                                                        name="cepFornecedor" placeholder="CEP">
-                                                    <small class="form-text text-muted">CEP</small>
+                                                    <div class="form-group">
+                                                        <label>Locador:</label><strong class="strongAlert">*</strong>
+                                                        <select name="locador" id="locador" class="form-control inputInfoChamado"></select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Procurador:</label><strong class="strongAlert">*</strong> <input
-                                                type="text" id="procurador" name="procurador"
-                                                class="form-control inputInfoChamado" />
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Informações do Locador:</label>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" id="rgFornecedor" name="rgFornecedor" placeholder="RG" />
+                                                        <small class="form-text text-muted">RG/CNPJ</small>
+                                                    </div>
+                                                    <!-- Pessoa Física -->
+                                                    <div class="col-md-3 pessoa-fisica">
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="nacionalidadeFornecedor"
+                                                            name="nacionalidadeFornecedor"
+                                                            placeholder="Nacionalidade"
+                                                        />
+                                                        <small class="form-text text-muted">Nacionalidade</small>
+                                                    </div>
+                                                    <div class="col-md-3 pessoa-fisica">
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="estadoCivilFornecedor"
+                                                            name="estadoCivilFornecedor"
+                                                            placeholder="Estado Civil"
+                                                        />
+                                                        <small class="form-text text-muted">Estado Civil</small>
+                                                    </div>
+                                                    <!-- Pessoa Jurídica -->
+                                                    <div class="col-md-3 pessoa-juridica" style="display: none">
+                                                        <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="administradorFornecedor"
+                                                            name="administradorFornecedor"
+                                                            placeholder="Administrador"
+                                                        />
+                                                        <small class="form-text text-muted">Administrador</small>
+                                                    </div>
+                                                    <div class="col-md-3 pessoa-juridica" style="display: none">
+                                                        <input type="text" class="form-control" id="cpfFornecedor" name="cpfFornecedor" placeholder="CPF" />
+                                                        <small class="form-text text-muted">CPF</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Endereço do Locador:</label>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" id="ruaFornecedor" name="ruaFornecedor" placeholder="Rua" />
+                                                        <small class="form-text text-muted">Rua</small>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" id="numeroFornecedor" name="numeroFornecedor" placeholder="Nº" />
+                                                        <small class="form-text text-muted">Número</small>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" id="bairroFornecedor" name="bairroFornecedor" placeholder="Bairro" />
+                                                        <small class="form-text text-muted">Bairro</small>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin-top: 10px">
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" id="cidadeFornecedor" name="cidadeFornecedor" placeholder="Cidade" />
+                                                        <small class="form-text text-muted">Cidade</small>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" id="estadoFornecedor" name="estadoFornecedor" placeholder="UF" maxlength="2" />
+                                                        <small class="form-text text-muted">UF</small>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" id="cepFornecedor" name="cepFornecedor" placeholder="CEP" />
+                                                        <small class="form-text text-muted">CEP</small>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Representante:</label><strong class="strongAlert">*</strong> <input
-                                                type="text" id="representante" name="representante"
-                                                class="form-control inputInfoChamado" />
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Procurador:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="procurador" name="procurador" class="form-control inputInfoChamado" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Representante:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="representante" name="representante" class="form-control inputInfoChamado" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Contratante Principal:</label><strong class="strongAlert">*</strong>
-                                            <input type="text" id="contratantePrincipal" name="contratantePrincipal"
-                                                class="form-control inputInfoChamado" />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Contratante Principal:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="contratantePrincipal" name="contratantePrincipal" class="form-control inputInfoChamado" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Endereço do Imóvel:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="enderecoImovel" name="enderecoImovel" class="form-control inputInfoChamado" />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Endereço do Imóvel:</label><strong class="strongAlert">*</strong>
-                                            <input type="text" id="enderecoImovel" name="enderecoImovel"
-                                                class="form-control inputInfoChamado" />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Matrícula do Imóvel:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="matriculaImovel" name="matriculaImovel" class="form-control inputInfoChamado" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Finalidade da Locação:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="finalidadeLocacao" name="finalidadeLocacao" class="form-control inputInfoChamado" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Matrícula do Imóvel:</label><strong class="strongAlert">*</strong>
-                                            <input type="text" id="matriculaImovel" name="matriculaImovel"
-                                                class="form-control inputInfoChamado" />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Período de Locação:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="periodoLocacao" name="periodoLocacao" class="form-control inputInfoChamado" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Janela de Pagamento:</label><strong class="strongAlert">*</strong>
+                                                <select name="janelaPagamento" id="janelaPagamento" class="form-control inputInfoChamado">
+                                                    <option value="">Selecione</option>
+                                                    <option value="8">8</option>
+                                                    <option value="18">18</option>
+                                                    <option value="28">28</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Finalidade da Locação:</label><strong class="strongAlert">*</strong>
-                                            <input type="text" id="finalidadeLocacao" name="finalidadeLocacao"
-                                                class="form-control inputInfoChamado" />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Caução?</label><strong class="strongAlert">*</strong>
+                                                <select name="caucao" id="caucao" class="form-control inputInfoChamado">
+                                                    <option value="">Selecione</option>
+                                                    <option value="Sim">Sim</option>
+                                                    <option value="Não">Não</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" id="divValorCaucao" style="display: none">
+                                            <div class="form-group">
+                                                <label>Valor do Caução:</label><strong class="strongAlert">*</strong>
+                                                <input id="valorCaucao" name="valorCaucao" class="form-control inputInfoChamado" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" id="divDataPagamentoCaucao" style="display: none">
+                                            <div class="form-group">
+                                                <label>Data Pagamento do Caução:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="dataPagamentoCaucao" name="dataPagamentoCaucao" class="form-control inputInfoChamado date" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Período de Locação:</label><strong class="strongAlert">*</strong>
-                                            <input type="text" id="periodoLocacao" name="periodoLocacao"
-                                                class="form-control inputInfoChamado" />
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="background-color: #eaeaea">
+                                <h4 class="panel-title" style="color: #58595b">Dados para Pagamento</h4>
+                            </div>
+                            <div class="panel-body">
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="tipoPagamento">Tipo de Pagamento:</label>
+                                                <select name="tipoPagamento" id="tipoPagamento" class="form-control inputInfoChamado">
+                                                    <option value="">Selecione</option>
+                                                    <option value="Boleto">Boleto</option>
+                                                    <option value="Depósito">Depósito</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" id="divBanco" style="display: none">
+                                            <div class="form-group">
+                                                <label for="banco">Banco:</label>
+                                                <select name="banco" id="banco" class="form-control inputInfoChamado"></select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Janela de Pagamento:</label><strong class="strongAlert">*</strong>
-                                            <select name="janelaPagamento" id="janelaPagamento"
-                                                class="form-control inputInfoChamado">
+                                    <div class="row" id="divPagamento" style="display: none">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="titular">Titular da Conta:</label>
+                                                <input type="text" id="titular" name="titular" class="form-control inputInfoChamado" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="agencia">Agência:</label>
+                                                <input type="text" id="agencia" name="agencia" class="form-control inputInfoChamado" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="contaCorrente">Conta Corrente:</label>
+                                                <input type="text" id="contaCorrente" name="contaCorrente" class="form-control inputInfoChamado" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="background-color: #eaeaea">
+                                <h4 class="panel-title" style="color: #58595b">Assinatura do Contrato</h4>
+                            </div>
+                            <div class="panel-body">
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="assinaturaContrato">Formato da Assinatura:</label>
+                                                <select name="assinaturaContrato" id="assinaturaContrato" class="form-control inputInfoChamado">
+                                                    <option value="">Selecione</option>
+                                                    <option value="Eletrônica">Eletrônica</option>
+                                                    <option value="Manual">Manual</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pagina-2" class="pagina">
+                        <div class="panel panel-default" id="anexos">
+                            <div class="panel-heading" style="background-color: #eaeaea">
+                                <h4 class="panel-title" style="color: #58595b">Anexos</h4>
+                            </div>
+                            <div class="panel-body">
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="tipoDocumentacao">Documentação:</label>
+                                            <select name="tipoDocumentacao" id="tipoDocumentacao" class="form-control">
                                                 <option value="">Selecione</option>
-                                                <option value="8">8</option>
-                                                <option value="18">18</option>
-                                                <option value="28">28</option>
                                             </select>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Caução?</label><strong class="strongAlert">*</strong>
-                                            <select name="caucao" id="caucao" class="form-control inputInfoChamado">
-                                                <option value="">Selecione</option>
-                                                <option value="Sim">Sim</option>
-                                                <option value="Não">Não</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3" id="divValorCaucao" style="display: none">
-                                        <div class="form-group">
-                                            <label>Valor do Caução:</label><strong class="strongAlert">*</strong> <input
-                                                id="valorCaucao" name="valorCaucao"
-                                                class="form-control inputInfoChamado" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3" id="divDataPagamentoCaucao" style="display: none">
-                                        <div class="form-group">
-                                            <label>Data Pagamento do Caução:</label><strong
-                                                class="strongAlert">*</strong> <input type="text"
-                                                id="dataPagamentoCaucao" name="dataPagamentoCaucao"
-                                                class="form-control inputInfoChamado date" />
-                                        </div>
-                                    </div>
-                                </div>
 
-                            </fieldset>
+                                        <div class="col-md-6" id="divAnexo" style="opacity: 0; visibility: hidden; transition: all 0.3s">
+                                            <label id="labelAnexo" for="inputAnexo">Anexo:</label>
+                                            <input type="file" id="inputAnexo" name="anexoGenerico" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <h5>Documentos anexados:</h5>
+                                    <ul id="listaAnexos" style="list-style: none; padding-left: 0"></ul>
+                                </fieldset>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background-color: #eaeaea;">
-                            <h4 class="panel-title" style="color: #58595B">Dados para Pagamento</h4>
-                        </div>
-                        <div class="panel-body">
-                            <fieldset>
-                                <div class="row">
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="tipoPagamento">Tipo de Pagamento:</label>
-                                            <select name="tipoPagamento" id="tipoPagamento"
-                                                class="form-control inputInfoChamado">
-                                                <option value="">Selecione</option>
-                                                <option value="Boleto">Boleto</option>
-                                                <option value="Depósito">Depósito</option>
-                                            </select>
-                                        </div>
+                    <div id="pagina-3" class="pagina">
+                        <div class="panel panel-default" id="anexos">
+                            <div class="panel-heading" style="background-color: #eaeaea">
+                                <h4 class="panel-title" style="color: #58595b">Observações</h4>
+                            </div>
+                            <div class="panel-body">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <textarea name="observacoes" class="form-control" rows="6"></textarea>
                                     </div>
-                                    <div class="col-md-6" id="divBanco" style="display: none">
-                                        <div class="form-group">
-                                            <label for="banco">Banco:</label>
-                                            <select name="banco" id="banco"
-                                                class="form-control inputInfoChamado"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" id="divPagamento" style="display: none">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="titular">Titular da Conta:</label>
-                                            <input type="text" id="titular" name="titular"
-                                                class="form-control inputInfoChamado" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="agencia">Agência:</label>
-                                            <input type="text" id="agencia" name="agencia"
-                                                class="form-control inputInfoChamado" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="contaCorrente">Conta Corrente:</label>
-                                            <input type="text" id="contaCorrente" name="contaCorrente"
-                                                class="form-control inputInfoChamado" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
+                                </fieldset>
+                            </div>
                         </div>
                     </div>
+                    <div class="navegacao-formulario" style="display: flex; align-items: center; justify-content: center">
+                        <button id="btn-voltar">←</button>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background-color: #eaeaea;">
-                            <h4 class="panel-title" style="color: #58595B">Assinatura do Contrato</h4>
+                        <div class="bolinhas">
+                            <div class="bolinha"></div>
+                            <div class="bolinha"></div>
+                            <div class="bolinha"></div>
                         </div>
-                        <div class="panel-body">
-                            <fieldset>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="assinaturaContrato">Formato da Assinatura:</label>
-                                            <select name="assinaturaContrato" id="assinaturaContrato"
-                                                class="form-control inputInfoChamado">
-                                                <option value="">Selecione</option>
-                                                <option value="Eletrônica">Eletrônica</option>
-                                                <option value="Manual">Manual</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
+                        <button id="btn-avancar">→</button>
                     </div>
                 </div>
-
-                <div id="pagina-2" class="pagina">
-                    <div class="panel panel-default" id="anexos">
-                        <div class="panel-heading" style="background-color: #eaeaea;">
-                            <h4 class="panel-title" style="color: #58595B">Anexos</h4>
-                        </div>
-                        <div class="panel-body">
-                            <fieldset>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="tipoDocumentacao">Documentação:</label>
-                                        <select name="tipoDocumentacao" id="tipoDocumentacao" class="form-control">
-                                            <option value="">Selecione</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-6" id="divAnexo"
-                                        style="opacity: 0; visibility: hidden; transition: all 0.3s;">
-                                        <label id="labelAnexo" for="inputAnexo">Anexo:</label>
-                                        <input type="file" id="inputAnexo" name="anexoGenerico" class="form-control" />
-                                    </div>
-                                </div>
-
-                                <br />
-                                <h5>Documentos anexados:</h5>
-                                <ul id="listaAnexos" style="list-style: none; padding-left: 0;"></ul>
-                            </fieldset>
-                        </div>
-                    </div>
+                <div class="hidden" style="display: none">
+                    <input type="hidden" id="solicitante" name="solicitante" />
                 </div>
-
-                <div id="pagina-3" class="pagina">
-                    <div class="panel panel-default" id="anexos">
-                        <div class="panel-heading" style="background-color: #eaeaea;">
-                            <h4 class="panel-title" style="color: #58595B">Observações</h4>
-                        </div>
-                        <div class="panel-body">
-                            <fieldset>
-                                <div class="form-group">
-                                    <textarea name="observacoes" class="form-control" rows="6"></textarea>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="navegacao-formulario" style="display: flex; align-items: center; justify-content: center;">
-                    <button id="btn-voltar">←</button>
-
-                    <div class="bolinhas">
-                        <div class="bolinha"></div>
-                        <div class="bolinha"></div>
-                        <div class="bolinha"></div>
-                    </div>
-                    <button id="btn-avancar">→</button>
-                </div>
-            </div>
-            <div class="hidden" style="display: none">
-                <input type="hidden" id="solicitante" name="solicitante" />
-            </div>
-        </form>
-    </div>
-</body>
-
+            </form>
+        </div>
+    </body>
 </html>
