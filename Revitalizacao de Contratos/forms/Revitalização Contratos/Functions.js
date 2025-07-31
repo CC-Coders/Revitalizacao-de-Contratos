@@ -187,7 +187,7 @@ function atualizaOpcoesDocumentos(tipoPessoa) {
 		  lista.innerHTML += `<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`;
 		}
 
-		function inicializaInputAnexo() {
+function inicializaInputAnexo() {
 		  const select = document.getElementById("tipoDocumentacao");
 		  const input = document.getElementById("inputAnexo");
 		  const divAnexo = document.getElementById("divAnexo");
@@ -532,3 +532,38 @@ function anexarDocumentoAoProcesso(docId) {
     }
 }
 
+function validaCampos() {
+    var atividade = parseInt(document.getElementById("atividade").value);
+    var valida = true;
+    if (atividade == 0) {
+        $(".inputInfoChamado").each(function () {
+            if ($(this).is(":visible") && ($(this).val() == null || $(this).val() == undefined || $(this).val() == "")) {
+                $(this).addClass("has-error");
+                if ($(this).hasClass("select2-hidden-accessible")) {
+                    $(this).next(".select2-container").addClass("has-error");
+                }
+                if (valida) {
+                    valida = false;
+                    FLUIGC.toast({
+                        message: "Campo não preenchido!",
+                        type: "warning"
+                    });
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $(this).offset().top - (screen.height * 0.15)
+                    }, 700);
+                }
+            }
+        });
+    }
+
+    if (!valida) {
+        FLUIGC.toast({
+            message: "Preencha todos os campos obrigatórios!",
+            type: "warning"
+        });
+    } else {
+        salvaDadosFormulario();
+    }
+
+    return valida;
+}

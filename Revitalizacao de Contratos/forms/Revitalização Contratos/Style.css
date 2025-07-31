@@ -424,4 +424,15 @@ Container principal do formulário com efeito 3D
 	letter-spacing: 10px
 }
 
-/* CK5 Editor - end */
+.visible {
+    display: block!important;
+}
+.has-error {
+    padding - top: 0px!important;
+    padding - bottom: 0px!important;
+    padding - left: 2px!important;
+    padding - right: 2px!important;
+    display: inline - block;
+    border: 1px red solid!important;
+    color: black!important;
+}

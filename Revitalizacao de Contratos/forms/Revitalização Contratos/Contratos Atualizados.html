@@ -107,13 +107,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                        <label>Descrição do Imóvel:</label><strong class="strongAlert">*</strong>  
-                       <input type="text" class="form-control" id="descricaoImovel" name="descricaoImovel">
+                       <input type="text" class="form-control inputInfoChamado" id="descricaoImovel" name="descricaoImovel">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Valor Mensal do Aluguel:</label><strong class="strongAlert">*</strong>
-            <input type="text" class="form-control" id="valorMensalAluguel" name="valorMensalAluguel">
+            <input type="text" class="form-control inputInfoChamado" id="valorMensalAluguel" name="valorMensalAluguel">
                     </div>
                 </div>
             </div>         
@@ -308,7 +308,7 @@
                    
                    <div class="col-md-6">
                         <div class="form-group">
-                        <label for="tipoPagamento">Tipo de Pagamento:</label>
+                        <label for="tipoPagamento">Tipo de Pagamento:</label><strong class="strongAlert">*</strong>
                        <select name="tipoPagamento" id="tipoPagamento" class="form-control inputInfoChamado">
                             <option value="">Selecione</option>
               				<option value="Boleto">Boleto</option>
@@ -318,7 +318,7 @@
                     </div>
                         <div class="col-md-6" id="divBanco" style="display: none">
                     <div class="form-group">
-                        <label for="banco">Banco:</label>
+                        <label for="banco">Banco:</label><strong class="strongAlert">*</strong>
                         <select name="banco" id="banco" class="form-control inputInfoChamado"></select>
                     </div>
                     </div>
@@ -326,19 +326,19 @@
                                        <div class="row" id="divPagamento" style="display: none">
                         <div class="col-md-6">
                     <div class="form-group">
-                        <label for="titular">Titular da Conta:</label>
+                        <label for="titular">Titular da Conta:</label><strong class="strongAlert">*</strong>
                         <input type="text" id="titular" name="titular" class="form-control inputInfoChamado" />
                     </div>
                     </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="agencia">Agência:</label>
+                                <label for="agencia">Agência:</label><strong class="strongAlert">*</strong>
                                 <input type="text" id="agencia" name="agencia" class="form-control inputInfoChamado" />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="contaCorrente">Conta Corrente:</label>
+                                <label for="contaCorrente">Conta Corrente:</label><strong class="strongAlert">*</strong>
                                 <input type="text" id="contaCorrente" name="contaCorrente" class="form-control inputInfoChamado" />
                             </div>
                         </div>
@@ -356,7 +356,7 @@
                    <div class="row">
                         <div class="col-md-6">
                   <div class="form-group">
-                        <label for="assinaturaContrato">Formato da Assinatura:</label>
+                        <label for="assinaturaContrato">Formato da Assinatura:</label><strong class="strongAlert">*</strong>
                         <select name="assinaturaContrato" id="assinaturaContrato" class="form-control inputInfoChamado">
                             <option value="">Selecione</option>
               				<option value="Eletrônica">Eletrônica</option>
@@ -431,10 +431,20 @@
 
 			    <div class="hidden" style="display: none">
 	  				<input type="hidden" id="solicitante" name="solicitante" />
+	  				<input type="hidden" id="atividade" name="atividade" />
 	  			</div>
        
 
 </form>
+<script>
+    var beforeSendValidate = function (numState, nextState) {
+ 	   var atividade = parseInt(document.getElementById("atividade").value);
+    if (atividade == 0) {
+    	  return validaCampos();
+       }  
+ };
+</script>
 </div>
 </body>
+
 </html>
