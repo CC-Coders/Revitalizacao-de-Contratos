@@ -123,10 +123,10 @@ function buscaInfosFornecedor(cgccfo) {
                     $(".pessoa-juridica").show();
 
                     $("#administradorFornecedor").val(endereco.ADMINISTRADOR || "");
-                    $("#cpfFornecedor").val(endereco.CPF || "");
+                    $("#cnpjFornecedor").val(endereco.CPF || "");
                 }
 
-                $("#rgFornecedor").val(endereco.CGCCFO || "");
+                $("#cpfFornecedor").val(endereco.CGCCFO || "");
                 $("#ruaFornecedor").val(endereco.RUA || "");
                 $("#numeroFornecedor").val(endereco.NUMERO || "");
                 $("#bairroFornecedor").val(endereco.BAIRRO || "");
