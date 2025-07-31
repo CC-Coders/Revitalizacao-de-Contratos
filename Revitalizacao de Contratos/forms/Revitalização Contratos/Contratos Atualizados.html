@@ -40,7 +40,6 @@
         <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/46.0.0/ckeditor5.css" crossorigin />
         <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5-premium-features/46.0.0/ckeditor5-premium-features.css" crossorigin />
     </head>
-
     <body>
         <div class="fluig-style-guide">
             <form name="form" role="form">
@@ -104,13 +103,27 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Descrição do Imóvel:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" class="form-control" id="descricaoImovel" name="descricaoImovel" />
+                                                <input type="text" class="form-control inputInfoChamado" id="descricaoImovel" name="descricaoImovel" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Valor Mensal do Aluguel:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" class="form-control" id="valorMensalAluguel" name="valorMensalAluguel" />
+                                                <input type="text" class="form-control inputInfoChamado" id="valorMensalAluguel" name="valorMensalAluguel" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Obra:</label><strong class="strongAlert">*</strong
+                                                ><select name="obra" id="obra" class="form-control inputInfoChamado"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Locador:</label><strong class="strongAlert">*</strong>
+                                                <select name="locador" id="locador" class="form-control inputInfoChamado"></select>
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +134,7 @@
                                                 <label>Informações do Locador:</label>
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <input type="text" class="form-control" id="cpfFornecedor" name="cpfFornecedor" placeholder="CPF" />
+                                                        <input type="text" class="form-control" id="cpfFornecedor" name="cpfFornecedor" placeholder="CPF/CNPJ" />
                                                         <small class="form-text text-muted">CPF/CNPJ</small>
                                                     </div>
                                                     <div class="col-md-3">
@@ -163,68 +176,6 @@
                                                     <div class="col-md-3 pessoa-juridica" style="display: none">
                                                         <input type="text" class="form-control" id="cpfAdministrador" name="cpfAdministrador" placeholder="CPF" />
                                                         <small class="form-text text-muted">CPF do Administrador</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Obra:</label><strong class="strongAlert">*</strong
-                                                        ><select name="obra" id="obra" class="form-control inputInfoChamado"></select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Locador:</label><strong class="strongAlert">*</strong>
-                                                        <select name="locador" id="locador" class="form-control inputInfoChamado"></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Informações do Locador:</label>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control" id="rgFornecedor" name="rgFornecedor" placeholder="RG" />
-                                                        <small class="form-text text-muted">RG/CNPJ</small>
-                                                    </div>
-                                                    <!-- Pessoa Física -->
-                                                    <div class="col-md-3 pessoa-fisica">
-                                                        <input
-                                                            type="text"
-                                                            class="form-control"
-                                                            id="nacionalidadeFornecedor"
-                                                            name="nacionalidadeFornecedor"
-                                                            placeholder="Nacionalidade"
-                                                        />
-                                                        <small class="form-text text-muted">Nacionalidade</small>
-                                                    </div>
-                                                    <div class="col-md-3 pessoa-fisica">
-                                                        <input
-                                                            type="text"
-                                                            class="form-control"
-                                                            id="estadoCivilFornecedor"
-                                                            name="estadoCivilFornecedor"
-                                                            placeholder="Estado Civil"
-                                                        />
-                                                        <small class="form-text text-muted">Estado Civil</small>
-                                                    </div>
-                                                    <!-- Pessoa Jurídica -->
-                                                    <div class="col-md-3 pessoa-juridica" style="display: none">
-                                                        <input
-                                                            type="text"
-                                                            class="form-control"
-                                                            id="administradorFornecedor"
-                                                            name="administradorFornecedor"
-                                                            placeholder="Administrador"
-                                                        />
-                                                        <small class="form-text text-muted">Administrador</small>
-                                                    </div>
-                                                    <div class="col-md-3 pessoa-juridica" style="display: none">
-                                                        <input type="text" class="form-control" id="cpfFornecedor" name="cpfFornecedor" placeholder="CPF" />
-                                                        <small class="form-text text-muted">CPF</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -360,7 +311,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="tipoPagamento">Tipo de Pagamento:</label>
+                                                <label for="tipoPagamento">Tipo de Pagamento:</label><strong class="strongAlert">*</strong>
                                                 <select name="tipoPagamento" id="tipoPagamento" class="form-control inputInfoChamado">
                                                     <option value="">Selecione</option>
                                                     <option value="Boleto">Boleto</option>
@@ -370,7 +321,7 @@
                                         </div>
                                         <div class="col-md-6" id="divBanco" style="display: none">
                                             <div class="form-group">
-                                                <label for="banco">Banco:</label>
+                                                <label for="banco">Banco:</label><strong class="strongAlert">*</strong>
                                                 <select name="banco" id="banco" class="form-control inputInfoChamado"></select>
                                             </div>
                                         </div>
@@ -378,19 +329,19 @@
                                     <div class="row" id="divPagamento" style="display: none">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="titular">Titular da Conta:</label>
+                                                <label for="titular">Titular da Conta:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" id="titular" name="titular" class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="agencia">Agência:</label>
+                                                <label for="agencia">Agência:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" id="agencia" name="agencia" class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="contaCorrente">Conta Corrente:</label>
+                                                <label for="contaCorrente">Conta Corrente:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" id="contaCorrente" name="contaCorrente" class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
@@ -408,7 +359,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="assinaturaContrato">Formato da Assinatura:</label>
+                                                <label for="assinaturaContrato">Formato da Assinatura:</label><strong class="strongAlert">*</strong>
                                                 <select name="assinaturaContrato" id="assinaturaContrato" class="form-control inputInfoChamado">
                                                     <option value="">Selecione</option>
                                                     <option value="Eletrônica">Eletrônica</option>
@@ -433,7 +384,7 @@
                                         <div class="col-md-6">
                                             <label for="tipoDocumentacao">Documentação:</label>
                                             <select name="tipoDocumentacao" id="tipoDocumentacao" class="form-control">
-                                                <option value="">Selecione</option>
+                                                <option value="">Selecione um Locador</option>
                                             </select>
                                         </div>
 
@@ -473,13 +424,24 @@
                             <div class="bolinha"></div>
                             <div class="bolinha"></div>
                         </div>
+
                         <button id="btn-avancar">→</button>
                     </div>
                 </div>
+
                 <div class="hidden" style="display: none">
                     <input type="hidden" id="solicitante" name="solicitante" />
+                    <input type="hidden" id="atividade" name="atividade" />
                 </div>
             </form>
+            <script>
+                var beforeSendValidate = function (numState, nextState) {
+                    var atividade = parseInt(document.getElementById("atividade").value);
+                    if (atividade == 0) {
+                        return validaCampos();
+                    }
+                };
+            </script>
         </div>
     </body>
 </html>
