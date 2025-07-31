@@ -75,7 +75,6 @@ function buscaFornecedores() {
                 });
 
                 $("#locador").val(optSelected);
-
                 $('#locador').select2({
                     height: "34px",
                     width: "100%",
@@ -102,57 +101,7 @@ function buscaFornecedores() {
     });
 }
 
-//function buscaInfosFornecedor(cgccfo) {
-//    DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [
-//        DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)
-//    ], null, {
-//        success: (dataset) => {
-//            if (dataset.values && dataset.values.length > 0) {
-//                const endereco = dataset.values[0];
-//                const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrangeiro";
-//
-//                if (endereco.PESSOAFISOUJUR == 'F') {
-//                    $(".pessoa-fisica").show();
-//                    $(".pessoa-juridica").hide();
-//
-//                    $("#nacionalidadeFornecedor").val(nacionalidadeTexto);
-//                    $("#estadoCivilFornecedor").val(endereco.ESTADOCIVIL || "");
-//                } else if (endereco.PESSOAFISOUJUR == 'J') {
-//                    $(".pessoa-fisica").hide();
-//                    $(".pessoa-juridica").show();
-//
-//                    $("#administradorFornecedor").val(endereco.ADMINISTRADOR || "");
-//                    $("#cpfFornecedor").val(endereco.CPF || "");
-//                }
-//
-//                $("#rgFornecedor").val(endereco.CGCCFO || "");
-//                $("#ruaFornecedor").val(endereco.RUA || "");
-//                $("#numeroFornecedor").val(endereco.NUMERO || "");
-//                $("#bairroFornecedor").val(endereco.BAIRRO || "");
-//                $("#cidadeFornecedor").val(endereco.CIDADE || "");
-//                $("#cepFornecedor").val(endereco.CEP || "");
-//                $("#estadoFornecedor").val(endereco.CODETD || "");
-//
-//                $(".endereco-fornecedor").slideDown();
-//            } else {
-//                FLUIGC.toast({
-//                    title: "Endereço não encontrado",
-//                    message: "Nenhum endereço localizado para este CGCCFO",
-//                    type: "warning"
-//                });
-//                $(".endereco-fornecedor").slideUp();
-//            }
-//        },
-//        error: (err) => {
-//            console.error("Erro ao buscar endereço:", err);
-//            FLUIGC.toast({
-//                title: "Erro ao buscar endereço",
-//                message: err.message || "Erro desconhecido",
-//                type: "danger"
-//            });
-//        }
-//    });
-//}
+
 function buscaInfosFornecedor(cgccfo) {
     DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [
         DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)
@@ -174,10 +123,10 @@ function buscaInfosFornecedor(cgccfo) {
                     $(".pessoa-juridica").show();
 
                     $("#administradorFornecedor").val(endereco.ADMINISTRADOR || "");
-                    $("#cpfFornecedor").val(endereco.CPF || "");
+                    $("#cnpjFornecedor").val(endereco.CPF || "");
                 }
 
-                $("#rgFornecedor").val(endereco.CGCCFO || "");
+                $("#cpfFornecedor").val(endereco.CGCCFO || "");
                 $("#ruaFornecedor").val(endereco.RUA || "");
                 $("#numeroFornecedor").val(endereco.NUMERO || "");
                 $("#bairroFornecedor").val(endereco.BAIRRO || "");
@@ -208,23 +157,120 @@ function buscaInfosFornecedor(cgccfo) {
     });
 }
 
+
+const documentosPorTipo = {
+		  F: ["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
+		  J: ["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"]
+		};
+const documentosAnexados = {};
+
 function atualizaOpcoesDocumentos(tipoPessoa) {
-    const select = $("#tipoDocumentacao");
-    select.empty();
-    select.append('<option value="">Selecione</option>');
+		  const select = $("#tipoDocumentacao").empty().append('<option value="">Selecione</option>');
+		  const lista = document.getElementById("listaAnexos");
+		  lista.innerHTML = "";
 
-    if (tipoPessoa === 'F') {
-        select.append('<option value="Termo de Solicitação de Imóvel">Termo de Solicitação de Imóvel</option>');
-        select.append('<option value="CNH">CNH</option>');
-        select.append('<option value="RG e CPF">RG e CPF</option>');
-    } else if (tipoPessoa === 'J') {
-        select.append('<option value="Termo de Solicitação de Imóvel">Termo de Solicitação de Imóvel</option>');
-        select.append('<option value="Cartão CNPJ">Cartão CNPJ</option>');
-        select.append('<option value="Cartão QSA">Cartão QSA</option>');
-    }
+		  const docs = [...(documentosPorTipo[tipoPessoa] || []), "Outros"];
 
-    select.append('<option value="Outros">Outros</option>');
+		  docs.forEach(doc => {
+		    documentosAnexados[doc] = null;
+
+		    if (["RG", "CPF", "CNH"].includes(doc)) return;
+
+		    select.append(`<option value="${doc}">${doc}</option>`);
+		    lista.innerHTML += `<li id="item-${doc}"><span>❌ <b>${doc}</b></span></li>`;
+		  });
+		  
+		  select.append(`<option value="CNH">CNH</option>`);
+		  select.append(`<option value="RG">RG</option>`);
+		  select.append(`<option value="CPF">CPF</option>`);
+		  lista.innerHTML += `<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`;
+		  lista.innerHTML += `<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`;
+		}
+
+		function inicializaInputAnexo() {
+		  const select = document.getElementById("tipoDocumentacao");
+		  const input = document.getElementById("inputAnexo");
+		  const divAnexo = document.getElementById("divAnexo");
+
+		  select.addEventListener("change", function () {
+		    divAnexo.style.opacity = this.value ? "1" : "0";
+		    divAnexo.style.visibility = this.value ? "visible" : "hidden";
+		  });
+
+		  input.addEventListener("change", async function () {
+		    const tipo = select.value;
+		    const file = this.files[0];
+		    if (!file || !tipo) return;
+
+		    try {
+		    	const listaCarregar = document.getElementById("listaAnexos");
+		    	const itemId = `item-${tipo}`;
+		    	
+
+		    	if (["CNH", "RG", "CPF"].includes(tipo)) {
+		    	  llistaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
+		    	} else {
+		    	  const item = document.getElementById(itemId);
+		    	  if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
+		    	}
+		    	const docId = await criaDocFluigRetornaDocumentId(file, 10133);
+		      const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
+
+		      documentosAnexados[tipo] = docId;
+
+		      const lista = document.getElementById("listaAnexos");
+
+		      if (tipo === "CNH") {
+		        documentosAnexados["RG"] = null;
+		        documentosAnexados["CPF"] = null;
+
+		        removeItem("item-identidade-rg-cnh");
+		        removeItem("item-identidade-cpf-cnh");
+		        removeItem("item-RG");
+		        removeItem("item-CPF");
+
+		        lista.innerHTML += `<li id="item-CNH"><span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
+		      } else if (tipo === "RG") {
+		        documentosAnexados["CNH"] = null;
+		        removeItem("item-identidade-rg-cnh");
+		        removeItem("item-CNH");
+
+		        lista.innerHTML += `<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
+		        if (!documentosAnexados["CPF"]) {
+		          removeItem("item-identidade-cpf-cnh");
+		          lista.innerHTML += `<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`;
+		        }
+		      } else if (tipo === "CPF") {
+		        documentosAnexados["CNH"] = null;
+		        removeItem("item-identidade-cpf-cnh");
+		        removeItem("item-CNH");
+
+		        lista.innerHTML += `<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
+		        if (!documentosAnexados["RG"]) {
+		          removeItem("item-identidade-rg-cnh");
+		          lista.innerHTML += `<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`;
+		        }
+		      } else {
+		        document.getElementById(`item-${tipo}`).innerHTML =
+		          `<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`;
+		      }
+
+		      input.value = "";
+		      select.value = "";
+		      divAnexo.style.opacity = "0";
+		      divAnexo.style.visibility = "hidden";
+		    } catch (e) {
+		      console.error("Erro ao anexar:", e);
+		      alert("Erro ao anexar documento.");
+		    }
+		  });
+		}
+
+function removeItem(id) {
+		  const el = document.getElementById(id);
+		  if (el) el.remove();
 }
+
 
 function buscaBancos() {
     DatasetFactory.getDataset("GBANCO", null, null, null, {
@@ -316,8 +362,6 @@ function carregaDadosDoContratoParaTelaAprovacao() {
     var valorCaucao = $("#valorCaucao").val();
     var dataCaucao = $("#dataPagamentoCaucao").val();
 
-
-
     $("#aprovacaoTextObra").text(obra);
     $("#aprovacaoTextLocador").text(locador);
     $("#aprovacaoTextProcurador").text(procurador);
@@ -336,9 +380,6 @@ function carregaDadosDoContratoParaTelaAprovacao() {
         $(".camposComCaucao").hide();
     }
 
-
-
-
     var tipoPagamento = $("#tipoPagamento").val();
     var banco = $("#banco").val();
     var titular = $("#titular").val();
@@ -353,7 +394,7 @@ function carregaDadosDoContratoParaTelaAprovacao() {
 }
 
 
-// Utils
+
 function setAtividadeAtivaProgresso(atividadesConcluidas) {
     var counter = 0;
     $(".wizard-progress").find("div").each(function () {
@@ -419,7 +460,7 @@ function handleFileUpload(inputId, descricaoArquivo) {
     const input = document.getElementById(inputId);
     const statusText = document.getElementById("textFileOrcamento");
 
-    input.click(); // Abre o seletor de arquivos
+    input.click(); 
 
     input.onchange = async function () {
         const file = input.files[0];
@@ -431,13 +472,11 @@ function handleFileUpload(inputId, descricaoArquivo) {
 
         try {
             statusText.textContent = "Enviando arquivo...";
-            const pastaDestino = "12345"; // Substitua pelo ID da pasta no GED
+            const pastaDestino = "12345"; 
 
             const docId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDestino);
 
             statusText.textContent = `Arquivo enviado: ${file.name}`;
-
-            // Anexa ao processo
             anexarDocumentoAoProcesso(docId);
 
             console.log(`Arquivo ${file.name} enviado e anexado com sucesso!`);
@@ -479,6 +518,7 @@ function criaDocFluigRetornaDocumentId(file, parentId) {
         };
     });
 }
+
 function anexarDocumentoAoProcesso(docId) {
     try {
         if (parent?.ECM?.workflowView?.attachDocument) {

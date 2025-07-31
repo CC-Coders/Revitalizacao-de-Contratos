@@ -140,9 +140,13 @@
                                 <div class="form-group">
                                     <label>Informações do Locador:</label>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" id="cpfFornecedor" name="cpfFornecedor" placeholder="CPF/CNPJ">
+                                            <small class="form-text text-muted">CPF/CNPJ</small>
+                                        </div>
+                                         <div class="col-md-3">
                                             <input type="text" class="form-control" id="rgFornecedor" name="rgFornecedor" placeholder="RG">
-                                            <small class="form-text text-muted">RG/CNPJ</small>
+                                            <small class="form-text text-muted">RG</small>
                                         </div>
                                         <!-- Pessoa Física -->
                                         <div class="col-md-3 pessoa-fisica">
@@ -159,8 +163,8 @@
                                             <small class="form-text text-muted">Administrador</small>
                                         </div>
                                         <div class="col-md-3 pessoa-juridica" style="display: none;">
-                                            <input type="text" class="form-control" id="cpfFornecedor" name="cpfFornecedor" placeholder="CPF">
-                                            <small class="form-text text-muted">CPF</small>
+                                            <input type="text" class="form-control" id="cpfAdministrador" name="cpfAdministrador" placeholder="CPF">
+                                            <small class="form-text text-muted">CPF do Administrador</small>
                                         </div>
                                     </div>
                                 </div>
@@ -378,12 +382,8 @@
           <div class="col-md-6">
             <label for="tipoDocumentacao">Documentação:</label>
             <select name="tipoDocumentacao" id="tipoDocumentacao" class="form-control">
-              <option value="">Selecione</option>
-<!--               <option value="Termo de Solicitação de Imóvel">Termo de Solicitação de Imóvel</option> -->
-<!--               <option value="Cartão CNPJ">Cartão CNPJ</option> -->
-<!--               <option value="Cartão QSA">Cartão QSA</option> -->
-<!--               <option value="CNH">CNH</option> -->
-<!--               <option value="Outros">Outros</option> -->
+              <option value="">Selecione um Locador</option>
+
             </select>
           </div>
 
@@ -394,7 +394,7 @@
         </div>
 
         <br />
-        <h5>Documentos já anexados:</h5>
+        <h5>Documentos anexados:</h5>
         <ul id="listaAnexos" style="list-style: none; padding-left: 0;"></ul>
       </fieldset>
     </div>
