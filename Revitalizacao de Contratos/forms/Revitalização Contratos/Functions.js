@@ -5,7 +5,7 @@ function preencherObrasDoUsuario() {
         FLUIGC.toast({
             title: "Erro:",
             message: "O usuário solicitante não está definido.",
-            type: "warning"
+            type: "warning",
         });
         return;
     }
@@ -19,7 +19,7 @@ function preencherObrasDoUsuario() {
             let optionsObra = "<option value='' id='option'>Selecione uma obra</option>";
             let codcoligadaAtual = "";
 
-            permissoes.forEach(ccusto => {
+            permissoes.forEach((ccusto) => {
                 if (codcoligadaAtual !== ccusto.CODCOLIGADA) {
                     if (codcoligadaAtual !== "") {
                         optionsObra += "</optgroup>";
@@ -39,7 +39,7 @@ function preencherObrasDoUsuario() {
             FLUIGC.toast({
                 title: "Aviso:",
                 message: "Nenhuma permissão encontrada para o usuário.",
-                type: "warning"
+                type: "warning",
             });
         }
     } catch (error) {
@@ -47,78 +47,79 @@ function preencherObrasDoUsuario() {
         FLUIGC.toast({
             title: "Erro ao preencher obras do usuário:",
             message: error.message || error,
-            type: "danger"
+            type: "danger",
         });
     }
 }
 
 function buscaFornecedores() {
-    DatasetFactory.getDataset("FCFO", ["CGCCFO", "NOMEFANTASIA"], [
-        DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST),
-        DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST),
-    ], null, {
-        success: (fornecedores) => {
-            if (fornecedores.columns[0] == "error") {
+    DatasetFactory.getDataset("FCFO",["CGCCFO", "NOMEFANTASIA"],[
+        DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST), DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
+    ],null,{
+            success: (fornecedores) => {
+                if (fornecedores.columns[0] == "error") {
+                    FLUIGC.toast({
+                        title: "Erro ao buscar fornecedores: ",
+                        message: fornecedores.values[0].error,
+                        type: "warning",
+                    });
+                } else {
+                    var optSelected = $("#locador").val();
+                    $("#locador").html("<option></option>");
+
+                    fornecedores.values.forEach((fornecedor) => {
+                        $("#locador").append(
+                            $("<option></option>")
+                                .attr("value", fornecedor.CGCCFO + " - " + fornecedor.NOMEFANTASIA)
+                                .text(fornecedor.CGCCFO + " - " + fornecedor.NOMEFANTASIA)
+                        );
+                    });
+
+                    $("#locador").val(optSelected);
+                    $("#locador").select2({
+                        height: "34px",
+                        width: "100%",
+                        minimumInputLength: 4,
+                        language: {
+                            inputTooShort: () => "Digite pelo menos 4 caracteres",
+                            noResults: () => "Nenhum resultado encontrado",
+                            searching: () => "Buscando...",
+                        },
+                    });
+
+                    $(".select2-container")
+                        .off("click")
+                        .on("click", function () {
+                            $(this).removeClass("has-error");
+                        });
+                }
+            },
+            error: (error) => {
                 FLUIGC.toast({
                     title: "Erro ao buscar fornecedores: ",
-                    message: fornecedores.values[0].error,
-                    type: "warning"
+                    message: error,
+                    type: "warning",
                 });
-            } else {
-                var optSelected = $("#locador").val();
-                $("#locador").html("<option></option>");
-
-                fornecedores.values.forEach(fornecedor => {
-                    $("#locador").append($("<option></option>")
-                        .attr("value", fornecedor.CGCCFO)
-                        .text(fornecedor.CGCCFO + " - " + fornecedor.NOMEFANTASIA));
-                });
-
-                $("#locador").val(optSelected);
-                $('#locador').select2({
-                    height: "34px",
-                    width: "100%",
-                    minimumInputLength: 4,
-                    language: {
-                        inputTooShort: () => "Digite pelo menos 4 caracteres",
-                        noResults: () => "Nenhum resultado encontrado",
-                        searching: () => "Buscando..."
-                    }
-                });
-
-                $(".select2-container").off("click").on("click", function () {
-                    $(this).removeClass("has-error");
-                });
-            }
-        },
-        error: (error) => {
-            FLUIGC.toast({
-                title: "Erro ao buscar fornecedores: ",
-                message: error,
-                type: "warning"
-            });
+            },
         }
-    });
+    );
 }
 
-
 function buscaInfosFornecedor(cgccfo) {
-    DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [
-        DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)
-    ], null, {
+    DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)], null, {
         success: (dataset) => {
             if (dataset.values && dataset.values.length > 0) {
                 const endereco = dataset.values[0];
                 const tipoPessoa = endereco.PESSOAFISOUJUR;
                 const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrangeiro";
 
-                if (tipoPessoa === 'F') {
+                if (tipoPessoa === "F") {
                     $(".pessoa-fisica").show();
                     $(".pessoa-juridica").hide();
 
                     $("#nacionalidadeFornecedor").val(nacionalidadeTexto);
                     $("#estadoCivilFornecedor").val(endereco.ESTADOCIVIL || "");
-                } else if (tipoPessoa === 'J') {
+                } else if (tipoPessoa === "J") {
                     $(".pessoa-fisica").hide();
                     $(".pessoa-juridica").show();
 
@@ -141,7 +142,7 @@ function buscaInfosFornecedor(cgccfo) {
                 FLUIGC.toast({
                     title: "Endereço não encontrado",
                     message: "Nenhum endereço localizado para este CGCCFO",
-                    type: "warning"
+                    type: "warning",
                 });
                 $(".endereco-fornecedor").slideUp();
             }
@@ -151,151 +152,147 @@ function buscaInfosFornecedor(cgccfo) {
             FLUIGC.toast({
                 title: "Erro ao buscar endereço",
                 message: err.message || "Erro desconhecido",
-                type: "danger"
+                type: "danger",
             });
+        },
+    });
+}
+
+const documentosPorTipo = {
+    F: ["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
+    J: ["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
+};
+const documentosAnexados = {};
+
+function atualizaOpcoesDocumentos(tipoPessoa) {
+    const select = $("#tipoDocumentacao").empty().append('<option value="">Selecione</option>');
+    const lista = document.getElementById("listaAnexos");
+    lista.innerHTML = "";
+
+    const docs = [...(documentosPorTipo[tipoPessoa] || []), "Outros"];
+
+    docs.forEach((doc) => {
+        documentosAnexados[doc] = null;
+
+        if (["RG", "CPF", "CNH"].includes(doc)) return;
+
+        select.append(`<option value="${doc}">${doc}</option>`);
+        lista.innerHTML += `<li id="item-${doc}"><span>❌ <b>${doc}</b></span></li>`;
+    });
+
+    select.append(`<option value="CNH">CNH</option>`);
+    select.append(`<option value="RG">RG</option>`);
+    select.append(`<option value="CPF">CPF</option>`);
+    lista.innerHTML += `<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`;
+    lista.innerHTML += `<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`;
+}
+
+function inicializaInputAnexo() {
+    const select = document.getElementById("tipoDocumentacao");
+    const input = document.getElementById("inputAnexo");
+    const divAnexo = document.getElementById("divAnexo");
+
+    select.addEventListener("change", function () {
+        divAnexo.style.opacity = this.value ? "1" : "0";
+        divAnexo.style.visibility = this.value ? "visible" : "hidden";
+    });
+
+    input.addEventListener("change", async function () {
+        const tipo = select.value;
+        const file = this.files[0];
+        if (!file || !tipo) return;
+
+        try {
+            const listaCarregar = document.getElementById("listaAnexos");
+            const itemId = `item-${tipo}`;
+
+            if (["CNH", "RG", "CPF"].includes(tipo)) {
+                listaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
+            } else {
+                const item = document.getElementById(itemId);
+                if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
+            }
+            const docId = await criaDocFluigRetornaDocumentId(file, 10133);
+            const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
+
+            documentosAnexados[tipo] = docId;
+
+            const lista = document.getElementById("listaAnexos");
+
+            if (tipo === "CNH") {
+                documentosAnexados["RG"] = null;
+                documentosAnexados["CPF"] = null;
+
+                removeItem("item-identidade-rg-cnh");
+                removeItem("item-identidade-cpf-cnh");
+                removeItem("item-RG");
+                removeItem("item-CPF");
+
+                lista.innerHTML += `<li id="item-CNH"><span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
+            } else if (tipo === "RG") {
+                documentosAnexados["CNH"] = null;
+                removeItem("item-identidade-rg-cnh");
+                removeItem("item-CNH");
+
+                lista.innerHTML += `<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
+                if (!documentosAnexados["CPF"]) {
+                    removeItem("item-identidade-cpf-cnh");
+                    lista.innerHTML += `<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`;
+                }
+            } else if (tipo === "CPF") {
+                documentosAnexados["CNH"] = null;
+                removeItem("item-identidade-cpf-cnh");
+                removeItem("item-CNH");
+
+                lista.innerHTML += `<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
+                if (!documentosAnexados["RG"]) {
+                    removeItem("item-identidade-rg-cnh");
+                    lista.innerHTML += `<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`;
+                }
+            } else {
+                document.getElementById(`item-${tipo}`).innerHTML = `<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`;
+            }
+
+            input.value = "";
+            select.value = "";
+            divAnexo.style.opacity = "0";
+            divAnexo.style.visibility = "hidden";
+        } catch (e) {
+            console.error("Erro ao anexar:", e);
+            alert("Erro ao anexar documento.");
         }
     });
 }
 
-
-const documentosPorTipo = {
-		  F: ["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
-		  J: ["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"]
-		};
-const documentosAnexados = {};
-
-function atualizaOpcoesDocumentos(tipoPessoa) {
-		  const select = $("#tipoDocumentacao").empty().append('<option value="">Selecione</option>');
-		  const lista = document.getElementById("listaAnexos");
-		  lista.innerHTML = "";
-
-		  const docs = [...(documentosPorTipo[tipoPessoa] || []), "Outros"];
-
-		  docs.forEach(doc => {
-		    documentosAnexados[doc] = null;
-
-		    if (["RG", "CPF", "CNH"].includes(doc)) return;
-
-		    select.append(`<option value="${doc}">${doc}</option>`);
-		    lista.innerHTML += `<li id="item-${doc}"><span>❌ <b>${doc}</b></span></li>`;
-		  });
-		  
-		  select.append(`<option value="CNH">CNH</option>`);
-		  select.append(`<option value="RG">RG</option>`);
-		  select.append(`<option value="CPF">CPF</option>`);
-		  lista.innerHTML += `<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`;
-		  lista.innerHTML += `<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`;
-		}
-
-function inicializaInputAnexo() {
-		  const select = document.getElementById("tipoDocumentacao");
-		  const input = document.getElementById("inputAnexo");
-		  const divAnexo = document.getElementById("divAnexo");
-
-		  select.addEventListener("change", function () {
-		    divAnexo.style.opacity = this.value ? "1" : "0";
-		    divAnexo.style.visibility = this.value ? "visible" : "hidden";
-		  });
-
-		  input.addEventListener("change", async function () {
-		    const tipo = select.value;
-		    const file = this.files[0];
-		    if (!file || !tipo) return;
-
-		    try {
-		    	const listaCarregar = document.getElementById("listaAnexos");
-		    	const itemId = `item-${tipo}`;
-		    	
-
-		    	if (["CNH", "RG", "CPF"].includes(tipo)) {
-		    	  llistaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
-		    	} else {
-		    	  const item = document.getElementById(itemId);
-		    	  if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
-		    	}
-		    	const docId = await criaDocFluigRetornaDocumentId(file, 10133);
-		      const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
-
-		      documentosAnexados[tipo] = docId;
-
-		      const lista = document.getElementById("listaAnexos");
-
-		      if (tipo === "CNH") {
-		        documentosAnexados["RG"] = null;
-		        documentosAnexados["CPF"] = null;
-
-		        removeItem("item-identidade-rg-cnh");
-		        removeItem("item-identidade-cpf-cnh");
-		        removeItem("item-RG");
-		        removeItem("item-CPF");
-
-		        lista.innerHTML += `<li id="item-CNH"><span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
-		      } else if (tipo === "RG") {
-		        documentosAnexados["CNH"] = null;
-		        removeItem("item-identidade-rg-cnh");
-		        removeItem("item-CNH");
-
-		        lista.innerHTML += `<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
-		        if (!documentosAnexados["CPF"]) {
-		          removeItem("item-identidade-cpf-cnh");
-		          lista.innerHTML += `<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`;
-		        }
-		      } else if (tipo === "CPF") {
-		        documentosAnexados["CNH"] = null;
-		        removeItem("item-identidade-cpf-cnh");
-		        removeItem("item-CNH");
-
-		        lista.innerHTML += `<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
-		        if (!documentosAnexados["RG"]) {
-		          removeItem("item-identidade-rg-cnh");
-		          lista.innerHTML += `<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`;
-		        }
-		      } else {
-		        document.getElementById(`item-${tipo}`).innerHTML =
-		          `<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`;
-		      }
-
-		      input.value = "";
-		      select.value = "";
-		      divAnexo.style.opacity = "0";
-		      divAnexo.style.visibility = "hidden";
-		    } catch (e) {
-		      console.error("Erro ao anexar:", e);
-		      alert("Erro ao anexar documento.");
-		    }
-		  });
-		}
-
 function removeItem(id) {
-		  const el = document.getElementById(id);
-		  if (el) el.remove();
+    const el = document.getElementById(id);
+    if (el) el.remove();
 }
-
 
 function buscaBancos() {
     DatasetFactory.getDataset("GBANCO", null, null, null, {
-        success: ds => {
+        success: (ds) => {
             if (ds.values[0].STATUS != "SUCCESS") {
                 showMessage("Erro ao buscar Bancos: ", ds.values[0].MENSAGEM, "warning");
                 throw ds.values[0].MENSAGEM;
             }
             var bancos = JSON.parse(ds.values[0].RESULT);
-            const selectBanco = $('#banco');
+            const selectBanco = $("#banco");
             selectBanco.empty();
             selectBanco.append('<option value="">Selecione um banco</option>');
-            bancos.forEach(banco => {
+            bancos.forEach((banco) => {
                 selectBanco.append(`<option value="${banco.NUMBANCO}">${banco.NUMBANCO} - ${banco.NOME}</option>`);
             });
             selectBanco.select2({
                 placeholder: "Selecione um banco",
                 allowClear: true,
-                width: '100%'
+                width: "100%",
             });
         },
-        error: e => {
+        error: (e) => {
             console.error(e);
             showMessage("Erro ao buscar Bancos: ", " favor entrar em contato com o Administrador.", "warning");
-        }
+        },
     });
 }
 
@@ -306,10 +303,9 @@ function inicializarCalendario() {
         minDate: "01/01/2024",
         maxDate: "12/31/2030",
         language: "pt-br",
-        dateFormat: "dd/mm/yyyy"
+        dateFormat: "dd/mm/yyyy",
     });
 }
-
 
 function inicializarPeriodoLocacao() {
     const periodoLocacao = document.getElementById("periodoLocacao");
@@ -335,17 +331,15 @@ function inicializarPeriodoLocacao() {
                     if (diffInMonths > 12) {
                         FLUIGC.toast({
                             message: "Período máximo: 12 meses.",
-                            type: "warning"
+                            type: "warning",
                         });
                         periodoLocacao.value = "";
                     }
                 }
-            }
+            },
         });
     }
 }
-
-
 
 function carregaDadosDoContratoParaTelaAprovacao() {
     var obra = $("#obra").val();
@@ -393,19 +387,18 @@ function carregaDadosDoContratoParaTelaAprovacao() {
     $("#aprovacaoTextContaCorrente").text(contaCorrente);
 }
 
-
-
 function setAtividadeAtivaProgresso(atividadesConcluidas) {
     var counter = 0;
-    $(".wizard-progress").find("div").each(function () {
-        if (counter < atividadesConcluidas) {
-            $(this).addClass("completed");
-        }
-        else if (counter == atividadesConcluidas) {
-            $(this).addClass("active");
-        }
-        counter++;
-    });
+    $(".wizard-progress")
+        .find("div")
+        .each(function () {
+            if (counter < atividadesConcluidas) {
+                $(this).addClass("completed");
+            } else if (counter == atividadesConcluidas) {
+                $(this).addClass("active");
+            }
+            counter++;
+        });
 }
 async function enviarSolicitacao() {
     const ATIVIDADE_ATUAL = $("#atividade").val();
@@ -413,7 +406,6 @@ async function enviarSolicitacao() {
     if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
         await asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao();
         $("#workflowActions > button:first-child", window.parent.document).click();
-
     } else {
         $("#workflowActions > button:first-child", window.parent.document).click();
     }
@@ -460,7 +452,7 @@ function handleFileUpload(inputId, descricaoArquivo) {
     const input = document.getElementById(inputId);
     const statusText = document.getElementById("textFileOrcamento");
 
-    input.click(); 
+    input.click();
 
     input.onchange = async function () {
         const file = input.files[0];
@@ -472,7 +464,7 @@ function handleFileUpload(inputId, descricaoArquivo) {
 
         try {
             statusText.textContent = "Enviando arquivo...";
-            const pastaDestino = "12345"; 
+            const pastaDestino = "12345";
 
             const docId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDestino);
 
@@ -495,26 +487,32 @@ function criaDocFluigRetornaDocumentId(file, parentId) {
         reader.onload = function (e) {
             const bytes = e.target.result.split("base64,")[1];
 
-            DatasetFactory.getDataset("CriacaoDocumentosFluig", null, [
-                DatasetFactory.createConstraint("conteudo", bytes, bytes, ConstraintType.MUST),
-                DatasetFactory.createConstraint("nome", fileName, fileName, ConstraintType.SHOULD),
-                DatasetFactory.createConstraint("descricao", fileName, fileName, ConstraintType.SHOULD),
-                DatasetFactory.createConstraint("pasta", parentId, parentId, ConstraintType.SHOULD),
-            ], null, {
-                success: function (dataset) {
-                    if (!dataset || dataset.values.length === 0) {
-                        reject("Erro ao comunicar com dataset");
-                    } else if (dataset.values[0][0] === "false") {
-                        reject("Erro na criação do documento: " + dataset.values[0][1]);
-                    } else {
-                        console.log("Documento criado, ID:", dataset.values[0].Resultado);
-                        resolve(dataset.values[0].Resultado);
-                    }
-                },
-                error: function (err) {
-                    reject(err);
+            DatasetFactory.getDataset(
+                "CriacaoDocumentosFluig",
+                null,
+                [
+                    DatasetFactory.createConstraint("conteudo", bytes, bytes, ConstraintType.MUST),
+                    DatasetFactory.createConstraint("nome", fileName, fileName, ConstraintType.SHOULD),
+                    DatasetFactory.createConstraint("descricao", fileName, fileName, ConstraintType.SHOULD),
+                    DatasetFactory.createConstraint("pasta", parentId, parentId, ConstraintType.SHOULD),
+                ],
+                null,
+                {
+                    success: function (dataset) {
+                        if (!dataset || dataset.values.length === 0) {
+                            reject("Erro ao comunicar com dataset");
+                        } else if (dataset.values[0][0] === "false") {
+                            reject("Erro na criação do documento: " + dataset.values[0][1]);
+                        } else {
+                            console.log("Documento criado, ID:", dataset.values[0].Resultado);
+                            resolve(dataset.values[0].Resultado);
+                        }
+                    },
+                    error: function (err) {
+                        reject(err);
+                    },
                 }
-            });
+            );
         };
     });
 }
@@ -546,11 +544,14 @@ function validaCampos() {
                     valida = false;
                     FLUIGC.toast({
                         message: "Campo não preenchido!",
-                        type: "warning"
+                        type: "warning",
                     });
-                    $([document.documentElement, document.body]).animate({
-                        scrollTop: $(this).offset().top - (screen.height * 0.15)
-                    }, 700);
+                    $([document.documentElement, document.body]).animate(
+                        {
+                            scrollTop: $(this).offset().top - screen.height * 0.15,
+                        },
+                        700
+                    );
                 }
             }
         });
@@ -559,7 +560,7 @@ function validaCampos() {
     if (!valida) {
         FLUIGC.toast({
             message: "Preencha todos os campos obrigatórios!",
-            type: "warning"
+            type: "warning",
         });
     } else {
         // salvaDadosFormulario();

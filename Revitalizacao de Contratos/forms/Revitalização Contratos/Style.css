@@ -287,7 +287,7 @@
 }
 
 
-Container principal do formulário com efeito 3D
+/* Container principal do formulário com efeito 3D */
 .aba-container {
   position: relative;
   perspective: 1200px;
@@ -428,10 +428,10 @@ Container principal do formulário com efeito 3D
     display: block!important;
 }
 .has-error {
-    padding - top: 0px!important;
-    padding - bottom: 0px!important;
-    padding - left: 2px!important;
-    padding - right: 2px!important;
+    padding-top: 0px!important;
+    padding-bottom: 0px!important;
+    padding-left: 2px!important;
+    padding-right: 2px!important;
     display: inline - block;
     border: 1px red solid!important;
     color: black!important;
