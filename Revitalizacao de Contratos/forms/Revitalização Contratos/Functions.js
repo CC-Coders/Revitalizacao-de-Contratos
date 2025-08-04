@@ -404,7 +404,19 @@ async function enviarSolicitacao() {
     const ATIVIDADE_ATUAL = $("#atividade").val();
 
     if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
+        Swal.fire({
+            icon: "info",
+            title: "Gerando Contrato, por favor aguarde...",
+            showConfirmButton: false,
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        });
         await asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao();
+        Swal.close();
+
         $("#workflowActions > button:first-child", window.parent.document).click();
     } else {
         $("#workflowActions > button:first-child", window.parent.document).click();

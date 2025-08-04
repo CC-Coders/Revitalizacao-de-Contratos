@@ -3,7 +3,8 @@ const pastaDeAnexos = 18386;
 async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
     var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
     var file = await geraFileFromURL(url);
-    return carregaFileProDocxTemplatereEPreencheOsValores_retornaFile(file);
+    var pdf = await carregaFileProDocxTemplatereEPreencheOsValores_retornaFile(file);
+    return pdf;
 
     function geraFileFromURL(url) {
         return new Promise((resolve, reject) => {
@@ -31,7 +32,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
     }
     function buscaDadosDoFormulario() {
         var retorno = {
-            FORNECEDOR: "SEM CAMPO",
+            FORNECEDOR: $("#locador").val(),
             FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
                 "#cidadeFornecedor"
             ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
@@ -151,8 +152,19 @@ async function salvaModeloAlterado() {
 }
 
 async function geraPreContrato() {
+    Swal.fire({
+        icon: "info",
+        title: "Gerando Contrato, por favor aguarde...",
+        showConfirmButton: false,
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        },
+    });
     var file = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
     var pdf = await convertDocxToPdf(file);
+    Swal.close();
     saveAs(pdf, "teste.pdf");
 }
 async function convertDocxToPdf(docxBlob) {
@@ -180,7 +192,7 @@ async function convertDocxToPdf(docxBlob) {
                 options: {
                     format: "Tabloid",
                     margin_top: "20mm",
-                    margin_bottom: "25mm",
+                    margin_bottom: "35mm",
                     margin_right: "24mm",
                     margin_left: "24mm",
                     page_orientation: "portrait",
@@ -200,6 +212,16 @@ async function convertDocxToPdf(docxBlob) {
 // CK5 Editor
 var ckeditor = null;
 async function editarArquivo() {
+        Swal.fire({
+            icon: "info",
+            title: "Carregando Contrato, por favor aguarde...",
+            showConfirmButton: false,
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        });
     openModal();
     await loadCkEditor();
     setTimeout(async () => {
@@ -748,6 +770,8 @@ async function carregaDocumentoParaOCKEditor(documentId) {
             ckeditor.setData(`${response.data.html}`);
             ckeditor.config._config.exportPdf.converterOptions.header_html = header;
             ckeditor.config._config.exportPdf.converterOptions.footer_html = footer;
+            Swal.close();
+
         })
         .catch((error) => {
             console.log("Conversion error", error);

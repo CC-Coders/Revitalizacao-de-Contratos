@@ -436,3 +436,8 @@
     border: 1px red solid!important;
     color: black!important;
 }
+
+
+.swal2-container {
+  z-index: 100000;
+}
