@@ -29,7 +29,7 @@
     <processDefinitionVersionPK>
       <companyId>1</companyId>
       <processId>Revitalização Contratos</processId>
-      <version>10</version>
+      <version>12</version>
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
     <formId>29166</formId>
@@ -1171,7 +1171,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>10</version>
+        <version>12</version>
         <sequence>11</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1183,7 +1183,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>10</version>
+        <version>12</version>
         <sequence>24</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1195,7 +1195,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>10</version>
+        <version>12</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1207,7 +1207,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>10</version>
+        <version>12</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1219,7 +1219,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>10</version>
+        <version>12</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1231,7 +1231,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>10</version>
+        <version>12</version>
         <sequence>51</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1243,7 +1243,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>10</version>
+        <version>12</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1255,7 +1255,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>10</version>
+        <version>12</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1267,7 +1267,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>10</version>
+        <version>12</version>
         <sequence>68</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -2030,17 +2030,96 @@
     DIRETORIA: 53,&#xd;
     ASSINATURA_ELETRONICA: 66,&#xd;
 };&#xd;
-function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
+function beforeTaskSave(colleagueId, nextSequenceId, userList) {&#xd;
     var ATIVIDADE_ATUAL = getValue(&quot;WKNumState&quot;);&#xd;
 &#xd;
-&#xd;
     if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {&#xd;
-        var docIdContrato = hAPI.getCardValue(&quot;contratoDocumentId&quot;);&#xd;
-        hAPI.attachDocument(docIdContrato);&#xd;
+        beforeTaskSave_inicio();&#xd;
+    } &#xd;
+    else if (ATIVIDADE_ATUAL == ATIVIDADES.JURIDICO) {&#xd;
+        beforeTaskSave_juridico();&#xd;
+    } &#xd;
+    else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {&#xd;
+        beforeTaskSave_controladoria();&#xd;
+    }&#xd;
+    else if (ATIVIDADE_ATUAL == ATIVIDADES.ENGENHEIRO) {&#xd;
+        beforeTaskSave_engenheiro();&#xd;
+    }&#xd;
+    else if (ATIVIDADE_ATUAL == ATIVIDADES.COORDENADOR_OBRAS) {&#xd;
+        beforeTaskSave_coordenadorObras();&#xd;
+    }&#xd;
+    else if (ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {&#xd;
+        beforeTaskSave_diretoria();&#xd;
+    }&#xd;
+}&#xd;
+&#xd;
+&#xd;
+&#xd;
+function beforeTaskSave_inicio() {&#xd;
+    var docIdContrato = hAPI.getCardValue(&quot;contratoDocumentId&quot;);&#xd;
+    hAPI.attachDocument(docIdContrato);&#xd;
+&#xd;
+    insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), &quot;Início&quot;, &quot;Início&quot;);&#xd;
+}&#xd;
+function beforeTaskSave_juridico() {&#xd;
+    insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Jurídico&quot;);&#xd;
+}&#xd;
+function beforeTaskSave_controladoria() {&#xd;
+    insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Controladoria&quot;);&#xd;
+}&#xd;
+function beforeTaskSave_engenheiro() {&#xd;
+    insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Aprovação Engenheiro&quot;);&#xd;
+}&#xd;
+function beforeTaskSave_coordenadorObras() {&#xd;
+    insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Aprovação Coordenador&quot;);&#xd;
+}&#xd;
+function beforeTaskSave_diretoria() {&#xd;
+    insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Aprovação Diretoria&quot;);&#xd;
+}&#xd;
+&#xd;
+&#xd;
+&#xd;
+// Utils&#xd;
+function insereHistorico(observacao, acao, atividade) {&#xd;
+    var USER = getValue(&quot;WKUser&quot;);&#xd;
+    var DATA = getDateTimeNow();&#xd;
+&#xd;
+    var novaLinha = new java.util.HashMap();&#xd;
+    novaLinha.put(&quot;tableHistoricoUsuario&quot;, USER);&#xd;
+    novaLinha.put(&quot;tableHistoricoData&quot;, DATA);&#xd;
+    novaLinha.put(&quot;tableHistoricoAtividade&quot;, atividade);&#xd;
+    novaLinha.put(&quot;tableHistoricoObservacao&quot;, observacao);&#xd;
+    novaLinha.put(&quot;tableHistoricoAcao&quot;, acao);&#xd;
+&#xd;
+    hAPI.addCardChild(&quot;tableHistorico&quot;, novaLinha);&#xd;
+}&#xd;
+function getDateTimeNow() {&#xd;
+    var date = new Date();&#xd;
+    var dia = date.getDate();&#xd;
+    if (dia &lt; 10) {&#xd;
+        dia = &quot;0&quot; + dia;&#xd;
+    }&#xd;
+    var mes = date.getMonth() + 1;&#xd;
+    if (mes &lt; 10) {&#xd;
+        mes = &quot;0&quot; + mes;&#xd;
     }&#xd;
 &#xd;
+    var ano = date.getFullYear();&#xd;
 &#xd;
-}</eventDescription>
+    var hora = date.getHours();&#xd;
+    if (hora &lt; 10) {&#xd;
+        hora = &quot;0&quot; + hora;&#xd;
+    }&#xd;
+&#xd;
+    var minutos = date.getMinutes();&#xd;
+    if (minutos &lt; 10) {&#xd;
+        minutos = &quot;0&quot; + minutos;&#xd;
+    }&#xd;
+&#xd;
+    var dateTime = [ano, mes, dia].join(&quot;-&quot;) + &quot; &quot; + hora + &quot;:&quot; + minutos;&#xd;
+    return dateTime;&#xd;
+}&#xd;
+</eventDescription>
     </WorkflowProcessEvent>
     <WorkflowProcessEvent>
       <workflowProcessEventPK>
@@ -2160,7 +2239,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>44</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2171,7 +2250,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>44</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2182,7 +2261,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>16</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2193,7 +2272,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>27</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2204,7 +2283,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>28</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2215,7 +2294,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>39</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2226,7 +2305,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>39</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2237,7 +2316,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>36</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2248,7 +2327,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>78</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2259,7 +2338,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>78</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2270,7 +2349,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>78</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -2281,7 +2360,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>79</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2292,7 +2371,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>79</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2303,7 +2382,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>80</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2314,7 +2393,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>80</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2325,7 +2404,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>81</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2336,7 +2415,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>81</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2347,7 +2426,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>57</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2358,7 +2437,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>57</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2369,7 +2448,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>82</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2380,7 +2459,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>82</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2391,7 +2470,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>85</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2402,7 +2481,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>85</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2413,7 +2492,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>86</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2424,7 +2503,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>86</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2435,7 +2514,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>86</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -2446,7 +2525,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>73</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2457,7 +2536,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>71</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2468,7 +2547,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <linkSequence>71</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2481,7 +2560,7 @@ function beforeTaskSave(colleagueId,nextSequenceId,userList){&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>10</version>
+        <version>12</version>
         <stateSequence>58</stateSequence>
         <triggerSequence>0</triggerSequence>
       </processStateTriggerPK>
