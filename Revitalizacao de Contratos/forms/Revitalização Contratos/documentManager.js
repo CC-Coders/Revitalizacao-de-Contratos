@@ -103,10 +103,10 @@ async function salvaModeloAlterado() {
     } catch (error) {}
 
     function promiseConverteEditorParaDocx() {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             const data = {
                 html: ckeditor.getData(),
-                css: "",
+                css: 'figure.table {    display: table;    margin: 1em auto; }figure.table table {border-collapse: collapse !important;    width: 100%;    table-layout: auto;    border: 1px solid #ccc;}figure.table td,figure.table th {    border: 1px solid #ccc;    padding: 4px;    font-family: "Arial, sans-serif";    font-size: 12px;    vertical-align: top;}figure.table p {    margin: 0;}',
                 config: {
                     document: {
                         orientation: "portrait",
@@ -148,6 +148,20 @@ async function salvaModeloAlterado() {
                     reject(error);
                 });
         });
+    }
+
+    async function asyncBuscaCSSDoDocx() {
+        var retorno = "";
+        var cssUrl = "https://cdn.ckeditor.com/ckeditor5/46.0.0/ckeditor5.css";
+        var css = await fetch(cssUrl);
+        retorno += await css.text();
+        retorno += " ";
+
+        var cssUrl = "https://cdn.ckeditor.com/ckeditor5-premium-features/46.0.0/ckeditor5-premium-features.css";
+        var css = await fetch(cssUrl);
+        retorno += await css.text();
+
+        return retorno;
     }
 }
 
@@ -212,16 +226,16 @@ async function convertDocxToPdf(docxBlob) {
 // CK5 Editor
 var ckeditor = null;
 async function editarArquivo() {
-        Swal.fire({
-            icon: "info",
-            title: "Carregando Contrato, por favor aguarde...",
-            showConfirmButton: false,
-            allowEscapeKey: false,
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            },
-        });
+    Swal.fire({
+        icon: "info",
+        title: "Carregando Contrato, por favor aguarde...",
+        showConfirmButton: false,
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        },
+    });
     openModal();
     await loadCkEditor();
     setTimeout(async () => {
@@ -518,6 +532,11 @@ async function loadCkEditor() {
             ],
             dataCallback: (editor) => {
                 return `
+                    <style>
+                        .ck-content figure.table:not(.layout-table)>table, .ck-content table.table:not(.layout-table){
+                            border-collapse: collapse !important;
+                        }
+                    </style>
 					${editor.getData()}
 					<div class="watermark">SEM VALOR CONTRATUAL</div>
 					<div class="header" style="position: fixed;left: 70;top: -5;">${header}</div>
@@ -767,11 +786,17 @@ async function carregaDocumentoParaOCKEditor(documentId) {
             console.log("Conversion result", response.data);
             header = response.data.headers.default.html;
             footer = response.data.footers.default.html;
-            ckeditor.setData(`${response.data.html}`);
+            ckeditor.setData(
+                `${response.data.html}
+                <style>
+                        .ck-content figure.table:not(.layout-table)>table, .ck-content table.table:not(.layout-table){
+                            border-collapse: collapse !important;
+                        }
+                </style>`
+            );
             ckeditor.config._config.exportPdf.converterOptions.header_html = header;
             ckeditor.config._config.exportPdf.converterOptions.footer_html = footer;
             Swal.close();
-
         })
         .catch((error) => {
             console.log("Conversion error", error);
