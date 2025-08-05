@@ -342,19 +342,19 @@ function inicializarPeriodoLocacao() {
 }
 
 function carregaDadosDoContratoParaTelaAprovacao() {
-    var obra = $("#obra").val();
-    var locador = $("#locador").val();
-    var procurador = $("#procurador").val();
-    var representante = $("#representante").val();
-    var contratantePrincipal = $("#contratantePrincipal").val();
-    var enderecoImovel = $("#enderecoImovel").val();
-    var matriculaImovel = $("#matriculaImovel").val();
-    var finalidade = $("#finalidadeLocacao").val();
-    var periodo = $("#periodoLocacao").val();
-    var janelaPagamento = $("#janelaPagamento").val();
-    var caucao = $("#caucao").val();
-    var valorCaucao = $("#valorCaucao").val();
-    var dataCaucao = $("#dataPagamentoCaucao").val();
+    var obra = $("#obra").val() ? $("#obra").val() : $("#obra").text();
+    var locador = $("#locador").val() ? $("#locador").val() : $("#locador").text();
+    var procurador = $("#procurador").val() ? $("#procurador").val() : $("#procurador").text();
+    var representante = $("#representante").val() ? $("#representante").val() : $("#representante").text();
+    var contratantePrincipal = $("#contratantePrincipal").val() ? $("#contratantePrincipal").val() : $("#contratantePrincipal").text();
+    var enderecoImovel = $("#enderecoImovel").val() ? $("#enderecoImovel").val() : $("#enderecoImovel").text();
+    var matriculaImovel = $("#matriculaImovel").val() ? $("#matriculaImovel").val() : $("#matriculaImovel").text();
+    var finalidade = $("#finalidadeLocacao").val() ? $("#finalidadeLocacao").val() : $("#finalidadeLocacao").text();
+    var periodo = $("#periodoLocacao").val() ? $("#periodoLocacao").val() : $("#periodoLocacao").text();
+    var janelaPagamento = $("#janelaPagamento").val() ? $("#janelaPagamento").val() : $("#janelaPagamento").text();
+    var caucao = $("#caucao").val() ? $("#caucao").val() : $("#caucao").text();
+    var valorCaucao = $("#valorCaucao").val() ? $("#valorCaucao").val() : $("#valorCaucao").text();
+    var dataCaucao = $("#dataPagamentoCaucao").val() ? $("#dataPagamentoCaucao").val() : $("#dataPagamentoCaucao").text();
 
     $("#aprovacaoTextObra").text(obra);
     $("#aprovacaoTextLocador").text(locador);
@@ -374,11 +374,11 @@ function carregaDadosDoContratoParaTelaAprovacao() {
         $(".camposComCaucao").hide();
     }
 
-    var tipoPagamento = $("#tipoPagamento").val();
-    var banco = $("#banco").val();
-    var titular = $("#titular").val();
-    var agencia = $("#agencia").val();
-    var contaCorrente = $("#contaCorrente").val();
+    var tipoPagamento = $("#tipoPagamento").val() ? $("#tipoPagamento").val() : $("#tipoPagamento").text();
+    var banco = $("#banco").val() ? $("#banco").val() : $("#banco").text();
+    var titular = $("#titular").val() ? $("#titular").val() : $("#titular").text();
+    var agencia = $("#agencia").val() ? $("#agencia").val() : $("#agencia").text();
+    var contaCorrente = $("#contaCorrente").val() ? $("#contaCorrente").val() : $("#contaCorrente").text();
 
     $("#aprovacaoTextTipoPagamento").text(tipoPagamento);
     $("#aprovacaoTextBanco").text(banco);
@@ -579,4 +579,66 @@ function validaCampos() {
     }
 
     return valida;
+}
+
+// Historico
+async function asyncMontaHistorico() {
+    var linhasHistorico = getLinhasHistorico();
+
+    // Inverte a Lista para motrar o Histórico do Mais Recente para o Mais Antigo
+    linhasHistorico = linhasHistorico.reverse();
+
+    for (const linha of linhasHistorico) {
+        var html = geraHtmlHistorico(linha);
+
+        // Primeiro insere a linha do HTML, depois cria a <img/> e insere na DIV
+        $("#divLinhasHistorico").append(html);
+        $(".divImageUser:last").append(await promiseBuscaImagemUsuario(linha.USUARIO));
+    }
+
+    function getLinhasHistorico() {
+        var retorno = [];
+        $("#tableHistorico>tbody>tr:not(:first)").each(function () {
+            retorno.push({
+                USUARIO: $(this).find(".tableHistoricoUsuario").val(),
+                DATA: $(this).find(".tableHistoricoData").val(),
+                OBSERVACAO: $(this).find(".tableHistoricoObservacao").val(),
+                ACAO: $(this).find(".tableHistoricoAcao").val(),
+                ATIVIDADE: $(this).find(".tableHistoricoAtividade").val(),
+            });
+        });
+        return retorno;
+    }
+    function geraHtmlHistorico(linha) {
+        var DATA = linha.DATA.split(" ");
+        DATA = DATA[0].split("-").reverse().join("/") + " " + DATA[1];
+
+        var html = `<div class="card">
+                <div class="card-body" style="${linha.ACAO == "Aprovado" ? "border:solid 1px green;" : linha.ACAO == "Reprovado" ? "border:solid 1px red;" : ""} ">
+                    <div style="display:flex;">
+                        <div class="divImageUser" style="margin-right:20px;"></div>
+                        <div>
+                            <h3 class="card-title" style="margin-bottom:0px; color:black;">${BuscaNomeUsuario(linha.USUARIO)} <small>${linha.ACAO}</small></h3>
+                            <small>${DATA}</small>
+                            <p class="card-text">${linha.OBSERVACAO}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+        return html;
+    }
+    function promiseBuscaImagemUsuario(usuario) {
+        return new Promise(async (resolve, reject) => {
+            const res = await fetch("/api/public/social/image/" + usuario);
+            const blob = await res.blob();
+            const img = new Image();
+            img.width = "60";
+            img.height = "60";
+            img.classList.add("userImage");
+            img.src = URL.createObjectURL(blob);
+            await img.decode();
+            resolve(img);
+        });
+    }
 }

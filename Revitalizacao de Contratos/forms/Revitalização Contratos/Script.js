@@ -110,28 +110,6 @@ function bindings() {
             divAnexo.style.visibility = "hidden";
         }
     });
-    // document.getElementById("inputAnexo").addEventListener("change", async function () {
-    //     const tipo = document.getElementById("tipoDocumentacao").value;
-    //     const file = this.files[0];
-    //     const lista = document.getElementById("listaAnexos");
-
-    //     if (!file || !tipo) return;
-    //     try {
-    //         const docId = await criaDocFluigRetornaDocumentId(file, 10133);
-    //         const li = document.createElement("li");
-    //         const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
-    //         li.innerHTML = `<span>✅<b> ${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a>`;
-    //         lista.appendChild(li);
-
-    //         document.getElementById("tipoDocumentacao").value = "";
-    //         this.value = "";
-    //         document.getElementById("divAnexo").style.opacity = "0";
-    //         document.getElementById("divAnexo").style.visibility = "hidden";
-    //     } catch (error) {
-    //         console.error("Erro ao salvar documento no Fluig:", error);
-    //         alert("Erro ao anexar documento. Tente novamente.");
-    //     }
-    // });
 }
 
 function loadTelaInicio() {
@@ -149,6 +127,7 @@ function loadTelaJuridico() {
     $("#panelAprovacao").show();
     setAtividadeAtivaProgresso(1);
     carregaDadosDoContratoParaTelaAprovacao();
+    asyncMontaHistorico();
 }
 
 function loadTelaControladoria() {}

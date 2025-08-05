@@ -803,11 +803,7 @@ async function carregaDocumentoParaOCKEditor(documentId) {
         });
 }
 
-async function carregaDocumentoProIframe() {
-    var documnetId = $("#contratoDocumentId").val();
-    var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documnetId);
-    $("#frameContrato").attr("src", url);
-}
+
 function visualizaDocumento() {
     var documentId = $("#contratoDocumentId").val();
     var attachments = parent.WKFViewAttachment.getAllAttachments();
