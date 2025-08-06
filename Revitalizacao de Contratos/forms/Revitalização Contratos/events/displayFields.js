@@ -7,4 +7,6 @@ function displayFields(form, customHTML) {
 	if (getValue('WKNumState') == 0) {
 		form.setValue("solicitante", getValue("WKUser"));
 	}
+
+	 form.setHidePrintLink(true);
 }

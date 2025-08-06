@@ -51,6 +51,13 @@ function bindings() {
     $("#btnVisualizarPreContrato").on("click", geraPreContrato);
     $("#btn-avancar").on("click", avancarPagina);
     $("#btn-voltar").on("click", voltarPagina);
+    $("#btnAdicionarItem").on("click", adicionarItemNovoContrato);
+    
+    $(".pagination").on("click", function(){
+        var index = parseInt($(this).attr("data-index"));
+        paginaAtual=index;
+        mostrarPagina(index);
+    });
 
     $("#tipoContrato").on("change", function () {
         if ($(this).val() === "Locação de Imóvel") {
