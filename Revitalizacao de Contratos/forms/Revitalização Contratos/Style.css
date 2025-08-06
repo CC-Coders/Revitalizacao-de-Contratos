@@ -290,7 +290,7 @@
 }
 
 
-/* Container principal do formulário com efeito 3D */
+/* Container principal do formulário com efeito 3D - init */
 .aba-container {
   position: relative;
   perspective: 1200px;
@@ -340,11 +340,27 @@
   align-items: center;
   gap: 15px;
   margin-top: 10px;
+  display: flex; 
+  position: fixed; 
+  bottom: 0; 
+  background-color: white; 
+  width: 100%; 
+  z-index: 20;
+}
+
+
+.pagination{
+	font-size: 12px;
+}
+.pagination-active{
+	font-size: 20px;
 }
 
 .bolinhas {
   display: flex;
   gap: 10px;
+	align-items: flex-end;
+	height: 65px;
 }
 
 .bolinha {
@@ -367,23 +383,25 @@
   cursor: pointer;
   user-select: none;
 }
+/* Container principal do formulário com efeito 3D - end */
+
 
 /* Painel Aprovacao - init */
 .divLinhaAprovacao {
 	height: 20px !important
 }
 
-#panelAprovacao {
+.panelAprovacao {
 	background-color: #edf5ff;
 	border-radius: 20px;
 	padding: 20px 50px;
 	max-width: 1400px;
 	margin: auto;
 }
-#panelAprovacao label,#panelAprovacao h3,#panelAprovacao h4,#panelAprovacao hr{
-	color: royalblue;
+.panelAprovacao label,.panelAprovacao h3,.panelAprovacao h4,.panelAprovacao hr{
+	color: royalblue !important;
 }
-#panelAprovacao span{
+.panelAprovacao span{
 	color: black;
 }
 

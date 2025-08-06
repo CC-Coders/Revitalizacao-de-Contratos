@@ -425,6 +425,11 @@ async function enviarSolicitacao() {
 
 let paginaAtual = 0;
 function mostrarPagina(indice) {
+
+    $(".pagination-active").removeClass("pagination-active", 250);
+    $(`.pagination:nth-child(${indice+1})`).addClass("pagination-active", 250);
+
+
     const paginas = document.querySelectorAll(".pagina");
     const totalPaginas = paginas.length;
 
@@ -441,10 +446,7 @@ function mostrarPagina(indice) {
             p.classList.add("escondida-para-direita");
             p.style.position = "absolute";
         }
-    });
-
-    document.querySelectorAll(".bolinha").forEach((b, i) => {
-        b.classList.toggle("ativa", i === indice);
+        $(window).scrollTop(0)
     });
 }
 function avancarPagina() {
