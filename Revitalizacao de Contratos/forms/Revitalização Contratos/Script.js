@@ -113,6 +113,8 @@ function bindings() {
 }
 
 function loadTelaInicio() {
+    $(".panelAprovacao").hide();
+
     setAtividadeAtivaProgresso(0);
     preencherObrasDoUsuario();
     buscaFornecedores();
@@ -124,12 +126,29 @@ function loadTelaInicio() {
 
 function loadTelaJuridico() {
     $("#informacoesIniciais").hide();
-    $("#panelAprovacao").show();
+    $(".panelAprovacao").show();
+    $("#formContainer").show();
+    $("#divBtnEnviar").hide();
+
+    $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
     setAtividadeAtivaProgresso(1);
     carregaDadosDoContratoParaTelaAprovacao();
     asyncMontaHistorico();
+    mostrarPagina(0);
 }
 
-function loadTelaControladoria() {}
+function loadTelaControladoria() {
+    $("#informacoesIniciais").hide();
+    $(".panelAprovacao").show();
+    $("#formContainer").show();
+    $("#divBtnEnviar").hide();
+
+    $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
+    setAtividadeAtivaProgresso(2);
+    carregaDadosDoContratoParaTelaAprovacao();
+    asyncMontaHistorico();
+    mostrarPagina(0);
+
+}
 
 function loadTelaAprovacao() {}
