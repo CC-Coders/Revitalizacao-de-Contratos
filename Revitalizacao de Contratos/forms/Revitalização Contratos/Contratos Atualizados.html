@@ -26,6 +26,7 @@
 
         <!-- Formulário -->
         <script src="documentManager.js"></script>
+        <script src="integracaoRMManager.js"></script>
         <script src="Functions.js"></script>
         <script src="Script.js"></script>
 
@@ -141,7 +142,7 @@
                 </div>
                 <br />
                 <div id="formContainer" class="panel-body"
-                    style="display: none; margin-bottom: 20px; box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.15); margin-top: 10px;">
+                    style="display: none; margin-bottom: 20px; margin-top: 10px;">
                     <div id="pagina-1" class="pagina">
                         <div class="panel panel-default" id="panelDadosGerais">
                             <div class="panel-heading" style="background-color: #eaeaea">
@@ -653,21 +654,155 @@
                             </div>
                         </div>
                     </div>
+
+                    <div id="pagina-5" class="pagina">
+                        <div class="panelAprovacao">
+                             <div style="text-align: center;">
+                                    <label for="">Lançar Novo Contrato?</label>
+                                    <input type="checkbox" name="checkboxLancarNovoContrato" id="checkboxLancarNovoContrato">
+                             </div>
+
+                            <div id="dadosRMNovoContrato">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="">Coligada</label>
+                                        <input type="text" name="novoContratoColigada" id="novoContratoColigada" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Filial</label>
+                                        <input type="text" name="novoContratoFilial" id="novoContratoFilial" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Tipo do Contrato</label>
+                                        <input type="text" name="novoContratoTipoContrato" id="novoContratoTipoContrato" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="">Centro de Custo</label>
+                                        <input type="text" name="novoContratoCCUSTO" id="novoContratoCCUSTO" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Código</label>
+                                        <input type="text" name="novoContratoCodigo" id="novoContratoCodigo" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Local de estoque</label>
+                                        <input type="text" name="novoContratoLocalDeEstoque" id="novoContratoLocalDeEstoque" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="">STATUS</label>
+                                        <input type="text" name="novoContratoSTATUS" id="novoContratoSTATUS" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Condição de Pagamento</label>
+                                        <input type="text" name="novoContratoCondicaoPagamento" id="novoContratoCondicaoPagamento" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Representante</label>
+                                        <input type="text" name="novoContratoRepresentante" id="novoContratoRepresentante" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="">Data Início</label>
+                                        <input type="text" name="novoContratoDataInicio" id="novoContratoDataInicio" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Data Fim</label>
+                                        <input type="text" name="novoContratoDataFim" id="novoContratoDataFim" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Objeto do Contrato</label>
+                                        <input type="text" name="novoContratoObjeto" id="novoContratoObjeto" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="">Tipo de Faturamento</label>
+                                        <input type="text" name="novoContratoTipoFaturamento" id="novoContratoTipoFaturamento" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Dia de Faturamento</label>
+                                        <input type="text" name="novoContratoDiaFaturamento" id="novoContratoDiaFaturamento" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Qtde. de Faturamentos</label>
+                                        <input type="text" name="novoContratoQtdeFaturamento" id="novoContratoQtdeFaturamento" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">Fornecedor</label>
+                                        <input type="text" name="novoContratoFornecedor" id="novoContratoFornecedor" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 style="margin-bottom: 0px">Itens</h3>
+                                        <hr style="margin-top: 0px; margin-bottom: 10px" />
+                                        <table tablename="tableNovoContratoItens" id="tableNovoContratoItens" nodeletebutton="true" noaddbutton="true" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <label for="">Produto: </label>
+                                                                <input type="text" name="novoContratoItemProduto" id="novoContratoItemProduto" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="">Valor: </label>
+                                                                <input type="text" name="novoContratoItemValor" id="novoContratoItemValor" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h3 style="margin-bottom: 0px">Rateio</h3>
+                                                                <hr style="margin-top: 0px; margin-bottom: 10px" />
+                                                                <input type="hidden" name="novoContratoJsonRateiosItem"
+                                                                    id="novoContratoJsonRateiosItem">
+                                                                <div class="divNovoContratoTableRateiosItens">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div style="text-align: center;">
+                                            <button class="btn btn-primary" id="btnAdicionarItem">Adicionar Item</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
                 <div class="navegacao-formulario">
-                    <button id="btn-voltar">←</button>
+                    <button id="btn-voltar">
+                        <i class="fluigicon fluigicon-pointer-left icon-md" aria-hidden="true"></i>
+                    </button>
 
-                    <div class="bolinhas">
-                        <div class="pagination pagination-active">Dados Gerais</div>
-                        <div class="pagination">Assinatura</div>
-                        <div class="pagination">Anexos</div>
-                        <div class="pagination">Histórico</div>
-                        <div class="pagination">Intergração RM</div>
+                    <div class="bolinhas" style="overflow-x: scroll;">
+                        <div class="pagination pagination-active" data-index="0">Dados Gerais</div>
+                        <div class="pagination" data-index="1">Assinatura</div>
+                        <div class="pagination" data-index="2">Anexos</div>
+                        <div class="pagination" data-index="3">Histórico</div>
+                        <div class="pagination" data-index="4">Integração RM</div>
                     </div>
 
-                    <button id="btn-avancar">→</button>
+                    <button id="btn-avancar">
+                        <i class="fluigicon fluigicon-pointer-right icon-md" aria-hidden="true"></i>
+                    </button>
                 </div>
 
                 <div style="text-align: center" id="divBtnEnviar">
