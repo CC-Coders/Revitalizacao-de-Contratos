@@ -296,7 +296,6 @@
   perspective: 1200px;
   min-height: 400px;
 }
-
 .painel-formulario {
   position: relative;
   width: 100%;
@@ -304,7 +303,6 @@
   margin-bottom: 30px;
   perspective: 1200px;
 }
-
 .pagina {
   position: absolute;
   width: 100%;
@@ -317,7 +315,6 @@
   transform-style: preserve-3d;
   transform-origin: left center;
 }
-
 .pagina.ativa {
   opacity: 1;
   pointer-events: auto;
@@ -325,15 +322,15 @@
   position: relative;
   z-index: 2;
 }
-
 .pagina.escondida-para-direita {
   opacity: 0;
   pointer-events: none;
   transform: rotateY(90deg);
   z-index: 1;
 }
-
-
+.divNovoContratoItem{
+	padding: 20px 30px;
+}
 .navegacao-formulario {
   display: flex;
   justify-content: center;
@@ -347,8 +344,6 @@
   width: 100%; 
   z-index: 20;
 }
-
-
 .pagination{
 	font-size: 12px;
 	display: inline-block;
@@ -367,7 +362,6 @@
 	font-weight: bold;
     background: #c1dcff !important;
 }
-
 .bolinhas {
   display: flex;
   gap: 10px;
@@ -377,11 +371,9 @@
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE and Edge */
 }
-
 .bolinhas::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
-
 .bolinha {
   width: 14px;
   height: 14px;
@@ -389,11 +381,9 @@
   background-color: #ccc;
   cursor: pointer;
 }
-
 .bolinha.ativa {
   background-color: #007bff;
 }
-
 #btn-voltar,
 #btn-avancar {
   background-color: transparent;
@@ -409,7 +399,6 @@
 .divLinhaAprovacao {
 	height: 20px !important
 }
-
 .panelAprovacao {
 	background-color: #edf5ff;
 	border-radius: 20px;
@@ -423,8 +412,9 @@
 .panelAprovacao span{
 	color: black;
 }
-
 /* Painel Aprovacao - end */
+
+
 
 /* CK5 Editor - init*/
 
@@ -490,10 +480,23 @@
 .divImageUser>img{
 	border-radius: 50%;
 }
-
 #divLinhasHistorico{
-	
-	
 }
-
 /* Historico - end */
+
+
+/* Selectize - init */
+.selectize-dropdown .active:not(.selected){
+    background-color: lightgray !important;
+    color: black !important;
+}
+.selectize-dropdown .selected{
+    background-color: lightgray !important;
+    color: black !important;
+}
+.selectize-control.single .selectize-input{
+    box-shadow: rgba(0, 0, 0, 0.0) !important;
+    background-color: #fff !important;
+    background-image: none !important;
+}
+/* Selectize - end */
