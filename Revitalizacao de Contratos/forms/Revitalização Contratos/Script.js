@@ -27,12 +27,6 @@ $(document).ready(function () {
         loadTelaAprovacao();
     }
 
-    preencherObrasDoUsuario();
-    buscaFornecedores();
-    buscaBancos();
-    inicializarCalendario();
-    inicializarPeriodoLocacao();
-    inicializaInputAnexo();
 });
 var beforeSendValidate = function (numState, nextState) {
     var atividade = parseInt(document.getElementById("atividade").value);
@@ -51,7 +45,8 @@ function bindings() {
     $("#btnVisualizarPreContrato").on("click", geraPreContrato);
     $("#btn-avancar").on("click", avancarPagina);
     $("#btn-voltar").on("click", voltarPagina);
-    $("#btnAdicionarItem").on("click", adicionarItemNovoContrato);
+    $("#btnAdicionarItem").on("click", asyncAdicionarItemNovoContrato);
+    $("#obra").off("change").on("change", salvaDadosDaObraSelecionadaComoHiddenInput);
     
     $(".pagination").on("click", function(){
         var index = parseInt($(this).attr("data-index"));
@@ -126,9 +121,10 @@ function loadTelaInicio() {
     preencherObrasDoUsuario();
     buscaFornecedores();
     buscaBancos();
-
     inicializarCalendario();
     inicializarPeriodoLocacao();
+    inicializaInputAnexo();
+
 }
 
 function loadTelaJuridico() {

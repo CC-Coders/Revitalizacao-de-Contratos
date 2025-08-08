@@ -644,3 +644,22 @@ async function asyncMontaHistorico() {
         });
     }
 }
+
+
+    function salvaDadosDaObraSelecionadaComoHiddenInput(){
+        var value = $(this).val();
+        console.log(this);
+        console.log(value);
+        console.log(!value);
+        if (!value) {
+            $("#CODCOLIGADA").val("");
+            $("#CODCCUSTO").val("");
+            $("#NOMECCUSTO").val("");
+        }else{
+            var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = $(this).val().split(" - ");
+            console.log(CODCOLIGADA, CODCCUSTO, NOMECCUSTO);
+            $("#CODCOLIGADA").val(CODCOLIGADA);
+            $("#CODCCUSTO").val(CODCCUSTO);
+            $("#NOMECCUSTO").val(NOMECCUSTO);
+        }
+    }
