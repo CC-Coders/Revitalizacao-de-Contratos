@@ -31,7 +31,7 @@ $(document).ready(function () {
 var beforeSendValidate = function (numState, nextState) {
     var atividade = parseInt(document.getElementById("atividade").value);
     if (atividade == 0) {
-        return validaCampos();
+      //  return validaCampos();
     }
 };
 
