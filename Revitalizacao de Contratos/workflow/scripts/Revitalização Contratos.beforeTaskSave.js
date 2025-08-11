@@ -11,30 +11,62 @@ var ATIVIDADES = {
     DIRETORIA: 53,
     ASSINATURA_ELETRONICA: 66,
 };
-function beforeTaskSave(colleagueId, nextSequenceId, userList) {
-    var ATIVIDADE_ATUAL = getValue("WKNumState");
 
-    if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
-        beforeTaskSave_inicio();
-    } 
-    else if (ATIVIDADE_ATUAL == ATIVIDADES.JURIDICO) {
-        beforeTaskSave_juridico();
-    } 
-    else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {
-        beforeTaskSave_controladoria();
-    }
-    else if (ATIVIDADE_ATUAL == ATIVIDADES.ENGENHEIRO) {
-        beforeTaskSave_engenheiro();
-    }
-    else if (ATIVIDADE_ATUAL == ATIVIDADES.COORDENADOR_OBRAS) {
-        beforeTaskSave_coordenadorObras();
-    }
-    else if (ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {
-        beforeTaskSave_diretoria();
-    }
+var STATUS_CONTRATOS = {
+    "ATIVO" : "01",
+    "CANCELADO" : "02",
+    "ENCERRADO" : "03",
+    "EM ANDAMENTO MTZ" : "04",
+    "PENDENTE OBRA" : "05",
+    "ENCERRADO SEM DOC." : "06",
+    "ESPORÁDICO" : "07",
+    "SEM CONTRATO" : "08",
+    "FLUIG" : "09",
+    "ATIVO SEM DOC" : "10",
+    "RESCISÃO EM ANDAMENTO" : "11",
 }
 
+var TIPOS_CONTRATO = {
+    "Empréstimos": "01",
+    "Financiamentos": "02",
+    "Locação de Imóvel": "04",
+    "Locação de Equipamentos - S/M.O.": "06",
+    "Prestação de Serviços - Sub-Empreiteiros": "07",
+    "Fornecimento de Material": "08",
+    "Locação de Equipamentos - C/M.O.": "09",
+    "Prestação de Serviços": "10",
+    "Transporte de Material - S/M.O.": "11",
+    "Finame": "12",
+    "CDC": "13",
+    "Prestação de Serviços - Vigilância": "14",
+    "Prestação de Serviços - Sub/Retenção": "15",
+    "Clientes": "16",
+    "Cartão de Crédito": "17",
+    "Consórcio": "18",
+    "PJ": "19",
+};
 
+function beforeTaskSave(colleagueId, nextSequenceId, userList) {
+    try {
+        var ATIVIDADE_ATUAL = getValue("WKNumState");
+
+        if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
+            beforeTaskSave_inicio();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.JURIDICO) {
+            beforeTaskSave_juridico();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {
+            beforeTaskSave_controladoria();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.ENGENHEIRO) {
+            beforeTaskSave_engenheiro();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.COORDENADOR_OBRAS) {
+            beforeTaskSave_coordenadorObras();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {
+            beforeTaskSave_diretoria();
+        }
+    } catch (error) {
+        throw error;
+    }
+}
 
 function beforeTaskSave_inicio() {
     var docIdContrato = hAPI.getCardValue("contratoDocumentId");
@@ -46,7 +78,27 @@ function beforeTaskSave_juridico() {
     insereHistorico("#TODO: Definir o campo de Observação", "#TODO: Definir o campo de Decisão", "Jurídico");
 }
 function beforeTaskSave_controladoria() {
-    insereHistorico("#TODO: Definir o campo de Observação", "#TODO: Definir o campo de Decisão", "Controladoria");
+    try {
+        insereHistorico("#TODO: Definir o campo de Observação", "#TODO: Definir o campo de Decisão", "Controladoria");
+
+        var tipo = hAPI.getCardValue("origemContrato");
+        if (tipo == "Novo") {
+            var criaNovoContratoRM = hAPI.getCardValue("checkboxLancarNovoContrato") == "on";
+            if (criaNovoContratoRM) {
+                criaNovoContrato();
+            }
+        } 
+        else if (tipo == "Aditivos") {
+            alteraStatusContrato("PENDENTE OBRA");
+            // TODO - Inserir relação do Aditivo com o Contrato na tabela Custom de Contratos
+        } 
+        else if (tipo == "Rescisões") {
+            alteraStatusContrato("RESCISÃO EM ANDAMENTO");
+            // TODO - Inserir relação da Rescisão com o Contrato na tabela Custom de Contratos
+        }
+    } catch (error) {
+        throw error;
+    }
 }
 function beforeTaskSave_engenheiro() {
     insereHistorico("#TODO: Definir o campo de Observação", "#TODO: Definir o campo de Decisão", "Aprovação Engenheiro");
@@ -58,6 +110,377 @@ function beforeTaskSave_diretoria() {
     insereHistorico("#TODO: Definir o campo de Observação", "#TODO: Definir o campo de Decisão", "Aprovação Diretoria");
 }
 
+// Integração RM
+function criaNovoContrato() {
+    try {
+        var parametros = buscaParamentrosCriacaoContrato();
+        validaParametros(parametros);
+
+
+
+
+
+
+    } catch (error) {
+     throw error;   
+    }
+}
+function buscaParamentrosCriacaoContrato() {
+    var CODCOLIGADA = hAPI.getCardValue("novoContratoColigada");
+    var CODFILIAL = hAPI.getCardValue("novoContratoFilial");
+    var CODIGOTIPOCONTRATO = hAPI.getCardValue("novoContratoTipoContrato");
+    var CODTCN = hAPI.getCardValue("novoContratoTipoContrato");
+    var CODCCUSTO = hAPI.getCardValue("novoContratoCCUSTO");
+    var CODIGOCONTRATO = hAPI.getCardValue("novoContratoCodigo");
+    var locEstoque = hAPI.getCardValue("novoContratoLocalDeEstoque");
+    var CODCFO = hAPI.getCardValue("novoContratoFornecedor");
+    var CODRPR = hAPI.getCardValue("novoContratoRepresentante");
+    var DATAINICIO = hAPI.getCardValue("novoContratoDataInicio");
+    var DATAFIM = hAPI.getCardValue("novoContratoDataFim");
+    var NOME = hAPI.getCardValue("novoContratoObjeto");
+    if (Nome.length() > 40) {
+        // A coluna na base do RM tem limite de 40 caracteres
+        Nome = Nome.substring(0, 40);
+    }
+    var CODCPG = hAPI.getCardValue("novoContratoTipoFaturamento");
+    var DIAFATURAMENTO = hAPI.getCardValue("novoContratoDiaFaturamento");
+    var QTDEFATURAMENTOS = hAPI.getCardValue("novoContratoQtdeFaturamento");
+    var urlSolicitacao = getServerURL() + "/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=" + getValue("WKNumProces");
+
+    var IDCNT = hAPI.getCardValue("novoContratoIdCnt");
+    if (IDCNT == "" || IDCNT == null || IDCNT != undefined) {
+        var IDCNT = -1;
+    }
+
+
+    var ITENS = [];
+    var indexes = hAPI.getChildrenIndexes("tableNovoContratoItens");
+    for (var i = 0; i < indexes.length; i++) {
+        var id = indexes[i];
+        
+        ITENS.push({
+            IDPRD:hAPI.getCardValue("novoContratoItemProduto" + "___" + id),
+            VALOR:hAPI.getCardValue("novoContratoItemValor" + "___" + id),
+            RATDEP:hAPI.getCardValue("novoContratoJsonRateiosItem" + "___" + id)
+        });
+    }
+
+
+    return {
+        CODCOLIGADA:CODCOLIGADA,
+        IDCNT:IDCNT,
+        CODFILIAL:CODFILIAL,
+        CODIGOTIPOCONTRATO:CODIGOTIPOCONTRATO,
+        CODTCN:CODTCN,
+        CODCCUSTO:CODCCUSTO,
+        CODIGOCONTRATO:CODIGOCONTRATO,
+        locEstoque:locEstoque,
+        CODCFO:CODCFO,
+        CODRPR:CODRPR,
+        DATAINICIO:DATAINICIO,
+        DATAFIM:DATAFIM,
+        NOME:NOME,
+        CODCPG:CODCPG,
+        DIAFATURAMENTO:DIAFATURAMENTO,
+        QTDEFATURAMENTOS:QTDEFATURAMENTOS,
+        urlSolicitacao:urlSolicitacao,
+        ITENS:ITENS
+    }
+
+}   
+function validaParametros(parametros) {
+    var erroRetorno = [];
+    if (parametros.CODCOLIGADA == undefined || parametros.CODCOLIGADA == null || parametros.CODCOLIGADA == "") {
+        erroRetorno.push("CODCOLIGADA");
+    }
+
+    if (parametros.CODFILIAL == undefined || parametros.CODFILIAL == null || parametros.CODFILIAL == "") {
+        erroRetorno.push("CODFILIAL");
+    }
+
+    if (parametros.CODIGOTIPOCONTRATO == undefined || parametros.CODIGOTIPOCONTRATO == null || parametros.CODIGOTIPOCONTRATO == "") {
+        erroRetorno.push("CODIGOTIPOCONTRATO");
+    }
+
+    if (parametros.CODTCN == undefined || parametros.CODTCN == null || parametros.CODTCN == "") {
+        erroRetorno.push("CODTCN");
+    }
+
+    if (parametros.CODCCUSTO == undefined || parametros.CODCCUSTO == null || parametros.CODCCUSTO == "") {
+        erroRetorno.push("CODCCUSTO");
+    }
+
+    if (parametros.CODIGOCONTRATO == undefined || parametros.CODIGOCONTRATO == null || parametros.CODIGOCONTRATO == "") {
+        erroRetorno.push("CODIGOCONTRATO");
+    }
+
+    if (parametros.locEstoque == undefined || parametros.locEstoque == null || parametros.locEstoque == "") {
+        erroRetorno.push("locEstoque");
+    }
+
+    if (parametros.CODCFO == undefined || parametros.CODCFO == null || parametros.CODCFO == "") {
+        erroRetorno.push("CODCFO");
+    }
+
+    if (parametros.CODRPR == undefined || parametros.CODRPR == null || parametros.CODRPR == "") {
+        erroRetorno.push("CODRPR");
+    }
+
+    if (parametros.DATAINICIO == undefined || parametros.DATAINICIO == null || parametros.DATAINICIO == "") {
+        erroRetorno.push("DATAINICIO");
+    }
+
+    if (parametros.DATAFIM == undefined || parametros.DATAFIM == null || parametros.DATAFIM == "") {
+        erroRetorno.push("DATAFIM");
+    }
+
+    if (parametros.NOME == undefined || parametros.NOME == null || parametros.NOME == "") {
+        erroRetorno.push("NOME");
+    }
+
+    if (parametros.CODCPG == undefined || parametros.CODCPG == null || parametros.CODCPG == "") {
+        erroRetorno.push("CODCPG");
+    }
+
+    if (parametros.CODTCN == TIPOS_CONTRATO["Locação de Imóvel"]) {
+        // Se for locação de imóvel, deve preenchide dia e quantidade de Faturamentos
+        if (parametros.DIAFATURAMENTO == undefined || parametros.DIAFATURAMENTO == null || parametros.DIAFATURAMENTO == "") {
+            erroRetorno.push("DIAFATURAMENTO");
+        }
+        if (parametros.QTDEFATURAMENTOS == undefined || parametros.QTDEFATURAMENTOS == null || parametros.QTDEFATURAMENTOS == "") {
+            erroRetorno.push("QTDEFATURAMENTOS");
+        }
+    }
+
+    if (parametros.urlSolicitacao == undefined || parametros.urlSolicitacao == null || parametros.urlSolicitacao == "") {
+        erroRetorno.push("urlSolicitacao");
+    }
+
+    if (parametros.ITENS == undefined || parametros.ITENS == null || parametros.ITENS == "") {
+        erroRetorno.push("ITENS");
+    }
+
+    try {
+        parametros.ITENS = JSON.parse(parametros.ITENS);
+    } catch (error) {
+        erroRetorno.push("ITENS");
+    }
+
+    for (var i = 0; i < parametros.ITENS.length; i++) {
+        var item = parametros.ITENS[i];
+
+        if (item.IDPRD == undefined || item.IDPRD == null || item.IDPRD == "") {
+            erroRetorno.push("IDPRD");
+        }
+        if (item.VALOR == undefined || item.VALOR == null || item.VALOR == "") {
+            erroRetorno.push("VALOR");
+        }
+        if (item.RATDEP == undefined || item.RATDEP == null || item.RATDEP == "") {
+            erroRetorno.push("RATDEP");
+        }
+
+        try {
+            item.RATDEP = JSON.parse(item.RATDEP);
+        } catch (error) {
+            erroRetorno.push("Item RATDEP");
+        }
+
+        for (var j = 0; j < item.RATDEP.length; j++) {
+            var RATEIO =  item.RATDEP[j];
+
+            if (RATEIO.CODDPTO == undefined || RATEIO.CODDPTO == null || item.RATEIO.CODDPTO == "") {
+            erroRetorno.push("RATDEP DEPTO");
+            }
+            if (RATEIO.VALOR == undefined || RATEIO.VALOR == null || RATEIO.VALOR == "") {
+                erroRetorno.push("RATDEP VALOR");
+            }
+
+        }
+    }
+
+    if (erroRetorno.length>0) {
+        throw erroRetorno.join(", ");
+    }
+}
+
+function exportarContratoProRM() {
+    var contexto = "CODSISTEMA=G;CODCOLIGADA=" + hAPI.getCardValue("codColigada") + ";CODUSUARIO=fluig";
+    var url = "Contrato: " + hAPI.getCardValue("servidor") + "/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=" + getValue("WKNumProces");
+
+    var Nome = hAPI.getCardValue("descContrato");
+    if (Nome.length() > 40) {
+        Nome = Nome.substring(0, 40);
+    }
+
+    var idCnt = hAPI.getCardValue("idCnt");
+    if (idCnt == "" || idCnt == null || idCnt != undefined) {
+        var idCnt = -1;
+    }
+    var coligada = hAPI.getCardValue("codColigada");
+    var filial = hAPI.getCardValue("codFilial");
+    var tipoContrato = hAPI.getCardValue("tipoContrato");
+    var codNatureza = hAPI.getCardValue("codNatureza");
+    var codCCusto = hAPI.getCardValue("codCCusto");
+    var locEstoque = hAPI.getCardValue("locEstoque");
+    var codContrato = hAPI.getCardValue("codContrato");
+    var codFornecedor = hAPI.getCardValue("codFornecedor");
+    var representante = hAPI.getCardValue("representante");
+    var tipoPagamento = hAPI.getCardValue("tipoPagamento");
+    var status = hAPI.getCardValue("codStaCnt");
+    var JSONItemContratoRM = JSON.parse(hAPI.getCardValue("JSONItemContratoRM"));
+    var dataContrato = hAPI.getCardValue("dataContratoRM");
+    var QtdeFaturamentos = hAPI.getCardValue("QtdeFaturamentos");
+    var diaFaturamento = hAPI.getCardValue("diaFaturamentoContratoRM");
+    var tipoFaturamento = hAPI.getCardValue("tipoFaturamentoContratoRM");
+
+    if (coligada == "" || coligada == null) {
+        throw "Coligada inválida!";
+    } else if (filial == "" || filial == null) {
+        throw "Filial inválida!";
+    } else if (tipoContrato == "" || tipoContrato == null) {
+        throw "Tipo do contrato inválido!";
+    } else if (codNatureza == "" || codNatureza == null) {
+        throw "Natureza do contrato inválida!";
+    } else if (codCCusto == "" || codCCusto == null) {
+        throw "Centro de custo inválido!";
+    } else if (locEstoque == "" || locEstoque == null) {
+        throw "Local de estoque inválido!";
+    } else if (codFornecedor == "" || codFornecedor == null) {
+        throw "Fornecedor inválido!";
+    } else if (representante == "" || representante == null) {
+        throw "Representante inválido!";
+    } else if (tipoPagamento == "" || tipoPagamento == null) {
+        throw "Condição de pagamento inválida!";
+    } else if (status == "" || status == null) {
+        throw "Status do contrato inválido!";
+    } else if (JSONItemContratoRM == "" || JSONItemContratoRM == null) {
+        throw "Nenhum item inserido!";
+    } else if (tipoFaturamento == "" || tipoFaturamento == null) {
+        throw "Tipo do faturamento não selecionado!";
+    } else if ((QtdeFaturamentos == "" || QtdeFaturamentos == null) && tipoFaturamento == 1) {
+        throw "Quantidade de faturamentos inválida!";
+    } else if ((diaFaturamento == "" || diaFaturamento == null) && tipoFaturamento == 1) {
+        throw "Dia do faturamento inválido!";
+    } else {
+
+        // TIPO = Locação de Imóvel
+        if (tipoContrato == '04') {
+            tipoPagamento = '001'; // A VISTA
+        }
+
+        var xml =
+            "<CtrCnt>\
+			    <TCnt>\
+				    <CODCOLIGADA>" + coligada + "</CODCOLIGADA>\
+				    <IDCNT>" + idCnt + "</IDCNT>\
+				    <CODCOLCFO>0</CODCOLCFO>\
+			        <NOME>" + Nome + "</NOME>\
+				    <CODCCUSTO>" + codCCusto + "</CODCCUSTO>\
+				    <NATUREZA>" + codNatureza + "</NATUREZA>\
+				    <CODTCN>" + tipoContrato + "</CODTCN>\
+				    <CODFILIAL>" + filial + "</CODFILIAL>\
+				    <CODIGOCONTRATO>" + codContrato + "</CODIGOCONTRATO>\
+				    <CODCFO>" + codFornecedor + "</CODCFO>\
+				    <CODRPR>" + representante + "</CODRPR>\
+				    <CODSTACNT>" + status + "</CODSTACNT>\
+				    <CODCPG>" + tipoPagamento + "</CODCPG>\
+                    <CODCPGPRAZO>130</CODCPGPRAZO>\
+                    <DATACONTRATO>" + setDateXMLFormat(dataContrato) + "</DATACONTRATO>\
+				    <DATAINICIO>" + setDateXMLFormat(dataContrato) + "</DATAINICIO>\
+				    <DATAFIM>" + CalculaDataFimContrato() + "T00:00:00</DATAFIM>\
+				    <CODMOEVALORCONTRATO>R$</CODMOEVALORCONTRATO>\
+				    <IMPRIMEMOV>1</IMPRIMEMOV>";
+        xml += (diaFaturamento == "" || diaFaturamento == 0 ? "<DIAFATURAMENTO>0</DIAFATURAMENTO>" : "<DIAFATURAMENTO>" + diaFaturamento + "</DIAFATURAMENTO>")
+        xml += "<CODUSUARIO>" + getValue("WKUser") + "</CODUSUARIO>";
+        xml += (QtdeFaturamentos == "" || QtdeFaturamentos == 0 ? "<QTDEFATURAMENTOS>1</QTDEFATURAMENTOS>" : "<QTDEFATURAMENTOS>" + QtdeFaturamentos + "</QTDEFATURAMENTOS>")
+        xml += "</TCnt>\
+			    <TCNTHISTORICO>\
+			    	<CODCOLIGADA>" + coligada + "</CODCOLIGADA>\
+			    	<IDCNT>" + idCnt + "</IDCNT>\
+			    	<HISTORICOLONGO>" + url + "</HISTORICOLONGO>\
+			    </TCNTHISTORICO>\
+			    <TCNTCOMPL>\
+			    	<CODCOLIGADA>" + coligada + "</CODCOLIGADA>\
+			    	<IDCNT>" + idCnt + "</IDCNT>\
+			    </TCNTCOMPL>";
+
+        for (var i = 0; i < JSONItemContratoRM.length; i++) {
+            xml +=
+                "<TITMCNT>\
+					<CODCOLIGADA>" + coligada + "</CODCOLIGADA>\
+					<IDCNT>" + idCnt + "</IDCNT>\
+					<NSEQITMCNT>" + (i + 1) + "</NSEQITMCNT>\
+					<IDPRD>" + JSONItemContratoRM[i].IDPRD + "</IDPRD>\
+					<CODFILIALFAT>" + filial + "</CODFILIALFAT>\
+					<CODLOCFATURAM>" + locEstoque + "</CODLOCFATURAM>\
+					<CODCCUSTO>" + codCCusto + "</CODCCUSTO>\
+					<CODCFO>" + codFornecedor + "</CODCFO>\
+					<QUANTIDADE>1</QUANTIDADE>\
+					<CODCPG>" + tipoPagamento + "</CODCPG>\
+					<CODMOEPRECOFATURAMENTO>R$</CODMOEPRECOFATURAMENTO>\
+					<CODSTACNT>" + status + "</CODSTACNT>\
+					<CODTMV>" + ((tipoContrato == "04") ? "1.1.98" : "1.1.99") + "</CODTMV>\
+					<EPERIODICO>" + tipoFaturamento + "</EPERIODICO>\
+					<DATAINICIO>" + setDateXMLFormat(dataContrato) + "</DATAINICIO>\
+                    <DATAFIM>" + CalculaDataFimContrato() + "T00:00:00</DATAFIM>\
+                    <CODCPGPRAZO>130</CODCPGPRAZO>\
+					<CODRPR>" + representante + "</CODRPR>";
+            xml += (diaFaturamento == "" || diaFaturamento == 0 ? "<DIAFATURAMENTO>0</DIAFATURAMENTO>" : "<DIAFATURAMENTO>" + diaFaturamento + "</DIAFATURAMENTO>")
+            xml += "<PRECOFATURAMENTO>" + ValorToFloat(JSONItemContratoRM[i].Valor).toString().replace(".", ",") + "</PRECOFATURAMENTO>\
+					<CODMOEREAJUSTE>R$</CODMOEREAJUSTE>\
+					<CODCOLCFODEST>0</CODCOLCFODEST>\
+					<CODCFODEST>" + codFornecedor + "</CODCFODEST>";
+            xml += (QtdeFaturamentos == "" || QtdeFaturamentos == 0 ? "<QTDEFATURAMENTOS>1</QTDEFATURAMENTOS>" : "<QTDEFATURAMENTOS>" + QtdeFaturamentos + "</QTDEFATURAMENTOS>")
+            xml += "</TITMCNT>";
+
+            xml += "<TITMCNTRATCCU>\
+					<IDCNT>" + idCnt + "</IDCNT>\
+					<CODCOLIGADA>" + coligada + "</CODCOLIGADA> \
+					<NSEQITMCNT>" + (i + 1) + "</NSEQITMCNT>\
+					<CODCCUSTO>" + codCCusto + "</CODCCUSTO>\
+					<PERCENTUAL>100</PERCENTUAL>\
+				</TITMCNTRATCCU>";
+
+            for (var j = 0; j < JSONItemContratoRM[i].Rateio.length; j++) {
+                xml += "<TITMCNTRATDEP>\
+						<CODCOLIGADA>" + coligada + "</CODCOLIGADA>\
+						<IDCNT>" + idCnt + "</IDCNT>\
+						<NSEQITMCNT>" + (i + 1) + "</NSEQITMCNT>\
+						<CODFILIAL>" + filial + "</CODFILIAL>\
+						<CODDEPARTAMENTO>" + JSONItemContratoRM[i].Rateio[j].Departamento + "</CODDEPARTAMENTO>\
+						<PERCENTUAL>" + JSONItemContratoRM[i].Rateio[j].Percentual + "</PERCENTUAL>\
+					</TITMCNTRATDEP>";
+            }
+        }
+
+        xml += "</CtrCnt>";
+
+        log.info("XML: " + xml);
+        var c1 = DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST);
+        var c2 = DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST);
+        var c3 = DatasetFactory.createConstraint("idContrato", idCnt, idCnt, ConstraintType.MUST);
+        var c4 = DatasetFactory.createConstraint("coligada", coligada, coligada, ConstraintType.MUST);
+        var retorno = DatasetFactory.getDataset("InsereContratoRM", null, [c1, c2, c3, c4], null);
+
+        if (!retorno || retorno == "" || retorno == null) {
+            throw "Houve um erro na comunicação com o webservice. Tente novamente!";
+        } else {
+            if (retorno.values[0][0] == "false") {
+                throw "Erro ao gerar contrato. Favor entrar em contato com o administrador do sistema. Mensagem: " + retorno.values[0][1];
+            } else if (retorno.values[0][0] == "true") {
+                hAPI.setCardValue("idCntRm", retorno.values[0][2]);
+            }
+        }
+    }
+}
+
+
+
+
+function alteraStatusContrato(STATUS){
+    var CODSTACNT = STATUS_CONTRATOS[STATUS];
+
+}
 
 
 // Utils
@@ -99,4 +522,8 @@ function getDateTimeNow() {
 
     var dateTime = [ano, mes, dia].join("-") + " " + hora + ":" + minutos;
     return dateTime;
+}
+function getServerURL(){
+    var ds = DatasetFactory.getDataset("dsGetServerURL",null,null,null);
+    return ds.getValue(0,"URL");
 }
