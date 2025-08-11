@@ -360,7 +360,7 @@
 .pagination-active{
 	font-size: 20px;
 	font-weight: bold;
-    background: #c1dcff !important;
+    background: #ffa751 !important;
 }
 .bolinhas {
   display: flex;
@@ -395,7 +395,7 @@
 /* Container principal do formulário com efeito 3D - end */
 
 
-/* Painel Aprovacao - init */
+Painel Aprovacao - init
 .divLinhaAprovacao {
 	height: 20px !important
 }
@@ -412,6 +412,95 @@
 .panelAprovacao span{
 	color: black;
 }
+/* .binder { */
+/*     display: flex; */
+/*     width: 100%; */
+/*     max-width: 1400px; */
+/*     margin: 2rem auto; */
+/*     box-shadow: 0 10px 30px rgba(0,0,0,0.2); */
+/*     border-radius: 10px; */
+/*     overflow: hidden; */
+/*     background-color: #e0e0e0; */
+/* } */
+
+/* .binder-page { */
+/*     background-color: #f7f7f7; */
+/*     flex: 1; */
+/*     position: relative; */
+/*     padding: 3rem 4rem; */
+/*     display: flex; */
+/*     flex-direction: column; */
+/* } */
+
+/* .binder-divider { */
+/*     width: 40px; */
+/*     background-color: #d1d5db; */
+/*     display: flex; */
+/*     flex-direction: column; */
+/*     align-items: center; */
+/*     justify-content: space-around; */
+/*     padding: 5rem 0; */
+/* } */
+
+/* .rings-column { */
+/*     position: absolute; */
+/*     left: 10px; */
+/*     top: 3rem; */
+/*     display: flex; */
+/*     flex-direction: column; */
+/*     gap: 3rem; */
+/* } */
+
+/* .ring-hole { */
+/*     width: 12px; */
+/*     height: 12px; */
+/*     background-color: #f7f7f7; */
+/*     border-radius: 50%; */
+/*     border: 1px solid #c0c0c0; */
+/* } */
+
+/* .ring { */
+/*     width: 30px; */
+/*     height: 30px; */
+/*     background-color: #c0c0c0; */
+/*     border-radius: 50%; */
+/*     border: 2px solid #a0a0a0; */
+/* } */
+
+/* .paper-content { */
+/*     flex-grow: 1; */
+/*     background: linear-gradient(to bottom, transparent 49px, #d1d5db 49px); */
+/*     background-size: 100% 50px; */
+/*     line-height: 50px; */
+/*     padding-left: 2rem; */
+/*     border-left: 2px solid #ff8080; */
+/* } */
+
+/* .info-line { */
+/*     display: flex; */
+/*     align-items: center; */
+/* } */
+
+/* .info-label { */
+/*     font-weight: bold; */
+/*     color: #1f2937; */
+/*     min-width: 200px; */
+/*     margin-right: 1rem; */
+/* } */
+
+/* .info-value { */
+/*     color: #4b5563; */
+/*     font-style: italic; */
+/* } */
+
+/* h1 { */
+/*     font-size: 2rem; */
+/*     font-weight: bold; */
+/*     color: #4a5568; */
+/*     margin-bottom: 2rem; */
+/* } */
+
+
 /* Painel Aprovacao - end */
 
 
