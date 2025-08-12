@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="/castilho_dev_guide/resources/css/castilho-cards.css" />
         <link rel="stylesheet" href="Style.css" />
 
-        <!-- Scripts (jQuery e dependï¿½ncias) -->
+        <!-- Scripts (jQuery e dependências) -->
         <script src="/resources/js/jquery/jquery.js"></script>
         <script src="/resources/js/jquery/jquery-ui.min.js"></script>
         <script src="/webdesk/vcXMLRPC.js"></script>
@@ -24,7 +24,7 @@
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
-        <!-- Formulï¿½rio -->
+        <!-- Formulário -->
         <script src="documentManager.js"></script>
         <script src="integracaoRMManager.js"></script>
         <script src="Functions.js"></script>
@@ -109,9 +109,9 @@
                 </div>
                 <div class="wizard-progress">
                     <div class="step active">Obra</div>
-                    <div class="step">Jurï¿½dico</div>
+                    <div class="step">Jurídico</div>
                     <div class="step">Controladoria</div>
-                    <div class="step">Aprovaï¿½ï¿½o</div>
+                    <div class="step">Aprovação</div>
                     <div class="step">Assinatura</div>
                 </div>
 
@@ -123,7 +123,7 @@
                                 <option value="">Selecione</option>
                                 <option value="Novo">Novo</option>
                                 <option value="Aditivos">Aditivos</option>
-                                <option value="Rescisï¿½es">Rescisï¿½es</option>
+                                <option value="Rescisões">Rescisões</option>
                             </select>
                         </div>
                     </div>
@@ -141,15 +141,15 @@
                         <div class="form-input">
                             <label>Tipo de Contrato:</label><select name="tipoContrato" id="tipoContrato" class="form-control inputInfoChamado">
                                 <option value="">Selecione</option>
-                                <option value="Ferrovias - Locaï¿½ï¿½o de Equipamento">Ferrovias - Locaï¿½ï¿½o de Equipamento</option>
-                                <option value="Ferrovias ï¿½ Locaï¿½ï¿½o de Imï¿½vel">Ferrovias - Locaï¿½ï¿½o de Imï¿½vel</option>
-                                <option value="Locaï¿½ï¿½o de Container">Locaï¿½ï¿½o de Container</option>
-                                <option value="Locaï¿½ï¿½o de Equipamento">Locaï¿½ï¿½o de Equipamento</option>
-                                <option value="Locaï¿½ï¿½o de Imï¿½vel">Locaï¿½ï¿½o de Imï¿½vel</option>
-                                <option value="Locaï¿½ï¿½o de Sanitï¿½rios">Locaï¿½ï¿½o de Sanitï¿½rios</option>
-                                <option value="Prestaï¿½ï¿½o de Serviï¿½os">Prestaï¿½ï¿½o de Serviï¿½os</option>
+                                <option value="Ferrovias - Locação de Equipamento">Ferrovias - Locação de Equipamento</option>
+                                <option value="Ferrovias – Locação de Imóvel">Ferrovias - Locação de Imóvel</option>
+                                <option value="Locação de Container">Locação de Container</option>
+                                <option value="Locação de Equipamento">Locação de Equipamento</option>
+                                <option value="Locação de Imóvel">Locação de Imóvel</option>
+                                <option value="Locação de Sanitários">Locação de Sanitários</option>
+                                <option value="Prestação de Serviços">Prestação de Serviços</option>
                                 <option value="Transporte de Material">Transporte de Material</option>
-                                <option value="Transporte de Funcionï¿½rios">Transporte de Funcionï¿½rios</option>
+                                <option value="Transporte de Funcionários">Transporte de Funcionários</option>
                             </select>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Descriï¿½ï¿½o do Imï¿½vel:</label><strong class="strongAlert">*</strong>
+                                                <label>Descrição do Imóvel:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" class="form-control inputInfoChamado" id="descricaoImovel"
                                                     name="descricaoImovel" />
                                             </div>
@@ -198,7 +198,7 @@
                                     <div class="row endereco-fornecedor" style="display: none">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Informaï¿½ï¿½es do Locador:</label>
+                                                <label>Informações do Locador:</label>
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <input type="text" class="form-control" id="cpfFornecedor" name="cpfFornecedor"
@@ -210,7 +210,7 @@
                                                             placeholder="RG" />
                                                         <small class="form-text text-muted">RG</small>
                                                     </div>
-                                                    <!-- Pessoa Fï¿½sica -->
+                                                    <!-- Pessoa Física -->
                                                     <div class="col-md-3 pessoa-fisica">
                                                         <input type="text" class="form-control" id="nacionalidadeFornecedor"
                                                             name="nacionalidadeFornecedor" placeholder="Nacionalidade" />
@@ -221,7 +221,7 @@
                                                             name="estadoCivilFornecedor" placeholder="Estado Civil" />
                                                         <small class="form-text text-muted">Estado Civil</small>
                                                     </div>
-                                                    <!-- Pessoa Jurï¿½dica -->
+                                                    <!-- Pessoa Jurídica -->
                                                     <div class="col-md-3 pessoa-juridica" style="display: none">
                                                         <input type="text" class="form-control" id="administradorFornecedor"
                                                             name="administradorFornecedor" placeholder="Administrador" />
@@ -235,7 +235,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label>Endereï¿½o do Locador:</label>
+                                                <label>Endereço do Locador:</label>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <input type="text" class="form-control" id="ruaFornecedor" name="ruaFornecedor"
@@ -245,7 +245,7 @@
                                                     <div class="col-md-3">
                                                         <input type="text" class="form-control" id="numeroFornecedor"
                                                             name="numeroFornecedor" placeholder="NÂº" />
-                                                        <small class="form-text text-muted">Nï¿½mero</small>
+                                                        <small class="form-text text-muted">Número</small>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <input type="text" class="form-control" id="bairroFornecedor"
@@ -300,7 +300,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Endereï¿½o do Imï¿½vel:</label><strong class="strongAlert">*</strong>
+                                                <label>Endereço do Imóvel:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" id="enderecoImovel" name="enderecoImovel"
                                                     class="form-control inputInfoChamado" />
                                             </div>
@@ -309,14 +309,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Matrï¿½cula do Imï¿½vel:</label><strong class="strongAlert">*</strong>
+                                                <label>Matrícula do Imóvel:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" id="matriculaImovel" name="matriculaImovel"
                                                     class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Finalidade da Locaï¿½ï¿½o:</label><strong class="strongAlert">*</strong>
+                                                <label>Finalidade da Locação:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" id="finalidadeLocacao" name="finalidadeLocacao"
                                                     class="form-control inputInfoChamado" />
                                             </div>
@@ -325,7 +325,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Perï¿½odo de Locaï¿½ï¿½o:</label><strong class="strongAlert">*</strong>
+                                                <label>Período de Locação:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" id="periodoLocacao" name="periodoLocacao"
                                                     class="form-control inputInfoChamado" />
                                             </div>
@@ -346,23 +346,23 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Cauï¿½ï¿½o?</label><strong class="strongAlert">*</strong>
+                                                <label>Caução?</label><strong class="strongAlert">*</strong>
                                                 <select name="caucao" id="caucao" class="form-control inputInfoChamado">
                                                     <option value="">Selecione</option>
                                                     <option value="Sim">Sim</option>
-                                                    <option value="Nï¿½o">Nï¿½o</option>
+                                                    <option value="Não">Não</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3" id="divValorCaucao" style="display: none">
                                             <div class="form-group">
-                                                <label>Valor do Cauï¿½ï¿½o:</label><strong class="strongAlert">*</strong>
+                                                <label>Valor do Caução:</label><strong class="strongAlert">*</strong>
                                                 <input id="valorCaucao" name="valorCaucao" class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
                                         <div class="col-md-3" id="divDataPagamentoCaucao" style="display: none">
                                             <div class="form-group">
-                                                <label>Data Pagamento do Cauï¿½ï¿½o:</label><strong class="strongAlert">*</strong>
+                                                <label>Data Pagamento do Caução:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" id="dataPagamentoCaucao" name="dataPagamentoCaucao"
                                                     class="form-control inputInfoChamado date" />
                                             </div>
@@ -374,7 +374,7 @@
                 
      
 <!--    <div class="binder"> -->
-<!--     Pï¿½gina 1 - Dados Gerais -->
+<!--     Página 1 - Dados Gerais -->
 <!--     <div class="binder-page"> -->
 <!--         <div class="rings-column"> -->
 <!--             <div class="ring-hole"></div> -->
@@ -388,14 +388,14 @@
 <!--             <div class="info-line"><label class="info-label">Procurador:</label><span id="aprovacaoTextProcurador"></span></div> -->
 <!--             <div class="info-line"><label class="info-label">Representante:</label><span id="aprovacaoTextRepresentante"></span></div> -->
 <!--             <div class="info-line"><label class="info-label">Contratante Principal:</label><span id="aprovacaoTextContratantePrincipal"></span></div> -->
-<!--             <div class="info-line"><label class="info-label">Endereï¿½o do Imï¿½vel:</label><span id="aprovacaoTextEnderecoImovel"></span></div> -->
-<!--             <div class="info-line"><label class="info-label">Matrï¿½cula do Imï¿½vel:</label><span id="aprovacaoTextMatriculaImovel"></span></div> -->
-<!--             <div class="info-line"><label class="info-label">Finalidade da Locaï¿½ï¿½o:</label><span id="aprovacaoTextFinalidadeLocacao"></span></div> -->
-<!--             <div class="info-line"><label class="info-label">Perï¿½odo de Locaï¿½ï¿½o:</label><span id="aprovacaoTextPeriodoLocacao"></span></div> -->
+<!--             <div class="info-line"><label class="info-label">Endereço do Imóvel:</label><span id="aprovacaoTextEnderecoImovel"></span></div> -->
+<!--             <div class="info-line"><label class="info-label">Matrícula do Imóvel:</label><span id="aprovacaoTextMatriculaImovel"></span></div> -->
+<!--             <div class="info-line"><label class="info-label">Finalidade da Locação:</label><span id="aprovacaoTextFinalidadeLocacao"></span></div> -->
+<!--             <div class="info-line"><label class="info-label">Período de Locação:</label><span id="aprovacaoTextPeriodoLocacao"></span></div> -->
 <!--             <div class="info-line"><label class="info-label">Janela de Pagamento:</label><span id="aprovacaoTextJanelaPagamento"></span></div> -->
-<!--             <div class="info-line"><label class="info-label">Cauï¿½ï¿½o:</label><span id="aprovacaoTextCaucao"></span></div> -->
-<!--             <div class="info-line camposComCaucao"><label class="info-label">Valor do Cauï¿½ï¿½o:</label><span id="aprovacaoTextCaucaoValor"></span></div> -->
-<!--             <div class="info-line camposComCaucao"><label class="info-label">Data Pagamento do Cauï¿½ï¿½o:</label><span id="aprovacaoTextCaucaoData"></span></div> -->
+<!--             <div class="info-line"><label class="info-label">Caução:</label><span id="aprovacaoTextCaucao"></span></div> -->
+<!--             <div class="info-line camposComCaucao"><label class="info-label">Valor do Caução:</label><span id="aprovacaoTextCaucaoValor"></span></div> -->
+<!--             <div class="info-line camposComCaucao"><label class="info-label">Data Pagamento do Caução:</label><span id="aprovacaoTextCaucaoData"></span></div> -->
 <!--         </div> -->
 <!--     </div> -->
 
@@ -406,7 +406,7 @@
 <!--         <div class="ring"></div> -->
 <!--     </div> -->
 
-<!--     Pï¿½gina 2 - Dados para Pagamento -->
+<!--     Página 2 - Dados para Pagamento -->
 <!--     <div class="binder-page"> -->
 <!--         <div class="rings-column"> -->
 <!--             <div class="ring-hole"></div> -->
@@ -418,7 +418,7 @@
 <!--             <div class="info-line"><label class="info-label">Tipo de Pagamento:</label><span id="aprovacaoTextTipoPagamento"></span></div> -->
 <!--             <div class="info-line"><label class="info-label">Banco:</label><span id="aprovacaoTextBanco"></span></div> -->
 <!--             <div class="info-line"><label class="info-label">Titular da Conta:</label><span id="aprovacaoTextTitularConta"></span></div> -->
-<!--             <div class="info-line"><label class="info-label">Agï¿½ncia:</label><span id="aprovacaoTextAgï¿½ncia"></span></div> -->
+<!--             <div class="info-line"><label class="info-label">Agência:</label><span id="aprovacaoTextAgência"></span></div> -->
 <!--             <div class="info-line"><label class="info-label">Conta Corrente:</label><span id="aprovacaoTextContaCorrente"></span></div> -->
 <!--         </div> -->
 <!--     </div> -->
@@ -427,12 +427,12 @@
 <!-- <div style="text-align: center; margin-top: 1rem;"> -->
 <!--     <button class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button> -->
 <!--     <button class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button> -->
-<!--     <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir Prï¿½-Contrato</button> -->
+<!--     <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir Pré-Contrato</button> -->
 <!-- </div> -->
                 
                         <div class="panelAprovacao">
                             <div style="max-width: 1400px">
-                                <h3>Contrato - Locaï¿½ï¿½o de Imï¿½vel - PF</h3>
+                                <h3>Contrato - Locação de Imóvel - PF</h3>
                 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -614,70 +614,13 @@
                                                 <select name="assinaturaContrato" id="assinaturaContrato"
                                                     class="form-control inputInfoChamado">
                                                     <option value="">Selecione</option>
-                                                    <option value="Eletrï¿½nica">Eletrï¿½nica</option>
+                                                    <option value="Eletrônica">Eletrônica</option>
                                                     <option value="Manual">Manual</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                 </fieldset>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">Representante Castilho</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label for="assinaturaCastilhoNome">Nome: </label>
-                                                        <input type="text" name="assinaturaCastilhoNome" id="assinaturaCastilhoNome" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label for="assinaturaCastilhoCpf">CPF: </label>
-                                                        <input type="text" name="assinaturaCastilhoCpf" id="assinaturaCastilhoCpf" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label for="assinaturaCastilhoEmail">E-mail: </label>
-                                                        <input type="text" name="assinaturaCastilhoEmail" id="assinaturaCastilhoEmail" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">Representante Terceiro</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label for="assinaturaTerceiroNome">Nome: </label>
-                                                        <input type="text" name="assinaturaTerceiroNome" id="assinaturaTerceiroNome" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label for="assinaturaTerceiroCpf">CPF: </label>
-                                                        <input type="text" name="assinaturaTerceiroCpf" id="assinaturaTerceiroCpf" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label for="assinaturaTerceiroEmail">E-mail: </label>
-                                                        <input type="text" name="assinaturaTerceiroEmail" id="assinaturaTerceiroEmail" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -691,7 +634,7 @@
                                 <fieldset>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="tipoDocumentacao">Documentaï¿½ï¿½o:</label>
+                                            <label for="tipoDocumentacao">Documentação:</label>
                                             <select name="tipoDocumentacao" id="tipoDocumentacao" class="form-control">
                                                 <option value="">Selecione um Locador</option>
                                             </select>
@@ -715,7 +658,7 @@
                     <div id="pagina-4" class="pagina">
                         <div class="panel panel-default" id="painelObservacoes">
                             <div class="panel-heading" style="background-color: #eaeaea">
-                                <h4 class="panel-title" style="color: #58595b">Observaï¿½ï¿½es</h4>
+                                <h4 class="panel-title" style="color: #58595b">Observações</h4>
                             </div>
                             <div class="panel-body">
                                 <fieldset>
@@ -727,7 +670,7 @@
                         </div>
                         <div class="panelAprovacao">
                             <div id="panelHistorico">
-                                <h3 style="margin-bottom: 0px">Histï¿½rico</h3>
+                                <h3 style="margin-bottom: 0px">Histórico</h3>
                                 <hr style="margin-top: 0px; margin-bottom: 10px" />
                                 <div id="divLinhasHistorico"></div>
                             </div>
@@ -737,7 +680,7 @@
                     <div id="pagina-5" class="pagina">
                         <div class="panelAprovacao">
                             <div style="text-align: center;">
-                                <label for="checkboxLancarNovoContrato">Lanï¿½ar Novo Contrato?</label>
+                                <label for="checkboxLancarNovoContrato">Lançar Novo Contrato?</label>
                                 <br>
                                 <div class="switch switch-success switch-labels">
                                     <input class="switch-input" type="checkbox" id="checkboxLancarNovoContrato"
@@ -750,72 +693,60 @@
                                     <div class="col-md-4">
                                         <label for="">Coligada</label>
                                         <input type="text" name="novoContratoColigada" id="novoContratoColigada" class="form-control">
-                                        <br>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Filial</label>
                                         <input type="text" name="novoContratoFilial" id="novoContratoFilial" class="form-control">
-                                        <br>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Tipo do Contrato</label>
                                         <input type="text" name="novoContratoTipoContrato" id="novoContratoTipoContrato"
                                             class="form-control">
-                                            <br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="">Centro de Custo</label>
                                         <input type="text" name="novoContratoCCUSTO" id="novoContratoCCUSTO" class="form-control">
-                                        <br>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="">Cï¿½digo</label>
+                                        <label for="">Código</label>
                                         <input type="text" name="novoContratoCodigo" id="novoContratoCodigo" class="form-control">
-                                        <br>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Local de estoque</label>
                                         <input type="text" name="novoContratoLocalDeEstoque" id="novoContratoLocalDeEstoque"
                                             class="form-control">
-                                            <br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="">STATUS</label>
                                         <input type="text" name="novoContratoSTATUS" id="novoContratoSTATUS" class="form-control">
-                                        <br>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="">Condiï¿½ï¿½o de Pagamento</label>
+                                        <label for="">Condição de Pagamento</label>
                                         <input type="text" name="novoContratoCondicaoPagamento" id="novoContratoCondicaoPagamento"
                                             class="form-control">
-                                            <br>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Representante</label>
                                         <input type="text" name="novoContratoRepresentante" id="novoContratoRepresentante"
                                             class="form-control">
-                                            <br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="">Data Inï¿½cio</label>
+                                        <label for="">Data Início</label>
                                         <input type="text" name="novoContratoDataInicio" id="novoContratoDataInicio" class="form-control">
-                                        <br>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Data Fim</label>
                                         <input type="text" name="novoContratoDataFim" id="novoContratoDataFim" class="form-control">
-                                        <br>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Objeto do Contrato</label>
                                         <input type="text" name="novoContratoObjeto" id="novoContratoObjeto" class="form-control">
-                                        <br>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -823,19 +754,16 @@
                                         <label for="">Tipo de Faturamento</label>
                                         <input type="text" name="novoContratoTipoFaturamento" id="novoContratoTipoFaturamento"
                                             class="form-control">
-                                            <br>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Dia de Faturamento</label>
                                         <input type="text" name="novoContratoDiaFaturamento" id="novoContratoDiaFaturamento"
                                             class="form-control">
-                                            <br>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Qtde. de Faturamentos</label>
                                         <input type="text" name="novoContratoQtdeFaturamento" id="novoContratoQtdeFaturamento"
                                             class="form-control">
-                                            <br>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -920,8 +848,8 @@
                         <div class="pagination pagination-active" data-index="0">Dados Gerais</div>
                         <div class="pagination" data-index="1">Assinatura</div>
                         <div class="pagination" data-index="2">Anexos</div>
-                        <div class="pagination" data-index="3">Histï¿½rico</div>
-                        <div class="pagination" data-index="4">Integraï¿½ï¿½o RM</div>
+                        <div class="pagination" data-index="3">Histórico</div>
+                        <div class="pagination" data-index="4">Integração RM</div>
                     </div>
 
                     <button id="btn-avancar">
