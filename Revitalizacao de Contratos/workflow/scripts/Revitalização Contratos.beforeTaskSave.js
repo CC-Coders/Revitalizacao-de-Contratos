@@ -11,7 +11,6 @@ var ATIVIDADES = {
     DIRETORIA: 53,
     ASSINATURA_ELETRONICA: 66,
 };
-
 var STATUS_CONTRATOS = {
     "ATIVO" : "01",
     "CANCELADO" : "02",
@@ -25,7 +24,6 @@ var STATUS_CONTRATOS = {
     "ATIVO SEM DOC" : "10",
     "RESCISÃO EM ANDAMENTO" : "11",
 }
-
 var TIPOS_CONTRATO = {
     "Empréstimos": "01",
     "Financiamentos": "02",
@@ -44,6 +42,11 @@ var TIPOS_CONTRATO = {
     "Cartão de Crédito": "17",
     "Consórcio": "18",
     "PJ": "19",
+};
+var TIPOS_FATURAMENTO = {
+    "Não Periódico":0,
+    "Periódico":1,
+    "Por Medição":2,
 };
 
 function beforeTaskSave(colleagueId, nextSequenceId, userList) {
@@ -85,15 +88,16 @@ function beforeTaskSave_controladoria() {
         if (tipo == "Novo") {
             var criaNovoContratoRM = hAPI.getCardValue("checkboxLancarNovoContrato") == "on";
             if (criaNovoContratoRM) {
-                criaNovoContrato();
+                var IDCNT = criaNovoContrato();
+                hAPI.setCardValue("IDCNT", IDCNT);
             }
         } 
         else if (tipo == "Aditivos") {
-            alteraStatusContrato("PENDENTE OBRA");
+            alteraStatusContrato(hAPI.getCardValue("CODCOLIGADA") , hAPI.getCardValue("IDCNT"), "PENDENTE OBRA");
             // TODO - Inserir relação do Aditivo com o Contrato na tabela Custom de Contratos
         } 
         else if (tipo == "Rescisões") {
-            alteraStatusContrato("RESCISÃO EM ANDAMENTO");
+            alteraStatusContrato(hAPI.getCardValue("CODCOLIGADA") , hAPI.getCardValue("IDCNT"), "RESCISÃO EM ANDAMENTO");
             // TODO - Inserir relação da Rescisão com o Contrato na tabela Custom de Contratos
         }
     } catch (error) {
@@ -110,19 +114,34 @@ function beforeTaskSave_diretoria() {
     insereHistorico("#TODO: Definir o campo de Observação", "#TODO: Definir o campo de Decisão", "Aprovação Diretoria");
 }
 
+
 // Integração RM
 function criaNovoContrato() {
     try {
         var parametros = buscaParamentrosCriacaoContrato();
         validaParametros(parametros);
 
+        var contexto = "CODSISTEMA=G;CODCOLIGADA=" + parametros.CODCOLIGADA + ";CODUSUARIO=fluig";
+        var xml = montaXMLCriacaoDeContrato(parametros);
 
+        var retorno = DatasetFactory.getDataset("InsereContratoRM", null, [
+            DatasetFactory.createConstraint("coligada", parametros.CODCOLIGADA, parametros.CODCOLIGADA, ConstraintType.MUST),
+            DatasetFactory.createConstraint("idContrato", parametros.IDCNT, parametros.IDCNT, ConstraintType.MUST),
+            DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST),
+            DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST),
+        ], null);
 
-
-
-
+        if (!retorno || retorno == "" || retorno == null) {
+            throw "Houve um erro na comunicação com o webservice. Tente novamente!";
+        } else {
+            if (retorno.values[0][0] == "false") {
+                throw "Erro ao gerar contrato. Favor entrar em contato com o administrador do sistema. Mensagem: " + retorno.values[0][1];
+            } else if (retorno.values[0][0] == "true") {
+                return retorno.values[0][2];
+            }
+        }
     } catch (error) {
-     throw error;   
+        throw error;
     }
 }
 function buscaParamentrosCriacaoContrato() {
@@ -138,6 +157,7 @@ function buscaParamentrosCriacaoContrato() {
     var DATAINICIO = hAPI.getCardValue("novoContratoDataInicio");
     var DATAFIM = hAPI.getCardValue("novoContratoDataFim");
     var NOME = hAPI.getCardValue("novoContratoObjeto");
+    var CODSTACNT = hAPI.getCardValue("novoContratoSTATUS");
     if (Nome.length() > 40) {
         // A coluna na base do RM tem limite de 40 caracteres
         Nome = Nome.substring(0, 40);
@@ -152,42 +172,41 @@ function buscaParamentrosCriacaoContrato() {
         var IDCNT = -1;
     }
 
-
     var ITENS = [];
     var indexes = hAPI.getChildrenIndexes("tableNovoContratoItens");
     for (var i = 0; i < indexes.length; i++) {
         var id = indexes[i];
-        
+
         ITENS.push({
-            IDPRD:hAPI.getCardValue("novoContratoItemProduto" + "___" + id),
-            VALOR:hAPI.getCardValue("novoContratoItemValor" + "___" + id),
-            RATDEP:hAPI.getCardValue("novoContratoJsonRateiosItem" + "___" + id)
+            IDPRD: hAPI.getCardValue("novoContratoItemProduto" + "___" + id),
+            VALOR: hAPI.getCardValue("novoContratoItemValor" + "___" + id),
+            RATDEP: hAPI.getCardValue("novoContratoJsonRateiosItem" + "___" + id),
         });
     }
 
-
     return {
-        CODCOLIGADA:CODCOLIGADA,
-        IDCNT:IDCNT,
-        CODFILIAL:CODFILIAL,
-        CODIGOTIPOCONTRATO:CODIGOTIPOCONTRATO,
-        CODTCN:CODTCN,
-        CODCCUSTO:CODCCUSTO,
-        CODIGOCONTRATO:CODIGOCONTRATO,
-        locEstoque:locEstoque,
-        CODCFO:CODCFO,
-        CODRPR:CODRPR,
-        DATAINICIO:DATAINICIO,
-        DATAFIM:DATAFIM,
-        NOME:NOME,
-        CODCPG:CODCPG,
-        DIAFATURAMENTO:DIAFATURAMENTO,
-        QTDEFATURAMENTOS:QTDEFATURAMENTOS,
-        urlSolicitacao:urlSolicitacao,
-        ITENS:ITENS
-    }
-
-}   
+        CODCOLIGADA: CODCOLIGADA,
+        IDCNT: IDCNT,
+        CODFILIAL: CODFILIAL,
+        CODIGOTIPOCONTRATO: CODIGOTIPOCONTRATO,
+        CODTCN: CODTCN,
+        CODCCUSTO: CODCCUSTO,
+        CODIGOCONTRATO: CODIGOCONTRATO,
+        locEstoque: locEstoque,
+        CODCFO: CODCFO,
+        CODRPR: CODRPR,
+        DATAINICIO: DATAINICIO,
+        DATAFIM: DATAFIM,
+        NOME: NOME,
+        CODSTACNT: CODSTACNT,
+        CODCPG: CODCPG,
+        DIAFATURAMENTO: DIAFATURAMENTO,
+        QTDEFATURAMENTOS: QTDEFATURAMENTOS,
+        urlSolicitacao: urlSolicitacao,
+        NATUREZA: "1", //Compra
+        ITENS: ITENS,
+    };
+}
 function validaParametros(parametros) {
     var erroRetorno = [];
     if (parametros.CODCOLIGADA == undefined || parametros.CODCOLIGADA == null || parametros.CODCOLIGADA == "") {
@@ -286,181 +305,199 @@ function validaParametros(parametros) {
         }
 
         for (var j = 0; j < item.RATDEP.length; j++) {
-            var RATEIO =  item.RATDEP[j];
+            var RATEIO = item.RATDEP[j];
 
-            if (RATEIO.CODDPTO == undefined || RATEIO.CODDPTO == null || item.RATEIO.CODDPTO == "") {
-            erroRetorno.push("RATDEP DEPTO");
+            if (RATEIO.CODDEPTO == undefined || RATEIO.CODDEPTO == null || item.RATEIO.CODDEPTO == "") {
+                erroRetorno.push("RATDEP DEPTO");
             }
             if (RATEIO.VALOR == undefined || RATEIO.VALOR == null || RATEIO.VALOR == "") {
                 erroRetorno.push("RATDEP VALOR");
             }
-
         }
     }
 
-    if (erroRetorno.length>0) {
+    if (erroRetorno.length > 0) {
         throw erroRetorno.join(", ");
     }
 }
-
-function exportarContratoProRM() {
-    var contexto = "CODSISTEMA=G;CODCOLIGADA=" + hAPI.getCardValue("codColigada") + ";CODUSUARIO=fluig";
-    var url = "Contrato: " + hAPI.getCardValue("servidor") + "/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=" + getValue("WKNumProces");
-
-    var Nome = hAPI.getCardValue("descContrato");
-    if (Nome.length() > 40) {
-        Nome = Nome.substring(0, 40);
+function montaXMLCriacaoDeContrato(parametros) {
+    var xml = "";
+    xml += "<CTRCNT>";
+    xml += "    <TCNT>";
+    xml += "        <CODCOLIGADA>" + parametros.CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "        <IDCNT>" + parametros.IDCNT + "</IDCNT>";
+    xml += "        <CODCOLCFO>0</CODCOLCFO>";
+    xml += "        <NOME>" + parametros.NOME + "</NOME>";
+    xml += "        <CODCCUSTO>" + parametros.CODCCUSTO + "</CODCCUSTO>";
+    xml += "        <NATUREZA>" + parametros.NATUREZA + "</NATUREZA>";
+    xml += "        <CODTCN>" + parametros.CODTCN + "</CODTCN>";
+    xml += "        <CODFILIAL>" + parametros.CODFILIAL + "</CODFILIAL>";
+    xml += "        <CODIGOCONTRATO>" + parametros.CODIGOCONTRATO + "</CODIGOCONTRATO>";
+    xml += "        <CODCFO>" + parametros.CODCFO + "</CODCFO>";
+    xml += "        <CODRPR>" + parametros.CODRPR + "</CODRPR>";
+    xml += "        <CODSTACNT>" + parametros.CODSTACNT + "</CODSTACNT>";
+    xml += "        <CODCPG>" + parametros.CODCPG + "</CODCPG>";
+    xml += "        <CODCPGPRAZO>130</CODCPGPRAZO>";
+    xml += "        <DATACONTRATO>" + setDateXMLFormat(parametros.DATAINICIO) + "</DATACONTRATO>";
+    xml += "        <DATAINICIO>" + setDateXMLFormat(parametros.DATAINICIO) + "</DATAINICIO>";
+    xml += "        <DATAFIM>" + setDateXMLFormat(parametros.DATAFIM) + "T00:00:00</DATAFIM>";
+    xml += "        <CODMOEVALORCONTRATO>R$</CODMOEVALORCONTRATO>";
+    xml += "        <IMPRIMEMOV>1</IMPRIMEMOV>";
+    if (parametros.CODCPG == TIPOS_FATURAMENTO["Periódico"]) {
+        xml += "    <DIAFATURAMENTO>" + parametros.DIAFATURAMENTO + "</DIAFATURAMENTO>";
+        xml += "    <QTDEFATURAMENTOS>" + parametros.QTDEFATURAMENTOS + "</QTDEFATURAMENTOS>";
     }
+    xml += "        <CODUSUARIO>" + getValue("WKUser") + "</CODUSUARIO>";
+    xml += "    </TCNT>";
+    xml += "    <TCNTHISTORICO>";
+    xml += "        <CODCOLIGADA>" + parametros.CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "        <IDCNT>" + parametros.IDCNT + "</IDCNT>";
+    xml += "        <HISTORICOLONGO>" + parametros.urlSolicitacao + "</HISTORICOLONGO>";
+    xml += "    </TCNTHISTORICO>";
+    xml += "    <TCNTCOMPL>";
+    xml += "        <CODCOLIGADA>" + parametros.CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "        <IDCNT>" + parametros.IDCNT + "</IDCNT>";
+    xml += "    </TCNTCOMPL>";
+    xml += geraXML_TITMCNT(parametros);
+    xml += geraXML_TITMCNTRATCCU(parametros);
+    xml += geraXML_TITMCNTRATDEP(parametros);
 
-    var idCnt = hAPI.getCardValue("idCnt");
-    if (idCnt == "" || idCnt == null || idCnt != undefined) {
-        var idCnt = -1;
-    }
-    var coligada = hAPI.getCardValue("codColigada");
-    var filial = hAPI.getCardValue("codFilial");
-    var tipoContrato = hAPI.getCardValue("tipoContrato");
-    var codNatureza = hAPI.getCardValue("codNatureza");
-    var codCCusto = hAPI.getCardValue("codCCusto");
-    var locEstoque = hAPI.getCardValue("locEstoque");
-    var codContrato = hAPI.getCardValue("codContrato");
-    var codFornecedor = hAPI.getCardValue("codFornecedor");
-    var representante = hAPI.getCardValue("representante");
-    var tipoPagamento = hAPI.getCardValue("tipoPagamento");
-    var status = hAPI.getCardValue("codStaCnt");
-    var JSONItemContratoRM = JSON.parse(hAPI.getCardValue("JSONItemContratoRM"));
-    var dataContrato = hAPI.getCardValue("dataContratoRM");
-    var QtdeFaturamentos = hAPI.getCardValue("QtdeFaturamentos");
-    var diaFaturamento = hAPI.getCardValue("diaFaturamentoContratoRM");
-    var tipoFaturamento = hAPI.getCardValue("tipoFaturamentoContratoRM");
-
-    if (coligada == "" || coligada == null) {
-        throw "Coligada inválida!";
-    } else if (filial == "" || filial == null) {
-        throw "Filial inválida!";
-    } else if (tipoContrato == "" || tipoContrato == null) {
-        throw "Tipo do contrato inválido!";
-    } else if (codNatureza == "" || codNatureza == null) {
-        throw "Natureza do contrato inválida!";
-    } else if (codCCusto == "" || codCCusto == null) {
-        throw "Centro de custo inválido!";
-    } else if (locEstoque == "" || locEstoque == null) {
-        throw "Local de estoque inválido!";
-    } else if (codFornecedor == "" || codFornecedor == null) {
-        throw "Fornecedor inválido!";
-    } else if (representante == "" || representante == null) {
-        throw "Representante inválido!";
-    } else if (tipoPagamento == "" || tipoPagamento == null) {
-        throw "Condição de pagamento inválida!";
-    } else if (status == "" || status == null) {
-        throw "Status do contrato inválido!";
-    } else if (JSONItemContratoRM == "" || JSONItemContratoRM == null) {
-        throw "Nenhum item inserido!";
-    } else if (tipoFaturamento == "" || tipoFaturamento == null) {
-        throw "Tipo do faturamento não selecionado!";
-    } else if ((QtdeFaturamentos == "" || QtdeFaturamentos == null) && tipoFaturamento == 1) {
-        throw "Quantidade de faturamentos inválida!";
-    } else if ((diaFaturamento == "" || diaFaturamento == null) && tipoFaturamento == 1) {
-        throw "Dia do faturamento inválido!";
-    } else {
-
-        // TIPO = Locação de Imóvel
-        if (tipoContrato == '04') {
-            tipoPagamento = '001'; // A VISTA
-        }
-
-        var xml =
-            "<CtrCnt>\
-			    <TCnt>\
-				    <CODCOLIGADA>" + coligada + "</CODCOLIGADA>\
-				    <IDCNT>" + idCnt + "</IDCNT>\
-				    <CODCOLCFO>0</CODCOLCFO>\
-			        <NOME>" + Nome + "</NOME>\
-				    <CODCCUSTO>" + codCCusto + "</CODCCUSTO>\
-				    <NATUREZA>" + codNatureza + "</NATUREZA>\
-				    <CODTCN>" + tipoContrato + "</CODTCN>\
-				    <CODFILIAL>" + filial + "</CODFILIAL>\
-				    <CODIGOCONTRATO>" + codContrato + "</CODIGOCONTRATO>\
-				    <CODCFO>" + codFornecedor + "</CODCFO>\
-				    <CODRPR>" + representante + "</CODRPR>\
-				    <CODSTACNT>" + status + "</CODSTACNT>\
-				    <CODCPG>" + tipoPagamento + "</CODCPG>\
-                    <CODCPGPRAZO>130</CODCPGPRAZO>\
-                    <DATACONTRATO>" + setDateXMLFormat(dataContrato) + "</DATACONTRATO>\
-				    <DATAINICIO>" + setDateXMLFormat(dataContrato) + "</DATAINICIO>\
-				    <DATAFIM>" + CalculaDataFimContrato() + "T00:00:00</DATAFIM>\
-				    <CODMOEVALORCONTRATO>R$</CODMOEVALORCONTRATO>\
-				    <IMPRIMEMOV>1</IMPRIMEMOV>";
-        xml += (diaFaturamento == "" || diaFaturamento == 0 ? "<DIAFATURAMENTO>0</DIAFATURAMENTO>" : "<DIAFATURAMENTO>" + diaFaturamento + "</DIAFATURAMENTO>")
-        xml += "<CODUSUARIO>" + getValue("WKUser") + "</CODUSUARIO>";
-        xml += (QtdeFaturamentos == "" || QtdeFaturamentos == 0 ? "<QTDEFATURAMENTOS>1</QTDEFATURAMENTOS>" : "<QTDEFATURAMENTOS>" + QtdeFaturamentos + "</QTDEFATURAMENTOS>")
-        xml += "</TCnt>\
-			    <TCNTHISTORICO>\
-			    	<CODCOLIGADA>" + coligada + "</CODCOLIGADA>\
-			    	<IDCNT>" + idCnt + "</IDCNT>\
-			    	<HISTORICOLONGO>" + url + "</HISTORICOLONGO>\
-			    </TCNTHISTORICO>\
-			    <TCNTCOMPL>\
-			    	<CODCOLIGADA>" + coligada + "</CODCOLIGADA>\
-			    	<IDCNT>" + idCnt + "</IDCNT>\
-			    </TCNTCOMPL>";
-
-        for (var i = 0; i < JSONItemContratoRM.length; i++) {
+    for (var i = 0; i < JSONItemContratoRM.length; i++) {
+        for (var j = 0; j < JSONItemContratoRM[i].Rateio.length; j++) {
             xml +=
-                "<TITMCNT>\
-					<CODCOLIGADA>" + coligada + "</CODCOLIGADA>\
-					<IDCNT>" + idCnt + "</IDCNT>\
-					<NSEQITMCNT>" + (i + 1) + "</NSEQITMCNT>\
-					<IDPRD>" + JSONItemContratoRM[i].IDPRD + "</IDPRD>\
-					<CODFILIALFAT>" + filial + "</CODFILIALFAT>\
-					<CODLOCFATURAM>" + locEstoque + "</CODLOCFATURAM>\
-					<CODCCUSTO>" + codCCusto + "</CODCCUSTO>\
-					<CODCFO>" + codFornecedor + "</CODCFO>\
-					<QUANTIDADE>1</QUANTIDADE>\
-					<CODCPG>" + tipoPagamento + "</CODCPG>\
-					<CODMOEPRECOFATURAMENTO>R$</CODMOEPRECOFATURAMENTO>\
-					<CODSTACNT>" + status + "</CODSTACNT>\
-					<CODTMV>" + ((tipoContrato == "04") ? "1.1.98" : "1.1.99") + "</CODTMV>\
-					<EPERIODICO>" + tipoFaturamento + "</EPERIODICO>\
-					<DATAINICIO>" + setDateXMLFormat(dataContrato) + "</DATAINICIO>\
-                    <DATAFIM>" + CalculaDataFimContrato() + "T00:00:00</DATAFIM>\
-                    <CODCPGPRAZO>130</CODCPGPRAZO>\
-					<CODRPR>" + representante + "</CODRPR>";
-            xml += (diaFaturamento == "" || diaFaturamento == 0 ? "<DIAFATURAMENTO>0</DIAFATURAMENTO>" : "<DIAFATURAMENTO>" + diaFaturamento + "</DIAFATURAMENTO>")
-            xml += "<PRECOFATURAMENTO>" + ValorToFloat(JSONItemContratoRM[i].Valor).toString().replace(".", ",") + "</PRECOFATURAMENTO>\
-					<CODMOEREAJUSTE>R$</CODMOEREAJUSTE>\
-					<CODCOLCFODEST>0</CODCOLCFODEST>\
-					<CODCFODEST>" + codFornecedor + "</CODCFODEST>";
-            xml += (QtdeFaturamentos == "" || QtdeFaturamentos == 0 ? "<QTDEFATURAMENTOS>1</QTDEFATURAMENTOS>" : "<QTDEFATURAMENTOS>" + QtdeFaturamentos + "</QTDEFATURAMENTOS>")
-            xml += "</TITMCNT>";
-
-            xml += "<TITMCNTRATCCU>\
-					<IDCNT>" + idCnt + "</IDCNT>\
-					<CODCOLIGADA>" + coligada + "</CODCOLIGADA> \
-					<NSEQITMCNT>" + (i + 1) + "</NSEQITMCNT>\
-					<CODCCUSTO>" + codCCusto + "</CODCCUSTO>\
-					<PERCENTUAL>100</PERCENTUAL>\
-				</TITMCNTRATCCU>";
-
-            for (var j = 0; j < JSONItemContratoRM[i].Rateio.length; j++) {
-                xml += "<TITMCNTRATDEP>\
-						<CODCOLIGADA>" + coligada + "</CODCOLIGADA>\
-						<IDCNT>" + idCnt + "</IDCNT>\
-						<NSEQITMCNT>" + (i + 1) + "</NSEQITMCNT>\
-						<CODFILIAL>" + filial + "</CODFILIAL>\
-						<CODDEPARTAMENTO>" + JSONItemContratoRM[i].Rateio[j].Departamento + "</CODDEPARTAMENTO>\
-						<PERCENTUAL>" + JSONItemContratoRM[i].Rateio[j].Percentual + "</PERCENTUAL>\
+                "<TITMCNTRATDEP>\
+						<CODCOLIGADA>" +
+                coligada +
+                "</CODCOLIGADA>\
+						<IDCNT>" +
+                idCnt +
+                "</IDCNT>\
+						<NSEQITMCNT>" +
+                (i + 1) +
+                "</NSEQITMCNT>\
+						<CODFILIAL>" +
+                filial +
+                "</CODFILIAL>\
+						<CODDEPARTAMENTO>" +
+                JSONItemContratoRM[i].Rateio[j].Departamento +
+                "</CODDEPARTAMENTO>\
+						<PERCENTUAL>" +
+                JSONItemContratoRM[i].Rateio[j].Percentual +
+                "</PERCENTUAL>\
 					</TITMCNTRATDEP>";
-            }
+        }
+    }
+
+    xml += "</CTRCNT>";
+}
+function geraXML_TITMCNT(parametros) {
+    var xml = "";
+
+    for (var i = 0; i < parametros.ITENS.length; i++) {
+        var item = parametros.ITENS[i];
+
+        xml += "<TITMCNT>";
+        xml += "    <CODCOLIGADA>" + parametros.CODCOLIGADA + "</CODCOLIGADA>";
+        xml += "    <IDCNT>" + parametros.IDCNT + "</IDCNT>";
+        xml += "    <NSEQITMCNT>" + (i + 1) + "</NSEQITMCNT>";
+        xml += "    <IDPRD>" + item.IDPRD + "</IDPRD>";
+        xml += "    <CODFILIALFAT>" + parametros.CODFILIAL + "</CODFILIALFAT>";
+        xml += "    <CODLOCFATURAM>" + parametros.LOCESTOQUE + "</CODLOCFATURAM>";
+        xml += "    <CODCCUSTO>" + parametros.CCUSTO + "</CODCCUSTO>";
+        xml += "    <CODCFO>" + parametros.CODCFO + "</CODCFO>";
+        xml += "    <QUANTIDADE>1</QUANTIDADE>";
+        xml += "    <CODCPG>" + parametros.CODCPG + "</CODCPG>";
+        xml += "    <CODMOEPRECOFATURAMENTO>R$</CODMOEPRECOFATURAMENTO>";
+        xml += "    <CODSTACNT>" + parametros.CODSTACNT + "</CODSTACNT>";
+        xml += "    <CODTMV>" + (parametros.CODTCN == TIPOS_CONTRATO["Locação de Imóvel"] ? "1.1.98" : "1.1.99") + "</CODTMV>";
+        xml += "    <EPERIODICO>" + parametros.CODCPG + "</EPERIODICO>";
+        xml += "    <DATAINICIO>" + setDateXMLFormat(parametros.DATAINICIO) + "</DATAINICIO>";
+        xml += "    <DATAFIM>" + setDateXMLFormat(parametros.DATAFIM) + "T00:00:00</DATAFIM>";
+        xml += "    <CODCPGPRAZO>130</CODCPGPRAZO>";
+        xml += "    <CODRPR>" + parametros.CODRPR + "</CODRPR>";
+        if (parametros.CODCPG == TIPOS_FATURAMENTO["Periódico"]) {
+            xml += "<DIAFATURAMENTO>" + parametros.DIAFATURAMENTO + "</DIAFATURAMENTO>";
+            xml += "<QTDEFATURAMENTOS>" + parametros.QTDEFATURAMENTOS + "</QTDEFATURAMENTOS>";
+        }
+        xml += "    <PRECOFATURAMENTO>" + ValorToFloat(item.VALOR).toString().replace(".", ",") + "</PRECOFATURAMENTO>";
+        xml += "    <CODMOEREAJUSTE>R$</CODMOEREAJUSTE>";
+        xml += "    <CODCOLCFODEST>0</CODCOLCFODEST>";
+        xml += "    <CODCFODEST>" + parametros.CODCFO + "</CODCFODEST>";
+        xml += "</TITMCNT>";
+    }
+
+    return xml;
+}
+function geraXML_TITMCNTRATCCU(parametros) {
+    var xml = "";
+
+    for (var i = 0; i < parametros.ITENS.length; i++) {
+        var item = parametros.ITENS[i];
+
+        xml += "<TITMCNTRATCCU>";
+        xml += "    <CODCOLIGADA>" + parametros.CODCOLIGADA + "</CODCOLIGADA> ";
+        xml += "    <IDCNT>" + parametros.IDCNT + "</IDCNT>";
+        xml += "    <NSEQITMCNT>" + (i + 1) + "</NSEQITMCNT>";
+        xml += "    <CODCCUSTO>" + parametros.CODCCUSTO + "</CODCCUSTO>";
+        xml += "    <PERCENTUAL>100</PERCENTUAL>";
+        xml += "</TITMCNTRATCCU>";
+    }
+
+    return xml;
+}
+function geraXML_TITMCNTRATDEP(parametros) {
+    var xml = "";
+
+    for (var i = 0; i < parametros.ITENS.length; i++) {
+        var item = parametros.ITENS[i];
+
+        var RATEIOS = item.RATDEP;
+        for (var j = 0; j < RATEIOS.length; j++) {
+            var RATDEPTO = RATEIOS[j];
+            xml += "<TITMCNTRATDEP>";
+            xml += "    <CODCOLIGADA>" + parametros.CODCOLIGADA + "</CODCOLIGADA>";
+            xml += "    <IDCNT>" + parametros.IDCNT + "</IDCNT>";
+            xml += "    <NSEQITMCNT>" + (i + 1) + "</NSEQITMCNT>";
+            xml += "    <CODFILIAL>" + parametros.CODFILIAL + "</CODFILIAL>";
+            xml += "    <CODDEPARTAMENTO>" + RATDEPTO.CODDEPTO + "</CODDEPARTAMENTO>";
+            xml += "    <PERCENTUAL>" + RATDEPTO.PERCENTUAL + "</PERCENTUAL>";
+            xml += "</TITMCNTRATDEP>";
+        }
+    }
+    return xml;
+}
+
+function alteraStatusContrato(CODCOLIGADA, IDCNT, STATUS) {
+    try {
+        var CODSTACNT = STATUS_CONTRATOS[STATUS];
+
+        if (!CODCOLIGADA || CODCOLIGADA == null || CODCOLIGADA == "") {
+            throw "Necessário informar CODCOLIGA";
+        }
+        if (!IDCNT || IDCNT == null || IDCNT == "") {
+            throw "Necessário informar IDCNT";
+        }
+        if (!CODSTACNT || CODSTACNT == null || CODSTACNT == "") {
+            throw "Necessário informar CODSTACNT";
         }
 
-        xml += "</CtrCnt>";
+        var xml ="";
+        xml += "<CTRCNT>";
+        xml += "    <TCNT>";
+        xml+= "         <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>"
+        xml+= "         <IDCNT>" + IDCNT + "</IDCNT>"
+        xml+= "         <CODSTACNT>" + CODSTACNT + "</CODSTACNT>"
+        xml +="     </TCNT>"
+        xml += "</CTRCNT>";
 
-        log.info("XML: " + xml);
-        var c1 = DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST);
-        var c2 = DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST);
-        var c3 = DatasetFactory.createConstraint("idContrato", idCnt, idCnt, ConstraintType.MUST);
-        var c4 = DatasetFactory.createConstraint("coligada", coligada, coligada, ConstraintType.MUST);
-        var retorno = DatasetFactory.getDataset("InsereContratoRM", null, [c1, c2, c3, c4], null);
+        var contexto = "CODSISTEMA=G;CODCOLIGADA=" + CODCOLIGADA + ";CODUSUARIO=fluig";
+
+        var retorno = DatasetFactory.getDataset("InsereContratoRM", null, [
+            DatasetFactory.createConstraint("coligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+            DatasetFactory.createConstraint("idContrato", IDCNT, IDCNT, ConstraintType.MUST),
+            DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST),
+            DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST),
+        ], null);
 
         if (!retorno || retorno == "" || retorno == null) {
             throw "Houve um erro na comunicação com o webservice. Tente novamente!";
@@ -468,18 +505,12 @@ function exportarContratoProRM() {
             if (retorno.values[0][0] == "false") {
                 throw "Erro ao gerar contrato. Favor entrar em contato com o administrador do sistema. Mensagem: " + retorno.values[0][1];
             } else if (retorno.values[0][0] == "true") {
-                hAPI.setCardValue("idCntRm", retorno.values[0][2]);
+                return true;
             }
         }
+    } catch (error) {
+        throw error;
     }
-}
-
-
-
-
-function alteraStatusContrato(STATUS){
-    var CODSTACNT = STATUS_CONTRATOS[STATUS];
-
 }
 
 
