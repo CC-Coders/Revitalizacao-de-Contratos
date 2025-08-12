@@ -16,7 +16,7 @@ $(document).ready(function () {
     bindings();
 
     const ATIVIDADE_ATUAL = $("#atividade").val();
-
+    console.log(ATIVIDADE_ATUAL)
     if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
         loadTelaInicio();
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.JURIDICO) {
@@ -128,7 +128,7 @@ function loadTelaInicio() {
 }
 
 function loadTelaJuridico() {
-    $("#informacoesIniciais").hide();
+    $("#informacoesIniciais, #rowAnexosSelecao").hide();
     $(".panelAprovacao").show();
     $("#formContainer").show();
     $("#divBtnEnviar").hide();
@@ -138,6 +138,7 @@ function loadTelaJuridico() {
     carregaDadosDoContratoParaTelaAprovacao();
     asyncMontaHistorico();
     mostrarPagina(0);
+    renderizarAnexosEtapaAprovacao();
 }
 
 function loadTelaControladoria() {
@@ -154,4 +155,14 @@ function loadTelaControladoria() {
 
 }
 
-function loadTelaAprovacao() {}
+function loadTelaAprovacao() {
+    $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
+	   $("#informacoesIniciais, #rowAnexosSelecao").hide();
+	    $(".panelAprovacao").show();
+	    $("#formContainer").show();
+	    setAtividadeAtivaProgresso(3);
+	    carregaDadosDoContratoParaTelaAprovacao();
+	    asyncMontaHistorico();
+	    mostrarPagina(0);
+	    renderizarAnexosEtapaAprovacao();
+}
