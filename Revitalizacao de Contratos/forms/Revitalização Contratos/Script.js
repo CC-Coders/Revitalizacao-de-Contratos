@@ -14,7 +14,7 @@ const ATIVIDADES = {
 
 $(document).ready(function () {
     bindings();
-
+    console.log("paola")
     const ATIVIDADE_ATUAL = $("#atividade").val();
     console.log(ATIVIDADE_ATUAL)
     if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
@@ -95,7 +95,15 @@ function bindings() {
             $(".endereco-fornecedor").slideUp();
         }
     });
-
+    $("input[name='decisao']").on("change", function () {
+        if ($(this).val() == "Aprovar") {
+            $("#divDestinoRetorno").hide();
+        }
+        else if ($(this).val() == "Retornar") {
+            $("#divDestinoRetorno").show();
+            popularDestinoRetorno()
+        }
+    });
     document.getElementById("tipoDocumentacao").addEventListener("change", function () {
         const tipo = this.value;
         const divAnexo = document.getElementById("divAnexo");
@@ -112,6 +120,7 @@ function bindings() {
             divAnexo.style.visibility = "hidden";
         }
     });
+    
 }
 
 function loadTelaInicio() {
@@ -156,13 +165,13 @@ function loadTelaControladoria() {
 }
 
 function loadTelaAprovacao() {
-    $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
-	   $("#informacoesIniciais, #rowAnexosSelecao").hide();
-	    $(".panelAprovacao").show();
-	    $("#formContainer").show();
+		$("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
+	    $(".panelAprovacao, #formContainer").show();
 	    setAtividadeAtivaProgresso(3);
 	    carregaDadosDoContratoParaTelaAprovacao();
 	    asyncMontaHistorico();
 	    mostrarPagina(0);
 	    renderizarAnexosEtapaAprovacao();
 }
+
+

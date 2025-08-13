@@ -8,6 +8,7 @@
 	z-index: 20;
 	position: fixed;
 	top: 0;
+	overflow-x: visible;
 }
 
 .step {
@@ -28,7 +29,7 @@
 	box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
 }
 
-/* first etapa*/
+/*1a etapa*/
 .step:first-child {
 	margin-left: 0;
 	clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%,
@@ -37,7 +38,7 @@
 	border-bottom-left-radius: 8px;
 }
 
-/* LAST ETAPA */
+/*�ltima etapa */
 .step:last-child {
 	border-top-right-radius: 8px;
 	border-bottom-right-radius: 8px;
@@ -54,7 +55,7 @@
 	transform: scale(1.02);
 }
 
-/* Etapa concluÃ­da (verde moderna) */
+/* Etapa conclu�da*/
 .step.completed {
 	background: linear-gradient(to right, #43cea2, #185a9d);
 	color: white;
@@ -64,179 +65,179 @@
 	color: red;
 }
 
-/* Hover para qualquer etapa (exceto ativa) */
+/* Hover para qualquer etapa (menos ativa) */
 .step:not(.active):hover {
 	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
 	transform: translateY(-2px);
 }
 
-/********************************************************************************************************/
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+/* /********************************************************************************************************/ */
+/* @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap'); */
 
-.bubble-progress {
-	position: relative;
-	display: flex;
-	justify-content: space-between;
-	font-family: 'Quicksand', sans-serif;
-	margin: 40px auto;
-	max-width: 600px;
-}
+/* .bubble-progress { */
+/* 	position: relative; */
+/* 	display: flex; */
+/* 	justify-content: space-between; */
+/* 	font-family: 'Quicksand', sans-serif; */
+/* 	margin: 40px auto; */
+/* 	max-width: 600px; */
+/* } */
 
-/* Linha de fundo */
-.bubble-progress::before {
-	content: '';
-	position: absolute;
-	top: 24px;
-	left: 40px;
-	right: 40px;
-	height: 4px;
-	background-color: #ccc;
-	z-index: 0;
-}
+/* /* Linha de fundo */ */
+/* .bubble-progress::before { */
+/* 	content: ''; */
+/* 	position: absolute; */
+/* 	top: 24px; */
+/* 	left: 40px; */
+/* 	right: 40px; */
+/* 	height: 4px; */
+/* 	background-color: #ccc; */
+/* 	z-index: 0; */
+/* } */
 
-.bubble-step {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 6px;
-	position: relative;
-	z-index: 1;
-}
+/* .bubble-step { */
+/* 	display: flex; */
+/* 	flex-direction: column; */
+/* 	align-items: center; */
+/* 	gap: 6px; */
+/* 	position: relative; */
+/* 	z-index: 1; */
+/* } */
 
-/* Bolha circular */
-.bubble-icon {
-	width: 48px;
-	height: 48px;
-	border-radius: 50%;
-	background: #e0e0e0;
-	color: #444;
-	font-size: 18px;
-	font-weight: bold;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
-}
+/* /* Bolha circular */ */
+/* .bubble-icon { */
+/* 	width: 48px; */
+/* 	height: 48px; */
+/* 	border-radius: 50%; */
+/* 	background: #e0e0e0; */
+/* 	color: #444; */
+/* 	font-size: 18px; */
+/* 	font-weight: bold; */
+/* 	display: flex; */
+/* 	align-items: center; */
+/* 	justify-content: center; */
+/* 	box-sizing: border-box; */
+/* } */
 
-/* Nome da etapa */
-.label {
-	font-size: 12px;
-	font-weight: 600;
-	color: #666;
-	text-align: center;
-	width: 80px;
-	color: #666 !important;
-}
+/* /* Nome da etapa */ */
+/* .label { */
+/* 	font-size: 12px; */
+/* 	font-weight: 600; */
+/* 	color: #666; */
+/* 	text-align: center; */
+/* 	width: 80px; */
+/* 	color: #666 !important; */
+/* } */
 
-/* Etapa ativa */
-.bubble-step.active .bubble-icon {
-	background: radial-gradient(circle at 30% 30%, #ffe259, #ffa751);
-	box-shadow: 0 0 8px rgba(255, 193, 7, 0.6);
-	transform: scale(1.1);
-	color: #000;
-}
+/* /* Etapa ativa */ */
+/* .bubble-step.active .bubble-icon { */
+/* 	background: radial-gradient(circle at 30% 30%, #ffe259, #ffa751); */
+/* 	box-shadow: 0 0 8px rgba(255, 193, 7, 0.6); */
+/* 	transform: scale(1.1); */
+/* 	color: #000; */
+/* } */
 
-/* Etapa concluÃ­da */
-.bubble-step.completed .bubble-icon {
-	background-color: #4caf50;
-	color: white;
-	font-size: 20px;
-}
+/* /* Etapa concluÃ­da */ */
+/* .bubble-step.completed .bubble-icon { */
+/* 	background-color: #4caf50; */
+/* 	color: white; */
+/* 	font-size: 20px; */
+/* } */
 
 
-/**************************************************************************************/
-.circle-progress-container {
-	position: relative;
-	width: 250px;
-	height: 250px;
-	margin: 60px auto;
-}
+/* /**************************************************************************************/ */
+/* .circle-progress-container { */
+/* 	position: relative; */
+/* 	width: 250px; */
+/* 	height: 250px; */
+/* 	margin: 60px auto; */
+/* } */
 
-.circle-progress {
-	width: 100%;
-	height: 100%;
-}
+/* .circle-progress { */
+/* 	width: 100%; */
+/* 	height: 100%; */
+/* } */
 
-.segment {
-	fill: none;
-	stroke-width: 12;
-	stroke-dasharray: 141.37 424.12;
-	stroke-linecap: round;
-	transform: rotate(322deg);
-	/* comeÃ§a no topo */
-	transform-origin: 50% 50%;
-	opacity: 0.3;
-	transition: all 0.4s ease;
-}
+/* .segment { */
+/* 	fill: none; */
+/* 	stroke-width: 12; */
+/* 	stroke-dasharray: 141.37 424.12; */
+/* 	stroke-linecap: round; */
+/* 	transform: rotate(322deg); */
+/* 	/* comeÃ§a no topo */ */
+/* 	transform-origin: 50% 50%; */
+/* 	opacity: 0.3; */
+/* 	transition: all 0.4s ease; */
+/* } */
 
-.segment1 {
-	stroke: #ffc107;
-	stroke-dashoffset: 0;
-}
+/* .segment1 { */
+/* 	stroke: #ffc107; */
+/* 	stroke-dashoffset: 0; */
+/* } */
 
-.segment2 {
-	stroke: #4caf50;
-	stroke-dashoffset: -141.37;
-}
+/* .segment2 { */
+/* 	stroke: #4caf50; */
+/* 	stroke-dashoffset: -141.37; */
+/* } */
 
-.segment3 {
-	stroke: #2196f3;
-	stroke-dashoffset: -282.74;
-}
+/* .segment3 { */
+/* 	stroke: #2196f3; */
+/* 	stroke-dashoffset: -282.74; */
+/* } */
 
-.segment4 {
-	stroke: #9c27b0;
-	stroke-dashoffset: -424.11;
-}
+/* .segment4 { */
+/* 	stroke: #9c27b0; */
+/* 	stroke-dashoffset: -424.11; */
+/* } */
 
-.segment.current {
-	opacity: 1;
-	stroke-width: 14;
-}
+/* .segment.current { */
+/* 	opacity: 1; */
+/* 	stroke-width: 14; */
+/* } */
 
-.center-text {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 84%;
-	height: 85%;
-	background-color: #ffffff;
-	border-radius: 50%;
-	transform: translate(-50%, -50%);
-	font-family: 'Quicksand', sans-serif;
-	font-weight: bold;
-	font-size: 16px;
-	color: #333;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	z-index: 1;
-	cursor: pointer;
-	transition: background-color 0.5s ease;
-}
+/* .center-text { */
+/* 	position: absolute; */
+/* 	top: 50%; */
+/* 	left: 50%; */
+/* 	width: 84%; */
+/* 	height: 85%; */
+/* 	background-color: #ffffff; */
+/* 	border-radius: 50%; */
+/* 	transform: translate(-50%, -50%); */
+/* 	font-family: 'Quicksand', sans-serif; */
+/* 	font-weight: bold; */
+/* 	font-size: 16px; */
+/* 	color: #333; */
+/* 	display: flex; */
+/* 	align-items: center; */
+/* 	justify-content: center; */
+/* 	text-align: center; */
+/* 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+/* 	z-index: 1; */
+/* 	cursor: pointer; */
+/* 	transition: background-color 0.5s ease; */
+/* } */
 
-.circle-labels {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 100%;
-	height: 100%;
-	pointer-events: none;
-}
+/* .circle-labels { */
+/* 	position: absolute; */
+/* 	top: 50%; */
+/* 	left: 50%; */
+/* 	width: 100%; */
+/* 	height: 100%; */
+/* 	pointer-events: none; */
+/* } */
 
-.circle-label {
-	position: absolute;
-	transform: rotate(var(--angle)) translate(130px) rotate(calc(-1 * var(--angle)));
-	transform-origin: center;
-	font-family: 'Quicksand', sans-serif;
-	font-size: 11px;
-	text-align: center;
-	width: max-content;
-	color: #444;
-	white-space: nowrap;
-}
+/* .circle-label { */
+/* 	position: absolute; */
+/* 	transform: rotate(var(--angle)) translate(130px) rotate(calc(-1 * var(--angle))); */
+/* 	transform-origin: center; */
+/* 	font-family: 'Quicksand', sans-serif; */
+/* 	font-size: 11px; */
+/* 	text-align: center; */
+/* 	width: max-content; */
+/* 	color: #444; */
+/* 	white-space: nowrap; */
+/* } */
 
 
 
@@ -651,19 +652,12 @@
 }
 
 
-
-
-
-/* Historico - init */
 .divImageUser>img{
 	border-radius: 50%;
 }
 #divLinhasHistorico{
 }
-/* Historico - end */
 
-
-/* Selectize - init */
 .selectize-dropdown .active:not(.selected){
     background-color: lightgray !important;
     color: black !important;
@@ -677,4 +671,38 @@
     background-color: #fff !important;
     background-image: none !important;
 }
-/* Selectize - end */
+
+
+@media (max-width: 767px) {
+    .wizard-progress {
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: #ffa751 #f0f0f0; 
+    }
+
+    .wizard-progress::-webkit-scrollbar {
+        height: 4px;
+    }
+    .wizard-progress::-webkit-scrollbar-track {
+        background: #f0f0f0; 
+    }
+    .wizard-progress::-webkit-scrollbar-thumb {
+        background: #ffa751; 
+        border-radius: 2px;
+    }
+       .step-container {
+        min-width: max-content;
+        padding-bottom: 8px; 
+    }
+    .step {
+        flex-shrink: 0; 
+    }
+    #rowAprovacao {
+    display: flex;
+    flex-wrap: wrap;
+    }
+    .navegacao-formulario{
+    margin-bottom: 50px;
+    }
+}

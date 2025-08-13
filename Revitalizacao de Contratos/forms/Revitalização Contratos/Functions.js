@@ -272,7 +272,6 @@ function removeItem(id) {
 }
 
 function renderizarAnexosEtapaAprovacao() {
-	console.log("entrou")
     const hiddenValue = document.getElementById("hiddenDocumentosAnexados").value;
     if (!hiddenValue) return;
 
@@ -648,7 +647,7 @@ async function asyncMontaHistorico() {
                         <div>
                             <h3 class="card-title" style="margin-bottom:0px; color:black;">${BuscaNomeUsuario(linha.USUARIO)} <small>${linha.ACAO}</small></h3>
                             <small>${DATA}</small>
-                            <p class="card-text">${linha.OBSERVACAO}</p>
+                            <p class="card-text">${linha.OBSERVACAO && linha.OBSERVACAO.trim() ? linha.OBSERVACAO : "Aprovado"}</p>
                         </div>
                     </div>
                 </div>
@@ -688,4 +687,39 @@ async function asyncMontaHistorico() {
             $("#CODCCUSTO").val(CODCCUSTO);
             $("#NOMECCUSTO").val(NOMECCUSTO);
         }
+    }
+    
+    function popularDestinoRetorno() {
+        const ATIVIDADE_ATUAL = $("#atividade").val(); 
+        const $select = $("#destinoRetorno");
+        $select.empty().append('<option value="">Selecione o destino</option>');
+        let opcoes = [];
+        switch (parseInt(ATIVIDADE_ATUAL)) { 
+            case ATIVIDADES.JURIDICO:
+                opcoes = [
+                    { value: "OBRA", text: "Obra" }
+                ];
+                break;
+            case ATIVIDADES.CONTROLADORIA:
+                opcoes = [
+                    { value: "JURIDICO", text: "Jurídico" },
+                    { value: "OBRA", text: "Obra" }
+                ];
+                break;
+            case ATIVIDADES.ENGENHEIRO:
+            case ATIVIDADES.COORDENADOR_OBRAS:
+            case ATIVIDADES.DIRETORIA:
+                opcoes = [
+                    { value: "CONTROLADORIA", text: "Controladoria" },
+                    { value: "JURIDICO", text: "Jurídico" },
+                    { value: "OBRA", text: "Obra" }
+                ];
+                break;
+        }
+        opcoes.forEach(opcao => {
+            $select.append($('<option>', {
+                value: opcao.value,
+                text: opcao.text
+            }));
+        });
     }

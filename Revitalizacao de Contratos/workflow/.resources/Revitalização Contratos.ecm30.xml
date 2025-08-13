@@ -29,7 +29,7 @@
     <processDefinitionVersionPK>
       <companyId>1</companyId>
       <processId>Revitalização Contratos</processId>
-      <version>13</version>
+      <version>15</version>
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
     <formId>0</formId>
@@ -928,31 +928,6 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <version>1</version>
-        <sequence>51</sequence>
-      </processStatePK>
-      <stateName>Opção</stateName>
-      <stateDescription>Opção</stateDescription>
-      <joint>false</joint>
-      <initialState>false</initialState>
-      <transferAttachments>false</transferAttachments>
-      <subProcessId></subProcessId>
-      <formFolder>0</formFolder>
-      <automatic>true</automatic>
-      <positionX>1000</positionX>
-      <positionY>768</positionY>
-      <inhibitTransfer>false</inhibitTransfer>
-      <stateType>1</stateType>
-      <bpmnType>120</bpmnType>
-      <signalId>0</signalId>
-      <openInstances>0</openInstances>
-      <destinationStates/>
-      <digitalSignature>false</digitalSignature>
-    </ProcessState>
-    <ProcessState>
-      <processStatePK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
         <sequence>55</sequence>
       </processStatePK>
       <stateName>Opção</stateName>
@@ -1028,6 +1003,31 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <version>1</version>
+        <sequence>88</sequence>
+      </processStatePK>
+      <stateName>Opção</stateName>
+      <stateDescription>Opção</stateDescription>
+      <joint>false</joint>
+      <initialState>false</initialState>
+      <transferAttachments>false</transferAttachments>
+      <subProcessId></subProcessId>
+      <formFolder>0</formFolder>
+      <automatic>true</automatic>
+      <positionX>990</positionX>
+      <positionY>780</positionY>
+      <inhibitTransfer>false</inhibitTransfer>
+      <stateType>1</stateType>
+      <bpmnType>120</bpmnType>
+      <signalId>0</signalId>
+      <openInstances>0</openInstances>
+      <destinationStates/>
+      <digitalSignature>false</digitalSignature>
+    </ProcessState>
+    <ProcessState>
+      <processStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
         <sequence>37</sequence>
       </processStatePK>
       <stateName>Fim</stateName>
@@ -1052,7 +1052,7 @@
       <notifyAuthorityFollowUp>false</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>680</positionX>
+      <positionX>620</positionX>
       <positionY>643</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
@@ -1171,7 +1171,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>13</version>
+        <version>15</version>
         <sequence>11</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1183,7 +1183,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>13</version>
+        <version>15</version>
         <sequence>24</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1195,67 +1195,163 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>13</version>
+        <version>15</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
-      <condition>true</condition>
+      <condition></condition>
       <destinationSequenceId>32</destinationSequenceId>
-      <conditionType>0</conditionType>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>2</expressionOrder>
+        <version>15</version>
+        <sequence>30</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>4</destinationSequenceId>
+      <conditionType>1</conditionType>
     </ConditionProcessState>
     <ConditionProcessState>
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>13</version>
+        <version>15</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
-      <condition>true</condition>
+      <condition></condition>
       <destinationSequenceId>43</destinationSequenceId>
-      <conditionType>0</conditionType>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>2</expressionOrder>
+        <version>15</version>
+        <sequence>34</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>5</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>3</expressionOrder>
+        <version>15</version>
+        <sequence>34</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>4</destinationSequenceId>
+      <conditionType>1</conditionType>
     </ConditionProcessState>
     <ConditionProcessState>
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>13</version>
+        <version>15</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition>true</condition>
+      <condition></condition>
       <destinationSequenceId>48</destinationSequenceId>
-      <conditionType>0</conditionType>
+      <conditionType>1</conditionType>
     </ConditionProcessState>
     <ConditionProcessState>
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <expressionOrder>1</expressionOrder>
-        <version>13</version>
-        <sequence>51</sequence>
+        <expressionOrder>2</expressionOrder>
+        <version>15</version>
+        <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition>true</condition>
-      <destinationSequenceId>53</destinationSequenceId>
-      <conditionType>0</conditionType>
+      <condition></condition>
+      <destinationSequenceId>4</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>3</expressionOrder>
+        <version>15</version>
+        <sequence>46</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>5</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>4</expressionOrder>
+        <version>15</version>
+        <sequence>46</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>32</destinationSequenceId>
+      <conditionType>1</conditionType>
     </ConditionProcessState>
     <ConditionProcessState>
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>13</version>
+        <version>15</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition>true</condition>
+      <condition></condition>
       <destinationSequenceId>58</destinationSequenceId>
-      <conditionType>0</conditionType>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>2</expressionOrder>
+        <version>15</version>
+        <sequence>55</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>4</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>3</expressionOrder>
+        <version>15</version>
+        <sequence>55</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>32</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>4</expressionOrder>
+        <version>15</version>
+        <sequence>55</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>5</destinationSequenceId>
+      <conditionType>1</conditionType>
     </ConditionProcessState>
     <ConditionProcessState>
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>13</version>
+        <version>15</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1267,12 +1363,60 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>13</version>
+        <version>15</version>
         <sequence>68</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
       <destinationSequenceId>32</destinationSequenceId>
       <conditionType>0</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>1</expressionOrder>
+        <version>15</version>
+        <sequence>88</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>53</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>2</expressionOrder>
+        <version>15</version>
+        <sequence>88</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>4</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>3</expressionOrder>
+        <version>15</version>
+        <sequence>88</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>5</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>4</expressionOrder>
+        <version>15</version>
+        <sequence>88</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>32</destinationSequenceId>
+      <conditionType>1</conditionType>
     </ConditionProcessState>
   </list>
   <list>
@@ -1689,57 +1833,6 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <version>1</version>
-        <linkSequence>52</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>48</initialStateSequence>
-      <finalStateSequence>51</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>54</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>51</initialStateSequence>
-      <finalStateSequence>53</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>57</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>51</initialStateSequence>
-      <finalStateSequence>55</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
         <linkSequence>56</linkSequence>
       </processLinkPK>
       <actionLabel></actionLabel>
@@ -2007,6 +2100,142 @@
       <defaultLink>false</defaultLink>
       <type>0</type>
     </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>87</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>46</initialStateSequence>
+      <finalStateSequence>5</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>89</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>48</initialStateSequence>
+      <finalStateSequence>88</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>90</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>88</initialStateSequence>
+      <finalStateSequence>53</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>91</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>34</initialStateSequence>
+      <finalStateSequence>4</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>92</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>55</initialStateSequence>
+      <finalStateSequence>5</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>93</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>88</initialStateSequence>
+      <finalStateSequence>32</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>94</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>88</initialStateSequence>
+      <finalStateSequence>5</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>95</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>88</initialStateSequence>
+      <finalStateSequence>4</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
   </list>
   <list/>
   <list>
@@ -2030,30 +2259,68 @@
     DIRETORIA: 53,&#xd;
     ASSINATURA_ELETRONICA: 66,&#xd;
 };&#xd;
-function beforeTaskSave(colleagueId, nextSequenceId, userList) {&#xd;
-    var ATIVIDADE_ATUAL = getValue(&quot;WKNumState&quot;);&#xd;
 &#xd;
-    if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {&#xd;
-        beforeTaskSave_inicio();&#xd;
-    } &#xd;
-    else if (ATIVIDADE_ATUAL == ATIVIDADES.JURIDICO) {&#xd;
-        beforeTaskSave_juridico();&#xd;
-    } &#xd;
-    else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {&#xd;
-        beforeTaskSave_controladoria();&#xd;
-    }&#xd;
-    else if (ATIVIDADE_ATUAL == ATIVIDADES.ENGENHEIRO) {&#xd;
-        beforeTaskSave_engenheiro();&#xd;
-    }&#xd;
-    else if (ATIVIDADE_ATUAL == ATIVIDADES.COORDENADOR_OBRAS) {&#xd;
-        beforeTaskSave_coordenadorObras();&#xd;
-    }&#xd;
-    else if (ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {&#xd;
-        beforeTaskSave_diretoria();&#xd;
+var STATUS_CONTRATOS = {&#xd;
+    ATIVO: &quot;01&quot;,&#xd;
+    CANCELADO: &quot;02&quot;,&#xd;
+    ENCERRADO: &quot;03&quot;,&#xd;
+    &quot;EM ANDAMENTO MTZ&quot;: &quot;04&quot;,&#xd;
+    &quot;PENDENTE OBRA&quot;: &quot;05&quot;,&#xd;
+    &quot;ENCERRADO SEM DOC.&quot;: &quot;06&quot;,&#xd;
+    ESPORÁDICO: &quot;07&quot;,&#xd;
+    &quot;SEM CONTRATO&quot;: &quot;08&quot;,&#xd;
+    FLUIG: &quot;09&quot;,&#xd;
+    &quot;ATIVO SEM DOC&quot;: &quot;10&quot;,&#xd;
+    &quot;RESCISÃO EM ANDAMENTO&quot;: &quot;11&quot;,&#xd;
+};&#xd;
+&#xd;
+var TIPOS_CONTRATO = {&#xd;
+    Empréstimos: &quot;01&quot;,&#xd;
+    Financiamentos: &quot;02&quot;,&#xd;
+    &quot;Locação de Imóvel&quot;: &quot;04&quot;,&#xd;
+    &quot;Locação de Equipamentos - S/M.O.&quot;: &quot;06&quot;,&#xd;
+    &quot;Prestação de Serviços - Sub-Empreiteiros&quot;: &quot;07&quot;,&#xd;
+    &quot;Fornecimento de Material&quot;: &quot;08&quot;,&#xd;
+    &quot;Locação de Equipamentos - C/M.O.&quot;: &quot;09&quot;,&#xd;
+    &quot;Prestação de Serviços&quot;: &quot;10&quot;,&#xd;
+    &quot;Transporte de Material - S/M.O.&quot;: &quot;11&quot;,&#xd;
+    Finame: &quot;12&quot;,&#xd;
+    CDC: &quot;13&quot;,&#xd;
+    &quot;Prestação de Serviços - Vigilância&quot;: &quot;14&quot;,&#xd;
+    &quot;Prestação de Serviços - Sub/Retenção&quot;: &quot;15&quot;,&#xd;
+    Clientes: &quot;16&quot;,&#xd;
+    &quot;Cartão de Crédito&quot;: &quot;17&quot;,&#xd;
+    Consórcio: &quot;18&quot;,&#xd;
+    PJ: &quot;19&quot;,&#xd;
+};&#xd;
+&#xd;
+var TIPOS_FATURAMENTO = {&#xd;
+    &quot;Não Periódico&quot;: 0,&#xd;
+    Periódico: 1,&#xd;
+    &quot;Por Medição&quot;: 2,&#xd;
+};&#xd;
+&#xd;
+function beforeTaskSave(colleagueId, nextSequenceId, userList) {&#xd;
+    try {&#xd;
+        var ATIVIDADE_ATUAL = getValue(&quot;WKNumState&quot;);&#xd;
+&#xd;
+        if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {&#xd;
+            beforeTaskSave_inicio();&#xd;
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.JURIDICO) {&#xd;
+            beforeTaskSave_juridico();&#xd;
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {&#xd;
+            beforeTaskSave_controladoria();&#xd;
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.ENGENHEIRO) {&#xd;
+            beforeTaskSave_engenheiro();&#xd;
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.COORDENADOR_OBRAS) {&#xd;
+            beforeTaskSave_coordenadorObras();&#xd;
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {&#xd;
+            beforeTaskSave_diretoria();&#xd;
+        }&#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
     }&#xd;
 }&#xd;
-&#xd;
-&#xd;
 &#xd;
 function beforeTaskSave_inicio() {&#xd;
     var docIdContrato = hAPI.getCardValue(&quot;contratoDocumentId&quot;);&#xd;
@@ -2062,22 +2329,414 @@ function beforeTaskSave_inicio() {&#xd;
     insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), &quot;Início&quot;, &quot;Início&quot;);&#xd;
 }&#xd;
 function beforeTaskSave_juridico() {&#xd;
-    insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Jurídico&quot;);&#xd;
+ //   insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Jurídico&quot;);&#xd;
+	insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Jurídico&quot;);&#xd;
 }&#xd;
 function beforeTaskSave_controladoria() {&#xd;
-    insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Controladoria&quot;);&#xd;
+    try {&#xd;
+        insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Controladoria&quot;);&#xd;
+&#xd;
+        var tipo = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
+        if (tipo == &quot;Novo&quot;) {&#xd;
+            var criaNovoContratoRM = hAPI.getCardValue(&quot;checkboxLancarNovoContrato&quot;) == &quot;on&quot;;&#xd;
+            if (criaNovoContratoRM) {&#xd;
+                var IDCNT = criaNovoContrato();&#xd;
+                hAPI.setCardValue(&quot;IDCNT&quot;, IDCNT);&#xd;
+            }&#xd;
+        } else if (tipo == &quot;Aditivos&quot;) {&#xd;
+            alteraStatusContrato(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;PENDENTE OBRA&quot;);&#xd;
+            // TODO - Inserir relação do Aditivo com o Contrato na tabela Custom de Contratos&#xd;
+        } else if (tipo == &quot;Rescisões&quot;) {&#xd;
+            alteraStatusContrato(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;RESCISÃO EM ANDAMENTO&quot;);&#xd;
+            // TODO - Inserir relação da Rescisão com o Contrato na tabela Custom de Contratos&#xd;
+        }&#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
+    }&#xd;
 }&#xd;
 function beforeTaskSave_engenheiro() {&#xd;
-    insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Aprovação Engenheiro&quot;);&#xd;
+    insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Aprovação Engenheiro&quot;);&#xd;
 }&#xd;
 function beforeTaskSave_coordenadorObras() {&#xd;
-    insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Aprovação Coordenador&quot;);&#xd;
+    insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Aprovação Coordenador&quot;);&#xd;
 }&#xd;
 function beforeTaskSave_diretoria() {&#xd;
-    insereHistorico(&quot;#TODO: Definir o campo de Observação&quot;, &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Aprovação Diretoria&quot;);&#xd;
+    insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), &quot;#TODO: Definir o campo de Decisão&quot;, &quot;Aprovação Diretoria&quot;);&#xd;
+}&#xd;
+&#xd;
+// Integração RM&#xd;
+function criaNovoContrato() {&#xd;
+    try {&#xd;
+        var parametros = buscaParamentrosCriacaoContrato();&#xd;
+        validaParametros(parametros);&#xd;
+        var contexto = &quot;CODSISTEMA=G;CODCOLIGADA=&quot; + parametros.CODCOLIGADA + &quot;;CODUSUARIO=fluig&quot;;&#xd;
+        var xml = montaXMLCriacaoDeContrato(parametros);&#xd;
+&#xd;
+        var retorno = DatasetFactory.getDataset(&#xd;
+            &quot;InsereContratoRM&quot;,&#xd;
+            null,&#xd;
+            [&#xd;
+                DatasetFactory.createConstraint(&quot;coligada&quot;, parametros.CODCOLIGADA, parametros.CODCOLIGADA, ConstraintType.MUST),&#xd;
+                DatasetFactory.createConstraint(&quot;idContrato&quot;, parametros.IDCNT, parametros.IDCNT, ConstraintType.MUST),&#xd;
+                DatasetFactory.createConstraint(&quot;contexto&quot;, contexto, contexto, ConstraintType.MUST),&#xd;
+                DatasetFactory.createConstraint(&quot;xml&quot;, xml, xml, ConstraintType.MUST),&#xd;
+            ],&#xd;
+            null&#xd;
+        );&#xd;
+&#xd;
+        if (!retorno || retorno == &quot;&quot; || retorno == null) {&#xd;
+            throw &quot;Houve um erro na comunicação com o webservice. Tente novamente!&quot;;&#xd;
+        } else {&#xd;
+            if (retorno.values[0][0] == &quot;false&quot;) {&#xd;
+                throw &quot;Erro ao gerar contrato. Favor entrar em contato com o administrador do sistema. Mensagem: &quot; + retorno.values[0][1];&#xd;
+            } else if (retorno.values[0][0] == &quot;true&quot;) {&#xd;
+                return retorno.values[0][2];&#xd;
+            }&#xd;
+        }&#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
+    }&#xd;
+}&#xd;
+function buscaParamentrosCriacaoContrato() {&#xd;
+    var CODCOLIGADA = hAPI.getCardValue(&quot;novoContratoColigada&quot;);&#xd;
+    var CODFILIAL = hAPI.getCardValue(&quot;novoContratoFilial&quot;);&#xd;
+    var CODIGOTIPOCONTRATO = hAPI.getCardValue(&quot;novoContratoTipoContrato&quot;);&#xd;
+    var CODTCN = hAPI.getCardValue(&quot;novoContratoTipoContrato&quot;);&#xd;
+    var CODCCUSTO = hAPI.getCardValue(&quot;novoContratoCCUSTO&quot;);&#xd;
+    var CODIGOCONTRATO = hAPI.getCardValue(&quot;novoContratoCodigo&quot;);&#xd;
+    var locEstoque = hAPI.getCardValue(&quot;novoContratoLocalDeEstoque&quot;);&#xd;
+    var CODCFO = hAPI.getCardValue(&quot;novoContratoFornecedor&quot;);&#xd;
+    var CODRPR = hAPI.getCardValue(&quot;novoContratoRepresentante&quot;);&#xd;
+    var DATAINICIO = hAPI.getCardValue(&quot;novoContratoDataInicio&quot;);&#xd;
+    var DATAFIM = hAPI.getCardValue(&quot;novoContratoDataFim&quot;);&#xd;
+    var CODSTACNT = hAPI.getCardValue(&quot;novoContratoSTATUS&quot;);&#xd;
+    var NOME = hAPI.getCardValue(&quot;novoContratoObjeto&quot;);&#xd;
+    if (Nome.length() &gt; 40) {&#xd;
+        // A coluna na base do RM tem limite de 40 caracteres&#xd;
+        Nome = Nome.substring(0, 40);&#xd;
+    }&#xd;
+    var CODCPG = hAPI.getCardValue(&quot;novoContratoTipoFaturamento&quot;);&#xd;
+    var DIAFATURAMENTO = hAPI.getCardValue(&quot;novoContratoDiaFaturamento&quot;);&#xd;
+    var QTDEFATURAMENTOS = hAPI.getCardValue(&quot;novoContratoQtdeFaturamento&quot;);&#xd;
+    var urlSolicitacao = getServerURL() + &quot;/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=&quot; + getValue(&quot;WKNumProces&quot;);&#xd;
+&#xd;
+    var IDCNT = hAPI.getCardValue(&quot;novoContratoIdCnt&quot;);&#xd;
+    if (IDCNT == &quot;&quot; || IDCNT == null || IDCNT != undefined) {&#xd;
+        var IDCNT = -1;&#xd;
+    }&#xd;
+&#xd;
+    var ITENS = [];&#xd;
+    var indexes = hAPI.getChildrenIndexes(&quot;tableNovoContratoItens&quot;);&#xd;
+    for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+        var id = indexes[i];&#xd;
+&#xd;
+        ITENS.push({&#xd;
+            IDPRD: hAPI.getCardValue(&quot;novoContratoItemProduto&quot; + &quot;___&quot; + id),&#xd;
+            VALOR: hAPI.getCardValue(&quot;novoContratoItemValor&quot; + &quot;___&quot; + id),&#xd;
+            RATDEP: hAPI.getCardValue(&quot;novoContratoJsonRateiosItem&quot; + &quot;___&quot; + id),&#xd;
+        });&#xd;
+    }&#xd;
+&#xd;
+    return {&#xd;
+        CODCOLIGADA: CODCOLIGADA,&#xd;
+        IDCNT: IDCNT,&#xd;
+        CODFILIAL: CODFILIAL,&#xd;
+        CODIGOTIPOCONTRATO: CODIGOTIPOCONTRATO,&#xd;
+        CODTCN: CODTCN,&#xd;
+        CODCCUSTO: CODCCUSTO,&#xd;
+        CODIGOCONTRATO: CODIGOCONTRATO,&#xd;
+        locEstoque: locEstoque,&#xd;
+        CODCFO: CODCFO,&#xd;
+        CODRPR: CODRPR,&#xd;
+        DATAINICIO: DATAINICIO,&#xd;
+        DATAFIM: DATAFIM,&#xd;
+        NOME: NOME,&#xd;
+        CODSTACNT: CODSTACNT,&#xd;
+        CODCPG: CODCPG,&#xd;
+        DIAFATURAMENTO: DIAFATURAMENTO,&#xd;
+        QTDEFATURAMENTOS: QTDEFATURAMENTOS,&#xd;
+        urlSolicitacao: urlSolicitacao,&#xd;
+        NATUREZA: &quot;1&quot;, //Compra&#xd;
+        ITENS: ITENS,&#xd;
+    };&#xd;
+}&#xd;
+function validaParametros(parametros) {&#xd;
+    var erroRetorno = [];&#xd;
+    if (parametros.CODCOLIGADA == undefined || parametros.CODCOLIGADA == null || parametros.CODCOLIGADA == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;CODCOLIGADA&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.CODFILIAL == undefined || parametros.CODFILIAL == null || parametros.CODFILIAL == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;CODFILIAL&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.CODIGOTIPOCONTRATO == undefined || parametros.CODIGOTIPOCONTRATO == null || parametros.CODIGOTIPOCONTRATO == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;CODIGOTIPOCONTRATO&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.CODTCN == undefined || parametros.CODTCN == null || parametros.CODTCN == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;CODTCN&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.CODCCUSTO == undefined || parametros.CODCCUSTO == null || parametros.CODCCUSTO == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;CODCCUSTO&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.CODIGOCONTRATO == undefined || parametros.CODIGOCONTRATO == null || parametros.CODIGOCONTRATO == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;CODIGOCONTRATO&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.locEstoque == undefined || parametros.locEstoque == null || parametros.locEstoque == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;locEstoque&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.CODCFO == undefined || parametros.CODCFO == null || parametros.CODCFO == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;CODCFO&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.CODRPR == undefined || parametros.CODRPR == null || parametros.CODRPR == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;CODRPR&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.DATAINICIO == undefined || parametros.DATAINICIO == null || parametros.DATAINICIO == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;DATAINICIO&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.DATAFIM == undefined || parametros.DATAFIM == null || parametros.DATAFIM == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;DATAFIM&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.NOME == undefined || parametros.NOME == null || parametros.NOME == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;NOME&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.CODCPG == undefined || parametros.CODCPG == null || parametros.CODCPG == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;CODCPG&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.CODTCN == TIPOS_CONTRATO[&quot;Locação de Imóvel&quot;]) {&#xd;
+        // Se for locação de imóvel, deve preenchide dia e quantidade de Faturamentos&#xd;
+        if (parametros.DIAFATURAMENTO == undefined || parametros.DIAFATURAMENTO == null || parametros.DIAFATURAMENTO == &quot;&quot;) {&#xd;
+            erroRetorno.push(&quot;DIAFATURAMENTO&quot;);&#xd;
+        }&#xd;
+        if (parametros.QTDEFATURAMENTOS == undefined || parametros.QTDEFATURAMENTOS == null || parametros.QTDEFATURAMENTOS == &quot;&quot;) {&#xd;
+            erroRetorno.push(&quot;QTDEFATURAMENTOS&quot;);&#xd;
+        }&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.urlSolicitacao == undefined || parametros.urlSolicitacao == null || parametros.urlSolicitacao == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;urlSolicitacao&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (parametros.ITENS == undefined || parametros.ITENS == null || parametros.ITENS == &quot;&quot;) {&#xd;
+        erroRetorno.push(&quot;ITENS&quot;);&#xd;
+    }&#xd;
+&#xd;
+    try {&#xd;
+        parametros.ITENS = JSON.parse(parametros.ITENS);&#xd;
+    } catch (error) {&#xd;
+        erroRetorno.push(&quot;ITENS&quot;);&#xd;
+    }&#xd;
+&#xd;
+    for (var i = 0; i &lt; parametros.ITENS.length; i++) {&#xd;
+        var item = parametros.ITENS[i];&#xd;
+&#xd;
+        if (item.IDPRD == undefined || item.IDPRD == null || item.IDPRD == &quot;&quot;) {&#xd;
+            erroRetorno.push(&quot;IDPRD&quot;);&#xd;
+        }&#xd;
+        if (item.VALOR == undefined || item.VALOR == null || item.VALOR == &quot;&quot;) {&#xd;
+            erroRetorno.push(&quot;VALOR&quot;);&#xd;
+        }&#xd;
+        if (item.RATDEP == undefined || item.RATDEP == null || item.RATDEP == &quot;&quot;) {&#xd;
+            erroRetorno.push(&quot;RATDEP&quot;);&#xd;
+        }&#xd;
+&#xd;
+        try {&#xd;
+            item.RATDEP = JSON.parse(item.RATDEP);&#xd;
+        } catch (error) {&#xd;
+            erroRetorno.push(&quot;Item RATDEP&quot;);&#xd;
+        }&#xd;
+&#xd;
+        for (var j = 0; j &lt; item.RATDEP.length; j++) {&#xd;
+            var RATEIO = item.RATDEP[j];&#xd;
+&#xd;
+            if (RATEIO.CODDEPTO == undefined || RATEIO.CODDEPTO == null || item.RATEIO.CODDEPTO == &quot;&quot;) {&#xd;
+                erroRetorno.push(&quot;RATDEP DEPTO&quot;);&#xd;
+            }&#xd;
+            if (RATEIO.VALOR == undefined || RATEIO.VALOR == null || RATEIO.VALOR == &quot;&quot;) {&#xd;
+                erroRetorno.push(&quot;RATDEP VALOR&quot;);&#xd;
+            }&#xd;
+        }&#xd;
+    }&#xd;
+&#xd;
+    if (erroRetorno.length &gt; 0) {&#xd;
+        throw erroRetorno.join(&quot;, &quot;);&#xd;
+    }&#xd;
+}&#xd;
+&#xd;
+function montaXMLCriacaoDeContrato(parametros) {&#xd;
+    var xml = &quot;&quot;;&#xd;
+    xml += &quot;&lt;CTRCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;TCNT&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODCOLIGADA&gt;&quot; + parametros.CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+    xml += &quot;        &lt;IDCNT&gt;&quot; + parametros.IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODCOLCFO&gt;0&lt;/CODCOLCFO&gt;&quot;;&#xd;
+    xml += &quot;        &lt;NOME&gt;&quot; + parametros.NOME + &quot;&lt;/NOME&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODCCUSTO&gt;&quot; + parametros.CODCCUSTO + &quot;&lt;/CODCCUSTO&gt;&quot;;&#xd;
+    xml += &quot;        &lt;NATUREZA&gt;&quot; + parametros.NATUREZA + &quot;&lt;/NATUREZA&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODTCN&gt;&quot; + parametros.CODTCN + &quot;&lt;/CODTCN&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODFILIAL&gt;&quot; + parametros.CODFILIAL + &quot;&lt;/CODFILIAL&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODIGOCONTRATO&gt;&quot; + parametros.CODIGOCONTRATO + &quot;&lt;/CODIGOCONTRATO&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODCFO&gt;&quot; + parametros.CODCFO + &quot;&lt;/CODCFO&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODRPR&gt;&quot; + parametros.CODRPR + &quot;&lt;/CODRPR&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODSTACNT&gt;&quot; + parametros.CODSTACNT + &quot;&lt;/CODSTACNT&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODCPG&gt;&quot; + parametros.CODCPG + &quot;&lt;/CODCPG&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODCPGPRAZO&gt;130&lt;/CODCPGPRAZO&gt;&quot;;&#xd;
+    xml += &quot;        &lt;DATACONTRATO&gt;&quot; + setDateXMLFormat(parametros.DATAINICIO) + &quot;&lt;/DATACONTRATO&gt;&quot;;&#xd;
+    xml += &quot;        &lt;DATAINICIO&gt;&quot; + setDateXMLFormat(parametros.DATAINICIO) + &quot;&lt;/DATAINICIO&gt;&quot;;&#xd;
+    xml += &quot;        &lt;DATAFIM&gt;&quot; + setDateXMLFormat(parametros.DATAFIM) + &quot;T00:00:00&lt;/DATAFIM&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODMOEVALORCONTRATO&gt;R$&lt;/CODMOEVALORCONTRATO&gt;&quot;;&#xd;
+    xml += &quot;        &lt;IMPRIMEMOV&gt;1&lt;/IMPRIMEMOV&gt;&quot;;&#xd;
+    if (parametros.CODCPG == TIPOS_FATURAMENTO[&quot;Periódico&quot;]) {&#xd;
+        xml += &quot;    &lt;DIAFATURAMENTO&gt;&quot; + parametros.DIAFATURAMENTO + &quot;&lt;/DIAFATURAMENTO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;QTDEFATURAMENTOS&gt;&quot; + parametros.QTDEFATURAMENTOS + &quot;&lt;/QTDEFATURAMENTOS&gt;&quot;;&#xd;
+    }&#xd;
+    xml += &quot;        &lt;CODUSUARIO&gt;&quot; + getValue(&quot;WKUser&quot;) + &quot;&lt;/CODUSUARIO&gt;&quot;;&#xd;
+    xml += &quot;    &lt;/TCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;TCNTHISTORICO&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODCOLIGADA&gt;&quot; + parametros.CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+    xml += &quot;        &lt;IDCNT&gt;&quot; + parametros.IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+    xml += &quot;        &lt;HISTORICOLONGO&gt;&quot; + parametros.urlSolicitacao + &quot;&lt;/HISTORICOLONGO&gt;&quot;;&#xd;
+    xml += &quot;    &lt;/TCNTHISTORICO&gt;&quot;;&#xd;
+    xml += &quot;    &lt;TCNTCOMPL&gt;&quot;;&#xd;
+    xml += &quot;        &lt;CODCOLIGADA&gt;&quot; + parametros.CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+    xml += &quot;        &lt;IDCNT&gt;&quot; + parametros.IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;/TCNTCOMPL&gt;&quot;;&#xd;
+    xml += geraXML_TITMCNT(parametros);&#xd;
+    xml += geraXML_TITMCNTRATCCU(parametros);&#xd;
+    xml += geraXML_TITMCNTRATDEP(parametros);&#xd;
+    xml += &quot;&lt;/CTRCNT&gt;&quot;;&#xd;
+}&#xd;
+function geraXML_TITMCNT(parametros) {&#xd;
+    var xml = &quot;&quot;;&#xd;
+&#xd;
+    for (var i = 0; i &lt; parametros.ITENS.length; i++) {&#xd;
+        var item = parametros.ITENS[i];&#xd;
+&#xd;
+        xml += &quot;&lt;TITMCNT&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + parametros.CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+        xml += &quot;    &lt;IDCNT&gt;&quot; + parametros.IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+        xml += &quot;    &lt;NSEQITMCNT&gt;&quot; + (i + 1) + &quot;&lt;/NSEQITMCNT&gt;&quot;;&#xd;
+        xml += &quot;    &lt;IDPRD&gt;&quot; + item.IDPRD + &quot;&lt;/IDPRD&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODFILIALFAT&gt;&quot; + parametros.CODFILIAL + &quot;&lt;/CODFILIALFAT&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODLOCFATURAM&gt;&quot; + parametros.LOCESTOQUE + &quot;&lt;/CODLOCFATURAM&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCCUSTO&gt;&quot; + parametros.CCUSTO + &quot;&lt;/CODCCUSTO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCFO&gt;&quot; + parametros.CODCFO + &quot;&lt;/CODCFO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;QUANTIDADE&gt;1&lt;/QUANTIDADE&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCPG&gt;&quot; + parametros.CODCPG + &quot;&lt;/CODCPG&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODMOEPRECOFATURAMENTO&gt;R$&lt;/CODMOEPRECOFATURAMENTO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODSTACNT&gt;&quot; + parametros.CODSTACNT + &quot;&lt;/CODSTACNT&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODTMV&gt;&quot; + (parametros.CODTCN == TIPOS_CONTRATO[&quot;Locação de Imóvel&quot;] ? &quot;1.1.98&quot; : &quot;1.1.99&quot;) + &quot;&lt;/CODTMV&gt;&quot;;&#xd;
+        xml += &quot;    &lt;EPERIODICO&gt;&quot; + parametros.CODCPG + &quot;&lt;/EPERIODICO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;DATAINICIO&gt;&quot; + setDateXMLFormat(parametros.DATAINICIO) + &quot;&lt;/DATAINICIO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;DATAFIM&gt;&quot; + setDateXMLFormat(parametros.DATAFIM) + &quot;T00:00:00&lt;/DATAFIM&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCPGPRAZO&gt;130&lt;/CODCPGPRAZO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODRPR&gt;&quot; + parametros.CODRPR + &quot;&lt;/CODRPR&gt;&quot;;&#xd;
+        if (parametros.CODCPG == TIPOS_FATURAMENTO[&quot;Periódico&quot;]) {&#xd;
+            xml += &quot;&lt;DIAFATURAMENTO&gt;&quot; + parametros.DIAFATURAMENTO + &quot;&lt;/DIAFATURAMENTO&gt;&quot;;&#xd;
+            xml += &quot;&lt;QTDEFATURAMENTOS&gt;&quot; + parametros.QTDEFATURAMENTOS + &quot;&lt;/QTDEFATURAMENTOS&gt;&quot;;&#xd;
+        }&#xd;
+        xml += &quot;    &lt;PRECOFATURAMENTO&gt;&quot; + ValorToFloat(item.VALOR).toString().replace(&quot;.&quot;, &quot;,&quot;) + &quot;&lt;/PRECOFATURAMENTO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODMOEREAJUSTE&gt;R$&lt;/CODMOEREAJUSTE&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCOLCFODEST&gt;0&lt;/CODCOLCFODEST&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCFODEST&gt;&quot; + parametros.CODCFO + &quot;&lt;/CODCFODEST&gt;&quot;;&#xd;
+        xml += &quot;&lt;/TITMCNT&gt;&quot;;&#xd;
+    }&#xd;
+&#xd;
+    return xml;&#xd;
+}&#xd;
+function geraXML_TITMCNTRATCCU(parametros) {&#xd;
+    var xml = &quot;&quot;;&#xd;
+    for (var i = 0; i &lt; parametros.ITENS.length; i++) {&#xd;
+        var item = parametros.ITENS[i];&#xd;
+&#xd;
+        xml += &quot;&lt;TITMCNTRATCCU&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + parametros.CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt; &quot;;&#xd;
+        xml += &quot;    &lt;IDCNT&gt;&quot; + parametros.IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+        xml += &quot;    &lt;NSEQITMCNT&gt;&quot; + (i + 1) + &quot;&lt;/NSEQITMCNT&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCCUSTO&gt;&quot; + parametros.CODCCUSTO + &quot;&lt;/CODCCUSTO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;PERCENTUAL&gt;100&lt;/PERCENTUAL&gt;&quot;;&#xd;
+        xml += &quot;&lt;/TITMCNTRATCCU&gt;&quot;;&#xd;
+    }&#xd;
+&#xd;
+    return xml;&#xd;
+}&#xd;
+function geraXML_TITMCNTRATDEP(parametros) {&#xd;
+    var xml = &quot;&quot;;&#xd;
+&#xd;
+    for (var i = 0; i &lt; parametros.ITENS.length; i++) {&#xd;
+        var item = parametros.ITENS[i];&#xd;
+&#xd;
+        var RATEIOS = item.RATDEP;&#xd;
+        for (var j = 0; j &lt; RATEIOS.length; j++) {&#xd;
+            var RATDEPTO = RATEIOS[j];&#xd;
+            xml += &quot;&lt;TITMCNTRATDEP&gt;&quot;;&#xd;
+            xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + parametros.CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+            xml += &quot;    &lt;IDCNT&gt;&quot; + parametros.IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+            xml += &quot;    &lt;NSEQITMCNT&gt;&quot; + (i + 1) + &quot;&lt;/NSEQITMCNT&gt;&quot;;&#xd;
+            xml += &quot;    &lt;CODFILIAL&gt;&quot; + parametros.CODFILIAL + &quot;&lt;/CODFILIAL&gt;&quot;;&#xd;
+            xml += &quot;    &lt;CODDEPARTAMENTO&gt;&quot; + RATDEPTO.CODDEPTO + &quot;&lt;/CODDEPARTAMENTO&gt;&quot;;&#xd;
+            xml += &quot;    &lt;PERCENTUAL&gt;&quot; + RATDEPTO.PERCENTUAL + &quot;&lt;/PERCENTUAL&gt;&quot;;&#xd;
+            xml += &quot;&lt;/TITMCNTRATDEP&gt;&quot;;&#xd;
+        }&#xd;
+    }&#xd;
+    return xml;&#xd;
 }&#xd;
 &#xd;
 &#xd;
+&#xd;
+function alteraStatusContrato(STATUS) {&#xd;
+    try {&#xd;
+        &#xd;
+    &#xd;
+    var CODSTACNT = STATUS_CONTRATOS[STATUS];&#xd;
+    if (!CODSTACNT || CODSTACNT == null || CODSTACNT == &quot;&quot;) {&#xd;
+        throw &quot;Necessário informar CODSTACNT&quot;;&#xd;
+    }&#xd;
+&#xd;
+    var xml = &quot;&quot;;&#xd;
+    xml += &quot;&lt;CTRCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;TCNT&gt;&quot;;&#xd;
+    xml += &quot;         &lt;CODCOLIGADA&gt;&quot; + CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+    xml += &quot;         &lt;IDCNT&gt;&quot; + IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+    xml += &quot;         &lt;CODSTACNT&gt;&quot; + CODSTACNT + &quot;&lt;/CODSTACNT&gt;&quot;;&#xd;
+    xml += &quot;     &lt;/TCNT&gt;&quot;;&#xd;
+    xml += &quot;&lt;/CTRCNT&gt;&quot;;&#xd;
+&#xd;
+    var contexto = &quot;CODSISTEMA=G;CODCOLIGADA=&quot; + CODCOLIGADA + &quot;;CODUSUARIO=fluig&quot;;&#xd;
+&#xd;
+    var retorno = DatasetFactory.getDataset(&#xd;
+        &quot;InsereContratoRM&quot;,&#xd;
+        null,&#xd;
+        [&#xd;
+            DatasetFactory.createConstraint(&quot;coligada&quot;, CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;idContrato&quot;, IDCNT, IDCNT, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;contexto&quot;, contexto, contexto, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;xml&quot;, xml, xml, ConstraintType.MUST),&#xd;
+        ],&#xd;
+        null&#xd;
+    );&#xd;
+    if (retorno.values[0][0] == &quot;false&quot;) {&#xd;
+                throw &quot;Erro ao gerar contrato. Favor entrar em contato com o administrador do sistema. Mensagem: &quot; + retorno.values[0][1];&#xd;
+            } else if (retorno.values[0][0] == &quot;true&quot;) {&#xd;
+                return true;&#xd;
+&#xd;
+            }&#xd;
+        &#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
+    }&#xd;
+}&#xd;
 &#xd;
 // Utils&#xd;
 function insereHistorico(observacao, acao, atividade) {&#xd;
@@ -2118,6 +2777,10 @@ function getDateTimeNow() {&#xd;
 &#xd;
     var dateTime = [ano, mes, dia].join(&quot;-&quot;) + &quot; &quot; + hora + &quot;:&quot; + minutos;&#xd;
     return dateTime;&#xd;
+}&#xd;
+function getServerURL() {&#xd;
+    var ds = DatasetFactory.getDataset(&quot;dsGetServerURL&quot;, null, null, null);&#xd;
+    return ds.getValue(0, &quot;URL&quot;);&#xd;
 }&#xd;
 </eventDescription>
     </WorkflowProcessEvent>
@@ -2239,7 +2902,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>44</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2250,7 +2913,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>44</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2261,7 +2924,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>16</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2272,7 +2935,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>27</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2283,7 +2946,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>28</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2294,7 +2957,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>39</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2305,7 +2968,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>39</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2316,7 +2979,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>36</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2327,7 +2990,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>78</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2338,7 +3001,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>78</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2349,7 +3012,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>78</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -2360,7 +3023,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>79</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2371,7 +3034,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>79</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2382,7 +3045,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>80</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2393,7 +3056,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>80</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2404,7 +3067,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>81</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2415,7 +3078,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>81</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2426,29 +3089,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
-        <linkSequence>57</linkSequence>
-        <bendSequence>1</bendSequence>
-      </processLinkBendPK>
-      <positionX>1030</positionX>
-      <positionY>716</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>13</version>
-        <linkSequence>57</linkSequence>
-        <bendSequence>2</bendSequence>
-      </processLinkBendPK>
-      <positionX>1340</positionX>
-      <positionY>716</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>82</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2459,7 +3100,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>82</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2470,7 +3111,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>85</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2481,7 +3122,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>85</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2492,7 +3133,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>86</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2503,7 +3144,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>86</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2514,7 +3155,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>86</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -2525,7 +3166,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>73</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2536,7 +3177,7 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>71</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2547,12 +3188,155 @@ function getDateTimeNow() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <linkSequence>71</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
       <positionX>333</positionX>
       <positionY>1159</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>87</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>690</positionX>
+      <positionY>429</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>91</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>546</positionX>
+      <positionY>744</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>91</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>170</positionX>
+      <positionY>744</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>91</linkSequence>
+        <bendSequence>3</bendSequence>
+      </processLinkBendPK>
+      <positionX>170</positionX>
+      <positionY>37</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>92</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>1338</positionX>
+      <positionY>430</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>93</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>1022</positionX>
+      <positionY>989</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>93</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>333</positionX>
+      <positionY>989</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>94</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>1020</positionX>
+      <positionY>1055</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>94</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>122</positionX>
+      <positionY>1055</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>94</linkSequence>
+        <bendSequence>3</bendSequence>
+      </processLinkBendPK>
+      <positionX>122</positionX>
+      <positionY>430</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>95</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>1020</positionX>
+      <positionY>1147</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>95</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>126</positionX>
+      <positionY>1147</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>15</version>
+        <linkSequence>95</linkSequence>
+        <bendSequence>3</bendSequence>
+      </processLinkBendPK>
+      <positionX>126</positionX>
+      <positionY>37</positionY>
     </ProcessLinkBend>
   </list>
   <list>
@@ -2560,7 +3344,7 @@ function getDateTimeNow() {&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>13</version>
+        <version>15</version>
         <stateSequence>58</stateSequence>
         <triggerSequence>0</triggerSequence>
       </processStateTriggerPK>
@@ -2577,5 +3361,276 @@ function getDateTimeNow() {&#xd;
   <list/>
   <list/>
   <list/>
-  <list/>
+  <list>
+    <ConditionProcessAutomaticRules>
+      <sequence>30</sequence>
+      <expressionOrder>1</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Aprovar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>30</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>30</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>OBRA</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>34</sequence>
+      <expressionOrder>1</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Aprovar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>34</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>34</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>JURIDICO</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>34</sequence>
+      <expressionOrder>3</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>34</sequence>
+      <expressionOrder>3</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>OBRA</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>46</sequence>
+      <expressionOrder>1</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Aprovar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>46</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>46</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>OBRA</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>46</sequence>
+      <expressionOrder>3</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>46</sequence>
+      <expressionOrder>3</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>JURIDICO</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>46</sequence>
+      <expressionOrder>4</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>46</sequence>
+      <expressionOrder>4</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>CONTROLADORIA</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>55</sequence>
+      <expressionOrder>1</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Aprovar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>55</sequence>
+      <expressionOrder>1</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>administradorFornecedor</field>
+      <value></value>
+      <operator>0</operator>
+      <valueType>0</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>55</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>55</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>OBRA</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>55</sequence>
+      <expressionOrder>3</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>55</sequence>
+      <expressionOrder>3</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>CONTROLADORIA</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>55</sequence>
+      <expressionOrder>4</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>55</sequence>
+      <expressionOrder>4</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>JURIDICO</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>88</sequence>
+      <expressionOrder>1</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Aprovar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>88</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>88</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>OBRA</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>88</sequence>
+      <expressionOrder>3</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>88</sequence>
+      <expressionOrder>3</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>JURIDICO</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>88</sequence>
+      <expressionOrder>4</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>88</sequence>
+      <expressionOrder>4</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>destinoRetorno</field>
+      <value>CONTROLADORIA</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+  </list>
 </list>
