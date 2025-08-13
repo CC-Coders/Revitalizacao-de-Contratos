@@ -216,6 +216,8 @@ function inicializaInputAnexo() {
             const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
 
             documentosAnexados[tipo] = docId;
+            document.getElementById("hiddenDocumentosAnexados").value = JSON.stringify(documentosAnexados);
+
 
             const lista = document.getElementById("listaAnexos");
 
@@ -268,6 +270,30 @@ function removeItem(id) {
     const el = document.getElementById(id);
     if (el) el.remove();
 }
+
+function renderizarAnexosEtapaAprovacao() {
+	console.log("entrou")
+    const hiddenValue = document.getElementById("hiddenDocumentosAnexados").value;
+    if (!hiddenValue) return;
+
+    try {
+        const anexos = JSON.parse(hiddenValue);
+        const lista = document.getElementById("listaAnexos");
+        lista.innerHTML = "";
+
+        for (const [tipo, docId] of Object.entries(anexos)) {
+            if (!docId) continue;
+            const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
+            lista.innerHTML += `<li><span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">Visualizar</a></span></li>`;
+        }
+    } catch (e) {
+        console.error("Erro ao carregar anexos:", e);
+    }
+}
+
+
+
+
 
 function buscaBancos() {
     DatasetFactory.getDataset("GBANCO", null, null, null, {

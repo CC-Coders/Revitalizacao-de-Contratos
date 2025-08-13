@@ -82,6 +82,7 @@
                     <input type="hidden" id="CODCOLIGADA" name="CODCOLIGADA">
                     <input type="hidden" id="CODCCUSTO" name="CODCCUSTO">
                     <input type="hidden" id="NOMECCUSTO" name="NOMECCUSTO">
+<input type="hidden" name="hiddenDocumentosAnexados" id="hiddenDocumentosAnexados" />
 
                     <!-- Tabela Historico -->
                     <div>
@@ -430,172 +431,284 @@
 <!--     <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir Pré-Contrato</button> -->
 <!-- </div> -->
                 
-                        <div class="panelAprovacao">
-                            <div style="max-width: 1400px">
-                                <h3>Contrato - Locação de Imóvel - PF</h3>
-                
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h3 style="margin-bottom: 0px">Dados Gerais</h3>
-                                        <hr style="margin-top: 0px; margin-bottom: 10px" />
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Obra:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextObra"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Locador:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextLocador"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Procurador:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextProcurador"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Representante:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextRepresentante"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Contratante Principal:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextContratantePrincipal"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>EndereÃ§o do ImÃ³vel:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextEnderecoImovel"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>MatrÃ­cula do ImÃ³vel:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextMatriculaImovel"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Finalidade da LocaÃ§Ã£o:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextFinalidadeLocacao"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>PerÃ­odo de LocaÃ§Ã£o:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextPeriodoLocacao"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Janela de Pagamento:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextJanelaPagamento"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>CauÃ§Ã£o:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextCaucao"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row camposComCaucao">
-                                            <div class="col-md-5">
-                                                <label>Valor do CauÃ§Ã£o:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextCaucaoValor"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row camposComCaucao">
-                                            <div class="col-md-5">
-                                                <label>Data Pagamento do CauÃ§Ã£o:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextCaucaoData"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h3 style="margin-bottom: 0px">Dados para Pagamento</h3>
-                                        <hr style="margin-top: 0px; margin-bottom: 10px" />
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Tipo de Pagamento:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextTipoPagamento"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Banco:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextBanco"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Titular da Conta:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextTitularConta"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>AgÃªncia:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextAgÃªncia"></span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Conta Corrente:</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span id="aprovacaoTextContaCorrente"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                
-                                <div style="text-align: center">
-                                    <button class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button>
-                                    <button class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button>
-                                    <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir Pre Contrato</button>
-                                </div>
+                               <div class="panelAprovacao">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="background-color: #eaeaea">
+                                <h4 class="panel-title" style="color: #58595b">Contrato - Locação de Imóvel - PF</h4>
+                            </div>
+                            <div class="panel-body">
+   <div class="row" id="rowAprovacao">
+        <!-- Card Dados Gerais -->
+        <div class="col-md-6 colAprovacao">
+            <div class="aprovacao-card">
+                <h3 style="color:white;">Dados Gerais</h3>
+                <div class="row">
+                    <div class="col-md-5"><label>Obra:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextObra"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Locador:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextLocador"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Procurador:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextProcurador"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Representante:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextRepresentante"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Contratante Principal:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextContratantePrincipal"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Endereço do Imóvel:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextEnderecoImovel"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Matrícula do Imóvel:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextMatriculaImovel"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Finalidade da Locação:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextFinalidadeLocacao"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Período de Locação:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextPeriodoLocacao"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Janela de Pagamento:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextJanelaPagamento"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Caução:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextCaucao"></span></div>
+                </div>
+                <div class="row camposComCaucao">
+                    <div class="col-md-5"><label>Valor do Caução:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextCaucaoValor"></span></div>
+                </div>
+                <div class="row camposComCaucao">
+                    <div class="col-md-5"><label>Data Pagamento do Caução:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextCaucaoData"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Dados para Pagamento -->
+        <div class="col-md-6 colAprovacao" >
+            <div class="aprovacao-card">
+                <h3 style="color:white;">Dados para Pagamento</h3>
+                <div class="row">
+                    <div class="col-md-5"><label>Tipo de Pagamento:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextTipoPagamento"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Banco:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextBanco"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Titular da Conta:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextTitularConta"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Agência:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextAgencia"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><label>Conta Corrente:</label></div>
+                    <div class="col-md-7"><span id="aprovacaoTextContaCorrente"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botões -->
+    <div style="text-align:center; margin-top:20px;">
+        <button class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button>
+        <button class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button>
+        <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir Pré-Contrato</button>
+    </div>
+
+
+
+
+
                             </div>
                         </div>
+                    </div>
+                    
+                    
+                
+                
+<!--                         <div class="panelAprovacao"> -->
+<!--                             <div style="max-width: 1400px"> -->
+<!--                                 <h3>Contrato - Locação de Imóvel - PF</h3> -->
+                
+<!--                                 <div class="row"> -->
+<!--                                     <div class="col-md-6"> -->
+<!--                                         <h3 style="margin-bottom: 0px">Dados Gerais</h3> -->
+<!--                                         <hr style="margin-top: 0px; margin-bottom: 10px" /> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Obra:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextObra"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Locador:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextLocador"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Procurador:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextProcurador"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Representante:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextRepresentante"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Contratante Principal:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextContratantePrincipal"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>EndereÃ§o do ImÃ³vel:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextEnderecoImovel"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>MatrÃ­cula do ImÃ³vel:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextMatriculaImovel"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Finalidade da LocaÃ§Ã£o:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextFinalidadeLocacao"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>PerÃ­odo de LocaÃ§Ã£o:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextPeriodoLocacao"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Janela de Pagamento:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextJanelaPagamento"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>CauÃ§Ã£o:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextCaucao"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row camposComCaucao"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Valor do CauÃ§Ã£o:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextCaucaoValor"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row camposComCaucao"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Data Pagamento do CauÃ§Ã£o:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextCaucaoData"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                     <div class="col-md-6"> -->
+<!--                                         <h3 style="margin-bottom: 0px">Dados para Pagamento</h3> -->
+<!--                                         <hr style="margin-top: 0px; margin-bottom: 10px" /> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Tipo de Pagamento:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextTipoPagamento"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Banco:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextBanco"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Titular da Conta:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextTitularConta"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>AgÃªncia:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextAgÃªncia"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="row"> -->
+<!--                                             <div class="col-md-5"> -->
+<!--                                                 <label>Conta Corrente:</label> -->
+<!--                                             </div> -->
+<!--                                             <div class="col-md-7"> -->
+<!--                                                 <span id="aprovacaoTextContaCorrente"></span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+                
+<!--                                 <div style="text-align: center"> -->
+<!--                                     <button class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button> -->
+<!--                                     <button class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button> -->
+<!--                                     <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir Pre Contrato</button> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </div> -->
                 
                     </div>
                 
@@ -632,7 +745,7 @@
                             </div>
                             <div class="panel-body">
                                 <fieldset>
-                                    <div class="row">
+                                    <div class="row" id="rowAnexosSelecao">
                                         <div class="col-md-6">
                                             <label for="tipoDocumentacao">Documentação:</label>
                                             <select name="tipoDocumentacao" id="tipoDocumentacao" class="form-control">
@@ -655,27 +768,45 @@
                         </div>
                     </div>
                 
-                    <div id="pagina-4" class="pagina">
-                        <div class="panel panel-default" id="painelObservacoes">
+                
+                
+                
+                
+                                    <div id="pagina-4" class="pagina">
+                        <div class="panel panel-default" id="historico">
                             <div class="panel-heading" style="background-color: #eaeaea">
-                                <h4 class="panel-title" style="color: #58595b">Observações</h4>
+                                <h4 class="panel-title" style="color: #58595b">Histórico</h4>
                             </div>
                             <div class="panel-body">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <textarea name="observacoes" class="form-control" rows="6"></textarea>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <div class="panelAprovacao">
+                               <div>
                             <div id="panelHistorico">
-                                <h3 style="margin-bottom: 0px">Histórico</h3>
-                                <hr style="margin-top: 0px; margin-bottom: 10px" />
                                 <div id="divLinhasHistorico"></div>
                             </div>
                         </div>
+                            </div>
+                        </div>
                     </div>
+<!--                     <div id="pagina-4" class="pagina"> -->
+<!--                         <div class="panel panel-default" id="painelObservacoes"> -->
+<!--                             <div class="panel-heading" style="background-color: #eaeaea"> -->
+<!--                                 <h4 class="panel-title" style="color: #58595b">Observações</h4> -->
+<!--                             </div> -->
+<!--                             <div class="panel-body"> -->
+<!--                                 <fieldset> -->
+<!--                                     <div class="form-group"> -->
+<!--                                         <textarea name="observacoes" class="form-control" rows="6"></textarea> -->
+<!--                                     </div> -->
+<!--                                 </fieldset> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                         <div class="panelAprovacao"> -->
+<!--                             <div id="panelHistorico"> -->
+<!--                                 <h3 style="margin-bottom: 0px">Histórico</h3> -->
+<!--                                 <hr style="margin-top: 0px; margin-bottom: 10px" /> -->
+<!--                                 <div id="divLinhasHistorico"></div> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
 
                     <div id="pagina-5" class="pagina">
                         <div class="panelAprovacao">
@@ -836,6 +967,80 @@
                             </div>
                         </div>
                     </div>
+                     <div id="pagina-5" class="pagina">
+                        <div class="panel panel-default" id="resolucao">
+                            <div class="panel-heading" style="background-color: #eaeaea">
+                                <h4 class="panel-title" style="color: #58595b">Resolução</h4>
+                            </div>
+                            <div class="panel-body">
+  <div class="tab-content tab-solicitante" id="divResolucao">
+                <div class="tab-pane active" id="tabInfoChamado">
+                    <div id="divResolucaoChamado" style="text-align: center; margin-top: 20px;">
+                        <div id="divDecisaoAprovar" style="display: inline-block">
+                            <label for="decisaoAprovar" style="margin-right: 2%; padding-top: 2px">Aprovar</label>
+                            <div class="switch switch-success">
+                                <input class="switch-input" type="radio" name="decisao" id="decisaoAprovar"
+                                    value="Aprovar" />
+                                <label class="switch-button switchRedGreen" for="decisaoAprovar">Toggle</label>
+                            </div>
+                        </div>
+                        <div id="divDecisaoCancelar" style="display: inline-block">
+                            <label for="decisaoCancelar" style="margin-right: 2%; padding-top: 2px">Retornar</label>
+                            <div class="switch switch-danger">
+                                <input class="switch-input inputCheckbox" type="radio" name="decisao"
+                                    id="decisaoCancelar" value="Cancelar" /> <label class="switch-button switchRedGreen"
+                                    for="decisaoCancelar">Toggle</label>
+                            </div>
+                        </div>
+                    </div>
+
+                          			   <div class="form-input">
+                            <label>
+                                Observações:
+                            </label>
+                            <textarea name="observacao" id="observacao" class="form-control inputCurso inputOpcional" rows="4"></textarea>
+                            <div></div>
+                            <br />
+                        </div>  
+                </div>
+            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                   
+           
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 </div>
 
 
@@ -850,6 +1055,7 @@
                         <div class="pagination" data-index="2">Anexos</div>
                         <div class="pagination" data-index="3">Histórico</div>
                         <div class="pagination" data-index="4">Integração RM</div>
+                        <div class="pagination" data-index="5">Resolução</div>
                     </div>
 
                     <button id="btn-avancar">
