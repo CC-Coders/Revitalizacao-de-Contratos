@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/castilho_dev_guide/resources/css/castilho-cards.css" />
     <link rel="stylesheet" href="Style.css" />
 
-    <!-- Scripts (jQuery e dependências) -->
+    <!-- Scripts (jQuery e dependÃªncias) -->
     <script src="/resources/js/jquery/jquery.js"></script>
     <script src="/resources/js/jquery/jquery-ui.min.js"></script>
     <script src="/webdesk/vcXMLRPC.js"></script>
@@ -25,7 +25,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
-    <!-- Formulário -->
+    <!-- FormulÃ¡rio -->
     <script src="documentManager.js"></script>
     <script src="integracaoRMManager.js"></script>
     <script src="Functions.js"></script>
@@ -52,7 +52,7 @@
     <script src="https://cdn.ckbox.io/ckbox/2.6.1/ckbox.js" crossorigin=""></script>
 
     <!-- Axios -->
-    <!-- Precisa? Acho que nÃ£o, deve dar pra usar o Ajax no lugar, mas peguei de uma documentaÃ§Ã£o do CK5 Editor uma chamada com Axios e mantive -->
+    <!-- Precisa? Acho que nÃƒÂ£o, deve dar pra usar o Ajax no lugar, mas peguei de uma documentaÃƒÂ§ÃƒÂ£o do CK5 Editor uma chamada com Axios e mantive -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- Swal -->
@@ -120,9 +120,9 @@
             </div>
             <div class="wizard-progress">
                 <div class="step active">Obra</div>
-                <div class="step">Jurídico</div>
+                <div class="step">JurÃ­dico</div>
                 <div class="step">Controladoria</div>
-                <div class="step">Aprovação</div>
+                <div class="step">AprovaÃ§Ã£o</div>
                 <div class="step">Assinatura</div>
             </div>
 
@@ -134,7 +134,7 @@
                             <option value="">Selecione</option>
                             <option value="Novo">Novo</option>
                             <option value="Aditivos">Aditivos</option>
-                            <option value="Rescisões">Rescisões</option>
+                            <option value="RescisÃµes">RescisÃµes</option>
                         </select>
                     </div>
                 </div>
@@ -153,16 +153,16 @@
                         <label>Tipo de Contrato:</label><select name="tipoContrato" id="tipoContrato"
                             class="form-control inputInfoChamado">
                             <option value="">Selecione</option>
-                            <option value="Ferrovias - Locação de Equipamento">Ferrovias - Locação de Equipamento
+                            <option value="Ferrovias - LocaÃ§Ã£o de Equipamento">Ferrovias - LocaÃ§Ã£o de Equipamento
                             </option>
-                            <option value="Ferrovias – Locação de Imóvel">Ferrovias - Locação de Imóvel</option>
-                            <option value="Locação de Container">Locação de Container</option>
-                            <option value="Locação de Equipamento">Locação de Equipamento</option>
-                            <option value="Locação de Imóvel">Locação de Imóvel</option>
-                            <option value="Locação de Sanitários">Locação de Sanitários</option>
-                            <option value="Prestação de Serviços">Prestação de Serviços</option>
+                            <option value="Ferrovias â€“ LocaÃ§Ã£o de ImÃ³vel">Ferrovias - LocaÃ§Ã£o de ImÃ³vel</option>
+                            <option value="LocaÃ§Ã£o de Container">LocaÃ§Ã£o de Container</option>
+                            <option value="LocaÃ§Ã£o de Equipamento">LocaÃ§Ã£o de Equipamento</option>
+                            <option value="LocaÃ§Ã£o de ImÃ³vel">LocaÃ§Ã£o de ImÃ³vel</option>
+                            <option value="LocaÃ§Ã£o de SanitÃ¡rios">LocaÃ§Ã£o de SanitÃ¡rios</option>
+                            <option value="PrestaÃ§Ã£o de ServiÃ§os">PrestaÃ§Ã£o de ServiÃ§os</option>
                             <option value="Transporte de Material">Transporte de Material</option>
-                            <option value="Transporte de Funcionários">Transporte de Funcionários</option>
+                            <option value="Transporte de FuncionÃ¡rios">Transporte de FuncionÃ¡rios</option>
                         </select>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Descrição do Imóvel:</label><strong class="strongAlert">*</strong>
+                                            <label>DescriÃ§Ã£o do ImÃ³vel:</label><strong class="strongAlert">*</strong>
                                             <input type="text" class="form-control inputInfoChamado"
                                                 id="descricaoImovel" name="descricaoImovel" />
                                         </div>
@@ -212,7 +212,7 @@
                                 <div class="row endereco-fornecedor" style="display: none">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Informações do Locador:</label>
+                                            <label>InformaÃ§Ãµes do Locador:</label>
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control" id="cpfFornecedor"
@@ -224,7 +224,7 @@
                                                         name="rgFornecedor" placeholder="RG" />
                                                     <small class="form-text text-muted">RG</small>
                                                 </div>
-                                                <!-- Pessoa Física -->
+                                                <!-- Pessoa FÃ­sica -->
                                                 <div class="col-md-3 pessoa-fisica">
                                                     <input type="text" class="form-control" id="nacionalidadeFornecedor"
                                                         name="nacionalidadeFornecedor" placeholder="Nacionalidade" />
@@ -235,7 +235,7 @@
                                                         name="estadoCivilFornecedor" placeholder="Estado Civil" />
                                                     <small class="form-text text-muted">Estado Civil</small>
                                                 </div>
-                                                <!-- Pessoa Jurídica -->
+                                                <!-- Pessoa JurÃ­dica -->
                                                 <div class="col-md-3 pessoa-juridica" style="display: none">
                                                     <input type="text" class="form-control" id="administradorFornecedor"
                                                         name="administradorFornecedor" placeholder="Administrador" />
@@ -249,7 +249,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>Endereço do Locador:</label>
+                                            <label>EndereÃ§o do Locador:</label>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <input type="text" class="form-control" id="ruaFornecedor"
@@ -258,8 +258,8 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control" id="numeroFornecedor"
-                                                        name="numeroFornecedor" placeholder="NÂº" />
-                                                    <small class="form-text text-muted">Número</small>
+                                                        name="numeroFornecedor" placeholder="NÃ‚Âº" />
+                                                    <small class="form-text text-muted">NÃºmero</small>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <input type="text" class="form-control" id="bairroFornecedor"
@@ -314,7 +314,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Endereço do Imóvel:</label><strong class="strongAlert">*</strong>
+                                            <label>EndereÃ§o do ImÃ³vel:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="enderecoImovel" name="enderecoImovel"
                                                 class="form-control inputInfoChamado" />
                                         </div>
@@ -323,14 +323,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Matrícula do Imóvel:</label><strong class="strongAlert">*</strong>
+                                            <label>MatrÃ­cula do ImÃ³vel:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="matriculaImovel" name="matriculaImovel"
                                                 class="form-control inputInfoChamado" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Finalidade da Locação:</label><strong class="strongAlert">*</strong>
+                                            <label>Finalidade da LocaÃ§Ã£o:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="finalidadeLocacao" name="finalidadeLocacao"
                                                 class="form-control inputInfoChamado" />
                                         </div>
@@ -339,7 +339,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Período de Locação:</label><strong class="strongAlert">*</strong>
+                                            <label>PerÃ­odo de LocaÃ§Ã£o:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="periodoLocacao" name="periodoLocacao"
                                                 class="form-control inputInfoChamado" />
                                         </div>
@@ -360,24 +360,24 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Caução?</label><strong class="strongAlert">*</strong>
+                                            <label>CauÃ§Ã£o?</label><strong class="strongAlert">*</strong>
                                             <select name="caucao" id="caucao" class="form-control inputInfoChamado">
                                                 <option value="">Selecione</option>
                                                 <option value="Sim">Sim</option>
-                                                <option value="Não">Não</option>
+                                                <option value="NÃ£o">NÃ£o</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-3" id="divValorCaucao" style="display: none">
                                         <div class="form-group">
-                                            <label>Valor do Caução:</label><strong class="strongAlert">*</strong>
+                                            <label>Valor do CauÃ§Ã£o:</label><strong class="strongAlert">*</strong>
                                             <input id="valorCaucao" name="valorCaucao"
                                                 class="form-control inputInfoChamado" />
                                         </div>
                                     </div>
                                     <div class="col-md-3" id="divDataPagamentoCaucao" style="display: none">
                                         <div class="form-group">
-                                            <label>Data Pagamento do Caução:</label><strong
+                                            <label>Data Pagamento do CauÃ§Ã£o:</label><strong
                                                 class="strongAlert">*</strong>
                                             <input type="text" id="dataPagamentoCaucao" name="dataPagamentoCaucao"
                                                 class="form-control inputInfoChamado date" />
@@ -408,7 +408,7 @@
                                             class="form-control inputInfoChamado">
                                             <option value="">Selecione</option>
                                             <option value="Boleto">Boleto</option>
-                                            <option value="Depósito">Depósito</option>
+                                            <option value="DepÃ³sito">DepÃ³sito</option>
                                         </select>
                                     </div>
                                 </div>
@@ -423,7 +423,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="agencia">Agência:</label>
+                                        <label for="agencia">AgÃªncia:</label>
                                         <input type="text" id="agencia" name="agencia"
                                             class="form-control inputInfoChamado" />
                                     </div>
@@ -441,7 +441,7 @@
                 </div>
                         <div class="panel panel-default panelAprovacao">
                             <div class="panel-heading" style="background-color: #eaeaea; margin-bottom: 20px;">
-                                <h4 class="panel-title" style="color: #58595b">Contrato - Locação de Imóvel - PF</h4>
+                                <h4 class="panel-title" style="color: #58595b">Contrato - LocaÃ§Ã£o de ImÃ³vel - PF</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="row" id="rowAprovacao">
@@ -472,22 +472,22 @@
                                                         id="aprovacaoTextContratantePrincipal"></span></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-5"><label>Endereço do Imóvel:</label></div>
+                                                <div class="col-md-5"><label>EndereÃ§o do ImÃ³vel:</label></div>
                                                 <div class="col-md-7"><span id="aprovacaoTextEnderecoImovel"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-5"><label>Matrícula do Imóvel:</label></div>
+                                                <div class="col-md-5"><label>MatrÃ­cula do ImÃ³vel:</label></div>
                                                 <div class="col-md-7"><span id="aprovacaoTextMatriculaImovel"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-5"><label>Finalidade da Locação:</label></div>
+                                                <div class="col-md-5"><label>Finalidade da LocaÃ§Ã£o:</label></div>
                                                 <div class="col-md-7"><span id="aprovacaoTextFinalidadeLocacao"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-5"><label>Período de Locação:</label></div>
+                                                <div class="col-md-5"><label>PerÃ­odo de LocaÃ§Ã£o:</label></div>
                                                 <div class="col-md-7"><span id="aprovacaoTextPeriodoLocacao"></span>
                                                 </div>
                                             </div>
@@ -497,15 +497,15 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-5"><label>Caução:</label></div>
+                                                <div class="col-md-5"><label>CauÃ§Ã£o:</label></div>
                                                 <div class="col-md-7"><span id="aprovacaoTextCaucao"></span></div>
                                             </div>
                                             <div class="row camposComCaucao">
-                                                <div class="col-md-5"><label>Valor do Caução:</label></div>
+                                                <div class="col-md-5"><label>Valor do CauÃ§Ã£o:</label></div>
                                                 <div class="col-md-7"><span id="aprovacaoTextCaucaoValor"></span></div>
                                             </div>
                                             <div class="row camposComCaucao">
-                                                <div class="col-md-5"><label>Data Pagamento do Caução:</label></div>
+                                                <div class="col-md-5"><label>Data Pagamento do CauÃ§Ã£o:</label></div>
                                                 <div class="col-md-7"><span id="aprovacaoTextCaucaoData"></span></div>
                                             </div>
                                         </div>
@@ -529,7 +529,7 @@
                                                 <div class="col-md-7"><span id="aprovacaoTextTitularConta"></span></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-5"><label>Agência:</label></div>
+                                                <div class="col-md-5"><label>AgÃªncia:</label></div>
                                                 <div class="col-md-7"><span id="aprovacaoTextAgencia"></span></div>
                                             </div>
                                             <div class="row">
@@ -541,12 +541,12 @@
                                     </div>
                                 </div>
 
-                                <!-- Botões -->
+                                <!-- BotÃµes -->
                                 <div style="text-align:center; margin-top:20px;">
                                     <button class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button>
                                     <button class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button>
                                     <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir
-                                        Pré-Contrato</button>
+                                        PrÃ©-Contrato</button>
                                 </div>
                             </div>
                         </div>
@@ -569,7 +569,7 @@
                                             <select name="assinaturaContrato" id="assinaturaContrato"
                                                 class="form-control inputInfoChamado">
                                                 <option value="">Selecione</option>
-                                                <option value="Eletrônica">Eletrônica</option>
+                                                <option value="EletrÃ´nica">EletrÃ´nica</option>
                                                 <option value="Manual">Manual</option>
                                             </select>
                                         </div>
@@ -589,7 +589,7 @@
                             <fieldset>
                                 <div class="row" id="rowAnexosSelecao">
                                     <div class="col-md-6">
-                                        <label for="tipoDocumentacao">Documentação:</label>
+                                        <label for="tipoDocumentacao">DocumentaÃ§Ã£o:</label>
                                         <select name="tipoDocumentacao" id="tipoDocumentacao" class="form-control">
                                             <option value="">Selecione um Locador</option>
                                         </select>
@@ -613,7 +613,7 @@
                 <div id="pagina-4" class="pagina">
                     <div class="panelAprovacao">
                         <div style="text-align: center;">
-                            <label for="checkboxLancarNovoContrato">Lançar Novo Contrato?</label>
+                            <label for="checkboxLancarNovoContrato">LanÃ§ar Novo Contrato?</label>
                             <br>
                             <div class="switch switch-success switch-labels">
                                 <input class="switch-input" type="checkbox" id="checkboxLancarNovoContrato"
@@ -646,7 +646,7 @@
                                         class="form-control">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="">Código</label>
+                                    <label for="">CÃ³digo</label>
                                     <input type="text" name="novoContratoCodigo" id="novoContratoCodigo"
                                         class="form-control">
                                 </div>
@@ -663,7 +663,7 @@
                                         class="form-control">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="">Condição de Pagamento</label>
+                                    <label for="">CondiÃ§Ã£o de Pagamento</label>
                                     <input type="text" name="novoContratoCondicaoPagamento"
                                         id="novoContratoCondicaoPagamento" class="form-control">
                                 </div>
@@ -675,7 +675,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label for="">Data Início</label>
+                                    <label for="">Data InÃ­cio</label>
                                     <input type="text" name="novoContratoDataInicio" id="novoContratoDataInicio"
                                         class="form-control">
                                 </div>
@@ -793,7 +793,7 @@
                 <div id="pagina-5" class="pagina">
                     <div class="panel panel-default" id="resolucao">
                         <div class="panel-heading" style="background-color: #eaeaea">
-                            <h4 class="panel-title" style="color: #58595b">Resolução</h4>
+                            <h4 class="panel-title" style="color: #58595b">ResoluÃ§Ã£o</h4>
                         </div>
                         <div class="panel-body">
                             <div class="tab-content tab-solicitante" id="divResolucao">
@@ -833,7 +833,7 @@
                                     </div>
                                     <div class="form-input">
                                         <label>
-                                            Observações:
+                                            ObservaÃ§Ãµes:
                                         </label>
                                         <textarea name="observacoes" id="observacoes"
                                             class="form-control inputCurso inputOpcional" rows="4"></textarea>
@@ -847,7 +847,7 @@
 
                     <div class="panel panel-default" id="historico">
                         <div class="panel-heading" style="background-color: #eaeaea">
-                            <h4 class="panel-title" style="color: #58595b">Histórico</h4>
+                            <h4 class="panel-title" style="color: #58595b">HistÃ³rico</h4>
                         </div>
                         <div class="panel-body">
                             <div>
@@ -870,8 +870,8 @@
                     <div class="pagination pagination-active" data-index="0">Dados Gerais</div>
                     <div class="pagination" data-index="1">Assinatura</div>
                     <div class="pagination" data-index="2">Anexos</div>
-                    <div class="pagination" data-index="3">Integração RM</div>
-                    <div class="pagination" data-index="4">Decisão</div>
+                    <div class="pagination" data-index="3">IntegraÃ§Ã£o RM</div>
+                    <div class="pagination" data-index="4">DecisÃ£o</div>
                 </div>
 
                 <button id="btn-avancar">
