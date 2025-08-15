@@ -14,11 +14,12 @@ const ATIVIDADES = {
 
 $(document).ready(function () {
     bindings();
-    console.log("paola")
-    const ATIVIDADE_ATUAL = $("#atividade").val();
+    const ATIVIDADE_ATUAL = parseInt($("#atividade").val())
     console.log(ATIVIDADE_ATUAL)
-    if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
-        loadTelaInicio();
+    if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO){
+    	loadTelaInicioRetorno(); 
+    } else if(ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
+    	loadTelaInicio(); 
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.JURIDICO) {
         loadTelaJuridico();
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {
@@ -30,9 +31,10 @@ $(document).ready(function () {
 });
 var beforeSendValidate = function (numState, nextState) {
     var atividade = parseInt(document.getElementById("atividade").value);
-    if (atividade == 0) {
-      //  return validaCampos();
-    }
+//    if (atividade == 0) {
+//        return validaCampos();
+//    }
+    return validaCampos();
 };
 
 function bindings() {
@@ -134,6 +136,41 @@ function loadTelaInicio() {
     inicializarPeriodoLocacao();
     inicializaInputAnexo();
 
+}
+function loadTelaInicioRetorno() {
+    $(".panelAprovacao").hide();
+    setAtividadeAtivaProgresso(0);
+//    preencherObrasDoUsuario();
+    buscaFornecedores();
+//    buscaBancos();
+    inicializarCalendario();
+    inicializarPeriodoLocacao();
+    inicializaInputAnexo();
+    asyncMontaHistorico()
+    renderizarAnexosEtapaAprovacao();
+        $("#formContainer").show();
+        paginaAtual = 0;
+        mostrarPagina(paginaAtual);
+        if($("#caucao").val() == "Sim"){
+        	$("#divValorCaucao, #divDataPagamentoCaucao").show();
+        }
+        if( $("#tipoPagamento").val() == "Depósito"){
+        	 $("#divPagamento, #divBanco").show();
+        }
+        $("#obra").one('click', function() {
+            if(!$(this).hasClass('opcoes-carregadas')) {
+                preencherObrasDoUsuario();
+                $(this).addClass('opcoes-carregadas');
+            }
+        });
+        
+        // Configurar o select de banco
+        $("#banco").one('click', function() {
+            if(!$(this).hasClass('opcoes-carregadas')) {
+                buscaBancos();
+                $(this).addClass('opcoes-carregadas');
+            }
+        });
 }
 
 function loadTelaJuridico() {

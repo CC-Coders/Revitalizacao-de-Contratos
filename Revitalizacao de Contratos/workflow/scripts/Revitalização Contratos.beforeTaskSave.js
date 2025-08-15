@@ -503,7 +503,10 @@ function insereHistorico(observacao, acao, atividade) {
     novaLinha.put("tableHistoricoAcao", acao);
 
     hAPI.addCardChild("tableHistorico", novaLinha);
+    hAPI.setCardValue("observacao", ""); 
+
 }
+
 function getDateTimeNow() {
     var date = new Date();
     var dia = date.getDate();

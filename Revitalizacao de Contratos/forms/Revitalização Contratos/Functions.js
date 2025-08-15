@@ -206,12 +206,25 @@ function inicializaInputAnexo() {
             const listaCarregar = document.getElementById("listaAnexos");
             const itemId = `item-${tipo}`;
 
+//            if (["CNH", "RG", "CPF"].includes(tipo)) {
+//                listaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
+//            } else {
+//                const item = document.getElementById(itemId);
+//                if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
+//            }
             if (["CNH", "RG", "CPF"].includes(tipo)) {
-                listaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
+                let item = document.getElementById(itemId);
+                if (!item) {
+                    listaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
+                    item = document.getElementById(itemId);
+                } else {
+                    item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
+                }
             } else {
                 const item = document.getElementById(itemId);
                 if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
             }
+
             const docId = await criaDocFluigRetornaDocumentId(file, 10133);
             const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
 
@@ -229,8 +242,11 @@ function inicializaInputAnexo() {
                 removeItem("item-identidade-cpf-cnh");
                 removeItem("item-RG");
                 removeItem("item-CPF");
-
-                lista.innerHTML += `<li id="item-CNH"><span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
+                const item = document.getElementById("item-CNH");
+                if (item) {
+                    item.innerHTML = `<span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span>`;
+                }
+              //  lista.innerHTML += `<li id="item-CNH"><span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
             } else if (tipo === "RG") {
                 documentosAnexados["CNH"] = null;
                 removeItem("item-identidade-rg-cnh");
@@ -306,7 +322,7 @@ function buscaBancos() {
             selectBanco.empty();
             selectBanco.append('<option value="">Selecione um banco</option>');
             bancos.forEach((banco) => {
-                selectBanco.append(`<option value="${banco.NUMBANCO}">${banco.NUMBANCO} - ${banco.NOME}</option>`);
+                selectBanco.append(`<option value="${banco.NUMBANCO} - ${banco.NOME}">${banco.NUMBANCO} - ${banco.NOME}</option>`);
             });
             selectBanco.select2({
                 placeholder: "Selecione um banco",
@@ -572,6 +588,8 @@ function anexarDocumentoAoProcesso(docId) {
 function validaCampos() {
     var atividade = parseInt(document.getElementById("atividade").value);
     var valida = true;
+    var isRetornar = document.getElementById("decisaoCancelar").checked;
+    console.log(isRetornar)
     if (atividade == 0) {
         $(".inputInfoChamado").each(function () {
             if ($(this).is(":visible") && ($(this).val() == null || $(this).val() == undefined || $(this).val() == "")) {
@@ -595,7 +613,43 @@ function validaCampos() {
             }
         });
     }
-
+    if (isRetornar) {
+        var destinoRetorno = $("#destinoRetorno").val();
+        if (destinoRetorno == null || destinoRetorno == undefined || destinoRetorno == "") {
+            $("#destinoRetorno").addClass("has-error");
+            $("#destinoRetorno").next(".select2-container").addClass("has-error");
+            if (valida) {
+                valida = false;
+                FLUIGC.toast({
+                    message: "Selecione o destino do retorno!",
+                    type: "warning",
+                });
+                $([document.documentElement, document.body]).animate(
+                    {
+                        scrollTop: $("#destinoRetorno").offset().top - screen.height * 0.15,
+                    },
+                    700
+                );
+            }
+        }
+        var observacoes = $("#observacoes").val().trim();
+        if (observacoes == null || observacoes == undefined || observacoes == "") {
+            $("#observacoes").addClass("has-error");
+            if (valida) {
+                valida = false;
+                FLUIGC.toast({
+                    message: "Preencha as observações!",
+                    type: "warning",
+                });
+                $([document.documentElement, document.body]).animate(
+                    {
+                        scrollTop: $("#observacoes").offset().top - screen.height * 0.15,
+                    },
+                    700
+                );
+            }
+        }
+    }
     if (!valida) {
         FLUIGC.toast({
             message: "Preencha todos os campos obrigatórios!",
