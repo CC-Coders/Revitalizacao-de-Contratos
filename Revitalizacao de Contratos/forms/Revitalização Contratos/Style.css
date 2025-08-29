@@ -38,7 +38,7 @@
 	border-bottom-left-radius: 8px;
 }
 
-/*Última etapa */
+/*ï¿½ltima etapa */
 .step:last-child {
 	border-top-right-radius: 8px;
 	border-bottom-right-radius: 8px;
@@ -55,7 +55,7 @@
 	transform: scale(1.02);
 }
 
-/* Etapa concluída*/
+/* Etapa concluï¿½da*/
 .step.completed {
 	background: linear-gradient(to right, #43cea2, #185a9d);
 	color: white;
@@ -69,6 +69,23 @@
 .step:not(.active):hover {
 	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
 	transform: translateY(-2px);
+}
+
+
+#divDescricaoAtividades{
+    width: 100%;
+    margin: 0px 0px 10px 0px;
+    font-family: 'Inter', sans-serif;
+    z-index: 10;
+    position: fixed;
+    top: 50px;
+    overflow-x: visible;
+    background-color: #dfeff7;
+    border-radius: 0px 0px 20px 20px;
+    padding: 20px 40px;
+      border: 1px solid black;
+    box-shadow: 5px 5px 0px 0px #5b5b5b;
+
 }
 
 /* /********************************************************************************************************/ */
@@ -419,9 +436,9 @@
 .panelAprovacao {
     background-color: #ffffff;
     border-radius: 16px;
-    padding: 30px;
+    padding: 20px 30px;
     max-width: 1400px;
-    margin: 20px auto;
+    margin: 0px auto !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     font-family: 'Segoe UI', sans-serif;
 }
@@ -437,12 +454,12 @@
     margin-bottom: 15px;
     padding: 10px 15px;
     border-radius: 8px;
-    background: #638FA5; /* opção 1 */
-    /* background: linear-gradient(135deg, #ffe259, #ffa751); opção 2 */
-    color: white;
+    background: #638FA5; /* opï¿½ï¿½o 1 */
+    /* background: linear-gradient(135deg, #ffe259, #ffa751); opï¿½ï¿½o 2 */
+    color: white !important;
     display: inline-block;
 }
-#rowAprovacao{
+.rowAprovacao{
 	display: flex;
     gap: 20px;
 }
@@ -698,11 +715,15 @@
     .step {
         flex-shrink: 0; 
     }
-    #rowAprovacao {
+    .rowAprovacao {
     display: flex;
     flex-wrap: wrap;
     }
     .navegacao-formulario{
     margin-bottom: 50px;
     }
+}
+
+.readonlyField{
+  color: black !important;
 }

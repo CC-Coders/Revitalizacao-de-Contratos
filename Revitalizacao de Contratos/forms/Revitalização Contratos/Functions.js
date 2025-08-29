@@ -777,3 +777,34 @@ async function asyncMontaHistorico() {
             }));
         });
     }
+
+
+// Descrição das Atividades
+function mostraDescricaoDaAtividade(){
+    const atividades = {
+        OBRA:{
+            descricao:"<h1>Obra</h1><p>A <b>Obra</b> é responsável pelo <b>início do processo</b>, incluíndo as <b>informações iniciais e toda a Documentação necessária</b>.</p>"
+        },
+        JURIDICO:{
+            descricao:"<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>"
+        },
+        CONTROLADORIA:{
+            descricao:"<h1>Controladoria</h1><p>A Controladoria é responsável por incluir o Contrato no RM. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>"
+        },
+        APROVACAO:{
+            descricao:"Na Aprovação o Processo passará pelo Engenheiro e Coordenador, em casos de Equipamentos pela Diretoria. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae."
+        },
+        ASSINATURA:{
+            descricao:"Na Atividade de Assiantura o processo aguarda a integração com a Wesign. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae."
+        }
+    };
+    const sequenciaDasAtividades = ["OBRA","JURIDICO","CONTROLADORIA","APROVACAO","ASSINATURA"];
+
+    var index = $(".step").index(this);
+    var atividade = sequenciaDasAtividades[index];
+
+
+    var desc = atividades[atividade].descricao;
+    $("#divDescricaoAtividades").html(desc);
+    $("#divDescricaoAtividades").show();
+}

@@ -57,13 +57,15 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
         var representantes = representantesEpya();
     }
 
-
-    for (const representante of representantes) {
-        var found = representante.tipos.find(e=>e==TIPO_CONTRATO);
-        if (found) {
-            return representante.representante;
-        }
+    var found = representantes.find(e=>e.tipos.includes(TIPO_CONTRATO));
+    if (found) {
+        return found.representante;
     }
+    else{
+        throw "Representante não encontrado.";
+    }
+
+
     
     function representantesCastilho(){
         return [
