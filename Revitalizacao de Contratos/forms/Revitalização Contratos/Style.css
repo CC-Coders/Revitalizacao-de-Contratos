@@ -71,6 +71,9 @@
 	transform: translateY(-2px);
 }
 
+.popover{
+  max-width: 800px !important;
+}
 
 #divDescricaoAtividades{
     width: 100%;

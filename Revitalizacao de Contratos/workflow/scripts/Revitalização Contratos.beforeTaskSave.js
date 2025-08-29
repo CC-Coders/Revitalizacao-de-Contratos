@@ -490,6 +490,25 @@ function alteraStatusContrato(STATUS) {
     }
 }
 
+
+// Assinatura Eletrônica
+function criaAssinaturaEletronica(){
+       var ds = DatasetFactory.getDataset("ds_auxiliar_wesign", null, [
+            DatasetFactory.createConstraint("nmArquivo", NomeArquivo, NomeArquivo, ConstraintType.MUST),
+            DatasetFactory.createConstraint("codArquivo", IdArquivo, IdArquivo, ConstraintType.MUST),
+            DatasetFactory.createConstraint("vrArquivo", versaoArquivo, versaoArquivo, ConstraintType.MUST),
+            DatasetFactory.createConstraint("codPasta", idPasta, idPasta, ConstraintType.MUST),
+            DatasetFactory.createConstraint("codRemetente", CodRemetente, CodRemetente, ConstraintType.MUST),
+            DatasetFactory.createConstraint("nmRemetente", BuscaNomeUsuario(CodRemetente), BuscaNomeUsuario(CodRemetente), ConstraintType.MUST),
+            DatasetFactory.createConstraint("status", "Enviando para assinatura", "Enviando para assinatura", ConstraintType.MUST),
+            DatasetFactory.createConstraint("metodo", "create", "create", ConstraintType.MUST),
+            DatasetFactory.createConstraint("jsonSigners", JSONUtil.toJSON(arrSigners), JSONUtil.toJSON(arrSigners), ConstraintType.MUST),
+            DatasetFactory.createConstraint("numSolic", getValue("WKNumProces"), getValue("WKNumProces"), ConstraintType.MUST)
+        ], null);
+}
+
+
+
 // Utils
 function insereHistorico(observacao, acao, atividade) {
     var USER = getValue("WKUser");

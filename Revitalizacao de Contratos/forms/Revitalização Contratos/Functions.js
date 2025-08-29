@@ -424,7 +424,7 @@ function carregaDadosDoContratoParaTelaAprovacao() {
     $("#aprovacaoTextTipoPagamento").text(tipoPagamento);
     $("#aprovacaoTextBanco").text(banco);
     $("#aprovacaoTextTitularConta").text(titular);
-    $("#aprovacaoTextAgência").text(agencia);
+    $("#aprovacaoTextAgencia").text(agencia);
     $("#aprovacaoTextContaCorrente").text(contaCorrente);
 }
 

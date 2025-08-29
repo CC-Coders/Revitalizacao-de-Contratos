@@ -38,6 +38,9 @@ var beforeSendValidate = function (numState, nextState) {
 };
 
 function bindings() {
+    FLUIGC.popover('.step',{trigger: 'hover', placement: 'auto'});
+
+
     // Amarra eventos e elementos do HTML, mantendo todas definições de evento agrupadas
     $("#btnGerarArquivo").on("click", asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao);
     $("#btnEditarArquivo").on("click", editarArquivo);
@@ -142,12 +145,13 @@ function bindings() {
 
 
     // Decrição Atividades
-    $(".wizard-progress>.step").hover(mostraDescricaoDaAtividade, ()=>{$("#divDescricaoAtividades").hide()});
+    // $(".wizard-progress>.step").hover(mostraDescricaoDaAtividade, ()=>{$("#divDescricaoAtividades").hide()});
 }
 
 function loadTelaInicio() {
     $(".panelAprovacao").hide();
     $("#divRepresentantesContratoAprovacao").hide();
+    $("#divRepresentantesContrato").show();
 
     setAtividadeAtivaProgresso(0);
     preencherObrasDoUsuario();
