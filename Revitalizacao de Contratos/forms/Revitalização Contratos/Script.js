@@ -38,6 +38,9 @@ var beforeSendValidate = function (numState, nextState) {
 };
 
 function bindings() {
+    FLUIGC.popover('.step',{trigger: 'hover', placement: 'auto'});
+
+
     // Amarra eventos e elementos do HTML, mantendo todas definições de evento agrupadas
     $("#btnGerarArquivo").on("click", asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao);
     $("#btnEditarArquivo").on("click", editarArquivo);
@@ -45,16 +48,8 @@ function bindings() {
     $("#btnVisualizarArquivo").on("click", visualizaDocumento);
     $("#btnEnviarSolicitacao").on("click", enviarSolicitacao);
     $("#btnVisualizarPreContrato").on("click", geraPreContrato);
-    $("#btn-avancar").on("click", avancarPagina);
-    $("#btn-voltar").on("click", voltarPagina);
-    $("#btnAdicionarItem").on("click", asyncAdicionarItemNovoContrato);
+   
     $("#obra").off("change").on("change", salvaDadosDaObraSelecionadaComoHiddenInput);
-    
-    $(".pagination").on("click", function(){
-        var index = parseInt($(this).attr("data-index"));
-        paginaAtual=index;
-        mostrarPagina(index);
-    });
 
     $("#tipoContrato").on("change", function () {
         if ($(this).val() === "Locação de Imóvel") {
@@ -122,11 +117,41 @@ function bindings() {
             divAnexo.style.visibility = "hidden";
         }
     });
-    
+
+
+    // Aba Assinatura
+    $("#assinaturaContrato").on("change", ()=> onchangeTipoAssinaturaContrato())
+    $("#nomeRepresentanteFornecedor").on("change", ()=> asyncVerificaSeExisteAssinanteCadastradoPorNome($(this).val()));
+    $("#tipoContrato, #obra").on("change", function(){
+        if ($("#tipoContrato").val() != "" && $("#obra").val() != "") {
+            asyncPreencheRepresentanteCastilho();
+        }
+    });
+
+
+    // Aba Integração RM
+    $("#btnAdicionarItem").on("click", asyncAdicionarItemNovoContrato);
+
+
+    // Paginacao
+    $("#btn-avancar").on("click", avancarPagina);
+    $("#btn-voltar").on("click", voltarPagina);
+      
+    $(".pagination").on("click", function(){
+        var index = parseInt($(this).attr("data-index"));
+        paginaAtual=index;
+        mostrarPagina(index);
+    });
+
+
+    // Decrição Atividades
+    // $(".wizard-progress>.step").hover(mostraDescricaoDaAtividade, ()=>{$("#divDescricaoAtividades").hide()});
 }
 
 function loadTelaInicio() {
     $(".panelAprovacao").hide();
+    $("#divRepresentantesContratoAprovacao").hide();
+    $("#divRepresentantesContrato").show();
 
     setAtividadeAtivaProgresso(0);
     preencherObrasDoUsuario();
@@ -135,7 +160,6 @@ function loadTelaInicio() {
     inicializarCalendario();
     inicializarPeriodoLocacao();
     inicializaInputAnexo();
-
 }
 function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
@@ -185,6 +209,9 @@ function loadTelaJuridico() {
     asyncMontaHistorico();
     mostrarPagina(0);
     renderizarAnexosEtapaAprovacao();
+
+    $("#divRepresentantesContrato").hide();
+        preencheInformacoesAprovacao();
 }
 
 function loadTelaControladoria() {
@@ -199,6 +226,8 @@ function loadTelaControladoria() {
     asyncMontaHistorico();
     mostrarPagina(0);
 
+    $("#divRepresentantesContrato").hide();
+        preencheInformacoesAprovacao();
 }
 
 function loadTelaAprovacao() {
@@ -209,6 +238,7 @@ function loadTelaAprovacao() {
 	    asyncMontaHistorico();
 	    mostrarPagina(0);
 	    renderizarAnexosEtapaAprovacao();
-}
-
-
+        
+        $("#divRepresentantesContrato").hide();
+        preencheInformacoesAprovacao();
+    }

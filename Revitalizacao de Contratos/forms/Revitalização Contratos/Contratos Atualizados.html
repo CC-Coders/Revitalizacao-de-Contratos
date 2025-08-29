@@ -28,6 +28,7 @@
     <!-- Formulário -->
     <script src="documentManager.js"></script>
     <script src="integracaoRMManager.js"></script>
+    <script src="representantesManager.js"></script>
     <script src="Functions.js"></script>
     <script src="Script.js"></script>
 
@@ -119,11 +120,18 @@
                 </div>
             </div>
             <div class="wizard-progress">
-                <div class="step active">Obra</div>
-                <div class="step">Jurídico</div>
-                <div class="step">Controladoria</div>
-                <div class="step">Aprovação</div>
-                <div class="step">Assinatura</div>
+                <div class="step active" data-html="true" data-toggle="popover" title="" data-content="<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>" data-original-title="Popover title">Obra</div>
+                <div class="step" data-html="true"
+                data-toggle="popover" title="" data-content="<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>" data-original-title="Popover title"
+                >Jurídico</div>
+                <div class="step" data-toggle="tooltip" title="" data-html="true" data-content="<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>" data-original-title="Popover title">Controladoria</div>
+                <div class="step" data-toggle="tooltip" title="" data-html="true" data-content="<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>" data-original-title="Popover title">Aprovação</div>
+                <div class="step" data-toggle="tooltip" title="" data-html="true" data-content="<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>" data-original-title="Popover title">Assinatura</div>
+            </div>
+            <div id="divDescricaoAtividades" style="display: none;">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta
+                provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus
+                nesciunt molestiae.
             </div>
 
             <div class="row" id="informacoesIniciais" style="padding: 24px; margin-top: 40px">
@@ -387,195 +395,289 @@
                             </fieldset>
                         </div>
                     </div>
-                                 <div class="panel panel-default" id="panelDadosPagamento">
-                    <div class="panel-heading" style="background-color: #eaeaea;">
-                        <h4 class="panel-title" style="color: #58595B">Dados para Pagamento</h4>
+                    <div class="panel panel-default" id="panelDadosPagamento">
+                        <div class="panel-heading" style="background-color: #eaeaea;">
+                            <h4 class="panel-title" style="color: #58595B">Dados para Pagamento</h4>
 
-                    </div>
-                    <div class="panel-body">
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="banco">Banco:</label>
-                                        <select name="banco" id="banco" class="form-control inputInfoChamado"></select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="tipoPagamento">Tipo de Pagamento:</label>
-                                        <select name="tipoPagamento" id="tipoPagamento"
-                                            class="form-control inputInfoChamado">
-                                            <option value="">Selecione</option>
-                                            <option value="Boleto">Boleto</option>
-                                            <option value="Depósito">Depósito</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" id="divPagamento" style="display: none">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="titular">Titular da Conta:</label>
-                                        <input type="text" id="titular" name="titular"
-                                            class="form-control inputInfoChamado" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="agencia">Agência:</label>
-                                        <input type="text" id="agencia" name="agencia"
-                                            class="form-control inputInfoChamado" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="contaCorrente">Conta Corrente:</label>
-                                        <input type="text" id="contaCorrente" name="contaCorrente"
-                                            class="form-control inputInfoChamado" />
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                </div>
-                        <div class="panel panel-default panelAprovacao">
-                            <div class="panel-heading" style="background-color: #eaeaea; margin-bottom: 20px;">
-                                <h4 class="panel-title" style="color: #58595b">Contrato - Locação de Imóvel - PF</h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row" id="rowAprovacao">
-                                    <!-- Card Dados Gerais -->
-                                    <div class="col-md-6 colAprovacao">
-                                        <div class="aprovacao-card">
-                                            <h3 style="color:white;">Dados Gerais</h3>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Obra:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextObra"></span></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Locador:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextLocador"></span></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Procurador:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextProcurador"></span></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Representante:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextRepresentante"></span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Contratante Principal:</label></div>
-                                                <div class="col-md-7"><span
-                                                        id="aprovacaoTextContratantePrincipal"></span></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Endereço do Imóvel:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextEnderecoImovel"></span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Matrícula do Imóvel:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextMatriculaImovel"></span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Finalidade da Locação:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextFinalidadeLocacao"></span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Período de Locação:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextPeriodoLocacao"></span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Janela de Pagamento:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextJanelaPagamento"></span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Caução:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextCaucao"></span></div>
-                                            </div>
-                                            <div class="row camposComCaucao">
-                                                <div class="col-md-5"><label>Valor do Caução:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextCaucaoValor"></span></div>
-                                            </div>
-                                            <div class="row camposComCaucao">
-                                                <div class="col-md-5"><label>Data Pagamento do Caução:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextCaucaoData"></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Card Dados para Pagamento -->
-                                    <div class="col-md-6 colAprovacao" style="height: 50%">
-                                        <div class="aprovacao-card">
-                                            <h3 style="color:white;">Dados para Pagamento</h3>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Tipo de Pagamento:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextTipoPagamento"></span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Banco:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextBanco"></span></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Titular da Conta:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextTitularConta"></span></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Agência:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextAgencia"></span></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5"><label>Conta Corrente:</label></div>
-                                                <div class="col-md-7"><span id="aprovacaoTextContaCorrente"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Botões -->
-                                <div style="text-align:center; margin-top:20px;">
-                                    <button class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button>
-                                    <button class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button>
-                                    <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir
-                                        Pré-Contrato</button>
-                                </div>
-                            </div>
-                        </div>
-<!--                     </div> -->
-
-                </div>
-
-                <div id="pagina-2" class="pagina">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="background-color: #eaeaea">
-                            <h4 class="panel-title" style="color: #58595b">Assinatura do Contrato</h4>
                         </div>
                         <div class="panel-body">
                             <fieldset>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="assinaturaContrato">Formato da Assinatura:</label><strong
-                                                class="strongAlert">*</strong>
-                                            <select name="assinaturaContrato" id="assinaturaContrato"
+                                            <label for="banco">Banco:</label>
+                                            <select name="banco" id="banco"
+                                                class="form-control inputInfoChamado"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="tipoPagamento">Tipo de Pagamento:</label>
+                                            <select name="tipoPagamento" id="tipoPagamento"
                                                 class="form-control inputInfoChamado">
                                                 <option value="">Selecione</option>
-                                                <option value="Eletrônica">Eletrônica</option>
-                                                <option value="Manual">Manual</option>
+                                                <option value="Boleto">Boleto</option>
+                                                <option value="Depósito">Depósito</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row" id="divPagamento" style="display: none">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="titular">Titular da Conta:</label>
+                                            <input type="text" id="titular" name="titular"
+                                                class="form-control inputInfoChamado" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="agencia">Agência:</label>
+                                            <input type="text" id="agencia" name="agencia"
+                                                class="form-control inputInfoChamado" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="contaCorrente">Conta Corrente:</label>
+                                            <input type="text" id="contaCorrente" name="contaCorrente"
+                                                class="form-control inputInfoChamado" />
+                                        </div>
+                                    </div>
+                                </div>
                             </fieldset>
+                        </div>
+                    </div>
+                    <div class="panel panel-default panelAprovacao">
+                        <div class="panel-heading" style="background-color: #eaeaea; margin-bottom: 20px;">
+                            <h4 class="panel-title" style="color: #58595b">Contrato - Locação de Imóvel - PF</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row rowAprovacao">
+                                <!-- Card Dados Gerais -->
+                                <div class="col-md-6 colAprovacao">
+                                    <div class="aprovacao-card">
+                                        <h3 style="color:white;">Dados Gerais</h3>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Obra:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextObra"></span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Locador:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextLocador"></span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Procurador:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextProcurador"></span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Representante:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextRepresentante"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Contratante Principal:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextContratantePrincipal"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Endereço do Imóvel:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextEnderecoImovel"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Matrícula do Imóvel:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextMatriculaImovel"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Finalidade da Locação:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextFinalidadeLocacao"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Período de Locação:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextPeriodoLocacao"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Janela de Pagamento:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextJanelaPagamento"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Caução:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextCaucao"></span></div>
+                                        </div>
+                                        <div class="row camposComCaucao">
+                                            <div class="col-md-5"><label>Valor do Caução:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextCaucaoValor"></span></div>
+                                        </div>
+                                        <div class="row camposComCaucao">
+                                            <div class="col-md-5"><label>Data Pagamento do Caução:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextCaucaoData"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card Dados para Pagamento -->
+                                <div class="col-md-6 colAprovacao" style="height: 50%">
+                                    <div class="aprovacao-card">
+                                        <h3 style="color:white;">Dados para Pagamento</h3>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Tipo de Pagamento:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextTipoPagamento"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Banco:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextBanco"></span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Titular da Conta:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextTitularConta"></span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Agência:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextAgencia"></span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><label>Conta Corrente:</label></div>
+                                            <div class="col-md-7"><span id="aprovacaoTextContaCorrente"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botões -->
+                            <div style="text-align:center; margin-top:20px;">
+                                <button class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button>
+                                <button class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button>
+                                <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir
+                                    Pré-Contrato</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                     </div> -->
+
+                </div>
+
+                <div id="pagina-2" class="pagina">
+                    <div id="divRepresentantesContrato" class="row rowAprovacao panelAprovacao">
+                        <div class="col-md-6 colAprovacao">
+                            <h3>Representante Castilho</h3>
+                            <div>
+                                <label for="nomeRepresentanteCastilho">Nome: </label>
+                                <input type="text" name="nomeRepresentanteCastilho" id="nomeRepresentanteCastilho"
+                                    class="form-control readonlyField" readonly inert>
+                                <br>
+                            </div>
+                            <div>
+                                <label for="cpfRepresentanteCastilho">CPF: </label>
+                                <input type="text" name="cpfRepresentanteCastilho" id="cpfRepresentanteCastilho"
+                                    class="form-control readonlyField" readonly inert>
+                                <br>
+                            </div>
+                            <div>
+                                <label for="mailRepresentanteCastilho">E-mail: </label>
+                                <input type="text" name="mailRepresentanteCastilho" id="mailRepresentanteCastilho"
+                                    class="form-control readonlyField" readonly inert>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col-md-6 colAprovacao">
+                            <h3>Representante Fornecedor</h3>
+                            <div>
+                                <label for="nomeRepresentanteFornecedor">Nome: </label>
+                                <input type="text" name="nomeRepresentanteFornecedor" id="nomeRepresentanteFornecedor"
+                                    class="form-control">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="cpfRepresentanteFornecedor">CPF: </label>
+                                <input type="text" name="cpfRepresentanteFornecedor" id="cpfRepresentanteFornecedor"
+                                    class="form-control">
+                                <br>
+                            </div>
+                            <div>
+                                <label for="mailRepresentanteFornecedor">E-mail: </label>
+                                <input type="text" name="mailRepresentanteFornecedor" id="mailRepresentanteFornecedor"
+                                    class="form-control">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divRepresentantesContratoAprovacao" class="row rowAprovacao panelAprovacao">
+                        <div class="col-md-6 colAprovacao">
+                            <h3>Representante Castilho</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="">Nome: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <span id="spanNomeRepresentanteCastilho"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="">CPF: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <span id="spanCpfRepresentanteCastilho"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="">E-mail: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <span id="spanMailRepresentanteCastilho"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 colAprovacao">
+                            <h3>Representante Fornecedor</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="">Nome: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <span id="spanNomeRepresentanteFornecedor"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="">CPF: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <span id="spanCpfRepresentanteFornecedor"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="">E-mail: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <span id="spanMailRepresentanteFornecedor"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row rowAprovacao panelAprovacao">
+                        <div class="col-md-12 colAprovacao">
+                            <h3>Assinatura do Contrato</h3>
+                            <div class="form-group">
+                                <label for="assinaturaContrato">Formato da Assinatura:</label>
+                                <!-- <strong class="strongAlert">*</strong> -->
+                                <select name="assinaturaContrato" id="assinaturaContrato"
+                                    class="form-control inputInfoChamado">
+                                    <option value="">Selecione</option>
+                                    <option value="Eletrônica">Eletrônica</option>
+                                    <option value="Manual">Manual</option>
+                                </select>
+                                <span id="spanAssinaturaContrato"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -820,15 +922,15 @@
                                             </div>
                                         </div>
                                     </div>
-      								  <div class="form-input" style="display: none" id="divDestinoRetorno">
+                                    <div class="form-input" style="display: none" id="divDestinoRetorno">
                                         <label>
                                             Selecionar Destino do Retorno:
                                         </label>
-                                      <select name="destinoRetorno" id="destinoRetorno"
-				                            class="form-control inputInfoChamado">
-				                            <option value="">Selecione</option>
+                                        <select name="destinoRetorno" id="destinoRetorno"
+                                            class="form-control inputInfoChamado">
+                                            <option value="">Selecione</option>
 
-				                        </select>
+                                        </select>
                                         <br />
                                     </div>
                                     <div class="form-input">
