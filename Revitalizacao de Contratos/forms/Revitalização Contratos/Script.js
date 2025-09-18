@@ -224,6 +224,7 @@ function loadTelaControladoria() {
     $(".panelAprovacao").show();
     $("#formContainer").show();
     $("#divBtnEnviar").hide();
+    bindingCamposIntegracaoRM();
 
     $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
     setAtividadeAtivaProgresso(2);
