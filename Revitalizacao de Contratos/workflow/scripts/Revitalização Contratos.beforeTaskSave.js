@@ -492,8 +492,8 @@ function alteraStatusContrato(STATUS) {
 
 
 // Assinatura Eletrônica
-function criaAssinaturaEletronica(){
-       var ds = DatasetFactory.getDataset("ds_auxiliar_wesign", null, [
+function criaAssinaturaEletronica() {
+    var ds = DatasetFactory.getDataset("ds_auxiliar_wesign",null,[
             DatasetFactory.createConstraint("nmArquivo", NomeArquivo, NomeArquivo, ConstraintType.MUST),
             DatasetFactory.createConstraint("codArquivo", IdArquivo, IdArquivo, ConstraintType.MUST),
             DatasetFactory.createConstraint("vrArquivo", versaoArquivo, versaoArquivo, ConstraintType.MUST),
@@ -503,8 +503,16 @@ function criaAssinaturaEletronica(){
             DatasetFactory.createConstraint("status", "Enviando para assinatura", "Enviando para assinatura", ConstraintType.MUST),
             DatasetFactory.createConstraint("metodo", "create", "create", ConstraintType.MUST),
             DatasetFactory.createConstraint("jsonSigners", JSONUtil.toJSON(arrSigners), JSONUtil.toJSON(arrSigners), ConstraintType.MUST),
-            DatasetFactory.createConstraint("numSolic", getValue("WKNumProces"), getValue("WKNumProces"), ConstraintType.MUST)
-        ], null);
+            DatasetFactory.createConstraint("numSolic", getValue("WKNumProces"), getValue("WKNumProces"), ConstraintType.MUST),
+        ],null);
+
+    if (ds.getValue(0, "Result") == "OK") {
+        return true;
+    } else {
+        log.error(ds.getValue("Erro ao enviar Assinatura Eletronica"));
+        log.error(ds.getValue(0, "mensagem"));
+        throw "Erro ao Criar a Assinatura Eletrôncia: " + ds.getValue(0, "mensagem");
+    }
 }
 
 

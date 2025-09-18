@@ -152,6 +152,7 @@ function loadTelaInicio() {
     $(".panelAprovacao").hide();
     $("#divRepresentantesContratoAprovacao").hide();
     $("#divRepresentantesContrato").show();
+    $("#divTipoAssinaturaContrato").show();
 
     setAtividadeAtivaProgresso(0);
     preencherObrasDoUsuario();
@@ -163,6 +164,9 @@ function loadTelaInicio() {
 }
 function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
+    $("#divRepresentantesContrato").show();
+    $("#divTipoAssinaturaContrato").show();
+
     setAtividadeAtivaProgresso(0);
 //    preencherObrasDoUsuario();
     buscaFornecedores();
