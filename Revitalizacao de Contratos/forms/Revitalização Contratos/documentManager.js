@@ -187,7 +187,7 @@ async function convertDocxToPdf(docxBlob) {
     let html, headerHtml, footerHtml;
     try {
         const docxHtmlResponse = await axios.post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, { responseType: "json" });
-        html = docxHtmlResponse.data.html;
+        html = docxHtmlResponse.data.html + `<div class="watermark" style="font-size: 50px;opacity: 0.5;color: black;position: fixed;left: 20%;top: 50%;transform: rotate(25deg);letter-spacing: 10px;">SEM VALOR CONTRATUAL</div>`;
         headerHtml = docxHtmlResponse.data.headers?.default?.html || "";
         footerHtml = docxHtmlResponse.data.footers?.default?.html || "";
     } catch (error) {
@@ -370,9 +370,9 @@ async function loadCkEditor() {
     } = window.CKEDITOR_PREMIUM_FEATURES;
 
     const LICENSE_KEY =
-        "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NTQ0MzgzOTksImp0aSI6Ijg5YmUwMzM4LWE1M2EtNDEzZC1hMjY4LTA4YTdiMzNhMGY4ZiIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6ImM1YzRkMTUwIn0.IC4kRbMDckN9tAYgF3gfIqdC-IcIFwskVaS5OkVgJEWNLxqbUL_XrqPp5jxq6uYdbXcuIVdodUL2oPF2WTxZHw";
+        "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NTkyNzY3OTksImp0aSI6IjM2YjE2NzlmLWEzNjYtNDhiMy1iZTkyLTdmNzEyNTE4M2M0YiIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6IjIzZTVlYzYxIn0.7lGKD1PuLGNDrKRBu3yGL6r5ewjSOJVEObpg2UcwT5AZHl8UhjMqPKdXM-ltwmGqx1U4J1Zpmg7lp7oE2llXPQ";
 
-    const CLOUD_SERVICES_TOKEN_URL = "https://kgpduuc7hd0x.cke-cs.com/token/dev/407f4638faf927a773c40624a83b760abd427256264bba2c07f63af67045?limit=10";
+    const CLOUD_SERVICES_TOKEN_URL = "https://utlwjl2qznbm.cke-cs.com/token/dev/f5b90ac332b5e0cda48e1ff594046f04709db54b3105553df15f9a6e51ab?limit=10";
 
     const editorConfig = {
         toolbar: {
@@ -433,7 +433,7 @@ async function loadCkEditor() {
                 "outdent",
                 "indent",
             ],
-            shouldNotGroupWhenFull: false,
+            shouldNotGroupWhenFull: true,
         },
         plugins: [
             Alignment,
@@ -579,7 +579,7 @@ async function loadCkEditor() {
             },
         },
         importWord: {
-            tokenUrl: "https://kgpduuc7hd0x.cke-cs.com/token/dev/407f4638faf927a773c40624a83b760abd427256264bba2c07f63af67045?limit=10",
+            tokenUrl: "https://utlwjl2qznbm.cke-cs.com/token/dev/f5b90ac332b5e0cda48e1ff594046f04709db54b3105553df15f9a6e51ab?limit=10",
         },
         fontFamily: {
             supportAllValues: true,
