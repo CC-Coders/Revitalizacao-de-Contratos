@@ -177,7 +177,7 @@
             </div>
             <br />
             <div id="formContainer" class="panel-body" style="display: none; margin-bottom: 20px; margin-top: 10px;">
-                <div id="pagina-1" class="pagina">
+                <div id="pagina-1" data-index="0" class="pagina">
                     <div class="panel panel-default" id="panelDadosGerais">
                         <div class="panel-heading" style="background-color: #eaeaea">
                             <h4 class="panel-title" style="color: #58595b">Dados Gerais</h4>
@@ -562,8 +562,7 @@
                     <!--                     </div> -->
 
                 </div>
-
-                <div id="pagina-2" class="pagina">
+                <div id="pagina-2" data-index="1" class="pagina">
                     <div id="divRepresentantesContrato" class="row rowAprovacao panelAprovacao">
                         <div class="col-md-6 colAprovacao">
                             <h3>Representante Castilho</h3>
@@ -681,8 +680,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div id="pagina-3" class="pagina">
+                <div id="pagina-3" data-index="2" class="pagina">
                     <div class="panel panel-default" id="anexos">
                         <div class="panel-heading" style="background-color: #eaeaea">
                             <h4 class="panel-title" style="color: #58595b">Anexos</h4>
@@ -711,8 +709,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div id="pagina-4" class="pagina">
+                <div id="pagina-4" data-index="3" class="pagina">
                     <div class="panelAprovacao">
                         <div style="text-align: center;">
                             <label for="checkboxLancarNovoContrato">Lançar Novo Contrato?</label>
@@ -892,7 +889,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="pagina-5" class="pagina">
+                <div id="pagina-5" data-index="4" class="pagina">
                     <div class="panel panel-default" id="resolucao">
                         <div class="panel-heading" style="background-color: #eaeaea">
                             <h4 class="panel-title" style="color: #58595b">Resolução</h4>
@@ -972,7 +969,7 @@
                     <div class="pagination pagination-active" data-index="0">Dados Gerais</div>
                     <div class="pagination" data-index="1">Assinatura</div>
                     <div class="pagination" data-index="2">Anexos</div>
-                    <div class="pagination" data-index="3">Integração RM</div>
+                    <div class="pagination" data-index="3" id="paginationIntegracaoRM">Integração RM</div>
                     <div class="pagination" data-index="4">Decisão</div>
                 </div>
 

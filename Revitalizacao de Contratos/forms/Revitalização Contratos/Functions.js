@@ -464,43 +464,34 @@ async function enviarSolicitacao() {
     }
 }
 
-let paginaAtual = 0;
-function mostrarPagina(indice) {
+function mostrarPagina(indice, move) {
+    if (move == "set") {
+        var indiceAtivo = $(".pagination-active").attr("data-index");
+        if (indiceAtivo > indice) {
+            move = "prev";
+        }else{
+            move = "next";
+        }
+    }
 
     $(".pagination-active").removeClass("pagination-active", 250);
-    $(`.pagination:nth-child(${indice+1})`).addClass("pagination-active", 250);
-
-
-    const paginas = document.querySelectorAll(".pagina");
-    const totalPaginas = paginas.length;
-
-    paginas.forEach((p, i) => {
-        p.classList.remove("ativa", "escondida-para-direita", "escondida-para-esquerda");
-
-        if (i === indice) {
-            p.classList.add("ativa");
-            p.style.position = "relative";
-        } else if (i < indice) {
-            p.classList.add("escondida-para-esquerda");
-            p.style.position = "absolute";
-        } else {
-            p.classList.add("escondida-para-direita");
-            p.style.position = "absolute";
-        }
-        $(window).scrollTop(0)
-    });
+    $(`.pagination[data-index='${indice}']`).addClass("pagination-active", 250);
+    
+    $(`.pagina.ativa[data-index!='${indice}']`).removeClass("ativa").addClass(move == "next" ? "escondida-para-esquerda" : "escondida-para-direita").css("position","absolute");
+    $(`.pagina[data-index='${indice}']`).addClass("ativa",250).removeClass("escondida-para-direita",250).removeClass("escondida-para-esquerda",250).css("position","relative");
 }
 function avancarPagina() {
-    const totalPaginas = document.querySelectorAll(".pagina").length;
-    if (paginaAtual < totalPaginas - 1) {
-        paginaAtual++;
-        mostrarPagina(paginaAtual);
+    var active = $(".pagination-active");
+    var index = $(active).next(".pagination").attr("data-index");
+    if (index) {
+        mostrarPagina(index, "next");
     }
 }
 function voltarPagina() {
-    if (paginaAtual > 0) {
-        paginaAtual--;
-        mostrarPagina(paginaAtual);
+    var active = $(".pagination-active");
+    var index = $(active).prev(".pagination").attr("data-index");
+    if (index) {
+        mostrarPagina(index , "prev");
     }
 }
 function handleFileUpload(inputId, descricaoArquivo) {

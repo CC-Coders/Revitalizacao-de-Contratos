@@ -54,8 +54,7 @@ function bindings() {
     $("#tipoContrato").on("change", function () {
         if ($(this).val() === "Locação de Imóvel") {
             $("#formContainer").show();
-            paginaAtual = 0;
-            mostrarPagina(paginaAtual);
+            mostrarPagina("0");
         } else {
             $("#formContainer").hide();
         }
@@ -138,9 +137,8 @@ function bindings() {
     $("#btn-voltar").on("click", voltarPagina);
       
     $(".pagination").on("click", function(){
-        var index = parseInt($(this).attr("data-index"));
-        paginaAtual=index;
-        mostrarPagina(index);
+        var index = $(this).attr("data-index");
+        mostrarPagina(index, "set");
     });
 
 
@@ -154,6 +152,8 @@ function loadTelaInicio() {
     $("#divRepresentantesContrato").show();
     $("#divTipoAssinaturaContrato").show();
 
+    $("#paginationIntegracaoRM").remove();
+
     setAtividadeAtivaProgresso(0);
     preencherObrasDoUsuario();
     buscaFornecedores();
@@ -166,7 +166,7 @@ function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
     $("#divRepresentantesContrato").show();
     $("#divTipoAssinaturaContrato").show();
-
+    $("#paginationIntegracaoRM").remove();
     setAtividadeAtivaProgresso(0);
 //    preencherObrasDoUsuario();
     buscaFornecedores();
@@ -177,8 +177,7 @@ function loadTelaInicioRetorno() {
     asyncMontaHistorico()
     renderizarAnexosEtapaAprovacao();
         $("#formContainer").show();
-        paginaAtual = 0;
-        mostrarPagina(paginaAtual);
+        mostrarPagina("0");
         if($("#caucao").val() == "Sim"){
         	$("#divValorCaucao, #divDataPagamentoCaucao").show();
         }
@@ -211,7 +210,7 @@ function loadTelaJuridico() {
     setAtividadeAtivaProgresso(1);
     carregaDadosDoContratoParaTelaAprovacao();
     asyncMontaHistorico();
-    mostrarPagina(0);
+    mostrarPagina("0");
     renderizarAnexosEtapaAprovacao();
 
     $("#divRepresentantesContrato").hide();
@@ -228,7 +227,7 @@ function loadTelaControladoria() {
     setAtividadeAtivaProgresso(2);
     carregaDadosDoContratoParaTelaAprovacao();
     asyncMontaHistorico();
-    mostrarPagina(0);
+    mostrarPagina("0");
 
     $("#divRepresentantesContrato").hide();
         preencheInformacoesAprovacao();
@@ -240,7 +239,7 @@ function loadTelaAprovacao() {
 	    setAtividadeAtivaProgresso(3);
 	    carregaDadosDoContratoParaTelaAprovacao();
 	    asyncMontaHistorico();
-	    mostrarPagina(0);
+	    mostrarPagina("0");
 	    renderizarAnexosEtapaAprovacao();
         
         $("#divRepresentantesContrato").hide();
