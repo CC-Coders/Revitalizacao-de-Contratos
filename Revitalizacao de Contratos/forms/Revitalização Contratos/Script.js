@@ -53,10 +53,9 @@ function bindings() {
 
     $("#tipoContrato").on("change", function () {
         if ($(this).val() === "Locação de Imóvel") {
-            $("#formContainer").show();
-            mostrarPagina("0");
+            $("#dadosContrato").show();
         } else {
-            $("#formContainer").hide();
+            $("#dadosContrato").hide();
         }
     });
     $("#caucao").on("change", function () {
@@ -154,6 +153,8 @@ function loadTelaInicio() {
 
     $("#paginationIntegracaoRM").remove();
 
+    $("#historico, #divDecisaoAprovar, #divDecisaoCancelar").hide();
+    mostrarPagina("0");
     setAtividadeAtivaProgresso(0);
     preencherObrasDoUsuario();
     buscaFornecedores();
@@ -214,7 +215,8 @@ function loadTelaJuridico() {
     renderizarAnexosEtapaAprovacao();
 
     $("#divRepresentantesContrato").hide();
-        preencheInformacoesAprovacao();
+    preencheInformacoesAprovacao();
+    $("#paginationIntegracaoRM").remove();
 }
 
 function loadTelaControladoria() {

@@ -479,6 +479,7 @@ function mostrarPagina(indice, move) {
     
     $(`.pagina.ativa[data-index!='${indice}']`).removeClass("ativa").addClass(move == "next" ? "escondida-para-esquerda" : "escondida-para-direita").css("position","absolute");
     $(`.pagina[data-index='${indice}']`).addClass("ativa",250).removeClass("escondida-para-direita",250).removeClass("escondida-para-esquerda",250).css("position","relative");
+    $(window).scrollTop(0)
 }
 function avancarPagina() {
     var active = $(".pagination-active");
