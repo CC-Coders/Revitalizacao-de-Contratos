@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <link rel="stylesheet" href="/castilho_dev_guide/resources/css/castilho-cards.css" />
-    <link rel="stylesheet" href="Style.css" />
 
     <!-- Scripts (jQuery e dependências) -->
     <script src="/resources/js/jquery/jquery.js"></script>
@@ -26,11 +25,13 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
     <!-- Formulário -->
-    <script src="documentManager.js"></script>
-    <script src="integracaoRMManager.js"></script>
-    <script src="representantesManager.js"></script>
-    <script src="Functions.js"></script>
+    <script src="js/documentManager.js"></script>
+    <script src="js/integracaoRMManager.js"></script>
+    <script src="js/representantesManager.js"></script>
+    <script src="js/Functions.js"></script>
     <script src="Script.js"></script>
+    <link rel="stylesheet" href="css/Style.css" />
+
 
     <!-- Castilho Dev Guida -->
     <script src="/castilho_dev_guide/resources/js/castilho-utils.js"></script>
@@ -720,7 +721,7 @@
                                     <label class="switch-button" for="checkboxLancarNovoContrato">Toggle</label>
                                 </div>
                             </div>
-                            <div id="dadosRMNovoContrato">
+                            <div id="dadosRMNovoContrato" style="display: none;">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="">Coligada</label>
@@ -742,7 +743,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Código</label>
-                                        <select name="novoContratoCodigo" id="novoContratoCodigo" class="form-control"></select>
+                                        <input name="novoContratoCodigo" id="novoContratoCodigo" class="form-control"/>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Local de estoque</label>
@@ -799,8 +800,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="">Fornecedor</label>
-                                        <select name="novoContratoFornecedor" id="novoContratoFornecedor"
-                                            class="form-control"></select>
+                                        <inp name="novoContratoFornecedor" id="novoContratoFornecedor" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="row">
