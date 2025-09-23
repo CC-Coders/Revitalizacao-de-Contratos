@@ -53,51 +53,51 @@ function preencherObrasDoUsuario() {
 }
 
 function buscaFornecedores_preencheOptionsDoCampoLocador_IniciaSelect2() {
-    DatasetFactory.getDataset("FCFO",["CODCFO", "CGCCFO", "NOMEFANTASIA"],[
-        DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST), 
+    DatasetFactory.getDataset("FCFO", ["CODCFO", "CGCCFO", "NOMEFANTASIA"], [
+        DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST),
         DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
-    ],null,{
-            success: (fornecedores) => {
-                if (fornecedores.columns[0] == "error") {
-                    FLUIGC.toast({
-                        title: "Erro ao buscar fornecedores: ",
-                        message: fornecedores.values[0].error,
-                        type: "warning",
-                    });
-                } else {
-                    var optSelected = $("#locador").val();
-
-                    var html = "<option></option>";
-                    fornecedores.values.forEach((fornecedor) => html +=`<option value="${fornecedor.CODCFO} - ${fornecedor.CGCCFO} - ${fornecedor.NOMEFANTASIA}">${fornecedor.CGCCFO} - ${fornecedor.NOMEFANTASIA}</option>`);                    
-                    $("#locador").html(html);
-
-                    $("#locador").val(optSelected);
-                    $("#locador").select2({
-                        height: "34px",
-                        width: "100%",
-                        minimumInputLength: 4,
-                        language: {
-                            inputTooShort: () => "Digite pelo menos 4 caracteres",
-                            noResults: () => "Nenhum resultado encontrado",
-                            searching: () => "Buscando...",
-                        },
-                    });
-
-                    $(".select2-container")
-                        .off("click")
-                        .on("click", function () {
-                            $(this).removeClass("has-error");
-                        });
-                }
-            },
-            error: (error) => {
+    ], null, {
+        success: (fornecedores) => {
+            if (fornecedores.columns[0] == "error") {
                 FLUIGC.toast({
                     title: "Erro ao buscar fornecedores: ",
-                    message: error,
+                    message: fornecedores.values[0].error,
                     type: "warning",
                 });
-            },
-        }
+            } else {
+                var optSelected = $("#locador").val();
+
+                var html = "<option></option>";
+                fornecedores.values.forEach((fornecedor) => html += `<option value="${fornecedor.CODCFO} - ${fornecedor.CGCCFO} - ${fornecedor.NOMEFANTASIA}">${fornecedor.CGCCFO} - ${fornecedor.NOMEFANTASIA}</option>`);
+                $("#locador").html(html);
+
+                $("#locador").val(optSelected);
+                $("#locador").select2({
+                    height: "34px",
+                    width: "100%",
+                    minimumInputLength: 4,
+                    language: {
+                        inputTooShort: () => "Digite pelo menos 4 caracteres",
+                        noResults: () => "Nenhum resultado encontrado",
+                        searching: () => "Buscando...",
+                    },
+                });
+
+                $(".select2-container")
+                    .off("click")
+                    .on("click", function () {
+                        $(this).removeClass("has-error");
+                    });
+            }
+        },
+        error: (error) => {
+            FLUIGC.toast({
+                title: "Erro ao buscar fornecedores: ",
+                message: error,
+                type: "warning",
+            });
+        },
+    }
     );
 }
 
@@ -717,7 +717,7 @@ async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores() {
         $("#CODCCUSTO").val(CODCCUSTO);
         $("#NOMECCUSTO").val(NOMECCUSTO);
 
-        var aprovadores =  extraiAprovadoresDaLista(await promiseBuscaAprovadoresDaObra(CODCOLIGADA, NOMECCUSTO, "1.1.02", "9999999999999"));
+        var aprovadores = extraiAprovadoresDaLista(await promiseBuscaAprovadoresDaObra(CODCOLIGADA, NOMECCUSTO, "1.1.02", "9999999999999"));
         $("#engenheiro").val(aprovadores.engenherio);
         $("#coordenador").val(aprovadores.diretor);
         $("#diretor").val(aprovadores.engenherio);
@@ -726,22 +726,22 @@ async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores() {
     // Aprovadores
     function promiseBuscaAprovadoresDaObra(CODCOLIGADA, LOCALESTOQUE, CODTMV, valorTotal) {
         return new Promise((resolve, reject) => {
-            DatasetFactory.getDataset("verificaAprovador",null,[
-            DatasetFactory.createConstraint("paramCodcoligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
-            DatasetFactory.createConstraint("paramLocal", LOCALESTOQUE, LOCALESTOQUE, ConstraintType.MUST),
-            DatasetFactory.createConstraint("paramCodTmv", CODTMV, CODTMV, ConstraintType.MUST),
-            DatasetFactory.createConstraint("paramValorTotal", valorTotal, valorTotal, ConstraintType.MUST),],null,{
-                    success: (ds) => {
-                        if (ds.columns[0] == "FALHA") {
-                            reject(ds.values[0].FALHA);
-                        }
+            DatasetFactory.getDataset("verificaAprovador", null, [
+                DatasetFactory.createConstraint("paramCodcoligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+                DatasetFactory.createConstraint("paramLocal", LOCALESTOQUE, LOCALESTOQUE, ConstraintType.MUST),
+                DatasetFactory.createConstraint("paramCodTmv", CODTMV, CODTMV, ConstraintType.MUST),
+                DatasetFactory.createConstraint("paramValorTotal", valorTotal, valorTotal, ConstraintType.MUST),], null, {
+                success: (ds) => {
+                    if (ds.columns[0] == "FALHA") {
+                        reject(ds.values[0].FALHA);
+                    }
 
-                        resolve(ds.values);
-                    },
-                    error: (e) => {
-                        reject(e);
-                    },
-                }
+                    resolve(ds.values);
+                },
+                error: (e) => {
+                    reject(e);
+                },
+            }
             );
         });
     }
@@ -793,9 +793,9 @@ function popularDestinoRetorno() {
     }
     opcoes.forEach(opcao => {
         $select.append($('<option>', {
-                value: opcao.value,
-                text: opcao.text
-            }));
+            value: opcao.value,
+            text: opcao.text
+        }));
     });
 }
 

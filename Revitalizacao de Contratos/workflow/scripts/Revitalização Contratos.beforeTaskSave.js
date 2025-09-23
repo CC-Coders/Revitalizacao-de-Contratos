@@ -81,8 +81,8 @@ function beforeTaskSave_inicio() {
     insereHistorico(hAPI.getCardValue("observacoes"), "Início", "Início");
 }
 function beforeTaskSave_juridico() {
- //   insereHistorico("#TODO: Definir o campo de Observação", "#TODO: Definir o campo de Decisão", "Jurídico");
-	insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Jurídico");
+    //   insereHistorico("#TODO: Definir o campo de Observação", "#TODO: Definir o campo de Decisão", "Jurídico");
+    insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Jurídico");
 }
 function beforeTaskSave_controladoria() {
     try {
@@ -213,13 +213,13 @@ function buscaParamentrosCriacaoContrato() {
         DIAFATURAMENTO: DIAFATURAMENTO + "",
         QTDEFATURAMENTOS: QTDEFATURAMENTOS + "",
         urlSolicitacao: urlSolicitacao + "",
-        TIPOFATURAMENTO:TIPOFATURAMENTO + "",
+        TIPOFATURAMENTO: TIPOFATURAMENTO + "",
         NATUREZA: "1" + "",
         ITENS: ITENS,
     };
 }
 function validaParametros(parametros) {
-    
+
     var erroRetorno = [];
     if (parametros.CODCOLIGADA == undefined || parametros.CODCOLIGADA == null || parametros.CODCOLIGADA == "") {
         erroRetorno.push("CODCOLIGADA");
@@ -317,30 +317,30 @@ function validaParametros(parametros) {
             log.info(typeof item.RATDEP);
             log.info(item.RATDEP.length);
             log.dir(item.RATDEP);
-            
+
             // item.RATDEP = JSON.parse(item.RATDEP);
         } catch (error) {
-            log.info("Erro no parse do JSON RATDEP");            
+            log.info("Erro no parse do JSON RATDEP");
             erroRetorno.push("Item RATDEP");
         }
 
         try {
-            
-        
-        for (var j = 0; j < item.RATDEP.length; j++) {
-            var RATEIO = item.RATDEP[j];
-            log.dir(item.RATDEP);
-            log.dir(RATEIO);
-            log.dir(item.RATDEP[j]);
-            log.info(RATEIO.CODDEPTO);
 
-            if (RATEIO.CODDEPTO == undefined || item.RATDEP[j].CODDEPTO == null || item.RATDEP[j].RATEIO.CODDEPTO == "") {
-                erroRetorno.push("RATDEP DEPTO");
+
+            for (var j = 0; j < item.RATDEP.length; j++) {
+                var RATEIO = item.RATDEP[j];
+                log.dir(item.RATDEP);
+                log.dir(RATEIO);
+                log.dir(item.RATDEP[j]);
+                log.info(RATEIO.CODDEPTO);
+
+                if (RATEIO.CODDEPTO == undefined || item.RATDEP[j].CODDEPTO == null || item.RATDEP[j].RATEIO.CODDEPTO == "") {
+                    erroRetorno.push("RATDEP DEPTO");
+                }
+                if (item.RATDEP[j].PERCENTUAL == undefined || item.RATDEP[j].PERCENTUAL == null || item.RATDEP[j].PERCENTUAL == "") {
+                    erroRetorno.push("RATDEP PERCENTUAL");
+                }
             }
-            if (item.RATDEP[j].PERCENTUAL == undefined || item.RATDEP[j].PERCENTUAL == null || item.RATDEP[j].PERCENTUAL == "") {
-                erroRetorno.push("RATDEP PERCENTUAL");
-            }
-        }
         } catch (error) {
             log.dir(error);
         }
@@ -476,42 +476,42 @@ function geraXML_TITMCNTRATDEP(parametros) {
 
 function alteraStatusContrato(STATUS) {
     try {
-        
-    
-    var CODSTACNT = STATUS_CONTRATOS[STATUS];
-    if (!CODSTACNT || CODSTACNT == null || CODSTACNT == "") {
-        throw "Necessário informar CODSTACNT";
-    }
 
-    var xml = "";
-    xml += "<CTRCNT>";
-    xml += "    <TCNT>";
-    xml += "         <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
-    xml += "         <IDCNT>" + IDCNT + "</IDCNT>";
-    xml += "         <CODSTACNT>" + CODSTACNT + "</CODSTACNT>";
-    xml += "     </TCNT>";
-    xml += "</CTRCNT>";
 
-    var contexto = "CODSISTEMA=G;CODCOLIGADA=" + CODCOLIGADA + ";CODUSUARIO=fluig";
+        var CODSTACNT = STATUS_CONTRATOS[STATUS];
+        if (!CODSTACNT || CODSTACNT == null || CODSTACNT == "") {
+            throw "Necessário informar CODSTACNT";
+        }
 
-    var retorno = DatasetFactory.getDataset(
-        "InsereContratoRM",
-        null,
-        [
-            DatasetFactory.createConstraint("coligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
-            DatasetFactory.createConstraint("idContrato", IDCNT, IDCNT, ConstraintType.MUST),
-            DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST),
-            DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST),
-        ],
-        null
-    );
-    if (retorno.values[0][0] == "false") {
-                throw "Erro ao gerar contrato. Favor entrar em contato com o administrador do sistema. Mensagem: " + retorno.values[0][1];
-            } else if (retorno.values[0][0] == "true") {
-                return true;
+        var xml = "";
+        xml += "<CTRCNT>";
+        xml += "    <TCNT>";
+        xml += "         <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
+        xml += "         <IDCNT>" + IDCNT + "</IDCNT>";
+        xml += "         <CODSTACNT>" + CODSTACNT + "</CODSTACNT>";
+        xml += "     </TCNT>";
+        xml += "</CTRCNT>";
 
-            }
-        
+        var contexto = "CODSISTEMA=G;CODCOLIGADA=" + CODCOLIGADA + ";CODUSUARIO=fluig";
+
+        var retorno = DatasetFactory.getDataset(
+            "InsereContratoRM",
+            null,
+            [
+                DatasetFactory.createConstraint("coligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+                DatasetFactory.createConstraint("idContrato", IDCNT, IDCNT, ConstraintType.MUST),
+                DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST),
+                DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST),
+            ],
+            null
+        );
+        if (retorno.values[0][0] == "false") {
+            throw "Erro ao gerar contrato. Favor entrar em contato com o administrador do sistema. Mensagem: " + retorno.values[0][1];
+        } else if (retorno.values[0][0] == "true") {
+            return true;
+
+        }
+
     } catch (error) {
         throw error;
     }
@@ -520,18 +520,18 @@ function alteraStatusContrato(STATUS) {
 
 // Assinatura Eletrônica
 function criaAssinaturaEletronica() {
-    var ds = DatasetFactory.getDataset("ds_auxiliar_wesign",null,[
-            DatasetFactory.createConstraint("nmArquivo", NomeArquivo, NomeArquivo, ConstraintType.MUST),
-            DatasetFactory.createConstraint("codArquivo", IdArquivo, IdArquivo, ConstraintType.MUST),
-            DatasetFactory.createConstraint("vrArquivo", versaoArquivo, versaoArquivo, ConstraintType.MUST),
-            DatasetFactory.createConstraint("codPasta", idPasta, idPasta, ConstraintType.MUST),
-            DatasetFactory.createConstraint("codRemetente", CodRemetente, CodRemetente, ConstraintType.MUST),
-            DatasetFactory.createConstraint("nmRemetente", BuscaNomeUsuario(CodRemetente), BuscaNomeUsuario(CodRemetente), ConstraintType.MUST),
-            DatasetFactory.createConstraint("status", "Enviando para assinatura", "Enviando para assinatura", ConstraintType.MUST),
-            DatasetFactory.createConstraint("metodo", "create", "create", ConstraintType.MUST),
-            DatasetFactory.createConstraint("jsonSigners", JSONUtil.toJSON(arrSigners), JSONUtil.toJSON(arrSigners), ConstraintType.MUST),
-            DatasetFactory.createConstraint("numSolic", getValue("WKNumProces"), getValue("WKNumProces"), ConstraintType.MUST),
-        ],null);
+    var ds = DatasetFactory.getDataset("ds_auxiliar_wesign", null, [
+        DatasetFactory.createConstraint("nmArquivo", NomeArquivo, NomeArquivo, ConstraintType.MUST),
+        DatasetFactory.createConstraint("codArquivo", IdArquivo, IdArquivo, ConstraintType.MUST),
+        DatasetFactory.createConstraint("vrArquivo", versaoArquivo, versaoArquivo, ConstraintType.MUST),
+        DatasetFactory.createConstraint("codPasta", idPasta, idPasta, ConstraintType.MUST),
+        DatasetFactory.createConstraint("codRemetente", CodRemetente, CodRemetente, ConstraintType.MUST),
+        DatasetFactory.createConstraint("nmRemetente", BuscaNomeUsuario(CodRemetente), BuscaNomeUsuario(CodRemetente), ConstraintType.MUST),
+        DatasetFactory.createConstraint("status", "Enviando para assinatura", "Enviando para assinatura", ConstraintType.MUST),
+        DatasetFactory.createConstraint("metodo", "create", "create", ConstraintType.MUST),
+        DatasetFactory.createConstraint("jsonSigners", JSONUtil.toJSON(arrSigners), JSONUtil.toJSON(arrSigners), ConstraintType.MUST),
+        DatasetFactory.createConstraint("numSolic", getValue("WKNumProces"), getValue("WKNumProces"), ConstraintType.MUST),
+    ], null);
 
     if (ds.getValue(0, "Result") == "OK") {
         return true;
@@ -557,7 +557,7 @@ function insereHistorico(observacao, acao, atividade) {
     novaLinha.put("tableHistoricoAcao", acao);
 
     hAPI.addCardChild("tableHistorico", novaLinha);
-    hAPI.setCardValue("observacao", ""); 
+    hAPI.setCardValue("observacao", "");
 
 }
 

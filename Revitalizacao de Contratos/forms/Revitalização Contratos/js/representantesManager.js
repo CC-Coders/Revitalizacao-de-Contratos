@@ -1,4 +1,4 @@
-async function asyncPreencheRepresentanteCastilho(){
+async function asyncPreencheRepresentanteCastilho() {
     try {
         const CODCOLIGADA = $("#CODCOLIGADA").val();
         const TIPO_CONTRATO = $("#tipoContrato").val();
@@ -19,27 +19,27 @@ async function asyncVerificaSeExisteAssinanteCadastradoPorNome(nome) {
         var cadastroAssinante = await promiseBuscaCadastroDeAssinantePorNome(nome);
         $("#cpfRepresentanteFornecedor").val(cadastroAssinante.cCpf);
         $("#mailRepresentanteFornecedor").val(cadastroAssinante.cEmail);
-        
+
     } catch (error) {
         showMessage("Erro ao buscar assinante: ", error, "warning");
     }
 }
 
 
-function promiseBuscaCadastroDeAssinantePorNome(nome){
-    return new Promise((resolve,reject)=>{
-        DatasetFactory.getDataset("ds_wesign_assinantes", null,[
+function promiseBuscaCadastroDeAssinantePorNome(nome) {
+    return new Promise((resolve, reject) => {
+        DatasetFactory.getDataset("ds_wesign_assinantes", null, [
             DatasetFactory.createConstraint("nome", nome, nome, ConstraintType.MUST)
-        ],null,{
-            success:ds=>{
+        ], null, {
+            success: ds => {
                 if (ds.values.length != 1) {
                     reject("Assinante não encontrado");
                 }
-                else{
+                else {
                     resolve(ds.values[0]);
                 }
             },
-            error:error=>{
+            error: error => {
                 reject(error);
             }
         });
@@ -47,7 +47,7 @@ function promiseBuscaCadastroDeAssinantePorNome(nome){
 }
 
 
-function preencheInformacoesAprovacao(){
+function preencheInformacoesAprovacao() {
     $("#spanNomeRepresentanteCastilho").text($("#nomeRepresentanteCastilho").val());
     $("#spanCpfRepresentanteCastilho").text($("#cpfRepresentanteCastilho").val());
     $("#spanMailRepresentanteCastilho").text($("#mailRepresentanteCastilho").val());
@@ -64,13 +64,13 @@ function preencheInformacoesAprovacao(){
 
 
 
-function onchangeTipoAssinaturaContrato(){
+function onchangeTipoAssinaturaContrato() {
     var val = $("#assinaturaContrato").val();
 
     if (val == "Eletrônica") {
 
-        
-    }else if(val == "Manual"){
-     
+
+    } else if (val == "Manual") {
+
     }
 }

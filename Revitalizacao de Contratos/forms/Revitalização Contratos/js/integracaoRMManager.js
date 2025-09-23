@@ -1,15 +1,15 @@
-function bindingCamposIntegracaoRM(){
-    $("#checkboxLancarNovoContrato").on("change", async function(){
+function bindingCamposIntegracaoRM() {
+    $("#checkboxLancarNovoContrato").on("change", async function () {
         if ($(this).is(":checked")) {
             $("#dadosRMNovoContrato").show();
             await asyncPreencheOptionsColigada();
             preencheCamposAutomaticamente();
         }
-        else{
+        else {
             $("#dadosRMNovoContrato").hide();
         }
     });
-    $("#novoContratoColigada").on("change", function(){
+    $("#novoContratoColigada").on("change", function () {
         var CODCOLIGA = $(this).val();
         if (CODCOLIGA) {
             asyncPreencheOptionsFilial(CODCOLIGA);
@@ -20,7 +20,7 @@ function bindingCamposIntegracaoRM(){
             asyncPreencheOptionsRepresentante(CODCOLIGA);
         }
     });
-    $("#novoContratoFilial").on("change", function(){
+    $("#novoContratoFilial").on("change", function () {
         var CODCOLIGADA = $("#novoContratoColigada").val();
         var CODFILIAL = $(this).val();
         asyncPreencheOptionsLocalEstoque(CODCOLIGADA, CODFILIAL);
@@ -54,9 +54,9 @@ function preencheCamposAutomaticamente() {
         var CCUSTO = $("#CODCCUSTO").val();
         $("#novoContratoCCUSTO").val(CCUSTO);
 
-        
+
         var representante = regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO);
-        $("#novoContratoRepresentante option").each(function(){
+        $("#novoContratoRepresentante option").each(function () {
             if ($(this).text() == representante) {
                 $("#novoContratoRepresentante").val($(this).val());
             }
@@ -110,17 +110,17 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
         var representantes = representantesEpya();
     }
 
-    var found = representantes.find(e=>e.tipos.includes(TIPO_CONTRATO));
+    var found = representantes.find(e => e.tipos.includes(TIPO_CONTRATO));
     if (found) {
         return found.representante;
     }
-    else{
+    else {
         throw "Representante não encontrado.";
     }
 
 
-    
-    function representantesCastilho(){
+
+    function representantesCastilho() {
         return [
             {
                 representante: "Jerson Godoy Leski Junior",
@@ -136,7 +136,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
             },
         ];
     }
-    function representantesMineiracao(){
+    function representantesMineiracao() {
         return [
             {
                 representante: "Jerson Godoy Leski Junior",
@@ -154,7 +154,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
             },
         ];
     }
-    function representantesEstacaoLuz(){
+    function representantesEstacaoLuz() {
         return [
             {
                 representante: "Jerson Godoy Leski Junior",
@@ -172,7 +172,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
             },
         ];
     }
-    function representantesDromos(){
+    function representantesDromos() {
         return [
             {
                 representante: "Mario Rogers de Castilho",
@@ -189,7 +189,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
             },
         ];
     }
-    function representantesEpya(){
+    function representantesEpya() {
         return [
             {
                 representante: "Mario Rogers de Castilho",
@@ -207,7 +207,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
         ];
     }
 }
-function regraTipoDeContrato(){
+function regraTipoDeContrato() {
     var tipoContrato = $("#tipoContrato").val();
 
 
@@ -261,7 +261,7 @@ async function asyncPreencheOptionsFilial(CODCOLIGADA) {
             DatasetFactory.getDataset("GFILIAL", null, [DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST)], ["CODFILIAL"], {
                 success: (ds) => {
 
-                    resolve(ds.values.sort((a,b)=>a.CODFILIAL-b.CODFILIAL));
+                    resolve(ds.values.sort((a, b) => a.CODFILIAL - b.CODFILIAL));
                 },
                 error: (e) => {
                     reject(e);
@@ -283,7 +283,7 @@ async function asyncPreencheOptionsTipoDeContrato(CODCOLIGADA) {
         return new Promise((resolve, reject) => {
             DatasetFactory.getDataset("TTCN", null, [DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST)], ["DESCRICAO"], {
                 success: (ds) => {
-                    resolve(ds.values.sort((a,b)=>a.DESCRICAO<b.DESCRICAO ? -1:1));
+                    resolve(ds.values.sort((a, b) => a.DESCRICAO < b.DESCRICAO ? -1 : 1));
                 },
                 error: (e) => {
                     reject(e);
@@ -303,17 +303,17 @@ async function asyncPreencheOptionsLocalEstoque(CODCOLIGADA, CODFILIAL) {
 
     function promiseConsultaLocalEstoque(CODCOLIGADA, CODFILIAL) {
         return new Promise((resolve, reject) => {
-            DatasetFactory.getDataset("LocalRM",null,[
-                    DatasetFactory.createConstraint("clg", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
-                    DatasetFactory.createConstraint("cdFl", CODFILIAL, CODFILIAL, ConstraintType.MUST),
-                ],null,{
-                    success: (ds) => {
-                        resolve(ds.values);
-                    },
-                    error: (e) => {
-                        reject(e);
-                    },
-                });
+            DatasetFactory.getDataset("LocalRM", null, [
+                DatasetFactory.createConstraint("clg", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+                DatasetFactory.createConstraint("cdFl", CODFILIAL, CODFILIAL, ConstraintType.MUST),
+            ], null, {
+                success: (ds) => {
+                    resolve(ds.values);
+                },
+                error: (e) => {
+                    reject(e);
+                },
+            });
         });
     }
 }
@@ -328,16 +328,16 @@ async function asyncPreencheOptionsStatus(CODCOLIGADA) {
 
     function promiseConsultaSTATUS(CODCOLIGADA) {
         return new Promise((resolve, reject) => {
-            DatasetFactory.getDataset("TSTACNT",null,[
-                    DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
-                ],["DESCRICAO"],{
-                    success: (ds) => {
-                        resolve(ds.values);
-                    },
-                    error: (e) => {
-                        reject(e);
-                    },
-                });
+            DatasetFactory.getDataset("TSTACNT", null, [
+                DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+            ], ["DESCRICAO"], {
+                success: (ds) => {
+                    resolve(ds.values);
+                },
+                error: (e) => {
+                    reject(e);
+                },
+            });
         });
     }
 }
@@ -352,19 +352,19 @@ async function asyncPreencheOptionsCCusto(CODCOLIGADA) {
 
     function promiseConsultaCCUSTO(CODCOLIGADA) {
         return new Promise((resolve, reject) => {
-            DatasetFactory.getDataset("GCCUSTO",null,[
-                    DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
-                    DatasetFactory.createConstraint("ATIVO", "T", "T", ConstraintType.MUST),
-                    DatasetFactory.createConstraint("CODCCUSTO", "1", "1", ConstraintType.MUST_NOT),
-                ],["CODCCUSTO"],{
-                    success: (ds) => {
-                        var values = ds.values.sort((a,b)=>a.CODCCUSTO < b.CODCCUSTO ? -1: 1);
-                        resolve(values);
-                    },
-                    error: (e) => {
-                        reject(e);
-                    },
-                });
+            DatasetFactory.getDataset("GCCUSTO", null, [
+                DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+                DatasetFactory.createConstraint("ATIVO", "T", "T", ConstraintType.MUST),
+                DatasetFactory.createConstraint("CODCCUSTO", "1", "1", ConstraintType.MUST_NOT),
+            ], ["CODCCUSTO"], {
+                success: (ds) => {
+                    var values = ds.values.sort((a, b) => a.CODCCUSTO < b.CODCCUSTO ? -1 : 1);
+                    resolve(values);
+                },
+                error: (e) => {
+                    reject(e);
+                },
+            });
         });
     }
 }
@@ -379,20 +379,20 @@ async function asyncPreencheOptionsCondicaoPagamento(CODCOLIGADA) {
 
     function promiseConsultaCondicaoPagamento(CODCOLIGADA) {
         return new Promise((resolve, reject) => {
-            DatasetFactory.getDataset("TCPG",null,[
-                    DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
-                    DatasetFactory.createConstraint("CODCPG", "001", "001", ConstraintType.SHOULD),
-                    DatasetFactory.createConstraint("CODCPG", "130", "130", ConstraintType.SHOULD),
-                    DatasetFactory.createConstraint("CODCPG", "145", "145", ConstraintType.SHOULD),
-                    DatasetFactory.createConstraint("CODCPG", "160", "160", ConstraintType.SHOULD),
-                ],["NOME"],{
-                    success: (ds) => {
-                        resolve(ds.values);
-                    },
-                    error: (e) => {
-                        reject(e);
-                    },
-                });
+            DatasetFactory.getDataset("TCPG", null, [
+                DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+                DatasetFactory.createConstraint("CODCPG", "001", "001", ConstraintType.SHOULD),
+                DatasetFactory.createConstraint("CODCPG", "130", "130", ConstraintType.SHOULD),
+                DatasetFactory.createConstraint("CODCPG", "145", "145", ConstraintType.SHOULD),
+                DatasetFactory.createConstraint("CODCPG", "160", "160", ConstraintType.SHOULD),
+            ], ["NOME"], {
+                success: (ds) => {
+                    resolve(ds.values);
+                },
+                error: (e) => {
+                    reject(e);
+                },
+            });
         });
     }
 }
@@ -407,17 +407,17 @@ async function asyncPreencheOptionsRepresentante(CODCOLIGADA) {
 
     function promiseConsultaRepresentantes(CODCOLIGADA) {
         return new Promise((resolve, reject) => {
-            DatasetFactory.getDataset("TRPR",null,[
-                    DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
-                    DatasetFactory.createConstraint("INATIVO", "0", "0", ConstraintType.MUST)
-                ],["NOME"],{
-                    success: (ds) => {
-                        resolve(ds.values);
-                    },
-                    error: (e) => {
-                        reject(e);
-                    },
-                });
+            DatasetFactory.getDataset("TRPR", null, [
+                DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+                DatasetFactory.createConstraint("INATIVO", "0", "0", ConstraintType.MUST)
+            ], ["NOME"], {
+                success: (ds) => {
+                    resolve(ds.values);
+                },
+                error: (e) => {
+                    reject(e);
+                },
+            });
         });
     }
 }
@@ -428,7 +428,7 @@ async function asyncAdicionarItemNovoContrato() {
     var id = wdkAddChild("tableNovoContratoItens");
 
     $(".titleCounterItem:last").html("Item " + id);
-    $(".btnRemoverItemNovoContrato:last").off("click").on("click", function(){
+    $(".btnRemoverItemNovoContrato:last").off("click").on("click", function () {
         fnWdkRemoveChild($(this).closest("tr")[0]);
     });
 
@@ -474,21 +474,21 @@ async function asyncInsereNovaLinhaReteio() {
         .closest("table")
         .find("tbody")
         .append(await asyncGeraLinhaTabela());
-    
+
     $(this).closest("table").find("tbody").find(".selectDepartamentoNovoContratoItemRateio:last").on("change", salvaJSONRateio);
     $(this).closest("table").find("tbody").find(".inputValorNovoContratoItemRateio:last").on("change", salvaJSONRateio);
     $(this).closest("table").find("tbody").find(".selectDepartamentoNovoContratoItemRateio:last").selectize({
-        onChange: ()=> $(this)[0].dispatchEvent(new Event("change"))
+        onChange: () => $(this)[0].dispatchEvent(new Event("change"))
     });
 
     console.log($(this).closest("table").find("tbody").find(".selectDepartamentoNovoContratoItemRateio:last"));
     console.log($(this).closest("table").find("tbody").find(".inputValorNovoContratoItemRateio:last"));
 
     $(this).closest("table").find("tbody").find(".inputValorNovoContratoItemRateio:last").maskMoney({
-        suffix: "%", 
+        suffix: "%",
         allowZero: false,
         affixesStay: true,
-        precision:0,
+        precision: 0,
     });
     $(this)
         .closest("table")
@@ -516,14 +516,14 @@ async function asyncInsereNovaLinhaReteio() {
         return html;
     }
 }
-function salvaJSONRateio(){
+function salvaJSONRateio() {
     var json = [];
-    $(this).closest("tbody").find("tr").each(function(){
+    $(this).closest("tbody").find("tr").each(function () {
         var depto = $(this).find(".selectDepartamentoNovoContratoItemRateio").val();
-        var valor = $(this).find(".inputValorNovoContratoItemRateio").val().replace("%","");
+        var valor = $(this).find(".inputValorNovoContratoItemRateio").val().replace("%", "");
         json.push({
-            CODDEPTO:depto + "",
-            PERCENTUAL:valor + ""
+            CODDEPTO: depto + "",
+            PERCENTUAL: valor + ""
         });
     });
     console.log(json)

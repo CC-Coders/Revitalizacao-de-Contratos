@@ -100,7 +100,7 @@ async function salvaModeloAlterado() {
             timer: 1500,
             preConfirm: false,
         });
-    } catch (error) {}
+    } catch (error) { }
 
     function promiseConverteEditorParaDocx() {
         return new Promise(async (resolve, reject) => {
