@@ -81,12 +81,11 @@ function beforeTaskSave_inicio() {
     insereHistorico(hAPI.getCardValue("observacoes"), "Início", "Início");
 }
 function beforeTaskSave_juridico() {
-    //   insereHistorico("#TODO: Definir o campo de Observação", "#TODO: Definir o campo de Decisão", "Jurídico");
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Jurídico");
 }
 function beforeTaskSave_controladoria() {
     try {
-        insereHistorico(hAPI.getCardValue("observacoes"), "#TODO: Definir o campo de Decisão", "Controladoria");
+        insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Controladoria");
 
         var tipo = hAPI.getCardValue("origemContrato");
         if (tipo == "Novo") {
@@ -107,13 +106,13 @@ function beforeTaskSave_controladoria() {
     }
 }
 function beforeTaskSave_engenheiro() {
-    insereHistorico(hAPI.getCardValue("observacoes"), "#TODO: Definir o campo de Decisão", "Aprovação Engenheiro");
+    insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Engenheiro");
 }
 function beforeTaskSave_coordenadorObras() {
-    insereHistorico(hAPI.getCardValue("observacoes"), "#TODO: Definir o campo de Decisão", "Aprovação Coordenador");
+    insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Coordenador");
 }
 function beforeTaskSave_diretoria() {
-    insereHistorico(hAPI.getCardValue("observacoes"), "#TODO: Definir o campo de Decisão", "Aprovação Diretoria");
+    insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Diretoria");
 }
 
 // Integração RM
