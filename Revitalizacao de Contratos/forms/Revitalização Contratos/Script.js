@@ -48,7 +48,7 @@ function bindings() {
     $("#btnVisualizarArquivo").on("click", visualizaDocumento);
     $("#btnEnviarSolicitacao").on("click", enviarSolicitacao);
     $("#btnVisualizarPreContrato").on("click", geraPreContrato);
-    $("#obra").off("change").on("change", salvaDadosDaObraSelecionadaComoHiddenInput);
+    $("#obra").off("change").on("change", salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores);
 
     $("input[name='decisao']").on("change", function () {
         if ($(this).val() == "Aprovar") {

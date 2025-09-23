@@ -53,7 +53,7 @@ function preencherObrasDoUsuario() {
 }
 
 function buscaFornecedores_preencheOptionsDoCampoLocador_IniciaSelect2() {
-    DatasetFactory.getDataset("FCFO",["CODCFO","CGCCFO", "NOMEFANTASIA"],[
+    DatasetFactory.getDataset("FCFO",["CODCFO", "CGCCFO", "NOMEFANTASIA"],[
         DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST), 
         DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
     ],null,{
@@ -66,12 +66,10 @@ function buscaFornecedores_preencheOptionsDoCampoLocador_IniciaSelect2() {
                     });
                 } else {
                     var optSelected = $("#locador").val();
-                    
+
                     var html = "<option></option>";
                     fornecedores.values.forEach((fornecedor) => html +=`<option value="${fornecedor.CODCFO} - ${fornecedor.CGCCFO} - ${fornecedor.NOMEFANTASIA}">${fornecedor.CGCCFO} - ${fornecedor.NOMEFANTASIA}</option>`);                    
                     $("#locador").html(html);
-
-
 
                     $("#locador").val(optSelected);
                     $("#locador").select2({
@@ -202,11 +200,11 @@ function inicializaInputAnexo() {
         const tipo = select.value;
         const file = this.files[0];
         if (!file || !tipo) return;
-    
+
         try {
             const listaCarregar = document.getElementById("listaAnexos");
             const itemId = `item-${tipo}`;
-    
+
             //            if (["CNH", "RG", "CPF"].includes(tipo)) {
             //                listaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
             //            } else {
@@ -225,19 +223,19 @@ function inicializaInputAnexo() {
                 const item = document.getElementById(itemId);
                 if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
             }
-    
+
             const docId = await criaDocFluigRetornaDocumentId(file, 10133);
             const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
-    
+
             documentosAnexados[tipo] = docId;
             document.getElementById("hiddenDocumentosAnexados").value = JSON.stringify(documentosAnexados);
-    
+
             const lista = document.getElementById("listaAnexos");
-    
+
             if (tipo === "CNH") {
                 documentosAnexados["RG"] = null;
                 documentosAnexados["CPF"] = null;
-    
+
                 $("#item-identidade-rg-cnh").remove();
                 $("#item-identidade-cpf-cnh").remove();
                 $("#item-RG").remove();
@@ -251,7 +249,7 @@ function inicializaInputAnexo() {
                 documentosAnexados["CNH"] = null;
                 $("#item-identidade-rg-cnh").remove();
                 $("#item-CNH").remove();
-    
+
                 lista.innerHTML += `<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
                 if (!documentosAnexados["CPF"]) {
                     $("#item-identidade-cpf-cnh").remove();
@@ -261,7 +259,7 @@ function inicializaInputAnexo() {
                 documentosAnexados["CNH"] = null;
                 $("#item-identidade-cpf-cnh").remove();
                 $("#item-CNH").remove();
-    
+
                 lista.innerHTML += `<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
                 if (!documentosAnexados["RG"]) {
                     $("#item-identidade-rg-cnh").remove();
@@ -270,7 +268,7 @@ function inicializaInputAnexo() {
             } else {
                 document.getElementById(`item-${tipo}`).innerHTML = `<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`;
             }
-    
+
             input.value = "";
             select.value = "";
             divAnexo.style.opacity = "0";
@@ -300,10 +298,6 @@ function renderizarAnexosEtapaAprovacao() {
         console.error("Erro ao carregar anexos:", e);
     }
 }
-
-
-
-
 
 function buscaBancos() {
     DatasetFactory.getDataset("GBANCO", null, null, null, {
@@ -464,16 +458,16 @@ function mostrarPagina(indice, move) {
         var indiceAtivo = $(".pagination-active").attr("data-index");
         if (indiceAtivo > indice) {
             move = "prev";
-        }else{
+        } else {
             move = "next";
         }
     }
 
     $(".pagination-active").removeClass("pagination-active", 250);
     $(`.pagination[data-index='${indice}']`).addClass("pagination-active", 250);
-    
-    $(`.pagina.ativa[data-index!='${indice}']`).removeClass("ativa").addClass(move == "next" ? "escondida-para-esquerda" : "escondida-para-direita").css("position","absolute");
-    $(`.pagina[data-index='${indice}']`).addClass("ativa",250).removeClass("escondida-para-direita",250).removeClass("escondida-para-esquerda",250).css("position","relative");
+
+    $(`.pagina.ativa[data-index!='${indice}']`).removeClass("ativa").addClass(move == "next" ? "escondida-para-esquerda" : "escondida-para-direita").css("position", "absolute");
+    $(`.pagina[data-index='${indice}']`).addClass("ativa", 250).removeClass("escondida-para-direita", 250).removeClass("escondida-para-esquerda", 250).css("position", "relative");
     $(window).scrollTop(0)
 }
 function avancarPagina() {
@@ -487,7 +481,7 @@ function voltarPagina() {
     var active = $(".pagination-active");
     var index = $(active).prev(".pagination").attr("data-index");
     if (index) {
-        mostrarPagina(index , "prev");
+        mostrarPagina(index, "prev");
     }
 }
 function handleFileUpload(inputId, descricaoArquivo) {
@@ -711,85 +705,123 @@ async function asyncMontaHistorico() {
     }
 }
 
+async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores() {
+    var value = $(this).val();
+    if (!value) {
+        $("#CODCOLIGADA").val("");
+        $("#CODCCUSTO").val("");
+        $("#NOMECCUSTO").val("");
+    } else {
+        var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = $(this).val().split(" - ");
+        $("#CODCOLIGADA").val(CODCOLIGADA);
+        $("#CODCCUSTO").val(CODCCUSTO);
+        $("#NOMECCUSTO").val(NOMECCUSTO);
 
-    function salvaDadosDaObraSelecionadaComoHiddenInput(){
-        var value = $(this).val();
-        console.log(this);
-        console.log(value);
-        console.log(!value);
-        if (!value) {
-            $("#CODCOLIGADA").val("");
-            $("#CODCCUSTO").val("");
-            $("#NOMECCUSTO").val("");
-        }else{
-            var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = $(this).val().split(" - ");
-            console.log(CODCOLIGADA, CODCCUSTO, NOMECCUSTO);
-            $("#CODCOLIGADA").val(CODCOLIGADA);
-            $("#CODCCUSTO").val(CODCCUSTO);
-            $("#NOMECCUSTO").val(NOMECCUSTO);
-        }
+        var aprovadores =  extraiAprovadoresDaLista(await promiseBuscaAprovadoresDaObra(CODCOLIGADA, NOMECCUSTO, "1.1.02", "9999999999999"));
+        $("#engenheiro").val(aprovadores.engenherio);
+        $("#coordenador").val(aprovadores.diretor);
+        $("#diretor").val(aprovadores.engenherio);
     }
-    
-    function popularDestinoRetorno() {
-        const ATIVIDADE_ATUAL = $("#atividade").val(); 
-        const $select = $("#destinoRetorno");
-        $select.empty().append('<option value="">Selecione o destino</option>');
-        let opcoes = [];
-        switch (parseInt(ATIVIDADE_ATUAL)) { 
-            case ATIVIDADES.JURIDICO:
-                opcoes = [
-                    { value: "OBRA", text: "Obra" }
-                ];
-                break;
-            case ATIVIDADES.CONTROLADORIA:
-                opcoes = [
-                    { value: "JURIDICO", text: "Jurídico" },
-                    { value: "OBRA", text: "Obra" }
-                ];
-                break;
-            case ATIVIDADES.ENGENHEIRO:
-            case ATIVIDADES.COORDENADOR_OBRAS:
-            case ATIVIDADES.DIRETORIA:
-                opcoes = [
-                    { value: "CONTROLADORIA", text: "Controladoria" },
-                    { value: "JURIDICO", text: "Jurídico" },
-                    { value: "OBRA", text: "Obra" }
-                ];
-                break;
+
+    // Aprovadores
+    function promiseBuscaAprovadoresDaObra(CODCOLIGADA, LOCALESTOQUE, CODTMV, valorTotal) {
+        return new Promise((resolve, reject) => {
+            DatasetFactory.getDataset("verificaAprovador",null,[
+            DatasetFactory.createConstraint("paramCodcoligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+            DatasetFactory.createConstraint("paramLocal", LOCALESTOQUE, LOCALESTOQUE, ConstraintType.MUST),
+            DatasetFactory.createConstraint("paramCodTmv", CODTMV, CODTMV, ConstraintType.MUST),
+            DatasetFactory.createConstraint("paramValorTotal", valorTotal, valorTotal, ConstraintType.MUST),],null,{
+                    success: (ds) => {
+                        if (ds.columns[0] == "FALHA") {
+                            reject(ds.values[0].FALHA);
+                        }
+
+                        resolve(ds.values);
+                    },
+                    error: (e) => {
+                        reject(e);
+                    },
+                }
+            );
+        });
+    }
+    function extraiAprovadoresDaLista(lista) {
+        var engenherio = "";
+        var coordenador = "";
+        var diretor = "";
+
+        for (const user of lista) {
+            if (!engenherio && verificaSeUsuarioPertenceAoGrupo(user.usuarioFLUIG, "Engenheiros")) {
+                engenherio = user.usuarioFLUIG;
+            } else if (!coordenador && verificaSeUsuarioPertenceAoGrupo(user.usuarioFLUIG, "Coordenadores de obras")) {
+                coordenador = user.usuarioFLUIG;
+            } else if (!diretor && verificaSeUsuarioPertenceAoGrupo(user.usuarioFLUIG, "Diretoria")) {
+                diretor = user.usuarioFLUIG;
+            }
         }
-        opcoes.forEach(opcao => {
-            $select.append($('<option>', {
+
+        return { engenherio, coordenador, diretor };
+    }
+}
+
+function popularDestinoRetorno() {
+    const ATIVIDADE_ATUAL = $("#atividade").val();
+    const $select = $("#destinoRetorno");
+    $select.empty().append('<option value="">Selecione o destino</option>');
+    let opcoes = [];
+    switch (parseInt(ATIVIDADE_ATUAL)) {
+        case ATIVIDADES.JURIDICO:
+            opcoes = [
+                { value: "OBRA", text: "Obra" }
+            ];
+            break;
+        case ATIVIDADES.CONTROLADORIA:
+            opcoes = [
+                { value: "JURIDICO", text: "Jurídico" },
+                { value: "OBRA", text: "Obra" }
+            ];
+            break;
+        case ATIVIDADES.ENGENHEIRO:
+        case ATIVIDADES.COORDENADOR_OBRAS:
+        case ATIVIDADES.DIRETORIA:
+            opcoes = [
+                { value: "CONTROLADORIA", text: "Controladoria" },
+                { value: "JURIDICO", text: "Jurídico" },
+                { value: "OBRA", text: "Obra" }
+            ];
+            break;
+    }
+    opcoes.forEach(opcao => {
+        $select.append($('<option>', {
                 value: opcao.value,
                 text: opcao.text
             }));
-        });
-    }
-
+    });
+}
 
 // Descrição das Atividades
-function mostraDescricaoDaAtividade(){
+function mostraDescricaoDaAtividade() {
     const atividades = {
-        OBRA:{
-            descricao:"<h1>Obra</h1><p>A <b>Obra</b> é responsável pelo <b>início do processo</b>, incluíndo as <b>informações iniciais e toda a Documentação necessária</b>.</p>"
+        OBRA: {
+            descricao: "<h1>Obra</h1><p>A <b>Obra</b> é responsável pelo <b>início do processo</b>, incluíndo as <b>informações iniciais e toda a Documentação necessária</b>.</p>"
         },
-        JURIDICO:{
-            descricao:"<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>"
+        JURIDICO: {
+            descricao: "<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>"
         },
-        CONTROLADORIA:{
-            descricao:"<h1>Controladoria</h1><p>A Controladoria é responsável por incluir o Contrato no RM. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>"
+        CONTROLADORIA: {
+            descricao: "<h1>Controladoria</h1><p>A Controladoria é responsável por incluir o Contrato no RM. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>"
         },
-        APROVACAO:{
-            descricao:"Na Aprovação o Processo passará pelo Engenheiro e Coordenador, em casos de Equipamentos pela Diretoria. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae."
+        APROVACAO: {
+            descricao: "Na Aprovação o Processo passará pelo Engenheiro e Coordenador, em casos de Equipamentos pela Diretoria. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae."
         },
-        ASSINATURA:{
-            descricao:"Na Atividade de Assiantura o processo aguarda a integração com a Wesign. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae."
+        ASSINATURA: {
+            descricao: "Na Atividade de Assiantura o processo aguarda a integração com a Wesign. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae."
         }
     };
-    const sequenciaDasAtividades = ["OBRA","JURIDICO","CONTROLADORIA","APROVACAO","ASSINATURA"];
+    const sequenciaDasAtividades = ["OBRA", "JURIDICO", "CONTROLADORIA", "APROVACAO", "ASSINATURA"];
 
     var index = $(".step").index(this);
     var atividade = sequenciaDasAtividades[index];
-
 
     var desc = atividades[atividade].descricao;
     $("#divDescricaoAtividades").html(desc);
