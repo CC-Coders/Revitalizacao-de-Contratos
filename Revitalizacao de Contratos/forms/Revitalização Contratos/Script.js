@@ -172,6 +172,7 @@ function loadTelaInicio() {
     inicializarPeriodoLocacao();
     inicializaInputAnexo();
 }
+
 function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
     $("#divRepresentantesContrato").show();
@@ -229,7 +230,7 @@ function loadTelaJuridico() {
 }
 
 function loadTelaControladoria() {
-    $("#informacoesIniciais").hide();
+    $("#informacoesIniciais, #rowAnexosSelecao").hide();
     $(".panelAprovacao").show();
     $("#formContainer").show();
     $("#divBtnEnviar").hide();
@@ -241,19 +242,23 @@ function loadTelaControladoria() {
     asyncMontaHistorico();
     mostrarPagina("0");
 
+    renderizarAnexosEtapaAprovacao();
+
     $("#divRepresentantesContrato").hide();
         preencheInformacoesAprovacao();
 }
 
 function loadTelaAprovacao() {
-		$("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
-	    $(".panelAprovacao, #formContainer").show();
-	    setAtividadeAtivaProgresso(3);
-	    carregaDadosDoContratoParaTelaAprovacao();
-	    asyncMontaHistorico();
-	    mostrarPagina("0");
-	    renderizarAnexosEtapaAprovacao();
-        
-        $("#divRepresentantesContrato").hide();
-        preencheInformacoesAprovacao();
-    }
+	$("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
+	$(".panelAprovacao, #formContainer").show();
+	setAtividadeAtivaProgresso(3);
+	carregaDadosDoContratoParaTelaAprovacao();
+	asyncMontaHistorico();
+	mostrarPagina("0");
+	renderizarAnexosEtapaAprovacao();
+    $("#paginationIntegracaoRM").remove();
+    $("#btnEditarArquivo").remove();
+
+    $("#divRepresentantesContrato").hide();
+    preencheInformacoesAprovacao();
+}
