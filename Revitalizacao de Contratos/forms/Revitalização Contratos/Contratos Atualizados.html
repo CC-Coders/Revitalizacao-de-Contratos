@@ -91,6 +91,12 @@
                 <input type="hidden" id="NOMECCUSTO" name="NOMECCUSTO">
                 <input type="hidden" name="hiddenDocumentosAnexados" id="hiddenDocumentosAnexados" />
 
+                <!-- Fornecedor -->
+                <input type="hidden" name="hiddenCODCOLCFO" id="hiddenCODCOLCFO">
+                <input type="hidden" name="hiddenCODCFO" id="hiddenCODCFO">
+                <input type="hidden" name="hiddenCGCCFO" id="hiddenCGCCFO">
+                <input type="hidden" name="hiddenFORNECEDOR" id="hiddenFORNECEDOR">
+
                 <!-- Tabela Historico -->
                 <div>
                     <table id="tableHistorico" tablename="tableHistorico" noaddbuttom="true" nodeletebuttom="true">
@@ -784,7 +790,12 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="">Tipo de Faturamento</label>
-                                        <select name="novoContratoTipoFaturamento" id="novoContratoTipoFaturamento" class="form-control"></select>
+                                        <select name="novoContratoTipoFaturamento" id="novoContratoTipoFaturamento" class="form-control">
+                                            <option value=""></option>
+                                            <option value="0">Não Periódico</option>
+                                            <option value="1">Periódico</option>
+                                            <option value="2">Por Medição</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Dia de Faturamento</label>
@@ -800,7 +811,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="">Fornecedor</label>
-                                        <inp name="novoContratoFornecedor" id="novoContratoFornecedor" class="form-control"/>
+                                        <input name="novoContratoFornecedor" id="novoContratoFornecedor" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -859,7 +870,7 @@
                                                                         <hr style="margin-top: 0px; margin-bottom: 10px" />
                                                                         <input type="hidden"
                                                                             name="novoContratoJsonRateiosItem"
-                                                                            id="novoContratoJsonRateiosItem">
+                                                                            id="novoContratoJsonRateiosItem" class="novoContratoJsonRateiosItem">
                                                                         <div class="divNovoContratoTableRateiosItens">
                                                                         </div>
                                                                     </div>

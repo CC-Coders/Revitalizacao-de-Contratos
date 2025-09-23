@@ -48,9 +48,35 @@ function bindings() {
     $("#btnVisualizarArquivo").on("click", visualizaDocumento);
     $("#btnEnviarSolicitacao").on("click", enviarSolicitacao);
     $("#btnVisualizarPreContrato").on("click", geraPreContrato);
-   
     $("#obra").off("change").on("change", salvaDadosDaObraSelecionadaComoHiddenInput);
 
+    $("input[name='decisao']").on("change", function () {
+        if ($(this).val() == "Aprovar") {
+            $("#divDestinoRetorno").hide();
+        }
+        else if ($(this).val() == "Retornar") {
+            $("#divDestinoRetorno").show();
+            popularDestinoRetorno()
+        }
+    });
+    $("#tipoDocumentacao").on("change", function () {
+        const tipo = $(this).val();
+        const divAnexo = document.getElementById("divAnexo");
+        const labelAnexo = document.getElementById("labelAnexo");
+        const inputAnexo = document.getElementById("inputAnexo");
+
+        if (tipo) {
+            labelAnexo.textContent = `Anexo: ${tipo}`;
+            inputAnexo.value = "";
+            divAnexo.style.opacity = "1";
+            divAnexo.style.visibility = "visible";
+        } else {
+            divAnexo.style.opacity = "0";
+            divAnexo.style.visibility = "hidden";
+        }
+    });
+
+    // Aba Dados Gerais
     $("#tipoContrato").on("change", function () {
         if ($(this).val() === "Locação de Imóvel") {
             $("#dadosContrato").show();
@@ -83,36 +109,20 @@ function bindings() {
     $("#contaCorrente").mask("00000-0", { placeholder: "_____-_" });
 
     $("#locador").on("change", function () {
-        var cgccfo = $(this).val().split(" - ")[0];
+        var [codcfo, cgccfo, nomeFornecedor] = $(this).val().split(" - ");
+        
+        // Por padrão os fornecedores são cadastrados no Coligada 0 = Global
+        // Nos cadasos de cadastros errados tem que verificar a filial
+        // Como a consulta não está retornando o CODCOLCFO ficou fixo como 0
+        $("#hiddenCODCOLCFO").val(0);
+        $("#hiddenCODCFO").val(codcfo);
+        $("#hiddenCGCCFO").val(cgccfo);
+        $("#hiddenFORNECEDOR").val(nomeFornecedor);
+        
         if (cgccfo) {
-            buscaInfosFornecedor(cgccfo);
+            buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(cgccfo);
         } else {
             $(".endereco-fornecedor").slideUp();
-        }
-    });
-    $("input[name='decisao']").on("change", function () {
-        if ($(this).val() == "Aprovar") {
-            $("#divDestinoRetorno").hide();
-        }
-        else if ($(this).val() == "Retornar") {
-            $("#divDestinoRetorno").show();
-            popularDestinoRetorno()
-        }
-    });
-    document.getElementById("tipoDocumentacao").addEventListener("change", function () {
-        const tipo = this.value;
-        const divAnexo = document.getElementById("divAnexo");
-        const labelAnexo = document.getElementById("labelAnexo");
-        const inputAnexo = document.getElementById("inputAnexo");
-
-        if (tipo) {
-            labelAnexo.textContent = `Anexo: ${tipo}`;
-            inputAnexo.value = "";
-            divAnexo.style.opacity = "1";
-            divAnexo.style.visibility = "visible";
-        } else {
-            divAnexo.style.opacity = "0";
-            divAnexo.style.visibility = "hidden";
         }
     });
 
@@ -127,8 +137,7 @@ function bindings() {
     });
 
 
-    // Aba Integração RM
-    $("#btnAdicionarItem").on("click", asyncAdicionarItemNovoContrato);
+
 
 
     // Paginacao
@@ -157,7 +166,7 @@ function loadTelaInicio() {
     mostrarPagina("0");
     setAtividadeAtivaProgresso(0);
     preencherObrasDoUsuario();
-    buscaFornecedores();
+    buscaFornecedores_preencheOptionsDoCampoLocador_IniciaSelect2();
     buscaBancos();
     inicializarCalendario();
     inicializarPeriodoLocacao();
@@ -170,7 +179,7 @@ function loadTelaInicioRetorno() {
     $("#paginationIntegracaoRM").remove();
     setAtividadeAtivaProgresso(0);
 //    preencherObrasDoUsuario();
-    buscaFornecedores();
+    buscaFornecedores_preencheOptionsDoCampoLocador_IniciaSelect2();
 //    buscaBancos();
     inicializarCalendario();
     inicializarPeriodoLocacao();

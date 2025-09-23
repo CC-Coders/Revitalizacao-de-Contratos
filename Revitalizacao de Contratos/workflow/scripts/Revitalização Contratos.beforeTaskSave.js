@@ -121,8 +121,12 @@ function criaNovoContrato() {
     try {
         var parametros = buscaParamentrosCriacaoContrato();
         validaParametros(parametros);
+        log.info("Paramentros novo contrato: ");
+        log.dir(parametros);
         var contexto = "CODSISTEMA=G;CODCOLIGADA=" + parametros.CODCOLIGADA + ";CODUSUARIO=fluig";
         var xml = montaXMLCriacaoDeContrato(parametros);
+        log.info("XML novo Contrato: ");
+        log.info(xml);
 
         var retorno = DatasetFactory.getDataset(
             "InsereContratoRM",
@@ -163,11 +167,12 @@ function buscaParamentrosCriacaoContrato() {
     var DATAFIM = hAPI.getCardValue("novoContratoDataFim");
     var CODSTACNT = hAPI.getCardValue("novoContratoSTATUS");
     var NOME = hAPI.getCardValue("novoContratoObjeto");
-    if (Nome.length() > 40) {
+    if (NOME.length() > 40) {
         // A coluna na base do RM tem limite de 40 caracteres
-        Nome = Nome.substring(0, 40);
+        NOME = NOME.substring(0, 40);
     }
-    var CODCPG = hAPI.getCardValue("novoContratoTipoFaturamento");
+    var CODCPG = hAPI.getCardValue("novoContratoCondicaoPagamento");
+    var TIPOFATURAMENTO = hAPI.getCardValue("novoContratoTipoFaturamento");
     var DIAFATURAMENTO = hAPI.getCardValue("novoContratoDiaFaturamento");
     var QTDEFATURAMENTOS = hAPI.getCardValue("novoContratoQtdeFaturamento");
     var urlSolicitacao = getServerURL() + "/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=" + getValue("WKNumProces");
@@ -183,36 +188,38 @@ function buscaParamentrosCriacaoContrato() {
         var id = indexes[i];
 
         ITENS.push({
-            IDPRD: hAPI.getCardValue("novoContratoItemProduto" + "___" + id),
-            VALOR: hAPI.getCardValue("novoContratoItemValor" + "___" + id),
-            RATDEP: hAPI.getCardValue("novoContratoJsonRateiosItem" + "___" + id),
+            IDPRD: hAPI.getCardValue("novoContratoItemProduto" + "___" + id) + "",
+            VALOR: hAPI.getCardValue("novoContratoItemValor" + "___" + id) + "",
+            RATDEP: JSON.parse(hAPI.getCardValue("novoContratoJsonRateiosItem" + "___" + id) + ""),
         });
     }
 
     return {
-        CODCOLIGADA: CODCOLIGADA,
-        IDCNT: IDCNT,
-        CODFILIAL: CODFILIAL,
-        CODIGOTIPOCONTRATO: CODIGOTIPOCONTRATO,
-        CODTCN: CODTCN,
-        CODCCUSTO: CODCCUSTO,
-        CODIGOCONTRATO: CODIGOCONTRATO,
-        locEstoque: locEstoque,
-        CODCFO: CODCFO,
-        CODRPR: CODRPR,
-        DATAINICIO: DATAINICIO,
-        DATAFIM: DATAFIM,
-        NOME: NOME,
-        CODSTACNT: CODSTACNT,
-        CODCPG: CODCPG,
-        DIAFATURAMENTO: DIAFATURAMENTO,
-        QTDEFATURAMENTOS: QTDEFATURAMENTOS,
-        urlSolicitacao: urlSolicitacao,
-        NATUREZA: "1", //Compra
+        CODCOLIGADA: CODCOLIGADA + "",
+        IDCNT: IDCNT + "",
+        CODFILIAL: CODFILIAL + "",
+        CODIGOTIPOCONTRATO: CODIGOTIPOCONTRATO + "",
+        CODTCN: CODTCN + "",
+        CODCCUSTO: CODCCUSTO + "",
+        CODIGOCONTRATO: CODIGOCONTRATO + "",
+        locEstoque: locEstoque + "",
+        CODCFO: CODCFO + "",
+        CODRPR: CODRPR + "",
+        DATAINICIO: DATAINICIO + "",
+        DATAFIM: DATAFIM + "",
+        NOME: NOME + "",
+        CODSTACNT: CODSTACNT + "",
+        CODCPG: CODCPG + "",
+        DIAFATURAMENTO: DIAFATURAMENTO + "",
+        QTDEFATURAMENTOS: QTDEFATURAMENTOS + "",
+        urlSolicitacao: urlSolicitacao + "",
+        TIPOFATURAMENTO:TIPOFATURAMENTO + "",
+        NATUREZA: "1" + "",
         ITENS: ITENS,
     };
 }
 function validaParametros(parametros) {
+    
     var erroRetorno = [];
     if (parametros.CODCOLIGADA == undefined || parametros.CODCOLIGADA == null || parametros.CODCOLIGADA == "") {
         erroRetorno.push("CODCOLIGADA");
@@ -284,11 +291,14 @@ function validaParametros(parametros) {
         erroRetorno.push("ITENS");
     }
 
-    try {
-        parametros.ITENS = JSON.parse(parametros.ITENS);
-    } catch (error) {
-        erroRetorno.push("ITENS");
-    }
+    // try {
+    //     log.info(parametros.ITENS);
+    //     parametros.ITENS = JSONUtil.toJSON(parametros.ITENS);
+    // } catch (error) {
+    //     log.info("Erro no parse do JSON ITENS");
+    //     log.dir(error);
+    //     erroRetorno.push("ITENS");
+    // }
 
     for (var i = 0; i < parametros.ITENS.length; i++) {
         var item = parametros.ITENS[i];
@@ -304,20 +314,35 @@ function validaParametros(parametros) {
         }
 
         try {
-            item.RATDEP = JSON.parse(item.RATDEP);
+            log.info(typeof item.RATDEP);
+            log.info(item.RATDEP.length);
+            log.dir(item.RATDEP);
+            
+            // item.RATDEP = JSON.parse(item.RATDEP);
         } catch (error) {
+            log.info("Erro no parse do JSON RATDEP");            
             erroRetorno.push("Item RATDEP");
         }
 
+        try {
+            
+        
         for (var j = 0; j < item.RATDEP.length; j++) {
             var RATEIO = item.RATDEP[j];
+            log.dir(item.RATDEP);
+            log.dir(RATEIO);
+            log.dir(item.RATDEP[j]);
+            log.info(RATEIO.CODDEPTO);
 
-            if (RATEIO.CODDEPTO == undefined || RATEIO.CODDEPTO == null || item.RATEIO.CODDEPTO == "") {
+            if (RATEIO.CODDEPTO == undefined || item.RATDEP[j].CODDEPTO == null || item.RATDEP[j].RATEIO.CODDEPTO == "") {
                 erroRetorno.push("RATDEP DEPTO");
             }
-            if (RATEIO.VALOR == undefined || RATEIO.VALOR == null || RATEIO.VALOR == "") {
-                erroRetorno.push("RATDEP VALOR");
+            if (item.RATDEP[j].PERCENTUAL == undefined || item.RATDEP[j].PERCENTUAL == null || item.RATDEP[j].PERCENTUAL == "") {
+                erroRetorno.push("RATDEP PERCENTUAL");
             }
+        }
+        } catch (error) {
+            log.dir(error);
         }
     }
 
@@ -349,7 +374,7 @@ function montaXMLCriacaoDeContrato(parametros) {
     xml += "        <DATAFIM>" + setDateXMLFormat(parametros.DATAFIM) + "T00:00:00</DATAFIM>";
     xml += "        <CODMOEVALORCONTRATO>R$</CODMOEVALORCONTRATO>";
     xml += "        <IMPRIMEMOV>1</IMPRIMEMOV>";
-    if (parametros.CODCPG == TIPOS_FATURAMENTO["Periódico"]) {
+    if (parametros.TIPOFATURAMENTO == TIPOS_FATURAMENTO["Periódico"]) {
         xml += "    <DIAFATURAMENTO>" + parametros.DIAFATURAMENTO + "</DIAFATURAMENTO>";
         xml += "    <QTDEFATURAMENTOS>" + parametros.QTDEFATURAMENTOS + "</QTDEFATURAMENTOS>";
     }
@@ -368,6 +393,8 @@ function montaXMLCriacaoDeContrato(parametros) {
     xml += geraXML_TITMCNTRATCCU(parametros);
     xml += geraXML_TITMCNTRATDEP(parametros);
     xml += "</CTRCNT>";
+
+    return xml;
 }
 function geraXML_TITMCNT(parametros) {
     var xml = "";
@@ -381,15 +408,15 @@ function geraXML_TITMCNT(parametros) {
         xml += "    <NSEQITMCNT>" + (i + 1) + "</NSEQITMCNT>";
         xml += "    <IDPRD>" + item.IDPRD + "</IDPRD>";
         xml += "    <CODFILIALFAT>" + parametros.CODFILIAL + "</CODFILIALFAT>";
-        xml += "    <CODLOCFATURAM>" + parametros.LOCESTOQUE + "</CODLOCFATURAM>";
-        xml += "    <CODCCUSTO>" + parametros.CCUSTO + "</CODCCUSTO>";
+        xml += "    <CODLOCFATURAM>" + parametros.locEstoque + "</CODLOCFATURAM>";
+        xml += "    <CODCCUSTO>" + parametros.CODCCUSTO + "</CODCCUSTO>";
         xml += "    <CODCFO>" + parametros.CODCFO + "</CODCFO>";
         xml += "    <QUANTIDADE>1</QUANTIDADE>";
         xml += "    <CODCPG>" + parametros.CODCPG + "</CODCPG>";
         xml += "    <CODMOEPRECOFATURAMENTO>R$</CODMOEPRECOFATURAMENTO>";
         xml += "    <CODSTACNT>" + parametros.CODSTACNT + "</CODSTACNT>";
         xml += "    <CODTMV>" + (parametros.CODTCN == TIPOS_CONTRATO["Locação de Imóvel"] ? "1.1.98" : "1.1.99") + "</CODTMV>";
-        xml += "    <EPERIODICO>" + parametros.CODCPG + "</EPERIODICO>";
+        xml += "    <EPERIODICO>" + parametros.TIPOFATURAMENTO + "</EPERIODICO>";
         xml += "    <DATAINICIO>" + setDateXMLFormat(parametros.DATAINICIO) + "</DATAINICIO>";
         xml += "    <DATAFIM>" + setDateXMLFormat(parametros.DATAFIM) + "T00:00:00</DATAFIM>";
         xml += "    <CODCPGPRAZO>130</CODCPGPRAZO>";
@@ -563,4 +590,43 @@ function getDateTimeNow() {
 function getServerURL() {
     var ds = DatasetFactory.getDataset("dsGetServerURL", null, null, null);
     return ds.getValue(0, "URL");
+}
+function setDateXMLFormat(data, sql) {
+    // Formata data para inserção no XML
+    var retorno = "";
+    var n = data.indexOf("/");
+    data = data.trim();
+    var joinDtHr = "";
+    if (sql == 1) {
+        joinDtHr = " ";
+    } else {
+        joinDtHr = "T";
+    }
+    if (n == -1) {
+        var tam = data.length;
+        if (tam > 10) {
+            retorno = retorno.replace(" ", joinDtHr);
+            retorno = retorno + "00";
+        } else {
+            retorno = retorno + joinDtHr + "00:00:00";
+        }
+    }
+
+    if (n == 2) {
+        var temp = data.split("/");
+        retorno = [temp[2], temp[1], temp[0]].join("-");
+        retorno = retorno + joinDtHr + "00:00:00";
+    }
+    if (n == 4) {
+        retorno = data.replace("/", "-");
+        retorno = retorno + joinDtHr + "00:00:00";
+    }
+    return retorno;
+}
+function ValorToFloat(valor) {
+    if (valor.split("R$").length > 1) {
+        valor = valor.split("R$")[1].trim();
+    }
+    valor = valor.split(".").join("").split(",").join(".");
+    return parseFloat(valor);
 }

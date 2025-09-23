@@ -52,9 +52,10 @@ function preencherObrasDoUsuario() {
     }
 }
 
-function buscaFornecedores() {
-    DatasetFactory.getDataset("FCFO",["CGCCFO", "NOMEFANTASIA"],[
-        DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST), DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
+function buscaFornecedores_preencheOptionsDoCampoLocador_IniciaSelect2() {
+    DatasetFactory.getDataset("FCFO",["CODCFO","CGCCFO", "NOMEFANTASIA"],[
+        DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST), 
+        DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
     ],null,{
             success: (fornecedores) => {
                 if (fornecedores.columns[0] == "error") {
@@ -65,15 +66,12 @@ function buscaFornecedores() {
                     });
                 } else {
                     var optSelected = $("#locador").val();
-                    $("#locador").html("<option></option>");
+                    
+                    var html = "<option></option>";
+                    fornecedores.values.forEach((fornecedor) => html +=`<option value="${fornecedor.CODCFO} - ${fornecedor.CGCCFO} - ${fornecedor.NOMEFANTASIA}">${fornecedor.CGCCFO} - ${fornecedor.NOMEFANTASIA}</option>`);                    
+                    $("#locador").html(html);
 
-                    fornecedores.values.forEach((fornecedor) => {
-                        $("#locador").append(
-                            $("<option></option>")
-                                .attr("value", fornecedor.CGCCFO + " - " + fornecedor.NOMEFANTASIA)
-                                .text(fornecedor.CGCCFO + " - " + fornecedor.NOMEFANTASIA)
-                        );
-                    });
+
 
                     $("#locador").val(optSelected);
                     $("#locador").select2({
@@ -105,13 +103,15 @@ function buscaFornecedores() {
     );
 }
 
-function buscaInfosFornecedor(cgccfo) {
+function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(cgccfo) {
+    // Nome da função alterado para descrever as resposabilidades da função corretamente
+    // Necessário quebrar a função em várias funções, cada uma com uma responsabilidade
     DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)], null, {
         success: (dataset) => {
             if (dataset.values && dataset.values.length > 0) {
                 const endereco = dataset.values[0];
                 const tipoPessoa = endereco.PESSOAFISOUJUR;
-                const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrangeiro";
+                const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrang eiro";
 
                 if (tipoPessoa === "F") {
                     $(".pessoa-fisica").show();
@@ -197,21 +197,22 @@ function inicializaInputAnexo() {
         divAnexo.style.visibility = this.value ? "visible" : "hidden";
     });
 
-    input.addEventListener("change", async function () {
+    input.addEventListener("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
+    async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
         const tipo = select.value;
         const file = this.files[0];
         if (!file || !tipo) return;
-
+    
         try {
             const listaCarregar = document.getElementById("listaAnexos");
             const itemId = `item-${tipo}`;
-
-//            if (["CNH", "RG", "CPF"].includes(tipo)) {
-//                listaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
-//            } else {
-//                const item = document.getElementById(itemId);
-//                if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
-//            }
+    
+            //            if (["CNH", "RG", "CPF"].includes(tipo)) {
+            //                listaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
+            //            } else {
+            //                const item = document.getElementById(itemId);
+            //                if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
+            //            }
             if (["CNH", "RG", "CPF"].includes(tipo)) {
                 let item = document.getElementById(itemId);
                 if (!item) {
@@ -224,53 +225,52 @@ function inicializaInputAnexo() {
                 const item = document.getElementById(itemId);
                 if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
             }
-
+    
             const docId = await criaDocFluigRetornaDocumentId(file, 10133);
             const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
-
+    
             documentosAnexados[tipo] = docId;
             document.getElementById("hiddenDocumentosAnexados").value = JSON.stringify(documentosAnexados);
-
-
+    
             const lista = document.getElementById("listaAnexos");
-
+    
             if (tipo === "CNH") {
                 documentosAnexados["RG"] = null;
                 documentosAnexados["CPF"] = null;
-
-                removeItem("item-identidade-rg-cnh");
-                removeItem("item-identidade-cpf-cnh");
-                removeItem("item-RG");
-                removeItem("item-CPF");
+    
+                $("#item-identidade-rg-cnh").remove();
+                $("#item-identidade-cpf-cnh").remove();
+                $("#item-RG").remove();
+                $("#item-CPF").remove();
                 const item = document.getElementById("item-CNH");
                 if (item) {
                     item.innerHTML = `<span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span>`;
                 }
-              //  lista.innerHTML += `<li id="item-CNH"><span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
+                //  lista.innerHTML += `<li id="item-CNH"><span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
             } else if (tipo === "RG") {
                 documentosAnexados["CNH"] = null;
-                removeItem("item-identidade-rg-cnh");
-                removeItem("item-CNH");
-
+                $("#item-identidade-rg-cnh").remove();
+                $("#item-CNH").remove();
+    
                 lista.innerHTML += `<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
                 if (!documentosAnexados["CPF"]) {
-                    removeItem("item-identidade-cpf-cnh");
+                    $("#item-identidade-cpf-cnh").remove();
                     lista.innerHTML += `<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`;
                 }
             } else if (tipo === "CPF") {
                 documentosAnexados["CNH"] = null;
-                removeItem("item-identidade-cpf-cnh");
-                removeItem("item-CNH");
-
+                $("#item-identidade-cpf-cnh").remove();
+                $("#item-CNH").remove();
+    
                 lista.innerHTML += `<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
                 if (!documentosAnexados["RG"]) {
-                    removeItem("item-identidade-rg-cnh");
+                    $("#item-identidade-rg-cnh").remove();
                     lista.innerHTML += `<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`;
                 }
             } else {
                 document.getElementById(`item-${tipo}`).innerHTML = `<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`;
             }
-
+    
             input.value = "";
             select.value = "";
             divAnexo.style.opacity = "0";
@@ -279,12 +279,7 @@ function inicializaInputAnexo() {
             console.error("Erro ao anexar:", e);
             alert("Erro ao anexar documento.");
         }
-    });
-}
-
-function removeItem(id) {
-    const el = document.getElementById(id);
-    if (el) el.remove();
+    }
 }
 
 function renderizarAnexosEtapaAprovacao() {

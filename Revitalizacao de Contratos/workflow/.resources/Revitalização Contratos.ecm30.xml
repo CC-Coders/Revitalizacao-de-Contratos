@@ -29,10 +29,10 @@
     <processDefinitionVersionPK>
       <companyId>1</companyId>
       <processId>Revitalização Contratos</processId>
-      <version>18</version>
+      <version>44</version>
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
-    <formId>0</formId>
+    <formId>29166</formId>
     <editionMode>true</editionMode>
     <updateAttachmentsVersion>false</updateAttachmentsVersion>
     <controlsAttachmentsSecurity>false</controlsAttachmentsSecurity>
@@ -1171,7 +1171,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>11</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1183,7 +1183,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>24</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1195,7 +1195,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1207,7 +1207,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1219,7 +1219,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1231,7 +1231,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1243,7 +1243,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1255,7 +1255,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1267,7 +1267,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1279,7 +1279,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1291,7 +1291,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1303,7 +1303,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1315,7 +1315,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1327,7 +1327,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1339,7 +1339,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1351,7 +1351,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1363,7 +1363,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>68</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1375,7 +1375,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1387,7 +1387,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1399,7 +1399,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1411,7 +1411,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>18</version>
+        <version>44</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -2369,8 +2369,12 @@ function criaNovoContrato() {&#xd;
     try {&#xd;
         var parametros = buscaParamentrosCriacaoContrato();&#xd;
         validaParametros(parametros);&#xd;
+        log.info(&quot;Paramentros novo contrato: &quot;);&#xd;
+        log.dir(parametros);&#xd;
         var contexto = &quot;CODSISTEMA=G;CODCOLIGADA=&quot; + parametros.CODCOLIGADA + &quot;;CODUSUARIO=fluig&quot;;&#xd;
         var xml = montaXMLCriacaoDeContrato(parametros);&#xd;
+        log.info(&quot;XML novo Contrato: &quot;);&#xd;
+        log.info(xml);&#xd;
 &#xd;
         var retorno = DatasetFactory.getDataset(&#xd;
             &quot;InsereContratoRM&quot;,&#xd;
@@ -2411,11 +2415,12 @@ function buscaParamentrosCriacaoContrato() {&#xd;
     var DATAFIM = hAPI.getCardValue(&quot;novoContratoDataFim&quot;);&#xd;
     var CODSTACNT = hAPI.getCardValue(&quot;novoContratoSTATUS&quot;);&#xd;
     var NOME = hAPI.getCardValue(&quot;novoContratoObjeto&quot;);&#xd;
-    if (Nome.length() &gt; 40) {&#xd;
+    if (NOME.length() &gt; 40) {&#xd;
         // A coluna na base do RM tem limite de 40 caracteres&#xd;
-        Nome = Nome.substring(0, 40);&#xd;
+        NOME = NOME.substring(0, 40);&#xd;
     }&#xd;
-    var CODCPG = hAPI.getCardValue(&quot;novoContratoTipoFaturamento&quot;);&#xd;
+    var CODCPG = hAPI.getCardValue(&quot;novoContratoCondicaoPagamento&quot;);&#xd;
+    var TIPOFATURAMENTO = hAPI.getCardValue(&quot;novoContratoTipoFaturamento&quot;);&#xd;
     var DIAFATURAMENTO = hAPI.getCardValue(&quot;novoContratoDiaFaturamento&quot;);&#xd;
     var QTDEFATURAMENTOS = hAPI.getCardValue(&quot;novoContratoQtdeFaturamento&quot;);&#xd;
     var urlSolicitacao = getServerURL() + &quot;/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=&quot; + getValue(&quot;WKNumProces&quot;);&#xd;
@@ -2431,36 +2436,38 @@ function buscaParamentrosCriacaoContrato() {&#xd;
         var id = indexes[i];&#xd;
 &#xd;
         ITENS.push({&#xd;
-            IDPRD: hAPI.getCardValue(&quot;novoContratoItemProduto&quot; + &quot;___&quot; + id),&#xd;
-            VALOR: hAPI.getCardValue(&quot;novoContratoItemValor&quot; + &quot;___&quot; + id),&#xd;
-            RATDEP: hAPI.getCardValue(&quot;novoContratoJsonRateiosItem&quot; + &quot;___&quot; + id),&#xd;
+            IDPRD: hAPI.getCardValue(&quot;novoContratoItemProduto&quot; + &quot;___&quot; + id) + &quot;&quot;,&#xd;
+            VALOR: hAPI.getCardValue(&quot;novoContratoItemValor&quot; + &quot;___&quot; + id) + &quot;&quot;,&#xd;
+            RATDEP: JSON.parse(hAPI.getCardValue(&quot;novoContratoJsonRateiosItem&quot; + &quot;___&quot; + id) + &quot;&quot;),&#xd;
         });&#xd;
     }&#xd;
 &#xd;
     return {&#xd;
-        CODCOLIGADA: CODCOLIGADA,&#xd;
-        IDCNT: IDCNT,&#xd;
-        CODFILIAL: CODFILIAL,&#xd;
-        CODIGOTIPOCONTRATO: CODIGOTIPOCONTRATO,&#xd;
-        CODTCN: CODTCN,&#xd;
-        CODCCUSTO: CODCCUSTO,&#xd;
-        CODIGOCONTRATO: CODIGOCONTRATO,&#xd;
-        locEstoque: locEstoque,&#xd;
-        CODCFO: CODCFO,&#xd;
-        CODRPR: CODRPR,&#xd;
-        DATAINICIO: DATAINICIO,&#xd;
-        DATAFIM: DATAFIM,&#xd;
-        NOME: NOME,&#xd;
-        CODSTACNT: CODSTACNT,&#xd;
-        CODCPG: CODCPG,&#xd;
-        DIAFATURAMENTO: DIAFATURAMENTO,&#xd;
-        QTDEFATURAMENTOS: QTDEFATURAMENTOS,&#xd;
-        urlSolicitacao: urlSolicitacao,&#xd;
-        NATUREZA: &quot;1&quot;, //Compra&#xd;
+        CODCOLIGADA: CODCOLIGADA + &quot;&quot;,&#xd;
+        IDCNT: IDCNT + &quot;&quot;,&#xd;
+        CODFILIAL: CODFILIAL + &quot;&quot;,&#xd;
+        CODIGOTIPOCONTRATO: CODIGOTIPOCONTRATO + &quot;&quot;,&#xd;
+        CODTCN: CODTCN + &quot;&quot;,&#xd;
+        CODCCUSTO: CODCCUSTO + &quot;&quot;,&#xd;
+        CODIGOCONTRATO: CODIGOCONTRATO + &quot;&quot;,&#xd;
+        locEstoque: locEstoque + &quot;&quot;,&#xd;
+        CODCFO: CODCFO + &quot;&quot;,&#xd;
+        CODRPR: CODRPR + &quot;&quot;,&#xd;
+        DATAINICIO: DATAINICIO + &quot;&quot;,&#xd;
+        DATAFIM: DATAFIM + &quot;&quot;,&#xd;
+        NOME: NOME + &quot;&quot;,&#xd;
+        CODSTACNT: CODSTACNT + &quot;&quot;,&#xd;
+        CODCPG: CODCPG + &quot;&quot;,&#xd;
+        DIAFATURAMENTO: DIAFATURAMENTO + &quot;&quot;,&#xd;
+        QTDEFATURAMENTOS: QTDEFATURAMENTOS + &quot;&quot;,&#xd;
+        urlSolicitacao: urlSolicitacao + &quot;&quot;,&#xd;
+        TIPOFATURAMENTO:TIPOFATURAMENTO + &quot;&quot;,&#xd;
+        NATUREZA: &quot;1&quot; + &quot;&quot;,&#xd;
         ITENS: ITENS,&#xd;
     };&#xd;
 }&#xd;
 function validaParametros(parametros) {&#xd;
+    &#xd;
     var erroRetorno = [];&#xd;
     if (parametros.CODCOLIGADA == undefined || parametros.CODCOLIGADA == null || parametros.CODCOLIGADA == &quot;&quot;) {&#xd;
         erroRetorno.push(&quot;CODCOLIGADA&quot;);&#xd;
@@ -2532,11 +2539,14 @@ function validaParametros(parametros) {&#xd;
         erroRetorno.push(&quot;ITENS&quot;);&#xd;
     }&#xd;
 &#xd;
-    try {&#xd;
-        parametros.ITENS = JSON.parse(parametros.ITENS);&#xd;
-    } catch (error) {&#xd;
-        erroRetorno.push(&quot;ITENS&quot;);&#xd;
-    }&#xd;
+    // try {&#xd;
+    //     log.info(parametros.ITENS);&#xd;
+    //     parametros.ITENS = JSONUtil.toJSON(parametros.ITENS);&#xd;
+    // } catch (error) {&#xd;
+    //     log.info(&quot;Erro no parse do JSON ITENS&quot;);&#xd;
+    //     log.dir(error);&#xd;
+    //     erroRetorno.push(&quot;ITENS&quot;);&#xd;
+    // }&#xd;
 &#xd;
     for (var i = 0; i &lt; parametros.ITENS.length; i++) {&#xd;
         var item = parametros.ITENS[i];&#xd;
@@ -2552,20 +2562,35 @@ function validaParametros(parametros) {&#xd;
         }&#xd;
 &#xd;
         try {&#xd;
-            item.RATDEP = JSON.parse(item.RATDEP);&#xd;
+            log.info(typeof item.RATDEP);&#xd;
+            log.info(item.RATDEP.length);&#xd;
+            log.dir(item.RATDEP);&#xd;
+            &#xd;
+            // item.RATDEP = JSON.parse(item.RATDEP);&#xd;
         } catch (error) {&#xd;
+            log.info(&quot;Erro no parse do JSON RATDEP&quot;);            &#xd;
             erroRetorno.push(&quot;Item RATDEP&quot;);&#xd;
         }&#xd;
 &#xd;
+        try {&#xd;
+            &#xd;
+        &#xd;
         for (var j = 0; j &lt; item.RATDEP.length; j++) {&#xd;
             var RATEIO = item.RATDEP[j];&#xd;
+            log.dir(item.RATDEP);&#xd;
+            log.dir(RATEIO);&#xd;
+            log.dir(item.RATDEP[j]);&#xd;
+            log.info(RATEIO.CODDEPTO);&#xd;
 &#xd;
-            if (RATEIO.CODDEPTO == undefined || RATEIO.CODDEPTO == null || item.RATEIO.CODDEPTO == &quot;&quot;) {&#xd;
+            if (RATEIO.CODDEPTO == undefined || item.RATDEP[j].CODDEPTO == null || item.RATDEP[j].RATEIO.CODDEPTO == &quot;&quot;) {&#xd;
                 erroRetorno.push(&quot;RATDEP DEPTO&quot;);&#xd;
             }&#xd;
-            if (RATEIO.VALOR == undefined || RATEIO.VALOR == null || RATEIO.VALOR == &quot;&quot;) {&#xd;
-                erroRetorno.push(&quot;RATDEP VALOR&quot;);&#xd;
+            if (item.RATDEP[j].PERCENTUAL == undefined || item.RATDEP[j].PERCENTUAL == null || item.RATDEP[j].PERCENTUAL == &quot;&quot;) {&#xd;
+                erroRetorno.push(&quot;RATDEP PERCENTUAL&quot;);&#xd;
             }&#xd;
+        }&#xd;
+        } catch (error) {&#xd;
+            log.dir(error);&#xd;
         }&#xd;
     }&#xd;
 &#xd;
@@ -2597,7 +2622,7 @@ function montaXMLCriacaoDeContrato(parametros) {&#xd;
     xml += &quot;        &lt;DATAFIM&gt;&quot; + setDateXMLFormat(parametros.DATAFIM) + &quot;T00:00:00&lt;/DATAFIM&gt;&quot;;&#xd;
     xml += &quot;        &lt;CODMOEVALORCONTRATO&gt;R$&lt;/CODMOEVALORCONTRATO&gt;&quot;;&#xd;
     xml += &quot;        &lt;IMPRIMEMOV&gt;1&lt;/IMPRIMEMOV&gt;&quot;;&#xd;
-    if (parametros.CODCPG == TIPOS_FATURAMENTO[&quot;Periódico&quot;]) {&#xd;
+    if (parametros.TIPOFATURAMENTO == TIPOS_FATURAMENTO[&quot;Periódico&quot;]) {&#xd;
         xml += &quot;    &lt;DIAFATURAMENTO&gt;&quot; + parametros.DIAFATURAMENTO + &quot;&lt;/DIAFATURAMENTO&gt;&quot;;&#xd;
         xml += &quot;    &lt;QTDEFATURAMENTOS&gt;&quot; + parametros.QTDEFATURAMENTOS + &quot;&lt;/QTDEFATURAMENTOS&gt;&quot;;&#xd;
     }&#xd;
@@ -2616,6 +2641,8 @@ function montaXMLCriacaoDeContrato(parametros) {&#xd;
     xml += geraXML_TITMCNTRATCCU(parametros);&#xd;
     xml += geraXML_TITMCNTRATDEP(parametros);&#xd;
     xml += &quot;&lt;/CTRCNT&gt;&quot;;&#xd;
+&#xd;
+    return xml;&#xd;
 }&#xd;
 function geraXML_TITMCNT(parametros) {&#xd;
     var xml = &quot;&quot;;&#xd;
@@ -2629,15 +2656,15 @@ function geraXML_TITMCNT(parametros) {&#xd;
         xml += &quot;    &lt;NSEQITMCNT&gt;&quot; + (i + 1) + &quot;&lt;/NSEQITMCNT&gt;&quot;;&#xd;
         xml += &quot;    &lt;IDPRD&gt;&quot; + item.IDPRD + &quot;&lt;/IDPRD&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODFILIALFAT&gt;&quot; + parametros.CODFILIAL + &quot;&lt;/CODFILIALFAT&gt;&quot;;&#xd;
-        xml += &quot;    &lt;CODLOCFATURAM&gt;&quot; + parametros.LOCESTOQUE + &quot;&lt;/CODLOCFATURAM&gt;&quot;;&#xd;
-        xml += &quot;    &lt;CODCCUSTO&gt;&quot; + parametros.CCUSTO + &quot;&lt;/CODCCUSTO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODLOCFATURAM&gt;&quot; + parametros.locEstoque + &quot;&lt;/CODLOCFATURAM&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCCUSTO&gt;&quot; + parametros.CODCCUSTO + &quot;&lt;/CODCCUSTO&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODCFO&gt;&quot; + parametros.CODCFO + &quot;&lt;/CODCFO&gt;&quot;;&#xd;
         xml += &quot;    &lt;QUANTIDADE&gt;1&lt;/QUANTIDADE&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODCPG&gt;&quot; + parametros.CODCPG + &quot;&lt;/CODCPG&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODMOEPRECOFATURAMENTO&gt;R$&lt;/CODMOEPRECOFATURAMENTO&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODSTACNT&gt;&quot; + parametros.CODSTACNT + &quot;&lt;/CODSTACNT&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODTMV&gt;&quot; + (parametros.CODTCN == TIPOS_CONTRATO[&quot;Locação de Imóvel&quot;] ? &quot;1.1.98&quot; : &quot;1.1.99&quot;) + &quot;&lt;/CODTMV&gt;&quot;;&#xd;
-        xml += &quot;    &lt;EPERIODICO&gt;&quot; + parametros.CODCPG + &quot;&lt;/EPERIODICO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;EPERIODICO&gt;&quot; + parametros.TIPOFATURAMENTO + &quot;&lt;/EPERIODICO&gt;&quot;;&#xd;
         xml += &quot;    &lt;DATAINICIO&gt;&quot; + setDateXMLFormat(parametros.DATAINICIO) + &quot;&lt;/DATAINICIO&gt;&quot;;&#xd;
         xml += &quot;    &lt;DATAFIM&gt;&quot; + setDateXMLFormat(parametros.DATAFIM) + &quot;T00:00:00&lt;/DATAFIM&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODCPGPRAZO&gt;130&lt;/CODCPGPRAZO&gt;&quot;;&#xd;
@@ -2738,6 +2765,33 @@ function alteraStatusContrato(STATUS) {&#xd;
     }&#xd;
 }&#xd;
 &#xd;
+&#xd;
+// Assinatura Eletrônica&#xd;
+function criaAssinaturaEletronica() {&#xd;
+    var ds = DatasetFactory.getDataset(&quot;ds_auxiliar_wesign&quot;,null,[&#xd;
+            DatasetFactory.createConstraint(&quot;nmArquivo&quot;, NomeArquivo, NomeArquivo, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;codArquivo&quot;, IdArquivo, IdArquivo, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;vrArquivo&quot;, versaoArquivo, versaoArquivo, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;codPasta&quot;, idPasta, idPasta, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;codRemetente&quot;, CodRemetente, CodRemetente, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;nmRemetente&quot;, BuscaNomeUsuario(CodRemetente), BuscaNomeUsuario(CodRemetente), ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;status&quot;, &quot;Enviando para assinatura&quot;, &quot;Enviando para assinatura&quot;, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;metodo&quot;, &quot;create&quot;, &quot;create&quot;, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;jsonSigners&quot;, JSONUtil.toJSON(arrSigners), JSONUtil.toJSON(arrSigners), ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;numSolic&quot;, getValue(&quot;WKNumProces&quot;), getValue(&quot;WKNumProces&quot;), ConstraintType.MUST),&#xd;
+        ],null);&#xd;
+&#xd;
+    if (ds.getValue(0, &quot;Result&quot;) == &quot;OK&quot;) {&#xd;
+        return true;&#xd;
+    } else {&#xd;
+        log.error(ds.getValue(&quot;Erro ao enviar Assinatura Eletronica&quot;));&#xd;
+        log.error(ds.getValue(0, &quot;mensagem&quot;));&#xd;
+        throw &quot;Erro ao Criar a Assinatura Eletrôncia: &quot; + ds.getValue(0, &quot;mensagem&quot;);&#xd;
+    }&#xd;
+}&#xd;
+&#xd;
+&#xd;
+&#xd;
 // Utils&#xd;
 function insereHistorico(observacao, acao, atividade) {&#xd;
     var USER = getValue(&quot;WKUser&quot;);&#xd;
@@ -2754,6 +2808,7 @@ function insereHistorico(observacao, acao, atividade) {&#xd;
     hAPI.setCardValue(&quot;observacao&quot;, &quot;&quot;); &#xd;
 &#xd;
 }&#xd;
+&#xd;
 function getDateTimeNow() {&#xd;
     var date = new Date();&#xd;
     var dia = date.getDate();&#xd;
@@ -2784,6 +2839,45 @@ function getServerURL() {&#xd;
     var ds = DatasetFactory.getDataset(&quot;dsGetServerURL&quot;, null, null, null);&#xd;
     return ds.getValue(0, &quot;URL&quot;);&#xd;
 }&#xd;
+function setDateXMLFormat(data, sql) {&#xd;
+    // Formata data para inserção no XML&#xd;
+    var retorno = &quot;&quot;;&#xd;
+    var n = data.indexOf(&quot;/&quot;);&#xd;
+    data = data.trim();&#xd;
+    var joinDtHr = &quot;&quot;;&#xd;
+    if (sql == 1) {&#xd;
+        joinDtHr = &quot; &quot;;&#xd;
+    } else {&#xd;
+        joinDtHr = &quot;T&quot;;&#xd;
+    }&#xd;
+    if (n == -1) {&#xd;
+        var tam = data.length;&#xd;
+        if (tam &gt; 10) {&#xd;
+            retorno = retorno.replace(&quot; &quot;, joinDtHr);&#xd;
+            retorno = retorno + &quot;00&quot;;&#xd;
+        } else {&#xd;
+            retorno = retorno + joinDtHr + &quot;00:00:00&quot;;&#xd;
+        }&#xd;
+    }&#xd;
+&#xd;
+    if (n == 2) {&#xd;
+        var temp = data.split(&quot;/&quot;);&#xd;
+        retorno = [temp[2], temp[1], temp[0]].join(&quot;-&quot;);&#xd;
+        retorno = retorno + joinDtHr + &quot;00:00:00&quot;;&#xd;
+    }&#xd;
+    if (n == 4) {&#xd;
+        retorno = data.replace(&quot;/&quot;, &quot;-&quot;);&#xd;
+        retorno = retorno + joinDtHr + &quot;00:00:00&quot;;&#xd;
+    }&#xd;
+    return retorno;&#xd;
+}&#xd;
+function ValorToFloat(valor) {&#xd;
+    if (valor.split(&quot;R$&quot;).length &gt; 1) {&#xd;
+        valor = valor.split(&quot;R$&quot;)[1].trim();&#xd;
+    }&#xd;
+    valor = valor.split(&quot;.&quot;).join(&quot;&quot;).split(&quot;,&quot;).join(&quot;.&quot;);&#xd;
+    return parseFloat(valor);&#xd;
+}&#xd;
 </eventDescription>
     </WorkflowProcessEvent>
     <WorkflowProcessEvent>
@@ -2793,8 +2887,8 @@ function getServerURL() {&#xd;
         <processId>Revitalização Contratos</processId>
         <version>1</version>
       </workflowProcessEventPK>
-      <eventDescription>function intermediateconditional58() {&#xd;
-&#xd;
+      <eventDescription>function intermediateconditional58() {
+
 }</eventDescription>
     </WorkflowProcessEvent>
   </list>
@@ -2904,7 +2998,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>44</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2915,7 +3009,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>44</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2926,7 +3020,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>16</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2937,7 +3031,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>27</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2948,7 +3042,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>28</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2959,7 +3053,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>39</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2970,7 +3064,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>39</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -2981,7 +3075,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>36</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -2992,7 +3086,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>78</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3003,7 +3097,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>78</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3014,7 +3108,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>78</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3025,7 +3119,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>79</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3036,7 +3130,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>79</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3047,7 +3141,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>80</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3058,7 +3152,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>80</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3069,7 +3163,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>81</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3080,7 +3174,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>81</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3091,7 +3185,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>82</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3102,7 +3196,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>82</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3113,7 +3207,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>85</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3124,7 +3218,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>85</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3135,7 +3229,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>86</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3146,7 +3240,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>86</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3157,7 +3251,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>86</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3168,7 +3262,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>73</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3179,7 +3273,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>71</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3190,7 +3284,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>71</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3201,7 +3295,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>87</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3212,7 +3306,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>91</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3223,7 +3317,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>91</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3234,7 +3328,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>91</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3245,7 +3339,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>92</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3256,7 +3350,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>93</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3267,7 +3361,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>93</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3278,7 +3372,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>94</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3289,7 +3383,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>94</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3300,7 +3394,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>94</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3311,7 +3405,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>95</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3322,7 +3416,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>95</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3333,7 +3427,7 @@ function getServerURL() {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <linkSequence>95</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3346,7 +3440,7 @@ function getServerURL() {&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>18</version>
+        <version>44</version>
         <stateSequence>58</stateSequence>
         <triggerSequence>0</triggerSequence>
       </processStateTriggerPK>

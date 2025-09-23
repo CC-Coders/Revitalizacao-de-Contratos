@@ -25,6 +25,7 @@ function bindingCamposIntegracaoRM(){
         var CODFILIAL = $(this).val();
         asyncPreencheOptionsLocalEstoque(CODCOLIGADA, CODFILIAL);
     });
+    $("#btnAdicionarItem").on("click", asyncAdicionarItemNovoContrato);
 }
 
 
@@ -61,6 +62,39 @@ function preencheCamposAutomaticamente() {
             }
         });
 
+        var periodo = $("#periodoLocacao").val();
+        var [periodoInit, periodoEnd] = periodo.split(" até ");
+        $("#novoContratoDataInicio").val(periodoInit);
+        $("#novoContratoDataFim").val(periodoEnd);
+
+        var momentInit = moment(periodoInit.split("/").reverse().join("-"));
+        var momentEnd = moment(periodoEnd.split("/").reverse().join("-"));
+
+
+        var duration = moment.duration(momentEnd.diff(momentInit));
+        var months = Math.ceil(duration.asMonths());
+        $("#novoContratoQtdeFaturamento").val(months);
+
+        var periodico = 1;
+        var porMedicao = 2;
+
+        const isLocacaoImovel = $("#tipoContrato").val() == "Locação de Imóvel";
+        if (isLocacaoImovel) {
+            $("#novoContratoTipoFaturamento").val(periodico).change();
+        } else {
+            $("#novoContratoTipoFaturamento").val(porMedicao).change();
+        }
+
+        var diaPagamento = $("#janelaPagamento").val();
+        $("#novoContratoDiaFaturamento").val(diaPagamento);
+
+
+        var hiddenCODCOLCFO = $("#hiddenCODCOLCFO").val();
+        var hiddenCODCFO = $("#hiddenCODCFO").val();
+        var hiddenCGCCFO = $("#hiddenCGCCFO").val();
+        var hiddenFORNECEDOR = $("#hiddenFORNECEDOR").val();
+
+        $("#novoContratoFornecedor").val(`${hiddenCODCOLCFO} - ${hiddenCODCFO} - ${hiddenCGCCFO} - ${hiddenFORNECEDOR}`);
     }, 1000);
 }
 function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
@@ -440,36 +474,63 @@ async function asyncInsereNovaLinhaReteio() {
         .closest("table")
         .find("tbody")
         .append(await asyncGeraLinhaTabela());
-    $(this).closest("table").find("tbody").find(".selectDepartamentoNovoContratoItemRateio:last").selectize({});
-    $(this).closest("table").find("tbody").find(".inputValorNovoContratoItemRateio:last").maskMoney({
-        prefix: "R$ ",
-        thousands: ".",
-        decimal: ",",
-        allowZero: true,
-        affixesStay: true,
+    
+    $(this).closest("table").find("tbody").find(".selectDepartamentoNovoContratoItemRateio:last").on("change", salvaJSONRateio);
+    $(this).closest("table").find("tbody").find(".inputValorNovoContratoItemRateio:last").on("change", salvaJSONRateio);
+    $(this).closest("table").find("tbody").find(".selectDepartamentoNovoContratoItemRateio:last").selectize({
+        onChange: ()=> $(this)[0].dispatchEvent(new Event("change"))
     });
 
-    $(this).closest("table").find("tbody").find(".btnRemoverLinhaRateioNovoItem").on("click", function(){
-        $(this).closest("tr").remove();
-    })
+    console.log($(this).closest("table").find("tbody").find(".selectDepartamentoNovoContratoItemRateio:last"));
+    console.log($(this).closest("table").find("tbody").find(".inputValorNovoContratoItemRateio:last"));
+
+    $(this).closest("table").find("tbody").find(".inputValorNovoContratoItemRateio:last").maskMoney({
+        suffix: "%", 
+        allowZero: false,
+        affixesStay: true,
+        precision:0,
+    });
+    $(this)
+        .closest("table")
+        .find("tbody")
+        .find(".btnRemoverLinhaRateioNovoItem")
+        .on("click", function () {
+            $(this).closest("tr").remove();
+        });
+
+    async function asyncGeraLinhaTabela() {
+        var html = `<tr>
+            <td>1</td>
+            <td>
+                <select class="selectDepartamentoNovoContratoItemRateio">${await promiseRetornaHtmlOptionsDepartamentos()}</select>
+            </td>
+            <td>
+                <input class="form-control inputValorNovoContratoItemRateio" />
+            </td>
+            <td style="text-align:center;">
+                <button class="btn btn-danger btnRemoverLinhaRateioNovoItem">
+                    <i class="flaticon flaticon-trash icon-md" aria-hidden="true"></i>
+                </button>
+            </td>
+        </tr>`;
+        return html;
+    }
 }
-async function asyncGeraLinhaTabela() {
-    var html = `<tr>
-        <td>1</td>
-        <td>
-            <select class="selectDepartamentoNovoContratoItemRateio">${await promiseRetornaHtmlOptionsDepartamentos()}</select>
-        </td>
-        <td>
-            <input class="form-control inputValorNovoContratoItemRateio" />
-        </td>
-        <td style="text-align:center;">
-            <button class="btn btn-danger btnRemoverLinhaRateioNovoItem">
-                <i class="flaticon flaticon-trash icon-md" aria-hidden="true"></i>
-            </button>
-        </td>
-    </tr>`;
-    return html;
+function salvaJSONRateio(){
+    var json = [];
+    $(this).closest("tbody").find("tr").each(function(){
+        var depto = $(this).find(".selectDepartamentoNovoContratoItemRateio").val();
+        var valor = $(this).find(".inputValorNovoContratoItemRateio").val().replace("%","");
+        json.push({
+            CODDEPTO:depto + "",
+            PERCENTUAL:valor + ""
+        });
+    });
+    console.log(json)
+    $(this).closest(".panel").find(".novoContratoJsonRateiosItem").val(JSON.stringify(json));
 }
+
+
 
 // Consultas
 function promiseRetornaHtmlOptionsDepartamentos() {
