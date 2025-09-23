@@ -8,5 +8,10 @@ function displayFields(form, customHTML) {
 		form.setValue("solicitante", getValue("WKUser"));
 	}
 
+
+	// Limpa os campos
+	form.setValue("decisao","");
+	form.setValue("observacoes","");
+
 	 form.setHidePrintLink(true);
 }
