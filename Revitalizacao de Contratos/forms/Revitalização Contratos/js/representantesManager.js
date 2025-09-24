@@ -14,14 +14,16 @@ async function asyncPreencheRepresentanteCastilho() {
         showMessage("Erro ao buscar representante da Castilho: ", error, "warning");
     }
 }
-async function asyncVerificaSeExisteAssinanteCadastradoPorNome(nome) {
+async function asyncVerificaSeExisteAssinanteCadastradoPorNome() {
+    var nome = $(this).val();
+    console.log(nome)
     try {
         var cadastroAssinante = await promiseBuscaCadastroDeAssinantePorNome(nome);
         $("#cpfRepresentanteFornecedor").val(cadastroAssinante.cCpf);
         $("#mailRepresentanteFornecedor").val(cadastroAssinante.cEmail);
 
     } catch (error) {
-        showMessage("Erro ao buscar assinante: ", error, "warning");
+        console.error("Erro ao buscar assinante: ", error);
     }
 }
 
@@ -69,8 +71,9 @@ function onchangeTipoAssinaturaContrato() {
 
     if (val == "Eletrônica") {
 
-
+        $("#mailRepresentanteCastilho, #mailRepresentanteFornecedor").closest("div").show();
+        
     } else if (val == "Manual") {
-
+        $("#mailRepresentanteCastilho, #mailRepresentanteFornecedor").closest("div").hide();
     }
 }

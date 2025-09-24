@@ -129,7 +129,7 @@ function bindings() {
 
     // Aba Assinatura
     $("#assinaturaContrato").on("change", ()=> onchangeTipoAssinaturaContrato())
-    $("#nomeRepresentanteFornecedor").on("change", ()=> asyncVerificaSeExisteAssinanteCadastradoPorNome($(this).val()));
+    $("#nomeRepresentanteFornecedor").on("change", asyncVerificaSeExisteAssinanteCadastradoPorNome);
     $("#tipoContrato, #obra").on("change", function(){
         if ($("#tipoContrato").val() != "" && $("#obra").val() != "") {
             asyncPreencheRepresentanteCastilho();
