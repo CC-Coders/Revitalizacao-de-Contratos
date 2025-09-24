@@ -719,8 +719,8 @@ async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores() {
 
         var aprovadores = extraiAprovadoresDaLista(await promiseBuscaAprovadoresDaObra(CODCOLIGADA, NOMECCUSTO, "1.1.02", "9999999999999"));
         $("#engenheiro").val(aprovadores.engenherio);
-        $("#coordenador").val(aprovadores.diretor);
-        $("#diretor").val(aprovadores.engenherio);
+        $("#coordenador").val(aprovadores.coordenador);
+        $("#diretor").val(aprovadores.diretor);
     }
 
     // Aprovadores
