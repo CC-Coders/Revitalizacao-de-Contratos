@@ -7,8 +7,8 @@ async function asyncPreencheRepresentanteCastilho() {
         var cadastroAssinante = await promiseBuscaCadastroDeAssinantePorNome(representante);
 
         $("#nomeRepresentanteCastilho").val(cadastroAssinante.nome);
-        $("#cpfRepresentanteCastilho").val(cadastroAssinante.cCpf);
-        $("#mailRepresentanteCastilho").val(cadastroAssinante.cEmail);
+        $("#cpfRepresentanteCastilho").val(hex2a(cadastroAssinante.cpf));
+        $("#mailRepresentanteCastilho").val(hex2a(cadastroAssinante.email));
 
     } catch (error) {
         showMessage("Erro ao buscar representante da Castilho: ", error, "warning");
@@ -19,8 +19,8 @@ async function asyncVerificaSeExisteAssinanteCadastradoPorNome() {
     console.log(nome)
     try {
         var cadastroAssinante = await promiseBuscaCadastroDeAssinantePorNome(nome);
-        $("#cpfRepresentanteFornecedor").val(cadastroAssinante.cCpf);
-        $("#mailRepresentanteFornecedor").val(cadastroAssinante.cEmail);
+        $("#cpfRepresentanteFornecedor").val(hex2a(cadastroAssinante.cpf));
+        $("#mailRepresentanteFornecedor").val(hex2a(cadastroAssinante.email));
 
     } catch (error) {
         console.error("Erro ao buscar assinante: ", error);
@@ -61,6 +61,11 @@ function preencheInformacoesAprovacao() {
     $("#spanAssinaturaContrato").text($("#assinaturaContrato").val());
 
     $("#assinaturaContrato").hide();
+}
+
+function hex2a(e) {
+    for (var t = String(e), a = "", i = 0; i < t.length && "00" !== t.substr(i, 2); i += 2) a += String.fromCharCode(parseInt(t.substr(i, 2), 16));
+    return a;
 }
 
 

@@ -113,6 +113,8 @@ function beforeTaskSave_coordenadorObras() {
 }
 function beforeTaskSave_diretoria() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Diretoria");
+
+    criaAssinaturaEletronica();
 }
 
 // Integração RM
@@ -519,28 +521,95 @@ function alteraStatusContrato(STATUS) {
 
 // Assinatura Eletrônica
 function criaAssinaturaEletronica() {
-    var ds = DatasetFactory.getDataset("ds_auxiliar_wesign", null, [
-        DatasetFactory.createConstraint("nmArquivo", NomeArquivo, NomeArquivo, ConstraintType.MUST),
-        DatasetFactory.createConstraint("codArquivo", IdArquivo, IdArquivo, ConstraintType.MUST),
-        DatasetFactory.createConstraint("vrArquivo", versaoArquivo, versaoArquivo, ConstraintType.MUST),
-        DatasetFactory.createConstraint("codPasta", idPasta, idPasta, ConstraintType.MUST),
-        DatasetFactory.createConstraint("codRemetente", CodRemetente, CodRemetente, ConstraintType.MUST),
-        DatasetFactory.createConstraint("nmRemetente", BuscaNomeUsuario(CodRemetente), BuscaNomeUsuario(CodRemetente), ConstraintType.MUST),
-        DatasetFactory.createConstraint("status", "Enviando para assinatura", "Enviando para assinatura", ConstraintType.MUST),
-        DatasetFactory.createConstraint("metodo", "create", "create", ConstraintType.MUST),
-        DatasetFactory.createConstraint("jsonSigners", JSONUtil.toJSON(arrSigners), JSONUtil.toJSON(arrSigners), ConstraintType.MUST),
-        DatasetFactory.createConstraint("numSolic", getValue("WKNumProces"), getValue("WKNumProces"), ConstraintType.MUST),
-    ], null);
+    try {
+        var documentId = hAPI.getCardValue("contratoDocumentId");
+        var CodRemetente = hAPI.getCardValue("solicitante");
+        var document = buscaDadosDoArquivo(documentId);
+        log.info("dados do arquivo");
+        log.dir(document);
 
-    if (ds.getValue(0, "Result") == "OK") {
-        return true;
-    } else {
-        log.error(ds.getValue("Erro ao enviar Assinatura Eletronica"));
-        log.error(ds.getValue(0, "mensagem"));
-        throw "Erro ao Criar a Assinatura Eletrôncia: " + ds.getValue(0, "mensagem");
+        var parentId = document.parentId;
+        var version = document.version;
+        var documentName = document.description;
+
+        var arrSigners = [];
+        arrSigners.push({
+            nome: hAPI.getCardValue("nomeRepresentanteFornecedor"),
+            email: hAPI.getCardValue("mailRepresentanteFornecedor"),
+            cpf: hAPI.getCardValue("cpfRepresentanteFornecedor"),
+            tipo: "E",
+            status: "Pendente",
+        });
+        arrSigners.push({
+            nome: hAPI.getCardValue("nomeRepresentanteCastilho"),
+            email: hAPI.getCardValue("mailRepresentanteCastilho"),
+            cpf: hAPI.getCardValue("cpfRepresentanteCastilho"),
+            tipo: "E",
+            status: "Pendente",
+        });
+
+
+        var ds = DatasetFactory.getDataset("ds_auxiliar_wesign", null, [
+            DatasetFactory.createConstraint("nmArquivo", documentName, documentName, ConstraintType.MUST),
+            DatasetFactory.createConstraint("codArquivo", documentId, documentId, ConstraintType.MUST),
+            DatasetFactory.createConstraint("vrArquivo", version, version, ConstraintType.MUST),
+            DatasetFactory.createConstraint("codPasta", parentId, parentId, ConstraintType.MUST),
+            DatasetFactory.createConstraint("codRemetente", CodRemetente, CodRemetente, ConstraintType.MUST),
+            DatasetFactory.createConstraint("nmRemetente", BuscaNomeUsuario(CodRemetente), BuscaNomeUsuario(CodRemetente), ConstraintType.MUST),
+            DatasetFactory.createConstraint("status", "Enviando para assinatura", "Enviando para assinatura", ConstraintType.MUST),
+            DatasetFactory.createConstraint("metodo", "create", "create", ConstraintType.MUST),
+            DatasetFactory.createConstraint("jsonSigners", JSONUtil.toJSON(arrSigners), JSONUtil.toJSON(arrSigners), ConstraintType.MUST),
+            DatasetFactory.createConstraint("numSolic", getValue("WKNumProces"), getValue("WKNumProces"), ConstraintType.MUST),
+        ], null);
+
+        if (ds.getValue(0, "Result") == "OK") {
+            var ds_upload = DatasetFactory.getDataset("ds_upload_wesign_manual", null, [
+                DatasetFactory.createConstraint('codArquivo', documentId, documentId, ConstraintType.MUST)
+            ], null);
+            return true;
+        } else {
+            log.error(ds.getValue("Erro ao enviar Assinatura Eletronica"));
+            log.error(ds.getValue(0, "mensagem"));
+            throw "Erro ao Criar a Assinatura Eletrôncia: " + ds.getValue(0, "mensagem");
+        }
+    } catch (error) {
+        throw error;    
     }
 }
+function buscaDadosDoArquivo(documentId){
+    try {
+        var clientService = fluigAPI.getAuthorizeClientService();
+        var data = {
+            companyId: getValue("WKCompany") + '',
+            serviceCode: 'ServicoFluig',
+            endpoint: '/content-management/api/v2/documents/' + documentId,
+            method: 'get',
+            options: {
+                encoding: 'UTF-8',
+                mediaType: 'application/json',
+                useSSL: true
+            },
+            headers: {
+                "Content-Type": 'application/json;charset=UTF-8'
+            }
+        };
 
+        var vo = clientService.invoke(JSON.stringify(data));
+
+        if (vo.getResult() == null || vo.getResult().isEmpty()) {
+            throw "Erro ao consultar o arquivo do Contrato";
+        } else{
+            var result = vo.getResult();
+            if (vo.httpStatusResult != 200) {
+                throw result;
+            }else{
+                return JSON.parse(result);
+            }
+        }
+    } catch (error) {
+        throw error;
+    }
+}
 
 
 // Utils
@@ -628,4 +697,11 @@ function ValorToFloat(valor) {
     }
     valor = valor.split(".").join("").split(",").join(".");
     return parseFloat(valor);
+}
+function BuscaNomeUsuario(CodUsuario) {
+    var ds = DatasetFactory.getDataset("colleague", ["colleagueName"], [
+        DatasetFactory.createConstraint("colleagueId", CodUsuario, CodUsuario, ConstraintType.MUST)
+    ], null);
+
+    return ds.getValue(0, "colleagueName");
 }
