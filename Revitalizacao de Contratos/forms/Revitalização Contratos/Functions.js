@@ -780,31 +780,69 @@ async function asyncMontaHistorico() {
 
 
 // Descrição das Atividades
-function mostraDescricaoDaAtividade(){
-    const atividades = {
-        OBRA:{
-            descricao:"<h1>Obra</h1><p>A <b>Obra</b> é responsável pelo <b>início do processo</b>, incluíndo as <b>informações iniciais e toda a Documentação necessária</b>.</p>"
-        },
-        JURIDICO:{
-            descricao:"<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>"
-        },
-        CONTROLADORIA:{
-            descricao:"<h1>Controladoria</h1><p>A Controladoria é responsável por incluir o Contrato no RM. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>"
-        },
-        APROVACAO:{
-            descricao:"Na Aprovação o Processo passará pelo Engenheiro e Coordenador, em casos de Equipamentos pela Diretoria. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae."
-        },
-        ASSINATURA:{
-            descricao:"Na Atividade de Assiantura o processo aguarda a integração com a Wesign. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae."
-        }
-    };
-    const sequenciaDasAtividades = ["OBRA","JURIDICO","CONTROLADORIA","APROVACAO","ASSINATURA"];
+//function mostraDescricaoDaAtividade(){
+//    const atividades = {
+//        OBRA:{
+//            descricao:"<h1>Obra</h1><p>A <b>Obra</b> é responsável pelo <b>início do processo</b>, incluíndo as <b>informações iniciais e toda a Documentação necessária</b>.</p>"
+//        },
+//        JURIDICO:{
+//            descricao:"<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>"
+//        },
+//        CONTROLADORIA:{
+//            descricao:"<h1>Controladoria</h1><p>A Controladoria é responsável por incluir o Contrato no RM. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae.</p>"
+//        },
+//        APROVACAO:{
+//            descricao:"Na Aprovação o Processo passará pelo Engenheiro e Coordenador, em casos de Equipamentos pela Diretoria. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae."
+//        },
+//        ASSINATURA:{
+//            descricao:"Na Atividade de Assiantura o processo aguarda a integração com a Wesign. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus nesciunt molestiae."
+//        }
+//    };
+//    const sequenciaDasAtividades = ["OBRA","JURIDICO","CONTROLADORIA","APROVACAO","ASSINATURA"];
+//
+//    var index = $(".step").index(this);
+//    var atividade = sequenciaDasAtividades[index];
+//
+//
+//    var desc = atividades[atividade].descricao;
+//    $("#divDescricaoAtividades").html(desc);
+//    $("#divDescricaoAtividades").show();
+//}
+    
+    function mostraDescricaoDaAtividade() {
+        const atividades = {
+            OBRA: {
+                descricao: "<h1>Obra</h1><p>A <b>Obra</b> é responsável pelo <b>início do processo</b>, incluíndo as <b>informações iniciais e toda a Documentação necessária</b>.</p><p>A <b>Obra</b> é responsável pelo <b>início do processo</b>, incluíndo as <b>informações iniciais e toda a Documentação necessária</b>.</p>"
+            },
+            JURIDICO: {
+                descricao: "<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>"
+            },
+            CONTROLADORIA: {
+                descricao: "<h1>Controladoria</h1><p>A Controladoria é responsável por incluir o Contrato no RM.</p>"
+            },
+            APROVACAO: {
+                descricao: "<h1>Aprovação</h1><p>Na Aprovação o Processo passará pelo Engenheiro e Coordenador.</p>"
+            },
+            ASSINATURA: {
+                descricao: "<h1>Assinatura</h1><p>Na Atividade de Assinatura o processo aguarda a integração com a Wesign.</p>"
+            }
+        };
 
-    var index = $(".step").index(this);
-    var atividade = sequenciaDasAtividades[index];
+        const sequenciaDasAtividades = ["OBRA","JURIDICO","CONTROLADORIA","APROVACAO","ASSINATURA"];
+        var index = $(".step").index(this);
+        var atividade = sequenciaDasAtividades[index];
+        var desc = atividades[atividade].descricao;
+        var stepOffset = $(this).offset();
+        var stepWidth = $(this).outerWidth();
+        $("#divDescricaoAtividades")
+            .html(desc)
+            .css({
+                top: stepOffset.top + $(this).outerHeight() + 10, 
+                left: stepOffset.left + stepWidth / 2, 
+            })
+            .fadeIn(200);
+    }
 
-
-    var desc = atividades[atividade].descricao;
-    $("#divDescricaoAtividades").html(desc);
-    $("#divDescricaoAtividades").show();
-}
+    $(".step").hover(mostraDescricaoDaAtividade, function() {
+        $("#divDescricaoAtividades").fadeOut(150);
+    });

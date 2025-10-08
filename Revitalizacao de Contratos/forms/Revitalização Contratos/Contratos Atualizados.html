@@ -28,7 +28,6 @@
     <!-- Formulário -->
     <script src="documentManager.js"></script>
     <script src="integracaoRMManager.js"></script>
-    <script src="representantesManager.js"></script>
     <script src="Functions.js"></script>
     <script src="Script.js"></script>
 
@@ -83,6 +82,7 @@
                 <!-- Dados Solicitacao -->
                 <input type="hidden" id="solicitante" name="solicitante" />
                 <input type="hidden" id="contratoDocumentId" name="contratoDocumentId" />
+                <input type="hidden" id="numProces" name="numProces" />
 
                 <!-- TODO -->
                 <input type="hidden" id="CODCOLIGADA" name="CODCOLIGADA">
@@ -126,12 +126,7 @@
                 <div class="step">Aprovação</div>
                 <div class="step">Assinatura</div>
             </div>
-            <div id="divDescricaoAtividades" style="display: none;">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti error hic dolore expedita soluta
-                provident, magni eveniet at id unde pariatur sed optio fuga reprehenderit blanditiis debitis possimus
-                nesciunt molestiae.
-            </div>
-
+            <div id="divDescricaoAtividades"></div>
             <div class="row" id="informacoesIniciais" style="padding: 24px; margin-top: 40px">
                 <div class="col-md-4">
                     <div class="form-input">
@@ -451,7 +446,7 @@
                             <h4 class="panel-title" style="color: #58595b">Contrato - Locação de Imóvel - PF</h4>
                         </div>
                         <div class="panel-body">
-                            <div class="row rowAprovacao">
+                            <div class="row" id="rowAprovacao">
                                 <!-- Card Dados Gerais -->
                                 <div class="col-md-6 colAprovacao">
                                     <div class="aprovacao-card">
@@ -562,120 +557,27 @@
                 </div>
 
                 <div id="pagina-2" class="pagina">
-                    <div id="divRepresentantesContrato" class="row rowAprovacao panelAprovacao">
-                        <div class="col-md-6 colAprovacao">
-                            <h3>Representante Castilho</h3>
-                            <div>
-                                <label for="nomeRepresentanteCastilho">Nome: </label>
-                                <input type="text" name="nomeRepresentanteCastilho" id="nomeRepresentanteCastilho"
-                                    class="form-control readonlyField" readonly inert>
-                                <br>
-                            </div>
-                            <div>
-                                <label for="cpfRepresentanteCastilho">CPF: </label>
-                                <input type="text" name="cpfRepresentanteCastilho" id="cpfRepresentanteCastilho"
-                                    class="form-control readonlyField" readonly inert>
-                                <br>
-                            </div>
-                            <div>
-                                <label for="mailRepresentanteCastilho">E-mail: </label>
-                                <input type="text" name="mailRepresentanteCastilho" id="mailRepresentanteCastilho"
-                                    class="form-control readonlyField" readonly inert>
-                                <br>
-                            </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="background-color: #eaeaea">
+                            <h4 class="panel-title" style="color: #58595b">Assinatura do Contrato</h4>
                         </div>
-                        <div class="col-md-6 colAprovacao">
-                            <h3>Representante Fornecedor</h3>
-                            <div>
-                                <label for="nomeRepresentanteFornecedor">Nome: </label>
-                                <input type="text" name="nomeRepresentanteFornecedor" id="nomeRepresentanteFornecedor"
-                                    class="form-control">
-                                <br>
-                            </div>
-                            <div>
-                                <label for="cpfRepresentanteFornecedor">CPF: </label>
-                                <input type="text" name="cpfRepresentanteFornecedor" id="cpfRepresentanteFornecedor"
-                                    class="form-control">
-                                <br>
-                            </div>
-                            <div>
-                                <label for="mailRepresentanteFornecedor">E-mail: </label>
-                                <input type="text" name="mailRepresentanteFornecedor" id="mailRepresentanteFornecedor"
-                                    class="form-control">
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="divRepresentantesContratoAprovacao" class="row rowAprovacao panelAprovacao">
-                        <div class="col-md-6 colAprovacao">
-                            <h3>Representante Castilho</h3>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="">Nome: </label>
+                        <div class="panel-body">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="assinaturaContrato">Formato da Assinatura:</label><strong
+                                                class="strongAlert">*</strong>
+                                            <select name="assinaturaContrato" id="assinaturaContrato"
+                                                class="form-control inputInfoChamado">
+                                                <option value="">Selecione</option>
+                                                <option value="Eletrônica">Eletrônica</option>
+                                                <option value="Manual">Manual</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <span id="spanNomeRepresentanteCastilho"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="">CPF: </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <span id="spanCpfRepresentanteCastilho"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="">E-mail: </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <span id="spanMailRepresentanteCastilho"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 colAprovacao">
-                            <h3>Representante Fornecedor</h3>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="">Nome: </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <span id="spanNomeRepresentanteFornecedor"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="">CPF: </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <span id="spanCpfRepresentanteFornecedor"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="">E-mail: </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <span id="spanMailRepresentanteFornecedor"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row rowAprovacao panelAprovacao">
-                        <div class="col-md-12 colAprovacao">
-                            <h3>Assinatura do Contrato</h3>
-                            <div class="form-group">
-                                <label for="assinaturaContrato">Formato da Assinatura:</label>
-                                <!-- <strong class="strongAlert">*</strong> -->
-                                <select name="assinaturaContrato" id="assinaturaContrato"
-                                    class="form-control inputInfoChamado">
-                                    <option value="">Selecione</option>
-                                    <option value="Eletrônica">Eletrônica</option>
-                                    <option value="Manual">Manual</option>
-                                </select>
-                                <span id="spanAssinaturaContrato"></span>
-                            </div>
+                            </fieldset>
                         </div>
                     </div>
                 </div>
