@@ -28,18 +28,46 @@ CREATE VIEW VIEW_EQUIPAMENTOS AS
 	WHERE PREFIXO IS NOT NULL AND PREFIXO != '';
 
 
-CREATE TABLE EQUIPAMENTOS_AUXILIAR (
-    PREFIXO:VARCHAR(10),
-    VALOR_MOBILIZADO:DOUBLE,
-    UN_MOBILIZADO:VARCHAR(5),
-    VALOR_EXTRA:DOUBLE,
-    UN_EXTRA:VARCHAR(5),
-    VALOR_FIPE:DOUBLE,
-    VALOR_IMPLEMENTO:DOUBLE,
-    ANALISE_REFERENCIA:VARCHAR(255),
-    ANALISE_OBSERVACAO:VARCHAR(255),
-    STATUS:INT
-);
+
+--DROP TABLE EQUIPAMENTOS_CONTRATOS_AUXILIAR_STATUS;
+CREATE TABLE EQUIPAMENTOS_CONTRATOS_AUXILIAR_STATUS {
+    ID INT PRIMARY KEY NOT NULL,
+    DESCRICAO varchar (50),
+    OBSERVACAO varchar (255)
+}
+INSERT INTO  EQUIPAMENTOS_CONTRATOS_AUXILIAR_STATUS
+(ID, DESCRICAO, OBSERVACAO)
+VALUES
+(1, 'Pendente Contrato', 'Equipamento cadastrado e disponível para seleção no processo de Contratos'),
+(2, 'Contrato em Andamento com análise pendente', 'Equipamento selecionado em uma solicitação de Contrato e dispónivel no Painel de Análise do Suprimentos'),
+(3, 'Contrato em Andamento com análise realizada', 'Equipamento selecionado em uma solicitação de Contrato e análise já realizada pelo Suprimentos'),
+(4, 'Contrato Vigente', 'Contrato solicitado e assinado o equipamento se encontra em uso'),
+(5, 'Equipamento desmobilizado', 'Aditivo realizado para desmobilização do Equipamento'),
+(6, 'Contrato encerrado', 'Prazo do contrato foi encerrado e o equipamento foi devolvido para o fornecedor');
+
+CREATE TABLE [dbo].[EQUIPAMENTOS_CONTRATOS_AUXILIAR](
+	[PREFIXO] [varchar](10) NULL,
+	[VALOR_MOBILIZADO] [numeric](15, 2) NULL,
+	[UN_MOBILIZADO] [varchar](20) NULL,
+	[VALOR_EXTRA] [numeric](15, 2) NULL,
+	[UN_EXTRA] [varchar](20) NULL,
+	[VALOR_FIPE] [numeric](15, 2) NULL,
+	[VALOR_IMPLEMENTO] [numeric](15, 2) NULL,
+	[ANALISE_REFERENCIA] [varchar](255) NULL,
+	[ANALISE_OBSERVACAO] [varchar](255) NULL,
+	[STATUS] [int] NULL,
+	[MAODEOBRA] [decimal](18, 2) NULL,
+	[ANEXOS_DOCUMENTACAO] [varchar](255) NULL,
+	[ANEXOS_FOTOS] [varchar](255) NULL,
+	[ANEXOS_LAUDO] [varchar](255) NULL,
+	[ANEXOS_PLANO_MANUTENCAO] [varchar](255) NULL,
+	[ANEXOS_ART] [varchar](255) NULL
+)
+ALTER TABLE EQUIPAMENTOS_CONTRATOS_AUXILIAR
+ADD FOREIGN KEY (STATUS) REFERENCES EQUIPAMENTOS_CONTRATOS_AUXILIAR_STATUS(ID);
+
+
+
 CREATE TABLE TCNT_AUXILIAR (
     CODCOLIGADA INT,
     IDCNT INT,
