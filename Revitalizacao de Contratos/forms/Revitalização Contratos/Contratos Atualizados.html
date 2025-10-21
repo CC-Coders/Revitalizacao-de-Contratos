@@ -28,7 +28,10 @@
     <script src="js/documentManager.js"></script>
     <script src="js/integracaoRMManager.js"></script>
     <script src="js/representantesManager.js"></script>
+    <script src="js/equipamentosManager.js"></script>
+    <script src="js/tipoContratoManager.js"></script>
     <script src="js/Functions.js"></script>
+
     <script src="Script.js"></script>
     <link rel="stylesheet" href="css/Style.css" />
 
@@ -107,31 +110,49 @@
                 <!-- Tabela Historico -->
                 <div>
                     <table id="tableHistorico" tablename="tableHistorico" noaddbuttom="true" nodeletebuttom="true">
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Data</th>
-                                <th>Atividade</th>
-                                <th>Observacao</th>
-                                <th>Acao</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="hidden" class="tableHistoricoUsuario" name="tableHistoricoUsuario"
-                                        id="tableHistoricoUsuario" /></td>
-                                <td><input type="hidden" class="tableHistoricoData" name="tableHistoricoData"
-                                        id="tableHistoricoData" /></td>
-                                <td><input type="hidden" class="tableHistoricoAtividade" name="tableHistoricoAtividade"
-                                        id="tableHistoricoAtividade" /></td>
-                                <td><input type="hidden" class="tableHistoricoObservacao"
-                                        name="tableHistoricoObservacao" id="tableHistoricoObservacao" /></td>
-                                <td><input type="hidden" class="tableHistoricoAcao" name="tableHistoricoAcao"
-                                        id="tableHistoricoAcao" /></td>
-                            </tr>
-                        </tbody>
+                         <thead>
+                             <tr>
+                                 <th>Usuario</th>
+                                 <th>Data</th>
+                                 <th>Atividade</th>
+                                 <th>Observacao</th>
+                                 <th>Acao</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td><input type="hidden" class="tableHistoricoUsuario" name="tableHistoricoUsuario"
+                                         id="tableHistoricoUsuario" /></td>
+                                 <td><input type="hidden" class="tableHistoricoData" name="tableHistoricoData"
+                                         id="tableHistoricoData" /></td>
+                                 <td><input type="hidden" class="tableHistoricoAtividade" name="tableHistoricoAtividade"
+                                         id="tableHistoricoAtividade" /></td>
+                                 <td><input type="hidden" class="tableHistoricoObservacao"
+                                         name="tableHistoricoObservacao" id="tableHistoricoObservacao" /></td>
+                                 <td><input type="hidden" class="tableHistoricoAcao" name="tableHistoricoAcao"
+                                         id="tableHistoricoAcao" /></td>
+                             </tr>
+                         </tbody>
                     </table>
                 </div>
+
+                <!-- Tabela Equipamentos Selecionados-->
+                 <div>
+                    <table id="tableEquipamentosSelecionados" tablename="tableEquipamentosSelecionados" noaddbuttom="true" nodeletebuttom="true">
+                         <thead>
+                             <tr>
+                                 <th>PREFIXO</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td>
+                                     <input type="hidden" name="equipamentoSelecionadoPrefixo" id="equipamentoSelecionadoPrefixo" class="equipamentoSelecionadoPrefixo"/>
+                                 </td>
+                             </tr>
+                         </tbody>
+                    </table>
+                 </div>
             </div>
             <div class="wizard-progress">
                 <div class="step active" data-html="true" data-toggle="popover" title=""
@@ -219,24 +240,6 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Descrição do Imóvel:</label><strong
-                                                    class="strongAlert">*</strong>
-                                                <input type="text" class="form-control inputInfoChamado"
-                                                    id="descricaoImovel" name="descricaoImovel" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Valor Mensal do Aluguel:</label><strong
-                                                    class="strongAlert">*</strong>
-                                                <input type="text" class="form-control inputInfoChamado"
-                                                    id="valorMensalAluguel" name="valorMensalAluguel" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
                                                 <label>Obra:</label><strong class="strongAlert">*</strong><select
                                                     name="obra" id="obra"
                                                     class="form-control inputInfoChamado"></select>
@@ -250,7 +253,24 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="row">
+                                        <div class="col-md-6 campoLocacaoImovel">
+                                            <div class="form-group">
+                                                <label>Descrição do Imóvel:</label><strong
+                                                    class="strongAlert">*</strong>
+                                                <input type="text" class="form-control inputInfoChamado"
+                                                    id="descricaoImovel" name="descricaoImovel" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 campoLocacaoImovel">
+                                            <div class="form-group">
+                                                <label>Valor Mensal do Aluguel:</label><strong
+                                                    class="strongAlert">*</strong>
+                                                <input type="text" class="form-control inputInfoChamado"
+                                                    id="valorMensalAluguel" name="valorMensalAluguel" />
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row endereco-fornecedor" style="display: none">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -348,8 +368,6 @@
                                                     class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Contratante Principal:</label><strong
@@ -358,16 +376,14 @@
                                                     class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 campoLocacaoImovel">
                                             <div class="form-group">
                                                 <label>Endereço do Imóvel:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" id="enderecoImovel" name="enderecoImovel"
                                                     class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 campoLocacaoImovel">
                                             <div class="form-group">
                                                 <label>Matrícula do Imóvel:</label><strong
                                                     class="strongAlert">*</strong>
@@ -375,7 +391,7 @@
                                                     class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 campoLocacaoImovel">
                                             <div class="form-group">
                                                 <label>Finalidade da Locação:</label><strong
                                                     class="strongAlert">*</strong>
@@ -383,8 +399,6 @@
                                                     class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Período de Locação:</label><strong class="strongAlert">*</strong>
@@ -392,7 +406,7 @@
                                                     class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 campoLocacaoImovel">
                                             <div class="form-group">
                                                 <label>Janela de Pagamento:</label><strong
                                                     class="strongAlert">*</strong>
@@ -405,15 +419,65 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 campoLocacaoImovel">
                                             <div class="form-group">
                                                 <label>Caução?</label><strong class="strongAlert">*</strong>
                                                 <select name="caucao" id="caucao" class="form-control inputInfoChamado">
                                                     <option value="">Selecione</option>
                                                     <option value="Sim">Sim</option>
                                                     <option value="Não">Não</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 campoLocacaoEquipamento">
+                                            <div class="form-group">
+                                                <label for="">Valor Total da Locação:</label>
+                                                <input type="text" name="valorTotalLocacao" id="valorTotalLocacao" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 campoLocacaoEquipamento">
+                                            <div class="form-group">
+                                                <label for="">Índice de Reajuste:</label>
+                                                <select name="indiceReajuste" id="indiceReajuste" class="form-control">
+                                                    <option value=""></option>
+                                                    <option value="IGPM">IGPM</option>
+                                                    <option value="IPCA">IPCA</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 campoLocacaoEquipamento">
+                                            <div class="form-group">
+                                                <label for="">Retenção?</label>
+                                                <select name="temRetencao" id="temRetencao" class="form-control">
+                                                    <option value="">Selecione</option>
+                                                    <option value="Sim">Sim</option>
+                                                    <option value="Não">Não</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" id="divPercentualRetencao" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="">Percentual de Retenção:</label>
+                                                <input type="text" name="percentualRetencao" id="percentualRetencao" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 campoLocacaoEquipamento">
+                                            <div class="form-group">
+                                                <label for="">REIDI?</label>
+                                                <select name="temREIDI" id="temREIDI" class="form-control">
+                                                    <option value="">Selecione</option>
+                                                    <option value="Sim">Sim</option>
+                                                    <option value="Não">Não</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" id="divPercentualReidi" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="">Percentual do REIDI</label>
+                                                <select name="percentualREIDI" id="percentualREIDI" class="form-control">
+                                                    <option value=""></option>
+                                                    <option value="3.65">3,65%</option>
+                                                    <option value="9.25">9,25%</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -1000,6 +1064,31 @@
                         <button class="btn btn-primary" id="btnEnviarSolicitacao">Enviar</button>
                     </div>
                 </div>
+                <div id="paginaEquipamentos" data-index="5" class="pagina">
+                    <h2 style="margin-bottom: 4px;">EQUIPAMENTOS</h2>
+                    <hr style="margin-top: 0px;">
+                    <table class="table table-bordered" id="tableEquipamentos">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Prefixo</th>
+                                <th>Modelo</th>
+                                <th>Descrição</th>
+                                <th>Potência</th>
+                                <th>Capacidade</th>
+                                <th>Placa/Serie</th>
+                                <th>Fabricante</th>
+                                <th>Fornecedor</th>
+                                <th>Valor Mensal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div id="divEquipamentosSelecionados">
+
+                    </div>
+                </div>
             </div>
 
             <div class="navegacao-formulario">
@@ -1010,6 +1099,7 @@
                 <div class="bolinhas" style="overflow-x: scroll">
                     <div class="pagination pagination-active" data-index="0">Dados Gerais</div>
                     <div class="pagination" data-index="1">Assinatura</div>
+                    <div class="pagination" data-index="5">Equipamentos</div>
                     <div class="pagination" data-index="2">Anexos</div>
                     <div class="pagination" data-index="3" id="paginationIntegracaoRM">Integração RM</div>
                     <div class="pagination" data-index="4">Decisão</div>

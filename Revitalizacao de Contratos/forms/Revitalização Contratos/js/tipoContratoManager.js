@@ -1,0 +1,15 @@
+function onChangeTipoContrato() {
+    $(".campoLocacaoImovel, .campoLocacaoEquipamento").hide();
+
+    if ($(this).val() === "Locação de Imóvel") {
+        $("#dadosContrato").show();
+        $(".campoLocacaoImovel").show();
+    } 
+    else if($(this).val() === "Locação de Equipamento"){
+        $("#dadosContrato").show();
+        $(".campoLocacaoEquipamento").show();
+    }
+    else {
+        $("#dadosContrato").hide();
+    }
+}

@@ -77,13 +77,7 @@ function bindings() {
     });
 
     // Aba Dados Gerais
-    $("#tipoContrato").on("change", function () {
-        if ($(this).val() === "Locação de Imóvel") {
-            $("#dadosContrato").show();
-        } else {
-            $("#dadosContrato").hide();
-        }
-    });
+    $("#tipoContrato").on("change", onChangeTipoContrato);
     $("#caucao").on("change", function () {
         if ($(this).val() == "Sim") {
             $("#divValorCaucao, #divDataPagamentoCaucao").show();
@@ -123,6 +117,21 @@ function bindings() {
             buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(cgccfo);
         } else {
             $(".endereco-fornecedor").slideUp();
+        }
+    });
+
+    $("#temRetencao").on("change", function(){
+        if ($(this).val() == "Sim") {
+            $("#divPercentualRetencao").show();
+        }else{
+            $("#divPercentualRetencao").hide();
+        }
+    });
+    $("#temREIDI").on("change", function(){
+        if ($(this).val() == "Sim") {
+            $("#divPercentualReidi").show();
+        }else{
+            $("#divPercentualReidi").hide();
         }
     });
 
@@ -171,6 +180,9 @@ function loadTelaInicio() {
     inicializarCalendario();
     inicializarPeriodoLocacao();
     inicializaInputAnexo();
+
+    initDataTableEquipamentos();
+    preencheListaDeEquipamentos();
 }
 
 function loadTelaInicioRetorno() {
@@ -216,6 +228,8 @@ function loadTelaJuridico() {
     $(".panelAprovacao").show();
     $("#formContainer").show();
     $("#divBtnEnviar").hide();
+    $("#tableEquipamentos").hide();
+    geraEquipamentosSelecionados();
 
     $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
     setAtividadeAtivaProgresso(1);

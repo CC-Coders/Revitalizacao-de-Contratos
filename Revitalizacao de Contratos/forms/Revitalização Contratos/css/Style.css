@@ -445,3 +445,14 @@
 .readonlyField{
   color: black !important;
 }
+
+.dt-hasChild.shown>td:nth-child(0),.dt-hasChild.shown>td:nth-child(0){
+  -ms-grid-row-span: 2;
+}
+
+.divEquipamento{
+  background-color: #f4f6f9;
+  padding: 20px 60px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
