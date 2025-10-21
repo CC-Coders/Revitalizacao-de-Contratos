@@ -75,10 +75,22 @@ function beforeTaskSave(colleagueId, nextSequenceId, userList) {
 }
 
 function beforeTaskSave_inicio() {
-    var docIdContrato = hAPI.getCardValue("contratoDocumentId");
-    hAPI.attachDocument(docIdContrato);
+    try {
+        hAPI.setCardValue("numProces", getValue("WKNumProces"));
 
-    insereHistorico(hAPI.getCardValue("observacoes"), "Início", "Início");
+        if (hAPI.getCardValue("tipoContrato") == "Locação de Equipamento") {
+            atualizaStatusEquipamento_PendenteAnalise();
+        }
+
+        var id = insereDadosNaTabelaAuxiliar();
+        insereDadosNaTabelaAuxiliarItens(id);
+    
+        var docIdContrato = hAPI.getCardValue("contratoDocumentId");
+        hAPI.attachDocument(docIdContrato);
+        insereHistorico(hAPI.getCardValue("observacoes"), "Início", "Início");
+    } catch (error) {
+        throw error;   
+    }
 }
 function beforeTaskSave_juridico() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Jurídico");
@@ -477,8 +489,6 @@ function geraXML_TITMCNTRATDEP(parametros) {
 
 function alteraStatusContrato(STATUS) {
     try {
-
-
         var CODSTACNT = STATUS_CONTRATOS[STATUS];
         if (!CODSTACNT || CODSTACNT == null || CODSTACNT == "") {
             throw "Necessário informar CODSTACNT";
@@ -517,6 +527,101 @@ function alteraStatusContrato(STATUS) {
         throw error;
     }
 }
+
+
+function insereDadosNaTabelaAuxiliar(){
+    try {
+        
+        var query = "INSERT INTO TCNT_AUXILIAR (";
+        query += " IS_MODELO_CASTILHO, ";
+        query += " IS_RETENCAO, ";
+        query += " PERCENT_RETENCAO, ";
+        query += " IS_REIDI, ";
+        query += " PERCENT_REIDI, ";
+        query += " TIPO_ASSINATURA, ";
+        query += " TIPO_CONTRATO, ";
+        query += " ID_FLUIG ";
+        query += ") ";
+        query += " VALUES (?,?,?,?,?,?,?,?);";
+
+
+        var id = executeInsert(query,[
+            {type:"int", value:hAPI.getCardValue("modeloContrato") == "Modelo Castilho" ? 1:0},
+            {type:"int", value:0},//TODO criar o campo de retenção e vincular no insert
+            {type:"float", value:0},//TODO criar o campo de percentual de retenção e vincular no insert
+            {type:"int", value:0},//TODO criar o campo do REIDI
+            {type:"float", value:0},//TODO criar o campo do percentual do REIDI
+            {type:"varchar", value:hAPI.getCardValue("assinaturaContrato")},//TIPO_ASSINATURA
+            {type:"varchar", value:hAPI.getCardValue("tipoContrato")},//TIPO_CONTRATO
+            {type:"int", value:getValue("WKNumProces")},//TIPO_CONTRATO
+        ], "/jdbc/CastilhoCustom");
+
+        return id;
+    } catch (error) {
+        throw error;
+    }
+}
+function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){
+    try {
+        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados");
+        var counter = 0;
+        for (var i = 0; i < indexes.length; i++) {
+            var id = indexes[i]
+            var prefixo = hAPI.getCardValue("equipamentoSelecionadoPrefixo" + "___" + id);
+
+            var query = "INSERT INTO TCNT_AUXILIAR_ITENS (";
+            query += "ID_TCNT_AUXILIAR, ";
+            query += "NSEQITEMCNT, ";
+            query += "PREFIXO) ";
+            query += "VALUES (?,?,?)";
+
+            executeInsert(query,[
+                {type:"int", value:ID_TCNT_AUXILIAR},//ID_TCNT_AUXILIAR
+                {type:"int", value:counter},//NSEQITEMCNT
+                {type:"varchar", value:prefixo},//PREFIXO
+            ], "/jdbc/CastilhoCustom");
+            counter++;
+        }
+    
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+
+// Equipamentos
+var codigoStatusEquipamentos = {
+    "Pendente_Contrato":1,
+    "Contrato_em_Andamento_com_análise_pendente":2,
+    "Contrato_em_Andamento_com_análise_realizada":3,
+    "Contrato_Vigente":4,
+    "Equipamento_desmobilizado":5,
+    "Contrato_encerrado":6,
+}
+
+function atualizaStatusEquipamento_PendenteAnalise(){
+    try {
+        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados");
+ 
+        for (var i = 0; i < indexes.length; i++) {
+            var id = indexes[i]
+            var prefixo = hAPI.getCardValue("equipamentoSelecionadoPrefixo" + "___" + id);
+
+            var query = "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET ";
+            query += "STATUS = ? ";
+            query +="WHERE PREFIXO = ?";
+
+            executeInsert(query, [
+                {type:"int", value:codigoStatusEquipamentos["Contrato_em_Andamento_com_análise_pendente"]},
+                {type:"varchar", value:prefixo},
+            ], "/jdbc/CastilhoCustom");
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
 
 
 // Assinatura Eletrônica
@@ -704,4 +809,160 @@ function BuscaNomeUsuario(CodUsuario) {
     ], null);
 
     return ds.getValue(0, "colleagueName");
+}
+function executaQuery(query, constraints, dataSource) {
+    try {
+        var dataSource = dataSource;
+        var ic = new javax.naming.InitialContext();
+        var ds = ic.lookup(dataSource);
+
+        var conn = ds.getConnection();
+        var stmt = conn.prepareStatement(query);
+
+        var counter = 1;
+        for (var i = 0; i < constraints.length; i++) {
+            var val = constraints[i];
+            if (val.type == "int") {
+                stmt.setInt(counter, val.value);
+            }
+            else if (val.type == "float") {
+                stmt.setFloat(counter, val.value);
+            }
+            else if (val.type == "date") {
+                stmt.setString(counter, val.value);
+            }
+            else if (val.type == "datetime") {
+                stmt.setString(counter, val.value);
+            } else {
+                stmt.setString(counter, val.value);
+            }
+            counter++;
+        }
+
+        var rs = stmt.executeQuery();
+        var columnCount = rs.getMetaData().getColumnCount();
+        var retorno = [];
+
+        while (rs.next()) {
+            var linha = {};
+            for (var j = 1; j < columnCount + 1; j++) {
+                linha[rs.getMetaData().getColumnName(j)] = rs.getObject(rs.getMetaData().getColumnName(j)) + "";
+            }
+            retorno.push(linha);
+        }
+
+        return retorno;
+
+    } catch (e) {
+        log.error("ERRO==============> " + e.message);
+        throw e;
+    } finally {
+        if (stmt != null) {
+            stmt.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
+    }
+}
+function executeInsert(query, constraints, dataSource) {
+    var conn = null;
+    var stmt = null;
+    var insertedId = null;
+    try {
+        log.info("executandoQuery");
+        log.info(query);
+        log.dir(constraints);
+
+        var ic = new javax.naming.InitialContext();
+        var ds = ic.lookup(dataSource);
+
+        conn = ds.getConnection();
+        stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);
+
+        var counter = 1;
+        for (var i = 0; i < constraints.length; i++) {
+            var val = constraints[i];
+            if (val.type == "int") {
+                stmt.setInt(counter, val.value);
+            }
+            else if (val.type == "float") {
+                stmt.setFloat(counter, val.value);
+            }
+            else if (val.type == "date") {
+                stmt.setString(counter, val.value);
+            }
+            else if (val.type == "datetime") {
+                stmt.setString(counter, val.value);
+            } else {
+                stmt.setString(counter, val.value);
+            }
+            counter++;
+        }
+
+        // Use executeUpdate for INSERT and then try getGeneratedKeys
+        var rowsAffected = stmt.executeUpdate();
+        log.info("rowsAffected: " + rowsAffected);
+
+        var rsKeys = stmt.getGeneratedKeys();
+        if (rsKeys != null) {
+            try {
+                if (rsKeys.next()) {
+                    insertedId = rsKeys.getInt(1);
+                    log.info("generated id (getGeneratedKeys): " + insertedId);
+                }
+            } finally {
+                try { rsKeys.close(); } catch (e) { }
+            }
+        }
+
+        // Fallback for SQL Server when driver doesn't return generated keys
+        if (insertedId == null) {
+            try {
+                var fallbackSql = "SELECT SCOPE_IDENTITY() AS ID";
+                var fallbackStmt = conn.prepareStatement(fallbackSql);
+                var rsScope = fallbackStmt.executeQuery();
+                try {
+                    if (rsScope.next()) {
+                        insertedId = rsScope.getInt("ID");
+                        log.info("generated id (SCOPE_IDENTITY): " + insertedId);
+                    }
+                } finally {
+                    try { rsScope.close(); } catch (e) { }
+                    try { fallbackStmt.close(); } catch (e) { }
+                }
+            } catch (e) {
+                log.info("SCOPE_IDENTITY fallback failed: " + e);
+            }
+        }
+
+    } catch (error) {
+        var msg = "";
+        if (error && error.javaException) {
+            msg = error.javaException.getMessage();
+        } else if (error && error.message) {
+            if (error.message.Error) {
+            } else {
+                msg = error.message;
+            }
+        } else {
+            msg = String(error);
+        }
+
+        log.error("ERRO==============> " + msg);
+        log.error("Type of error: " + typeof error);
+        log.error("Type of msg: " + typeof msg);
+
+        throw "Erro ao executar Dataset: " + msg;
+
+    } finally {
+        if (stmt != null) {
+            try { stmt.close(); } catch (e) { }
+        }
+        if (conn != null) {
+            try { conn.close(); } catch (e) { }
+        }
+    }
+
+    return insertedId;
 }
