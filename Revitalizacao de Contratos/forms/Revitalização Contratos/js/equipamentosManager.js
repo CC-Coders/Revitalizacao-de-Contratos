@@ -322,9 +322,8 @@ function atualizaValorTotalLocacao(){
     console.log(valorTotalMensal);
 
 
-    var [prazo_inicio, prazo_fim] = $("#periodoLocacao").val().split(" até ");
-    prazo_inicio = prazo_inicio.split("/").reverse().join("-");
-    prazo_fim = prazo_fim.split("/").reverse().join("-");
+    var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
+    var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
 
     prazo_inicio = moment(prazo_inicio);
     prazo_fim = moment(prazo_fim);
@@ -367,8 +366,33 @@ async function geraEquipamentosSelecionados(){
             prefixos.push($(this).find(".equipamentoSelecionadoPrefixo").val());
         });
 
-        var equipamento = await promiseConsultaEquipamento(prefixos[0]);
-        $("#divEquipamentosSelecionados").append(await geraHtmlEquipamento(equipamento[0]));
+        for (const prefixo of prefixos) {
+            var equipamento = await promiseConsultaEquipamento(prefixo);
+            var caracteristicaTecnica = await promiseConsultaCaracteristicaTecnicaEquipamento(equipamento.IDEQUI);
+            $("#divEquipamentosSelecionados").append(await geraHtmlEquipamento(equipamento, caracteristicaTecnica));
+            $(".btnAnexosEquipamento:last").on("click", {equipamento:equipamento}, async function(event){
+                console.log(event)
+                FLUIGC.modal({
+                    title: `Anexos ${event.data.equipamento.PREFIXO}`,
+                    content: await geraHtmlAnexos(event.data.equipamento),
+                    id: 'fluig-modal',
+                    actions: [{
+                        'label': 'Fechar',
+                        'autoClose': true
+                    }]
+                }, function(err, data) {
+                    if(err) {
+                        // do error handling
+                    } else {
+                        // do something with data
+                    }
+                });
+
+            });
+        }
+        $(".divHeaderEquipamento").on("click", function(){
+            $(this).siblings(".divDetailsEquipamento").slideToggle();
+        });
         
     }
     catch(error){
@@ -385,7 +409,7 @@ async function geraEquipamentosSelecionados(){
                     if (ds.values[0].STATUS != "SUCCESS") {
                         reject(ds.values[0].MENSAGEM);
                     }else{
-                        resolve(JSON.parse(ds.values[0].RESULT));
+                        resolve(JSON.parse(ds.values[0].RESULT)[0]);
                     }
                 },
                 error:e=>{
@@ -394,53 +418,95 @@ async function geraEquipamentosSelecionados(){
             });
         });
     }
-    async function geraHtmlEquipamento(equipamento){
+    async function geraHtmlEquipamento(equipamento, caracteristicaTecnica){
         console.log(equipamento)
+        console.log(caracteristicaTecnica)
         var html = 
-        `<div class="divEquipamento">
-            <label style="float: right;">Valor de Locação</label>
-            <br>
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 style="display: flex; justify-content: space-between; margin-top:0px; margin-bottom:0px;">
-                        <span>${equipamento.DESCRICAO.toUpperCase()}</span>  
-                        <span>${floatToMoney(equipamento.VALOR_LOCACAO)}</span>
-                    </h3>
-                </div>   
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Prefixo: </label> <span>${equipamento.PREFIXO}</span>
-                    <label>Modelo: </label> <span>${equipamento.MODELO}</span>
-                </div>
-                <div class="col-md-6" style="text-align: right;">
-                    <label>Valor do Equipamento: </label> <span>${equipamento.PREFIXO}</span>
-                </div>
-            </div>
-            <hr>
-            <div class="divDetailsEquipamento">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Fabricante:</label><br>
-                        <span>${equipamento.FABRICANTE}</span>
+        `<div class="row">
+            <div class="divEquipamento col-md-12">
+                <div class="aprovacao-card colAprovacao">
+                    <div class="divHeaderEquipamento">
+                        <label style="float: right;">Valor de Locação</label>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 style="display: flex; justify-content: space-between; margin-top:0px; margin-bottom:0px;">
+                                    <span>${equipamento.DESCRICAO.toUpperCase()}</span>  
+                                    <span style="color: var(--yellow-castilho) !important;">${floatToMoney(parseFloat(equipamento.VALOR_LOCACAO) + parseFloat(equipamento.MAODEOBRA))}</span>
+                                </h2>
+                            </div>   
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Prefixo: </label> <span style="margin-right:10px">${equipamento.PREFIXO}</span>
+                                <label>Modelo: </label> <span style="margin-right:10px">${equipamento.MODELO}</span>
+                                <label>Placa/Chassi: </label> <span style="margin-right:10px">${equipamento.PLACA?equipamento.PLACA:equipamento.CHASSI}</span>
+                            </div>
+                            <div class="col-md-6" style="text-align: right;">
+                                <label>Valor do Equipamento: </label> <span>${equipamento.PREFIXO}</span>
+                            </div>
+                        </div>
+                        <hr>
                     </div>
-                    <div class="col-md-3">
-                        <label>Ano Fabricação:</label><br>
-                        <span>${equipamento.ANO_FABRICACAO}</span>
-                    </div>
-                    <div class="col-md-3">
-                        <label>Ano Modelo:</label><br>
-                        <span>${equipamento.ANO_MODELO}</span>
-                    </div>
-                    <div class="col-md-3">
-                        <label>Classe Operacional:</label><br>
-                        <span>${equipamento.CLASSEOPERACIONAL}</span>
-                    </div>
-                </div>
-                <div>
-                    <h4>Anexos: </h4>
-                    <div>
-                        ${await geraHtmlAnexos(equipamento)}
+                    <div class="divDetailsEquipamento" style="display:none;">
+                        <h3>Equipamento: </h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Fabricante:</label><br>
+                                <span>${equipamento.FABRICANTE}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Ano Fabricação:</label><br>
+                                <span>${equipamento.ANO_FABRICACAO}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Ano Modelo:</label><br>
+                                <span>${equipamento.ANO_MODELO}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Classe Operacional:</label><br>
+                                <span>${equipamento.CLASSEOPERACIONAL}</span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Potência do Motor:</label><br>
+                                <span>${equipamento.POTENCIAHP} HP</span>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Tipo Combustivel:</label><br>
+                                <span>${equipamento.COMBUSTIVEL}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <label>${caracteristicaTecnica[0]?.DESCRICAO}:</label><br>
+                                <span>${caracteristicaTecnica[0]?.VALOR} ${caracteristicaTecnica[0]?.SIGLA}</span>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <h3>Valores:</h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Valor Locação:</label><br>
+                                <span>${floatToMoney(equipamento.VALOR_LOCACAO)}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Valor Mão de Obra:</label><br>
+                                <span>${floatToMoney(equipamento.MAODEOBRA)}</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div style="text-align:center;">
+                            <button class="btn btn-primary btnAnexosEquipamento">
+                                <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
+                                Anexos
+                            </button>
+                            <a target="_blanck" href="/portal/p/1/paola-tester?prefixo=${equipamento.PREFIXO}" class="btn btn-primary btnLinkPainelEquipamentos">
+                                <i class="flaticon flaticon-import icon-sm" aria-hidden="true"></i>
+                                Painel de Equipamentos
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -449,23 +515,44 @@ async function geraEquipamentosSelecionados(){
         return html;
     }
     async function geraHtmlAnexos(equipamento){
+        console.log(equipamento)
         var html = "";
 
-        for (const documentId of equipamento.ANEXOS_FOTOS.split(",")) {
-            html += await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId));
-        }
+        html+= "<h4>Fotos: </h4>";
+        html += "<div style='display:flex;'>";
+            for (const documentId of equipamento.ANEXOS_FOTOS.split(",")) {
+                html += await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId));
+            }
+        html+="</div>";
+
+        html+= "<br><h4>Documentação: </h4>";
+        html+="<div style='display:flex;'>";
         for (const documentId of equipamento.ANEXOS_DOCUMENTACAO.split(",")) {
             html += await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId));
         }
+        html+="</div>";
+
+        html+= "<br><h4>Laudo Técnico: </h4>";
+        html+="<div style='display:flex;'>";
         for (const documentId of equipamento.ANEXOS_LAUDO.split(",")) {
             html += await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId));
         }
+        html+="</div>";
+
+
+        html+= "<br><h4>Plano de Manutenção: </h4>";
+        html+="<div style='display:flex;'>";
         for (const documentId of equipamento.ANEXOS_PLANO_MANUTENCAO.split(",")) {
-            html += await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId));
+            html += "<div style='dispay:flex;'>"+ await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId))+ "</div>";
         }
+        html+="</div>";
+
+        html+= "<br><h4>ART: </h4>";
+        html+="<div style='display:flex;'>";
         for (const documentId of equipamento.ANEXOS_ART.split(",")) {
-            html += await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId));
+            html += "<div style='dispay:flex;'>"+ await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId))+ "</div>";
         }
+        html+="</div>";
 
         return html;
     }
@@ -477,6 +564,25 @@ async function geraEquipamentosSelecionados(){
 
         return html;
     }
+}
+
+function promiseConsultaCaracteristicaTecnicaEquipamento(IDEQUI){
+    return new Promise((resolve, reject)=>{
+        DatasetFactory.getDataset("dsConsultaCaracteristicasTecnicasEquipamentoSisma", null,[
+            DatasetFactory.createConstraint("IDEQUI", IDEQUI,IDEQUI,ConstraintType.MUST)
+        ], null,{
+            success:ds=>{
+                if (ds.values[0].STATUS !="SUCCESS") {
+                    reject(ds.values[0].MENSAGEM);
+                } else{
+                    resolve(JSON.parse(ds.values[0].RESULT))
+                }
+            },
+            error:e=>{
+                reject(e);
+            }
+        })
+    });
 }
 
 function promiseGetDocumentDescription(documentId){

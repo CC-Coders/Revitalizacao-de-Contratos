@@ -124,7 +124,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
         return [
             {
                 representante: "Jerson Godoy Leski Junior",
-                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamentos - C/M.O", "Transporte de Material - S/M.O"],
+                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamentos - C/M.O", "Transporte de Material - S/M.O", "Locação de Equipamento"],
             },
             {
                 representante: "Augusto Cesar de Almeida Pereira de Lyra",
