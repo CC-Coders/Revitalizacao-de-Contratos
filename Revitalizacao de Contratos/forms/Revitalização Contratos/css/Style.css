@@ -1,3 +1,7 @@
+:root{
+  --yellow-castilho: #face2d;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
 .wizard-progress {
@@ -263,21 +267,8 @@
 	 margin-bottom: 30px;
 	 color: grey
 }
-.panelAprovacao h3 {
-   font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-    padding: 10px 15px;
-    border-radius: 8px;
-    background: #638FA5; /* op��o 1 */
-    /* background: linear-gradient(135deg, #ffe259, #ffa751); op��o 2 */
-    color: white !important;
-    display: inline-block;
-}
-.rowAprovacao{
-	display: flex;
-    gap: 20px;
-}
+
+
 .colAprovacao{
     padding: 0;
     border-radius: 15px;
@@ -292,10 +283,19 @@
     transition: transform 0.2s ease;
 }
 
-.aprovacao-card h3{
-	    background: #638FA5;
-	    color:white;
-	    margin-bottom: 15px;
+.aprovacao-card>h3{
+	  background: #638FA5;
+	  color:white;
+	  margin-bottom: 15px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #638FA5; /* op��o 1 */
+    /* background: linear-gradient(135deg, #ffe259, #ffa751); op��o 2 */
+    color: white !important;
+    display: inline-block;
 }
 .aprovacao-card:hover {
     transform: translateY(-2px);
@@ -450,9 +450,38 @@
   -ms-grid-row-span: 2;
 }
 
-.divEquipamento{
-  background-color: #f4f6f9;
-  padding: 20px 60px;
-  border-radius: 20px;
-  margin-bottom: 10px;
+
+.btnAnexo{
+    display: flex !important;
+    border-radius: 5px !important;
+    align-items: center;
+    width: fit-content;
+    height: 25px !important;
+    
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-right: 0px !important;
+    overflow: hidden !important;
+
+    margin-right: 10px;
+
+    color: gray !important;
+    border-color: gray !important;
+}
+.btnAnexo>button{
+    border-radius: 0px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    min-width: 20px !important;
+}
+.btnAnexo>button>i{
+    border-bottom-width: 4px !important;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    color: red;
+}
+.btnAnexo>b{
+   margin-right: 10px;
 }

@@ -165,6 +165,7 @@ function bindings() {
 
 function loadTelaInicio() {
     $(".panelAprovacao").hide();
+    $(".panelInput").show();
     $("#divRepresentantesContratoAprovacao").hide();
     $("#divRepresentantesContrato").show();
     $("#divTipoAssinaturaContrato").show();
@@ -224,8 +225,8 @@ function loadTelaInicioRetorno() {
 }
 
 function loadTelaJuridico() {
-    $("#informacoesIniciais, #rowAnexosSelecao").hide();
     $(".panelAprovacao").show();
+    $("#informacoesIniciais, #rowAnexosSelecao").hide();
     $("#formContainer").show();
     $("#divBtnEnviar").hide();
     $("#tableEquipamentos").hide();
@@ -244,11 +245,13 @@ function loadTelaJuridico() {
 }
 
 function loadTelaControladoria() {
-    $("#informacoesIniciais, #rowAnexosSelecao").hide();
     $(".panelAprovacao").show();
+    $("#informacoesIniciais, #rowAnexosSelecao").hide();
     $("#formContainer").show();
     $("#divBtnEnviar").hide();
     bindingCamposIntegracaoRM();
+    geraEquipamentosSelecionados();
+
 
     $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
     setAtividadeAtivaProgresso(2);
@@ -263,8 +266,8 @@ function loadTelaControladoria() {
 }
 
 function loadTelaAprovacao() {
+    $(".panelAprovacao, #formContainer").show();
 	$("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
-	$(".panelAprovacao, #formContainer").show();
 	setAtividadeAtivaProgresso(3);
 	carregaDadosDoContratoParaTelaAprovacao();
 	asyncMontaHistorico();
