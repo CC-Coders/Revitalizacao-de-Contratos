@@ -25,41 +25,88 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 changeDelimiterPrefix: "$",
             },
         });
-        doc.render(buscaDadosDoFormulario());
+        doc.render(await buscaDadosDoFormulario());
         var file = doc.toBlob();
         var file = new File([file], "file.docx", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
         return file;
     }
-    function buscaDadosDoFormulario() {
-        var retorno = {
-            FORNECEDOR: $("#locador").val(),
-            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
-                "#cidadeFornecedor"
-            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
-            FORNECEDOR_CNPJ: $("#locador").val(),
-            FORNECEDOR_NOME_REPRESENTANTE: $("#representante").val(),
-            FORNECEDOR_CPF_REPRESENTANTE: "SEM CAMPO",
-            IMOVEL_DESCRICAO: "SEM CAMPO",
-            IMOVEL_MATRICULA: $("#matriculaImovel").val(),
-            IMOVEL_FINALIDADE: $("#finalidadeLocacao").val(),
-            LOCACAO_PERIODO: $("#periodoLocacao").val(),
-            LOCACAO_VALOR: "SEM CAMPO",
-            LOCACAO_DIA_VENCIMENTO: $("#periodoLocacao").val(),
-            LOCACAO_VALOR_CAUCAO: $("#valorCaucao").val(),
-            LOCACAO_DATA_CAUCAO: $("#dataPagamentoCaucao").val(),
-            BANCO: $("#banco").val(),
-            BANCO_AGENCIA: $("#agencia").val(),
-            BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
-            DIA: "22",
-            MES: "Julho",
-            ANO: "2025",
-        };
+    async function buscaDadosDoFormulario(tipoContrato) {
+        if (tipoContrato == "Locação de Imóvel") {
+            var retorno = {
+                FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+                FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                    "#cidadeFornecedor"
+                ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
+                FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+                FORNECEDOR_NOME_REPRESENTANTE: $("#representante").val(),
+                FORNECEDOR_CPF_REPRESENTANTE: "SEM CAMPO",
+                IMOVEL_DESCRICAO: "SEM CAMPO",
+                IMOVEL_MATRICULA: $("#matriculaImovel").val(),
+                IMOVEL_FINALIDADE: $("#finalidadeLocacao").val(),
+                LOCACAO_PERIODO: $("#periodoLocacao").val(),
+                LOCACAO_VALOR: "SEM CAMPO",
+                LOCACAO_DIA_VENCIMENTO: $("#periodoLocacao").val(),
+                LOCACAO_VALOR_CAUCAO: $("#valorCaucao").val(),
+                LOCACAO_DATA_CAUCAO: $("#dataPagamentoCaucao").val(),
+                BANCO: $("#banco").val(),
+                BANCO_AGENCIA: $("#agencia").val(),
+                BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
+                DIA: "22",
+                MES: "Julho",
+                ANO: "2025",
+            };
+        }else if(tipoContrato == "Locação de Equipamento"){
+            var retorno = {
+                FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+                FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                    "#cidadeFornecedor"
+                ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
+                FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+                FORNECEDOR_NOME_REPRESENTANTE: $("#representante").val(),
+                FORNECEDOR_CPF_REPRESENTANTE: "SEM CAMPO",
+                
+                PERIODOINICIO:$("#dataInicioLocacao").val(),
+                PERIODOFIM:$("#dataFimLocacao").val(),
+
+                TEM_RETENCAO:$("#temRetencao").val(),
+                PERCENTUAL_RETENCAO:$("#percentualRetencao").val(),
+
+                TEM_REIDI:$("#temREIDI").val(),
+                PERCENTUAL_REIDI:$("#percentualREIDI").val(),
+
+                VALORTOTALLOCACAO:$("#valorTotalLocacao").val(),
+
+                BANCO: $("#banco").val(),
+                BANCO_AGENCIA: $("#agencia").val(),
+                BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
+                DIA: "22",
+                MES: "Julho",
+                ANO: "2025",
+
+                EQUIPAMENTOS:await asyncConsultaEquipamentosSelecionados()
+            };
+
+        }
         return retorno;
     }
 }
+
+const codigosModelos = {
+    PRODUCAO:{
+
+    },
+    DESENVOLVIMENTO:{
+        "Locação de ìmovel":29328,
+        "Locação de Equipamento":29328,
+    }
+};
+
 async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
-    const documentIdModelo = 29328;
+    const tipoContrato = $("#tipoContrato").val();
+    const documentIdModelo = codigosModelos["DESENVOLVIMENTO"][tipoContrato];
+
     var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentIdModelo);
+
     const response = await fetch(url);
     const blob = await response.blob();
     const file = new File([blob], "document.docx", {

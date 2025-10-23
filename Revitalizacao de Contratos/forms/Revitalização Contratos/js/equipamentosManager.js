@@ -160,10 +160,10 @@ function initDataTableEquipamentos(){
     });
 
     dataTableEquipamentos.on("draw", function () {
-      $(".btnDetailsEquipamento").on("click", function(){
+      $(".btnDetailsEquipamento").off("click").on("click", function(){
             onClickDetailsEquipamento(this);
       });
-      $(".checkboxSelecionaEquipamento").on("click", function(){
+      $(".checkboxSelecionaEquipamento").off("click").on("click", function(){
             onClickCheckEquipamento(this);
       });
     });
@@ -187,6 +187,24 @@ async function onClickDetailsEquipamento(that){
         tr.next().addClass('child');
 
         $('div', row.child()).slideDown();
+        $("div").find(".btnAnexosEquipamento").on("click", {equipamento:row.data()}, async function(event){
+                FLUIGC.modal({
+                    title: `Anexos ${event.data.equipamento.PREFIXO}`,
+                    content: await geraHtmlAnexos(event.data.equipamento),
+                    id: 'fluig-modal',
+                    actions: [{
+                        'label': 'Fechar',
+                        'autoClose': true
+                    }]
+                }, function(err, data) {
+                    if(err) {
+                        // do error handling
+                    } else {
+                        // do something with data
+                    }
+                });
+
+            });
     }
 
 }
@@ -194,47 +212,58 @@ async function geraDetailsRow(data){
     try {
     console.log(data)
     var html = `
-        <div class="row">
-            <div class="col-md-4">
-                <label>Valor Locação:</label> ${floatToMoney(data.VALOR_LOCACAO)}
+        <div class="divChildRowEquipamento">
+            <h3>Equipamento</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Cadastro: </label><a target="_blank" href="/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=${data.NUMPROCES_CADASTROEQUIPAMENTOS}"> ${data.NUMPROCES_CADASTROEQUIPAMENTOS}</a>
+                </div>
+                <div class="col-md-4">
+                    <label>Data Chegada: </label>${data.DATA_CHEGADA}
+                </div>
+                <div class="col-md-4">
+                    <label>Ano Modelo: </label>${data.ANO_MODELO}
+                </div>
+                <div class="col-md-4">
+                    <label>Ano Fabricação: </label>${data.ANO_FABRICACAO}
+                </div>
             </div>
-            ${data.VALOR_MOBILIZADO ?
-                `<div class="col-md-4">
-                    <label>Valor Mobilização: ${floatToMoney(data.VALOR_MOBILIZADO)} ${data.UN_MOBILIZADO}</label>
-                </div>`:""
-            }
-            ${data.VALOR_EXTRA ?
-                `<div class="col-md-4">
-                    <label>Valor Hora Extra: ${floatToMoney(data.VALOR_EXTRA)} ${data.UN_EXTRA}</label>
-                </div>`:""
-            }
-            ${data.MAODEOBRA ?
-                `<div class="col-md-4">
-                    <label>Valor Mão de Obra: ${floatToMoney(data.MAODEOBRA)}</label>
-                </div>`:""
-            }
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <label>Cadastro: </label><a target="_blank" href="/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=${data.NUMPROCES_CADASTROEQUIPAMENTOS}"> ${data.NUMPROCES_CADASTROEQUIPAMENTOS}</a>
+            <hr>
+            <h3>Valores</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Valor Locação:</label> ${floatToMoney(data.VALOR_LOCACAO)}
+                </div>
+                ${data.VALOR_MOBILIZADO ?
+                    `<div class="col-md-4">
+                        <label>Valor Mobilização: ${floatToMoney(data.VALOR_MOBILIZADO)} ${data.UN_MOBILIZADO}</label>
+                    </div>`:""
+                }
+                ${data.VALOR_EXTRA ?
+                    `<div class="col-md-4">
+                        <label>Valor Hora Extra: ${floatToMoney(data.VALOR_EXTRA)} ${data.UN_EXTRA}</label>
+                    </div>`:""
+                }
+                ${data.MAODEOBRA ?
+                    `<div class="col-md-4">
+                        <label>Valor Mão de Obra: ${floatToMoney(data.MAODEOBRA)}</label>
+                    </div>`:""
+                }
             </div>
-            <div class="col-md-4">
-                <label>Data Chegada: </label>${data.DATA_CHEGADA}
-            </div>
-            <div class="col-md-4">
-                <label>Ano Modelo: </label>${data.ANO_MODELO}
-            </div>
-            <div class="col-md-4">
-                <label>Ano Fabricação: </label>${data.ANO_FABRICACAO}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Anexos</h3>
-                ${await geraHtmlAnexos(data)}
-            </div>
-        </div>       
-    `;
+            <hr>
+            <div class="row">
+                <div class="col-md-12" style="text-align:center;">
+                    <button class="btn btn-primary btnAnexosEquipamento">
+                        <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
+                        Anexos
+                    </button>
+                    <a target="_blanck" href="/portal/p/1/paola-tester?prefixo=${data.PREFIXO}" class="btn btn-primary btnLinkPainelEquipamentos">
+                        <i class="flaticon flaticon-import icon-sm" aria-hidden="true"></i>
+                        Painel de Equipamentos
+                    </a>
+                </div>
+            </div>       
+        </div>`;
 
     return html;
     } catch (error) {
@@ -361,15 +390,11 @@ function promiseGetDocumentDescription(documentId){
 
 async function geraEquipamentosSelecionados(){
     try {
-        var prefixos = [];
-        $("#tableEquipamentosSelecionados>tbody>tr:not(:first)").each(function(){
-            prefixos.push($(this).find(".equipamentoSelecionadoPrefixo").val());
-        });
+        $("#tableEquipamentos").hide();
+        var equipamentos = await asyncConsultaEquipamentosSelecionados();
 
-        for (const prefixo of prefixos) {
-            var equipamento = await promiseConsultaEquipamento(prefixo);
-            var caracteristicaTecnica = await promiseConsultaCaracteristicaTecnicaEquipamento(equipamento.IDEQUI);
-            $("#divEquipamentosSelecionados").append(await geraHtmlEquipamento(equipamento, caracteristicaTecnica));
+        for (const equipamento of equipamentos) {
+            $("#divEquipamentosSelecionados").append(await geraHtmlEquipamento(equipamento));
             $(".btnAnexosEquipamento:last").on("click", {equipamento:equipamento}, async function(event){
                 console.log(event)
                 FLUIGC.modal({
@@ -400,31 +425,14 @@ async function geraEquipamentosSelecionados(){
         throw error;
     }
 
-    function promiseConsultaEquipamento(PREFIXO){
-        return new Promise((resolve,reject)=>{
-            DatasetFactory.getDataset("dsConsultaVIEW_EQUIPAMENTOS_CONTRATOS",null,[
-                DatasetFactory.createConstraint("PREFIXO", PREFIXO, PREFIXO, ConstraintType.MUST)
-            ],null,{
-                success:ds=>{
-                    if (ds.values[0].STATUS != "SUCCESS") {
-                        reject(ds.values[0].MENSAGEM);
-                    }else{
-                        resolve(JSON.parse(ds.values[0].RESULT)[0]);
-                    }
-                },
-                error:e=>{
-                    reject(e);
-                }
-            });
-        });
-    }
-    async function geraHtmlEquipamento(equipamento, caracteristicaTecnica){
+
+    async function geraHtmlEquipamento(equipamento){
         console.log(equipamento)
-        console.log(caracteristicaTecnica)
+        console.log(equipamento.caracteristicaTecnica)
         var html = 
         `<div class="row">
-            <div class="divEquipamento col-md-12">
-                <div class="aprovacao-card colAprovacao">
+            <div class="col-md-12">
+                <div class="divEquipamento">
                     <div class="divHeaderEquipamento">
                         <label style="float: right;">Valor de Locação</label>
                         <br>
@@ -479,8 +487,8 @@ async function geraEquipamentosSelecionados(){
                                 <span>${equipamento.COMBUSTIVEL}</span>
                             </div>
                             <div class="col-md-3">
-                                <label>${caracteristicaTecnica[0]?.DESCRICAO}:</label><br>
-                                <span>${caracteristicaTecnica[0]?.VALOR} ${caracteristicaTecnica[0]?.SIGLA}</span>
+                                <label>${equipamento.caracteristicaTecnica[0]?.DESCRICAO}:</label><br>
+                                <span>${equipamento.caracteristicaTecnica[0]?.VALOR} ${equipamento.caracteristicaTecnica[0]?.SIGLA}</span>
                             </div>
                         </div>
                         <br>
@@ -514,77 +522,119 @@ async function geraEquipamentosSelecionados(){
 
         return html;
     }
-    async function geraHtmlAnexos(equipamento){
-        console.log(equipamento)
-        var html = "";
+}
+async function geraHtmlAnexos(equipamento) {
+    console.log(equipamento)
+    var html = "";
 
-        html+= "<h4>Fotos: </h4>";
-        html += "<div style='display:flex;'>";
-            for (const documentId of equipamento.ANEXOS_FOTOS.split(",")) {
-                html += await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId));
-            }
-        html+="</div>";
-
-        html+= "<br><h4>Documentação: </h4>";
-        html+="<div style='display:flex;'>";
-        for (const documentId of equipamento.ANEXOS_DOCUMENTACAO.split(",")) {
-            html += await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId));
-        }
-        html+="</div>";
-
-        html+= "<br><h4>Laudo Técnico: </h4>";
-        html+="<div style='display:flex;'>";
-        for (const documentId of equipamento.ANEXOS_LAUDO.split(",")) {
-            html += await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId));
-        }
-        html+="</div>";
-
-
-        html+= "<br><h4>Plano de Manutenção: </h4>";
-        html+="<div style='display:flex;'>";
-        for (const documentId of equipamento.ANEXOS_PLANO_MANUTENCAO.split(",")) {
-            html += "<div style='dispay:flex;'>"+ await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId))+ "</div>";
-        }
-        html+="</div>";
-
-        html+= "<br><h4>ART: </h4>";
-        html+="<div style='display:flex;'>";
-        for (const documentId of equipamento.ANEXOS_ART.split(",")) {
-            html += "<div style='dispay:flex;'>"+ await htmlNovoAnexo(documentId,await promiseGetDocumentDescription(documentId))+ "</div>";
-        }
-        html+="</div>";
-
-        return html;
+    html += "<h4>Fotos: </h4>";
+    html += "<div style='display:flex;'>";
+    for (const documentId of equipamento.ANEXOS_FOTOS.split(",")) {
+        html += await htmlNovoAnexo(documentId, await promiseGetDocumentDescription(documentId));
     }
-    async function htmlNovoAnexo(documentId, documentName){
-        var html = 
+    html += "</div>";
+
+    html += "<br><h4>Documentação: </h4>";
+    html += "<div style='display:flex;'>";
+    for (const documentId of equipamento.ANEXOS_DOCUMENTACAO.split(",")) {
+        html += await htmlNovoAnexo(documentId, await promiseGetDocumentDescription(documentId));
+    }
+    html += "</div>";
+
+    html += "<br><h4>Laudo Técnico: </h4>";
+    html += "<div style='display:flex;'>";
+    for (const documentId of equipamento.ANEXOS_LAUDO.split(",")) {
+        html += await htmlNovoAnexo(documentId, await promiseGetDocumentDescription(documentId));
+    }
+    html += "</div>";
+
+
+    html += "<br><h4>Plano de Manutenção: </h4>";
+    html += "<div style='display:flex;'>";
+    for (const documentId of equipamento.ANEXOS_PLANO_MANUTENCAO.split(",")) {
+        html += "<div style='dispay:flex;'>" + await htmlNovoAnexo(documentId, await promiseGetDocumentDescription(documentId)) + "</div>";
+    }
+    html += "</div>";
+
+    html += "<br><h4>ART: </h4>";
+    html += "<div style='display:flex;'>";
+    for (const documentId of equipamento.ANEXOS_ART.split(",")) {
+        html += "<div style='dispay:flex;'>" + await htmlNovoAnexo(documentId, await promiseGetDocumentDescription(documentId)) + "</div>";
+    }
+    html += "</div>";
+
+    return html;
+}
+async function htmlNovoAnexo(documentId, documentName) {
+    var html =
         `<div class="btn btn-default btnAnexo">
-            <b><a target="_blank" href=${documentId == "#"? "#": await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId)}>${documentName}</a></b>
+            <b><a target="_blank" href=${documentId == "#" ? "#" : await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId)}>${documentName}</a></b>
         </div>`;
 
-        return html;
-    }
+    return html;
 }
 
-function promiseConsultaCaracteristicaTecnicaEquipamento(IDEQUI){
-    return new Promise((resolve, reject)=>{
-        DatasetFactory.getDataset("dsConsultaCaracteristicasTecnicasEquipamentoSisma", null,[
-            DatasetFactory.createConstraint("IDEQUI", IDEQUI,IDEQUI,ConstraintType.MUST)
-        ], null,{
-            success:ds=>{
-                if (ds.values[0].STATUS !="SUCCESS") {
-                    reject(ds.values[0].MENSAGEM);
-                } else{
-                    resolve(JSON.parse(ds.values[0].RESULT))
-                }
-            },
-            error:e=>{
-                reject(e);
-            }
-        })
+
+
+
+
+// Consultas
+async function asyncConsultaEquipamentosSelecionados() {
+    // Percorre a tabela pai x filho que guarda os PREFIXOS selecionados e salva na "prefixos"
+    var prefixos = [];
+    $("#tableEquipamentosSelecionados>tbody>tr:not(:first)").each(function () {
+        prefixos.push($(this).find(".equipamentoSelecionadoPrefixo").val());
     });
+
+    // Para cada Prefixo, consulta os dados do equipamento
+    var retorno = [];
+    for (const prefixo of prefixos) {
+        var equipamento = await promiseConsultaEquipamento(prefixo);
+        equipamento.caracteristicaTecnica = await promiseConsultaCaracteristicaTecnicaEquipamento(equipamento.IDEQUI);
+        retorno.push(equipamento);
+    }
+
+    return retorno;
+
+    function promiseConsultaEquipamento(PREFIXO) {
+        return new Promise((resolve, reject) => {
+            DatasetFactory.getDataset("dsConsultaVIEW_EQUIPAMENTOS_CONTRATOS", null, [
+                DatasetFactory.createConstraint("PREFIXO", PREFIXO, PREFIXO, ConstraintType.MUST)
+            ], null, {
+                success: ds => {
+                    if (ds.values[0].STATUS != "SUCCESS") {
+                        reject(ds.values[0].MENSAGEM);
+                    } else {
+                        resolve(JSON.parse(ds.values[0].RESULT)[0]);
+                    }
+                },
+                error: e => {
+                    reject(e);
+                }
+            });
+        });
+    }
+    function promiseConsultaCaracteristicaTecnicaEquipamento(IDEQUI){
+        return new Promise((resolve, reject)=>{
+            DatasetFactory.getDataset("dsConsultaCaracteristicasTecnicasEquipamentoSisma", null,[
+                DatasetFactory.createConstraint("IDEQUI", IDEQUI,IDEQUI,ConstraintType.MUST)
+            ], null,{
+                success:ds=>{
+                    if (ds.values[0].STATUS !="SUCCESS") {
+                        reject(ds.values[0].MENSAGEM);
+                    } else{
+                        resolve(JSON.parse(ds.values[0].RESULT))
+                    }
+                },
+                error:e=>{
+                    reject(e);
+                }
+            })
+        });
+}
 }
 
+// Util
 function promiseGetDocumentDescription(documentId){
     return new Promise((resolve, reject)=> {
         $.ajax({

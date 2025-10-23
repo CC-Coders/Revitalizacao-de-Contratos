@@ -286,10 +286,10 @@
 .aprovacao-card>h3{
 	  background: #638FA5;
 	  color:white;
-	  margin-bottom: 15px;
+	  margin-top: 0px !important;
+	  margin-bottom: 15px !important;
     font-size: 1.4rem;
     font-weight: 600;
-    margin-bottom: 15px;
     padding: 10px 15px;
     border-radius: 8px;
     background: #638FA5; /* op��o 1 */
@@ -484,4 +484,14 @@
 }
 .btnAnexo>b{
    margin-right: 10px;
+}
+
+.divEquipamento{
+  background-color: white;
+  padding: 20px 60px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.divChildRowEquipamento{
+  padding: 20px 30px;
 }
