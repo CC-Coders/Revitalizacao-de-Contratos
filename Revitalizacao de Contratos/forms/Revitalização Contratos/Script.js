@@ -9,6 +9,7 @@ const ATIVIDADES = {
     ENGENHEIRO: 43,
     COORDENADOR_OBRAS: 48,
     DIRETORIA: 53,
+    INTERMEDIARIO_ASSINATURA_ELETRONICA: 58,
     ASSINATURA_ELETRONICA: 66,
 };
 
@@ -26,6 +27,8 @@ $(document).ready(function () {
         loadTelaControladoria();
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.ENGENHEIRO || ATIVIDADE_ATUAL == ATIVIDADES.COORDENADOR_OBRAS || ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {
         loadTelaAprovacao();
+    } else if(ATIVIDADE_ATUAL == ATIVIDADES.ASSINATURA_ELETRONICA || ATIVIDADE_ATUAL == ATIVIDADES.INTERMEDIARIO_ASSINATURA_ELETRONICA){
+        loadTelaAssinaturaEletronica();
     }
 
 });
@@ -272,10 +275,31 @@ function loadTelaAprovacao() {
 	carregaDadosDoContratoParaTelaAprovacao();
 	asyncMontaHistorico();
 	mostrarPagina("0");
+    geraEquipamentosSelecionados();
 	renderizarAnexosEtapaAprovacao();
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
 
     $("#divRepresentantesContrato").hide();
     preencheInformacoesAprovacao();
+}
+
+function loadTelaAssinaturaEletronica(){
+
+    $(".panelAprovacao, #formContainer").show();
+	$("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
+	setAtividadeAtivaProgresso(4);
+	carregaDadosDoContratoParaTelaAprovacao();
+	asyncMontaHistorico();
+	mostrarPagina("0");
+    geraEquipamentosSelecionados();
+	renderizarAnexosEtapaAprovacao();
+    $("#paginationIntegracaoRM").remove();
+    $("#btnEditarArquivo").remove();
+
+    $("#divRepresentantesContrato").hide();
+    preencheInformacoesAprovacao();
+
+    $("#divQuadroStatusAssinaturaEletronica").show();
+    asyncGeraQuadroStatusAssinatura();
 }

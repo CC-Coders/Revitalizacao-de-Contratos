@@ -643,7 +643,7 @@
                                     <div class="col-md-5"><label>Período de Locação:</label></div>
                                     <div class="col-md-7"><span id="aprovacaoTextPeriodoLocacao"></span></div>
                                 </div>
-                                <div class="row">
+                                <div class="row campoAprovacaoLocacaoImovel">
                                     <div class="col-md-5"><label>Janela de Pagamento:</label></div>
                                     <div class="col-md-7"><span id="aprovacaoTextJanelaPagamento"></span></div>
                                 </div>
@@ -722,7 +722,29 @@
                         <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir Pré-Contrato</button>
                     </div>
                 </div>
-                <div id="pagina-2" data-index="1" class="pagina">
+                <div id="paginaAssinatura" data-index="1" class="pagina">
+                    <div id="divQuadroStatusAssinaturaEletronica" class="row panelAprovacao" style="display: none;">
+                        <div class="col-md-12">
+                            <div class="colAprovacao aprovacao-card">
+                                <h3>Quadro de Status</h3>
+                                <table class="table table-bordered" id="tableQuadroStatusAssinatura">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Assinantes</th>
+                                            <th>Data de Envio</th>
+                                            <th>Enviado por</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                     <div id="divRepresentantesContrato" class="row panelAprovacao">
                         <div class="col-md-6">
                             <div class="colAprovacao aprovacao-card">
@@ -1153,11 +1175,11 @@
                                     </thead>
                                     <tbody></tbody>
                                 </table>
+                                <div id="divEquipamentosSelecionados">
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="divEquipamentosSelecionados">
-
                     </div>
                 </div>
             </div>

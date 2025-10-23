@@ -379,13 +379,12 @@ function carregaDadosDoContratoParaTelaAprovacao() {
     $("#aprovacaoTextOrigemContrato").text($("#origemContrato").val());
 
 
-    const tipoContrato = $("#tipoContrato").val();
+    const tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val() : $("#tipoContrato").text();
     if (tipoContrato == "Locação de Equipamento") {
         preencheDadosLocacaoDeEquipamento();
     }else if(tipoContrato == "Locação de Imóvel"){
         preencheDadosLocacaoDeImovel();
     }
-
 
     function preencheDadosLocacaoDeImovel(){
         $(".campoAprovacaoLocacaoImovel").show();
@@ -471,7 +470,7 @@ function carregaDadosDoContratoParaTelaAprovacao() {
         $("#aprovacaoTextTemRetencao").text(temRetencao);
         $("#aprovacaoTextPercentualRetencao").text(percentualRetencao);
         $("#aprovacaoTextTemREIDI").text(temREIDI);
-        $("#aprovacaoTextPercentualREIDI").text(percentualREIDI);
+        $("#aprovacaoTextPercentualREIDI").text(percentualREIDI + "%");
 
 
 

@@ -82,3 +82,50 @@ function onchangeTipoAssinaturaContrato() {
         $("#mailRepresentanteCastilho, #mailRepresentanteFornecedor").closest("div").hide();
     }
 }
+
+async function asyncGeraQuadroStatusAssinatura(){
+    try {
+        const assinaturas = await promiseConsultaAssinaturaEnviadasPeloProcesso();
+        var html = "";
+        for (const assinatura of assinaturas) {
+            const assinantes = JSON.parse(assinatura.jsonSigners);
+
+            html += 
+            `<tr>
+                <td>${assinatura.nmArquivo}</td>
+                <td><button class="btn btn-primary">${assinantes.length} Assinantes </button></td>
+                <td>${assinatura.dataEnvio} ${assinatura.horaEnvio}</td>
+                <td>${assinatura.nmRemetente}</td>
+                <td>
+                    ${assinatura.msgErro ? assinatura.msgErro:assinatura.statusAssinatura}
+                </td>
+
+            </tr>`;
+        }
+
+        $("#tableQuadroStatusAssinatura>tbody").html(html);
+    } catch (error) {
+        showMessage("Não foi possível gerar o quadro de assinaturas: " + error);
+    }
+
+
+    function promiseConsultaAssinaturaEnviadasPeloProcesso(){
+        return new Promise((resolve,reject)=>{
+            const numProces = $("#numProces").val();
+
+            DatasetFactory.getDataset("ds_form_aux_wesign",null,[
+                DatasetFactory.createConstraint("numSolic", numProces,numProces, ConstraintType.MUST),
+            ],null,{
+                success:ds=>{
+                    if (ds.values.length == 0) {
+                        reject("Nenhuma assinatura foi encontrada!");
+                    }else{
+                        resolve(ds.values);
+                    }
+                },
+                error:e=>reject(e)
+            });
+        });
+    }
+
+}
