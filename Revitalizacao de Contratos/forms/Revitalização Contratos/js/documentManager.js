@@ -25,12 +25,33 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 changeDelimiterPrefix: "$",
             },
         });
-        doc.render(await buscaDadosDoFormulario());
+
+        var input = await buscaDadosDoFormulario($("#tipoContrato").val());
+        console.log(input);
+        doc.render(input);
         var file = doc.toBlob();
         var file = new File([file], "file.docx", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
         return file;
     }
     async function buscaDadosDoFormulario(tipoContrato) {
+        const meses = [
+            "",
+            "Janeiro",
+            "Fevereiro",
+            "Março",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Agosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro",
+        ];
+        var [ano,mes,dia] = getDateNow().split("-");
+        
+
         if (tipoContrato == "Locação de Imóvel") {
             var retorno = {
                 FORNECEDOR: $("#hiddenFORNECEDOR").val(),
@@ -51,11 +72,14 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 BANCO: $("#banco").val(),
                 BANCO_AGENCIA: $("#agencia").val(),
                 BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
-                DIA: "22",
-                MES: "Julho",
-                ANO: "2025",
+                DIA: dia,
+                MES: meses[mes],
+                ANO:ano,
             };
         }else if(tipoContrato == "Locação de Equipamento"){
+            var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
+            var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
+
             var retorno = {
                 FORNECEDOR: $("#hiddenFORNECEDOR").val(),
                 FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
@@ -74,14 +98,22 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 TEM_REIDI:$("#temREIDI").val(),
                 PERCENTUAL_REIDI:$("#percentualREIDI").val(),
 
-                VALORTOTALLOCACAO:$("#valorTotalLocacao").val(),
+                VALOR_TOTAL:$("#valorTotalLocacao").val(),
+                VALOR_TOTAL_EXTENSO: numeroPorExtenso($("#valorTotalLocacao").val().replace("R$","").replace(".","").trim(), true),
 
                 BANCO: $("#banco").val(),
                 BANCO_AGENCIA: $("#agencia").val(),
                 BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
-                DIA: "22",
-                MES: "Julho",
-                ANO: "2025",
+                BANCO_TITULAR: $("#titular").val(),
+
+                DIA: dia,
+                MES: meses[mes],
+                ANO:ano,
+                CODIGO_CENTRO_DE_CUSTO:$("#NOMECCUSTO").val(),
+                OBRA:$("#NOMECCUSTO").val(),
+
+                PRAZO:parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
+                PRAZO_EXTENSO:numeroPorExtenso(calculaDiferencaEmMeses(prazo_inicio, prazo_fim).toString()),
 
                 EQUIPAMENTOS:await asyncConsultaEquipamentosSelecionados()
             };
@@ -97,7 +129,7 @@ const codigosModelos = {
     },
     DESENVOLVIMENTO:{
         "Locação de ìmovel":29328,
-        "Locação de Equipamento":29328,
+        "Locação de Equipamento":30545,
     }
 };
 
@@ -907,6 +939,7 @@ function promiseCriaDocFluig_retornaDocumentId(file, parentId) {
         reader.readAsDataURL(file);
         reader.onload = function (e) {
             var bytes = e.target.result.split("base64,")[1];
+            console.log(bytes)
 
             // Chama Dataset de Criação de Documento
             DatasetFactory.getDataset(
@@ -942,4 +975,119 @@ function promiseCriaDocFluig_retornaDocumentId(file, parentId) {
             );
         };
     });
+}
+
+
+
+
+// Utils
+function numeroPorExtenso(value, centavos) {
+    //retorna o numero passado por extenso
+    var resposta = "";
+
+    if (value != "" && value != " " && value != null && value != undefined) {
+        var unidade = ["", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"];
+        var dezena = ["", "", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"];
+        var centena = ["", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"];
+
+        list = value.split(".")[0].split("");
+        list = list.reverse();
+        while (list[list.length - 1] == 0) list.pop();
+        for (var i = list.length - 1; i >= 0; i--) {
+            if (value == 0) {
+                return "zero";
+            }
+            if (value < 20) {
+                return unidade[list.reverse().join("")];
+            }
+            if (value == "100") {
+                return "cem";
+            } else if (value == "1000") {
+                return "mil";
+            } else {
+                if (i == 5 || i == 2 || i == 8) {
+                    if (list[i] == 1 && list[i - 1] == 0 && list[i - 2] == 0) {
+                        resposta += "cem";
+                    } else resposta += centena[parseInt(list[i])] + " ";
+
+                    if (list[i - 1] != 0) {
+                        resposta += "e ";
+                    }
+                } else if (i == 4 || i == 1 || i == 7) {
+                    if (list[i] < 2 && list[i] > 0) {
+                        resposta += unidade[parseInt(list[i] + "" + list[i - 1])];
+                    } else {
+                        resposta += dezena[list[i]] + " ";
+                        if (list[i - 1] != 0) {
+                            resposta += "e ";
+                        }
+                    }
+                } else {
+                    if ((list[i + 1] >= 2 || list[i + 1] == 0 || list[i + 1] == null) && (i != 3 || list[i] != 1)) {
+                        resposta += unidade[list[i]];
+                    }
+                    if (i == 3) {
+                        resposta += " mil ";
+                        if (list[2] != 0 && list[1] == 0 && list[0] == 0) {
+                            resposta += "e ";
+                        }
+                    }
+                    if (i == 6) {
+                        resposta += " milhões ";
+                    }
+                }
+            }
+        }
+        resposta = resposta.split("  ");
+        resposta = resposta.join(" ");
+
+        string = resposta.substring(0, 1);
+        if (string == " ") {
+            resposta = resposta.substring(1, resposta.length);
+        }
+
+        do {
+            string = resposta.substring(resposta.length - 1);
+            if (string == " " || string == "") {
+                resposta = resposta.substring(0, resposta.length - 1);
+            }
+        } while (string == " ");
+        if (centavos) {
+            resposta += " reais";
+            list = value.split(",")[1].split("");
+            if (list[0] != 0 || list[1] != 0) {
+                if (list[0] < 2 && list[0] > 0) {
+                    resposta += " e " + unidade[list[0] + "" + list[1]] + " centavos";
+                } else {
+                    if (list[0] > 0) {
+                        resposta += " e " + dezena[list[0]];
+                    }
+                    if (list[1] > 0) {
+                        resposta += " e " + unidade[list[1]];
+                    }
+                    if (list[0] == 0 && list[1] == 1) {
+                        resposta += " centavo";
+                    } else {
+                        resposta += " centavos";
+                    }
+                }
+            }
+        }
+    }
+    return resposta;
+}
+function getDateNow() {
+    var date = new Date();
+    var dia = date.getDate();
+    if (dia < 10) {
+        dia = "0" + dia;
+    }
+    var mes = date.getMonth() + 1;
+    if (mes < 10) {
+        mes = "0" + mes;
+    }
+    var ano = date.getFullYear();
+
+    var dateTime = [ano, mes, dia].join("-");
+    return dateTime;
 }
