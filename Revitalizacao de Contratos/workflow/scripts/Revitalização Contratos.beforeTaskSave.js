@@ -80,6 +80,7 @@ function beforeTaskSave_inicio() {
 
         if (hAPI.getCardValue("tipoContrato") == "Locação de Equipamento") {
             atualizaStatusEquipamento_PendenteAnalise();
+            hAPI.setCardValue("dataCriadoEm", getDateNow());
         }
 
         var id = insereDadosNaTabelaAuxiliar();
@@ -758,6 +759,21 @@ function getDateTimeNow() {
     }
 
     var dateTime = [ano, mes, dia].join("-") + " " + hora + ":" + minutos;
+    return dateTime;
+}
+function getDateNow() {
+    var date = new Date();
+    var dia = date.getDate();
+    if (dia < 10) {
+        dia = "0" + dia;
+    }
+    var mes = date.getMonth() + 1;
+    if (mes < 10) {
+        mes = "0" + mes;
+    }
+    var ano = date.getFullYear();
+
+    var dateTime = [ano, mes, dia].join("-");
     return dateTime;
 }
 function getServerURL() {
