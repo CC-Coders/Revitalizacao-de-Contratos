@@ -12,36 +12,27 @@ function preencherObrasDoUsuario() {
 
     try {
         const permissoes = buscaObrasPorPermissaoDoUsuario(userCode, true);
-        if (permissoes.length > 0) {
-            const selectObra = $("#obra");
-            selectObra.empty();
-
-            let optionsObra = "<option value='' id='option'>Selecione uma obra</option>";
-            let codcoligadaAtual = "";
-
-            permissoes.forEach((ccusto) => {
-                if (codcoligadaAtual !== ccusto.CODCOLIGADA) {
-                    if (codcoligadaAtual !== "") {
-                        optionsObra += "</optgroup>";
-                    }
-                    optionsObra += `<optgroup label="${ccusto.CODCOLIGADA} - ${ccusto.NOMEFANTASIA}">`;
-                    codcoligadaAtual = ccusto.CODCOLIGADA;
-                }
-
-                const optionValue = `${ccusto.CODCOLIGADA} - ${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
-                const optionLabel = `${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
-
-                optionsObra += `<option value="${optionValue}">${optionLabel}</option>`;
-            });
-            optionsObra += "</optgroup>";
-            selectObra.append(optionsObra);
-        } else {
+        if (permissoes.length == 0) {
             FLUIGC.toast({
                 title: "Aviso:",
                 message: "Nenhuma permissão encontrada para o usuário.",
                 type: "warning",
             });
+            return;
         }
+
+            const selectObra = $("#obra");
+            permissoes.forEach((ccusto) => {
+                if (!selectObra[0].selectize.optgroups[ccusto.NOMEFANTASIA]) {
+                    $("#obra")[0].selectize.addOptionGroup(ccusto.CODCOLIGADA, {value:ccusto.CODCOLIGADA, label: `${ccusto.CODCOLIGADA} - ${ccusto.NOMEFANTASIA}` });
+                }
+
+                const optionValue = `${ccusto.CODCOLIGADA} - ${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
+                const optionLabel = `${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
+                selectObra[0].selectize.addOption({ value: optionValue, label:optionLabel, optgroup:ccusto.CODCOLIGADA });
+            });
+      
+
     } catch (error) {
         console.error("Erro ao preencher obras do usuário:", error);
         FLUIGC.toast({
@@ -52,7 +43,7 @@ function preencherObrasDoUsuario() {
     }
 }
 
-function buscaFornecedores_preencheOptionsDoCampoLocador_IniciaSelect2() {
+function buscaFornecedores_preencheOptionsDoCampoLocador() {
     DatasetFactory.getDataset("FCFO", ["CODCFO", "CGCCFO", "NOMEFANTASIA"], [
         DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST),
         DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
@@ -66,28 +57,10 @@ function buscaFornecedores_preencheOptionsDoCampoLocador_IniciaSelect2() {
                 });
             } else {
                 var optSelected = $("#locador").val();
+                $("#locador")[0].selectize.clearOptions();
 
-                var html = "<option></option>";
-                fornecedores.values.forEach((fornecedor) => html += `<option value="${fornecedor.CODCFO} - ${fornecedor.CGCCFO} - ${fornecedor.NOMEFANTASIA}">${fornecedor.CGCCFO} - ${fornecedor.NOMEFANTASIA}</option>`);
-                $("#locador").html(html);
-
-                $("#locador").val(optSelected);
-                $("#locador").select2({
-                    height: "34px",
-                    width: "100%",
-                    minimumInputLength: 4,
-                    language: {
-                        inputTooShort: () => "Digite pelo menos 4 caracteres",
-                        noResults: () => "Nenhum resultado encontrado",
-                        searching: () => "Buscando...",
-                    },
-                });
-
-                $(".select2-container")
-                    .off("click")
-                    .on("click", function () {
-                        $(this).removeClass("has-error");
-                    });
+                $("#locador")[0].selectize.addOption(fornecedores.values.map(e=>{return {value:`${e.CODCFO} - ${e.CGCCFO} - ${e.NOMEFANTASIA}`, text:`${e.CGCCFO} - ${e.NOMEFANTASIA}`}}));
+                $("#locador")[0].selectize.setValue(optSelected);
             }
         },
         error: (error) => {
@@ -313,11 +286,8 @@ function buscaBancos() {
             bancos.forEach((banco) => {
                 selectBanco.append(`<option value="${banco.NUMBANCO} - ${banco.NOME}">${banco.NUMBANCO} - ${banco.NOME}</option>`);
             });
-            selectBanco.select2({
-                placeholder: "Selecione um banco",
-                allowClear: true,
-                width: "100%",
-            });
+
+            selectBanco.selectize();
         },
         error: (e) => {
             console.error(e);
@@ -652,9 +622,6 @@ function validaCampos() {
         $(".inputInfoChamado").each(function () {
             if ($(this).is(":visible") && ($(this).val() == null || $(this).val() == undefined || $(this).val() == "")) {
                 $(this).addClass("has-error");
-                if ($(this).hasClass("select2-hidden-accessible")) {
-                    $(this).next(".select2-container").addClass("has-error");
-                }
                 if (valida) {
                     valida = false;
                     FLUIGC.toast({
@@ -675,7 +642,6 @@ function validaCampos() {
         var destinoRetorno = $("#destinoRetorno").val();
         if (destinoRetorno == null || destinoRetorno == undefined || destinoRetorno == "") {
             $("#destinoRetorno").addClass("has-error");
-            $("#destinoRetorno").next(".select2-container").addClass("has-error");
             if (valida) {
                 valida = false;
                 FLUIGC.toast({
@@ -782,14 +748,13 @@ async function asyncMontaHistorico() {
     }
 }
 
-async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores() {
-    var value = $(this).val();
+async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value) {
     if (!value) {
         $("#CODCOLIGADA").val("");
         $("#CODCCUSTO").val("");
         $("#NOMECCUSTO").val("");
     } else {
-        var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = $(this).val().split(" - ");
+        var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = value.split(" - ");
         $("#CODCOLIGADA").val(CODCOLIGADA);
         $("#CODCCUSTO").val(CODCCUSTO);
         $("#NOMECCUSTO").val(NOMECCUSTO);

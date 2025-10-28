@@ -51,7 +51,31 @@ function bindings() {
     $("#btnVisualizarArquivo").on("click", visualizaDocumento);
     $("#btnEnviarSolicitacao").on("click", enviarSolicitacao);
     $("#btnVisualizarPreContrato").on("click", geraPreContrato);
-    $("#obra").off("change").on("change", salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores);
+
+    $("#obra").selectize({
+        valueField: 'value',       // campo que vira o value do <option>
+        labelField: 'label',       // campo exibido nas opções
+        optgroupField: 'optgroup',      // campo nas options que referencia o grupo
+        optgroupLabelField: 'label', // campo do objeto optgroup para exibição
+        optgroupValueField: 'value', // campo do objeto optgroup que é a chave
+        searchField: ['label'],    // campos onde a busca procura (pode ter vários)
+        optgroups: [
+        ],
+        options: [
+
+        ],
+        render: {
+            optgroup_header: function(data, escape) {
+                return '<div class="optgroup-header">' + escape(data.label) + '</div>';
+            },
+            option: function(item, escape) {
+                return '<div class="option">' + escape(item.label) + '</div>';
+            }
+        },
+        onChange:(value)=>{
+            salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value);
+        }
+    });
 
     $("input[name='decisao']").on("change", function () {
         if ($(this).val() == "Aprovar") {
@@ -104,24 +128,28 @@ function bindings() {
     });
     $("#agencia").mask("0000-0", { placeholder: "____-_" });
     $("#contaCorrente").mask("00000-0", { placeholder: "_____-_" });
+    $("#percentualRetencao").mask("000%", {reverse:true});
 
-    $("#locador").on("change", function () {
-        var [codcfo, cgccfo, nomeFornecedor] = $(this).val().split(" - ");
-        
-        // Por padrão os fornecedores são cadastrados no Coligada 0 = Global
-        // Nos cadasos de cadastros errados tem que verificar a filial
-        // Como a consulta não está retornando o CODCOLCFO ficou fixo como 0
-        $("#hiddenCODCOLCFO").val(0);
-        $("#hiddenCODCFO").val(codcfo);
-        $("#hiddenCGCCFO").val(cgccfo);
-        $("#hiddenFORNECEDOR").val(nomeFornecedor);
-        
-        if (cgccfo) {
-            buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(cgccfo);
-        } else {
-            $(".endereco-fornecedor").slideUp();
+    $("#locador").selectize({
+        onChange:(value)=>{
+            var [codcfo, cgccfo, nomeFornecedor] = value.split(" - ");
+            
+            // Por padrão os fornecedores são cadastrados no Coligada 0 = Global
+            // Nos cadasos de cadastros errados tem que verificar a filial
+            // Como a consulta não está retornando o CODCOLCFO ficou fixo como 0
+            $("#hiddenCODCOLCFO").val(0);
+            $("#hiddenCODCFO").val(codcfo);
+            $("#hiddenCGCCFO").val(cgccfo);
+            $("#hiddenFORNECEDOR").val(nomeFornecedor);
+            
+            if (cgccfo) {
+                buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(cgccfo);
+            } else {
+                $(".endereco-fornecedor").slideUp();
+            }
         }
     });
+
 
     $("#temRetencao").on("change", function(){
         if ($(this).val() == "Sim") {
@@ -179,7 +207,7 @@ function loadTelaInicio() {
     mostrarPagina("0");
     setAtividadeAtivaProgresso(0);
     preencherObrasDoUsuario();
-    buscaFornecedores_preencheOptionsDoCampoLocador_IniciaSelect2();
+    buscaFornecedores_preencheOptionsDoCampoLocador();
     buscaBancos();
     inicializarCalendario();
     inicializarPeriodoLocacao();
@@ -196,7 +224,7 @@ function loadTelaInicioRetorno() {
     $("#paginationIntegracaoRM").remove();
     setAtividadeAtivaProgresso(0);
 //    preencherObrasDoUsuario();
-    buscaFornecedores_preencheOptionsDoCampoLocador_IniciaSelect2();
+    buscaFornecedores_preencheOptionsDoCampoLocador();
 //    buscaBancos();
     inicializarCalendario();
     inicializarPeriodoLocacao();
@@ -211,12 +239,6 @@ function loadTelaInicioRetorno() {
         if( $("#tipoPagamento").val() == "Depósito"){
         	 $("#divPagamento, #divBanco").show();
         }
-        $("#obra").one('click', function() {
-            if(!$(this).hasClass('opcoes-carregadas')) {
-                preencherObrasDoUsuario();
-                $(this).addClass('opcoes-carregadas');
-            }
-        });
         
         // Configurar o select de banco
         $("#banco").one('click', function() {
@@ -234,6 +256,7 @@ function loadTelaJuridico() {
     $("#divBtnEnviar").hide();
     $("#tableEquipamentos").hide();
     geraEquipamentosSelecionados();
+    $("#divBotoesEdicaoContrato").show();
 
     $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
     setAtividadeAtivaProgresso(1);

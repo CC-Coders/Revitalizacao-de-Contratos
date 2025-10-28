@@ -5,7 +5,6 @@
     <link rel="stylesheet" type="text/css" href="/style-guide/css/fluig-style-guide.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flaticon/2.1.2/css/flaticon.css" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <link rel="stylesheet" href="/castilho_dev_guide/resources/css/castilho-cards.css" />
@@ -18,11 +17,20 @@
     <script src="/style-guide/js/fluig-style-guide.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+
+    <!-- Selectize -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+        integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+        integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
 
     <!-- Formulário -->
     <script src="js/documentManager.js"></script>
@@ -62,14 +70,7 @@
     <!-- Swal -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Selectize -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
-        integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
-        integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
 <body>
@@ -81,6 +82,7 @@
                 <input type="hidden" id="formMode" name="formMode" />
                 <input type="hidden" id="userCode" name="userCode" />
                 <input type="hidden" id="isMobile" name="isMobile" />
+                
 
                 <!-- Aprovadores -->
                 <input type="hidden" name="engenheiro" id="engenheiro" />
@@ -255,14 +257,14 @@
                                             <div class="form-group">
                                                 <label>Obra:</label><strong class="strongAlert">*</strong><select
                                                     name="obra" id="obra"
-                                                    class="form-control inputInfoChamado"></select>
+                                                    class="inputInfoChamado"></select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Locador:</label><strong class="strongAlert">*</strong>
                                                 <select name="locador" id="locador"
-                                                    class="form-control inputInfoChamado"></select>
+                                                    class="inputInfoChamado"></select>
                                             </div>
                                         </div>
                                     </div>
@@ -537,7 +539,7 @@
                                             <div class="form-group">
                                                 <label for="banco">Banco:</label>
                                                 <select name="banco" id="banco"
-                                                    class="form-control inputInfoChamado"></select>
+                                                    class="inputInfoChamado"></select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -716,14 +718,14 @@
 
                     </div>
                     <!-- Botões -->
-                    <div style="text-align: center; margin-top: 20px">
+                    <div id="divBotoesEdicaoContrato" style="text-align: center; margin-top: 20px; display: none;">
                         <button class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button>
                         <button class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button>
                         <button class="btn btn-primary" id="btnVisualizarPreContrato">Abrir Pré-Contrato</button>
                     </div>
                 </div>
                 <div id="paginaAssinatura" data-index="1" class="pagina">
-                    <div id="divQuadroStatusAssinaturaEletronica" class="row panelAprovacao" style="display: none;">
+                    <div id="divQuadroStatusAssinaturaEletronica" class="row" style="display: none;">
                         <div class="col-md-12">
                             <div class="colAprovacao aprovacao-card">
                                 <h3>Quadro de Status</h3>
@@ -873,7 +875,6 @@
                     </div>
                 </div>
                 <div id="pagina-anexos" data-index="2" class="pagina">
-
                     <div class="row panelInput">
                         <div class="col-md-12">
                             <div class="aprovacao-card colAprovacao">
