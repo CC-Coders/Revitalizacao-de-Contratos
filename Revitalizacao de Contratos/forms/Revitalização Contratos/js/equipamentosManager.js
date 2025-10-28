@@ -132,7 +132,12 @@ function initDataTableEquipamentos(){
                 className: "alignCenter",
                 orderable: false,
                 render: function (data, type, row) {
-                    return `<input type="checkbox" class="checkboxSelecionaEquipamento" />`;
+                    if (row.STATUS == 1) {
+                        return `<input type="checkbox" class="checkboxSelecionaEquipamento" />`;
+                    }
+                    else if(row.STATUS == 2){
+                        return `<a taget="_blanck" href="/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=${row.NUMPROCES_CONTRATO}" class="btn btn-primary">Em Andamento</a>`;
+                    }
                 },
             },
         ],
@@ -187,24 +192,27 @@ async function onClickDetailsEquipamento(that){
         tr.next().addClass('child');
 
         $('div', row.child()).slideDown();
-        $("div").find(".btnAnexosEquipamento").on("click", {equipamento:row.data()}, async function(event){
-                FLUIGC.modal({
-                    title: `Anexos ${event.data.equipamento.PREFIXO}`,
-                    content: await geraHtmlAnexos(event.data.equipamento),
-                    id: 'fluig-modal',
-                    actions: [{
-                        'label': 'Fechar',
-                        'autoClose': true
-                    }]
-                }, function(err, data) {
-                    if(err) {
-                        // do error handling
-                    } else {
-                        // do something with data
-                    }
-                });
-
+        $("div").find(".btnAnexosEquipamento").on("click", { equipamento: row.data() }, async function (event) {
+            FLUIGC.modal({
+                title: `Anexos ${event.data.equipamento.PREFIXO}`,
+                content: await geraHtmlAnexos(event.data.equipamento),
+                id: 'fluig-modal',
+                actions: [{
+                    'label': 'Fechar',
+                    'autoClose': true
+                }]
+            }, function (err, data) {
+                if (err) {
+                    // do error handling
+                } else {
+                    // do something with data
+                }
             });
+        });
+        $("div").find(".btnAlterarEquipamento").on("click", { equipamento: row.data() }, async function (event) {
+           modalAlterarEquipamento(event.data.equipamento)
+        });
+            
     }
 
 }
@@ -219,7 +227,7 @@ async function geraDetailsRow(data){
                     <label>Cadastro: </label><a target="_blank" href="/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=${data.NUMPROCES_CADASTROEQUIPAMENTOS}"> ${data.NUMPROCES_CADASTROEQUIPAMENTOS}</a>
                 </div>
                 <div class="col-md-4">
-                    <label>Data Chegada: </label>${data.DATA_CHEGADA}
+                    <label>Data Chegada: </label>${data.DATA_CHEGADA.split(" ")[0].split("-").reverse().join("/")}
                 </div>
                 <div class="col-md-4">
                     <label>Ano Modelo: </label>${data.ANO_MODELO}
@@ -257,6 +265,13 @@ async function geraDetailsRow(data){
                         <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
                         Anexos
                     </button>
+                    ${
+                        data.STATUS == 1 ? 
+                        `<button class="btn btn-primary btnAlterarEquipamento">
+                            <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
+                            Alterar
+                        </button>`:``
+                    }
                     <a target="_blanck" href="/portal/p/1/paola-tester?prefixo=${data.PREFIXO}" class="btn btn-primary btnLinkPainelEquipamentos">
                         <i class="flaticon flaticon-import icon-sm" aria-hidden="true"></i>
                         Painel de Equipamentos
@@ -306,7 +321,6 @@ async function geraDetailsRow(data){
         return html;
     }
 }
-
 async function onClickCheckEquipamento(that) {
     var self = that;
     var tr = $(self).closest('tr');  
@@ -336,6 +350,78 @@ async function onClickCheckEquipamento(that) {
 
     
 }
+async function modalAlterarEquipamento(data) {
+    var html = 
+    `<div class="row">
+        <div class="col-md-4">
+            <label>Campo: </label>
+            <select class="form-control selectCampoAlteracao">
+                <option></option>
+                <option>CNPJ</option>
+                <option>Valor de Locação</option>
+                <option>Valor de Mão de Obra</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label>Valor Atual: </label>
+            <input type="text" class="form-control atualValorAlteracao" readonly/>
+        </div>
+        <div class="col-md-4">
+            <label>Valor Novo: </label>
+            <input type="text" class="form-control novoValorAlteracao"/>
+        </div>
+    </div>`
+    FLUIGC.modal({
+        title: 'Alterar ' + data.PREFIXO,
+        content: html,
+        id: 'fluig-modal',
+        size:"full",
+        actions: [{
+            'label': 'Alterar',
+            'bind': 'data-alterar',
+        },{
+            'label': 'Cancelar',
+            'autoClose': true
+        }]
+    }, function(err) {
+        if(err) {
+            // do error handling
+        } else {
+            $(".selectCampoAlteracao").on("change", function(){
+                console.log(data);
+
+                if ($(this).val() == "CNPJ") {
+                    $(".atualValorAlteracao").val(data.FORNECEDOR_CNPJ);
+                    $(".novoValorAlteracao").maskMoney("destroy");
+                }
+                else if ($(this).val() == "Valor de Locação") {
+                    $(".atualValorAlteracao").val(floatToMoney(data.VALOR_LOCACAO));
+                    $(".novoValorAlteracao").maskMoney({ thousands: '.', decimal: ',', prefix: 'R$' });
+                }
+                else if ($(this).val() == "Valor de Mão de Obra") {
+                    $(".atualValorAlteracao").val(floatToMoney(data.MAODEOBRA));
+                    $(".novoValorAlteracao").maskMoney({ thousands: '.', decimal: ',', prefix: 'R$' });
+                }
+
+            });
+
+            $("[data-alterar]").on("click", function(){
+                alteraDadosEquipamento();
+            });
+        }
+    });
+}
+
+function alteraDadosEquipamento(){
+    const campo = $(".selectCampoAlteracao").val()
+
+    DatasetFactory.getDataset("dsAlteraDadosEquipamento", null,[
+        DatasetFactory.createConstraint("CAMPO",$(".selectCampoAlteracao").val(),$(".selectCampoAlteracao").val(),ConstraintType.MUST),
+        DatasetFactory.createConstraint("VALOR",$(".novoValorAlteracao").val(),$(".novoValorAlteracao").val(),ConstraintType.MUST),
+        DatasetFactory.createConstraint("IDEQUI",data.IDEQUI,data.IDEQUI,ConstraintType.MUST),
+    ],null);
+}
+
 
 function atualizaValorTotalLocacao(){
     var valorTotalMensal = 0;
