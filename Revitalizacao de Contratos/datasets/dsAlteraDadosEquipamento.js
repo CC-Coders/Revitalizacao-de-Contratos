@@ -1,17 +1,17 @@
 function createDataset(fields, constraints, sortFields) {
     try {
         var constraints = getConstraints(constraints);
-        lancaErroSeConstraintsObrigatoriasNaoInformadas(constraints, ["CAMPO","VALOR", "IDEQUI"]);
+        lancaErroSeConstraintsObrigatoriasNaoInformadas(constraints, ["CAMPO","VALOR", "VALORATUAL", "IDEQUI", "PREFIXO"]);
 
         if (constraints.CAMPO == "CNPJ") {
             var query = "";
             query += "UPDATE EQUIPAMENTO SET ";
             query += "    CODIPROP =	CASE ";
-            query += "                    WHEN CODIESPE = 1 THEN (SELECT CODIPROP FROM PROPRIETARIO WHERE INSCESTADUAL = ?) ";
+            query += "                    WHEN CODIESPE = 1 THEN (SELECT CODIPROP FROM PROPRIETARIO WHERE INSCFEDERAL = ?) ";
             query += "                ELSE 0 ";
             query += "                END, ";
             query += "    CODITERC = CASE ";
-            query += "                    WHEN CODIESPE = 5 THEN (SELECT CODITERC FROM TERCEIRO WHERE INSCESTADUAL = ?) ";
+            query += "                    WHEN CODIESPE = 5 THEN (SELECT CODITERC FROM TERCEIRO WHERE INSCFEDERAL = ?) ";
             query += "                    ELSE 0 ";
             query += "                END ";
             query += "WHERE IDEQUI = ? ";
@@ -23,7 +23,6 @@ function createDataset(fields, constraints, sortFields) {
                 {"type":"int", value:constraints.IDEQUI},
             ], "/jdbc/Sisma");
 
-            return returnDataset("SUCCESS","","");
         }
         else if(constraints.CAMPO == "Valor de Locação"){
             var query = "";
@@ -44,9 +43,12 @@ function createDataset(fields, constraints, sortFields) {
 
             executeInsert(query,[
                 {"type":"float", value:constraints.VALOR},
-                {"type":"varchar", value:constraints.IDEQUI},
-            ], "/jdbc/Sisma");
+                {"type":"varchar", value:constraints.PREFIXO},
+            ], "/jdbc/CastilhoCustom");
         }
+
+        notificaAlteracaoNoEquipamento(constraints.PREFIXO, constraints.CAMPO, constraints.VALORATUAL, constraints.VALOR);
+        return returnDataset("SUCCESS","","");
 
 
     } catch (error) {
@@ -64,6 +66,51 @@ function createDataset(fields, constraints, sortFields) {
         } else {
             return returnDataset("ERRO", error, null);
         }
+    }
+}
+
+function notificaAlteracaoNoEquipamento(PREFIXO, CAMPO, VALORANTIGO, VALORNOVO){
+    if (CAMPO == "Valor de Locação" || CAMPO == "Valor de Mão de Obra") {
+        VALORNOVO = floatToMoney(VALORNOVO);
+    }
+
+    var usuario = getValue("WKUser");
+    var subject = "[FLUIG] Alteração de Equipamento!";
+    var mensagem = 'O equipamamento com Prefixo ' + PREFIXO + " teve alteração no campo '" + CAMPO + "' pelo usuário " + usuario ;
+    mensagem += "<br><br>"
+    mensagem += "<b>Valor Antigo: </b><span>" + VALORANTIGO + "</span><br><b>Valor Novo: </b><span>" + VALORNOVO + "</span>";
+    
+    var param = {CORPO_EMAIL:mensagem};
+ 
+    var destinatarios = "gabriel.persike@castilho.com.br";
+
+    var data = {
+        "to": destinatarios,
+        "from": "gabriel.persike@castilho.com.br", //Prod
+        "subject": subject, //   subject
+        "templateId": "TPL_SUPORTE_TI2", // Email template Id previously registered
+        "dialectId": "pt_BR", //Email dialect , if not informed receives pt_BR , email dialect ("pt_BR", "en_US", "es")
+        "param": param
+    };
+
+
+    var clientService = fluigAPI.getAuthorizeClientService();
+    var data = {
+        companyId: getValue("WKCompany") + '',
+        serviceCode: 'Fluig REST',
+        endpoint: '/api/public/alert/customEmailSender',
+        method: 'post',
+        timeoutService: '100',
+        params: data,
+    };
+
+
+    var vo = clientService.invoke(JSON.stringify(data));
+
+    if (vo.getResult() == null || vo.getResult().isEmpty()) {
+        throw new Exception("Retorno está vazio");
+    } else {
+        return vo.getResult();
     }
 }
 
@@ -203,4 +250,10 @@ function executeInsert(query, constraints, dataSource) {
     }
 
     return insertedId;
+}
+function floatToMoney(val) {
+    return parseFloat(val).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    });
 }
