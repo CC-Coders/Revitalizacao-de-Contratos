@@ -176,10 +176,6 @@ function bindings() {
         }
     });
 
-
-
-
-
     // Paginacao
     $("#btn-avancar").on("click", avancarPagina);
     $("#btn-voltar").on("click", voltarPagina);
@@ -189,6 +185,25 @@ function bindings() {
         mostrarPagina(index, "set");
     });
 
+    //Equipamentos
+    $("#tipoContrato, #obra, #locador").on("change", function(){
+        var tipoContrato = $("#tipoContrato").val();
+        var obra = $("#obra").val();
+        var locador = $("#locador").val();
+
+        if (tipoContrato == "Locação de Equipamento" && obra && locador) {
+            preencheListaDeEquipamentos();
+        }
+    });
+
+    $("#novoContratoTipoFaturamento").on("change", function(){
+        if ($(this).val() != "1") {
+            $("#novoContratoDiaFaturamento, #novoContratoQtdeFaturamento").closest("div").hide();
+        }else{
+            $("#novoContratoDiaFaturamento, #novoContratoQtdeFaturamento").closest("div").show();
+        }
+
+    });
 
     // Decrição Atividades
     // $(".wizard-progress>.step").hover(mostraDescricaoDaAtividade, ()=>{$("#divDescricaoAtividades").hide()});
