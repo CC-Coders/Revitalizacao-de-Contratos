@@ -37,9 +37,12 @@ datatablesLanguage = {
         },
     },
 };
-function conusltaEquipamentosPendentes(){
+function conusltaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ){
     return new Promise((resolve, reject)=>{
         DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
+            DatasetFactory.createConstraint("CODCOLIGADA",CODCOLIGADA,CODCOLIGADA,ConstraintType.MUST),
+            DatasetFactory.createConstraint("CCUSTO",CCUSTO,CCUSTO,ConstraintType.MUST),
+            DatasetFactory.createConstraint("CNPJ",CNPJ,CNPJ,ConstraintType.MUST),
         ],null,{
             success:ds=>{
                 if (ds.values[0].STATUS != "SUCCESS") {
@@ -55,7 +58,11 @@ function conusltaEquipamentosPendentes(){
 
 async function preencheListaDeEquipamentos(){
     try {
-        var equipamentos = await conusltaEquipamentosPendentes();
+        const CODCOLIGADA = $("#CODCOLIGADA").val();
+        const CCUSTO = $("#CODCCUSTO").val();
+        const CNPJ = $("#hiddenCGCCFO").val();
+
+        var equipamentos = await conusltaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ);
         dataTableEquipamentos.clear().draw();
         dataTableEquipamentos.rows.add(equipamentos); // Add new data
         dataTableEquipamentos.columns.adjust().draw(); // Redraw the DataTable
@@ -98,7 +105,7 @@ function initDataTableEquipamentos(){
                 type: "string",
             },
             {
-                data: "CAPACIDADE",
+                data: "POTENCIAHP",
                 className: "dt-left",
                 class: "nowrap",
                 type: "string",
@@ -268,11 +275,11 @@ async function geraDetailsRow(data){
                     ${
                         data.STATUS == 1 ? 
                         `<button class="btn btn-primary btnAlterarEquipamento">
-                            <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
+                            <i class="flaticon flaticon-edit icon-sm" aria-hidden="true"></i>
                             Alterar
                         </button>`:``
                     }
-                    <a target="_blanck" href="/portal/p/1/paola-tester?prefixo=${data.PREFIXO}" class="btn btn-primary btnLinkPainelEquipamentos">
+                    <a target="_blank" href="/portal/p/1/paola-tester?prefixo=${data.PREFIXO}" class="btn btn-primary btnLinkPainelEquipamentos">
                         <i class="flaticon flaticon-import icon-sm" aria-hidden="true"></i>
                         Painel de Equipamentos
                     </a>
@@ -352,26 +359,28 @@ async function onClickCheckEquipamento(that) {
 }
 async function modalAlterarEquipamento(data) {
     var html = 
-    `<div class="row">
-        <div class="col-md-4">
-            <label>Campo: </label>
-            <select class="form-control selectCampoAlteracao">
-                <option></option>
-                <option>CNPJ</option>
-                <option>Valor de Locação</option>
-                <option>Valor de Mão de Obra</option>
-            </select>
+    `<div style="min-height:200px">
+        <div class="row">
+            <div class="col-md-4">
+                <label>Campo: </label>
+                <select class="form-control selectCampoAlteracao">
+                    <option></option>
+                    <option>CNPJ</option>
+                    <option>Valor de Locação</option>
+                    <option>Valor de Mão de Obra</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>Valor Atual: </label>
+                <input type="text" class="form-control atualValorAlteracao" readonly/>
+            </div>
+            <div class="col-md-4">
+                <label>Valor Novo: </label>
+                <input type="text" class="form-control novoValorAlteracao"/>
+            </div>
         </div>
-        <div class="col-md-4">
-            <label>Valor Atual: </label>
-            <input type="text" class="form-control atualValorAlteracao" readonly/>
-        </div>
-        <div class="col-md-4">
-            <label>Valor Novo: </label>
-            <input type="text" class="form-control novoValorAlteracao"/>
-        </div>
-    </div>`
-    FLUIGC.modal({
+    </div>`;
+    var modal = FLUIGC.modal({
         title: 'Alterar ' + data.PREFIXO,
         content: html,
         id: 'fluig-modal',
@@ -391,35 +400,91 @@ async function modalAlterarEquipamento(data) {
                 console.log(data);
 
                 if ($(this).val() == "CNPJ") {
-                    $(".atualValorAlteracao").val(data.FORNECEDOR_CNPJ);
+                    $(".atualValorAlteracao").val(data.FORNECEDOR_CNPJ + " - " + data.FORNECEDOR);
                     $(".novoValorAlteracao").maskMoney("destroy");
+                    $(".novoValorAlteracao").selectize({
+                          maxItems: 1,
+                    });
+                    $(".novoValorAlteracao").removeClass("form-control");
+                    DatasetFactory.getDataset("FCFO", ["CODCFO", "CGCCFO", "NOMEFANTASIA"], [
+                        DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST),
+                        DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
+                    ], null, {
+                        success: (fornecedores) => {
+                            if (fornecedores.columns[0] == "error") {
+                                FLUIGC.toast({
+                                    title: "Erro ao buscar fornecedores: ",
+                                    message: fornecedores.values[0].error,
+                                    type: "warning",
+                                });
+                            } else {
+                                $(".novoValorAlteracao")[0].selectize.clearOptions();
+                                $(".novoValorAlteracao")[0].selectize.addOption(fornecedores.values.map(e=>{return {value:`${e.CODCFO} - ${e.CGCCFO} - ${e.NOMEFANTASIA}`, text:`${e.CGCCFO} - ${e.NOMEFANTASIA}`}}));
+                            }
+                        },
+                        error: (error) => {
+                            FLUIGC.toast({
+                                title: "Erro ao buscar fornecedores: ",
+                                message: error,
+                                type: "warning",
+                            });
+                        },
+                    });
+
                 }
                 else if ($(this).val() == "Valor de Locação") {
                     $(".atualValorAlteracao").val(floatToMoney(data.VALOR_LOCACAO));
                     $(".novoValorAlteracao").maskMoney({ thousands: '.', decimal: ',', prefix: 'R$' });
+                    $(".novoValorAlteracao").addClass("form-control");
+                    $(".novoValorAlteracao")[0].selectize.destroy()
                 }
                 else if ($(this).val() == "Valor de Mão de Obra") {
                     $(".atualValorAlteracao").val(floatToMoney(data.MAODEOBRA));
                     $(".novoValorAlteracao").maskMoney({ thousands: '.', decimal: ',', prefix: 'R$' });
+                    $(".novoValorAlteracao").addClass("form-control");
+                    $(".novoValorAlteracao")[0].selectize.destroy()
                 }
 
             });
 
             $("[data-alterar]").on("click", function(){
-                alteraDadosEquipamento();
+                var retorno = alteraDadosEquipamento(data.IDEQUI, data.PREFIXO);
+                if (retorno!="SUCCESS") {
+                    showMessage("Erro ao atualizar equipamento: ",retorno,"warning");
+                }else{
+                    showMessage("Equipamento alterado!","","success");
+                    preencheListaDeEquipamentos();
+                }
+                modal.remove();
             });
         }
     });
 }
 
-function alteraDadosEquipamento(){
+function alteraDadosEquipamento(IDEQUI, PREFIXO){
     const campo = $(".selectCampoAlteracao").val()
+    const VALORATUAL = $(".atualValorAlteracao").val()
+    var valor = $(".novoValorAlteracao").val()
 
-    DatasetFactory.getDataset("dsAlteraDadosEquipamento", null,[
-        DatasetFactory.createConstraint("CAMPO",$(".selectCampoAlteracao").val(),$(".selectCampoAlteracao").val(),ConstraintType.MUST),
-        DatasetFactory.createConstraint("VALOR",$(".novoValorAlteracao").val(),$(".novoValorAlteracao").val(),ConstraintType.MUST),
-        DatasetFactory.createConstraint("IDEQUI",data.IDEQUI,data.IDEQUI,ConstraintType.MUST),
+
+    if (campo == "Valor de Locação" || campo == "Valor de Mão de Obra") {
+        valor = moneyToFloat(valor);
+    }else{
+        valor = valor.split(" - ")[1];
+    }
+
+    var ds = DatasetFactory.getDataset("dsAlteraDadosEquipamento", null,[
+        DatasetFactory.createConstraint("CAMPO",campo,campo,ConstraintType.MUST),
+        DatasetFactory.createConstraint("VALOR",valor,valor,ConstraintType.MUST),
+        DatasetFactory.createConstraint("VALORATUAL",VALORATUAL,VALORATUAL,ConstraintType.MUST),
+        DatasetFactory.createConstraint("IDEQUI",IDEQUI,IDEQUI,ConstraintType.MUST),
+        DatasetFactory.createConstraint("PREFIXO",PREFIXO,PREFIXO,ConstraintType.MUST),
     ],null);
+    if (ds.values[0].STATUS == "SUCCESS") {
+        return "SUCCESS";
+    }else{
+        return ds.values[0].MENSAGEM;
+    }
 }
 
 
@@ -440,6 +505,10 @@ function atualizaValorTotalLocacao(){
     var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
     var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
     var prazoEmMeses = calculaDiferencaEmMeses(prazo_inicio, prazo_fim);
+
+    $("#valorMensalLocacao").val(floatToMoney(valorTotalMensal));
+    $("#prazoLocacao").val(prazoEmMeses + " meses");
+
 
 
 
@@ -537,14 +606,15 @@ async function geraEquipamentosSelecionados(){
                                 <label>Prefixo: </label> <span style="margin-right:10px">${equipamento.PREFIXO}</span>
                                 <label>Modelo: </label> <span style="margin-right:10px">${equipamento.MODELO}</span>
                                 <label>Placa/Chassi: </label> <span style="margin-right:10px">${equipamento.PLACA?equipamento.PLACA:equipamento.CHASSI}</span>
+                                ${equipamento.CLASSIFICACAO_BEM != null && equipamento.CLASSIFICACAO_BEM != "null" ? `<label>Avaliação do Bem: </label> <span style="margin-right:10px">${equipamento.CLASSIFICACAO_BEM}% ${equipamento.CLASSIFICACAO_BEM < 3 ? `<i class="animaliaicon animaliaicon-arrow-circle-up icon-sm" aria-hidden="true"></i>`:`<i class="animaliaicon animaliaicon-arrow-circle-down icon-sm" aria-hidden="true"></i>`}</span>`:""}                           
                             </div>
                             <div class="col-md-6" style="text-align: right;">
                                 <label>Valor do Equipamento: </label> <span>${equipamento.PREFIXO}</span>
                             </div>
                         </div>
-                        <hr>
                     </div>
                     <div class="divDetailsEquipamento" style="display:none;">
+                        <hr>
                         <h3>Equipamento: </h3>
                         <div class="row">
                             <div class="col-md-3">
