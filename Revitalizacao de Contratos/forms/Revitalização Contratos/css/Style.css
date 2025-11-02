@@ -488,9 +488,12 @@
 
 .divEquipamento{
   background-color: white;
-  padding: 20px 60px;
+  padding: 5px 30px;
   border-radius: 20px;
   margin-bottom: 10px;
+}
+.divHeaderEquipamento{
+  margin-bottom: 15px !important;
 }
 .divChildRowEquipamento{
   padding: 20px 30px;
@@ -516,4 +519,9 @@
     box-shadow: rgba(0, 0, 0, 0.0) !important;
     background-image: none !important;
     height: var(--form-control-height);
+}
+
+.fluig-style-guide hr{
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
 }
