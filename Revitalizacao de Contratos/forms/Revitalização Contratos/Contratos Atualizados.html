@@ -435,8 +435,7 @@
                                                 <input type="text" id="dataFimLocacao" name="dataFimLocacao"
                                                     class="form-control inputInfoChamado date" />
                                             </div>
-                                        </div>
-                            
+                                        </div>                            
                                         <div class="col-md-6 campoLocacaoImovel">
                                             <div class="form-group">
                                                 <label>Janela de Pagamento:</label><strong class="strongAlert">*</strong>
@@ -460,8 +459,22 @@
                                         </div>
                                         <div class="col-md-6 campoLocacaoEquipamento">
                                             <div class="form-group">
+                                                <label>Valor Mensal:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="valorMensalLocacao" name="valorMensalLocacao"
+                                                    class="form-control inputInfoChamado" readonly />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 campoLocacaoEquipamento">
+                                            <div class="form-group">
                                                 <label for="">Valor Total da Locação:</label>
                                                 <input type="text" name="valorTotalLocacao" id="valorTotalLocacao" readonly class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 campoLocacaoEquipamento">
+                                            <div class="form-group">
+                                                <label>Prazo:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="prazoLocacao" name="prazoLocacao"
+                                                    class="form-control inputInfoChamado" readonly />
                                             </div>
                                         </div>
                                         <div class="col-md-6 campoLocacaoEquipamento">
@@ -469,7 +482,7 @@
                                                 <label for="">Índice de Reajuste:</label>
                                                 <select name="indiceReajuste" id="indiceReajuste" class="form-control">
                                                     <option value=""></option>
-                                                    <option value="IGPM">IGPM</option>
+                                                    <option value="IGPM" selected>IGPM</option>
                                                     <option value="IPCA">IPCA</option>
                                                 </select>
                                             </div>
@@ -502,7 +515,7 @@
                                         <div class="col-md-6" id="divPercentualRetencao" style="display: none;">
                                             <div class="form-group">
                                                 <label for="">Percentual de Retenção:</label>
-                                                <input type="text" name="percentualRetencao" id="percentualRetencao" class="form-control">
+                                                <input type="text" name="percentualRetencao" id="percentualRetencao" class="form-control" value="5%">
                                             </div>
                                         </div>
                                     </div>
@@ -903,7 +916,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="pagina-4" data-index="3" class="pagina">
+                <div id="pagina-integracaoRM" data-index="3" class="pagina">
                     <div class="row panelAprovacao">
                         <div class="col-md-12 colAprovacao">
                             <div style="text-align: center">
@@ -1051,7 +1064,7 @@
                                                                             style="color: black !important">Produto:
                                                                         </label>
                                                                         <select name="novoContratoItemProduto"
-                                                                            id="novoContratoItemProduto" class=""
+                                                                            id="novoContratoItemProduto" class="novoContratoItemProduto"
                                                                             autocomplete="off"></select>
                                                                     </div>
                                                                     <div class="col-md-4">
@@ -1060,7 +1073,7 @@
                                                                         </label>
                                                                         <input type="text" name="novoContratoItemValor"
                                                                             id="novoContratoItemValor"
-                                                                            class="form-control" />
+                                                                            class="form-control novoContratoItemValor" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
