@@ -1,10 +1,14 @@
 function createDataset(fields, constraints, sortFields) {
     try {
         var constraints = getConstraints(constraints);
-        lancaErroSeConstraintsObrigatoriasNaoInformadas(constraints, []);
+        lancaErroSeConstraintsObrigatoriasNaoInformadas(constraints, ["CODCOLIGADA","CCUSTO", "CNPJ"]);
 
-        var query = "SELECT * FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE STATUS = 1 OR STATUS = 2;";
-        var retorno = executaQuery(query,[],"/jdbc/CastilhoCustom");
+        var query = "SELECT * FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE (STATUS = 1 OR STATUS = 2) AND CCUSTO = ? AND FORNECEDOR_CNPJ = ?;";
+        var retorno = executaQuery(query,[
+            {type:"varchar", value:constraints.CCUSTO},
+            {type:"varchar", value:constraints.CNPJ},
+
+        ],"/jdbc/CastilhoCustom");
 
         return returnDataset("SUCCESS", "", JSON.stringify(retorno));
     } catch (error) {
