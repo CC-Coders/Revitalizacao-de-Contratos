@@ -44,33 +44,33 @@ function preencherObrasDoUsuario() {
 }
 
 function buscaFornecedores_preencheOptionsDoCampoLocador() {
-    DatasetFactory.getDataset("FCFO", ["CODCFO", "CGCCFO", "NOMEFANTASIA"], [
-        DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST),
-        DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
-    ], null, {
-        success: (fornecedores) => {
-            if (fornecedores.columns[0] == "error") {
+        DatasetFactory.getDataset("FCFO", ["CODCFO", "CGCCFO", "NOMEFANTASIA"], [
+            DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST),
+            DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
+        ], null, {
+            success: (fornecedores) => {
+                if (fornecedores.columns[0] == "error") {
+                    FLUIGC.toast({
+                        title: "Erro ao buscar fornecedores: ",
+                        message: fornecedores.values[0].error,
+                        type: "warning",
+                    });
+                } else {
+                    var optSelected = $("#locador").val();
+                    $("#locador")[0].selectize.clearOptions();
+
+                    $("#locador")[0].selectize.addOption(fornecedores.values.map(e=>{return {value:`${e.CODCFO} - ${e.CGCCFO} - ${e.NOMEFANTASIA}`, text:`${e.CGCCFO} - ${e.NOMEFANTASIA}`}}));
+                    $("#locador")[0].selectize.setValue(optSelected);
+                }
+            },
+            error: (error) => {
                 FLUIGC.toast({
                     title: "Erro ao buscar fornecedores: ",
-                    message: fornecedores.values[0].error,
+                    message: error,
                     type: "warning",
                 });
-            } else {
-                var optSelected = $("#locador").val();
-                $("#locador")[0].selectize.clearOptions();
-
-                $("#locador")[0].selectize.addOption(fornecedores.values.map(e=>{return {value:`${e.CODCFO} - ${e.CGCCFO} - ${e.NOMEFANTASIA}`, text:`${e.CGCCFO} - ${e.NOMEFANTASIA}`}}));
-                $("#locador")[0].selectize.setValue(optSelected);
-            }
-        },
-        error: (error) => {
-            FLUIGC.toast({
-                title: "Erro ao buscar fornecedores: ",
-                message: error,
-                type: "warning",
-            });
-        },
-    }
+            },
+        }
     );
 }
 
@@ -619,7 +619,7 @@ function validaCampos() {
     var isRetornar = document.getElementById("decisaoCancelar").checked;
     console.log(isRetornar)
     if (atividade == 0) {
-        $(".inputInfoChamado").each(function () {
+        $("input.inputInfoChamado, select.inputInfoChamado").each(function () {
             if ($(this).is(":visible") && ($(this).val() == null || $(this).val() == undefined || $(this).val() == "")) {
                 $(this).addClass("has-error");
                 if (valida) {
