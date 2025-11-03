@@ -155,87 +155,90 @@ function anexosPorTipoDeContrato(tipoDoContrato){
     $("#listaAnexos").html(htmlListaAnexos);
 }
 
-function inicializaInputAnexo() {
-    $("#inputAnexo").on("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
+async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
+    const tipo = $("#tipoDocumentacao").val();
+    const file = this.files[0];
+    if (!file || !tipo) {
+        return;
+    }
 
-    async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
-        const tipo = $("#tipoDocumentacao").val();
-        const file = this.files[0];
-        if (!file || !tipo){
-            return;
-        } 
+    try {
+        const listaCarregar = $("#listaAnexos");
+        const itemId = `item-${tipo.split(" ").join("-").split("(")[0]}`;
 
-        try {
-            const listaCarregar = $("#listaAnexos");
-            const itemId = `item-${tipo.split(" ").join("-").split("(")[0]}`;
+        insereLabelCarregando(tipo, itemId, listaCarregar);
 
-            if (["CNH", "RG", "CPF"].includes(tipo)) {
-                let item = $("#"+itemId);
-                if (!item) {
-                    $(listaCarregar).append(`<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`);
-                } else {
-                    $(item).html(`<span>⏳ <b>${tipo}:</b> carregando...</span>`);
-                }
+        const docId = await criaDocFluigRetornaDocumentId(file, 10133);
+
+        documentosAnexados[tipo] = docId;
+        $("#hiddenDocumentosAnexados").val(JSON.stringify(documentosAnexados));
+        await insereDocumentoCriado(tipo, documentosAnexados, file.name, docId)
+
+
+        $("#inputAnexo").val("");
+    } catch (e) {
+        console.error("Erro ao anexar:", e);
+        alert("Erro ao anexar documento.");
+    }
+
+    function insereLabelCarregando(tipo, itemId, listaCarregar){
+        if (["CNH", "RG", "CPF"].includes(tipo)) {
+            let item = $("#" + itemId);
+            if (!item) {
+                $(listaCarregar).append(`<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`);
             } else {
-                const item = $("#"+itemId);
-                if (item){
-                    $(item).html(`<span>⏳ <b>${tipo}:</b> carregando...</span>`);
-                }
+                $(item).html(`<span>⏳ <b>${tipo}:</b> carregando...</span>`);
             }
-
-            const docId = await criaDocFluigRetornaDocumentId(file, 10133);
-            const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
-
-            documentosAnexados[tipo] = docId;
-            $("#hiddenDocumentosAnexados").val(JSON.stringify(documentosAnexados));
-
-            const lista = $("#listaAnexos");
-
-            if (tipo === "CNH") {
-                documentosAnexados["RG"] = null;
-                documentosAnexados["CPF"] = null;
-
-                $("#item-identidade-rg-cnh").remove();
-                $("#item-identidade-cpf-cnh").remove();
-                $("#item-RG").remove();
-                $("#item-CPF").remove();
-                const item = $("#item-CNH");
-                if (item) {
-                    $(item).html(`<span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span>`);
-                }
-            } else if (tipo === "RG") {
-                documentosAnexados["CNH"] = null;
-                $("#item-identidade-rg-cnh").remove();
-                $("#item-CNH").remove();
-
-                $(lista).append(`<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`);
-                if (!documentosAnexados["CPF"]) {
-                    $("#item-identidade-cpf-cnh").remove();
-                    $(lista).append(`<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`);
-                }
-            } else if (tipo === "CPF") {
-                documentosAnexados["CNH"] = null;
-                $("#item-identidade-cpf-cnh").remove();
-                $("#item-CNH").remove();
-
-                $(lista).append(`<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`);
-                if (!documentosAnexados["RG"]) {
-                    $("#item-identidade-rg-cnh").remove();
-                    $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
-                }
-            } else {
-                $(`#item-${tipo.split(" ").join("-").split("(")[0]}`).html(`<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`);
+        } else {
+            const item = $("#" + itemId);
+            if (item) {
+                $(item).html(`<span>⏳ <b>${tipo}:</b> carregando...</span>`);
             }
+        }
+    }
+    async function insereDocumentoCriado(tipo, documentosAnexados, name, docId){
+        const lista = $("#listaAnexos");
+        const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
 
-            $("#inputAnexo").val("");
-        } catch (e) {
-            console.error("Erro ao anexar:", e);
-            alert("Erro ao anexar documento.");
+        if (tipo === "CNH") {
+            documentosAnexados["RG"] = null;
+            documentosAnexados["CPF"] = null;
+
+            $("#item-identidade-rg-cnh").remove();
+            $("#item-identidade-cpf-cnh").remove();
+            $("#item-RG").remove();
+            $("#item-CPF").remove();
+            const item = $("#item-CNH");
+            if (item) {
+                $(item).html(`<span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${name}</a></span>`);
+            }
+        } else if (tipo === "RG") {
+            documentosAnexados["CNH"] = null;
+            $("#item-identidade-rg-cnh").remove();
+            $("#item-CNH").remove();
+
+            $(lista).append(`<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${name}</a></span></li>`);
+            if (!documentosAnexados["CPF"]) {
+                $("#item-identidade-cpf-cnh").remove();
+                $(lista).append(`<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`);
+            }
+        } else if (tipo === "CPF") {
+            documentosAnexados["CNH"] = null;
+            $("#item-identidade-cpf-cnh").remove();
+            $("#item-CNH").remove();
+
+            $(lista).append(`<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${name}</a></span></li>`);
+            if (!documentosAnexados["RG"]) {
+                $("#item-identidade-rg-cnh").remove();
+                $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
+            }
+        } else {
+            $(`#item-${tipo.split(" ").join("-").split("(")[0]}`).html(`<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`);
         }
     }
 }
 
-function renderizarAnexosEtapaAprovacao() {
+async function renderizarAnexosEtapaAprovacao() {
     const hiddenValue = document.getElementById("hiddenDocumentosAnexados").value;
     if (!hiddenValue) return;
 
@@ -246,7 +249,7 @@ function renderizarAnexosEtapaAprovacao() {
 
         for (const [tipo, docId] of Object.entries(anexos)) {
             if (!docId) continue;
-            const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
+            const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
             lista.innerHTML += `<li><span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">Visualizar</a></span></li>`;
         }
     } catch (e) {

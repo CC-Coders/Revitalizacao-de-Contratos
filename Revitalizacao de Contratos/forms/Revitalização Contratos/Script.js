@@ -200,6 +200,7 @@ function bindings() {
 
     // Anexos
     $("#btnAnexarDocumento").on("click", function(){$("#inputAnexo").click()});
+    $("#inputAnexo").on("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
     
 
     // Decrição Atividades
