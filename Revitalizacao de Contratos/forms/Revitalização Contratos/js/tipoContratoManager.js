@@ -8,6 +8,7 @@ function onChangeTipoContrato() {
     else if($(this).val() === "Locação de Equipamento"){
         $("#dadosContrato").show();
         $(".campoLocacaoEquipamento").show();
+        anexosPorTipoDeContrato($(this).val());
     }
     else {
         $("#dadosContrato").hide();

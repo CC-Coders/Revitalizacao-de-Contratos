@@ -108,7 +108,8 @@ function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoForneced
 
                 $(".endereco-fornecedor").slideDown();
 
-                atualizaOpcoesDocumentos(tipoPessoa);
+                anexosPorTipoDeContrato(tipoPessoa == "F" ? "Locação de Imóvel - PF":"Locação de Imóvel - PJ");
+                
             } else {
                 FLUIGC.toast({
                     title: "Endereço não encontrado",
@@ -135,44 +136,20 @@ const documentosPorTipo = {
 };
 const documentosAnexados = {};
 
-function atualizaOpcoesDocumentos(tipoPessoa) {
-    const select = $("#tipoDocumentacao").html('<option value="">Selecione</option>');
-    const lista =$("#listaAnexos");
-    $(lista).html("");
-
-    const docs = [...(documentosPorTipo[tipoPessoa] || []), "Outros"];
-
-    docs.forEach((doc) => {
-        documentosAnexados[doc] = null;
-
-        if (["RG", "CPF", "CNH"].includes(doc)){
-            return;
-        }
-
-        select.append(`<option value="${doc}">${doc}</option>`);
-        $(lista).append(`<li id="item-${doc}"><span>❌ <b>${doc}</b></span></li>`);
-    });
-
-    select.append(`<option value="CNH">CNH</option>`);
-    select.append(`<option value="RG">RG</option>`);
-    select.append(`<option value="CPF">CPF</option>`);
-    $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
-    $(lista).append(`<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`);
-}
 
 function anexosPorTipoDeContrato(tipoDoContrato){
-    const anexosPorTipoDeContrato = {
+    const listaAnexosPorTipoDeContrato = {
         "Locação de Equipamento":["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
         "Locação de Imóvel - PF":["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
         "Locação de Imóvel - PJ":["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
     };
 
-    var anexos = anexosPorTipoDeContrato[tipoDoContrato];
+    var anexos = listaAnexosPorTipoDeContrato[tipoDoContrato];
     var html = `<option value="">Selecione</option>`;
     var htmlListaAnexos = "";
     for (const anexo of anexos) {
         html += `<option value="${anexo}">${anexo}</option>`;
-        htmlListaAnexos += `<li id="anexo-${anexo}"><span>❌</span> <b>${anexo}</b></li>`;
+        htmlListaAnexos += `<li id="item-${anexo.split(" ").join("-").split("(")[0]}"><span>❌</span> <b>${anexo}</b></li>`;
     }
     $("#tipoDocumentacao").html(html);
     $("#listaAnexos").html(htmlListaAnexos);
@@ -190,7 +167,7 @@ function inicializaInputAnexo() {
 
         try {
             const listaCarregar = $("#listaAnexos");
-            const itemId = `item-${tipo}`;
+            const itemId = `item-${tipo.split(" ").join("-").split("(")[0]}`;
 
             if (["CNH", "RG", "CPF"].includes(tipo)) {
                 let item = $("#"+itemId);
@@ -247,11 +224,10 @@ function inicializaInputAnexo() {
                     $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
                 }
             } else {
-                $(`#item-${tipo}`).html(`<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`);
+                $(`#item-${tipo.split(" ").join("-").split("(")[0]}`).html(`<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`);
             }
 
             $("#inputAnexo").val("");
-            $("#tipoDocumentacao").val("");
         } catch (e) {
             console.error("Erro ao anexar:", e);
             alert("Erro ao anexar documento.");
