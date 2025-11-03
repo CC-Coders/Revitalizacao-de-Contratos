@@ -136,74 +136,83 @@ const documentosPorTipo = {
 const documentosAnexados = {};
 
 function atualizaOpcoesDocumentos(tipoPessoa) {
-    const select = $("#tipoDocumentacao").empty().append('<option value="">Selecione</option>');
-    const lista = document.getElementById("listaAnexos");
-    lista.innerHTML = "";
+    const select = $("#tipoDocumentacao").html('<option value="">Selecione</option>');
+    const lista =$("#listaAnexos");
+    $(lista).html("");
 
     const docs = [...(documentosPorTipo[tipoPessoa] || []), "Outros"];
 
     docs.forEach((doc) => {
         documentosAnexados[doc] = null;
 
-        if (["RG", "CPF", "CNH"].includes(doc)) return;
+        if (["RG", "CPF", "CNH"].includes(doc)){
+            return;
+        }
 
         select.append(`<option value="${doc}">${doc}</option>`);
-        lista.innerHTML += `<li id="item-${doc}"><span>❌ <b>${doc}</b></span></li>`;
+        $(lista).append(`<li id="item-${doc}"><span>❌ <b>${doc}</b></span></li>`);
     });
 
     select.append(`<option value="CNH">CNH</option>`);
     select.append(`<option value="RG">RG</option>`);
     select.append(`<option value="CPF">CPF</option>`);
-    lista.innerHTML += `<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`;
-    lista.innerHTML += `<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`;
+    $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
+    $(lista).append(`<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`);
+}
+
+function anexosPorTipoDeContrato(tipoDoContrato){
+    const anexosPorTipoDeContrato = {
+        "Locação de Equipamento":["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
+        "Locação de Imóvel - PF":["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
+        "Locação de Imóvel - PJ":["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
+    };
+
+    var anexos = anexosPorTipoDeContrato[tipoDoContrato];
+    var html = `<option value="">Selecione</option>`;
+    var htmlListaAnexos = "";
+    for (const anexo of anexos) {
+        html += `<option value="${anexo}">${anexo}</option>`;
+        htmlListaAnexos += `<li id="anexo-${anexo}"><span>❌</span> <b>${anexo}</b></li>`;
+    }
+    $("#tipoDocumentacao").html(html);
+    $("#listaAnexos").html(htmlListaAnexos);
 }
 
 function inicializaInputAnexo() {
-    const select = document.getElementById("tipoDocumentacao");
-    const input = document.getElementById("inputAnexo");
-    const divAnexo = document.getElementById("divAnexo");
+    $("#inputAnexo").on("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
 
-    select.addEventListener("change", function () {
-        divAnexo.style.opacity = this.value ? "1" : "0";
-        divAnexo.style.visibility = this.value ? "visible" : "hidden";
-    });
-
-    input.addEventListener("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
     async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
-        const tipo = select.value;
+        const tipo = $("#tipoDocumentacao").val();
         const file = this.files[0];
-        if (!file || !tipo) return;
+        if (!file || !tipo){
+            return;
+        } 
 
         try {
-            const listaCarregar = document.getElementById("listaAnexos");
+            const listaCarregar = $("#listaAnexos");
             const itemId = `item-${tipo}`;
 
-            //            if (["CNH", "RG", "CPF"].includes(tipo)) {
-            //                listaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
-            //            } else {
-            //                const item = document.getElementById(itemId);
-            //                if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
-            //            }
             if (["CNH", "RG", "CPF"].includes(tipo)) {
-                let item = document.getElementById(itemId);
+                let item = $("#"+itemId);
                 if (!item) {
-                    listaCarregar.innerHTML += `<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`;
-                    item = document.getElementById(itemId);
+                    $(listaCarregar).append(`<li id="${itemId}"><span>⏳ <b>${tipo}:</b> carregando...</span></li>`);
                 } else {
-                    item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
+                    $(item).html(`<span>⏳ <b>${tipo}:</b> carregando...</span>`);
                 }
             } else {
-                const item = document.getElementById(itemId);
-                if (item) item.innerHTML = `<span>⏳ <b>${tipo}:</b> carregando...</span>`;
+                const item = $("#"+itemId);
+                if (item){
+                    $(item).html(`<span>⏳ <b>${tipo}:</b> carregando...</span>`);
+                }
             }
 
             const docId = await criaDocFluigRetornaDocumentId(file, 10133);
-            const link = `http://desenvolvimento.castilho.com.br:3232/portal/p/1/ecmnavigation?app_ecm_navigation_doc=${docId}`;
+            const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
 
             documentosAnexados[tipo] = docId;
-            document.getElementById("hiddenDocumentosAnexados").value = JSON.stringify(documentosAnexados);
+            $("#hiddenDocumentosAnexados").val(JSON.stringify(documentosAnexados));
 
-            const lista = document.getElementById("listaAnexos");
+            const lista = $("#listaAnexos");
 
             if (tipo === "CNH") {
                 documentosAnexados["RG"] = null;
@@ -213,39 +222,36 @@ function inicializaInputAnexo() {
                 $("#item-identidade-cpf-cnh").remove();
                 $("#item-RG").remove();
                 $("#item-CPF").remove();
-                const item = document.getElementById("item-CNH");
+                const item = $("#item-CNH");
                 if (item) {
-                    item.innerHTML = `<span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span>`;
+                    $(item).html(`<span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span>`);
                 }
-                //  lista.innerHTML += `<li id="item-CNH"><span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
             } else if (tipo === "RG") {
                 documentosAnexados["CNH"] = null;
                 $("#item-identidade-rg-cnh").remove();
                 $("#item-CNH").remove();
 
-                lista.innerHTML += `<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
+                $(lista).append(`<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`);
                 if (!documentosAnexados["CPF"]) {
                     $("#item-identidade-cpf-cnh").remove();
-                    lista.innerHTML += `<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`;
+                    $(lista).append(`<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`);
                 }
             } else if (tipo === "CPF") {
                 documentosAnexados["CNH"] = null;
                 $("#item-identidade-cpf-cnh").remove();
                 $("#item-CNH").remove();
 
-                lista.innerHTML += `<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`;
+                $(lista).append(`<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${file.name}</a></span></li>`);
                 if (!documentosAnexados["RG"]) {
                     $("#item-identidade-rg-cnh").remove();
-                    lista.innerHTML += `<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`;
+                    $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
                 }
             } else {
-                document.getElementById(`item-${tipo}`).innerHTML = `<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`;
+                $(`#item-${tipo}`).html(`<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`);
             }
 
-            input.value = "";
-            select.value = "";
-            divAnexo.style.opacity = "0";
-            divAnexo.style.visibility = "hidden";
+            $("#inputAnexo").val("");
+            $("#tipoDocumentacao").val("");
         } catch (e) {
             console.error("Erro ao anexar:", e);
             alert("Erro ao anexar documento.");
