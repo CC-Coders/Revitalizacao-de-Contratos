@@ -438,9 +438,19 @@ function carregaDadosDoContratoParaTelaAprovacao() {
         $("#aprovacaoTextValorTotalLocacao").text(valorTotalLocacao);
         $("#aprovacaoTextIndiceReajuste").text(indiceReajuste);
         $("#aprovacaoTextTemRetencao").text(temRetencao);
-        $("#aprovacaoTextPercentualRetencao").text(percentualRetencao);
+        if (temRetencao == "Sim") {
+            $("#aprovacaoTextPercentualRetencao").text(percentualRetencao);
+        }else{
+            $("#aprovacaoTextPercentualRetencao").closest("div.row").hide();
+        }
+
+
         $("#aprovacaoTextTemREIDI").text(temREIDI);
-        $("#aprovacaoTextPercentualREIDI").text(percentualREIDI + "%");
+        if (temREIDI == "Sim") {
+            $("#aprovacaoTextPercentualREIDI").text(percentualREIDI + "%");
+        }else{
+            $("#aprovacaoTextPercentualREIDI").closest("div.row").hide();
+        }
 
 
 
