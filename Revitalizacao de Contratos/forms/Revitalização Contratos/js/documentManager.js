@@ -59,8 +59,8 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                     "#cidadeFornecedor"
                 ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
                 FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
-                FORNECEDOR_NOME_REPRESENTANTE: $("#representante").val(),
-                FORNECEDOR_CPF_REPRESENTANTE: "SEM CAMPO",
+                FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
+                FORNECEDOR_CPF_REPRESENTANTE: $("#cpfAdministrador").val(),
                 IMOVEL_DESCRICAO: "SEM CAMPO",
                 IMOVEL_MATRICULA: $("#matriculaImovel").val(),
                 IMOVEL_FINALIDADE: $("#finalidadeLocacao").val(),
@@ -86,8 +86,8 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                     "#cidadeFornecedor"
                 ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
                 FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
-                FORNECEDOR_NOME_REPRESENTANTE: $("#representante").val(),
-                FORNECEDOR_CPF_REPRESENTANTE: "SEM CAMPO",
+                FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
+                FORNECEDOR_CPF_REPRESENTANTE: $("#cpfAdministrador").val(),
                 
                 PERIODOINICIO:$("#dataInicioLocacao").val(),
                 PERIODOFIM:$("#dataFimLocacao").val(),

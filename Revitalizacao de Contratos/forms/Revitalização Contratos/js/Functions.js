@@ -361,7 +361,6 @@ function carregaDadosDoContratoParaTelaAprovacao() {
         var obra = $("#obra").val() ? $("#obra").val() : $("#obra").text();
         var locador = $("#locador").val() ? $("#locador").val() : $("#locador").text();
         var procurador = $("#procurador").val() ? $("#procurador").val() : $("#procurador").text();
-        var representante = $("#representante").val() ? $("#representante").val() : $("#representante").text();
         var contratantePrincipal = $("#contratantePrincipal").val() ? $("#contratantePrincipal").val() : $("#contratantePrincipal").text();
         var enderecoImovel = $("#enderecoImovel").val() ? $("#enderecoImovel").val() : $("#enderecoImovel").text();
         var matriculaImovel = $("#matriculaImovel").val() ? $("#matriculaImovel").val() : $("#matriculaImovel").text();
@@ -375,7 +374,6 @@ function carregaDadosDoContratoParaTelaAprovacao() {
         $("#aprovacaoTextObra").text(obra);
         $("#aprovacaoTextLocador").text(locador);
         $("#aprovacaoTextProcurador").text(procurador);
-        $("#aprovacaoTextRepresentante").text(representante);
         $("#aprovacaoTextContratantePrincipal").text(contratantePrincipal);
         $("#aprovacaoTextEnderecoImovel").text(enderecoImovel);
         $("#aprovacaoTextMatriculaImovel").text(matriculaImovel);
@@ -408,7 +406,6 @@ function carregaDadosDoContratoParaTelaAprovacao() {
         var obra = $("#obra").val() ? $("#obra").val() : $("#obra").text();
         var locador = $("#locador").val() ? $("#locador").val() : $("#locador").text();
         var procurador = $("#procurador").val() ? $("#procurador").val() : $("#procurador").text();
-        var representante = $("#representante").val() ? $("#representante").val() : $("#representante").text();
         var contratantePrincipal = $("#contratantePrincipal").val() ? $("#contratantePrincipal").val() : $("#contratantePrincipal").text();
 
         var periodoInicio = $("#dataInicioLocacao").val() ? $("#dataInicioLocacao").val() : $("#dataInicioLocacao").text();
@@ -428,7 +425,6 @@ function carregaDadosDoContratoParaTelaAprovacao() {
         $("#aprovacaoTextObra").text(obra);
         $("#aprovacaoTextLocador").text(locador);
         $("#aprovacaoTextProcurador").text(procurador);
-        $("#aprovacaoTextRepresentante").text(representante);
         $("#aprovacaoTextContratantePrincipal").text(contratantePrincipal);
         
         $("#aprovacaoTextPeriodoLocacao").text(`${periodoInicio} até ${periodoFIm}`);
