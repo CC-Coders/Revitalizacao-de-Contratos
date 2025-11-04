@@ -131,7 +131,12 @@ function preencheCamposAutomaticamente() {
         }
 
         promiseBuscaCodigoDoContrato(CODCOLIGADA, CCUSTO).then(ds=>{
-            $("#novoContratoCodigo").val(ds[0].CODIGOCONTRATO)
+            var CODIGOCONTRATO = ds[0].CODIGOCONTRATO;
+            CODIGOCONTRATO = parseInt(CODIGOCONTRATO.split("/")[0].split("-")[1]);
+            CODIGOCONTRATO++;
+
+            CODIGOCONTRATO = `${CCUSTO}-${CODIGOCONTRATO}/25`;
+            $("#novoContratoCodigo").val(CODIGOCONTRATO);
         });
     }, 1000);
 
