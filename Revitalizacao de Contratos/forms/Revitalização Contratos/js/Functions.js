@@ -860,3 +860,29 @@ function mostraDescricaoDaAtividade() {
     $("#divDescricaoAtividades").html(desc);
     $("#divDescricaoAtividades").show();
 }
+
+
+function obraPermiteReidi(CODCOLIGADA, CODCCUSTO){
+    const obrasComReidi = {
+        "1":{
+            "1.2.043":"Obra Parapuã",
+            "1.4.011":"Obra Conserva Echaporã",
+            "1.4.016":"Obra Duplicação Oriente",
+            "1.4.021":"Obra COFCO",
+            "1.4.027":"Obra Conserva Maracaí",
+            "1.4.030":"Obra MRS Pátios Vale do Paraíba",
+            "1.4.034":"Obra MRS Campo Grande",
+        },
+        "13":{
+            "1.4.030":"Obra MRS Pátios Vale do Paraíba",
+            "1.4.034":"Obra MRS Campo Grande",
+        }
+    };
+
+    if (obrasComReidi[CODCOLIGADA] && obrasComReidi[CODCOLIGADA][CODCCUSTO]) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}

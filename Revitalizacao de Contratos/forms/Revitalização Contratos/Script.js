@@ -74,6 +74,16 @@ function bindings() {
         },
         onChange: (value) => {
             salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value);
+            
+             var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = value.split(" - ");
+            if(!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)){
+                $("#temREIDI").closest("div.row").hide();
+                $("#temREIDI").val("Não");
+                $("#percentualREIDI").val("");
+            }else{
+                $("#temREIDI").closest("div.row").show();
+
+            }
         }
     });
 
