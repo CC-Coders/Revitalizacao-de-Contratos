@@ -525,14 +525,14 @@ function mostrarPagina(indice, move) {
 }
 function avancarPagina() {
     var active = $(".pagination-active");
-    var index = $(active).next(".pagination").attr("data-index");
+    var index = $(active).nextAll(".pagination:not('.hidden'):first").attr("data-index");
     if (index) {
         mostrarPagina(index, "next");
     }
 }
 function voltarPagina() {
     var active = $(".pagination-active");
-    var index = $(active).prev(".pagination").attr("data-index");
+    var index = $(active).prevAll(".pagination:not('.hidden'):first").attr("data-index");
     if (index) {
         mostrarPagina(index, "prev");
     }

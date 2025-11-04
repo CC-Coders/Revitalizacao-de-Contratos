@@ -17,31 +17,31 @@ $(document).ready(function () {
     bindings();
     const ATIVIDADE_ATUAL = parseInt($("#atividade").val())
     console.log(ATIVIDADE_ATUAL)
-    if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO){
-    	loadTelaInicioRetorno(); 
-    } else if(ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
-    	loadTelaInicio(); 
+    if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO) {
+        loadTelaInicioRetorno();
+    } else if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
+        loadTelaInicio();
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.JURIDICO) {
         loadTelaJuridico();
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {
         loadTelaControladoria();
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.ENGENHEIRO || ATIVIDADE_ATUAL == ATIVIDADES.COORDENADOR_OBRAS || ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {
         loadTelaAprovacao();
-    } else if(ATIVIDADE_ATUAL == ATIVIDADES.ASSINATURA_ELETRONICA || ATIVIDADE_ATUAL == ATIVIDADES.INTERMEDIARIO_ASSINATURA_ELETRONICA){
+    } else if (ATIVIDADE_ATUAL == ATIVIDADES.ASSINATURA_ELETRONICA || ATIVIDADE_ATUAL == ATIVIDADES.INTERMEDIARIO_ASSINATURA_ELETRONICA) {
         loadTelaAssinaturaEletronica();
     }
 
 });
 var beforeSendValidate = function (numState, nextState) {
     var atividade = parseInt(document.getElementById("atividade").value);
-//    if (atividade == 0) {
-//        return validaCampos();
-//    }
+    //    if (atividade == 0) {
+    //        return validaCampos();
+    //    }
     return validaCampos();
 };
 
 function bindings() {
-    FLUIGC.popover('.step',{trigger: 'hover', placement: 'auto'});
+    FLUIGC.popover('.step', { trigger: 'hover', placement: 'auto' });
 
 
     // Amarra eventos e elementos do HTML, mantendo todas definições de evento agrupadas
@@ -65,14 +65,14 @@ function bindings() {
 
         ],
         render: {
-            optgroup_header: function(data, escape) {
+            optgroup_header: function (data, escape) {
                 return '<div class="optgroup-header">' + escape(data.label) + '</div>';
             },
-            option: function(item, escape) {
+            option: function (item, escape) {
                 return '<div class="option">' + escape(item.label) + '</div>';
             }
         },
-        onChange:(value)=>{
+        onChange: (value) => {
             salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value);
         }
     });
@@ -128,12 +128,12 @@ function bindings() {
     });
     $("#agencia").mask("0000-0", { placeholder: "____-_" });
     $("#contaCorrente").mask("00000-0", { placeholder: "_____-_" });
-    $("#percentualRetencao").mask("000%", {reverse:true});
+    $("#percentualRetencao").mask("000%", { reverse: true });
 
     $("#locador").selectize({
-        onChange:(value)=>{
+        onChange: (value) => {
             var [codcfo, cgccfo, nomeFornecedor] = value.split(" - ");
-            
+
             // Por padrão os fornecedores são cadastrados no Coligada 0 = Global
             // Nos cadasos de cadastros errados tem que verificar a filial
             // Como a consulta não está retornando o CODCOLCFO ficou fixo como 0
@@ -141,7 +141,7 @@ function bindings() {
             $("#hiddenCODCFO").val(codcfo);
             $("#hiddenCGCCFO").val(cgccfo);
             $("#hiddenFORNECEDOR").val(nomeFornecedor);
-            
+
             if (cgccfo) {
                 buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(cgccfo);
             } else {
@@ -151,26 +151,26 @@ function bindings() {
     });
 
 
-    $("#temRetencao").on("change", function(){
+    $("#temRetencao").on("change", function () {
         if ($(this).val() == "Sim") {
             $("#divPercentualRetencao").show();
-        }else{
+        } else {
             $("#divPercentualRetencao").hide();
         }
     });
-    $("#temREIDI").on("change", function(){
+    $("#temREIDI").on("change", function () {
         if ($(this).val() == "Sim") {
             $("#divPercentualReidi").show();
-        }else{
+        } else {
             $("#divPercentualReidi").hide();
         }
     });
 
 
     // Aba Assinatura
-    $("#assinaturaContrato").on("change", ()=> onchangeTipoAssinaturaContrato())
+    $("#assinaturaContrato").on("change", () => onchangeTipoAssinaturaContrato())
     $("#nomeRepresentanteFornecedor").on("change", asyncVerificaSeExisteAssinanteCadastradoPorNome);
-    $("#tipoContrato, #obra").on("change", function(){
+    $("#tipoContrato, #obra").on("change", function () {
         if ($("#tipoContrato").val() != "" && $("#obra").val() != "") {
             asyncPreencheRepresentanteCastilho();
         }
@@ -179,14 +179,14 @@ function bindings() {
     // Paginacao
     $("#btn-avancar").on("click", avancarPagina);
     $("#btn-voltar").on("click", voltarPagina);
-      
-    $(".pagination").on("click", function(){
+
+    $(".pagination").on("click", function () {
         var index = $(this).attr("data-index");
         mostrarPagina(index, "set");
     });
 
     //Equipamentos
-    $("#tipoContrato, #obra, #locador").on("change", function(){
+    $("#tipoContrato, #obra, #locador").on("change", function () {
         var tipoContrato = $("#tipoContrato").val();
         var obra = $("#obra").val();
         var locador = $("#locador").val();
@@ -196,10 +196,10 @@ function bindings() {
         }
     });
 
-    $("#novoContratoTipoFaturamento").on("change", function(){
+    $("#novoContratoTipoFaturamento").on("change", function () {
         if ($(this).val() != "1") {
             $("#novoContratoDiaFaturamento, #novoContratoQtdeFaturamento").closest("div").hide();
-        }else{
+        } else {
             $("#novoContratoDiaFaturamento, #novoContratoQtdeFaturamento").closest("div").show();
         }
 
@@ -230,6 +230,10 @@ function loadTelaInicio() {
 
     initDataTableEquipamentos();
     preencheListaDeEquipamentos();
+    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+        $("#paginationEquipamentos").show();
+        $("#paginationEquipamentos").removeClass("hidden");
+    }
 }
 
 function loadTelaInicioRetorno() {
@@ -238,30 +242,35 @@ function loadTelaInicioRetorno() {
     $("#divTipoAssinaturaContrato").show();
     $("#paginationIntegracaoRM").remove();
     setAtividadeAtivaProgresso(0);
-//    preencherObrasDoUsuario();
+    //    preencherObrasDoUsuario();
     buscaFornecedores_preencheOptionsDoCampoLocador();
-//    buscaBancos();
+    //    buscaBancos();
     inicializarCalendario();
     inicializarPeriodoLocacao();
     inicializaInputAnexo();
     asyncMontaHistorico()
     renderizarAnexosEtapaAprovacao();
-        $("#formContainer").show();
-        mostrarPagina("0");
-        if($("#caucao").val() == "Sim"){
-        	$("#divValorCaucao, #divDataPagamentoCaucao").show();
+    $("#formContainer").show();
+    mostrarPagina("0");
+    if ($("#caucao").val() == "Sim") {
+        $("#divValorCaucao, #divDataPagamentoCaucao").show();
+    }
+    if ($("#tipoPagamento").val() == "Depósito") {
+        $("#divPagamento, #divBanco").show();
+    }
+
+    // Configurar o select de banco
+    $("#banco").one('click', function () {
+        if (!$(this).hasClass('opcoes-carregadas')) {
+            buscaBancos();
+            $(this).addClass('opcoes-carregadas');
         }
-        if( $("#tipoPagamento").val() == "Depósito"){
-        	 $("#divPagamento, #divBanco").show();
-        }
-        
-        // Configurar o select de banco
-        $("#banco").one('click', function() {
-            if(!$(this).hasClass('opcoes-carregadas')) {
-                buscaBancos();
-                $(this).addClass('opcoes-carregadas');
-            }
-        });
+    });
+
+    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+        $("#paginationEquipamentos").show();
+        $("#paginationEquipamentos").removeClass("hidden");
+    }
 }
 
 function loadTelaJuridico() {
@@ -283,6 +292,11 @@ function loadTelaJuridico() {
     $("#divRepresentantesContrato").hide();
     preencheInformacoesAprovacao();
     $("#paginationIntegracaoRM").remove();
+
+    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+        $("#paginationEquipamentos").show();
+        $("#paginationEquipamentos").removeClass("hidden");
+    }
 }
 
 function loadTelaControladoria() {
@@ -303,35 +317,45 @@ function loadTelaControladoria() {
     renderizarAnexosEtapaAprovacao();
 
     $("#divRepresentantesContrato").hide();
-        preencheInformacoesAprovacao();
+    preencheInformacoesAprovacao();
+
+    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+        $("#paginationEquipamentos").show();
+        $("#paginationEquipamentos").removeClass("hidden");
+    }
 }
 
 function loadTelaAprovacao() {
     $(".panelAprovacao, #formContainer").show();
-	$("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
-	setAtividadeAtivaProgresso(3);
-	carregaDadosDoContratoParaTelaAprovacao();
-	asyncMontaHistorico();
-	mostrarPagina("0");
+    $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
+    setAtividadeAtivaProgresso(3);
+    carregaDadosDoContratoParaTelaAprovacao();
+    asyncMontaHistorico();
+    mostrarPagina("0");
     geraEquipamentosSelecionados();
-	renderizarAnexosEtapaAprovacao();
+    renderizarAnexosEtapaAprovacao();
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
 
     $("#divRepresentantesContrato").hide();
     preencheInformacoesAprovacao();
+
+    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+        $("#paginationEquipamentos").show();
+        $("#paginationEquipamentos").removeClass("hidden");
+    }
 }
 
-function loadTelaAssinaturaEletronica(){
+function loadTelaAssinaturaEletronica() {
 
     $(".panelAprovacao, #formContainer").show();
-	$("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
-	setAtividadeAtivaProgresso(4);
-	carregaDadosDoContratoParaTelaAprovacao();
-	asyncMontaHistorico();
-	mostrarPagina("0");
+    $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
+    setAtividadeAtivaProgresso(4);
+    carregaDadosDoContratoParaTelaAprovacao();
+    asyncMontaHistorico();
+    mostrarPagina("0");
     geraEquipamentosSelecionados();
-	renderizarAnexosEtapaAprovacao();
+    renderizarAnexosEtapaAprovacao();
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
 
@@ -340,4 +364,9 @@ function loadTelaAssinaturaEletronica(){
 
     $("#divQuadroStatusAssinaturaEletronica").show();
     asyncGeraQuadroStatusAssinatura();
+
+    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+        $("#paginationEquipamentos").show();
+        $("#paginationEquipamentos").removeClass("hidden");
+    }
 }

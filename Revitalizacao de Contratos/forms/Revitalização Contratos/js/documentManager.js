@@ -128,7 +128,7 @@ const codigosModelos = {
 
     },
     DESENVOLVIMENTO:{
-        "Locação de ìmovel":29328,
+        "Locação de Imóvel":29328,
         "Locação de Equipamento":30545,
     }
 };
