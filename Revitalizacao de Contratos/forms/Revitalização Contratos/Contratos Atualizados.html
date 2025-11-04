@@ -98,10 +98,14 @@
                 <input type="hidden" id="CODCOLIGADA" name="CODCOLIGADA" />
                 <input type="hidden" id="CODCCUSTO" name="CODCCUSTO" />
                 <input type="hidden" id="NOMECCUSTO" name="NOMECCUSTO" />
+                <input type="hidden" id="IDCNT" name="IDCNT" />
+                <input type="hidden" id="ID_TCNT_AUXILIAR" name="ID_TCNT_AUXILIAR" />
+
                 <input type="hidden" name="hiddenDocumentosAnexados" id="hiddenDocumentosAnexados" />
                 <input type="hidden" name="dataAberturaSol" id="dataAberturaSol" />
                 <input type="hidden" name="dataCriadoEm" id="dataCriadoEm" />
                 <input type="hidden" name="dataFinalizado" id="dataFinalizado" />
+                <input type="hidden" name="statusAssinatura" id="statusAssinatura" />
 
                 <!-- Fornecedor -->
                 <input type="hidden" name="hiddenCODCOLCFO" id="hiddenCODCOLCFO" />
@@ -193,7 +197,7 @@
 
             <div id="formContainer" class="panel-body" style="margin-bottom: 20px; margin-top: 30px">
                 <div id="pagina-1" data-index="0" class="pagina">
-                    <div class="row panelAprovacao panelInput" id="informacoesIniciais">
+                    <div class="row  panelInput" id="informacoesIniciais" style="margin-top: 20px;">
                         <!-- Dados Iniciais -->
                         <div class="col-md-12">
                             <div class="aprovacao-card colAprovacao">
@@ -247,7 +251,7 @@
                     </div>
 
                     <div id="dadosContrato" style="display: none">
-                        <div class="row panelAprovacao panelInput" id="divInputDadosContrato">
+                        <div class="row panelInput rowFlex" id="divInputDadosContrato">
                             <!-- Dados Gerais -->
                             <div class="col-md-6">
                                 <div class="aprovacao-card colAprovacao">
@@ -588,7 +592,7 @@
                         </div>
                     </div>
 
-                    <div class="row panelAprovacao" id="divTextDadosContrato">
+                    <div class="row" id="divTextDadosContrato" style="margin-top: 20px;display: none;">
                         <!-- Card Dados Gerais -->
                         <div class="col-md-6 ">
                             <div class="aprovacao-card colAprovacao">
@@ -727,7 +731,7 @@
                     </div>
                 </div>
                 <div id="paginaAssinatura" data-index="1" class="pagina">
-                    <div id="divQuadroStatusAssinaturaEletronica" class="row" style="display: none;">
+                    <div id="divQuadroStatusAssinaturaEletronica" class="row" style="display: none;margin-top: 20px;">
                         <div class="col-md-12">
                             <div class="colAprovacao aprovacao-card">
                                 <h3>Quadro de Status</h3>
@@ -749,7 +753,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="divRepresentantesContrato" class="row panelAprovacao">
+                    <div id="divRepresentantesContrato" class="row" style="margin-top: 20px;">
                         <div class="col-md-6">
                             <div class="colAprovacao aprovacao-card">
                                 <h3>Representante Castilho</h3>
@@ -797,7 +801,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="divRepresentantesContratoAprovacao" class="row panelAprovacao">
+                    <div id="divRepresentantesContratoAprovacao" class="row" style="margin-top: 20px;">
                         <div class="col-md-6">
                             <div class="aprovacao-card colAprovacao">
                                 <h3>Representante Castilho</h3>
@@ -857,7 +861,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="divTipoAssinaturaContrato" class="row panelAprovacao">
+                    <div id="divTipoAssinaturaContrato" class="row">
                         <div class="col-md-12">
                             <div class="aprovacao-card colAprovacao">
                                 <h3>Assinatura do Contrato</h3>
@@ -877,7 +881,7 @@
                     </div>
                 </div>
                 <div id="pagina-anexos" data-index="2" class="pagina">
-                    <div class="row panelInput">
+                    <div class="row panelInput" style="margin-top: 20px;">
                         <div class="col-md-12">
                             <div class="aprovacao-card colAprovacao">
                                 <h3>Anexos</h3>
@@ -904,7 +908,7 @@
                     </div>
                 </div>
                 <div id="pagina-integracaoRM" data-index="3" class="pagina">
-                    <div class="row panelAprovacao">
+                    <div class="row panelAprovacao" style="margin-top: 20px;">
                         <div class="col-md-12 colAprovacao">
                             <div style="text-align: center">
                                 <label for="checkboxLancarNovoContrato">Lançar Novo Contrato?</label>
@@ -1095,7 +1099,7 @@
                     </div>
                 </div>
                 <div id="pagina-historico" data-index="4" class="pagina">
-                    <div class="row panelInput">
+                    <div class="row panelInput" style="margin-top: 20px;">
                         <div class="col-md-12">
                             <div class="aprovacao-card colAprovacao">
                                 <h3>Histórico</h3>
@@ -1154,7 +1158,7 @@
                     </div>
                 </div>
                 <div id="paginaEquipamentos" data-index="5" class="pagina">
-                    <div class="row panelInput">
+                    <div class="row panelInput" style="margin-top: 20px;">
                         <div class="col-md-12">
                             <div class="aprovacao-card colAprovacao">
                                 <h3>Equipamentos</h3>

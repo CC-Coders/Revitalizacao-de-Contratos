@@ -433,7 +433,7 @@
     .step {
         flex-shrink: 0; 
     }
-    .rowAprovacao {
+    .rowFlex {
     display: flex;
     flex-wrap: wrap;
     }

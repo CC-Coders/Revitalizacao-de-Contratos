@@ -108,7 +108,9 @@ function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoForneced
 
                 $(".endereco-fornecedor").slideDown();
 
-                anexosPorTipoDeContrato(tipoPessoa == "F" ? "Locação de Imóvel - PF":"Locação de Imóvel - PJ");
+                if ($("#tipoContrato").val() == "Locação de Imóvel") {
+                    anexosPorTipoDeContrato(tipoPessoa == "F" ? "Locação de Imóvel - PF":"Locação de Imóvel - PJ");
+                }
                 
             } else {
                 FLUIGC.toast({
@@ -327,6 +329,7 @@ function inicializarPeriodoLocacao() {
 }
 
 function carregaDadosDoContratoParaTelaAprovacao() {
+    $("#divTextDadosContrato").show();
     $(".campoAprovacaoLocacaoImovel, .campoAprovacaoLocacaoEquipamento").hide();
 
     $("#aprovacaoTextTipoContrato").text($("#tipoContrato").val());

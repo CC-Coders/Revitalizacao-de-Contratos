@@ -107,7 +107,7 @@ function bindings() {
     });
 
     // Aba Dados Gerais
-    $("#tipoContrato").on("change", onChangeTipoContrato);
+    $("#tipoContrato").on("change", ()=> onChangeTipoContrato($("#tipoContrato")));
     $("#caucao").on("change", function () {
         if ($(this).val() == "Sim") {
             $("#divValorCaucao, #divDataPagamentoCaucao").show();
@@ -234,7 +234,6 @@ function loadTelaInicio() {
     buscaBancos();
     inicializarCalendario();
     inicializarPeriodoLocacao();
-    inicializaInputAnexo();
 
     initDataTableEquipamentos();
     preencheListaDeEquipamentos();
@@ -248,15 +247,16 @@ function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
     $("#divRepresentantesContrato").show();
     $("#divTipoAssinaturaContrato").show();
+    $("#dadosContrato").show();
     $("#paginationIntegracaoRM").remove();
     setAtividadeAtivaProgresso(0);
-    //    preencherObrasDoUsuario();
+    preencherObrasDoUsuario();
     buscaFornecedores_preencheOptionsDoCampoLocador();
-    //    buscaBancos();
+    buscaBancos();
     inicializarCalendario();
     inicializarPeriodoLocacao();
-    inicializaInputAnexo();
     asyncMontaHistorico()
+    onChangeTipoContrato($("#tipoContrato"));
     renderizarAnexosEtapaAprovacao();
     $("#formContainer").show();
     mostrarPagina("0");
