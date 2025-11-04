@@ -79,12 +79,13 @@ function beforeTaskSave_inicio() {
         hAPI.setCardValue("numProces", getValue("WKNumProces"));
 
         if (hAPI.getCardValue("tipoContrato") == "Locação de Equipamento") {
-            atualizaStatusEquipamento_PendenteAnalise();
+            atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
             hAPI.setCardValue("dataCriadoEm", getDateNow());
         }
 
         var id = insereDadosNaTabelaAuxiliar();
         insereDadosNaTabelaAuxiliarItens(id);
+        hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
     
         var docIdContrato = hAPI.getCardValue("contratoDocumentId");
         hAPI.attachDocument(docIdContrato);
@@ -106,6 +107,7 @@ function beforeTaskSave_controladoria() {
             if (criaNovoContratoRM) {
                 var IDCNT = criaNovoContrato();
                 hAPI.setCardValue("IDCNT", IDCNT);
+                updateTcntAuxiliar(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
             }
         } else if (tipo == "Aditivos") {
             alteraStatusContrato(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "PENDENTE OBRA");
@@ -175,7 +177,7 @@ function buscaParamentrosCriacaoContrato() {
     var CODCCUSTO = hAPI.getCardValue("novoContratoCCUSTO");
     var CODIGOCONTRATO = hAPI.getCardValue("novoContratoCodigo");
     var locEstoque = hAPI.getCardValue("novoContratoLocalDeEstoque");
-    var CODCFO = hAPI.getCardValue("novoContratoFornecedor");
+    var CODCFO = hAPI.getCardValue("hiddenCODCFO");
     var CODRPR = hAPI.getCardValue("novoContratoRepresentante");
     var DATAINICIO = hAPI.getCardValue("novoContratoDataInicio");
     var DATAFIM = hAPI.getCardValue("novoContratoDataFim");
@@ -534,6 +536,7 @@ function insereDadosNaTabelaAuxiliar(){
     try {
         
         var query = "INSERT INTO TCNT_AUXILIAR (";
+        query += " CODCOLIGADA, ";
         query += " IS_MODELO_CASTILHO, ";
         query += " IS_RETENCAO, ";
         query += " PERCENT_RETENCAO, ";
@@ -543,10 +546,11 @@ function insereDadosNaTabelaAuxiliar(){
         query += " TIPO_CONTRATO, ";
         query += " ID_FLUIG ";
         query += ") ";
-        query += " VALUES (?,?,?,?,?,?,?,?);";
+        query += " VALUES (?,?,?,?,?,?,?,?,?);";
 
 
         var id = executeInsert(query,[
+            {type:"int", value:hAPI.getCardValue("CODCOLIGADA")},
             {type:"int", value:hAPI.getCardValue("modeloContrato") == "Modelo Castilho" ? 1:0},
             {type:"int", value:0},//TODO criar o campo de retenção e vincular no insert
             {type:"float", value:0},//TODO criar o campo de percentual de retenção e vincular no insert
@@ -588,7 +592,17 @@ function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){
         throw error;
     }
 }
-
+function updateTcntAuxiliar(IDCNT, ID_TCNT_AUXILIAR){
+    try {
+        var query = "UPDATE TCNT_AUXILIAR SET IDCNT = ? WHERE ID = ?";
+        executaUpdate(query, [
+            {type:"int", value:IDCNT},
+            {type:"int", value:ID_TCNT_AUXILIAR},
+        ], "/jdbc/CastilhoCustom");
+    } catch (error) {
+        throw error;   
+    }
+}
 
 
 // Equipamentos
@@ -601,7 +615,7 @@ var codigoStatusEquipamentos = {
     "Contrato_encerrado":6,
 }
 
-function atualizaStatusEquipamento_PendenteAnalise(){
+function atualizaStatusEquipamento(status){
     try {
         var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados");
  
@@ -614,7 +628,7 @@ function atualizaStatusEquipamento_PendenteAnalise(){
             query +="WHERE PREFIXO = ?";
 
             executeInsert(query, [
-                {type:"int", value:codigoStatusEquipamentos["Contrato_em_Andamento_com_análise_pendente"]},
+                {type:"int", value:codigoStatusEquipamentos[status]},
                 {type:"varchar", value:prefixo},
             ], "/jdbc/CastilhoCustom");
         }
