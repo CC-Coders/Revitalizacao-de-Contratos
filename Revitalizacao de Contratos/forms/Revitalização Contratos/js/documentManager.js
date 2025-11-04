@@ -30,7 +30,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
         console.log(input);
         doc.render(input);
         var file = doc.toBlob();
-        var file = new File([file], "file.docx", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+        var file = new File([file], geraNomeDoArquivo()+".pdf", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
         return file;
     }
     async function buscaDadosDoFormulario(tipoContrato) {
@@ -61,11 +61,11 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
                 FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
                 FORNECEDOR_CPF_REPRESENTANTE: $("#cpfAdministrador").val(),
-                IMOVEL_DESCRICAO: "SEM CAMPO",
+                IMOVEL_DESCRICAO: $("#descricaoImovel").val(),
                 IMOVEL_MATRICULA: $("#matriculaImovel").val(),
                 IMOVEL_FINALIDADE: $("#finalidadeLocacao").val(),
                 LOCACAO_PERIODO: $("#periodoLocacao").val(),
-                LOCACAO_VALOR: "SEM CAMPO",
+                LOCACAO_VALOR: $("#valorMensalAluguel").val(),
                 LOCACAO_DIA_VENCIMENTO: $("#periodoLocacao").val(),
                 LOCACAO_VALOR_CAUCAO: $("#valorCaucao").val(),
                 LOCACAO_DATA_CAUCAO: $("#dataPagamentoCaucao").val(),
@@ -75,6 +75,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 DIA: dia,
                 MES: meses[mes],
                 ANO:ano,
+                CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`
             };
         }else if(tipoContrato == "Locação de Equipamento"){
             var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
@@ -115,6 +116,8 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 PRAZO:parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
                 PRAZO_EXTENSO:numeroPorExtenso(calculaDiferencaEmMeses(prazo_inicio, prazo_fim).toString()),
 
+                INDICE_REAJUSTE:$("#indiceReajuste").val(),
+
                 EQUIPAMENTOS:await asyncConsultaEquipamentosSelecionados()
             };
 
@@ -141,12 +144,20 @@ async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
 
     const response = await fetch(url);
     const blob = await response.blob();
-    const file = new File([blob], "document.docx", {
+    const file = new File([blob], geraNomeDoArquivo()+".docx", {
         type: blob.type,
     });
     var documentId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDeAnexos);
     $("#contratoDocumentId").val(documentId);
 }
+function geraNomeDoArquivo(){
+    var CODCCUSTO = $("#CODCCUSTO").val();
+    var NOME_FORNECEDOR = $("#hiddenFORNECEDOR").val();
+    var TIPO_CONTRATO = $("#tipoContrato").val();
+
+    return `${CODCCUSTO} - ${TIPO_CONTRATO} - ${NOME_FORNECEDOR}`;
+}
+
 async function salvaModeloAlterado() {
     try {
         Swal.fire({
@@ -449,9 +460,9 @@ async function loadCkEditor() {
     } = window.CKEDITOR_PREMIUM_FEATURES;
 
     const LICENSE_KEY =
-        "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NTkyNzY3OTksImp0aSI6IjM2YjE2NzlmLWEzNjYtNDhiMy1iZTkyLTdmNzEyNTE4M2M0YiIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6IjIzZTVlYzYxIn0.7lGKD1PuLGNDrKRBu3yGL6r5ewjSOJVEObpg2UcwT5AZHl8UhjMqPKdXM-ltwmGqx1U4J1Zpmg7lp7oE2llXPQ";
+        "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NjM1MTAzOTksImp0aSI6IjYwNDE3NWRkLTQ0ZWEtNDY5Mi1iMjYyLTcwZmY4NDg5YWQ0YSIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6ImNhYzRlNDBjIn0.2mUK5kw3jdNRg3UsURe08DObpPFeM5MmaDuBIYi8KuMrni8nxyCUsuy5aSSPsroJ4MG9eQcBBc1gMp-3jAq64g";
 
-    const CLOUD_SERVICES_TOKEN_URL = "https://utlwjl2qznbm.cke-cs.com/token/dev/f5b90ac332b5e0cda48e1ff594046f04709db54b3105553df15f9a6e51ab?limit=10";
+    const CLOUD_SERVICES_TOKEN_URL = "https://afwbxzt3zsv0.cke-cs.com/token/dev/0c54bb51e7ae04bad7166d63f91681292def83e919f079228773aca12cba?limit=10";
 
     const editorConfig = {
         toolbar: {
@@ -658,7 +669,7 @@ async function loadCkEditor() {
             },
         },
         importWord: {
-            tokenUrl: "https://utlwjl2qznbm.cke-cs.com/token/dev/f5b90ac332b5e0cda48e1ff594046f04709db54b3105553df15f9a6e51ab?limit=10",
+            tokenUrl: CLOUD_SERVICES_TOKEN_URL,
         },
         fontFamily: {
             supportAllValues: true,
