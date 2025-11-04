@@ -29,7 +29,7 @@
     <processDefinitionVersionPK>
       <companyId>1</companyId>
       <processId>Revitalização Contratos</processId>
-      <version>72</version>
+      <version>81</version>
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
     <formId>29166</formId>
@@ -284,7 +284,7 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>866</positionX>
+      <positionX>830</positionX>
       <positionY>616</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
@@ -336,7 +336,7 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1136</positionX>
+      <positionX>1210</positionX>
       <positionY>616</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
@@ -662,6 +662,53 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <version>1</version>
+        <sequence>104</sequence>
+      </processStatePK>
+      <stateName>Intermediário</stateName>
+      <stateDescription>Intermediário</stateDescription>
+      <instruction>Evento intermediário do processo</instruction>
+      <deadlineTime>0</deadlineTime>
+      <joint>false</joint>
+      <agreementPercentage>0</agreementPercentage>
+      <engineAllocationId></engineAllocationId>
+      <engineAllocationConfiguration></engineAllocationConfiguration>
+      <selectColleague>0</selectColleague>
+      <initialState>false</initialState>
+      <notifyAuthorityDelay>true</notifyAuthorityDelay>
+      <notifyRequisitionerDelay>false</notifyRequisitionerDelay>
+      <allowanceAuthorityTime>1</allowanceAuthorityTime>
+      <frequenceAuthorityTime>1</frequenceAuthorityTime>
+      <allowanceRequisitionerTime>0</allowanceRequisitionerTime>
+      <frequenceRequisitionerTime>0</frequenceRequisitionerTime>
+      <transferAttachments>false</transferAttachments>
+      <subProcessId></subProcessId>
+      <formFolder>0</formFolder>
+      <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
+      <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
+      <automatic>false</automatic>
+      <positionX>1100</positionX>
+      <positionY>626</positionY>
+      <forecastedEffortType>0</forecastedEffortType>
+      <forecastedEffort>0</forecastedEffort>
+      <notifyManagerFollowUp>false</notifyManagerFollowUp>
+      <notifyManagerDelay>false</notifyManagerDelay>
+      <frequenceManagerTime>0</frequenceManagerTime>
+      <inhibitTransfer>false</inhibitTransfer>
+      <periodId></periodId>
+      <stateType>0</stateType>
+      <bpmnType>35</bpmnType>
+      <signalId>0</signalId>
+      <counterSign>false</counterSign>
+      <openInstances>0</openInstances>
+      <destinationStates/>
+      <digitalSignature>false</digitalSignature>
+      <parentSequence>0</parentSequence>
+    </ProcessState>
+    <ProcessState>
+      <processStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
         <sequence>30</sequence>
       </processStatePK>
       <stateName>Opção</stateName>
@@ -747,7 +794,7 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>1316</positionX>
+      <positionX>1350</positionX>
       <positionY>600</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
@@ -822,7 +869,7 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>1036</positionX>
+      <positionX>980</positionX>
       <positionY>600</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
@@ -980,7 +1027,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -992,7 +1039,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1004,7 +1051,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1016,7 +1063,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1028,7 +1075,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1040,7 +1087,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1052,7 +1099,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1064,7 +1111,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1076,7 +1123,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1088,7 +1135,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1100,7 +1147,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1112,7 +1159,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1124,7 +1171,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1136,7 +1183,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>5</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1148,7 +1195,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1160,7 +1207,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>68</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1172,11 +1219,11 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
-      <destinationSequenceId>53</destinationSequenceId>
+      <condition></condition>
+      <destinationSequenceId>104</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
     <ConditionProcessState>
@@ -1184,7 +1231,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1196,7 +1243,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1208,7 +1255,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>72</version>
+        <version>81</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1630,23 +1677,6 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <version>1</version>
-        <linkSequence>81</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>46</initialStateSequence>
-      <finalStateSequence>53</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
         <linkSequence>82</linkSequence>
       </processLinkPK>
       <actionLabel></actionLabel>
@@ -1738,23 +1768,6 @@
       <returnPermited>false</returnPermited>
       <initialStateSequence>48</initialStateSequence>
       <finalStateSequence>88</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>90</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>88</initialStateSequence>
-      <finalStateSequence>53</finalStateSequence>
       <returnLabel></returnLabel>
       <name></name>
       <automaticLink>false</automaticLink>
@@ -1863,9 +1876,133 @@
       <defaultLink>false</defaultLink>
       <type>0</type>
     </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>105</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>88</initialStateSequence>
+      <finalStateSequence>104</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>106</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>104</initialStateSequence>
+      <finalStateSequence>53</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
   </list>
   <list/>
   <list>
+    <WorkflowProcessEvent>
+      <workflowProcessEventPK>
+        <companyId>1</companyId>
+        <eventId>intermediateconditional104</eventId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+      </workflowProcessEventPK>
+      <eventDescription>function intermediateconditional104() {
+  var returnAnalisePendente = false;
+    var returnAnaliseCompleta = true;
+
+    var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);
+    for (var i = 0; i &lt; indexes.length; i++) {
+        var id = indexes[i];
+        var PREFIXO = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);
+
+        var query = &quot;SELECT STATUS FROM EQUIPAMENTOS_CONTRATOS_AUXILIAR WHERE PREFIXO = ?&quot;;
+        var retorno = executaQuery(query,[
+            {type:&quot;varchar&quot;, value:PREFIXO}
+        ], &quot;/jdbc/CastilhoCustom&quot;);
+
+        log.info(&quot;Verifica status equipamentos&quot;);
+        log.dir(retorno);
+        log.dir(retorno[0].STATUS);
+        log.dir(retorno.STATUS);
+        if (retorno[0].STATUS != &quot;7&quot;) {
+            log.info(&quot;Returno analise pendente&quot;);
+            return returnAnalisePendente;
+        }
+    }
+
+    log.info(&quot;Returno analise concluida&quot;);
+    return returnAnaliseCompleta;
+}
+function executaQuery(query, constraints, dataSource) {
+    try {
+        var dataSource = dataSource;
+        var ic = new javax.naming.InitialContext();
+        var ds = ic.lookup(dataSource);
+
+        var conn = ds.getConnection();
+        var stmt = conn.prepareStatement(query);
+
+        var counter = 1;
+        for (var i = 0; i &lt; constraints.length; i++) {
+            var val = constraints[i];
+            if (val.type == &quot;int&quot;) {
+                stmt.setInt(counter, val.value);
+            }
+            else if (val.type == &quot;float&quot;) {
+                stmt.setFloat(counter, val.value);
+            }
+            else if (val.type == &quot;date&quot;) {
+                stmt.setString(counter, val.value);
+            }
+            else if (val.type == &quot;datetime&quot;) {
+                stmt.setString(counter, val.value);
+            } else {
+                stmt.setString(counter, val.value);
+            }
+            counter++;
+        }
+
+        var rs = stmt.executeQuery();
+        var columnCount = rs.getMetaData().getColumnCount();
+        var retorno = [];
+
+        while (rs.next()) {
+            var linha = {};
+            for (var j = 1; j &lt; columnCount + 1; j++) {
+                linha[rs.getMetaData().getColumnName(j)] = rs.getObject(rs.getMetaData().getColumnName(j)) + &quot;&quot;;
+            }
+            retorno.push(linha);
+        }
+
+        return retorno;
+
+    } catch (e) {
+        log.error(&quot;ERRO==============&gt; &quot; + e.message);
+        throw e;
+    } finally {
+        if (stmt != null) {
+            stmt.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
+    }
+}</eventDescription>
+    </WorkflowProcessEvent>
     <WorkflowProcessEvent>
       <workflowProcessEventPK>
         <companyId>1</companyId>
@@ -2032,6 +2169,7 @@ function beforeTaskSave_inicio() {&#xd;
 &#xd;
         if (hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento&quot;) {&#xd;
             atualizaStatusEquipamento_PendenteAnalise();&#xd;
+            hAPI.setCardValue(&quot;dataCriadoEm&quot;, getDateNow());&#xd;
         }&#xd;
 &#xd;
         var id = insereDadosNaTabelaAuxiliar();&#xd;
@@ -2712,6 +2850,21 @@ function getDateTimeNow() {&#xd;
     var dateTime = [ano, mes, dia].join(&quot;-&quot;) + &quot; &quot; + hora + &quot;:&quot; + minutos;&#xd;
     return dateTime;&#xd;
 }&#xd;
+function getDateNow() {&#xd;
+    var date = new Date();&#xd;
+    var dia = date.getDate();&#xd;
+    if (dia &lt; 10) {&#xd;
+        dia = &quot;0&quot; + dia;&#xd;
+    }&#xd;
+    var mes = date.getMonth() + 1;&#xd;
+    if (mes &lt; 10) {&#xd;
+        mes = &quot;0&quot; + mes;&#xd;
+    }&#xd;
+    var ano = date.getFullYear();&#xd;
+&#xd;
+    var dateTime = [ano, mes, dia].join(&quot;-&quot;);&#xd;
+    return dateTime;&#xd;
+}&#xd;
 function getServerURL() {&#xd;
     var ds = DatasetFactory.getDataset(&quot;dsGetServerURL&quot;, null, null, null);&#xd;
     return ds.getValue(0, &quot;URL&quot;);&#xd;
@@ -3021,7 +3174,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>36</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3032,7 +3185,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>36</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3043,7 +3196,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>36</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3054,7 +3207,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>39</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3065,7 +3218,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>39</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3076,7 +3229,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>71</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3087,7 +3240,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>71</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3098,7 +3251,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>73</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3109,7 +3262,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>78</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3120,7 +3273,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>78</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3131,7 +3284,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>78</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3142,7 +3295,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>79</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3153,7 +3306,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>79</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3164,7 +3317,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>80</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3175,7 +3328,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>80</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3186,29 +3339,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
-        <linkSequence>81</linkSequence>
-        <bendSequence>1</bendSequence>
-      </processLinkBendPK>
-      <positionX>809</positionX>
-      <positionY>576</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>72</version>
-        <linkSequence>81</linkSequence>
-        <bendSequence>2</bendSequence>
-      </processLinkBendPK>
-      <positionX>1138</positionX>
-      <positionY>576</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>82</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3219,7 +3350,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>82</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3230,7 +3361,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>85</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3241,7 +3372,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>85</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3252,7 +3383,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>86</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3263,7 +3394,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>86</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3274,7 +3405,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>86</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3285,7 +3416,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>87</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3296,7 +3427,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>87</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3307,7 +3438,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>87</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3318,7 +3449,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>91</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3329,7 +3460,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>91</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3340,7 +3471,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>91</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3351,7 +3482,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>92</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3362,7 +3493,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>92</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3373,7 +3504,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>92</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3384,18 +3515,18 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>93</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1065</positionX>
+      <positionX>1010</positionX>
       <positionY>909</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>93</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3406,18 +3537,18 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>94</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1063</positionX>
-      <positionY>908</positionY>
+      <positionX>1010</positionX>
+      <positionY>909</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>94</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3428,7 +3559,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>94</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3439,18 +3570,18 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>95</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1063</positionX>
-      <positionY>905</positionY>
+      <positionX>1010</positionX>
+      <positionY>906</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>95</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3461,7 +3592,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <linkSequence>95</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3474,7 +3605,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>72</version>
+        <version>81</version>
         <stateSequence>58</stateSequence>
         <triggerSequence>0</triggerSequence>
       </processStateTriggerPK>
@@ -3483,6 +3614,20 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <value>Revitalização Contratos.intermediateconditional58.js</value>
       <timeTrigger>0:0:0</timeTrigger>
       <frequencia>12</frequencia>
+    </ProcessStateTrigger>
+    <ProcessStateTrigger>
+      <processStateTriggerPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>81</version>
+        <stateSequence>104</stateSequence>
+        <triggerSequence>1</triggerSequence>
+      </processStateTriggerPK>
+      <runType>1</runType>
+      <type>3</type>
+      <value>Revitalização Contratos.intermediateconditional104.js</value>
+      <timeTrigger>0:0:0</timeTrigger>
+      <frequencia>04</frequencia>
     </ProcessStateTrigger>
   </list>
   <list/>
