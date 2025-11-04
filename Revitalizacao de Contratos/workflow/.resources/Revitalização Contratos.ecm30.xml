@@ -29,7 +29,7 @@
     <processDefinitionVersionPK>
       <companyId>1</companyId>
       <processId>Revitalização Contratos</processId>
-      <version>66</version>
+      <version>72</version>
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
     <formId>29166</formId>
@@ -662,31 +662,6 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <version>1</version>
-        <sequence>11</sequence>
-      </processStatePK>
-      <stateName>Opção</stateName>
-      <stateDescription>Opção</stateDescription>
-      <joint>false</joint>
-      <initialState>false</initialState>
-      <transferAttachments>false</transferAttachments>
-      <subProcessId></subProcessId>
-      <formFolder>0</formFolder>
-      <automatic>true</automatic>
-      <positionX>296</positionX>
-      <positionY>96</positionY>
-      <inhibitTransfer>false</inhibitTransfer>
-      <stateType>1</stateType>
-      <bpmnType>120</bpmnType>
-      <signalId>0</signalId>
-      <openInstances>0</openInstances>
-      <destinationStates/>
-      <digitalSignature>false</digitalSignature>
-    </ProcessState>
-    <ProcessState>
-      <processStatePK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
         <sequence>30</sequence>
       </processStatePK>
       <stateName>Opção</stateName>
@@ -1005,22 +980,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>66</version>
-        <sequence>11</sequence>
-      </conditionProcessStatePK>
-      <condition>true</condition>
-      <destinationSequenceId>5</destinationSequenceId>
-      <conditionType>0</conditionType>
-    </ConditionProcessState>
-    <ConditionProcessState>
-      <conditionProcessStatePK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <expressionOrder>1</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>32</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1029,10 +992,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>4</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1041,10 +1004,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>43</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1053,10 +1016,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>5</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1065,10 +1028,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>4</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1077,10 +1040,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>48</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1089,10 +1052,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>4</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1101,10 +1064,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>5</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1113,10 +1076,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>32</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1125,10 +1088,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>4</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1137,10 +1100,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>32</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1149,10 +1112,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>5</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1161,10 +1124,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>58</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1173,10 +1136,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>5</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>64</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1185,7 +1148,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1197,7 +1160,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>68</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1209,10 +1172,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>53</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1221,10 +1184,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>4</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1233,10 +1196,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>5</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1245,32 +1208,15 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>66</version>
+        <version>72</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>false</condition>
       <destinationSequenceId>32</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
   </list>
   <list>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>12</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>4</initialStateSequence>
-      <finalStateSequence>11</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
     <ProcessLink>
       <processLinkPK>
         <companyId>1</companyId>
@@ -1293,46 +1239,12 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <version>1</version>
-        <linkSequence>13</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>11</initialStateSequence>
-      <finalStateSequence>5</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
         <linkSequence>33</linkSequence>
       </processLinkPK>
       <actionLabel></actionLabel>
       <returnPermited>false</returnPermited>
       <initialStateSequence>30</initialStateSequence>
       <finalStateSequence>32</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>39</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>30</initialStateSequence>
-      <finalStateSequence>4</finalStateSequence>
       <returnLabel></returnLabel>
       <name></name>
       <automaticLink>false</automaticLink>
@@ -1395,6 +1307,23 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <version>1</version>
+        <linkSequence>39</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>30</initialStateSequence>
+      <finalStateSequence>4</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
         <linkSequence>45</linkSequence>
       </processLinkPK>
       <actionLabel></actionLabel>
@@ -1435,6 +1364,210 @@
       <returnPermited>false</returnPermited>
       <initialStateSequence>46</initialStateSequence>
       <finalStateSequence>48</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>56</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>53</initialStateSequence>
+      <finalStateSequence>55</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>59</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>55</initialStateSequence>
+      <finalStateSequence>58</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>61</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>58</initialStateSequence>
+      <finalStateSequence>60</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>63</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>60</initialStateSequence>
+      <finalStateSequence>62</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>65</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>55</initialStateSequence>
+      <finalStateSequence>64</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>67</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>60</initialStateSequence>
+      <finalStateSequence>66</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>69</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>66</initialStateSequence>
+      <finalStateSequence>68</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>70</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>68</initialStateSequence>
+      <finalStateSequence>62</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>71</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>68</initialStateSequence>
+      <finalStateSequence>32</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>73</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>64</initialStateSequence>
+      <finalStateSequence>74</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>75</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>74</initialStateSequence>
+      <finalStateSequence>72</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>77</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>72</initialStateSequence>
+      <finalStateSequence>76</finalStateSequence>
       <returnLabel></returnLabel>
       <name></name>
       <automaticLink>false</automaticLink>
@@ -1514,63 +1647,29 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <version>1</version>
-        <linkSequence>56</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>53</initialStateSequence>
-      <finalStateSequence>55</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>59</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>55</initialStateSequence>
-      <finalStateSequence>58</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>65</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>55</initialStateSequence>
-      <finalStateSequence>64</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
         <linkSequence>82</linkSequence>
       </processLinkPK>
       <actionLabel></actionLabel>
       <returnPermited>false</returnPermited>
       <initialStateSequence>55</initialStateSequence>
       <finalStateSequence>32</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>84</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>76</initialStateSequence>
+      <finalStateSequence>83</finalStateSequence>
       <returnLabel></returnLabel>
       <name></name>
       <automaticLink>false</automaticLink>
@@ -1605,176 +1704,6 @@
       <returnPermited>false</returnPermited>
       <initialStateSequence>55</initialStateSequence>
       <finalStateSequence>4</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>61</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>58</initialStateSequence>
-      <finalStateSequence>60</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>63</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>60</initialStateSequence>
-      <finalStateSequence>62</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>67</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>60</initialStateSequence>
-      <finalStateSequence>66</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>73</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>64</initialStateSequence>
-      <finalStateSequence>74</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>69</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>66</initialStateSequence>
-      <finalStateSequence>68</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>70</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>68</initialStateSequence>
-      <finalStateSequence>62</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>71</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>68</initialStateSequence>
-      <finalStateSequence>32</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>77</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>72</initialStateSequence>
-      <finalStateSequence>76</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>75</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>74</initialStateSequence>
-      <finalStateSequence>72</finalStateSequence>
-      <returnLabel></returnLabel>
-      <name></name>
-      <automaticLink>false</automaticLink>
-      <defaultLink>false</defaultLink>
-      <type>0</type>
-    </ProcessLink>
-    <ProcessLink>
-      <processLinkPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <linkSequence>84</linkSequence>
-      </processLinkPK>
-      <actionLabel></actionLabel>
-      <returnPermited>false</returnPermited>
-      <initialStateSequence>76</initialStateSequence>
-      <finalStateSequence>83</finalStateSequence>
       <returnLabel></returnLabel>
       <name></name>
       <automaticLink>false</automaticLink>
@@ -1917,9 +1846,103 @@
       <defaultLink>false</defaultLink>
       <type>0</type>
     </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>96</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>4</initialStateSequence>
+      <finalStateSequence>5</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
   </list>
   <list/>
   <list>
+    <WorkflowProcessEvent>
+      <workflowProcessEventPK>
+        <companyId>1</companyId>
+        <eventId>beforeCancelProcess</eventId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+      </workflowProcessEventPK>
+      <eventDescription>function beforeCancelProcess(colleagueId,processId){&#xd;
+    var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+    &#xd;
+    if (tipoContrato == &quot;Locação de Equipamento&quot;) {&#xd;
+        resetaStatusDosEquipamentosParaPendenteContrato();&#xd;
+    }&#xd;
+}&#xd;
+&#xd;
+function resetaStatusDosEquipamentosParaPendenteContrato(){&#xd;
+    try {&#xd;
+        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);&#xd;
+        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+            var id = indexes[i];&#xd;
+            var PREFIXO = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);&#xd;
+&#xd;
+            var query = &quot;&quot;;&#xd;
+            query += &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET STATUS = 1 WHERE PREFIXO = ?&quot;;&#xd;
+            executaUpdate(query,[&#xd;
+                {type:&quot;varchar&quot;, value:PREFIXO}&#xd;
+            ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+        }&#xd;
+    } catch (error) {&#xd;
+        throw error;    &#xd;
+    }&#xd;
+}&#xd;
+function executaUpdate(query, constraints, dataSource) {&#xd;
+    try {&#xd;
+        var dataSource = dataSource;&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+        var ds = ic.lookup(dataSource);&#xd;
+&#xd;
+        var conn = ds.getConnection();&#xd;
+        var stmt = conn.prepareStatement(query);&#xd;
+&#xd;
+        var counter = 1;&#xd;
+        for (var i = 0; i &lt; constraints.length; i++) {&#xd;
+            var val = constraints[i];&#xd;
+            if (val.type == &quot;int&quot;) {&#xd;
+                stmt.setInt(counter, val.value);&#xd;
+            }&#xd;
+            else if (val.type == &quot;float&quot;) {&#xd;
+                stmt.setFloat(counter, val.value);&#xd;
+            }&#xd;
+            else if (val.type == &quot;date&quot;) {&#xd;
+                stmt.setString(counter, val.value);&#xd;
+            }&#xd;
+            else if (val.type == &quot;datetime&quot;) {&#xd;
+                stmt.setString(counter, val.value);&#xd;
+            } else {&#xd;
+                stmt.setString(counter, val.value);&#xd;
+            }&#xd;
+            counter++;&#xd;
+        }&#xd;
+&#xd;
+        stmt.executeUpdate();&#xd;
+        return true;&#xd;
+&#xd;
+    } catch (e) {&#xd;
+        log.error(&quot;ERRO==============&gt; &quot; + e.message);&#xd;
+        throw e;&#xd;
+    } finally {&#xd;
+        if (stmt != null) {&#xd;
+            stmt.close();&#xd;
+        }&#xd;
+        if (conn != null) {&#xd;
+            conn.close();&#xd;
+        }&#xd;
+    }&#xd;
+}</eventDescription>
+    </WorkflowProcessEvent>
     <WorkflowProcessEvent>
       <workflowProcessEventPK>
         <companyId>1</companyId>
@@ -2927,38 +2950,6 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       </swimLanePK>
     </SwimLane>
     <SwimLane>
-      <color>A8D5D5</color>
-      <height>171</height>
-      <width>1781</width>
-      <positionX>0</positionX>
-      <positionY>400</positionY>
-      <stateName>CONTROLADORIA</stateName>
-      <type>2</type>
-      <parentSequence>0</parentSequence>
-      <swimLanePK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <sequence>2</sequence>
-      </swimLanePK>
-    </SwimLane>
-    <SwimLane>
-      <color>71B9B9</color>
-      <height>323</height>
-      <width>1781</width>
-      <positionX>0</positionX>
-      <positionY>714</positionY>
-      <stateName>Aprovações</stateName>
-      <type>2</type>
-      <parentSequence>0</parentSequence>
-      <swimLanePK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>1</version>
-        <sequence>3</sequence>
-      </swimLanePK>
-    </SwimLane>
-    <SwimLane>
       <color>F1F8F8</color>
       <height>184</height>
       <width>1781</width>
@@ -2971,7 +2962,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <version>1</version>
-        <sequence>4</sequence>
+        <sequence>2</sequence>
       </swimLanePK>
     </SwimLane>
     <SwimLane>
@@ -2981,6 +2972,38 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <positionX>0</positionX>
       <positionY>570</positionY>
       <stateName>APROVAÇÃO OBRA</stateName>
+      <type>2</type>
+      <parentSequence>0</parentSequence>
+      <swimLanePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <sequence>3</sequence>
+      </swimLanePK>
+    </SwimLane>
+    <SwimLane>
+      <color>A8D5D5</color>
+      <height>171</height>
+      <width>1781</width>
+      <positionX>0</positionX>
+      <positionY>400</positionY>
+      <stateName>CONTROLADORIA</stateName>
+      <type>2</type>
+      <parentSequence>0</parentSequence>
+      <swimLanePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <sequence>4</sequence>
+      </swimLanePK>
+    </SwimLane>
+    <SwimLane>
+      <color>71B9B9</color>
+      <height>323</height>
+      <width>1781</width>
+      <positionX>0</positionX>
+      <positionY>714</positionY>
+      <stateName>Aprovações</stateName>
       <type>2</type>
       <parentSequence>0</parentSequence>
       <swimLanePK>
@@ -2998,29 +3021,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>39</linkSequence>
-        <bendSequence>1</bendSequence>
-      </processLinkBendPK>
-      <positionX>476</positionX>
-      <positionY>37</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>39</linkSequence>
-        <bendSequence>2</bendSequence>
-      </processLinkBendPK>
-      <positionX>408</positionX>
-      <positionY>37</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>36</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3031,7 +3032,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>36</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3042,7 +3043,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>36</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3053,194 +3054,29 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>78</linkSequence>
+        <version>72</version>
+        <linkSequence>39</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>754</positionX>
-      <positionY>908</positionY>
+      <positionX>476</positionX>
+      <positionY>37</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>78</linkSequence>
+        <version>72</version>
+        <linkSequence>39</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>196</positionX>
-      <positionY>908</positionY>
+      <positionX>408</positionX>
+      <positionY>37</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>78</linkSequence>
-        <bendSequence>3</bendSequence>
-      </processLinkBendPK>
-      <positionX>197</positionX>
-      <positionY>36</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>79</linkSequence>
-        <bendSequence>1</bendSequence>
-      </processLinkBendPK>
-      <positionX>754</positionX>
-      <positionY>908</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>79</linkSequence>
-        <bendSequence>2</bendSequence>
-      </processLinkBendPK>
-      <positionX>478</positionX>
-      <positionY>908</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>80</linkSequence>
-        <bendSequence>1</bendSequence>
-      </processLinkBendPK>
-      <positionX>810</positionX>
-      <positionY>576</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>80</linkSequence>
-        <bendSequence>2</bendSequence>
-      </processLinkBendPK>
-      <positionX>1315</positionX>
-      <positionY>576</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>81</linkSequence>
-        <bendSequence>1</bendSequence>
-      </processLinkBendPK>
-      <positionX>809</positionX>
-      <positionY>576</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>81</linkSequence>
-        <bendSequence>2</bendSequence>
-      </processLinkBendPK>
-      <positionX>1138</positionX>
-      <positionY>576</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>82</linkSequence>
-        <bendSequence>1</bendSequence>
-      </processLinkBendPK>
-      <positionX>1345</positionX>
-      <positionY>908</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>82</linkSequence>
-        <bendSequence>2</bendSequence>
-      </processLinkBendPK>
-      <positionX>478</positionX>
-      <positionY>908</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>85</linkSequence>
-        <bendSequence>1</bendSequence>
-      </processLinkBendPK>
-      <positionX>1344</positionX>
-      <positionY>908</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>85</linkSequence>
-        <bendSequence>2</bendSequence>
-      </processLinkBendPK>
-      <positionX>618</positionX>
-      <positionY>908</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>86</linkSequence>
-        <bendSequence>1</bendSequence>
-      </processLinkBendPK>
-      <positionX>1344</positionX>
-      <positionY>908</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>86</linkSequence>
-        <bendSequence>2</bendSequence>
-      </processLinkBendPK>
-      <positionX>198</positionX>
-      <positionY>908</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>86</linkSequence>
-        <bendSequence>3</bendSequence>
-      </processLinkBendPK>
-      <positionX>198</positionX>
-      <positionY>36</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
-        <linkSequence>73</linkSequence>
-        <bendSequence>1</bendSequence>
-      </processLinkBendPK>
-      <positionX>1468</positionX>
-      <positionY>94</positionY>
-    </ProcessLinkBend>
-    <ProcessLinkBend>
-      <processLinkBendPK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>71</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3251,7 +3087,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>71</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3262,7 +3098,194 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
+        <linkSequence>73</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>1468</positionX>
+      <positionY>94</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>78</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>754</positionX>
+      <positionY>908</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>78</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>196</positionX>
+      <positionY>908</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>78</linkSequence>
+        <bendSequence>3</bendSequence>
+      </processLinkBendPK>
+      <positionX>197</positionX>
+      <positionY>36</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>79</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>754</positionX>
+      <positionY>908</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>79</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>478</positionX>
+      <positionY>908</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>80</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>810</positionX>
+      <positionY>576</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>80</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>1315</positionX>
+      <positionY>576</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>81</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>809</positionX>
+      <positionY>576</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>81</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>1138</positionX>
+      <positionY>576</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>82</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>1345</positionX>
+      <positionY>908</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>82</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>478</positionX>
+      <positionY>908</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>85</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>1344</positionX>
+      <positionY>908</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>85</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>618</positionX>
+      <positionY>908</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>86</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>1344</positionX>
+      <positionY>908</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>86</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>198</positionX>
+      <positionY>908</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
+        <linkSequence>86</linkSequence>
+        <bendSequence>3</bendSequence>
+      </processLinkBendPK>
+      <positionX>198</positionX>
+      <positionY>36</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>72</version>
         <linkSequence>87</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3273,7 +3296,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>87</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3284,7 +3307,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>87</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3295,7 +3318,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>91</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3306,7 +3329,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>91</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3317,7 +3340,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>91</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3328,7 +3351,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>92</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3339,7 +3362,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>92</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3350,7 +3373,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>92</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3361,7 +3384,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>93</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3372,7 +3395,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>93</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3383,7 +3406,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>94</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3394,7 +3417,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>94</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3405,7 +3428,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>94</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3416,7 +3439,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>95</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3427,7 +3450,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>95</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3438,7 +3461,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <linkSequence>95</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3451,7 +3474,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>66</version>
+        <version>72</version>
         <stateSequence>58</stateSequence>
         <triggerSequence>0</triggerSequence>
       </processStateTriggerPK>
