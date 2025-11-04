@@ -4,3 +4,4 @@
 com.totvs.tds.ecm.dataservers
 *.cache
 *.bkp
+.vscode/servers.json
