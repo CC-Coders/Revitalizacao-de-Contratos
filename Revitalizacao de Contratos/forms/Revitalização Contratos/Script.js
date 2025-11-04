@@ -88,18 +88,11 @@ function bindings() {
     });
     $("#tipoDocumentacao").on("change", function () {
         const tipo = $(this).val();
-        const divAnexo = document.getElementById("divAnexo");
-        const labelAnexo = document.getElementById("labelAnexo");
         const inputAnexo = document.getElementById("inputAnexo");
 
         if (tipo) {
-            labelAnexo.textContent = `Anexo: ${tipo}`;
             inputAnexo.value = "";
-            divAnexo.style.opacity = "1";
-            divAnexo.style.visibility = "visible";
         } else {
-            divAnexo.style.opacity = "0";
-            divAnexo.style.visibility = "hidden";
         }
     });
 
@@ -204,6 +197,11 @@ function bindings() {
         }
 
     });
+
+    // Anexos
+    $("#btnAnexarDocumento").on("click", function(){$("#inputAnexo").click()});
+    $("#inputAnexo").on("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
+    
 
     // Decrição Atividades
     // $(".wizard-progress>.step").hover(mostraDescricaoDaAtividade, ()=>{$("#divDescricaoAtividades").hide()});

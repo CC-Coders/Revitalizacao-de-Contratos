@@ -885,15 +885,13 @@
                                     <div class="row" id="rowAnexosSelecao">
                                         <div class="col-md-6">
                                             <label for="tipoDocumentacao">Documentação:</label>
-                                            <select name="tipoDocumentacao" id="tipoDocumentacao" class="form-control">
-                                                <option value="">Selecione um Locador</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-6" id="divAnexo"
-                                            style="opacity: 0; visibility: hidden; transition: all 0.3s">
-                                            <label id="labelAnexo" for="inputAnexo">Anexo:</label>
-                                            <input type="file" id="inputAnexo" name="anexoGenerico" class="form-control" />
+                                            <div style="display: flex;">
+                                                <select name="tipoDocumentacao" id="tipoDocumentacao" class="form-control">
+                                                    <option value="">Selecione um Locador</option>
+                                                </select>
+                                                <button class="btn btn-primary" id="btnAnexarDocumento">Anexar</button>
+                                                <input type="file" id="inputAnexo" name="anexoGenerico" style="display: none;" />
+                                            </div>
                                         </div>
                                     </div>
 

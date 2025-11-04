@@ -12,6 +12,7 @@ function onChangeTipoContrato() {
         $(".campoLocacaoEquipamento").show();
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
+        anexosPorTipoDeContrato($(this).val());
     }
     else {
         $("#dadosContrato").hide();
