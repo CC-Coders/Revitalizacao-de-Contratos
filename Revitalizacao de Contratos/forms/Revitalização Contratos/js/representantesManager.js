@@ -50,15 +50,15 @@ function promiseBuscaCadastroDeAssinantePorNome(nome) {
 
 
 function preencheInformacoesAprovacao() {
-    $("#spanNomeRepresentanteCastilho").text($("#nomeRepresentanteCastilho").val());
-    $("#spanCpfRepresentanteCastilho").text($("#cpfRepresentanteCastilho").val());
-    $("#spanMailRepresentanteCastilho").text($("#mailRepresentanteCastilho").val());
+    $("#spanNomeRepresentanteCastilho").text($("#nomeRepresentanteCastilho").val() ? $("#nomeRepresentanteCastilho").val():$("#nomeRepresentanteCastilho").text());
+    $("#spanCpfRepresentanteCastilho").text($("#cpfRepresentanteCastilho").val() ? $("#cpfRepresentanteCastilho").val():$("#cpfRepresentanteCastilho").text());
+    $("#spanMailRepresentanteCastilho").text($("#mailRepresentanteCastilho").val() ? $("#mailRepresentanteCastilho").val():$("#mailRepresentanteCastilho").text());
 
-    $("#spanNomeRepresentanteFornecedor").text($("#nomeRepresentanteFornecedor").val());
-    $("#spanCpfRepresentanteFornecedor").text($("#cpfRepresentanteFornecedor").val());
-    $("#spanMailRepresentanteFornecedor").text($("#mailRepresentanteFornecedor").val());
+    $("#spanNomeRepresentanteFornecedor").text($("#nomeRepresentanteFornecedor").val()?$("#nomeRepresentanteFornecedor").val():$("#nomeRepresentanteFornecedor").text());
+    $("#spanCpfRepresentanteFornecedor").text($("#cpfRepresentanteFornecedor").val()?$("#cpfRepresentanteFornecedor").val():$("#cpfRepresentanteFornecedor").text());
+    $("#spanMailRepresentanteFornecedor").text($("#mailRepresentanteFornecedor").val()?$("#mailRepresentanteFornecedor").val():$("#mailRepresentanteFornecedor").text());
 
-    $("#spanAssinaturaContrato").text($("#assinaturaContrato").val());
+    $("#spanAssinaturaContrato").text($("#assinaturaContrato").val()?$("#assinaturaContrato").val():$("#assinaturaContrato").text());
 
     $("#assinaturaContrato").hide();
 }
