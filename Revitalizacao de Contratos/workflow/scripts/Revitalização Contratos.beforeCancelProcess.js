@@ -13,11 +13,22 @@ function resetaStatusDosEquipamentosParaPendenteContrato(){
             var id = indexes[i];
             var PREFIXO = hAPI.getCardValue("equipamentoSelecionadoPrefixo" + "___" + id);
 
-            var query = "";
-            query += "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET STATUS = 1 WHERE PREFIXO = ?";
-            executaUpdate(query,[
-                {type:"varchar", value:PREFIXO}
-            ], "/jdbc/CastilhoCustom");
+            var isMAouOutros = buscaCategoriaPorPrefixo(PREFIXO);
+            if (isMAouOutros[0].CATEGORIA != "Outros") {
+                var query = "";
+                query += "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET STATUS = 1 WHERE PREFIXO = ?";
+                executaUpdate(query,[
+                    {type:"varchar", value:PREFIXO}
+                ], "/jdbc/CastilhoCustom");
+            }
+            else{
+                var query = "";
+                query += "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR_OUTROS SET STATUS = 1 WHERE PREFIXO = ?";
+                executaUpdate(query,[
+                    {type:"varchar", value:PREFIXO}
+                ], "/jdbc/CastilhoCustom");
+            }
+
         }
     } catch (error) {
         throw error;    

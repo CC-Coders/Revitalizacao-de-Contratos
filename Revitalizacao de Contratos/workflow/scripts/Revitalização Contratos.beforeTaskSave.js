@@ -623,20 +623,44 @@ function atualizaStatusEquipamento(status){
             var id = indexes[i]
             var prefixo = hAPI.getCardValue("equipamentoSelecionadoPrefixo" + "___" + id);
 
-            var query = "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET ";
-            query += "STATUS = ? ";
-            query +="WHERE PREFIXO = ?";
+            var isMAouOutros = buscaCategoriaPorPrefixo(prefixo);
+            if (isMAouOutros[0].CATEGORIA != "Outros") {
+                var query = "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET ";
+                query += "STATUS = ? ";
+                query +="WHERE PREFIXO = ?";
 
-            executeInsert(query, [
-                {type:"int", value:codigoStatusEquipamentos[status]},
-                {type:"varchar", value:prefixo},
-            ], "/jdbc/CastilhoCustom");
+                executeInsert(query, [
+                    {type:"int", value:codigoStatusEquipamentos[status]},
+                    {type:"varchar", value:prefixo},
+                ], "/jdbc/CastilhoCustom");
+            }else{
+                var query = "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR_OUTROS SET ";
+                query += "STATUS = ? ";
+                query +="WHERE PREFIXO = ?";
+
+                executeInsert(query, [
+                    {type:"int", value:codigoStatusEquipamentos[status]},
+                    {type:"varchar", value:prefixo},
+                ], "/jdbc/CastilhoCustom");
+            }
         }
     } catch (error) {
         throw error;
     }
 }
 
+function buscaCategoriaPorPrefixo(PREFIXO){
+    try {
+        var query = "SELECT CATEGORIA FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE PREFIXO = ?";
+        var retorno = executaQuery(query, [
+            {type:"varchar", value:PREFIXO}
+        ], "/jdbc/CastilhoCustom");
+
+        return retorno;
+    } catch (error) {
+        throw error;
+    }
+}
 
 
 // Assinatura Eletrônica
