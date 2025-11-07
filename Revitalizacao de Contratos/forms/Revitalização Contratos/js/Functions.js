@@ -332,9 +332,9 @@ function carregaDadosDoContratoParaTelaAprovacao() {
     $("#divTextDadosContrato").show();
     $(".campoAprovacaoLocacaoImovel, .campoAprovacaoLocacaoEquipamento").hide();
 
-    $("#aprovacaoTextTipoContrato").text($("#tipoContrato").val());
-    $("#aprovacaoTextModeloContrato").text($("#modeloContrato").val());
-    $("#aprovacaoTextOrigemContrato").text($("#origemContrato").val());
+    $("#aprovacaoTextTipoContrato").text($("#tipoContrato").val() ? $("#tipoContrato").val():$("#tipoContrato").text());
+    $("#aprovacaoTextModeloContrato").text($("#modeloContrato").val() ? $("#modeloContrato").val():$("#modeloContrato").text());
+    $("#aprovacaoTextOrigemContrato").text($("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text());
 
 
     const tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val() : $("#tipoContrato").text();
@@ -402,12 +402,12 @@ function carregaDadosDoContratoParaTelaAprovacao() {
 
         var janelaPagamento = $("#janelaPagamento").val() ? $("#janelaPagamento").val() : $("#janelaPagamento").text();
 
-        var valorTotalLocacao = $("#valorTotalLocacao").val();
-        var indiceReajuste = $("#indiceReajuste").val();
-        var temRetencao = $("#temRetencao").val();
-        var percentualRetencao = $("#percentualRetencao").val();
-        var temREIDI = $("#temREIDI").val();
-        var percentualREIDI = $("#percentualREIDI").val();
+        var valorTotalLocacao = $("#valorTotalLocacao").val() ? $("#valorTotalLocacao").val():$("#valorTotalLocacao").text();
+        var indiceReajuste = $("#indiceReajuste").val() ? $("#indiceReajuste").val():$("#indiceReajuste").text();
+        var temRetencao = $("#temRetencao").val() ? $("#temRetencao").val():$("#temRetencao").text();
+        var percentualRetencao = $("#percentualRetencao").val() ? $("#percentualRetencao").val():$("#percentualRetencao").text();
+        var temREIDI = $("#temREIDI").val() ? $("#temREIDI").val():$("#temREIDI").text();
+        var percentualREIDI = $("#percentualREIDI").val() ? $("#percentualREIDI").val():$("#percentualREIDI").text();
 
 
         $("#aprovacaoTextObra").text(obra);
@@ -520,7 +520,7 @@ function avancarPagina() {
 }
 function voltarPagina() {
     var active = $(".pagination-active");
-    var index = $(active).prevAll(".pagination:not('.hidden'):first").attr("data-index");
+    var index = $(active).prevAll(".pagination:not('.hidden')").attr("data-index");
     if (index) {
         mostrarPagina(index, "prev");
     }
