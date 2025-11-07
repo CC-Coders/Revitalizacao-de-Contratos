@@ -130,7 +130,11 @@ function initDataTableEquipamentos(){
                 data: "VALOR_LOCACAO",
                 className: "dt-left",
                 render: function (data, type, row) {
-                    var total = parseFloat(row.VALOR_LOCACAO) + parseFloat(row.MAODEOBRA);
+                    var total = parseFloat(row.VALOR_LOCACAO);
+                    if (row.MAODEOBRA && row.MAODEOBRA != "null") {
+                        total+= parseFloat(row.MAODEOBRA);
+                    }
+
                     return floatToMoney(total);
                 },
             },
@@ -496,7 +500,9 @@ function atualizaValorTotalLocacao(){
             var data = row.data();
             console.log(data)
             valorTotalMensal += parseFloat(data.VALOR_LOCACAO);
-            valorTotalMensal += parseFloat(data.MAODEOBRA);
+            if (data.MAODEOBRA && data.MAODEOBRA != "null") {
+                valorTotalMensal += parseFloat(data.MAODEOBRA);
+            }
         }
     });
     console.log(valorTotalMensal);
@@ -597,7 +603,7 @@ async function geraEquipamentosSelecionados(){
                             <div class="col-md-12">
                                 <h2 style="display: flex; justify-content: space-between; margin-top:0px; margin-bottom:0px;">
                                     <span>${equipamento.DESCRICAO.toUpperCase()}</span>  
-                                    <span style="color: var(--yellow-castilho) !important;">${floatToMoney(parseFloat(equipamento.VALOR_LOCACAO) + parseFloat(equipamento.MAODEOBRA))}</span>
+                                    <span style="color: var(--yellow-castilho) !important;">${floatToMoney(parseFloat(equipamento.VALOR_LOCACAO) + (equipamento.MAODEOBRA && equipamento.MAODEOBRA != "null" ?  parseFloat(equipamento.MAODEOBRA) : 0) )}</span>
                                 </h2>
                             </div>   
                         </div>
@@ -645,22 +651,25 @@ async function geraEquipamentosSelecionados(){
                                 <span>${equipamento.COMBUSTIVEL}</span>
                             </div>
                             <div class="col-md-3">
-                                <label>${equipamento.caracteristicaTecnica[0]?.DESCRICAO}:</label><br>
-                                <span>${equipamento.caracteristicaTecnica[0]?.VALOR} ${equipamento.caracteristicaTecnica[0]?.SIGLA}</span>
+                                <label>${equipamento.caracteristicaTecnica?[0]?.DESCRICAO : ""}:</label><br>
+                                <span>${equipamento.caracteristicaTecnica?[0]?.VALOR : ""} ${equipamento.caracteristicaTecnica?[0]?.SIGLA : ""}</span>
                             </div>
                         </div>
                         <br>
                         <hr>
                         <h3>Valores:</h3>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col?-md-3">
                                 <label>Valor Locação:</label><br>
                                 <span>${floatToMoney(equipamento.VALOR_LOCACAO)}</span>
                             </div>
-                            <div class="col-md-3">
-                                <label>Valor Mão de Obra:</label><br>
-                                <span>${floatToMoney(equipamento.MAODEOBRA)}</span>
-                            </div>
+                            ${
+                                (equipamento.MAODEOBRA && equipamento.MAODEOBRA != "null") ?
+                                `<div class="col-md-3">
+                                    <label>Valor Mão de Obra:</label><br>
+                                    <span>${floatToMoney(equipamento.MAODEOBRA)}</span>
+                                </div>` : ""
+                            }
                         </div>
                         <hr>
                         <div style="text-align:center;">
@@ -748,7 +757,9 @@ async function asyncConsultaEquipamentosSelecionados() {
     var retorno = [];
     for (const prefixo of prefixos) {
         var equipamento = await promiseConsultaEquipamento(prefixo);
-        equipamento.caracteristicaTecnica = await promiseConsultaCaracteristicaTecnicaEquipamento(equipamento.IDEQUI);
+        if (equipamento.IDEQUI && equipamento.IDEQUI != "null") {
+            equipamento.caracteristicaTecnica = await promiseConsultaCaracteristicaTecnicaEquipamento(equipamento.IDEQUI);
+        }
         retorno.push(equipamento);
     }
 
