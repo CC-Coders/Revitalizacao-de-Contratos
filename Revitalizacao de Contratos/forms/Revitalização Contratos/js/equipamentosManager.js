@@ -776,6 +776,15 @@ async function htmlNovoAnexo(documentId, documentName) {
     return html;
 }
 
+function geraCabecalhoEquipamentos(){
+    $("#divHearderEquipamentos").show();
+    $("#obraHeaderEquipamentos").val($("#NOMECCUSTO").val() ?  $("#NOMECCUSTO").val() : $("#NOMECCUSTO").text());
+    $("#tipoContratoHeaderEquipamentos").val($("#tipoContrato").val() ?  $("#tipoContrato").val() : $("#tipoContrato").text());
+    $("#periodoHeaderEquipamentos").val($("#prazoLocacao").val() ?  $("#prazoLocacao").val() : $("#prazoLocacao").text());
+    $("#valorMensalHeaderEquipamentos").val($("#valorMensalLocacao").val() ?  $("#valorMensalLocacao").val() : $("#valorMensalLocacao").text());
+    $("#valorTotalHeaderEquipamentos").val($("#valorTotalLocacao").val() ?  $("#valorTotalLocacao").val() : $("#valorTotalLocacao").text());
+}
+
 
 
 
