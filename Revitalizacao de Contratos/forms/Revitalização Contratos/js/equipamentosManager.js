@@ -615,7 +615,10 @@ async function geraEquipamentosSelecionados(){
                                 ${equipamento.CLASSIFICACAO_BEM != null && equipamento.CLASSIFICACAO_BEM != "null" ? `<label>Avaliação do Bem: </label> <span style="margin-right:10px">${equipamento.CLASSIFICACAO_BEM}% ${equipamento.CLASSIFICACAO_BEM < 3 ? `<i class="animaliaicon animaliaicon-arrow-circle-up icon-sm" aria-hidden="true"></i>`:`<i class="animaliaicon animaliaicon-arrow-circle-down icon-sm" aria-hidden="true"></i>`}</span>`:""}                           
                             </div>
                             <div class="col-md-6" style="text-align: right;">
-                                <label>Valor do Equipamento: </label> <span>${equipamento.PREFIXO}</span>
+                                ${
+                                    (equipamento.VALOR_EQUIPAMENTO && equipamento.VALOR_EQUIPAMENTO != "null") ?
+                                        `<label>Valor do Equipamento: </label> <span>${floatToMoney(equipamento.VALOR_EQUIPAMENTO)}</span>`:""                                    
+                                }
                             </div>
                         </div>
                     </div>
