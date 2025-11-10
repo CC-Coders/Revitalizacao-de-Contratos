@@ -153,6 +153,8 @@ function bindings() {
         }
     });
 
+    $("#banco").selectize();
+
 
     $("#temRetencao").on("change", function () {
         if ($(this).val() == "Sim") {
@@ -220,8 +222,6 @@ function bindings() {
 function loadTelaInicio() {
     $(".panelAprovacao").hide();
     $(".panelInput").show();
-    $("#divRepresentantesContratoAprovacao").hide();
-    $("#divRepresentantesContrato").show();
     $("#divTipoAssinaturaContrato").show();
 
     $("#paginationIntegracaoRM").remove();
@@ -245,7 +245,6 @@ function loadTelaInicio() {
 
 function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
-    $("#divRepresentantesContrato").show();
     $("#divTipoAssinaturaContrato").show();
     $("#dadosContrato").show();
     $("#paginationIntegracaoRM").remove();
@@ -283,7 +282,7 @@ function loadTelaInicioRetorno() {
 
 function loadTelaJuridico() {
     $(".panelAprovacao").show();
-    $("#informacoesIniciais, #rowAnexosSelecao").hide();
+    $("#rowAnexosSelecao").hide();
     $("#formContainer").show();
     $("#divBtnEnviar").hide();
     $("#tableEquipamentos").hide();
@@ -291,15 +290,16 @@ function loadTelaJuridico() {
     geraCabecalhoEquipamentos();
     $("#divBotoesEdicaoContrato").show();
 
-    $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
+    onChangeTipoContrato($("#tipoContrato"));
+    bindings();
+    buscaBancos();
+    bloqueiaCamposAprovacao();
+
     setAtividadeAtivaProgresso(1);
-    carregaDadosDoContratoParaTelaAprovacao();
     asyncMontaHistorico();
     mostrarPagina("0");
     renderizarAnexosEtapaAprovacao();
 
-    $("#divRepresentantesContrato").hide();
-    preencheInformacoesAprovacao();
     $("#paginationIntegracaoRM").remove();
 
     if ($("#tipoContrato").val() == "Locação de Equipamento") {
@@ -310,24 +310,24 @@ function loadTelaJuridico() {
 
 function loadTelaControladoria() {
     $(".panelAprovacao").show();
-    $("#informacoesIniciais, #rowAnexosSelecao").hide();
+    $("#rowAnexosSelecao").hide();
     $("#formContainer").show();
     $("#divBtnEnviar").hide();
     bindingCamposIntegracaoRM();
     geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
+        onChangeTipoContrato($("#tipoContrato"));
+            buscaBancos();
 
+            
+            
+            setAtividadeAtivaProgresso(2);
+            asyncMontaHistorico();
+            mostrarPagina("0");
+            
+            renderizarAnexosEtapaAprovacao();
+            bloqueiaCamposAprovacao();
 
-    $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
-    setAtividadeAtivaProgresso(2);
-    carregaDadosDoContratoParaTelaAprovacao();
-    asyncMontaHistorico();
-    mostrarPagina("0");
-
-    renderizarAnexosEtapaAprovacao();
-
-    $("#divRepresentantesContrato").hide();
-    preencheInformacoesAprovacao();
 
     if ($("#tipoContrato").val() == "Locação de Equipamento") {
         $("#paginationEquipamentos").show();
@@ -337,19 +337,21 @@ function loadTelaControladoria() {
 
 function loadTelaAprovacao() {
     $(".panelAprovacao, #formContainer").show();
-    $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
+    $("#rowAnexosSelecao").hide();
     setAtividadeAtivaProgresso(3);
-    carregaDadosDoContratoParaTelaAprovacao();
-    asyncMontaHistorico();
-    mostrarPagina("0");
-    geraEquipamentosSelecionados();
-    geraCabecalhoEquipamentos();
-    renderizarAnexosEtapaAprovacao();
-    $("#paginationIntegracaoRM").remove();
-    $("#btnEditarArquivo").remove();
+    
+        onChangeTipoContrato($("#tipoContrato"));
+            buscaBancos();
 
-    $("#divRepresentantesContrato").hide();
-    preencheInformacoesAprovacao();
+            asyncMontaHistorico();
+            mostrarPagina("0");
+            geraEquipamentosSelecionados();
+            geraCabecalhoEquipamentos();
+            renderizarAnexosEtapaAprovacao();
+            $("#paginationIntegracaoRM").remove();
+            $("#btnEditarArquivo").remove();
+            bloqueiaCamposAprovacao();
+
 
     if ($("#tipoContrato").val() == "Locação de Equipamento") {
         $("#paginationEquipamentos").show();
@@ -359,10 +361,9 @@ function loadTelaAprovacao() {
 
 function loadTelaAssinaturaEletronica() {
 
-    $(".panelAprovacao, #formContainer").show();
-    $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes, #informacoesIniciais, #rowAnexosSelecao").hide();
+    $(".panelAprovacao, #formContainer, #dadosContrato").show();
+    $("#rowAnexosSelecao").hide();
     setAtividadeAtivaProgresso(4);
-    carregaDadosDoContratoParaTelaAprovacao();
     asyncMontaHistorico();
     mostrarPagina("0");
     geraEquipamentosSelecionados();
@@ -371,11 +372,11 @@ function loadTelaAssinaturaEletronica() {
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
 
-    $("#divRepresentantesContrato").hide();
-    preencheInformacoesAprovacao();
-
-    $("#divQuadroStatusAssinaturaEletronica").show();
-    asyncGeraQuadroStatusAssinatura();
+        onChangeTipoContrato($("#tipoContrato"));
+        
+        $("#divQuadroStatusAssinaturaEletronica").show();
+        asyncGeraQuadroStatusAssinatura();
+        bloqueiaCamposAprovacao();
 
     if ($("#tipoContrato").val() == "Locação de Equipamento") {
         $("#paginationEquipamentos").show();
