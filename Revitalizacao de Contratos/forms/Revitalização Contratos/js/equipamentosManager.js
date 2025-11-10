@@ -660,18 +660,50 @@ async function geraEquipamentosSelecionados(){
                         </div>
                         <br>
                         <hr>
-                        <h3>Valores:</h3>
+                        <h3>Análise Financeira:</h3>
                         <div class="row">
-                            <div class="col?-md-3">
+                            <div class="col-md-3">
                                 <label>Valor Locação:</label><br>
                                 <span>${floatToMoney(equipamento.VALOR_LOCACAO)}</span>
+                                <br><br>
                             </div>
                             ${
                                 (equipamento.MAODEOBRA && equipamento.MAODEOBRA != "null") ?
                                 `<div class="col-md-3">
                                     <label>Valor Mão de Obra:</label><br>
                                     <span>${floatToMoney(equipamento.MAODEOBRA)}</span>
+                                    <br><br>
                                 </div>` : ""
+                            }
+
+                            ${equipamento.STATUS == 7 ? 
+                                `<div class="col-md-3">
+                                    <label>Valor Fipe:</label><br>
+                                    <span>${floatToMoney(equipamento.VALOR_FIPE)}</span>
+                                    <br><br>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Valor Implemento:</label><br>
+                                    <span>${floatToMoney(equipamento.VALOR_IMPLEMENTO)}</span>
+                                    <br><br>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Valor Implemento Depreciado:</label><br>
+                                    <span>${floatToMoney(equipamento.VALOR_IMPLEMENTO)}</span>
+                                    <br><br>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Preço Equipamento:</label><br>
+                                    <span>${floatToMoney(equipamento.PRECO_EQUIPAMENTO)}</span>
+                                    <br><br>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Valor Final da Locação:</label><br>
+                                    <span>${floatToMoney((equipamento.VALOR_LOCACAO) * parseInt($("#prazoLocacao").val().split(" ")[0]))}</span>
+                                    <br><br>
+                                </div>
+
+                                `:""
                             }
                         </div>
                         <hr>
