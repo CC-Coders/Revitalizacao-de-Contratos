@@ -266,15 +266,15 @@ function buscaBancos() {
                 showMessage("Erro ao buscar Bancos: ", ds.values[0].MENSAGEM, "warning");
                 throw ds.values[0].MENSAGEM;
             }
+
             var bancos = JSON.parse(ds.values[0].RESULT);
             const selectBanco = $("#banco");
-            selectBanco.empty();
-            selectBanco.append('<option value="">Selecione um banco</option>');
-            bancos.forEach((banco) => {
-                selectBanco.append(`<option value="${banco.NUMBANCO} - ${banco.NOME}">${banco.NUMBANCO} - ${banco.NOME}</option>`);
-            });
+            var value = $(selectBanco).val();
 
-            selectBanco.selectize();
+            $(selectBanco)[0].selectize.clearOptions();
+            $(selectBanco)[0].selectize.addOption(bancos.map(e=>{return {value:`${e.NUMBANCO} - ${e.NOME}`, text:`${e.NUMBANCO} - ${e.NOME}`}}));
+
+            selectBanco[0].selectize.setValue(value);
         },
         error: (e) => {
             console.error(e);
@@ -328,135 +328,7 @@ function inicializarPeriodoLocacao() {
     }
 }
 
-function carregaDadosDoContratoParaTelaAprovacao() {
-    $("#divTextDadosContrato").show();
-    $(".campoAprovacaoLocacaoImovel, .campoAprovacaoLocacaoEquipamento").hide();
 
-    $("#aprovacaoTextTipoContrato").text($("#tipoContrato").val() ? $("#tipoContrato").val():$("#tipoContrato").text());
-    $("#aprovacaoTextModeloContrato").text($("#modeloContrato").val() ? $("#modeloContrato").val():$("#modeloContrato").text());
-    $("#aprovacaoTextOrigemContrato").text($("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text());
-
-
-    const tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val() : $("#tipoContrato").text();
-    if (tipoContrato == "Locação de Equipamento") {
-        preencheDadosLocacaoDeEquipamento();
-    }else if(tipoContrato == "Locação de Imóvel"){
-        preencheDadosLocacaoDeImovel();
-    }
-
-    function preencheDadosLocacaoDeImovel(){
-        $(".campoAprovacaoLocacaoImovel").show();
-        var obra = $("#obra").val() ? $("#obra").val() : $("#obra").text();
-        var locador = $("#locador").val() ? $("#locador").val() : $("#locador").text();
-        var procurador = $("#procurador").val() ? $("#procurador").val() : $("#procurador").text();
-        var contratantePrincipal = $("#contratantePrincipal").val() ? $("#contratantePrincipal").val() : $("#contratantePrincipal").text();
-        var enderecoImovel = $("#enderecoImovel").val() ? $("#enderecoImovel").val() : $("#enderecoImovel").text();
-        var matriculaImovel = $("#matriculaImovel").val() ? $("#matriculaImovel").val() : $("#matriculaImovel").text();
-        var finalidade = $("#finalidadeLocacao").val() ? $("#finalidadeLocacao").val() : $("#finalidadeLocacao").text();
-        var periodo = $("#periodoLocacao").val() ? $("#periodoLocacao").val() : $("#periodoLocacao").text();
-        var janelaPagamento = $("#janelaPagamento").val() ? $("#janelaPagamento").val() : $("#janelaPagamento").text();
-        var caucao = $("#caucao").val() ? $("#caucao").val() : $("#caucao").text();
-        var valorCaucao = $("#valorCaucao").val() ? $("#valorCaucao").val() : $("#valorCaucao").text();
-        var dataCaucao = $("#dataPagamentoCaucao").val() ? $("#dataPagamentoCaucao").val() : $("#dataPagamentoCaucao").text();
-
-        $("#aprovacaoTextObra").text(obra);
-        $("#aprovacaoTextLocador").text(locador);
-        $("#aprovacaoTextProcurador").text(procurador);
-        $("#aprovacaoTextContratantePrincipal").text(contratantePrincipal);
-        $("#aprovacaoTextEnderecoImovel").text(enderecoImovel);
-        $("#aprovacaoTextMatriculaImovel").text(matriculaImovel);
-        $("#aprovacaoTextFinalidadeLocacao").text(finalidade);
-        $("#aprovacaoTextPeriodoLocacao").text(periodo);
-        $("#aprovacaoTextJanelaPagamento").text(janelaPagamento);
-        $("#aprovacaoTextCaucao").text(caucao);
-        if (caucao == "Sim") {
-            $("#aprovacaoTextCaucaoValor").text(valorCaucao);
-            $("#aprovacaoTextCaucaoData").text(dataCaucao);
-        } else {
-            $(".camposComCaucao").hide();
-        }
-
-        var tipoPagamento = $("#tipoPagamento").val() ? $("#tipoPagamento").val() : $("#tipoPagamento").text();
-        var banco = $("#banco").val() ? $("#banco").val() : $("#banco").text();
-        var titular = $("#titular").val() ? $("#titular").val() : $("#titular").text();
-        var agencia = $("#agencia").val() ? $("#agencia").val() : $("#agencia").text();
-        var contaCorrente = $("#contaCorrente").val() ? $("#contaCorrente").val() : $("#contaCorrente").text();
-
-        $("#aprovacaoTextTipoPagamento").text(tipoPagamento);
-        $("#aprovacaoTextBanco").text(banco);
-        $("#aprovacaoTextTitularConta").text(titular);
-        $("#aprovacaoTextAgencia").text(agencia);
-        $("#aprovacaoTextContaCorrente").text(contaCorrente);
-    }
-
-    function preencheDadosLocacaoDeEquipamento(){
-        $(".campoAprovacaoLocacaoEquipamento").show();
-        var obra = $("#obra").val() ? $("#obra").val() : $("#obra").text();
-        var locador = $("#locador").val() ? $("#locador").val() : $("#locador").text();
-        var procurador = $("#procurador").val() ? $("#procurador").val() : $("#procurador").text();
-        var contratantePrincipal = $("#contratantePrincipal").val() ? $("#contratantePrincipal").val() : $("#contratantePrincipal").text();
-
-        var periodoInicio = $("#dataInicioLocacao").val() ? $("#dataInicioLocacao").val() : $("#dataInicioLocacao").text();
-        var periodoFIm = $("#dataFimLocacao").val() ? $("#dataFimLocacao").val() : $("#dataFimLocacao").text();
-
-
-        var janelaPagamento = $("#janelaPagamento").val() ? $("#janelaPagamento").val() : $("#janelaPagamento").text();
-
-        var valorTotalLocacao = $("#valorTotalLocacao").val() ? $("#valorTotalLocacao").val():$("#valorTotalLocacao").text();
-        var indiceReajuste = $("#indiceReajuste").val() ? $("#indiceReajuste").val():$("#indiceReajuste").text();
-        var temRetencao = $("#temRetencao").val() ? $("#temRetencao").val():$("#temRetencao").text();
-        var percentualRetencao = $("#percentualRetencao").val() ? $("#percentualRetencao").val():$("#percentualRetencao").text();
-        var temREIDI = $("#temREIDI").val() ? $("#temREIDI").val():$("#temREIDI").text();
-        var percentualREIDI = $("#percentualREIDI").val() ? $("#percentualREIDI").val():$("#percentualREIDI").text();
-
-
-        $("#aprovacaoTextObra").text(obra);
-        $("#aprovacaoTextLocador").text(locador);
-        $("#aprovacaoTextProcurador").text(procurador);
-        $("#aprovacaoTextContratantePrincipal").text(contratantePrincipal);
-        
-        $("#aprovacaoTextPeriodoLocacao").text(`${periodoInicio} até ${periodoFIm}`);
-        $("#aprovacaoTextJanelaPagamento").text(janelaPagamento);
-        
-        
-        $("#aprovacaoTextValorTotalLocacao").text(valorTotalLocacao);
-        $("#aprovacaoTextIndiceReajuste").text(indiceReajuste);
-        $("#aprovacaoTextTemRetencao").text(temRetencao);
-        if (temRetencao == "Sim") {
-            $("#aprovacaoTextPercentualRetencao").text(percentualRetencao);
-        }else{
-            $("#aprovacaoTextPercentualRetencao").closest("div.row").hide();
-        }
-
-
-        $("#aprovacaoTextTemREIDI").text(temREIDI);
-        if (temREIDI == "Sim") {
-            $("#aprovacaoTextPercentualREIDI").text(percentualREIDI + "%");
-        }else{
-            $("#aprovacaoTextPercentualREIDI").closest("div.row").hide();
-        }
-
-
-
-
-        var tipoPagamento = $("#tipoPagamento").val() ? $("#tipoPagamento").val() : $("#tipoPagamento").text();
-        var banco = $("#banco").val() ? $("#banco").val() : $("#banco").text();
-        var titular = $("#titular").val() ? $("#titular").val() : $("#titular").text();
-        var agencia = $("#agencia").val() ? $("#agencia").val() : $("#agencia").text();
-        var contaCorrente = $("#contaCorrente").val() ? $("#contaCorrente").val() : $("#contaCorrente").text();
-
-        $("#aprovacaoTextTipoPagamento").text(tipoPagamento);
-        $("#aprovacaoTextBanco").text(banco);
-
-        if (tipoPagamento == "Boleto") {
-            $(".campoPagamentoDeposito").hide()
-        }else{
-            $("#aprovacaoTextTitularConta").text(titular);
-            $("#aprovacaoTextAgencia").text(agencia);
-            $("#aprovacaoTextContaCorrente").text(contaCorrente);
-        }
-    }
-}
 
 function setAtividadeAtivaProgresso(atividadesConcluidas) {
     var counter = 0;
@@ -888,4 +760,36 @@ function obraPermiteReidi(CODCOLIGADA, CODCCUSTO){
     else{
         return false;
     }
+}
+
+function bloqueiaCamposAprovacao(){
+    $("#origemContrato").attr("readonly","readonly");
+    $("#modeloContrato").attr("readonly","readonly");
+    $("#tipoContrato").attr("readonly","readonly");
+    
+    $("#obra")[0].selectize.lock();
+    $("#locador")[0].selectize.lock();
+    $("#procurador").attr("readonly","readonly");
+    $("#contratantePrincipal").attr("readonly","readonly");
+    
+    $("#dataInicioLocacao").attr("readonly","readonly");
+    $("#dataFimLocacao").attr("readonly","readonly");
+    $("#indiceReajuste").attr("readonly","readonly");
+    $("#temRetencao").attr("readonly","readonly");
+    $("#percentualRetencao").attr("readonly","readonly");
+    $("#temREIDI").attr("readonly","readonly");
+    $("#percentualREIDI").attr("readonly","readonly");
+
+    $("#tipoPagamento").attr("readonly","readonly");
+    $("#banco")[0].selectize.lock();
+    $("#titular").attr("readonly","readonly");
+    $("#agencia").attr("readonly","readonly");
+    $("#contaCorrente").attr("readonly","readonly");
+    
+    
+    $("#nomeRepresentanteFornecedor").attr("readonly","readonly");
+    $("#cpfRepresentanteFornecedor").attr("readonly","readonly");
+    $("#mailRepresentanteFornecedor").attr("readonly","readonly");
+    $("#assinaturaContrato").attr("readonly","readonly");
+    
 }

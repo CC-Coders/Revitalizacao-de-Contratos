@@ -777,7 +777,7 @@ async function htmlNovoAnexo(documentId, documentName) {
 }
 
 function geraCabecalhoEquipamentos(){
-    $("#divHearderEquipamentos").show();
+    $("#divHeaderEquipamentos").show();
     $("#obraHeaderEquipamentos").val($("#NOMECCUSTO").val() ?  $("#NOMECCUSTO").val() : $("#NOMECCUSTO").text());
     $("#tipoContratoHeaderEquipamentos").val($("#tipoContrato").val() ?  $("#tipoContrato").val() : $("#tipoContrato").text());
     $("#periodoHeaderEquipamentos").val($("#prazoLocacao").val() ?  $("#prazoLocacao").val() : $("#prazoLocacao").text());

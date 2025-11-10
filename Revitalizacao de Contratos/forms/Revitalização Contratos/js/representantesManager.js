@@ -49,20 +49,6 @@ function promiseBuscaCadastroDeAssinantePorNome(nome) {
 }
 
 
-function preencheInformacoesAprovacao() {
-    $("#spanNomeRepresentanteCastilho").text($("#nomeRepresentanteCastilho").val() ? $("#nomeRepresentanteCastilho").val():$("#nomeRepresentanteCastilho").text());
-    $("#spanCpfRepresentanteCastilho").text($("#cpfRepresentanteCastilho").val() ? $("#cpfRepresentanteCastilho").val():$("#cpfRepresentanteCastilho").text());
-    $("#spanMailRepresentanteCastilho").text($("#mailRepresentanteCastilho").val() ? $("#mailRepresentanteCastilho").val():$("#mailRepresentanteCastilho").text());
-
-    $("#spanNomeRepresentanteFornecedor").text($("#nomeRepresentanteFornecedor").val()?$("#nomeRepresentanteFornecedor").val():$("#nomeRepresentanteFornecedor").text());
-    $("#spanCpfRepresentanteFornecedor").text($("#cpfRepresentanteFornecedor").val()?$("#cpfRepresentanteFornecedor").val():$("#cpfRepresentanteFornecedor").text());
-    $("#spanMailRepresentanteFornecedor").text($("#mailRepresentanteFornecedor").val()?$("#mailRepresentanteFornecedor").val():$("#mailRepresentanteFornecedor").text());
-
-    $("#spanAssinaturaContrato").text($("#assinaturaContrato").val()?$("#assinaturaContrato").val():$("#assinaturaContrato").text());
-
-    $("#assinaturaContrato").hide();
-}
-
 function hex2a(e) {
     for (var t = String(e), a = "", i = 0; i < t.length && "00" !== t.substr(i, 2); i += 2) a += String.fromCharCode(parseInt(t.substr(i, 2), 16));
     return a;
