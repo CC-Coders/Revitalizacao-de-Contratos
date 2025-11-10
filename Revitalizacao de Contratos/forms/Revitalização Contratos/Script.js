@@ -288,6 +288,7 @@ function loadTelaJuridico() {
     $("#divBtnEnviar").hide();
     $("#tableEquipamentos").hide();
     geraEquipamentosSelecionados();
+    geraCabecalhoEquipamentos();
     $("#divBotoesEdicaoContrato").show();
 
     $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
@@ -314,6 +315,7 @@ function loadTelaControladoria() {
     $("#divBtnEnviar").hide();
     bindingCamposIntegracaoRM();
     geraEquipamentosSelecionados();
+    geraCabecalhoEquipamentos();
 
 
     $("#panelDadosPagamento, #panelDadosGerais, #painelObservacoes").hide();
@@ -341,6 +343,7 @@ function loadTelaAprovacao() {
     asyncMontaHistorico();
     mostrarPagina("0");
     geraEquipamentosSelecionados();
+    geraCabecalhoEquipamentos();
     renderizarAnexosEtapaAprovacao();
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
@@ -363,6 +366,7 @@ function loadTelaAssinaturaEletronica() {
     asyncMontaHistorico();
     mostrarPagina("0");
     geraEquipamentosSelecionados();
+    geraCabecalhoEquipamentos();
     renderizarAnexosEtapaAprovacao();
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
