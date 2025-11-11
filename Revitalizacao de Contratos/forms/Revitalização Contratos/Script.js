@@ -107,6 +107,14 @@ function bindings() {
     });
 
     // Aba Dados Gerais
+
+    $("#modeloContrato").on("change", function(){
+        if ($(this).val() == "Contrato fora do modelo") {
+            $("#btnAnexarContrato").show();
+        }else{
+            $("#btnAnexarContrato").hide();
+        }
+    }); 
     $("#tipoContrato").on("change", ()=> onChangeTipoContrato($("#tipoContrato")));
     $("#caucao").on("change", function () {
         if ($(this).val() == "Sim") {
@@ -171,6 +179,18 @@ function bindings() {
         }
     });
 
+    $("#btnAnexarContrato").on("click", function(){
+        $("#inputFileAnexarContrato").click();
+    }); 
+    $("#inputFileAnexarContrato").on("change",async function(){
+        if ($(this)[0].files.length>0) {
+            $("#nomeAnexoContrato").text("Carregando...");
+            var docId = await criaDocFluigRetornaDocumentId($(this)[0].files[0], 18386);
+            $("#contratoDocumentId").val(docId);
+            $("#nomeAnexoContrato").text($(this)[0].files[0].name);
+            $("#nomeAnexoContrato").attr("href",await promiseBuscaDownloadUrlDocumentoNoFLuig(docId));
+        }
+    });
 
     // Aba Assinatura
     $("#assinaturaContrato").on("change", () => onchangeTipoAssinaturaContrato())
@@ -291,7 +311,6 @@ function loadTelaJuridico() {
     $("#divBotoesEdicaoContrato").show();
 
     onChangeTipoContrato($("#tipoContrato"));
-    bindings();
     buscaBancos();
     bloqueiaCamposAprovacao();
 
@@ -301,6 +320,11 @@ function loadTelaJuridico() {
     renderizarAnexosEtapaAprovacao();
 
     $("#paginationIntegracaoRM").remove();
+
+    if($("#modeloContrato").val() == "Contrato fora do modelo"){
+        $("#btnEditarArquivo").hide();
+        $("#btnVisualizarPreContrato").hide();
+    }
 
     if ($("#tipoContrato").val() == "Locação de Equipamento") {
         $("#paginationEquipamentos").show();
@@ -331,6 +355,11 @@ function loadTelaControladoria() {
             renderizarAnexosEtapaAprovacao();
             bloqueiaCamposAprovacao();
 
+    if($("#modeloContrato").val() == "Contrato fora do modelo"){
+        $("#btnEditarArquivo").hide();
+        $("#btnVisualizarPreContrato").hide();
+    }
+
 
     if ($("#tipoContrato").val() == "Locação de Equipamento") {
         $("#paginationEquipamentos").show();
@@ -359,6 +388,10 @@ $("#btnVisualizarPreContrato").hide();
             $("#btnEditarArquivo").remove();
             bloqueiaCamposAprovacao();
 
+    if($("#modeloContrato").val() == "Contrato fora do modelo"){
+        $("#btnEditarArquivo").hide();
+        $("#btnVisualizarPreContrato").hide();
+    }
 
     if ($("#tipoContrato").val() == "Locação de Equipamento") {
         $("#paginationEquipamentos").show();
@@ -379,10 +412,10 @@ function loadTelaAssinaturaEletronica() {
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
 
-
-    $("#divBotoesEdicaoContrato").show();
-$("#btnEditarArquivo").hide();
-$("#btnVisualizarPreContrato").hide();
+    if($("#modeloContrato").val() == "Contrato fora do modelo"){
+        $("#btnEditarArquivo").hide();
+        $("#btnVisualizarPreContrato").hide();
+    }
 
         onChangeTipoContrato($("#tipoContrato"));
         
