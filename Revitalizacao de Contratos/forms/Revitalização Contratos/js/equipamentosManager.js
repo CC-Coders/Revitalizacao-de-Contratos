@@ -654,8 +654,8 @@ async function geraEquipamentosSelecionados(){
                                 <span>${equipamento.COMBUSTIVEL}</span>
                             </div>
                             <div class="col-md-3">
-                                <label>${equipamento.caracteristicaTecnica?[0]?.DESCRICAO : ""}:</label><br>
-                                <span>${equipamento.caracteristicaTecnica?[0]?.VALOR : ""} ${equipamento.caracteristicaTecnica?[0]?.SIGLA : ""}</span>
+                                <label>${equipamento.caracteristicaTecnica[0].DESCRICAO ? equipamento.caracteristicaTecnica[0].DESCRICAO:  ""}:</label><br>
+                                <span>${equipamento.caracteristicaTecnica[0].VALOR ? equipamento.caracteristicaTecnica[0].VALOR:  ""} ${equipamento.caracteristicaTecnica[0].SIGLA ? equipamento.caracteristicaTecnica[0].SIGLA : ""}</span>
                             </div>
                         </div>
                         <br>
