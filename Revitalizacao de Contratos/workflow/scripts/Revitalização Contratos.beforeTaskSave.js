@@ -89,6 +89,8 @@ function beforeTaskSave_inicio() {
     
         var docIdContrato = hAPI.getCardValue("contratoDocumentId");
         hAPI.attachDocument(docIdContrato);
+        var pdfIdContrato = hAPI.getCardValue("contratoPdfId");
+        hAPI.attachDocument(pdfIdContrato);
         insereHistorico(hAPI.getCardValue("observacoes"), "Início", "Início");
     } catch (error) {
         throw error;   

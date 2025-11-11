@@ -149,6 +149,11 @@ async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
     });
     var documentId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDeAnexos);
     $("#contratoDocumentId").val(documentId);
+
+    var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
+    var pdf = await convertDocxToPdf(filePreenchido);
+    var pdfId = await promiseCriaDocFluig_retornaDocumentId(pdf, pastaDeAnexos);
+    $("#contratoPdfId").val(pdfId);
 }
 function geraNomeDoArquivo(){
     var CODCCUSTO = $("#CODCCUSTO").val();
@@ -177,10 +182,14 @@ async function salvaModeloAlterado() {
             type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         });
 
-        const file = new File([blob], "document.docx", {
+        const file = new File([blob], geraNomeDoArquivo()+".docx", {
             type: blob.type,
         });
-        await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val());
+        await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val(), geraNomeDoArquivo()+".docx", 18386);
+
+        var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
+        var pdf = await convertDocxToPdf(filePreenchido);
+        await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo()+".pdf", 18386);
 
         Swal.fire({
             position: "top-end",
@@ -894,14 +903,18 @@ async function carregaDocumentoParaOCKEditor(documentId) {
 }
 
 
-function visualizaDocumento() {
-    var documentId = $("#contratoDocumentId").val();
-    var attachments = parent.WKFViewAttachment.getAllAttachments();
-    for (const attachment of attachments) {
-        if (attachment.documentId == documentId) {
-            parent.WKFViewAttachment.openAttachmentView($("#userCode").val(), documentId, attachment.version);
-        }
-    }
+async function visualizaDocumento() {
+    var documentId = $("#contratoPdfId").val();
+    var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
+    window.open(url, '_blank');
+
+    // var attachments = parent.WKFViewAttachment.getAllAttachments();
+    // for (const attachment of attachments) {
+    //     if (attachment.documentId == documentId) {
+    //         // parent.WKFViewAttachment.openAttachmentView($("#userCode").val(), documentId, attachment.version);
+
+    //     }
+    // }
 }
 
 // Utils
@@ -915,11 +928,7 @@ function promiseGeraFileFromURL(url) {
         });
     });
 }
-function promiseAtualizaDocumentoNoGED(file, documentId) {
-    var name = "Teste.docx";
-    var parentId = "18386";
-    var parentId = "18386";
-
+function promiseAtualizaDocumentoNoGED(file, documentId, name, parentId) {
     return new Promise((resolve, reject) => {
         var reader = new FileReader();
 
