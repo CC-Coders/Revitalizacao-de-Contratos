@@ -125,11 +125,17 @@ function beforeTaskSave_engenheiro() {
 }
 function beforeTaskSave_coordenadorObras() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Coordenador");
+
+    if (hAPI.getCardValue("decisao") == "Aprovar" && hAPI.getCardValue("tipoContrato") == "Locação de Equipamento") {
+        criaAssinaturaEletronica
+    }
 }
 function beforeTaskSave_diretoria() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Diretoria");
 
-    criaAssinaturaEletronica();
+    if (hAPI.getCardValue("decisao") == "Aprovar" ){
+        criaAssinaturaEletronica();
+    }
 }
 
 // Integração RM
