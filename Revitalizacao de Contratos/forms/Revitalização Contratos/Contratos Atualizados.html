@@ -92,6 +92,7 @@
                 <!-- Dados Solicitacao -->
                 <input type="hidden" id="solicitante" name="solicitante" />
                 <input type="hidden" id="contratoDocumentId" name="contratoDocumentId" />
+                <input type="hidden" id="contratoPdfId" name="contratoPdfId" />
                 <input type="hidden" id="numProces" name="numProces" />
 
                 <!-- TODO -->
@@ -582,6 +583,11 @@
                                         </div>
                                     </div>
                             </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <button type="button" class="btn btn-primary" id="btnAnexarContrato" style="display: none;">Anexar Contrato</button>
+                            <a target="_blank" href="#" id="nomeAnexoContrato"></a>
+                            <input type="file" name="inputFileAnexarContrato" id="inputFileAnexarContrato" style="display: none;">
                         </div>
                     </div>
 
