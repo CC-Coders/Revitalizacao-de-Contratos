@@ -792,4 +792,16 @@ function bloqueiaCamposAprovacao(){
     $("#mailRepresentanteFornecedor").attr("readonly","readonly");
     $("#assinaturaContrato").attr("readonly","readonly");
     
+    
+    $("#descricaoImovel").attr("readonly","readonly");
+    $("#valorMensalAluguel").attr("readonly","readonly");
+    $("#enderecoImovel").attr("readonly","readonly");
+    $("#matriculaImovel").attr("readonly","readonly");
+    $("#finalidadeLocacao").attr("readonly","readonly");
+    $("#periodoLocacao").attr("readonly","readonly");
+    $("#janelaPagamento").attr("readonly","readonly");
+    $("#caucao").attr("readonly","readonly");
+    $("#valorCaucao").attr("readonly","readonly");
+    $("#dataPagamentoCaucao").attr("readonly","readonly");
+    
 }
