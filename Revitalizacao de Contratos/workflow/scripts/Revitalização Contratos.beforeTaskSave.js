@@ -558,10 +558,10 @@ function insereDadosNaTabelaAuxiliar(){
         var id = executeInsert(query,[
             {type:"int", value:hAPI.getCardValue("CODCOLIGADA")},
             {type:"int", value:hAPI.getCardValue("modeloContrato") == "Modelo Castilho" ? 1:0},
-            {type:"int", value:0},//TODO criar o campo de retenção e vincular no insert
-            {type:"float", value:0},//TODO criar o campo de percentual de retenção e vincular no insert
-            {type:"int", value:0},//TODO criar o campo do REIDI
-            {type:"float", value:0},//TODO criar o campo do percentual do REIDI
+            {type:"int", value:hAPI.getCardValue("temRetencao") == "Sim" ? 1:0},//Tem Retencao
+            {type:"float", value:hAPI.getCardValue("percentualRetencao").replace("%","")},// Percentual Retencao
+            {type:"int", value:hAPI.getCardValue("temREIDI") == "Sim" ? 1:0},// Tem REIDI
+            {type:"float", value:hAPI.getCardValue("percentualREIDI")},//Percentual REIDI
             {type:"varchar", value:hAPI.getCardValue("assinaturaContrato")},//TIPO_ASSINATURA
             {type:"varchar", value:hAPI.getCardValue("tipoContrato")},//TIPO_CONTRATO
             {type:"int", value:getValue("WKNumProces")},//TIPO_CONTRATO
