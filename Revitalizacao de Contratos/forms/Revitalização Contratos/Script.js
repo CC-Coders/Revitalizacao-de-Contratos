@@ -319,6 +319,9 @@ function loadTelaControladoria() {
         onChangeTipoContrato($("#tipoContrato"));
             buscaBancos();
 
+            $("#divBotoesEdicaoContrato").show();
+            $("#btnEditarArquivo").hide();
+            $("#btnVisualizarPreContrato").hide();
             
             
             setAtividadeAtivaProgresso(2);
@@ -342,6 +345,10 @@ function loadTelaAprovacao() {
     
         onChangeTipoContrato($("#tipoContrato"));
             buscaBancos();
+
+            $("#divBotoesEdicaoContrato").show();
+$("#btnEditarArquivo").hide();
+$("#btnVisualizarPreContrato").hide();
 
             asyncMontaHistorico();
             mostrarPagina("0");
@@ -371,6 +378,11 @@ function loadTelaAssinaturaEletronica() {
     renderizarAnexosEtapaAprovacao();
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
+
+
+    $("#divBotoesEdicaoContrato").show();
+$("#btnEditarArquivo").hide();
+$("#btnVisualizarPreContrato").hide();
 
         onChangeTipoContrato($("#tipoContrato"));
         
