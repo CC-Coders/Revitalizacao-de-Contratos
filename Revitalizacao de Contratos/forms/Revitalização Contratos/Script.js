@@ -186,7 +186,7 @@ function bindings() {
         if ($(this)[0].files.length>0) {
             $("#nomeAnexoContrato").text("Carregando...");
             var docId = await criaDocFluigRetornaDocumentId($(this)[0].files[0], 18386);
-            $("#contratoDocumentId").val(docId);
+            $("#contratoPdfId").val(docId);
             $("#nomeAnexoContrato").text($(this)[0].files[0].name);
             $("#nomeAnexoContrato").attr("href",await promiseBuscaDownloadUrlDocumentoNoFLuig(docId));
         }
