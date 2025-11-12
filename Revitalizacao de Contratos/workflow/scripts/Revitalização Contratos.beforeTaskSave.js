@@ -88,9 +88,13 @@ function beforeTaskSave_inicio() {
         hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
     
         var docIdContrato = hAPI.getCardValue("contratoDocumentId");
-        hAPI.attachDocument(docIdContrato);
+        if (docIdContrato) {
+            // hAPI.attachDocument(docIdContrato);
+        }
         var pdfIdContrato = hAPI.getCardValue("contratoPdfId");
-        hAPI.attachDocument(pdfIdContrato);
+        if (pdfIdContrato) {
+            // hAPI.attachDocument(pdfIdContrato);
+        }
         insereHistorico(hAPI.getCardValue("observacoes"), "Início", "Início");
     } catch (error) {
         throw error;   
@@ -128,8 +132,8 @@ function beforeTaskSave_engenheiro() {
 function beforeTaskSave_coordenadorObras() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Coordenador");
 
-    if (hAPI.getCardValue("decisao") == "Aprovar" && hAPI.getCardValue("tipoContrato") == "Locação de Equipamento") {
-        criaAssinaturaEletronica
+    if (hAPI.getCardValue("decisao") == "Aprovar" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento") {
+        criaAssinaturaEletronica();
     }
 }
 function beforeTaskSave_diretoria() {
@@ -674,7 +678,7 @@ function buscaCategoriaPorPrefixo(PREFIXO){
 // Assinatura Eletrônica
 function criaAssinaturaEletronica() {
     try {
-        var documentId = hAPI.getCardValue("contratoDocumentId");
+        var documentId = hAPI.getCardValue("contratoPdfId");
         var CodRemetente = hAPI.getCardValue("solicitante");
         var document = buscaDadosDoArquivo(documentId);
         log.info("dados do arquivo");
@@ -777,8 +781,6 @@ function insereHistorico(observacao, acao, atividade) {
     novaLinha.put("tableHistoricoAcao", acao);
 
     hAPI.addCardChild("tableHistorico", novaLinha);
-    hAPI.setCardValue("observacao", "");
-
 }
 
 function getDateTimeNow() {
