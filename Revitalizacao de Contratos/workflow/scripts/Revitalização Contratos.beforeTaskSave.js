@@ -580,6 +580,21 @@ function insereDadosNaTabelaAuxiliar(){
 }
 function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){
     try {
+        var tipo_contrato = hAPI.getCardValue("tipoContrato");
+
+        if (tipo_contrato == "Locação de Equipamento") {
+            insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR);
+        }else if(tipo_contrato == "Locação de Imóvel"){
+            insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR);
+        }
+
+       
+    } catch (error) {
+        throw error;
+    }
+}
+function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){
+    try {        
         var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados");
         var counter = 0;
         for (var i = 0; i < indexes.length; i++) {
@@ -599,11 +614,35 @@ function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){
             ], "/jdbc/CastilhoCustom");
             counter++;
         }
-    
     } catch (error) {
         throw error;
     }
 }
+function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){
+ try {        
+        var query = "INSERT INTO TCNT_AUXILIAR_ITENS (";
+        query += "ID_TCNT_AUXILIAR, ";
+        query += "NSEQITEMCNT, ";
+        query += "TIPO, ";
+        query += "DESCRICAO, ";
+        query += "VALOR, ";
+        query += "UN) ";
+        query += "VALUES (?,?,?,?,?,?)";
+
+        executeInsert(query,[
+            {type:"int", value:ID_TCNT_AUXILIAR},//ID_TCNT_AUXILIAR
+            {type:"int", value:"0"},//NSEQITEMCNT
+            {type:"varchar", value:hAPI.getCardValue("finalidadeLocacao")},//TIPO
+            {type:"varchar", value:hAPI.getCardValue("descricaoImovel")},//DESCRICAO
+            {type:"float", value:ValorToFloat(hAPI.getCardValue("valorMensalAluguel")+"")},//VALOR
+            {type:"varchar", value:"MES"},//UN
+        ], "/jdbc/CastilhoCustom");  
+
+    } catch (error) {
+        throw error;
+    }
+}
+
 function updateTcntAuxiliar(IDCNT, ID_TCNT_AUXILIAR){
     try {
         var query = "UPDATE TCNT_AUXILIAR SET IDCNT = ? WHERE ID = ?";
