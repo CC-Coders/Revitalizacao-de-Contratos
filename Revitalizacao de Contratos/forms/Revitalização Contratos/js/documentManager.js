@@ -1,5 +1,16 @@
 // Modelo de Conrato
-const pastaDeAnexos = 18386;
+const pastasDeAnexosPorServidor = {
+    DESENVOLVIMENTO:"18386",
+    HOMOLOGACAO:"10540",
+    PRODUCAO:""
+}
+
+var ds = DatasetFactory.getDataset("dsGetServerURL", null, null, null);
+const env = ds.values[0].URL == "http://homologacao.castilho.com.br:2020" ? "HOMOLOGACAO" : ds.values[0].URL == "http://desenvolvimento.castilho.com.br:3232" ? "DESENVOLVIMENTO":"PRODUCAO";
+const pastaDeAnexos = pastasDeAnexosPorServidor[env];
+
+
+
 async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
     var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
     var file = await geraFileFromURL(url);
