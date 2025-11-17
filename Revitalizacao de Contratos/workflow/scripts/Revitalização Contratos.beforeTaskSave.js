@@ -399,7 +399,7 @@ function montaXMLCriacaoDeContrato(parametros) {
     xml += "        <CODCPGPRAZO>130</CODCPGPRAZO>";
     xml += "        <DATACONTRATO>" + setDateXMLFormat(parametros.DATAINICIO) + "</DATACONTRATO>";
     xml += "        <DATAINICIO>" + setDateXMLFormat(parametros.DATAINICIO) + "</DATAINICIO>";
-    xml += "        <DATAFIM>" + setDateXMLFormat(parametros.DATAFIM) + "T00:00:00</DATAFIM>";
+    xml += "        <DATAFIM>" + setDateXMLFormat(parametros.DATAFIM) + "</DATAFIM>";
     xml += "        <CODMOEVALORCONTRATO>R$</CODMOEVALORCONTRATO>";
     xml += "        <IMPRIMEMOV>1</IMPRIMEMOV>";
     if (parametros.TIPOFATURAMENTO == TIPOS_FATURAMENTO["Periódico"]) {
