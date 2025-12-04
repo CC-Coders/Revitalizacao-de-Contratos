@@ -73,23 +73,30 @@ async function asyncGeraQuadroStatusAssinatura(){
     try {
         const assinaturas = await promiseConsultaAssinaturaEnviadasPeloProcesso();
         var html = "";
+        $("#tableQuadroStatusAssinatura>tbody").html("");
         for (const assinatura of assinaturas) {
             const assinantes = JSON.parse(assinatura.jsonSigners);
 
             html += 
             `<tr>
                 <td>${assinatura.nmArquivo}</td>
-                <td><button class="btn btn-primary">${assinantes.length} Assinantes </button></td>
+                <td><button class="btn btn-primary btnAssinantes">${assinantes.length} Assinantes </button></td>
                 <td>${assinatura.dataEnvio} ${assinatura.horaEnvio}</td>
                 <td>${assinatura.nmRemetente}</td>
                 <td>
                     ${assinatura.msgErro ? assinatura.msgErro:assinatura.statusAssinatura}
                 </td>
-
             </tr>`;
+
+            $("#tableQuadroStatusAssinatura>tbody").append(html);
+            $("#tableQuadroStatusAssinatura>tbody>tr:last").find(".btnAssinantes").on("click",{assinantes:assinantes, title:assinatura.nmArquivo}, function(event){
+                const assinantes = event.data.assinantes;
+                const title = event.data.title;
+                modalAssinantes(assinantes, title);
+
+            });
         }
 
-        $("#tableQuadroStatusAssinatura>tbody").html(html);
     } catch (error) {
         showMessage("Não foi possível gerar o quadro de assinaturas: " + error);
     }
@@ -113,5 +120,77 @@ async function asyncGeraQuadroStatusAssinatura(){
             });
         });
     }
+}
+function modalAssinantes(assinantes, title){
+    FLUIGC.modal({
+        title: title,
+        content: geraHtmlModal(assinantes),
+        id: 'fluig-modal',
+        size: 'full',
+        actions: [{
+            'label': 'Fechar',
+            'autoClose': true
+        }]
+    }, function(err, data) {
+        if(err) {
+            // do error handling
+        } else {
+            // do something with data
+        }
+    });
 
+
+    function geraHtmlModal(assinantes){
+        var html = 
+        `<table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>CPF</th>
+                    <th>Status</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${geraLinhasTabelaAssinantes(assinantes)}
+            </tbody>
+        </table`;
+
+        return html;
+    }
+    function geraLinhasTabelaAssinantes(assinantes){
+        var html = "";
+
+        for (const assinante of assinantes) {
+            html += 
+            `<tr>
+                <td>${assinante.nome}</td>
+                <td>${hex2a(assinante.email)}</td>
+                <td>${hex2a(assinante.cpf)}</td>
+                <td>${assinante.status}</td>
+                <td>${assinante.signUrl}</td>
+            </tr>`;
+        }
+
+        return html;
+    }
+}
+
+
+function hex2a(e) {
+    for (
+        var t = String(e), a = "", i = 0;
+        i < t.length && "00" !== t.substr(i, 2);
+        i += 2
+    )
+        a += String.fromCharCode(parseInt(t.substr(i, 2), 16));
+    return a;
+}
+function a2hex(e) {
+    for (var t = [], a = 0, i = (e = String(e)).length; a < i; a++) {
+        var o = Number(e.charCodeAt(a)).toString(16);
+        t.push(o);
+    }
+    return t.join("");
 }
