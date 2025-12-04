@@ -71,7 +71,7 @@ function createDataset(fields, constraints, sortFields) {
 
 function notificaAlteracaoNoEquipamento(PREFIXO, CAMPO, VALORANTIGO, VALORNOVO){
     if (CAMPO == "Valor de Locação" || CAMPO == "Valor de Mão de Obra") {
-        VALORNOVO = floatToMoney(VALORNOVO);
+        // VALORNOVO = floatToMoney(VALORNOVO);
     }
 
     var usuario = getValue("WKUser");
@@ -163,7 +163,7 @@ function executeInsert(query, constraints, dataSource) {
         var ds = ic.lookup(dataSource);
 
         conn = ds.getConnection();
-        stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);
+        stmt = conn.prepareStatement(query);
 
         var counter = 1;
         for (var i = 0; i < constraints.length; i++) {
@@ -185,41 +185,7 @@ function executeInsert(query, constraints, dataSource) {
             counter++;
         }
 
-        // Use executeUpdate for INSERT and then try getGeneratedKeys
-        var rowsAffected = stmt.executeUpdate();
-        log.info("rowsAffected: " + rowsAffected);
-
-        var rsKeys = stmt.getGeneratedKeys();
-        if (rsKeys != null) {
-            try {
-                if (rsKeys.next()) {
-                    insertedId = rsKeys.getInt(1);
-                    log.info("generated id (getGeneratedKeys): " + insertedId);
-                }
-            } finally {
-                try { rsKeys.close(); } catch (e) { }
-            }
-        }
-
-        // Fallback for SQL Server when driver doesn't return generated keys
-        if (insertedId == null) {
-            try {
-                var fallbackSql = "SELECT SCOPE_IDENTITY() AS ID";
-                var fallbackStmt = conn.prepareStatement(fallbackSql);
-                var rsScope = fallbackStmt.executeQuery();
-                try {
-                    if (rsScope.next()) {
-                        insertedId = rsScope.getInt("ID");
-                        log.info("generated id (SCOPE_IDENTITY): " + insertedId);
-                    }
-                } finally {
-                    try { rsScope.close(); } catch (e) { }
-                    try { fallbackStmt.close(); } catch (e) { }
-                }
-            } catch (e) {
-                log.info("SCOPE_IDENTITY fallback failed: " + e);
-            }
-        }
+        stmt.executeUpdate();
 
     } catch (error) {
         var msg = "";
@@ -252,8 +218,28 @@ function executeInsert(query, constraints, dataSource) {
     return insertedId;
 }
 function floatToMoney(val) {
-    return parseFloat(val).toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    });
+    try {
+        return parseFloat(val).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+    } catch (error) {
+           var msg = "";
+        if (error && error.javaException) {
+            msg = error.javaException.getMessage();
+        } else if (error && error.message) {
+            if (error.message.Error) {
+            } else {
+                msg = error.message;
+            }
+        } else {
+            msg = String(error);
+        }
+
+        log.error("ERRO==============> " + msg);
+        log.error("Type of error: " + typeof error);
+        log.error("Type of msg: " + typeof msg);
+
+        throw "Erro ao executar Dataset: " + msg;
+    }
 }
