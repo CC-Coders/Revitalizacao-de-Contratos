@@ -527,19 +527,18 @@ function atualizaValorTotalLocacao(){
     var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
     var prazoEmMeses = calculaDiferencaEmMeses(prazo_inicio, prazo_fim);
 
-    $("#valorMensalLocacao").val(floatToMoney(valorTotalMensal));
     $("#prazoLocacao").val(prazoEmMeses + " meses");
-
-
-
-
-    $("#valorTotalLocacao").val(floatToMoney(valorTotalMensal*prazoEmMeses))
+    
+    if (valorTotalMensal != 0) {
+        $("#valorMensalLocacao").val(floatToMoney(valorTotalMensal));
+        $("#valorTotalLocacao").val(floatToMoney(valorTotalMensal*prazoEmMeses))
+    }
 }
 function calculaDiferencaEmMeses(diaInicio, diaFim){
     const init = moment(diaInicio);
     const end = moment(diaFim);
 
-    return Math.abs(init.diff(end, 'months', true))
+    return Math.round(Math.abs(init.diff(end, 'months', true)))
 }
 
 
