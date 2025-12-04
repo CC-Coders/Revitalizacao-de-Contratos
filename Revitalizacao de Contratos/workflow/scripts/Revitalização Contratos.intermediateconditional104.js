@@ -16,7 +16,7 @@ function intermediateconditional104() {
         log.dir(retorno);
         log.dir(retorno[0].STATUS);
         log.dir(retorno.STATUS);
-        if (retorno[0].STATUS != "7") {
+        if (retorno[0].STATUS != "3") {
             log.info("Returno analise pendente");
             return returnAnalisePendente;
         }
