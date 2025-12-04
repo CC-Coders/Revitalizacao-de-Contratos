@@ -507,6 +507,13 @@ function validaCampos() {
                 }
             }
         });
+        if ($("#modeloContrato").val()=="Contrato fora do modelo" && $("#contratoPdfId").val() == "") {
+            FLUIGC.toast({
+                message: "Necessário anexar o Contrato fora do Modelo!",
+                type: "warning",
+            });
+            valida = false;
+        }
     }
     if (isRetornar) {
         var destinoRetorno = $("#destinoRetorno").val();
