@@ -104,7 +104,7 @@ function preencheCamposAutomaticamente() {
         var hiddenCGCCFO = $("#hiddenCGCCFO").val();
         var hiddenFORNECEDOR = $("#hiddenFORNECEDOR").val();
 
-        $("#novoContratoFornecedor").val(`${hiddenCODCOLCFO} - ${hiddenCODCFO} - ${hiddenCGCCFO} - ${hiddenFORNECEDOR}`);
+        $("#novoContratoFornecedor").val(`${hiddenCGCCFO} - ${hiddenFORNECEDOR}`);
         $("#novoContratoCondicaoPagamento").val('145');
 
         
