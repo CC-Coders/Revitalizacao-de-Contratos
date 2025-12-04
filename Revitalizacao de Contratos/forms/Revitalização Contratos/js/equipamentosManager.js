@@ -147,7 +147,13 @@ function initDataTableEquipamentos(){
                         return `<input type="checkbox" class="checkboxSelecionaEquipamento" />`;
                     }
                     else if(row.STATUS == 2){
-                        return `<a taget="_blanck" href="/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=${row.NUMPROCES_CONTRATO}" class="btn btn-primary">Em Andamento</a>`;
+                        var  list = listaPrefixosSelecionados();
+                        if (list.includes(row.PREFIXO)) {
+                            return `<input type="checkbox" checked class="checkboxSelecionaEquipamento" />`;
+                        }
+                        else{
+                            return `<a taget="_blanck" href="/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=${row.NUMPROCES_CONTRATO}" class="btn btn-primary">Em Andamento</a>`;
+                        }
                     }
                 },
             },
@@ -183,6 +189,15 @@ function initDataTableEquipamentos(){
             onClickCheckEquipamento(this);
       });
     });
+}
+
+function listaPrefixosSelecionados(){
+    var list = [];
+    $(".equipamentoSelecionadoPrefixo:not(:first)").each(function(){
+        list.push($(this).val());
+    });
+
+    return list;
 }
 
 async function onClickDetailsEquipamento(that){
@@ -654,8 +669,8 @@ async function geraEquipamentosSelecionados(){
                                 <span>${equipamento.COMBUSTIVEL}</span>
                             </div>
                             <div class="col-md-3">
-                                <label>${(equipamento.caracteristicaTecnica.length > 0 && equipamento.caracteristicaTecnica[0].DESCRICAO) ? equipamento.caracteristicaTecnica[0].DESCRICAO:  ""}:</label><br>
-                                <span>${(equipamento.caracteristicaTecnica.length > 0 && equipamento.caracteristicaTecnica[0].VALOR) ? equipamento.caracteristicaTecnica[0].VALOR:  ""} ${(equipamento.caracteristicaTecnica.length > 0 && equipamento.caracteristicaTecnica[0].SIGLA) ? equipamento.caracteristicaTecnica[0].SIGLA : ""}</span>
+                                <label>${(equipamento.caracteristicaTecnica?.length > 0 && equipamento.caracteristicaTecnica[0].DESCRICAO) ? equipamento.caracteristicaTecnica[0].DESCRICAO:  ""}:</label><br>
+                                <span>${(equipamento.caracteristicaTecnica?.length > 0 && equipamento.caracteristicaTecnica[0].VALOR) ? equipamento.caracteristicaTecnica[0].VALOR:  ""} ${(equipamento.caracteristicaTecnica?.length > 0 && equipamento.caracteristicaTecnica[0].SIGLA) ? equipamento.caracteristicaTecnica[0].SIGLA : ""}</span>
                             </div>
                         </div>
                         <br>
@@ -712,7 +727,7 @@ async function geraEquipamentosSelecionados(){
                                 <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
                                 Anexos
                             </button>
-                            <a target="_blanck" href="/portal/p/1/paola-tester?prefixo=${equipamento.PREFIXO}" class="btn btn-primary btnLinkPainelEquipamentos">
+                            <a target="_blanck" href="/portal/p/1/consulta-de-equipamentos?prefixo=${equipamento.PREFIXO}" class="btn btn-primary btnLinkPainelEquipamentos">
                                 <i class="flaticon flaticon-import icon-sm" aria-hidden="true"></i>
                                 Painel de Equipamentos
                             </a>

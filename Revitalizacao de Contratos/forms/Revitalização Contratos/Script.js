@@ -294,6 +294,9 @@ function loadTelaInicioRetorno() {
     if ($("#tipoContrato").val() == "Locação de Equipamento") {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
+
+        initDataTableEquipamentos();
+        preencheListaDeEquipamentos();
     }
 }
 
