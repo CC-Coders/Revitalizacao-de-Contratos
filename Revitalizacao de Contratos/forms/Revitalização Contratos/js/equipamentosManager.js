@@ -792,11 +792,19 @@ async function htmlNovoAnexo(documentId, documentName) {
 
 function geraCabecalhoEquipamentos(){
     $("#divHeaderEquipamentos").show();
-    $("#obraHeaderEquipamentos").val($("#NOMECCUSTO").val() ?  $("#NOMECCUSTO").val() : $("#NOMECCUSTO").text());
-    $("#tipoContratoHeaderEquipamentos").val($("#tipoContrato").val() ?  $("#tipoContrato").val() : $("#tipoContrato").text());
-    $("#periodoHeaderEquipamentos").val($("#prazoLocacao").val() ?  $("#prazoLocacao").val() : $("#prazoLocacao").text());
-    $("#valorMensalHeaderEquipamentos").val($("#valorMensalLocacao").val() ?  $("#valorMensalLocacao").val() : $("#valorMensalLocacao").text());
-    $("#valorTotalHeaderEquipamentos").val($("#valorTotalLocacao").val() ?  $("#valorTotalLocacao").val() : $("#valorTotalLocacao").text());
+    if($("#formMode").val() == "VIEW"){
+        $("#obraHeaderEquipamentos").text($("#NOMECCUSTO").val());
+        $("#tipoContratoHeaderEquipamentos").text($("#tipoContrato").text());
+        $("#periodoHeaderEquipamentos").text($("#prazoLocacao").text());
+        $("#valorMensalHeaderEquipamentos").text($("#valorMensalLocacao").text());
+        $("#valorTotalHeaderEquipamentos").text($("#valorTotalLocacao").text());
+    }else{
+        $("#obraHeaderEquipamentos").val($("#NOMECCUSTO").val());
+        $("#tipoContratoHeaderEquipamentos").val($("#tipoContrato").val());
+        $("#periodoHeaderEquipamentos").val($("#prazoLocacao").val());
+        $("#valorMensalHeaderEquipamentos").val($("#valorMensalLocacao").val());
+        $("#valorTotalHeaderEquipamentos").val($("#valorTotalLocacao").val());
+    }
 }
 
 
