@@ -87,13 +87,13 @@ function beforeTaskSave_inicio() {
         insereDadosNaTabelaAuxiliarItens(id);
         hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
     
-        var docIdContrato = hAPI.getCardValue("contratoDocumentId");
-        if (docIdContrato) {
-            // hAPI.attachDocument(docIdContrato);
-        }
+        // var docIdContrato = hAPI.getCardValue("contratoDocumentId");
+        // if (docIdContrato) {
+        //     hAPI.attachDocument(docIdContrato);
+        // }
         var pdfIdContrato = hAPI.getCardValue("contratoPdfId");
         if (pdfIdContrato) {
-            // hAPI.attachDocument(pdfIdContrato);
+            hAPI.attachDocument(pdfIdContrato);
         }
         insereHistorico(hAPI.getCardValue("observacoes"), "Início", "Início");
     } catch (error) {

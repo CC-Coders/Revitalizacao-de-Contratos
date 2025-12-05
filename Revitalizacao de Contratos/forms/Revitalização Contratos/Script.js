@@ -11,11 +11,15 @@ const ATIVIDADES = {
     DIRETORIA: 53,
     INTERMEDIARIO_ASSINATURA_ELETRONICA: 58,
     ASSINATURA_ELETRONICA: 66,
+    ADM_OBRA:64,
+    CONTROLADORIA_RECEBIMENTO:74,
+    CONTROLADORIA_RECOLHE_ASSINATURA:72,
+    OBRA_RECEBE_VIAS:76,
 };
 
 $(document).ready(function () {
     bindings();
-    const ATIVIDADE_ATUAL = parseInt($("#atividade").val())
+    const ATIVIDADE_ATUAL = parseInt($("#atividade").val());
     console.log(ATIVIDADE_ATUAL)
     if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO) {
         loadTelaInicioRetorno();
@@ -29,6 +33,9 @@ $(document).ready(function () {
         loadTelaAprovacao();
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.ASSINATURA_ELETRONICA || ATIVIDADE_ATUAL == ATIVIDADES.INTERMEDIARIO_ASSINATURA_ELETRONICA) {
         loadTelaAssinaturaEletronica();
+    } else if([ATIVIDADES.ADM_OBRA,ATIVIDADES.CONTROLADORIA_RECEBIMENTO, ATIVIDADES.CONTROLADORIA_RECOLHE_ASSINATURA, ATIVIDADES.OBRA_RECEBE_VIAS].includes(ATIVIDADE_ATUAL)){
+        // Se for atividade de Assinatura Manual
+        loadTelaAssinaturaManual();
     }
 
 });
@@ -188,7 +195,7 @@ function bindings() {
     $("#inputFileAnexarContrato").on("change",async function(){
         if ($(this)[0].files.length>0) {
             $("#nomeAnexoContrato").text("Carregando...");
-            var docId = await criaDocFluigRetornaDocumentId($(this)[0].files[0], 18386);
+            var docId = await criaDocFluigRetornaDocumentId($(this)[0].files[0], pastaDeAnexos);
             $("#contratoPdfId").val(docId);
             $("#nomeAnexoContrato").text($(this)[0].files[0].name);
             $("#nomeAnexoContrato").attr("href",await promiseBuscaDownloadUrlDocumentoNoFLuig(docId));
@@ -402,8 +409,7 @@ $("#btnVisualizarPreContrato").hide();
     }
 }
 
-function loadTelaAssinaturaEletronica() {
-
+function loadTelaAssinaturaManual() {
     $(".panelAprovacao, #formContainer, #dadosContrato").show();
     $("#rowAnexosSelecao").hide();
     setAtividadeAtivaProgresso(4);
@@ -411,7 +417,6 @@ function loadTelaAssinaturaEletronica() {
     mostrarPagina("0");
     geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
-    renderizarAnexosEtapaAprovacao();
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
 
@@ -421,6 +426,35 @@ function loadTelaAssinaturaEletronica() {
     }
 
         onChangeTipoContrato($("#tipoContrato"));
+        bloqueiaCamposAprovacao();
+    renderizarAnexosEtapaAprovacao();
+
+    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+        $("#paginationEquipamentos").show();
+        $("#paginationEquipamentos").removeClass("hidden");
+    }
+    $("#divResolucaoChamado").hide();
+}
+
+function loadTelaAssinaturaEletronica() {
+
+    $(".panelAprovacao, #formContainer, #dadosContrato").show();
+    $("#rowAnexosSelecao").hide();
+    setAtividadeAtivaProgresso(4);
+    asyncMontaHistorico();
+    mostrarPagina("0");
+    geraEquipamentosSelecionados();
+    geraCabecalhoEquipamentos();
+    $("#paginationIntegracaoRM").remove();
+    $("#btnEditarArquivo").remove();
+
+    if($("#modeloContrato").val() == "Contrato fora do modelo"){
+        $("#btnEditarArquivo").hide();
+        $("#btnVisualizarPreContrato").hide();
+    }
+
+        onChangeTipoContrato($("#tipoContrato"));
+    renderizarAnexosEtapaAprovacao();
         
         $("#divQuadroStatusAssinaturaEletronica").show();
         asyncGeraQuadroStatusAssinatura();

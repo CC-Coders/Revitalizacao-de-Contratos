@@ -626,7 +626,7 @@ async function geraEquipamentosSelecionados(){
                                 <label>Prefixo: </label> <span style="margin-right:10px">${equipamento.PREFIXO}</span>
                                 <label>Modelo: </label> <span style="margin-right:10px">${equipamento.MODELO}</span>
                                 <label>Placa/Chassi: </label> <span style="margin-right:10px">${equipamento.PLACA?equipamento.PLACA:equipamento.CHASSI}</span>
-                                ${equipamento.CLASSIFICACAO_BEM != null && equipamento.CLASSIFICACAO_BEM != "null" ? `<label>Avaliação do Bem: </label> <span style="margin-right:10px">${equipamento.CLASSIFICACAO_BEM}% ${equipamento.CLASSIFICACAO_BEM < 3 ? `<i class="animaliaicon animaliaicon-arrow-circle-up icon-sm" style="color:green"; aria-hidden="true"></i>`:`<i class="animaliaicon animaliaicon-arrow-circle-down icon-sm" style="color:red"; aria-hidden="true"></i>`}</span>`:""}                           
+                                ${equipamento.CLASSIFICACAO_BEM != null && equipamento.CLASSIFICACAO_BEM != "null" ? `<label>Avaliação do Bem: </label> <span style="margin-right:10px">${equipamento.CLASSIFICACAO_BEM}% ${equipamento.CLASSIFICACAO_BEM < 3 ? `<i class="flaticon flaticon-arrow-up icon-sm" style="color:green"; aria-hidden="true"></i>`:`<i class="flaticon flaticon-arrow-down icon-sm" style="color:red"; aria-hidden="true"></i>`}</span>`:""}                           
                             </div>
                             <div class="col-md-6" style="text-align: right;">
                                 ${

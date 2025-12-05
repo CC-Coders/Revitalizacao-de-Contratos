@@ -1,8 +1,8 @@
-// Modelo de Conrato
+// Modelo de Contrato
 const pastasDeAnexosPorServidor = {
     DESENVOLVIMENTO:"18386",
     HOMOLOGACAO:"10540",
-    PRODUCAO:""
+    PRODUCAO:"140518",
 }
 
 var ds = DatasetFactory.getDataset("dsGetServerURL", null, null, null);
@@ -163,7 +163,10 @@ async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
 
     var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
     var pdf = await convertDocxToPdf(filePreenchido);
-    var pdfId = await promiseCriaDocFluig_retornaDocumentId(pdf, pastaDeAnexos);
+    const filePdf = new File([pdf], geraNomeDoArquivo()+".pdf", {
+        type: blob.type,
+    });
+    var pdfId = await promiseCriaDocFluig_retornaDocumentId(filePdf, pastaDeAnexos);
     $("#contratoPdfId").val(pdfId);
 }
 function geraNomeDoArquivo(){
@@ -196,11 +199,11 @@ async function salvaModeloAlterado() {
         const file = new File([blob], geraNomeDoArquivo()+".docx", {
             type: blob.type,
         });
-        await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val(), geraNomeDoArquivo()+".docx", 18386);
+        await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val(), geraNomeDoArquivo()+".docx", pastaDeAnexos);
 
         var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
-        var pdf = await convertDocxToPdf(filePreenchido);
-        await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo()+".pdf", 18386);
+        var pdf = await convertDocxToPdf(filePreenchido, geraNomeDoArquivo()+".pdf");
+        await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo()+".pdf", pastaDeAnexos);
 
         Swal.fire({
             position: "top-end",
@@ -291,9 +294,9 @@ async function geraPreContrato() {
     Swal.close();
     saveAs(pdf, "teste.pdf");
 }
-async function convertDocxToPdf(docxBlob) {
+async function convertDocxToPdf(docxBlob, name) {
     const formData = new FormData();
-    formData.append("file", docxBlob, "file.docx");
+    formData.append("file", docxBlob, name);
     let html, headerHtml, footerHtml;
     try {
         const docxHtmlResponse = await axios.post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, { responseType: "json" });
