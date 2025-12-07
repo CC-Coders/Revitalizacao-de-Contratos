@@ -1,14 +1,4 @@
 function bindingCamposIntegracaoRM() {
-    $("#checkboxLancarNovoContrato").on("change", async function () {
-        if ($(this).is(":checked")) {
-            $("#dadosRMNovoContrato").show();
-            await asyncPreencheOptionsColigada();
-            preencheCamposAutomaticamente();
-        }
-        else {
-            $("#dadosRMNovoContrato").hide();
-        }
-    });
     $("#novoContratoColigada").on("change", function () {
         var CODCOLIGA = $(this).val();
         if (CODCOLIGA) {

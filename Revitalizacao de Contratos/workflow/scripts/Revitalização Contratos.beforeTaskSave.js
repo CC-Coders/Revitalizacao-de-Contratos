@@ -109,12 +109,9 @@ function beforeTaskSave_controladoria() {
 
         var tipo = hAPI.getCardValue("origemContrato");
         if (tipo == "Novo") {
-            var criaNovoContratoRM = hAPI.getCardValue("checkboxLancarNovoContrato") == "on";
-            if (criaNovoContratoRM) {
-                var IDCNT = criaNovoContrato();
-                hAPI.setCardValue("IDCNT", IDCNT);
-                updateTcntAuxiliar(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
-            }
+            var IDCNT = criaNovoContrato();
+            hAPI.setCardValue("IDCNT", IDCNT);
+            updateTcntAuxiliar(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
         } else if (tipo == "Aditivos") {
             alteraStatusContrato(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "PENDENTE OBRA");
             // TODO - Inserir relação do Aditivo com o Contrato na tabela Custom de Contratos
@@ -556,9 +553,11 @@ function insereDadosNaTabelaAuxiliar(){
         query += " PERCENT_REIDI, ";
         query += " TIPO_ASSINATURA, ";
         query += " TIPO_CONTRATO, ";
+        query += " PERCENT_DESCONTO_CHUVA, ";
+        query += " PERCENT_DESCONTO_DIAS_PARADO, ";
         query += " ID_FLUIG ";
         query += ") ";
-        query += " VALUES (?,?,?,?,?,?,?,?,?);";
+        query += " VALUES (?,?,?,?,?,?,?,?,?,?, ?);";
 
 
         var id = executeInsert(query,[
@@ -570,6 +569,8 @@ function insereDadosNaTabelaAuxiliar(){
             {type:"float", value:hAPI.getCardValue("percentualREIDI")},//Percentual REIDI
             {type:"varchar", value:hAPI.getCardValue("assinaturaContrato")},//TIPO_ASSINATURA
             {type:"varchar", value:hAPI.getCardValue("tipoContrato")},//TIPO_CONTRATO
+            {type:"varchar", value:hAPI.getCardValue("descontoPorDiaChuva").replace("%","")},//PERCENT_DESCONTO_CHUVA
+            {type:"varchar", value:hAPI.getCardValue("descontoPorDiaParado").replace("%","")},//PERCENT_DESCONTO_DIAS_PARADO
             {type:"int", value:getValue("WKNumProces")},//TIPO_CONTRATO
         ], "/jdbc/CastilhoCustom");
 

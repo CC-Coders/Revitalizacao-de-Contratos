@@ -468,6 +468,21 @@
                                         </div>
                                         <div class="col-md-6 campoLocacaoEquipamento">
                                             <div class="form-group">
+                                                <label>Desconto por Dia de Chuva:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="descontoPorDiaChuva" name="descontoPorDiaChuva"
+                                                    class="form-control inputInfoChamado" value="50%" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 campoLocacaoEquipamento">
+                                            <div class="form-group">
+                                                <label>Desconto por Dia Parado:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="descontoPorDiaParado" name="descontoPorDiaParado"
+                                                    class="form-control inputInfoChamado" value="50%" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 campoLocacaoEquipamento">
+                                            <div class="form-group">
                                                 <label for="">Índice de Reajuste:</label>
                                                 <select name="indiceReajuste" id="indiceReajuste" class="form-control">
                                                     <option value=""></option>
@@ -701,15 +716,6 @@
                 </div>
                 <div id="pagina-integracaoRM" data-index="3" class="pagina">
                     <h2 style="margin-top: 60px;">Integração RM</h2>
-                            <div style="text-align: center">
-                                <label for="checkboxLancarNovoContrato">Lançar Novo Contrato?</label>
-                                <br />
-                                <div class="switch switch-success switch-labels">
-                                    <input class="switch-input" type="checkbox" id="checkboxLancarNovoContrato"
-                                        name="checkboxLancarNovoContrato" />
-                                    <label class="switch-button" for="checkboxLancarNovoContrato">Toggle</label>
-                                </div>
-                            </div>
                             <div id="dadosRMNovoContrato" style="display: none">
                                 <div class="row">
                                     <div class="col-md-4">

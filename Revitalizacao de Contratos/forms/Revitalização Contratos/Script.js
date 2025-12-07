@@ -147,6 +147,8 @@ function bindings() {
     $("#agencia").mask("0000-0", { placeholder: "____-_" });
     $("#contaCorrente").mask("00000-0", { placeholder: "_____-_" });
     $("#percentualRetencao").mask("000%", { reverse: true });
+    $("#descontoPorDiaChuva").mask("000%", { reverse: true });
+    $("#descontoPorDiaParado").mask("000%", { reverse: true });
 
     $("#locador").selectize({
         onChange: (value) => {
@@ -342,12 +344,18 @@ function loadTelaJuridico() {
     }
 }
 
-function loadTelaControladoria() {
+async function loadTelaControladoria() {
     $(".panelAprovacao").show();
     $("#rowAnexosSelecao").hide();
     $("#formContainer").show();
     $("#divBtnEnviar").hide();
+
+    // Preenche campos de integração
     bindingCamposIntegracaoRM();
+    $("#dadosRMNovoContrato").show();
+    await asyncPreencheOptionsColigada();
+    preencheCamposAutomaticamente();
+
     geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
         onChangeTipoContrato($("#tipoContrato"));

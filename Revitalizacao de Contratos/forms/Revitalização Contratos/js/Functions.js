@@ -788,4 +788,6 @@ function bloqueiaCamposAprovacao(){
     $("#valorCaucao").attr("readonly","readonly");
     $("#dataPagamentoCaucao").attr("readonly","readonly");
     
+    $("#descontoPorDiaChuva").attr("readonly","readonly");
+    $("#descontoPorDiaParado").attr("readonly","readonly");
 }
