@@ -571,6 +571,7 @@ async function geraEquipamentosSelecionados(){
         var equipamentos = await asyncConsultaEquipamentosSelecionados();
 
         for (const equipamento of equipamentos) {
+            $("#negociacaoHeaderEquipamentos").val(equipamento.NEGOCIACAO_SUPRIMENTOS == "S" ? "Sim":equipamento.NEGOCIACAO_SUPRIMENTOS == "N" ? "Não":"");
             $("#divEquipamentosSelecionados").append(await geraHtmlEquipamento(equipamento));
             $(".btnAnexosEquipamento:last").on("click", {equipamento:equipamento}, async function(event){
                 console.log(event)
