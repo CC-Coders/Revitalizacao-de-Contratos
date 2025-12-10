@@ -58,7 +58,7 @@ function bindings() {
 
     // Amarra eventos e elementos do HTML, mantendo todas definições de evento agrupadas
     $("#btnGerarArquivo").on("click", asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao);
-    $("#btnEditarArquivo").on("click", editarArquivo);
+    $("#btnEditarArquivo").on("click", editarArquivoNoCKEditor);
     $("#btnSalvarArquivo").on("click", salvaModeloAlterado);
     $("#btnVisualizarArquivo").on("click", visualizaDocumento);
     $("#btnEnviarSolicitacao").on("click", enviarSolicitacao);

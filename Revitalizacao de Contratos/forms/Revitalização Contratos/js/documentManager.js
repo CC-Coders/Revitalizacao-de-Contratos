@@ -4,13 +4,22 @@ const pastasDeAnexosPorServidor = {
     HOMOLOGACAO:"10540",
     PRODUCAO:"140518",
 }
-
 var ds = DatasetFactory.getDataset("dsGetServerURL", null, null, null);
 const env = ds.values[0].URL == "http://homologacao.castilho.com.br:2020" ? "HOMOLOGACAO" : ds.values[0].URL == "http://desenvolvimento.castilho.com.br:3232" ? "DESENVOLVIMENTO":"PRODUCAO";
 const pastaDeAnexos = pastasDeAnexosPorServidor[env];
 
 
+const codigosModelos = {
+    PRODUCAO:{
 
+    },
+    DESENVOLVIMENTO:{
+        "Locação de Imóvel":29328,
+        "Locação de Equipamento":30545,
+    }
+};
+
+// Gera cópia do Modelo
 async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
     var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
     var file = await geraFileFromURL(url);
@@ -136,17 +145,6 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
         return retorno;
     }
 }
-
-const codigosModelos = {
-    PRODUCAO:{
-
-    },
-    DESENVOLVIMENTO:{
-        "Locação de Imóvel":29328,
-        "Locação de Equipamento":30545,
-    }
-};
-
 async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
     const tipoContrato = $("#tipoContrato").val();
     const documentIdModelo = codigosModelos["DESENVOLVIMENTO"][tipoContrato];
@@ -176,7 +174,6 @@ function geraNomeDoArquivo(){
 
     return `${CODCCUSTO} - ${TIPO_CONTRATO} - ${NOME_FORNECEDOR}`;
 }
-
 async function salvaModeloAlterado() {
     try {
         Swal.fire({
@@ -277,7 +274,6 @@ async function salvaModeloAlterado() {
         return retorno;
     }
 }
-
 async function geraPreContrato() {
     Swal.fire({
         icon: "info",
@@ -336,9 +332,10 @@ async function convertDocxToPdf(docxBlob, name) {
     }
 }
 
+
 // CK5 Editor
 var ckeditor = null;
-async function editarArquivo() {
+async function editarArquivoNoCKEditor() {
     Swal.fire({
         icon: "info",
         title: "Carregando Contrato, por favor aguarde...",
@@ -393,7 +390,6 @@ async function editarArquivo() {
         );
     }
 }
-
 async function loadCkEditor() {
     const {
         ClassicEditor,
@@ -883,7 +879,6 @@ async function loadCkEditor() {
 
     ckeditor = await ClassicEditor.create(document.querySelector("#editor"), editorConfig);
 }
-
 var header = null; //Salva o cabeçalho importado do docx para usar quando for salvar pra docx novamente
 var footer = null; //Salva o rodape importado do docx para usar quando for salvar pra docx novamente
 async function carregaDocumentoParaOCKEditor(documentId) {
@@ -916,20 +911,6 @@ async function carregaDocumentoParaOCKEditor(documentId) {
         });
 }
 
-
-async function visualizaDocumento() {
-    var documentId = $("#contratoPdfId").val();
-    var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
-    window.open(url, '_blank');
-
-    // var attachments = parent.WKFViewAttachment.getAllAttachments();
-    // for (const attachment of attachments) {
-    //     if (attachment.documentId == documentId) {
-    //         // parent.WKFViewAttachment.openAttachmentView($("#userCode").val(), documentId, attachment.version);
-
-    //     }
-    // }
-}
 
 // Utils
 function promiseGeraFileFromURL(url) {
@@ -1010,11 +991,6 @@ function promiseCriaDocFluig_retornaDocumentId(file, parentId) {
         };
     });
 }
-
-
-
-
-// Utils
 function numeroPorExtenso(value, centavos) {
     //retorna o numero passado por extenso
     var resposta = "";
@@ -1124,4 +1100,9 @@ function getDateNow() {
 
     var dateTime = [ano, mes, dia].join("-");
     return dateTime;
+}
+async function visualizaDocumento() {
+    var documentId = $("#contratoPdfId").val();
+    var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
+    window.open(url, '_blank');
 }
