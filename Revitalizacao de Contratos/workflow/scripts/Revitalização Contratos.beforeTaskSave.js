@@ -125,6 +125,17 @@ function beforeTaskSave_controladoria() {
 }
 function beforeTaskSave_engenheiro() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Engenheiro");
+
+    if (hAPI.getCardValue("decisao") == "Aprovar") {
+        if (hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("coordenador") == "") {
+            // Se não tiver coordenador vai para assinatura eletrônica
+            criaAssinaturaEletronica();
+        }else if(hAPI.getCardValue("tipoContrato") == "Locação de Equipamento" && hAPI.getCardValue("coordenador") == "" && hAPI.getCardValue("CODCOLIGADA") != 1 ){
+            // Caso seja Locação de Equipamento e não tiver coordenador
+            // Vai para assinatura eletrônica somente quando não for Coligada 1, pois na Coligada 1 vai para aprovação do Jerson
+            criaAssinaturaEletronica();
+        }
+    }
 }
 function beforeTaskSave_coordenadorObras() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Coordenador");
