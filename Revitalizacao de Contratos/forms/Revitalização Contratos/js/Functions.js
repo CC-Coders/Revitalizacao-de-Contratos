@@ -1,3 +1,70 @@
+// Init
+function inicializarCalendario() {
+    FLUIGC.calendar(".date", {
+        pickDate: true,
+        pickTime: false,
+        minDate: "01/01/2024",
+        maxDate: "12/31/2030",
+        language: "pt-br",
+        dateFormat: "dd/mm/yyyy",
+    });    
+}
+function inicializarPeriodoLocacao() {
+    const periodoLocacao = document.getElementById("periodoLocacao");
+
+    if (periodoLocacao) {
+        flatpickr(periodoLocacao, {
+            mode: "range",
+            dateFormat: "d/m/Y",
+            locale: "pt",
+            minDate: "01/01/2024",
+            maxDate: "31/12/2030",
+            allowInput: true,
+            clickOpens: true,
+            disableMobile: true,
+            onOpen: function () {
+                periodoLocacao.classList.remove("disabled");
+            },
+            onClose: function (selectedDates) {
+                if (selectedDates.length === 2) {
+                    const [start, end] = selectedDates;
+                    const diffInMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+
+                    if (diffInMonths > 12) {
+                        FLUIGC.toast({
+                            message: "Período máximo: 12 meses.",
+                            type: "warning",
+                        });
+                        periodoLocacao.value = "";
+                    }
+                }
+            },
+        });
+    }
+}
+function buscaBancos() {
+    DatasetFactory.getDataset("GBANCO", null, null, null, {
+        success: (ds) => {
+            if (ds.values[0].STATUS != "SUCCESS") {
+                showMessage("Erro ao buscar Bancos: ", ds.values[0].MENSAGEM, "warning");
+                throw ds.values[0].MENSAGEM;
+            }
+
+            var bancos = JSON.parse(ds.values[0].RESULT);
+            const selectBanco = $("#banco");
+            var value = $(selectBanco).val();
+
+            $(selectBanco)[0].selectize.clearOptions();
+            $(selectBanco)[0].selectize.addOption(bancos.map(e=>{return {value:`${e.NUMBANCO} - ${e.NOME}`, text:`${e.NUMBANCO} - ${e.NOME}`}}));
+
+            selectBanco[0].selectize.setValue(value);
+        },
+        error: (e) => {
+            console.error(e);
+            showMessage("Erro ao buscar Bancos: ", " favor entrar em contato com o Administrador.", "warning");
+        },
+    });
+}
 function preencherObrasDoUsuario() {
     const userCode = $("#solicitante").val();
     if (!userCode) {
@@ -21,16 +88,16 @@ function preencherObrasDoUsuario() {
             return;
         }
 
-            const selectObra = $("#obra");
-            permissoes.forEach((ccusto) => {
-                if (!selectObra[0].selectize.optgroups[ccusto.NOMEFANTASIA]) {
-                    $("#obra")[0].selectize.addOptionGroup(ccusto.CODCOLIGADA, {value:ccusto.CODCOLIGADA, label: `${ccusto.CODCOLIGADA} - ${ccusto.NOMEFANTASIA}` });
-                }
+        const selectObra = $("#obra");
+        permissoes.forEach((ccusto) => {
+            if (!selectObra[0].selectize.optgroups[ccusto.NOMEFANTASIA]) {
+                $("#obra")[0].selectize.addOptionGroup(ccusto.CODCOLIGADA, {value:ccusto.CODCOLIGADA, label: `${ccusto.CODCOLIGADA} - ${ccusto.NOMEFANTASIA}` });
+            }
 
-                const optionValue = `${ccusto.CODCOLIGADA} - ${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
-                const optionLabel = `${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
-                selectObra[0].selectize.addOption({ value: optionValue, label:optionLabel, optgroup:ccusto.CODCOLIGADA });
-            });
+            const optionValue = `${ccusto.CODCOLIGADA} - ${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
+            const optionLabel = `${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
+            selectObra[0].selectize.addOption({ value: optionValue, label:optionLabel, optgroup:ccusto.CODCOLIGADA });
+        });
       
 
     } catch (error) {
@@ -42,7 +109,6 @@ function preencherObrasDoUsuario() {
         });
     }
 }
-
 function buscaFornecedores_preencheOptionsDoCampoLocador() {
         DatasetFactory.getDataset("FCFO", ["CODCFO", "CGCCFO", "NOMEFANTASIA"], [
             DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST),
@@ -74,6 +140,64 @@ function buscaFornecedores_preencheOptionsDoCampoLocador() {
     );
 }
 
+
+async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value) {
+    if (!value) {
+        $("#CODCOLIGADA").val("");
+        $("#CODCCUSTO").val("");
+        $("#NOMECCUSTO").val("");
+    } else {
+        var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = value.split(" - ");
+        $("#CODCOLIGADA").val(CODCOLIGADA);
+        $("#CODCCUSTO").val(CODCCUSTO);
+        $("#NOMECCUSTO").val(NOMECCUSTO);
+
+        var aprovadores = extraiAprovadoresDaLista(await promiseBuscaAprovadoresDaObra(CODCOLIGADA, NOMECCUSTO, "1.1.02", "9999999999999"));
+        $("#engenheiro").val(aprovadores.engenherio);
+        $("#coordenador").val(aprovadores.coordenador);
+        $("#diretor").val(aprovadores.diretor);
+    }
+
+    // Aprovadores
+    function promiseBuscaAprovadoresDaObra(CODCOLIGADA, LOCALESTOQUE, CODTMV, valorTotal) {
+        return new Promise((resolve, reject) => {
+            DatasetFactory.getDataset("verificaAprovador", null, [
+                DatasetFactory.createConstraint("paramCodcoligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+                DatasetFactory.createConstraint("paramLocal", LOCALESTOQUE, LOCALESTOQUE, ConstraintType.MUST),
+                DatasetFactory.createConstraint("paramCodTmv", CODTMV, CODTMV, ConstraintType.MUST),
+                DatasetFactory.createConstraint("paramValorTotal", valorTotal, valorTotal, ConstraintType.MUST),], null, {
+                success: (ds) => {
+                    if (ds.columns[0] == "FALHA") {
+                        reject(ds.values[0].FALHA);
+                    }
+
+                    resolve(ds.values);
+                },
+                error: (e) => {
+                    reject(e);
+                },
+            }
+            );
+        });
+    }
+    function extraiAprovadoresDaLista(lista) {
+        var engenherio = "";
+        var coordenador = "";
+        var diretor = "";
+
+        for (const user of lista) {
+            if (!engenherio && verificaSeUsuarioPertenceAoGrupo(user.usuarioFLUIG, "Engenheiros")) {
+                engenherio = user.usuarioFLUIG;
+            } else if (!coordenador && verificaSeUsuarioPertenceAoGrupo(user.usuarioFLUIG, "Coordenadores de obras")) {
+                coordenador = user.usuarioFLUIG;
+            } else if (!diretor && verificaSeUsuarioPertenceAoGrupo(user.usuarioFLUIG, "Diretoria")) {
+                diretor = user.usuarioFLUIG;
+            }
+        }
+
+        return { engenherio, coordenador, diretor };
+    }
+}
 function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(cgccfo) {
     // Nome da função alterado para descrever as resposabilidades da função corretamente
     // Necessário quebrar a função em várias funções, cada uma com uma responsabilidade
@@ -132,13 +256,302 @@ function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoForneced
     });
 }
 
+
+async function enviarSolicitacao() {
+    const ATIVIDADE_ATUAL = $("#atividade").val();
+
+    if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
+        if ($("#modeloContrato").val() == "Modelo Castilho") {
+            Swal.fire({
+                icon: "info",
+                title: "Gerando Contrato, por favor aguarde...",
+                showConfirmButton: false,
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+            await asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao();
+            Swal.close();            
+            $("#workflowActions > button:first-child", window.parent.document).click();
+        }else{
+            $("#workflowActions > button:first-child", window.parent.document).click();
+        }
+
+    } else {
+        $("#workflowActions > button:first-child", window.parent.document).click();
+    }
+}
+function validaCampos() {
+    var atividade = parseInt(document.getElementById("atividade").value);
+    var valida = true;
+    var isRetornar = document.getElementById("decisaoCancelar").checked;
+    console.log(isRetornar)
+    if (atividade == 0) {
+        $("input.inputInfoChamado, select.inputInfoChamado").each(function () {
+            if ($(this).is(":visible") && ($(this).val() == null || $(this).val() == undefined || $(this).val() == "")) {
+                $(this).addClass("has-error");
+                if (valida) {
+                    valida = false;
+                    FLUIGC.toast({
+                        message: "Campo não preenchido!",
+                        type: "warning",
+                    });
+                    $([document.documentElement, document.body]).animate(
+                        {
+                            scrollTop: $(this).offset().top - screen.height * 0.15,
+                        },
+                        700
+                    );
+                }
+            }
+        });
+        if ($("#modeloContrato").val()=="Contrato fora do modelo" && $("#contratoPdfId").val() == "") {
+            FLUIGC.toast({
+                message: "Necessário anexar o Contrato fora do Modelo!",
+                type: "warning",
+            });
+            valida = false;
+        }
+    }
+    if (isRetornar) {
+        var destinoRetorno = $("#destinoRetorno").val();
+        if (destinoRetorno == null || destinoRetorno == undefined || destinoRetorno == "") {
+            $("#destinoRetorno").addClass("has-error");
+            if (valida) {
+                valida = false;
+                FLUIGC.toast({
+                    message: "Selecione o destino do retorno!",
+                    type: "warning",
+                });
+                $([document.documentElement, document.body]).animate(
+                    {
+                        scrollTop: $("#destinoRetorno").offset().top - screen.height * 0.15,
+                    },
+                    700
+                );
+            }
+        }
+        var observacoes = $("#observacoes").val().trim();
+        if (observacoes == null || observacoes == undefined || observacoes == "") {
+            $("#observacoes").addClass("has-error");
+            if (valida) {
+                valida = false;
+                FLUIGC.toast({
+                    message: "Preencha as observações!",
+                    type: "warning",
+                });
+                $([document.documentElement, document.body]).animate(
+                    {
+                        scrollTop: $("#observacoes").offset().top - screen.height * 0.15,
+                    },
+                    700
+                );
+            }
+        }
+    }
+    if (!valida) {
+        FLUIGC.toast({
+            message: "Preencha todos os campos obrigatórios!",
+            type: "warning",
+        });
+    }
+
+    return valida;
+}
+function bloqueiaCamposAprovacao(){
+    $("#origemContrato").attr("readonly","readonly");
+    $("#modeloContrato").attr("readonly","readonly");
+    $("#tipoContrato").attr("readonly","readonly");
+    
+    $("#obra")[0].selectize.lock();
+    $("#locador")[0].selectize.lock();
+    $("#procurador").attr("readonly","readonly");
+    $("#contratantePrincipal").attr("readonly","readonly");
+    
+    $("#dataInicioLocacao").attr("readonly","readonly");
+    $("#dataFimLocacao").attr("readonly","readonly");
+    $("#indiceReajuste").attr("readonly","readonly");
+    $("#temRetencao").attr("readonly","readonly");
+    $("#percentualRetencao").attr("readonly","readonly");
+    $("#temREIDI").attr("readonly","readonly");
+    $("#percentualREIDI").attr("readonly","readonly");
+
+    $("#tipoPagamento").attr("readonly","readonly");
+    $("#banco")[0].selectize.lock();
+    $("#titular").attr("readonly","readonly");
+    $("#agencia").attr("readonly","readonly");
+    $("#contaCorrente").attr("readonly","readonly");
+    
+    
+    $("#nomeRepresentanteFornecedor").attr("readonly","readonly");
+    $("#cpfRepresentanteFornecedor").attr("readonly","readonly");
+    $("#mailRepresentanteFornecedor").attr("readonly","readonly");
+    $("#assinaturaContrato").attr("readonly","readonly");
+    
+    
+    $("#descricaoImovel").attr("readonly","readonly");
+    $("#valorMensalAluguel").attr("readonly","readonly");
+    $("#enderecoImovel").attr("readonly","readonly");
+    $("#matriculaImovel").attr("readonly","readonly");
+    $("#finalidadeLocacao").attr("readonly","readonly");
+    $("#periodoLocacao").attr("readonly","readonly");
+    $("#janelaPagamento").attr("readonly","readonly");
+    $("#caucao").attr("readonly","readonly");
+    $("#valorCaucao").attr("readonly","readonly");
+    $("#dataPagamentoCaucao").attr("readonly","readonly");
+    
+    $("#descontoPorDiaChuva").attr("readonly","readonly");
+    $("#descontoPorDiaParado").attr("readonly","readonly");
+}
+function popularDestinoRetorno() {
+    const ATIVIDADE_ATUAL = $("#atividade").val();
+    const $select = $("#destinoRetorno");
+    $select.empty().append('<option value="">Selecione o destino</option>');
+    let opcoes = [];
+    switch (parseInt(ATIVIDADE_ATUAL)) {
+        case ATIVIDADES.JURIDICO:
+            opcoes = [
+                { value: "OBRA", text: "Obra" }
+            ];
+            break;
+        case ATIVIDADES.CONTROLADORIA:
+            opcoes = [
+                { value: "JURIDICO", text: "Jurídico" },
+                { value: "OBRA", text: "Obra" }
+            ];
+            break;
+        case ATIVIDADES.ENGENHEIRO:
+        case ATIVIDADES.COORDENADOR_OBRAS:
+        case ATIVIDADES.DIRETORIA:
+            opcoes = [
+                { value: "CONTROLADORIA", text: "Controladoria" },
+                { value: "JURIDICO", text: "Jurídico" },
+                { value: "OBRA", text: "Obra" }
+            ];
+            break;
+    }
+    opcoes.forEach(opcao => {
+        $select.append($('<option>', {
+            value: opcao.value,
+            text: opcao.text
+        }));
+    });
+}
+function obraPermiteReidi(CODCOLIGADA, CODCCUSTO){
+    const obrasComReidi = {
+        "1":{
+            "1.2.043":"Obra Parapuã",
+            "1.4.011":"Obra Conserva Echaporã",
+            "1.4.016":"Obra Duplicação Oriente",
+            "1.4.021":"Obra COFCO",
+            "1.4.027":"Obra Conserva Maracaí",
+            "1.4.030":"Obra MRS Pátios Vale do Paraíba",
+            "1.4.034":"Obra MRS Campo Grande",
+        },
+        "13":{
+            "1.4.030":"Obra MRS Pátios Vale do Paraíba",
+            "1.4.034":"Obra MRS Campo Grande",
+        }
+    };
+
+    if (obrasComReidi[CODCOLIGADA] && obrasComReidi[CODCOLIGADA][CODCCUSTO]) {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
+// Historico
+async function asyncMontaHistorico() {
+    var linhasHistorico = getLinhasHistorico();
+
+    // Inverte a Lista para motrar o Histórico do Mais Recente para o Mais Antigo
+    linhasHistorico = linhasHistorico.reverse();
+
+    for (const linha of linhasHistorico) {
+        var html = geraHtmlHistorico(linha);
+
+        // Primeiro insere a linha do HTML, depois cria a <img/> e insere na DIV
+        $("#divLinhasHistorico").append(html);
+        $(".divImageUser:last").append(await promiseBuscaImagemUsuario(linha.USUARIO));
+    }
+
+    function getLinhasHistorico() {
+        var retorno = [];
+        $("#tableHistorico>tbody>tr:not(:first)").each(function () {
+            retorno.push({
+                USUARIO: $(this).find(".tableHistoricoUsuario").val(),
+                DATA: $(this).find(".tableHistoricoData").val(),
+                OBSERVACAO: $(this).find(".tableHistoricoObservacao").val(),
+                ACAO: $(this).find(".tableHistoricoAcao").val(),
+                ATIVIDADE: $(this).find(".tableHistoricoAtividade").val(),
+            });
+        });
+        return retorno;
+    }
+    function geraHtmlHistorico(linha) {
+        var DATA = linha.DATA.split(" ");
+        DATA = DATA[0].split("-").reverse().join("/") + " " + DATA[1];
+
+        var html = `<div class="card">
+                <div class="card-body" style="${linha.ACAO == "Aprovado" ? "border:solid 1px green;" : linha.ACAO == "Reprovado" ? "border:solid 1px red;" : ""} ">
+                    <div style="display:flex;">
+                        <div class="divImageUser" style="margin-right:20px;"></div>
+                        <div>
+                            <h3 class="card-title" style="margin-bottom:0px; color:black;">${BuscaNomeUsuario(linha.USUARIO)} <small>${linha.ACAO}</small></h3>
+                            <small>${DATA}</small>
+                            <p class="card-text">${linha.OBSERVACAO && linha.OBSERVACAO.trim() ? linha.OBSERVACAO : "Aprovado"}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+        return html;
+    }
+    function promiseBuscaImagemUsuario(usuario) {
+        return new Promise(async (resolve, reject) => {
+            const res = await fetch("/api/public/social/image/" + usuario);
+            const blob = await res.blob();
+            const img = new Image();
+            img.width = "60";
+            img.height = "60";
+            img.classList.add("userImage");
+            img.src = URL.createObjectURL(blob);
+            await img.decode();
+            resolve(img);
+        });
+    }
+}
+
+
+// Anexos
 const documentosPorTipo = {
     F: ["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
     J: ["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
 };
 const documentosAnexados = {};
+async function renderizarAnexosEtapaAprovacao() {
+    const hiddenValue = document.getElementById("hiddenDocumentosAnexados").value;
+    if (!hiddenValue) return;
 
+    try {
+        const anexos = JSON.parse(hiddenValue);
+        const lista = document.getElementById("listaAnexos");
+        lista.innerHTML = "";
 
+        for (const [tipo, docId] of Object.entries(anexos)) {
+            if (!docId) continue;
+            const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
+            lista.innerHTML += `<li><span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">Visualizar</a></span></li>`;
+        }
+    } catch (e) {
+        console.error("Erro ao carregar anexos:", e);
+    }
+}
 function anexosPorTipoDeContrato(tipoDoContrato){
     const listaAnexosPorTipoDeContrato = {
         "Locação de Equipamento":["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
@@ -156,7 +569,6 @@ function anexosPorTipoDeContrato(tipoDoContrato){
     $("#tipoDocumentacao").html(html);
     $("#listaAnexos").html(htmlListaAnexos);
 }
-
 async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
     const tipo = $("#tipoDocumentacao").val();
     const file = this.files[0];
@@ -239,124 +651,6 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
         }
     }
 }
-
-async function renderizarAnexosEtapaAprovacao() {
-    const hiddenValue = document.getElementById("hiddenDocumentosAnexados").value;
-    if (!hiddenValue) return;
-
-    try {
-        const anexos = JSON.parse(hiddenValue);
-        const lista = document.getElementById("listaAnexos");
-        lista.innerHTML = "";
-
-        for (const [tipo, docId] of Object.entries(anexos)) {
-            if (!docId) continue;
-            const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
-            lista.innerHTML += `<li><span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">Visualizar</a></span></li>`;
-        }
-    } catch (e) {
-        console.error("Erro ao carregar anexos:", e);
-    }
-}
-
-function buscaBancos() {
-    DatasetFactory.getDataset("GBANCO", null, null, null, {
-        success: (ds) => {
-            if (ds.values[0].STATUS != "SUCCESS") {
-                showMessage("Erro ao buscar Bancos: ", ds.values[0].MENSAGEM, "warning");
-                throw ds.values[0].MENSAGEM;
-            }
-
-            var bancos = JSON.parse(ds.values[0].RESULT);
-            const selectBanco = $("#banco");
-            var value = $(selectBanco).val();
-
-            $(selectBanco)[0].selectize.clearOptions();
-            $(selectBanco)[0].selectize.addOption(bancos.map(e=>{return {value:`${e.NUMBANCO} - ${e.NOME}`, text:`${e.NUMBANCO} - ${e.NOME}`}}));
-
-            selectBanco[0].selectize.setValue(value);
-        },
-        error: (e) => {
-            console.error(e);
-            showMessage("Erro ao buscar Bancos: ", " favor entrar em contato com o Administrador.", "warning");
-        },
-    });
-}
-
-function inicializarCalendario() {
-    FLUIGC.calendar(".date", {
-        pickDate: true,
-        pickTime: false,
-        minDate: "01/01/2024",
-        maxDate: "12/31/2030",
-        language: "pt-br",
-        dateFormat: "dd/mm/yyyy",
-    });    
-}
-
-function inicializarPeriodoLocacao() {
-    const periodoLocacao = document.getElementById("periodoLocacao");
-
-    if (periodoLocacao) {
-        flatpickr(periodoLocacao, {
-            mode: "range",
-            dateFormat: "d/m/Y",
-            locale: "pt",
-            minDate: "01/01/2024",
-            maxDate: "31/12/2030",
-            allowInput: true,
-            clickOpens: true,
-            disableMobile: true,
-            onOpen: function () {
-                periodoLocacao.classList.remove("disabled");
-            },
-            onClose: function (selectedDates) {
-                if (selectedDates.length === 2) {
-                    const [start, end] = selectedDates;
-                    const diffInMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-
-                    if (diffInMonths > 12) {
-                        FLUIGC.toast({
-                            message: "Período máximo: 12 meses.",
-                            type: "warning",
-                        });
-                        periodoLocacao.value = "";
-                    }
-                }
-            },
-        });
-    }
-}
-
-
-
-async function enviarSolicitacao() {
-    const ATIVIDADE_ATUAL = $("#atividade").val();
-
-    if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
-        if ($("#modeloContrato").val() == "Modelo Castilho") {
-            Swal.fire({
-                icon: "info",
-                title: "Gerando Contrato, por favor aguarde...",
-                showConfirmButton: false,
-                allowEscapeKey: false,
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                },
-            });
-            await asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao();
-            Swal.close();            
-            $("#workflowActions > button:first-child", window.parent.document).click();
-        }else{
-            $("#workflowActions > button:first-child", window.parent.document).click();
-        }
-
-    } else {
-        $("#workflowActions > button:first-child", window.parent.document).click();
-    }
-}
-
 function handleFileUpload(inputId, descricaoArquivo) {
     const input = document.getElementById(inputId);
     const statusText = document.getElementById("textFileOrcamento");
@@ -387,6 +681,21 @@ function handleFileUpload(inputId, descricaoArquivo) {
         }
     };
 }
+function anexarDocumentoAoProcesso(docId) {
+    try {
+        if (parent?.ECM?.workflowView?.attachDocument) {
+            parent.ECM.workflowView.attachDocument(docId);
+            console.log(`Documento ${docId} anexado ao processo`);
+        } else {
+            console.warn("Função de anexo ao processo não disponível.");
+        }
+    } catch (e) {
+        console.error("Erro ao anexar documento ao processo:", e);
+    }
+}
+
+
+// Utils
 function criaDocFluigRetornaDocumentId(file, parentId) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -424,326 +733,4 @@ function criaDocFluigRetornaDocumentId(file, parentId) {
             );
         };
     });
-}
-
-function anexarDocumentoAoProcesso(docId) {
-    try {
-        if (parent?.ECM?.workflowView?.attachDocument) {
-            parent.ECM.workflowView.attachDocument(docId);
-            console.log(`Documento ${docId} anexado ao processo`);
-        } else {
-            console.warn("Função de anexo ao processo não disponível.");
-        }
-    } catch (e) {
-        console.error("Erro ao anexar documento ao processo:", e);
-    }
-}
-
-function validaCampos() {
-    var atividade = parseInt(document.getElementById("atividade").value);
-    var valida = true;
-    var isRetornar = document.getElementById("decisaoCancelar").checked;
-    console.log(isRetornar)
-    if (atividade == 0) {
-        $("input.inputInfoChamado, select.inputInfoChamado").each(function () {
-            if ($(this).is(":visible") && ($(this).val() == null || $(this).val() == undefined || $(this).val() == "")) {
-                $(this).addClass("has-error");
-                if (valida) {
-                    valida = false;
-                    FLUIGC.toast({
-                        message: "Campo não preenchido!",
-                        type: "warning",
-                    });
-                    $([document.documentElement, document.body]).animate(
-                        {
-                            scrollTop: $(this).offset().top - screen.height * 0.15,
-                        },
-                        700
-                    );
-                }
-            }
-        });
-        if ($("#modeloContrato").val()=="Contrato fora do modelo" && $("#contratoPdfId").val() == "") {
-            FLUIGC.toast({
-                message: "Necessário anexar o Contrato fora do Modelo!",
-                type: "warning",
-            });
-            valida = false;
-        }
-    }
-    if (isRetornar) {
-        var destinoRetorno = $("#destinoRetorno").val();
-        if (destinoRetorno == null || destinoRetorno == undefined || destinoRetorno == "") {
-            $("#destinoRetorno").addClass("has-error");
-            if (valida) {
-                valida = false;
-                FLUIGC.toast({
-                    message: "Selecione o destino do retorno!",
-                    type: "warning",
-                });
-                $([document.documentElement, document.body]).animate(
-                    {
-                        scrollTop: $("#destinoRetorno").offset().top - screen.height * 0.15,
-                    },
-                    700
-                );
-            }
-        }
-        var observacoes = $("#observacoes").val().trim();
-        if (observacoes == null || observacoes == undefined || observacoes == "") {
-            $("#observacoes").addClass("has-error");
-            if (valida) {
-                valida = false;
-                FLUIGC.toast({
-                    message: "Preencha as observações!",
-                    type: "warning",
-                });
-                $([document.documentElement, document.body]).animate(
-                    {
-                        scrollTop: $("#observacoes").offset().top - screen.height * 0.15,
-                    },
-                    700
-                );
-            }
-        }
-    }
-    if (!valida) {
-        FLUIGC.toast({
-            message: "Preencha todos os campos obrigatórios!",
-            type: "warning",
-        });
-    } else {
-        // salvaDadosFormulario();
-    }
-
-    return valida;
-}
-
-// Historico
-async function asyncMontaHistorico() {
-    var linhasHistorico = getLinhasHistorico();
-
-    // Inverte a Lista para motrar o Histórico do Mais Recente para o Mais Antigo
-    linhasHistorico = linhasHistorico.reverse();
-
-    for (const linha of linhasHistorico) {
-        var html = geraHtmlHistorico(linha);
-
-        // Primeiro insere a linha do HTML, depois cria a <img/> e insere na DIV
-        $("#divLinhasHistorico").append(html);
-        $(".divImageUser:last").append(await promiseBuscaImagemUsuario(linha.USUARIO));
-    }
-
-    function getLinhasHistorico() {
-        var retorno = [];
-        $("#tableHistorico>tbody>tr:not(:first)").each(function () {
-            retorno.push({
-                USUARIO: $(this).find(".tableHistoricoUsuario").val(),
-                DATA: $(this).find(".tableHistoricoData").val(),
-                OBSERVACAO: $(this).find(".tableHistoricoObservacao").val(),
-                ACAO: $(this).find(".tableHistoricoAcao").val(),
-                ATIVIDADE: $(this).find(".tableHistoricoAtividade").val(),
-            });
-        });
-        return retorno;
-    }
-    function geraHtmlHistorico(linha) {
-        var DATA = linha.DATA.split(" ");
-        DATA = DATA[0].split("-").reverse().join("/") + " " + DATA[1];
-
-        var html = `<div class="card">
-                <div class="card-body" style="${linha.ACAO == "Aprovado" ? "border:solid 1px green;" : linha.ACAO == "Reprovado" ? "border:solid 1px red;" : ""} ">
-                    <div style="display:flex;">
-                        <div class="divImageUser" style="margin-right:20px;"></div>
-                        <div>
-                            <h3 class="card-title" style="margin-bottom:0px; color:black;">${BuscaNomeUsuario(linha.USUARIO)} <small>${linha.ACAO}</small></h3>
-                            <small>${DATA}</small>
-                            <p class="card-text">${linha.OBSERVACAO && linha.OBSERVACAO.trim() ? linha.OBSERVACAO : "Aprovado"}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-
-        return html;
-    }
-    function promiseBuscaImagemUsuario(usuario) {
-        return new Promise(async (resolve, reject) => {
-            const res = await fetch("/api/public/social/image/" + usuario);
-            const blob = await res.blob();
-            const img = new Image();
-            img.width = "60";
-            img.height = "60";
-            img.classList.add("userImage");
-            img.src = URL.createObjectURL(blob);
-            await img.decode();
-            resolve(img);
-        });
-    }
-}
-
-async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value) {
-    if (!value) {
-        $("#CODCOLIGADA").val("");
-        $("#CODCCUSTO").val("");
-        $("#NOMECCUSTO").val("");
-    } else {
-        var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = value.split(" - ");
-        $("#CODCOLIGADA").val(CODCOLIGADA);
-        $("#CODCCUSTO").val(CODCCUSTO);
-        $("#NOMECCUSTO").val(NOMECCUSTO);
-
-        var aprovadores = extraiAprovadoresDaLista(await promiseBuscaAprovadoresDaObra(CODCOLIGADA, NOMECCUSTO, "1.1.02", "9999999999999"));
-        $("#engenheiro").val(aprovadores.engenherio);
-        $("#coordenador").val(aprovadores.coordenador);
-        $("#diretor").val(aprovadores.diretor);
-    }
-
-    // Aprovadores
-    function promiseBuscaAprovadoresDaObra(CODCOLIGADA, LOCALESTOQUE, CODTMV, valorTotal) {
-        return new Promise((resolve, reject) => {
-            DatasetFactory.getDataset("verificaAprovador", null, [
-                DatasetFactory.createConstraint("paramCodcoligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
-                DatasetFactory.createConstraint("paramLocal", LOCALESTOQUE, LOCALESTOQUE, ConstraintType.MUST),
-                DatasetFactory.createConstraint("paramCodTmv", CODTMV, CODTMV, ConstraintType.MUST),
-                DatasetFactory.createConstraint("paramValorTotal", valorTotal, valorTotal, ConstraintType.MUST),], null, {
-                success: (ds) => {
-                    if (ds.columns[0] == "FALHA") {
-                        reject(ds.values[0].FALHA);
-                    }
-
-                    resolve(ds.values);
-                },
-                error: (e) => {
-                    reject(e);
-                },
-            }
-            );
-        });
-    }
-    function extraiAprovadoresDaLista(lista) {
-        var engenherio = "";
-        var coordenador = "";
-        var diretor = "";
-
-        for (const user of lista) {
-            if (!engenherio && verificaSeUsuarioPertenceAoGrupo(user.usuarioFLUIG, "Engenheiros")) {
-                engenherio = user.usuarioFLUIG;
-            } else if (!coordenador && verificaSeUsuarioPertenceAoGrupo(user.usuarioFLUIG, "Coordenadores de obras")) {
-                coordenador = user.usuarioFLUIG;
-            } else if (!diretor && verificaSeUsuarioPertenceAoGrupo(user.usuarioFLUIG, "Diretoria")) {
-                diretor = user.usuarioFLUIG;
-            }
-        }
-
-        return { engenherio, coordenador, diretor };
-    }
-}
-
-function popularDestinoRetorno() {
-    const ATIVIDADE_ATUAL = $("#atividade").val();
-    const $select = $("#destinoRetorno");
-    $select.empty().append('<option value="">Selecione o destino</option>');
-    let opcoes = [];
-    switch (parseInt(ATIVIDADE_ATUAL)) {
-        case ATIVIDADES.JURIDICO:
-            opcoes = [
-                { value: "OBRA", text: "Obra" }
-            ];
-            break;
-        case ATIVIDADES.CONTROLADORIA:
-            opcoes = [
-                { value: "JURIDICO", text: "Jurídico" },
-                { value: "OBRA", text: "Obra" }
-            ];
-            break;
-        case ATIVIDADES.ENGENHEIRO:
-        case ATIVIDADES.COORDENADOR_OBRAS:
-        case ATIVIDADES.DIRETORIA:
-            opcoes = [
-                { value: "CONTROLADORIA", text: "Controladoria" },
-                { value: "JURIDICO", text: "Jurídico" },
-                { value: "OBRA", text: "Obra" }
-            ];
-            break;
-    }
-    opcoes.forEach(opcao => {
-        $select.append($('<option>', {
-            value: opcao.value,
-            text: opcao.text
-        }));
-    });
-}
-
-
-
-
-function obraPermiteReidi(CODCOLIGADA, CODCCUSTO){
-    const obrasComReidi = {
-        "1":{
-            "1.2.043":"Obra Parapuã",
-            "1.4.011":"Obra Conserva Echaporã",
-            "1.4.016":"Obra Duplicação Oriente",
-            "1.4.021":"Obra COFCO",
-            "1.4.027":"Obra Conserva Maracaí",
-            "1.4.030":"Obra MRS Pátios Vale do Paraíba",
-            "1.4.034":"Obra MRS Campo Grande",
-        },
-        "13":{
-            "1.4.030":"Obra MRS Pátios Vale do Paraíba",
-            "1.4.034":"Obra MRS Campo Grande",
-        }
-    };
-
-    if (obrasComReidi[CODCOLIGADA] && obrasComReidi[CODCOLIGADA][CODCCUSTO]) {
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
-function bloqueiaCamposAprovacao(){
-    $("#origemContrato").attr("readonly","readonly");
-    $("#modeloContrato").attr("readonly","readonly");
-    $("#tipoContrato").attr("readonly","readonly");
-    
-    $("#obra")[0].selectize.lock();
-    $("#locador")[0].selectize.lock();
-    $("#procurador").attr("readonly","readonly");
-    $("#contratantePrincipal").attr("readonly","readonly");
-    
-    $("#dataInicioLocacao").attr("readonly","readonly");
-    $("#dataFimLocacao").attr("readonly","readonly");
-    $("#indiceReajuste").attr("readonly","readonly");
-    $("#temRetencao").attr("readonly","readonly");
-    $("#percentualRetencao").attr("readonly","readonly");
-    $("#temREIDI").attr("readonly","readonly");
-    $("#percentualREIDI").attr("readonly","readonly");
-
-    $("#tipoPagamento").attr("readonly","readonly");
-    $("#banco")[0].selectize.lock();
-    $("#titular").attr("readonly","readonly");
-    $("#agencia").attr("readonly","readonly");
-    $("#contaCorrente").attr("readonly","readonly");
-    
-    
-    $("#nomeRepresentanteFornecedor").attr("readonly","readonly");
-    $("#cpfRepresentanteFornecedor").attr("readonly","readonly");
-    $("#mailRepresentanteFornecedor").attr("readonly","readonly");
-    $("#assinaturaContrato").attr("readonly","readonly");
-    
-    
-    $("#descricaoImovel").attr("readonly","readonly");
-    $("#valorMensalAluguel").attr("readonly","readonly");
-    $("#enderecoImovel").attr("readonly","readonly");
-    $("#matriculaImovel").attr("readonly","readonly");
-    $("#finalidadeLocacao").attr("readonly","readonly");
-    $("#periodoLocacao").attr("readonly","readonly");
-    $("#janelaPagamento").attr("readonly","readonly");
-    $("#caucao").attr("readonly","readonly");
-    $("#valorCaucao").attr("readonly","readonly");
-    $("#dataPagamentoCaucao").attr("readonly","readonly");
-    
-    $("#descontoPorDiaChuva").attr("readonly","readonly");
-    $("#descontoPorDiaParado").attr("readonly","readonly");
 }
