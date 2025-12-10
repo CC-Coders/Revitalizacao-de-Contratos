@@ -36,9 +36,13 @@ $(document).ready(function () {
     } else if([ATIVIDADES.ADM_OBRA,ATIVIDADES.CONTROLADORIA_RECEBIMENTO, ATIVIDADES.CONTROLADORIA_RECOLHE_ASSINATURA, ATIVIDADES.OBRA_RECEBE_VIAS].includes(ATIVIDADE_ATUAL)){
         // Se for atividade de Assinatura Manual
         loadTelaAssinaturaManual();
+    }else{
+        loadTelaAprovacao();
     }
 
 });
+
+
 var beforeSendValidate = function (numState, nextState) {
     var atividade = parseInt(document.getElementById("atividade").value);
        if (atividade == 0) {
@@ -46,6 +50,7 @@ var beforeSendValidate = function (numState, nextState) {
        }
     return validaCampos();
 };
+
 
 function bindings() {
     FLUIGC.popover('.step', { trigger: 'hover', placement: 'auto' });
@@ -248,6 +253,7 @@ function bindings() {
 
 }
 
+
 function loadTelaInicio() {
     $(".panelAprovacao").hide();
     $(".panelInput").show();
@@ -271,7 +277,6 @@ function loadTelaInicio() {
         $("#paginationEquipamentos").removeClass("hidden");
     }
 }
-
 function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
     $("#divTipoAssinaturaContrato").show();
@@ -310,8 +315,18 @@ function loadTelaInicioRetorno() {
         initDataTableEquipamentos();
         preencheListaDeEquipamentos();
     }
-}
 
+    if ($("#temRetencao").val() == "Sim") {
+        $("#divPercentualRetencao").show();
+    } else {
+        $("#divPercentualRetencao").hide();
+    }
+    if ($("#temREIDI").val() == "Sim") {
+        $("#divPercentualReidi").show();
+    } else {
+        $("#divPercentualReidi").hide();
+    }
+}
 function loadTelaJuridico() {
     $(".panelAprovacao").show();
     $("#rowAnexosSelecao").hide();
@@ -342,8 +357,18 @@ function loadTelaJuridico() {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
     }
-}
 
+    if ($("#temRetencao").val() == "Sim") {
+        $("#divPercentualRetencao").show();
+    } else {
+        $("#divPercentualRetencao").hide();
+    }
+    if ($("#temREIDI").val() == "Sim") {
+        $("#divPercentualReidi").show();
+    } else {
+        $("#divPercentualReidi").hide();
+    }
+}
 async function loadTelaControladoria() {
     $(".panelAprovacao").show();
     $("#rowAnexosSelecao").hide();
@@ -358,20 +383,20 @@ async function loadTelaControladoria() {
 
     geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
-        onChangeTipoContrato($("#tipoContrato"));
-            buscaBancos();
+    onChangeTipoContrato($("#tipoContrato"));
+    buscaBancos();
 
-            $("#divBotoesEdicaoContrato").show();
-            $("#btnEditarArquivo").hide();
-            $("#btnVisualizarPreContrato").hide();
+    $("#divBotoesEdicaoContrato").show();
+    $("#btnEditarArquivo").hide();
+    $("#btnVisualizarPreContrato").hide();
             
             
-            setAtividadeAtivaProgresso(2);
-            asyncMontaHistorico();
-            mostrarPagina("0");
+    setAtividadeAtivaProgresso(2);
+    asyncMontaHistorico();
+    mostrarPagina("0");
             
-            renderizarAnexosEtapaAprovacao();
-            bloqueiaCamposAprovacao();
+    renderizarAnexosEtapaAprovacao();
+    bloqueiaCamposAprovacao();
 
     if($("#modeloContrato").val() == "Contrato fora do modelo"){
         $("#btnEditarArquivo").hide();
@@ -383,28 +408,38 @@ async function loadTelaControladoria() {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
     }
-}
 
+    if ($("#temRetencao").val() == "Sim") {
+        $("#divPercentualRetencao").show();
+    } else {
+        $("#divPercentualRetencao").hide();
+    }
+    if ($("#temREIDI").val() == "Sim") {
+        $("#divPercentualReidi").show();
+    } else {
+        $("#divPercentualReidi").hide();
+    }
+}
 function loadTelaAprovacao() {
     $(".panelAprovacao, #formContainer").show();
     $("#rowAnexosSelecao").hide();
     setAtividadeAtivaProgresso(3);
     
-        onChangeTipoContrato($("#tipoContrato"));
-            buscaBancos();
+    onChangeTipoContrato($("#tipoContrato"));
+    buscaBancos();
 
-            $("#divBotoesEdicaoContrato").show();
-$("#btnEditarArquivo").hide();
-$("#btnVisualizarPreContrato").hide();
+    $("#divBotoesEdicaoContrato").show();
+    $("#btnEditarArquivo").hide();
+    $("#btnVisualizarPreContrato").hide();
 
-            asyncMontaHistorico();
-            mostrarPagina("0");
-            geraEquipamentosSelecionados();
-            geraCabecalhoEquipamentos();
-            renderizarAnexosEtapaAprovacao();
-            $("#paginationIntegracaoRM").remove();
-            $("#btnEditarArquivo").remove();
-            bloqueiaCamposAprovacao();
+    asyncMontaHistorico();
+    mostrarPagina("0");
+    geraEquipamentosSelecionados();
+    geraCabecalhoEquipamentos();
+    renderizarAnexosEtapaAprovacao();
+    $("#paginationIntegracaoRM").remove();
+    $("#btnEditarArquivo").remove();
+    bloqueiaCamposAprovacao();
 
     if($("#modeloContrato").val() == "Contrato fora do modelo"){
         $("#btnEditarArquivo").hide();
@@ -415,8 +450,18 @@ $("#btnVisualizarPreContrato").hide();
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
     }
-}
 
+    if ($("#temRetencao").val() == "Sim") {
+        $("#divPercentualRetencao").show();
+    } else {
+        $("#divPercentualRetencao").hide();
+    }
+    if ($("#temREIDI").val() == "Sim") {
+        $("#divPercentualReidi").show();
+    } else {
+        $("#divPercentualReidi").hide();
+    }
+}
 function loadTelaAssinaturaManual() {
     $(".panelAprovacao, #formContainer, #dadosContrato").show();
     $("#rowAnexosSelecao").hide();
@@ -433,8 +478,8 @@ function loadTelaAssinaturaManual() {
         $("#btnVisualizarPreContrato").hide();
     }
 
-        onChangeTipoContrato($("#tipoContrato"));
-        bloqueiaCamposAprovacao();
+    onChangeTipoContrato($("#tipoContrato"));
+    bloqueiaCamposAprovacao();
     renderizarAnexosEtapaAprovacao();
 
     if ($("#tipoContrato").val() == "Locação de Equipamento") {
@@ -442,8 +487,18 @@ function loadTelaAssinaturaManual() {
         $("#paginationEquipamentos").removeClass("hidden");
     }
     $("#divResolucaoChamado").hide();
-}
 
+    if ($("#temRetencao").val() == "Sim") {
+        $("#divPercentualRetencao").show();
+    } else {
+        $("#divPercentualRetencao").hide();
+    }
+    if ($("#temREIDI").val() == "Sim") {
+        $("#divPercentualReidi").show();
+    } else {
+        $("#divPercentualReidi").hide();
+    }
+}
 function loadTelaAssinaturaEletronica() {
 
     $(".panelAprovacao, #formContainer, #dadosContrato").show();
@@ -461,15 +516,26 @@ function loadTelaAssinaturaEletronica() {
         $("#btnVisualizarPreContrato").hide();
     }
 
-        onChangeTipoContrato($("#tipoContrato"));
+    onChangeTipoContrato($("#tipoContrato"));
     renderizarAnexosEtapaAprovacao();
         
-        $("#divQuadroStatusAssinaturaEletronica").show();
-        asyncGeraQuadroStatusAssinatura();
-        bloqueiaCamposAprovacao();
+    $("#divQuadroStatusAssinaturaEletronica").show();
+    asyncGeraQuadroStatusAssinatura();
+    bloqueiaCamposAprovacao();
 
     if ($("#tipoContrato").val() == "Locação de Equipamento") {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
+    }
+
+    if ($("#temRetencao").val() == "Sim") {
+        $("#divPercentualRetencao").show();
+    } else {
+        $("#divPercentualRetencao").hide();
+    }
+    if ($("#temREIDI").val() == "Sim") {
+        $("#divPercentualReidi").show();
+    } else {
+        $("#divPercentualReidi").hide();
     }
 }
