@@ -37,40 +37,8 @@ datatablesLanguage = {
         },
     },
 };
-function conusltaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ){
-    return new Promise((resolve, reject)=>{
-        DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
-            DatasetFactory.createConstraint("CODCOLIGADA",CODCOLIGADA,CODCOLIGADA,ConstraintType.MUST),
-            DatasetFactory.createConstraint("CCUSTO",CCUSTO,CCUSTO,ConstraintType.MUST),
-            DatasetFactory.createConstraint("CNPJ",CNPJ,CNPJ,ConstraintType.MUST),
-        ],null,{
-            success:ds=>{
-                if (ds.values[0].STATUS != "SUCCESS") {
-                    reject(ds.values[0].MENSAGEM);
-                }else{
-                    resolve(JSON.parse(ds.values[0].RESULT));
-                }
-            },
-            error:e=>reject(e)
-        });
-    });
-}
 
-async function preencheListaDeEquipamentos(){
-    try {
-        const CODCOLIGADA = $("#CODCOLIGADA").val();
-        const CCUSTO = $("#CODCCUSTO").val();
-        const CNPJ = $("#hiddenCGCCFO").val();
-
-        var equipamentos = await conusltaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ);
-        dataTableEquipamentos.clear().draw();
-        dataTableEquipamentos.rows.add(equipamentos); // Add new data
-        dataTableEquipamentos.columns.adjust().draw(); // Redraw the DataTable
-    } catch (error) {
-        console.error(error);
-    }
-}
-
+// DataTable Equipamentos Pendentes
 function initDataTableEquipamentos(){
     dataTableEquipamentos = new DataTable("#tableEquipamentos", {
         pageLength: 10,
@@ -147,7 +115,7 @@ function initDataTableEquipamentos(){
                         return `<input type="checkbox" class="checkboxSelecionaEquipamento" />`;
                     }
                     else if(row.STATUS == 2){
-                        var  list = listaPrefixosSelecionados();
+                        var  list = retornaListaComEquipamentosSelecionadosPeloUsuario();
                         if (list.includes(row.PREFIXO)) {
                             return `<input type="checkbox" checked class="checkboxSelecionaEquipamento" />`;
                         }
@@ -189,21 +157,52 @@ function initDataTableEquipamentos(){
             onClickCheckEquipamento(this);
       });
     });
-}
 
-function listaPrefixosSelecionados(){
-    var list = [];
-    $(".equipamentoSelecionadoPrefixo:not(:first)").each(function(){
-        list.push($(this).val());
+    function retornaListaComEquipamentosSelecionadosPeloUsuario(){
+        var list = [];
+        $(".equipamentoSelecionadoPrefixo:not(:first)").each(function(){
+            list.push($(this).val());
+        });
+
+        return list;
+    }
+}
+async function preencheListaDeEquipamentos(){
+    try {
+        const CODCOLIGADA = $("#CODCOLIGADA").val();
+        const CCUSTO = $("#CODCCUSTO").val();
+        const CNPJ = $("#hiddenCGCCFO").val();
+
+        var equipamentos = await consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ);
+        dataTableEquipamentos.clear().draw();
+        dataTableEquipamentos.rows.add(equipamentos); // Add new data
+        dataTableEquipamentos.columns.adjust().draw(); // Redraw the DataTable
+    } catch (error) {
+        console.error(error);
+    }
+}
+function consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ){
+    return new Promise((resolve, reject)=>{
+        DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
+            DatasetFactory.createConstraint("CODCOLIGADA",CODCOLIGADA,CODCOLIGADA,ConstraintType.MUST),
+            DatasetFactory.createConstraint("CCUSTO",CCUSTO,CCUSTO,ConstraintType.MUST),
+            DatasetFactory.createConstraint("CNPJ",CNPJ,CNPJ,ConstraintType.MUST),
+        ],null,{
+            success:ds=>{
+                if (ds.values[0].STATUS != "SUCCESS") {
+                    reject(ds.values[0].MENSAGEM);
+                }else{
+                    resolve(JSON.parse(ds.values[0].RESULT));
+                }
+            },
+            error:e=>reject(e)
+        });
     });
-
-    return list;
 }
-
-async function onClickDetailsEquipamento(that){
+async function onClickDetailsEquipamento(that) {
     var self = that;
-    
-    var tr = $(self).closest('tr');  
+
+    var tr = $(self).closest('tr');
     var row = dataTableEquipamentos.row(tr);
     console.log(row)
     if (row.child.isShown()) {
@@ -236,16 +235,15 @@ async function onClickDetailsEquipamento(that){
             });
         });
         $("div").find(".btnAlterarEquipamento").on("click", { equipamento: row.data() }, async function (event) {
-           modalAlterarEquipamento(event.data.equipamento)
+            modalAlterarEquipamento(event.data.equipamento)
         });
-            
+
     }
 
-}
-async function geraDetailsRow(data){
-    try {
-    console.log(data)
-    var html = `
+    async function geraDetailsRow(data) {
+        try {
+            console.log(data)
+            var html = `
         <div class="divChildRowEquipamento">
             <h3>Equipamento</h3>
             <div class="row">
@@ -271,17 +269,17 @@ async function geraDetailsRow(data){
                 ${data.VALOR_MOBILIZADO ?
                     `<div class="col-md-4">
                         <label>Valor Mobilização: ${floatToMoney(data.VALOR_MOBILIZADO)} ${data.UN_MOBILIZADO}</label>
-                    </div>`:""
+                    </div>`: ""
                 }
                 ${data.VALOR_EXTRA ?
                     `<div class="col-md-4">
                         <label>Valor Hora Extra: ${floatToMoney(data.VALOR_EXTRA)} ${data.UN_EXTRA}</label>
-                    </div>`:""
+                    </div>`: ""
                 }
                 ${data.MAODEOBRA ?
                     `<div class="col-md-4">
                         <label>Valor Mão de Obra: ${floatToMoney(data.MAODEOBRA)}</label>
-                    </div>`:""
+                    </div>`: ""
                 }
             </div>
             <hr>
@@ -291,13 +289,12 @@ async function geraDetailsRow(data){
                         <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
                         Anexos
                     </button>
-                    ${
-                        data.STATUS == 1 ? 
-                        `<button class="btn btn-primary btnAlterarEquipamento">
+                    ${data.STATUS == 1 ?
+                    `<button class="btn btn-primary btnAlterarEquipamento">
                             <i class="flaticon flaticon-edit icon-sm" aria-hidden="true"></i>
                             Alterar
-                        </button>`:``
-                    }
+                        </button>`: ``
+                }
                     <a target="_blank" href="/portal/p/1/paola-tester?prefixo=${data.PREFIXO}" class="btn btn-primary btnLinkPainelEquipamentos">
                         <i class="flaticon flaticon-import icon-sm" aria-hidden="true"></i>
                         Painel de Equipamentos
@@ -306,45 +303,45 @@ async function geraDetailsRow(data){
             </div>       
         </div>`;
 
-    return html;
-    } catch (error) {
-        throw error;
-    }
+            return html;
+        } catch (error) {
+            throw error;
+        }
 
 
-    async function geraHtmlAnexos(data){
-        var html = "";
+        async function geraHtmlAnexos(data) {
+            var html = "";
 
-        for (const documentId of data.ANEXOS_FOTOS.split(",")) {
-            var documentName = await promiseGetDocumentDescription(documentId)
-            html += await htmlNovoAnexo(documentId, documentName);
+            for (const documentId of data.ANEXOS_FOTOS.split(",")) {
+                var documentName = await promiseGetDocumentDescription(documentId)
+                html += await htmlNovoAnexo(documentId, documentName);
+            }
+            for (const documentId of data.ANEXOS_DOCUMENTACAO.split(",")) {
+                var documentName = await promiseGetDocumentDescription(documentId)
+                html += await htmlNovoAnexo(documentId, documentName);
+            }
+            for (const documentId of data.ANEXOS_LAUDO.split(",")) {
+                var documentName = await promiseGetDocumentDescription(documentId)
+                html += await htmlNovoAnexo(documentId, documentName);
+            }
+            for (const documentId of data.ANEXOS_PLANO_MANUTENCAO.split(",")) {
+                var documentName = await promiseGetDocumentDescription(documentId)
+                html += await htmlNovoAnexo(documentId, documentName);
+            }
+            for (const documentId of data.ANEXOS_ART.split(",")) {
+                var documentName = await promiseGetDocumentDescription(documentId)
+                html += await htmlNovoAnexo(documentId, documentName);
+            }
+            return html;
         }
-        for (const documentId of data.ANEXOS_DOCUMENTACAO.split(",")) {
-            var documentName = await promiseGetDocumentDescription(documentId)
-            html += await htmlNovoAnexo(documentId, documentName);
-        }
-        for (const documentId of data.ANEXOS_LAUDO.split(",")) {
-            var documentName = await promiseGetDocumentDescription(documentId)
-            html += await htmlNovoAnexo(documentId, documentName);
-        }
-        for (const documentId of data.ANEXOS_PLANO_MANUTENCAO.split(",")) {
-            var documentName = await promiseGetDocumentDescription(documentId)
-            html += await htmlNovoAnexo(documentId, documentName);
-        }
-        for (const documentId of data.ANEXOS_ART.split(",")) {
-            var documentName = await promiseGetDocumentDescription(documentId)
-            html += await htmlNovoAnexo(documentId, documentName);
-        }
-        return html;
-    }
-
-    async function htmlNovoAnexo(documentId, documentName){
-        var html = 
-        `<div class="btn btn-default btnAnexo">
-            <b><a target="_blank" href=${documentId == "#"? "#": await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId)}>${documentName}</a></b>
+        async function htmlNovoAnexo(documentId, documentName) {
+            var html =
+                `<div class="btn btn-default btnAnexo">
+            <b><a target="_blank" href=${documentId == "#" ? "#" : await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId)}>${documentName}</a></b>
         </div>`;
 
-        return html;
+            return html;
+        }
     }
 }
 async function onClickCheckEquipamento(that) {
@@ -373,8 +370,6 @@ async function onClickCheckEquipamento(that) {
             }
         });
     }
-
-    
 }
 async function modalAlterarEquipamento(data) {
     var html = 
@@ -479,7 +474,6 @@ async function modalAlterarEquipamento(data) {
         }
     });
 }
-
 function alteraDadosEquipamento(IDEQUI, PREFIXO){
     const campo = $(".selectCampoAlteracao").val()
     const VALORATUAL = $(".atualValorAlteracao").val()
@@ -505,8 +499,6 @@ function alteraDadosEquipamento(IDEQUI, PREFIXO){
         return ds.values[0].MENSAGEM;
     }
 }
-
-
 function atualizaValorTotalLocacao(){
     var valorTotalMensal = 0;
     $("#tableEquipamentos>tbody>tr").each(function(){
@@ -534,37 +526,9 @@ function atualizaValorTotalLocacao(){
         $("#valorTotalLocacao").val(floatToMoney(valorTotalMensal*prazoEmMeses))
     }
 }
-function calculaDiferencaEmMeses(diaInicio, diaFim){
-    const init = moment(diaInicio);
-    const end = moment(diaFim);
-
-    return Math.round(Math.abs(init.diff(end, 'months', true)))
-}
 
 
-function promiseGetDocumentDescription(documentId){
-    return new Promise((resolve, reject)=> {
-        $.ajax({
-            url: `/content-management/api/v2/documents/${documentId}`,
-            contentType: "application/json",
-            method: "GET",
-            error: function (x, e) {
-                console.log(x);
-                console.log(e);
-                FLUIGC.toast({
-                    message: "Erro ao buscar documento: " + e,
-                    type: "warning"
-                });
-                reject("Erro ao buscar boletim de medição!");
-            },
-            success: function (data) {
-                resolve(data.description);
-            }
-        });
-    });
-}
-
-
+// Equipamentos Selecionados nas telas de Aprovação
 async function geraEquipamentosSelecionados(){
     try {
         $("#tableEquipamentos").hide();
@@ -790,7 +754,6 @@ async function htmlNovoAnexo(documentId, documentName) {
 
     return html;
 }
-
 function geraCabecalhoEquipamentos(){
     $("#divHeaderEquipamentos").show();
     if($("#formMode").val() == "VIEW"){
@@ -807,12 +770,6 @@ function geraCabecalhoEquipamentos(){
         $("#valorTotalHeaderEquipamentos").val($("#valorTotalLocacao").val());
     }
 }
-
-
-
-
-
-// Consultas
 async function asyncConsultaEquipamentosSelecionados() {
     // Percorre a tabela pai x filho que guarda os PREFIXOS selecionados e salva na "prefixos"
     var prefixos = [];
@@ -870,7 +827,35 @@ async function asyncConsultaEquipamentosSelecionados() {
 }
 }
 
+
 // Util
+function promiseGetDocumentDescription(documentId){
+    return new Promise((resolve, reject)=> {
+        $.ajax({
+            url: `/content-management/api/v2/documents/${documentId}`,
+            contentType: "application/json",
+            method: "GET",
+            error: function (x, e) {
+                console.log(x);
+                console.log(e);
+                FLUIGC.toast({
+                    message: "Erro ao buscar documento: " + e,
+                    type: "warning"
+                });
+                reject("Erro ao buscar boletim de medição!");
+            },
+            success: function (data) {
+                resolve(data.description);
+            }
+        });
+    });
+}
+function calculaDiferencaEmMeses(diaInicio, diaFim){
+    const init = moment(diaInicio);
+    const end = moment(diaFim);
+
+    return Math.round(Math.abs(init.diff(end, 'months', true)))
+}
 function promiseGetDocumentDescription(documentId){
     return new Promise((resolve, reject)=> {
         $.ajax({
