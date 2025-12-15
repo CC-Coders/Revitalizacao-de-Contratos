@@ -26,8 +26,6 @@ async function asyncVerificaSeExisteAssinanteCadastradoPorNome() {
         console.error("Erro ao buscar assinante: ", error);
     }
 }
-
-
 function promiseBuscaCadastroDeAssinantePorNome(nome) {
     return new Promise((resolve, reject) => {
         DatasetFactory.getDataset("ds_wesign_assinantes", null, [
@@ -47,16 +45,6 @@ function promiseBuscaCadastroDeAssinantePorNome(nome) {
         });
     });
 }
-
-
-function hex2a(e) {
-    for (var t = String(e), a = "", i = 0; i < t.length && "00" !== t.substr(i, 2); i += 2) a += String.fromCharCode(parseInt(t.substr(i, 2), 16));
-    return a;
-}
-
-
-
-
 function onchangeTipoAssinaturaContrato() {
     var val = $("#assinaturaContrato").val();
 
@@ -68,7 +56,6 @@ function onchangeTipoAssinaturaContrato() {
         $("#mailRepresentanteCastilho, #mailRepresentanteFornecedor").closest("div").hide();
     }
 }
-
 async function asyncGeraQuadroStatusAssinatura(){
     try {
         const assinaturas = await promiseConsultaAssinaturaEnviadasPeloProcesso();
@@ -177,7 +164,7 @@ function modalAssinantes(assinantes, title){
     }
 }
 
-
+// Utils
 function hex2a(e) {
     for (
         var t = String(e), a = "", i = 0;
