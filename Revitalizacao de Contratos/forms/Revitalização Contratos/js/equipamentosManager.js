@@ -251,13 +251,13 @@ async function onClickDetailsEquipamento(that) {
                     <label>Cadastro: </label><a target="_blank" href="/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=${data.NUMPROCES_CADASTROEQUIPAMENTOS}"> ${data.NUMPROCES_CADASTROEQUIPAMENTOS}</a>
                 </div>
                 <div class="col-md-4">
-                    <label>Data Chegada: </label>${data.DATA_CHEGADA.split(" ")[0].split("-").reverse().join("/")}
+                    <label>Data Chegada: </label> ${data.DATA_CHEGADA.split(" ")[0].split("-").reverse().join("/")}
                 </div>
                 <div class="col-md-4">
-                    <label>Ano Modelo: </label>${data.ANO_MODELO}
+                    <label>Ano Modelo: </label> ${data.ANO_MODELO}
                 </div>
                 <div class="col-md-4">
-                    <label>Ano Fabricação: </label>${data.ANO_FABRICACAO}
+                    <label>Ano Fabricação: </label> ${data.ANO_FABRICACAO}
                 </div>
             </div>
             <hr>
@@ -268,17 +268,22 @@ async function onClickDetailsEquipamento(that) {
                 </div>
                 ${data.VALOR_MOBILIZADO ?
                     `<div class="col-md-4">
-                        <label>Valor Mobilização: ${floatToMoney(data.VALOR_MOBILIZADO)} ${data.UN_MOBILIZADO}</label>
+                        <label>Valor Mobilização: </label> ${floatToMoney(data.VALOR_MOBILIZADO)} ${data.UN_MOBILIZADO}
+                    </div>`: ""
+                }
+                ${data.VALOR_DESMOBILIZACAO ?
+                    `<div class="col-md-4">
+                        <label>Valor Desmobilização: </label> ${floatToMoney(data.VALOR_DESMOBILIZACAO)} ${data.UN_DESMOBILIZACAO}
                     </div>`: ""
                 }
                 ${data.VALOR_EXTRA ?
                     `<div class="col-md-4">
-                        <label>Valor Hora Extra: ${floatToMoney(data.VALOR_EXTRA)} ${data.UN_EXTRA}</label>
+                        <label>Valor Hora Extra: </label> ${floatToMoney(data.VALOR_EXTRA)} ${data.UN_EXTRA}
                     </div>`: ""
                 }
                 ${data.MAODEOBRA ?
                     `<div class="col-md-4">
-                        <label>Valor Mão de Obra: ${floatToMoney(data.MAODEOBRA)}</label>
+                        <label>Valor Mão de Obra: </label> ${floatToMoney(data.MAODEOBRA)}
                     </div>`: ""
                 }
             </div>
@@ -587,13 +592,13 @@ async function geraEquipamentosSelecionados(){
                             </div>   
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <label>Prefixo: </label> <span style="margin-right:10px">${equipamento.PREFIXO}</span>
                                 <label>Modelo: </label> <span style="margin-right:10px">${equipamento.MODELO}</span>
                                 <label>Placa/Chassi: </label> <span style="margin-right:10px">${equipamento.PLACA?equipamento.PLACA:equipamento.CHASSI}</span>
                                 ${equipamento.CLASSIFICACAO_BEM != null && equipamento.CLASSIFICACAO_BEM != "null" ? `<label>Avaliação do Bem: </label> <span style="margin-right:10px">${equipamento.CLASSIFICACAO_BEM}% ${equipamento.CLASSIFICACAO_BEM < 3 ? `<i class="flaticon flaticon-arrow-up icon-sm" style="color:green"; aria-hidden="true"></i>`:`<i class="flaticon flaticon-arrow-down icon-sm" style="color:red"; aria-hidden="true"></i>`}</span>`:""}                           
                             </div>
-                            <div class="col-md-6" style="text-align: right;">
+                            <div class="col-md-4" style="text-align: right;">
                                 ${
                                     (equipamento.VALOR_EQUIPAMENTO && equipamento.VALOR_EQUIPAMENTO != "null") ?
                                         `<label>Valor do Equipamento: </label> <span>${floatToMoney(equipamento.VALOR_EQUIPAMENTO)}</span>`:""                                    
@@ -654,8 +659,18 @@ async function geraEquipamentosSelecionados(){
                                     <br><br>
                                 </div>` : ""
                             }
+                            <div class="col-md-3">
+                                <label>Valor Mobilização:</label><br>
+                                <span>${floatToMoney(equipamento.VALOR_MOBILIZADO)} ${equipamento.UN_MOBILIZADO}</span>
+                                <br><br>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Valor Desmobilização:</label><br>
+                                <span>${floatToMoney(equipamento.VALOR_DESMOBILIZACAO)} ${equipamento.UN_DESMOBILIZACAO}</span>
+                                <br><br>
+                            </div>
 
-                            ${equipamento.STATUS == 7 ? 
+                            ${equipamento.STATUS == 3 ? 
                                 `<div class="col-md-3">
                                     <label>Valor Fipe:</label><br>
                                     <span>${floatToMoney(equipamento.VALOR_FIPE)}</span>
