@@ -13,6 +13,10 @@ const codigosModelos = {
     PRODUCAO:{
 
     },
+    HOMOLOGACAO:{
+        "Locação de Imóvel":39635,
+        "Locação de Equipamento":39636,
+    },
     DESENVOLVIMENTO:{
         "Locação de Imóvel":29328,
         "Locação de Equipamento":30545,
@@ -37,12 +41,12 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
         });
     }
     async function carregaFileProDocxTemplatereEPreencheOsValores_retornaFile(content) {
+        try {
         const zip = new PizZip(content);
         const doc = new window.docxtemplater(zip, {
             paragraphLoop: true,
             linebreaks: true,
             syntax: {
-                changeDelimiterPrefix: "$",
             },
         });
 
@@ -52,6 +56,9 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
         var file = doc.toBlob();
         var file = new File([file], geraNomeDoArquivo()+".pdf", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
         return file;
+        } catch (error) {
+            console.error(error);
+        }
     }
     async function buscaDadosDoFormulario(tipoContrato) {
         const meses = [
@@ -74,6 +81,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
 
         if (tipoContrato == "Locação de Imóvel") {
             var retorno = {
+                CODIGO_DO_CONTRATO: $("#novoContratoCodigo").val() || "___________",
                 FORNECEDOR: $("#hiddenFORNECEDOR").val(),
                 FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
                     "#cidadeFornecedor"
@@ -102,6 +110,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
             var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
 
             var retorno = {
+                CODIGO_DO_CONTRATO: $("#novoContratoCodigo").val() || "___________",
                 FORNECEDOR: $("#hiddenFORNECEDOR").val(),
                 FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
                     "#cidadeFornecedor"
@@ -120,7 +129,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 PERCENTUAL_REIDI:$("#percentualREIDI").val(),
 
                 VALOR_TOTAL:$("#valorTotalLocacao").val(),
-                VALOR_TOTAL_EXTENSO: numeroPorExtenso($("#valorTotalLocacao").val().replace("R$","").replace(".","").trim(), true),
+                VALOR_TOTAL_EXTENSO: numeroPorExtenso($("#valorTotalLocacao").val().replace("R$","").replace(".","").replace(",",".").trim(), true),
 
                 BANCO: $("#banco").val(),
                 BANCO_AGENCIA: $("#agencia").val(),
@@ -147,7 +156,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
 }
 async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
     const tipoContrato = $("#tipoContrato").val();
-    const documentIdModelo = codigosModelos["DESENVOLVIMENTO"][tipoContrato];
+    const documentIdModelo = codigosModelos[env][tipoContrato];
 
     var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentIdModelo);
 
@@ -479,9 +488,9 @@ async function loadCkEditor() {
     } = window.CKEDITOR_PREMIUM_FEATURES;
 
     const LICENSE_KEY =
-        "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NjM1MTAzOTksImp0aSI6IjYwNDE3NWRkLTQ0ZWEtNDY5Mi1iMjYyLTcwZmY4NDg5YWQ0YSIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6ImNhYzRlNDBjIn0.2mUK5kw3jdNRg3UsURe08DObpPFeM5MmaDuBIYi8KuMrni8nxyCUsuy5aSSPsroJ4MG9eQcBBc1gMp-3jAq64g";
+        "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3OTcwMzM1OTksImp0aSI6ImMxYmRiODcxLTBkZjQtNDkwYi1hMTdmLWQ3MDUwNDFmMGNiOCIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwid2hpdGVMYWJlbCI6dHJ1ZSwiZmVhdHVyZXMiOlsiRFJVUCIsIkRPIiwiRlAiLCJTQyIsIlRPQyIsIlRQTCIsIlBPRSIsIkNDIiwiTUYiLCJFMlAiLCJFMlciLCJNTEwiLCJTRUUiLCJFQ0giLCJFSVMiLCJMSCIsIkZPTyIsIkNNVCIsIlRDIiwiUkgiLCJSRSIsIlJDTVQiLCJSVEMiLCJSUkgiLCJJVyJdLCJ2YyI6IjYxMzAyNWJkIn0.SxKfpHP3CrGh4PCAOFbLGZRej1E6jDsyYE3JSVKry4jP5jDWvR2ctVmamF3QRHcon7pepx9ztNecmlgHOaLdeA";
 
-    const CLOUD_SERVICES_TOKEN_URL = "https://afwbxzt3zsv0.cke-cs.com/token/dev/0c54bb51e7ae04bad7166d63f91681292def83e919f079228773aca12cba?limit=10";
+    const CLOUD_SERVICES_TOKEN_URL = "https://kc3p4fgmzn5y.cke-cs.com/token/dev/0597f50c08b088e0870ac4a9e15ff1621d77b85dd6adc81564586157ce71?limit=10";
 
     const editorConfig = {
         toolbar: {
@@ -628,7 +637,7 @@ async function loadCkEditor() {
             Underline,
         ],
         cloudServices: {
-            tokenUrl: CLOUD_SERVICES_TOKEN_URL,
+            tokenUrl: "https://kgpduuc7hd0x.cke-cs.com/token/dev/48b335eeb99dca407895a79763a42e4cd145b6673729dee1bdebab516d90?limit=10",
         },
         exportPdf: {
             stylesheets: [
@@ -688,7 +697,7 @@ async function loadCkEditor() {
             },
         },
         importWord: {
-            tokenUrl: CLOUD_SERVICES_TOKEN_URL,
+            tokenUrl: "https://kgpduuc7hd0x.cke-cs.com/token/dev/48b335eeb99dca407895a79763a42e4cd145b6673729dee1bdebab516d90?limit=10"
         },
         fontFamily: {
             supportAllValues: true,
@@ -1064,7 +1073,7 @@ function numeroPorExtenso(value, centavos) {
         } while (string == " ");
         if (centavos) {
             resposta += " reais";
-            list = value.split(",")[1].split("");
+            list = value.split(".")[1].split("");
             if (list[0] != 0 || list[1] != 0) {
                 if (list[0] < 2 && list[0] > 0) {
                     resposta += " e " + unidade[list[0] + "" + list[1]] + " centavos";
