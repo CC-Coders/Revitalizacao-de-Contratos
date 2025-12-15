@@ -291,6 +291,7 @@ function loadTelaInicioRetorno() {
     asyncMontaHistorico()
     onChangeTipoContrato($("#tipoContrato"));
     renderizarAnexosEtapaAprovacao();
+    $(".endereco-fornecedor").slideDown();
     $("#formContainer").show();
     mostrarPagina("0");
     if ($("#caucao").val() == "Sim") {
@@ -336,7 +337,7 @@ function loadTelaJuridico() {
     geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
     $("#divBotoesEdicaoContrato").show();
-
+    $(".endereco-fornecedor").slideDown();
     onChangeTipoContrato($("#tipoContrato"));
     buscaBancos();
     bloqueiaCamposAprovacao();
@@ -385,6 +386,7 @@ async function loadTelaControladoria() {
     geraCabecalhoEquipamentos();
     onChangeTipoContrato($("#tipoContrato"));
     buscaBancos();
+    $(".endereco-fornecedor").slideDown();
 
     $("#divBotoesEdicaoContrato").show();
     $("#btnEditarArquivo").hide();
@@ -440,6 +442,7 @@ function loadTelaAprovacao() {
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
     bloqueiaCamposAprovacao();
+    $(".endereco-fornecedor").slideDown();
 
     if($("#modeloContrato").val() == "Contrato fora do modelo"){
         $("#btnEditarArquivo").hide();
@@ -477,6 +480,7 @@ function loadTelaAssinaturaManual() {
         $("#btnEditarArquivo").hide();
         $("#btnVisualizarPreContrato").hide();
     }
+    $(".endereco-fornecedor").slideDown();
 
     onChangeTipoContrato($("#tipoContrato"));
     bloqueiaCamposAprovacao();
@@ -515,6 +519,7 @@ function loadTelaAssinaturaEletronica() {
         $("#btnEditarArquivo").hide();
         $("#btnVisualizarPreContrato").hide();
     }
+    $(".endereco-fornecedor").slideDown();
 
     onChangeTipoContrato($("#tipoContrato"));
     renderizarAnexosEtapaAprovacao();

@@ -404,6 +404,18 @@ function bloqueiaCamposAprovacao(){
     
     $("#descontoPorDiaChuva").attr("readonly","readonly");
     $("#descontoPorDiaParado").attr("readonly","readonly");
+    
+    
+    $("#ruaFornecedor").attr("readonly","readonly");
+    $("#numeroFornecedor").attr("readonly","readonly");
+    $("#bairroFornecedor").attr("readonly","readonly");
+    $("#cidadeFornecedor").attr("readonly","readonly");
+    $("#estadoFornecedor").attr("readonly","readonly");
+    $("#cepFornecedor").attr("readonly","readonly");
+    $("#cpfFornecedor").attr("readonly","readonly");
+    $("#rgFornecedor").attr("readonly","readonly");
+    $("#nacionalidadeFornecedor").attr("readonly","readonly");
+    $("#estadoCivilFornecedor").attr("readonly","readonly");
 }
 function popularDestinoRetorno() {
     const ATIVIDADE_ATUAL = $("#atividade").val();
