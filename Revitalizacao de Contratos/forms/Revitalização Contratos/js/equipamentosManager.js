@@ -295,7 +295,7 @@ async function onClickDetailsEquipamento(that) {
                             Alterar
                         </button>`: ``
                 }
-                    <a target="_blank" href="/portal/p/1/paola-tester?prefixo=${data.PREFIXO}" class="btn btn-primary btnLinkPainelEquipamentos">
+                    <a target="_blank" href="/portal/p/1/consulta-de-equipamentos?prefixo=${data.PREFIXO}" class="btn btn-primary btnLinkPainelEquipamentos">
                         <i class="flaticon flaticon-import icon-sm" aria-hidden="true"></i>
                         Painel de Equipamentos
                     </a>
