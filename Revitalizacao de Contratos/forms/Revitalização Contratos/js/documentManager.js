@@ -1,25 +1,25 @@
 // Modelo de Contrato
 const pastasDeAnexosPorServidor = {
-    DESENVOLVIMENTO:"18386",
-    HOMOLOGACAO:"10540",
-    PRODUCAO:"140518",
+    DESENVOLVIMENTO: "18386",
+    HOMOLOGACAO: "10540",
+    PRODUCAO: "140518",
 }
 var ds = DatasetFactory.getDataset("dsGetServerURL", null, null, null);
-const env = ds.values[0].URL == "http://homologacao.castilho.com.br:2020" ? "HOMOLOGACAO" : ds.values[0].URL == "http://desenvolvimento.castilho.com.br:3232" ? "DESENVOLVIMENTO":"PRODUCAO";
+const env = ds.values[0].URL == "http://homologacao.castilho.com.br:2020" ? "HOMOLOGACAO" : ds.values[0].URL == "http://desenvolvimento.castilho.com.br:3232" ? "DESENVOLVIMENTO" : "PRODUCAO";
 const pastaDeAnexos = pastasDeAnexosPorServidor[env];
 
 
 const codigosModelos = {
-    PRODUCAO:{
+    PRODUCAO: {
 
     },
-    HOMOLOGACAO:{
-        "Locação de Imóvel":39635,
-        "Locação de Equipamento":39636,
+    HOMOLOGACAO: {
+        "Locação de Imóvel": 39635,
+        "Locação de Equipamento": 39636,
     },
-    DESENVOLVIMENTO:{
-        "Locação de Imóvel":29328,
-        "Locação de Equipamento":30545,
+    DESENVOLVIMENTO: {
+        "Locação de Imóvel": 29328,
+        "Locação de Equipamento": 30545,
     }
 };
 
@@ -42,20 +42,20 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
     }
     async function carregaFileProDocxTemplatereEPreencheOsValores_retornaFile(content) {
         try {
-        const zip = new PizZip(content);
-        const doc = new window.docxtemplater(zip, {
-            paragraphLoop: true,
-            linebreaks: true,
-            syntax: {
-            },
-        });
+            const zip = new PizZip(content);
+            const doc = new window.docxtemplater(zip, {
+                paragraphLoop: true,
+                linebreaks: true,
+                syntax: {
+                },
+            });
 
-        var input = await buscaDadosDoFormulario($("#tipoContrato").val());
-        console.log(input);
-        doc.render(input);
-        var file = doc.toBlob();
-        var file = new File([file], geraNomeDoArquivo()+".pdf", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
-        return file;
+            var input = await buscaDadosDoFormulario($("#tipoContrato").val());
+            console.log(input);
+            doc.render(input);
+            var file = doc.toBlob();
+            var file = new File([file], geraNomeDoArquivo() + ".pdf", { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+            return file;
         } catch (error) {
             console.error(error);
         }
@@ -76,8 +76,8 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
             "Novembro",
             "Dezembro",
         ];
-        var [ano,mes,dia] = getDateNow().split("-");
-        
+        var [ano, mes, dia] = getDateNow().split("-");
+
 
         if (tipoContrato == "Locação de Imóvel") {
             var retorno = {
@@ -102,10 +102,10 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
                 DIA: dia,
                 MES: meses[mes],
-                ANO:ano,
+                ANO: ano,
                 CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`
             };
-        }else if(tipoContrato == "Locação de Equipamento"){
+        } else if (tipoContrato == "Locação de Equipamento") {
             var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
             var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
 
@@ -118,18 +118,18 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
                 FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
                 FORNECEDOR_CPF_REPRESENTANTE: $("#cpfAdministrador").val(),
-                
-                PERIODOINICIO:$("#dataInicioLocacao").val(),
-                PERIODOFIM:$("#dataFimLocacao").val(),
 
-                TEM_RETENCAO:$("#temRetencao").val(),
-                PERCENTUAL_RETENCAO:$("#percentualRetencao").val(),
+                PERIODOINICIO: $("#dataInicioLocacao").val(),
+                PERIODOFIM: $("#dataFimLocacao").val(),
 
-                TEM_REIDI:$("#temREIDI").val(),
-                PERCENTUAL_REIDI:$("#percentualREIDI").val(),
+                TEM_RETENCAO: $("#temRetencao").val(),
+                PERCENTUAL_RETENCAO: $("#percentualRetencao").val(),
 
-                VALOR_TOTAL:$("#valorTotalLocacao").val(),
-                VALOR_TOTAL_EXTENSO: numeroPorExtenso($("#valorTotalLocacao").val().replace("R$","").replace(".","").replace(",",".").trim(), true),
+                TEM_REIDI: $("#temREIDI").val(),
+                PERCENTUAL_REIDI: $("#percentualREIDI").val(),
+
+                VALOR_TOTAL: $("#valorTotalLocacao").val(),
+                VALOR_TOTAL_EXTENSO: numeroPorExtenso($("#valorTotalLocacao").val().replace("R$", "").replace(".", "").replace(",", ".").trim(), true),
 
                 BANCO: $("#banco").val(),
                 BANCO_AGENCIA: $("#agencia").val(),
@@ -138,16 +138,16 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
 
                 DIA: dia,
                 MES: meses[mes],
-                ANO:ano,
-                CODIGO_CENTRO_DE_CUSTO:$("#NOMECCUSTO").val(),
-                OBRA:$("#NOMECCUSTO").val(),
+                ANO: ano,
+                CODIGO_CENTRO_DE_CUSTO: $("#NOMECCUSTO").val(),
+                OBRA: $("#NOMECCUSTO").val(),
 
-                PRAZO:parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
-                PRAZO_EXTENSO:numeroPorExtenso(calculaDiferencaEmMeses(prazo_inicio, prazo_fim).toString()),
+                PRAZO: parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
+                PRAZO_EXTENSO: numeroPorExtenso(calculaDiferencaEmMeses(prazo_inicio, prazo_fim).toString()),
 
-                INDICE_REAJUSTE:$("#indiceReajuste").val(),
+                INDICE_REAJUSTE: $("#indiceReajuste").val(),
 
-                EQUIPAMENTOS:await asyncConsultaEquipamentosSelecionados()
+                EQUIPAMENTOS: await asyncConsultaEquipamentosSelecionados()
             };
 
         }
@@ -162,7 +162,7 @@ async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
 
     const response = await fetch(url);
     const blob = await response.blob();
-    const file = new File([blob], geraNomeDoArquivo()+".docx", {
+    const file = new File([blob], geraNomeDoArquivo() + ".docx", {
         type: blob.type,
     });
     var documentId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDeAnexos);
@@ -170,13 +170,13 @@ async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
 
     var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
     var pdf = await convertDocxToPdf(filePreenchido);
-    const filePdf = new File([pdf], geraNomeDoArquivo()+".pdf", {
+    const filePdf = new File([pdf], geraNomeDoArquivo() + ".pdf", {
         type: blob.type,
     });
     var pdfId = await promiseCriaDocFluig_retornaDocumentId(filePdf, pastaDeAnexos);
     $("#contratoPdfId").val(pdfId);
 }
-function geraNomeDoArquivo(){
+function geraNomeDoArquivo() {
     var CODCCUSTO = $("#CODCCUSTO").val();
     var NOME_FORNECEDOR = $("#hiddenFORNECEDOR").val();
     var TIPO_CONTRATO = $("#tipoContrato").val();
@@ -202,14 +202,14 @@ async function salvaModeloAlterado() {
             type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         });
 
-        const file = new File([blob], geraNomeDoArquivo()+".docx", {
+        const file = new File([blob], geraNomeDoArquivo() + ".docx", {
             type: blob.type,
         });
-        await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val(), geraNomeDoArquivo()+".docx", pastaDeAnexos);
+        await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val(), geraNomeDoArquivo() + ".docx", pastaDeAnexos);
 
         var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
-        var pdf = await convertDocxToPdf(filePreenchido, geraNomeDoArquivo()+".pdf");
-        await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo()+".pdf", pastaDeAnexos);
+        var pdf = await convertDocxToPdf(filePreenchido, geraNomeDoArquivo() + ".pdf");
+        await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo() + ".pdf", pastaDeAnexos);
 
         Swal.fire({
             position: "top-end",
@@ -400,9 +400,16 @@ async function editarArquivoNoCKEditor() {
     }
 }
 async function loadCkEditor() {
-    const {
-        ClassicEditor,
+    const LICENSE_KEY =
+        'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3OTcwMzM1OTksImp0aSI6ImMxYmRiODcxLTBkZjQtNDkwYi1hMTdmLWQ3MDUwNDFmMGNiOCIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwid2hpdGVMYWJlbCI6dHJ1ZSwiZmVhdHVyZXMiOlsiRFJVUCIsIkRPIiwiRlAiLCJTQyIsIlRPQyIsIlRQTCIsIlBPRSIsIkNDIiwiTUYiLCJFMlAiLCJFMlciLCJNTEwiLCJTRUUiLCJFQ0giLCJFSVMiLCJMSCIsIkZPTyIsIkNNVCIsIlRDIiwiUkgiLCJSRSIsIlJDTVQiLCJSVEMiLCJSUkgiLCJJVyJdLCJ2YyI6IjYxMzAyNWJkIn0.SxKfpHP3CrGh4PCAOFbLGZRej1E6jDsyYE3JSVKry4jP5jDWvR2ctVmamF3QRHcon7pepx9ztNecmlgHOaLdeA';
+
+    const CLOUD_SERVICES_TOKEN_URL =
+        'https://riccys8ecxzq.cke-cs.com/token/dev/21a778b99face29865582bf7e8d4515fcd885eaacbc2e6d1e0b23a69215a?limit=10';
+
+
+    const { ClassicEditor,
         Alignment,
+        ListEditing,
         Autoformat,
         AutoImage,
         AutoLink,
@@ -411,6 +418,7 @@ async function loadCkEditor() {
         Bold,
         Bookmark,
         CKBox,
+        ImageResizeEditing, ImageResizeHandles, 
         CKBoxImageEdit,
         CloudServices,
         Code,
@@ -470,10 +478,9 @@ async function loadCkEditor() {
         TableToolbar,
         TextTransformation,
         TodoList,
-        Underline,
-    } = window.CKEDITOR;
-    const {
-        CaseChange,
+        Base64UploadAdapter,
+        Underline, } = CKEDITOR;
+    const { CaseChange,
         ExportPdf,
         ExportWord,
         FormatPainter,
@@ -484,409 +491,149 @@ async function loadCkEditor() {
         PasteFromOfficeEnhanced,
         SlashCommand,
         TableOfContents,
-        Template,
-    } = window.CKEDITOR_PREMIUM_FEATURES;
+        Template, } = CKEDITOR_PREMIUM_FEATURES;
 
-    const LICENSE_KEY =
-        "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3OTcwMzM1OTksImp0aSI6ImMxYmRiODcxLTBkZjQtNDkwYi1hMTdmLWQ3MDUwNDFmMGNiOCIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwid2hpdGVMYWJlbCI6dHJ1ZSwiZmVhdHVyZXMiOlsiRFJVUCIsIkRPIiwiRlAiLCJTQyIsIlRPQyIsIlRQTCIsIlBPRSIsIkNDIiwiTUYiLCJFMlAiLCJFMlciLCJNTEwiLCJTRUUiLCJFQ0giLCJFSVMiLCJMSCIsIkZPTyIsIkNNVCIsIlRDIiwiUkgiLCJSRSIsIlJDTVQiLCJSVEMiLCJSUkgiLCJJVyJdLCJ2YyI6IjYxMzAyNWJkIn0.SxKfpHP3CrGh4PCAOFbLGZRej1E6jDsyYE3JSVKry4jP5jDWvR2ctVmamF3QRHcon7pepx9ztNecmlgHOaLdeA";
-
-    const CLOUD_SERVICES_TOKEN_URL = "https://kc3p4fgmzn5y.cke-cs.com/token/dev/0597f50c08b088e0870ac4a9e15ff1621d77b85dd6adc81564586157ce71?limit=10";
-
-    const editorConfig = {
-        toolbar: {
-            items: [
-                "undo",
-                "redo",
-                "|",
-                "insertMergeField",
-                "previewMergeFields",
-                "|",
-                "importWord",
-                "exportWord",
-                "exportPdf",
-                "formatPainter",
-                "caseChange",
-                "findAndReplace",
-                "fullscreen",
-                "|",
-                "heading",
-                "style",
-                "|",
-                "fontSize",
-                "fontFamily",
-                "fontColor",
-                "fontBackgroundColor",
-                "|",
-                "bold",
-                "italic",
-                "underline",
-                "strikethrough",
-                "subscript",
-                "superscript",
-                "code",
-                "removeFormat",
-                "|",
-                "emoji",
-                "specialCharacters",
-                "horizontalLine",
-                "pageBreak",
-                "link",
-                "bookmark",
-                "insertImage",
-                "insertImageViaUrl",
-                "ckbox",
-                "insertTable",
-                "tableOfContents",
-                "insertTemplate",
-                "highlight",
-                "blockQuote",
-                "|",
-                "alignment",
-                "lineHeight",
-                "|",
-                "bulletedList",
-                "numberedList",
-                "multiLevelList",
-                "todoList",
-                "outdent",
-                "indent",
-            ],
-            shouldNotGroupWhenFull: true,
-        },
+    ckeditor = await ClassicEditor.create(document.querySelector('#editor'), {
         plugins: [
             Alignment,
-            Autoformat,
-            AutoImage,
-            AutoLink,
-            Autosave,
-            BlockQuote,
-            Bold,
-            Bookmark,
+            Base64UploadAdapter,
             CaseChange,
-            CKBox,
-            CKBoxImageEdit,
-            CloudServices,
-            Code,
-            Emoji,
-            Essentials,
-            ExportPdf,
-            ExportWord,
-            FindAndReplace,
-            FontBackgroundColor,
-            FontColor,
-            FontFamily,
-            FontSize,
-            FormatPainter,
-            Fullscreen,
-            GeneralHtmlSupport,
-            Heading,
-            Highlight,
-            HorizontalLine,
-            ImageBlock,
-            ImageCaption,
-            ImageEditing,
-            ImageInline,
-            ImageInsert,
-            ImageInsertViaUrl,
-            ImageResize,
-            ImageStyle,
-            ImageTextAlternative,
-            ImageToolbar,
-            ImageUpload,
-            ImageUtils,
-            ImportWord,
-            Indent,
-            IndentBlock,
-            Italic,
-            LineHeight,
-            Link,
-            LinkImage,
-            List,
-            ListProperties,
-            Mention,
-            MergeFields,
-            MultiLevelList,
-            PageBreak,
-            Paragraph,
-            PasteFromOffice,
-            PasteFromOfficeEnhanced,
-            PictureEditing,
-            RemoveFormat,
-            SlashCommand,
-            SpecialCharacters,
-            SpecialCharactersArrows,
-            SpecialCharactersCurrency,
-            SpecialCharactersEssentials,
-            SpecialCharactersLatin,
-            SpecialCharactersMathematical,
-            SpecialCharactersText,
-            Strikethrough,
-            Style,
-            Subscript,
-            Superscript,
-            Table,
-            TableCaption,
-            TableCellProperties,
-            TableColumnResize,
-            TableOfContents,
-            TableProperties,
-            TableToolbar,
-            Template,
-            TextTransformation,
-            TodoList,
-            Underline,
+                ListEditing,
+                Autoformat,
+                AutoImage,
+                AutoLink,
+                Autosave,
+                BlockQuote,
+                Bold,
+                Bookmark,
+                CKBox,
+                CKBoxImageEdit,
+                CloudServices,
+                Code,
+                ImageResizeEditing, ImageResizeHandles,
+                Emoji,
+                Essentials,
+                FindAndReplace,
+                FontBackgroundColor,
+                FontColor,
+                FontFamily,
+                FontSize,
+                Fullscreen,
+                GeneralHtmlSupport,
+                Heading,
+                Highlight,
+                HorizontalLine,
+                ImageBlock,
+                ImageCaption,
+                ImageEditing,
+                ImageInline,
+                ImageInsert,
+                ImageInsertViaUrl,
+                ImageResize,
+                ImageStyle,
+                ImageTextAlternative,
+                ImageToolbar,
+                ImageUpload,
+                ImageUtils,
+                Indent,
+                IndentBlock,
+                Italic,
+                Link,
+                LinkImage,
+                List,
+                ListProperties,
+                Mention,
+                PageBreak,
+                Paragraph,
+                PasteFromOffice,
+                PictureEditing,
+                RemoveFormat,
+                SpecialCharacters,
+                SpecialCharactersArrows,
+                SpecialCharactersCurrency,
+                SpecialCharactersEssentials,
+                SpecialCharactersLatin,
+                SpecialCharactersMathematical,
+                SpecialCharactersText,
+                Strikethrough,
+                Style,
+                Subscript,
+                Superscript,
+                Table,
+                TableColumnResize,
+                TableCaption,
+                TableCellProperties,
+                TableProperties,
+                TableToolbar,
+                TextTransformation,
+                TodoList,
+                Underline,
+                ExportPdf,
+                ExportWord,
+                FormatPainter,
+                ImportWord,
+                LineHeight,
+                MergeFields,
+                MultiLevelList,
+                PasteFromOfficeEnhanced,
+                SlashCommand,
+                TableOfContents,
+                Template,
+            
         ],
-        cloudServices: {
-            tokenUrl: "https://kgpduuc7hd0x.cke-cs.com/token/dev/48b335eeb99dca407895a79763a42e4cd145b6673729dee1bdebab516d90?limit=10",
-        },
-        exportPdf: {
-            stylesheets: [
-                /* This path should point to the content stylesheets on your assets server. */
-                /* See: https://ckeditor.com/docs/ckeditor5/latest/features/converters/export-pdf.html */
-                "Style.css",
-                /* Export PDF needs access to stylesheets that style the content. */
-                "https://cdn.ckeditor.com/ckeditor5/46.0.0/ckeditor5.css",
-                "https://cdn.ckeditor.com/ckeditor5-premium-features/46.0.0/ckeditor5-premium-features.css",
-            ],
-            dataCallback: (editor) => {
-                return `
-                    <style>
-                        .ck-content figure.table:not(.layout-table)>table, .ck-content table.table:not(.layout-table){
-                            border-collapse: collapse !important;
-                        }
-                    </style>
-					${editor.getData()}
-					<div class="watermark">SEM VALOR CONTRATUAL</div>
-					<div class="header" style="position: fixed;left: 70;top: -5;">${header}</div>
-					<div class="footer" style="position: fixed;left: 30;top: 95;">${footer}</div>
-				`;
-            },
-            fileName: "export-pdf-demo.pdf",
-            converterOptions: {
-                format: "Tabloid",
-                margin_top: "20mm",
-                margin_bottom: "20mm",
-                margin_right: "24mm",
-                margin_left: "24mm",
-                page_orientation: "portrait",
-                header_html: undefined,
-                footer_html: undefined,
-            },
-        },
-        exportWord: {
-            stylesheets: [
-                /* This path should point to the content stylesheets on your assets server. */
-                /* See: https://ckeditor.com/docs/ckeditor5/latest/features/converters/export-word.html */
-                "./style.css",
-                /* Export Word needs access to stylesheets that style the content. */
-                "https://cdn.ckeditor.com/ckeditor5/46.0.0/ckeditor5.css",
-                "https://cdn.ckeditor.com/ckeditor5-premium-features/46.0.0/ckeditor5-premium-features.css",
-            ],
-            fileName: "export-word-demo.docx",
-            converterOptions: {
-                document: {
-                    orientation: "portrait",
-                    size: "Tabloid",
-                    margins: {
-                        top: "20mm",
-                        bottom: "20mm",
-                        right: "24mm",
-                        left: "24mm",
-                    },
-                },
-            },
-        },
-        importWord: {
-            tokenUrl: "https://kgpduuc7hd0x.cke-cs.com/token/dev/48b335eeb99dca407895a79763a42e4cd145b6673729dee1bdebab516d90?limit=10"
-        },
-        fontFamily: {
-            supportAllValues: true,
-        },
-        fontSize: {
-            options: [10, 12, 14, "default", 18, 20, 22],
-            supportAllValues: true,
-        },
-        fullscreen: {
-            onEnterCallback: (container) =>
-                container.classList.add(
-                    "editor-container",
-                    "editor-container_classic-editor",
-                    "editor-container_include-style",
-                    "editor-container_include-fullscreen",
-                    "main-container"
-                ),
-        },
-        heading: {
-            options: [
-                {
-                    model: "paragraph",
-                    title: "Paragraph",
-                    class: "ck-heading_paragraph",
-                },
-                {
-                    model: "heading1",
-                    view: "h1",
-                    title: "Heading 1",
-                    class: "ck-heading_heading1",
-                },
-                {
-                    model: "heading2",
-                    view: "h2",
-                    title: "Heading 2",
-                    class: "ck-heading_heading2",
-                },
-                {
-                    model: "heading3",
-                    view: "h3",
-                    title: "Heading 3",
-                    class: "ck-heading_heading3",
-                },
-                {
-                    model: "heading4",
-                    view: "h4",
-                    title: "Heading 4",
-                    class: "ck-heading_heading4",
-                },
-                {
-                    model: "heading5",
-                    view: "h5",
-                    title: "Heading 5",
-                    class: "ck-heading_heading5",
-                },
-                {
-                    model: "heading6",
-                    view: "h6",
-                    title: "Heading 6",
-                    class: "ck-heading_heading6",
-                },
-            ],
-        },
-        htmlSupport: {
-            allow: [
-                {
-                    name: /^.*$/,
-                    styles: true,
-                    attributes: true,
-                    classes: true,
-                },
-            ],
-        },
-        image: {
-            toolbar: [
-                "toggleImageCaption",
-                "imageTextAlternative",
-                "|",
-                "imageStyle:inline",
-                "imageStyle:wrapText",
-                "imageStyle:breakText",
-                "|",
-                "resizeImage",
-                "|",
-                "ckboxImageEdit",
-            ],
-        },
-        initialData: "",
-        licenseKey: LICENSE_KEY,
-        lineHeight: {
-            supportAllValues: true,
-        },
-        link: {
-            addTargetToExternalLinks: true,
-            defaultProtocol: "https://",
-            decorators: {
-                toggleDownloadable: {
-                    mode: "manual",
-                    label: "Downloadable",
-                    attributes: {
-                        download: "file",
-                    },
-                },
-            },
-        },
-        list: {
-            properties: {
-                styles: true,
-                startIndex: true,
-                reversed: true,
-            },
-        },
-        mention: {
-            feeds: [
-                {
-                    marker: "@",
-                    feed: [
-                        /* See: https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html */
-                    ],
-                },
-            ],
-        },
+        toolbar:[
+			'undo',
+			'redo',
+            "resizeImage",
+			'|',
+			'insertMergeField',
+			'previewMergeFields',
+			'|',
+			'formatPainter',
+			'caseChange',
+			'findAndReplace',
+			'fullscreen',
+			'|',
+			'heading',
+			'|',
+			'bold',
+			'italic',
+			'underline',
+			'|',
+			'emoji',
+			'specialCharacters',
+			'link',
+			'insertImage',
+			'insertTable',
+			'insertTemplate',
+			'blockQuote',
+			'|',
+			'bulletedList',
+			'numberedList',
+			'todoList',
+			'outdent',
+			'indent'
+		],
         menuBar: {
             isVisible: true,
         },
-        mergeFields: {
-            /* Read more: https://ckeditor.com/docs/ckeditor5/latest/features/merge-fields.html#configuration */
-        },
-        placeholder: "Type or paste your content here!",
-        style: {
-            definitions: [
-                {
-                    name: "Article category",
-                    element: "h3",
-                    classes: ["category"],
-                },
-                {
-                    name: "Title",
-                    element: "h2",
-                    classes: ["document-title"],
-                },
-                {
-                    name: "Subtitle",
-                    element: "h3",
-                    classes: ["document-subtitle"],
-                },
-                {
-                    name: "Info box",
-                    element: "p",
-                    classes: ["info-box"],
-                },
-                {
-                    name: "CTA Link Primary",
-                    element: "a",
-                    classes: ["button", "button--green"],
-                },
-                {
-                    name: "CTA Link Secondary",
-                    element: "a",
-                    classes: ["button", "button--black"],
-                },
-                {
-                    name: "Marker",
-                    element: "span",
-                    classes: ["marker"],
-                },
-                {
-                    name: "Spoiler",
-                    element: "span",
-                    classes: ["spoiler"],
-                },
-            ],
-        },
+        licenseKey: LICENSE_KEY,
+        language: 'pt',
         table: {
-            contentToolbar: ["tableColumn", "tableRow", "mergeTableCells", "tableProperties", "tableCellProperties"],
+            contentToolbar: [
+                'tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'
+            ]
         },
-        template: {
-            definitions: [
-                {
-                    title: "Introduction",
-                    description: "Simple introduction to an article",
-                    icon: '<svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">\n    <g id="icons/article-image-right">\n        <rect id="icon-bg" width="45" height="45" rx="2" fill="#A5E7EB"/>\n        <g id="page" filter="url(#filter0_d_1_507)">\n            <path d="M9 41H36V12L28 5H9V41Z" fill="white"/>\n            <path d="M35.25 12.3403V40.25H9.75V5.75H27.7182L35.25 12.3403Z" stroke="#333333" stroke-width="1.5"/>\n        </g>\n        <g id="image">\n            <path id="Rectangle 22" d="M21.5 23C21.5 22.1716 22.1716 21.5 23 21.5H31C31.8284 21.5 32.5 22.1716 32.5 23V29C32.5 29.8284 31.8284 30.5 31 30.5H23C22.1716 30.5 21.5 29.8284 21.5 29V23Z" fill="#B6E3FC" stroke="#333333"/>\n            <path id="Vector 1" d="M24.1184 27.8255C23.9404 27.7499 23.7347 27.7838 23.5904 27.9125L21.6673 29.6268C21.5124 29.7648 21.4589 29.9842 21.5328 30.178C21.6066 30.3719 21.7925 30.5 22 30.5H32C32.2761 30.5 32.5 30.2761 32.5 30V27.7143C32.5 27.5717 32.4391 27.4359 32.3327 27.3411L30.4096 25.6268C30.2125 25.451 29.9127 25.4589 29.7251 25.6448L26.5019 28.8372L24.1184 27.8255Z" fill="#44D500" stroke="#333333" stroke-linejoin="round"/>\n            <circle id="Ellipse 1" cx="26" cy="25" r="1.5" fill="#FFD12D" stroke="#333333"/>\n        </g>\n        <rect id="Rectangle 23" x="13" y="13" width="12" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 24" x="13" y="17" width="19" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 25" x="13" y="21" width="6" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 26" x="13" y="25" width="6" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 27" x="13" y="29" width="6" height="2" rx="1" fill="#B4B4B4"/>\n        <rect id="Rectangle 28" x="13" y="33" width="16" height="2" rx="1" fill="#B4B4B4"/>\n    </g>\n    <defs>\n        <filter id="filter0_d_1_507" x="9" y="5" width="28" height="37" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">\n            <feFlood flood-opacity="0" result="BackgroundImageFix"/>\n            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>\n            <feOffset dx="1" dy="1"/>\n            <feComposite in2="hardAlpha" operator="out"/>\n            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.29 0"/>\n            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_507"/>\n            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_507" result="shape"/>\n        </filter>\n    </defs>\n</svg>\n',
-                    data: "<h2>Introduction</h2><p>In today's fast-paced world, keeping up with the latest trends and insights is essential for both personal growth and professional development. This article aims to shed light on a topic that resonates with many, providing valuable information and actionable advice. Whether you're seeking to enhance your knowledge, improve your skills, or simply stay informed, our comprehensive analysis offers a deep dive into the subject matter, designed to empower and inspire our readers.</p>",
-                },
-            ],
-        },
-    };
+        image:{
+            toolbar: ['imageStyle:inline', 'imageStyle:wrapText', 'imageStyle:breakText', '|',
+		    'toggleImageCaption', 'imageTextAlternative'
+	        ]
+        }
 
-    ckeditor = await ClassicEditor.create(document.querySelector("#editor"), editorConfig);
+    });
+
+    return;
+
 }
 var header = null; //Salva o cabeçalho importado do docx para usar quando for salvar pra docx novamente
 var footer = null; //Salva o rodape importado do docx para usar quando for salvar pra docx novamente
@@ -911,8 +658,8 @@ async function carregaDocumentoParaOCKEditor(documentId) {
                         }
                 </style>`
             );
-            ckeditor.config._config.exportPdf.converterOptions.header_html = header;
-            ckeditor.config._config.exportPdf.converterOptions.footer_html = footer;
+            // ckeditor.config._config.exportPdf.converterOptions.header_html = header;
+            // ckeditor.config._config.exportPdf.converterOptions.footer_html = footer;
             Swal.close();
         })
         .catch((error) => {
