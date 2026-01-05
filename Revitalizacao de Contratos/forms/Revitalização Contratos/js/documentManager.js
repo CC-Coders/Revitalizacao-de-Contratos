@@ -101,7 +101,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 BANCO_AGENCIA: $("#agencia").val(),
                 BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
                 DIA: dia,
-                MES: meses[mes],
+                MES: meses[parseInt(mes)],
                 ANO: ano,
                 CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`
             };
@@ -122,11 +122,14 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 PERIODOINICIO: $("#dataInicioLocacao").val(),
                 PERIODOFIM: $("#dataFimLocacao").val(),
 
-                TEM_RETENCAO: $("#temRetencao").val(),
-                PERCENTUAL_RETENCAO: $("#percentualRetencao").val(),
+                TEM_RETENCAO: $("#temRetencao").val() == "Sim" ? true:false,
+                PERCENTUAL_RETENCAO: $("#temRetencao").val() == "Sim" ? $("#percentualRetencao").val() : "",
 
-                TEM_REIDI: $("#temREIDI").val(),
-                PERCENTUAL_REIDI: $("#percentualREIDI").val(),
+                TEM_REIDI: $("#temREIDI").val() == "Sim" ? true:false,
+                PERCENTUAL_REIDI: $("#temREIDI").val() == "Sim" ? $("#percentualREIDI").val() : "",
+                
+                TEM_REAJUSTE:$("#temReajuste").val() == "Sim" ? true:false,
+                INDICE_REAJUSTE: $("#temReajuste").val() == "Sim" ? $("#indiceReajuste").val() : "",
 
                 VALOR_TOTAL: $("#valorTotalLocacao").val(),
                 VALOR_TOTAL_EXTENSO: numeroPorExtenso($("#valorTotalLocacao").val().replace("R$", "").replace(".", "").replace(",", ".").trim(), true),
@@ -137,7 +140,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 BANCO_TITULAR: $("#titular").val(),
 
                 DIA: dia,
-                MES: meses[mes],
+                MES: meses[parseInt(mes)],
                 ANO: ano,
                 CODIGO_CENTRO_DE_CUSTO: $("#NOMECCUSTO").val(),
                 OBRA: $("#NOMECCUSTO").val(),
@@ -145,7 +148,6 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 PRAZO: parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
                 PRAZO_EXTENSO: numeroPorExtenso(calculaDiferencaEmMeses(prazo_inicio, prazo_fim).toString()),
 
-                INDICE_REAJUSTE: $("#indiceReajuste").val(),
 
                 EQUIPAMENTOS: await asyncConsultaEquipamentosSelecionados()
             };
@@ -309,7 +311,15 @@ async function convertDocxToPdf(docxBlob, name) {
         const docxHtmlResponse = await axios.post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, { responseType: "json", headers: {
         'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM"
         }});
-        html = docxHtmlResponse.data.html + `<div class="watermark" style="font-size: 50px;opacity: 0.5;color: black;position: fixed;left: 20%;top: 50%;transform: rotate(25deg);letter-spacing: 10px;">SEM VALOR CONTRATUAL</div>`;
+
+
+
+        html = docxHtmlResponse.data.html;
+        if ($("#atividade").val() != ATIVIDADES.JURIDICO) {
+            html += `<div class="watermark" style="font-size: 50px;opacity: 0.5;color: black;position: fixed;left: 20%;top: 50%;transform: rotate(25deg);letter-spacing: 10px;">SEM VALOR CONTRATUAL</div>`;
+        }
+
+
         headerHtml = docxHtmlResponse.data.headers?.default?.html || "";
         footerHtml = docxHtmlResponse.data.footers?.default?.html || "";
     } catch (error) {
@@ -336,7 +346,12 @@ async function convertDocxToPdf(docxBlob, name) {
                     footer_html: footerHtml,
                 },
             },
-            { responseType: "arraybuffer" }
+            { 
+                responseType: "arraybuffer",
+                headers: {
+                    'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM"
+                }
+             }
         );
         return new Blob([pdfResponse.data], { type: "application/pdf" });
     } catch (error) {
@@ -502,97 +517,100 @@ async function loadCkEditor() {
             Alignment,
             Base64UploadAdapter,
             CaseChange,
-                ListEditing,
-                Autoformat,
-                AutoImage,
-                AutoLink,
-                Autosave,
-                BlockQuote,
-                Bold,
-                Bookmark,
-                CKBox,
-                CKBoxImageEdit,
-                CloudServices,
-                Code,
-                ImageResizeEditing, ImageResizeHandles,
-                Emoji,
-                Essentials,
-                FindAndReplace,
-                FontBackgroundColor,
-                FontColor,
-                FontFamily,
-                FontSize,
-                Fullscreen,
-                GeneralHtmlSupport,
-                Heading,
-                Highlight,
-                HorizontalLine,
-                ImageBlock,
-                ImageCaption,
-                ImageEditing,
-                ImageInline,
-                ImageInsert,
-                ImageInsertViaUrl,
-                ImageResize,
-                ImageStyle,
-                ImageTextAlternative,
-                ImageToolbar,
-                ImageUpload,
-                ImageUtils,
-                Indent,
-                IndentBlock,
-                Italic,
-                Link,
-                LinkImage,
-                List,
-                ListProperties,
-                Mention,
-                PageBreak,
-                Paragraph,
-                PasteFromOffice,
-                PictureEditing,
-                RemoveFormat,
-                SpecialCharacters,
-                SpecialCharactersArrows,
-                SpecialCharactersCurrency,
-                SpecialCharactersEssentials,
-                SpecialCharactersLatin,
-                SpecialCharactersMathematical,
-                SpecialCharactersText,
-                Strikethrough,
-                Style,
-                Subscript,
-                Superscript,
-                Table,
-                TableColumnResize,
-                TableCaption,
-                TableCellProperties,
-                TableProperties,
-                TableToolbar,
-                TextTransformation,
-                TodoList,
-                Underline,
-                ExportPdf,
-                ExportWord,
-                FormatPainter,
-                ImportWord,
-                LineHeight,
-                MergeFields,
-                MultiLevelList,
-                PasteFromOfficeEnhanced,
-                SlashCommand,
-                TableOfContents,
-                Template,
-            
+            ListEditing,
+            Autoformat,
+            AutoImage,
+            AutoLink,
+            Autosave,
+            BlockQuote,
+            Bold,
+            Bookmark,
+            CKBox,
+            CKBoxImageEdit,
+            CloudServices,
+            Code,
+            ImageResizeEditing, ImageResizeHandles,
+            Emoji,
+            Essentials,
+            FindAndReplace,
+            FontBackgroundColor,
+            FontColor,
+            FontFamily,
+            FontSize,
+            Fullscreen,
+            GeneralHtmlSupport,
+            Heading,
+            Highlight,
+            HorizontalLine,
+            ImageBlock,
+            ImageCaption,
+            ImageEditing,
+            ImageInline,
+            ImageInsert,
+            ImageInsertViaUrl,
+            ImageResize,
+            ImageStyle,
+            ImageTextAlternative,
+            ImageToolbar,
+            ImageUpload,
+            ImageUtils,
+            Indent,
+            IndentBlock,
+            Italic,
+            Link,
+            LinkImage,
+            List,
+            ListProperties,
+            Mention,
+            PageBreak,
+            Paragraph,
+            PasteFromOffice,
+            PictureEditing,
+            RemoveFormat,
+            SpecialCharacters,
+            SpecialCharactersArrows,
+            SpecialCharactersCurrency,
+            SpecialCharactersEssentials,
+            SpecialCharactersLatin,
+            SpecialCharactersMathematical,
+            SpecialCharactersText,
+            Strikethrough,
+            Style,
+            Subscript,
+            Superscript,
+            Table,
+            TableColumnResize,
+            TableCaption,
+            TableCellProperties,
+            TableProperties,
+            TableToolbar,
+            TextTransformation,
+            TodoList,
+            Underline,
+            ExportPdf,
+            ExportWord,
+            FormatPainter,
+            ImportWord,
+            LineHeight,
+            MergeFields,
+            MultiLevelList,
+            PasteFromOfficeEnhanced,
+            SlashCommand,
+            TableOfContents,
+            Template,
+
         ],
-        toolbar:[
+        toolbar: {
+		items: [
 			'undo',
 			'redo',
-            "resizeImage",
 			'|',
 			'insertMergeField',
 			'previewMergeFields',
 			'|',
+			'importWord',
+			'exportWord',
+			'exportPdf',
 			'formatPainter',
 			'caseChange',
 			'findAndReplace',
@@ -600,42 +618,140 @@ async function loadCkEditor() {
 			'|',
 			'heading',
 			'|',
+			'fontSize',
+			'fontFamily',
+			'fontColor',
+			'fontBackgroundColor',
+			'|',
 			'bold',
 			'italic',
 			'underline',
+			'strikethrough',
+			'subscript',
+			'superscript',
+			'code',
+			'removeFormat',
 			'|',
 			'emoji',
 			'specialCharacters',
+			'horizontalLine',
+			'pageBreak',
 			'link',
-			'insertImage',
+			'insertFootnote',
+			'insertImageViaUrl',
 			'insertTable',
+			'tableOfContents',
 			'insertTemplate',
-			'blockQuote',
+			'|',
+			'alignment',
+			'lineHeight',
 			'|',
 			'bulletedList',
 			'numberedList',
+			'multiLevelList',
 			'todoList',
 			'outdent',
 			'indent'
 		],
-        importWord: {
-			tokenUrl: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM'
-		},
+		shouldNotGroupWhenFull: true
+	},
+        
         menuBar: {
             isVisible: true,
         },
         licenseKey: LICENSE_KEY,
-        language: 'pt',
-        table: {
-            contentToolbar: [
-                'tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'
+        fontFamily: {
+            supportAllValues: true
+        },
+        fontSize: {
+            options: [10, 12, 14, 'default', 18, 20, 22],
+            supportAllValues: true
+        },
+        heading: {
+            options: [
+                {
+                    model: 'paragraph',
+                    title: 'Paragraph',
+                    class: 'ck-heading_paragraph'
+                },
+                {
+                    model: 'heading1',
+                    view: 'h1',
+                    title: 'Heading 1',
+                    class: 'ck-heading_heading1'
+                },
+                {
+                    model: 'heading2',
+                    view: 'h2',
+                    title: 'Heading 2',
+                    class: 'ck-heading_heading2'
+                },
+                {
+                    model: 'heading3',
+                    view: 'h3',
+                    title: 'Heading 3',
+                    class: 'ck-heading_heading3'
+                },
+                {
+                    model: 'heading4',
+                    view: 'h4',
+                    title: 'Heading 4',
+                    class: 'ck-heading_heading4'
+                },
+                {
+                    model: 'heading5',
+                    view: 'h5',
+                    title: 'Heading 5',
+                    class: 'ck-heading_heading5'
+                },
+                {
+                    model: 'heading6',
+                    view: 'h6',
+                    title: 'Heading 6',
+                    class: 'ck-heading_heading6'
+                }
             ]
         },
-        image:{
-            toolbar: ['imageStyle:inline', 'imageStyle:wrapText', 'imageStyle:breakText', '|',
-		    'toggleImageCaption', 'imageTextAlternative'
-	        ]
-        }
+        image: {
+            toolbar: [
+                'toggleImageCaption',
+                'imageTextAlternative',
+                '|',
+                'imageStyle:inline',
+                'imageStyle:wrapText',
+                'imageStyle:breakText',
+                '|',
+                'resizeImage'
+            ]
+        },
+        language: 'pt',
+        lineHeight: {
+            supportAllValues: true
+        },
+        link: {
+            addTargetToExternalLinks: true,
+            defaultProtocol: 'https://',
+            decorators: {
+                toggleDownloadable: {
+                    mode: 'manual',
+                    label: 'Downloadable',
+                    attributes: {
+                        download: 'file'
+                    }
+                }
+            }
+        },
+        list: {
+            properties: {
+                styles: true,
+                startIndex: true,
+                reversed: true
+            },
+        },
+        table: {
+            contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
+        },
+
 
     });
 
@@ -767,7 +883,10 @@ function numeroPorExtenso(value, centavos) {
 
         list = value.split(".")[0].split("");
         list = list.reverse();
+
+        // Remove zeros a esquerda
         while (list[list.length - 1] == 0) list.pop();
+
         for (var i = list.length - 1; i >= 0; i--) {
             if (value == 0) {
                 return "zero";
