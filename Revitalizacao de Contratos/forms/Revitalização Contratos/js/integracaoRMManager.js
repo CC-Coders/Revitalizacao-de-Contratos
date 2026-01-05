@@ -39,6 +39,7 @@ function preencheCamposAutomaticamente() {
         $("#novoContratoSTATUS").val(CODSTACNT_PENDENTEOBRA);
 
         var TIPO_CONTRATO = $("#tipoContrato").val();
+        $("#novoContratoObjeto").val(TIPO_CONTRATO);
         if (TIPO_CONTRATO == "Locação de Imóvel" || TIPO_CONTRATO == "Locação de Equipamento") {
             $("#novoContratoTipoContrato").val(regraTipoDeContrato());
         }
