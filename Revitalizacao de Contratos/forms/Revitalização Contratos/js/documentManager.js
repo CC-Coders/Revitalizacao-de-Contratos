@@ -258,7 +258,9 @@ async function salvaModeloAlterado() {
             };
 
             axios
-                .post("https://docx-converter.cke-cs.com/v2/convert/html-docx", data, { responseType: "arraybuffer" })
+                .post("https://docx-converter.cke-cs.com/v2/convert/html-docx", data, { responseType: "arraybuffer", headers: {
+        'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM"
+        }})
                 .then(async (response) => {
                     resolve(response);
                 })
@@ -304,7 +306,9 @@ async function convertDocxToPdf(docxBlob, name) {
     formData.append("file", docxBlob, name);
     let html, headerHtml, footerHtml;
     try {
-        const docxHtmlResponse = await axios.post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, { responseType: "json" });
+        const docxHtmlResponse = await axios.post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, { responseType: "json", headers: {
+        'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM"
+        }});
         html = docxHtmlResponse.data.html + `<div class="watermark" style="font-size: 50px;opacity: 0.5;color: black;position: fixed;left: 20%;top: 50%;transform: rotate(25deg);letter-spacing: 10px;">SEM VALOR CONTRATUAL</div>`;
         headerHtml = docxHtmlResponse.data.headers?.default?.html || "";
         footerHtml = docxHtmlResponse.data.footers?.default?.html || "";
@@ -614,6 +618,9 @@ async function loadCkEditor() {
 			'outdent',
 			'indent'
 		],
+        importWord: {
+			tokenUrl: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM'
+		},
         menuBar: {
             isVisible: true,
         },
@@ -645,7 +652,9 @@ async function carregaDocumentoParaOCKEditor(documentId) {
     const formData = new FormData();
     formData.append("file", blob, "file.docx");
     axios
-        .post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData)
+        .post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, {  headers: {
+        'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM"
+        }})
         .then((response) => {
             console.log("Conversion result", response.data);
             header = response.data.headers.default.html;
