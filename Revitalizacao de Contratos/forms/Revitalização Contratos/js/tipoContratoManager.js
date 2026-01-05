@@ -14,7 +14,8 @@ function onChangeTipoContrato(that) {
         $("#paginationEquipamentos").removeClass("hidden");
         if ($(that).val()) {
             anexosPorTipoDeContrato($(that).val());
-            
+
+            $("#temRetencao").val("Sim").change();
         }
     }
     else {

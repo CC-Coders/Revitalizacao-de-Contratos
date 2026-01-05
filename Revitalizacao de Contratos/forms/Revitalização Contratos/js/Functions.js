@@ -372,6 +372,7 @@ function bloqueiaCamposAprovacao(){
     
     $("#dataInicioLocacao").attr("readonly","readonly");
     $("#dataFimLocacao").attr("readonly","readonly");
+    $("#temReajuste").attr("readonly","readonly");
     $("#indiceReajuste").attr("readonly","readonly");
     $("#temRetencao").attr("readonly","readonly");
     $("#percentualRetencao").attr("readonly","readonly");
@@ -389,6 +390,7 @@ function bloqueiaCamposAprovacao(){
     $("#cpfRepresentanteFornecedor").attr("readonly","readonly");
     $("#mailRepresentanteFornecedor").attr("readonly","readonly");
     $("#assinaturaContrato").attr("readonly","readonly");
+
     
     
     $("#descricaoImovel").attr("readonly","readonly");

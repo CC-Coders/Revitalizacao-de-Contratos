@@ -119,7 +119,6 @@ function bindings() {
     });
 
     // Aba Dados Gerais
-
     $("#modeloContrato").on("change", function(){
         if ($(this).val() == "Contrato fora do modelo") {
             $("#btnAnexarContrato").show();
@@ -209,6 +208,51 @@ function bindings() {
         }
     });
 
+    $("#temReajuste").on("change", function(){
+        var val = $(this).val();
+        if (val == "Sim") {
+            $("#divCampoReajuste").show();
+        }else{
+            $("#divCampoReajuste").hide();
+        }
+    });
+    $("#percentualRetencao").on("change", function(){
+        if ($("#atividade").val() != ATIVIDADES.JURIDICO) {
+            if ($(this).val().replace("%","") < 5) {
+                FLUIGC.toast({
+                    title:"Caso seja necessário informar retenção menor que 5%, a alteração deve ser solicitada ao Jurídico.",
+                    message:"",
+                    type:"warning"
+                });
+                $(this).val("5%");
+            }
+        }
+    });
+    $("#descontoPorDiaChuva").on("change", function(){
+        if ($("#atividade").val() != ATIVIDADES.JURIDICO) {
+            if ($(this).val().replace("%","") < 50) {
+                FLUIGC.toast({
+                    title:"Caso seja necessário informar desconto por dia de chuva menor que 50%, a alteração deve ser solicitada ao Jurídico.",
+                    message:"",
+                    type:"warning"
+                });
+                $(this).val("50%");
+            }
+        }
+    });
+    $("#descontoPorDiaParado").on("change", function(){
+        if ($("#atividade").val() != ATIVIDADES.JURIDICO) {
+            if ($(this).val().replace("%","") < 50) {
+                FLUIGC.toast({
+                    title:"Caso seja necessário informar desconto por dia parado menor que 50%, a alteração deve ser solicitada ao Jurídico.",
+                    message:"",
+                    type:"warning"
+                });
+                $(this).val("50%");
+            }
+        }
+    });
+
     // Aba Assinatura
     $("#assinaturaContrato").on("change", () => onchangeTipoAssinaturaContrato())
     $("#nomeRepresentanteFornecedor").on("change", asyncVerificaSeExisteAssinanteCadastradoPorNome);
@@ -276,6 +320,8 @@ function loadTelaInicio() {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
     }
+
+    $("#temRetencao").attr("readonly","readonly");
 }
 function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
@@ -299,6 +345,12 @@ function loadTelaInicioRetorno() {
     }
     if ($("#tipoPagamento").val() == "Depósito") {
         $("#divPagamento, #divBanco").show();
+    }
+    
+    if ($("#temReajuste").val() == "Sim") {
+        $("#divCampoReajuste").show();
+    }else{
+        $("#divCampoReajuste").hide();
     }
 
     // Configurar o select de banco
@@ -327,6 +379,9 @@ function loadTelaInicioRetorno() {
     } else {
         $("#divPercentualReidi").hide();
     }
+
+
+    $("#temRetencao").attr("readonly","readonly");
 }
 function loadTelaJuridico() {
     $(".panelAprovacao").show();
@@ -340,7 +395,6 @@ function loadTelaJuridico() {
     $(".endereco-fornecedor").slideDown();
     onChangeTipoContrato($("#tipoContrato"));
     buscaBancos();
-    bloqueiaCamposAprovacao();
 
     setAtividadeAtivaProgresso(1);
     asyncMontaHistorico();
@@ -368,6 +422,11 @@ function loadTelaJuridico() {
         $("#divPercentualReidi").show();
     } else {
         $("#divPercentualReidi").hide();
+    }
+        if ($("#temReajuste").val() == "Sim") {
+        $("#divCampoReajuste").show();
+    }else{
+        $("#divCampoReajuste").hide();
     }
 }
 async function loadTelaControladoria() {
@@ -421,6 +480,11 @@ async function loadTelaControladoria() {
     } else {
         $("#divPercentualReidi").hide();
     }
+    if ($("#temReajuste").val() == "Sim") {
+        $("#divCampoReajuste").show();
+    }else{
+        $("#divCampoReajuste").hide();
+    }
 }
 function loadTelaAprovacao() {
     $(".panelAprovacao, #formContainer").show();
@@ -464,6 +528,11 @@ function loadTelaAprovacao() {
     } else {
         $("#divPercentualReidi").hide();
     }
+    if ($("#temReajuste").val() == "Sim") {
+        $("#divCampoReajuste").show();
+    }else{
+        $("#divCampoReajuste").hide();
+    }
 }
 function loadTelaAssinaturaManual() {
     $(".panelAprovacao, #formContainer, #dadosContrato").show();
@@ -501,6 +570,11 @@ function loadTelaAssinaturaManual() {
         $("#divPercentualReidi").show();
     } else {
         $("#divPercentualReidi").hide();
+    }
+    if ($("#temReajuste").val() == "Sim") {
+        $("#divCampoReajuste").show();
+    }else{
+        $("#divCampoReajuste").hide();
     }
 }
 function loadTelaAssinaturaEletronica() {
@@ -542,5 +616,10 @@ function loadTelaAssinaturaEletronica() {
         $("#divPercentualReidi").show();
     } else {
         $("#divPercentualReidi").hide();
+    }
+    if ($("#temReajuste").val() == "Sim") {
+        $("#divCampoReajuste").show();
+    }else{
+        $("#divCampoReajuste").hide();
     }
 }

@@ -372,184 +372,193 @@
                             </div>
                             <!-- Dados Contratuais -->
                             <div class="col-md-6">
-                                    <h2>Dados Contratuais</h2>
-                                    <div class="row">
-                                        <div class="col-md-6 campoLocacaoImovel">
-                                            <div class="form-group">
-                                                <label>Descrição do Imóvel:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" class="form-control inputInfoChamado" id="descricaoImovel"
-                                                    name="descricaoImovel" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoImovel">
-                                            <div class="form-group">
-                                                <label>Valor Mensal do Aluguel:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" class="form-control inputInfoChamado" id="valorMensalAluguel"
-                                                    name="valorMensalAluguel" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoImovel">
-                                            <div class="form-group">
-                                                <label>Endereço do Imóvel:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="enderecoImovel" name="enderecoImovel"
-                                                    class="form-control inputInfoChamado" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoImovel">
-                                            <div class="form-group">
-                                                <label>Matrícula do Imóvel:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="matriculaImovel" name="matriculaImovel"
-                                                    class="form-control inputInfoChamado" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoImovel">
-                                            <div class="form-group">
-                                                <label>Finalidade da Locação:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="finalidadeLocacao" name="finalidadeLocacao"
-                                                    class="form-control inputInfoChamado" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 campoLocacaoImovel">
-                                            <div class="form-group">
-                                                <label>Período de Locação:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="periodoLocacao" name="periodoLocacao"
-                                                    class="form-control inputInfoChamado" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoEquipamento">
-                                            <div class="form-group">
-                                                <label>Data Início Locação:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="dataInicioLocacao" name="dataInicioLocacao"
-                                                    class="form-control inputInfoChamado date" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoEquipamento">
-                                            <div class="form-group">
-                                                <label>Data Fim Locação:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="dataFimLocacao" name="dataFimLocacao"
-                                                    class="form-control inputInfoChamado date" />
-                                            </div>
-                                        </div>                            
-                                        <div class="col-md-6 campoLocacaoImovel">
-                                            <div class="form-group">
-                                                <label>Janela de Pagamento:</label><strong class="strongAlert">*</strong>
-                                                <select name="janelaPagamento" id="janelaPagamento" class="form-control inputInfoChamado">
-                                                    <option value="">Selecione</option>
-                                                    <option value="8">8</option>
-                                                    <option value="18">18</option>
-                                                    <option value="28">28</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoImovel">
-                                            <div class="form-group">
-                                                <label>Caução?</label><strong class="strongAlert">*</strong>
-                                                <select name="caucao" id="caucao" class="form-control inputInfoChamado">
-                                                    <option value="">Selecione</option>
-                                                    <option value="Sim">Sim</option>
-                                                    <option value="Não">Não</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoEquipamento">
-                                            <div class="form-group">
-                                                <label>Valor Mensal:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="valorMensalLocacao" name="valorMensalLocacao"
-                                                    class="form-control inputInfoChamado" readonly />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoEquipamento">
-                                            <div class="form-group">
-                                                <label for="">Valor Total da Locação:</label>
-                                                <input type="text" name="valorTotalLocacao" id="valorTotalLocacao" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoEquipamento">
-                                            <div class="form-group">
-                                                <label>Prazo:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="prazoLocacao" name="prazoLocacao"
-                                                    class="form-control inputInfoChamado" readonly />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoEquipamento">
-                                            <div class="form-group">
-                                                <label>Desconto por Dia de Chuva:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="descontoPorDiaChuva" name="descontoPorDiaChuva"
-                                                    class="form-control inputInfoChamado" value="50%" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 campoLocacaoEquipamento">
-                                            <div class="form-group">
-                                                <label>Desconto por Dia Parado:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="descontoPorDiaParado" name="descontoPorDiaParado"
-                                                    class="form-control inputInfoChamado" value="50%" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 campoLocacaoEquipamento">
-                                            <div class="form-group">
-                                                <label for="">Índice de Reajuste:</label>
-                                                <select name="indiceReajuste" id="indiceReajuste" class="form-control">
-                                                    <option value=""></option>
-                                                    <option value="IGPM" selected>IGPM</option>
-                                                    <option value="IPCA">IPCA</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" id="divValorCaucao" style="display: none">
-                                            <div class="form-group">
-                                                <label>Valor do Caução:</label><strong class="strongAlert">*</strong>
-                                                <input id="valorCaucao" name="valorCaucao" class="form-control inputInfoChamado" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" id="divDataPagamentoCaucao" style="display: none">
-                                            <div class="form-group">
-                                                <label>Data Pagamento do Caução:</label><strong class="strongAlert">*</strong>
-                                                <input type="text" id="dataPagamentoCaucao" name="dataPagamentoCaucao"
-                                                    class="form-control inputInfoChamado date" />
-                                            </div>
+                                <h2>Dados Contratuais</h2>
+                                <div class="row">
+                                    <div class="col-md-6 campoLocacaoImovel">
+                                        <div class="form-group">
+                                            <label>Descrição do Imóvel:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" class="form-control inputInfoChamado" id="descricaoImovel" name="descricaoImovel" />
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6 campoLocacaoEquipamento">
-                                            <div class="form-group">
-                                                <label for="">Retenção?</label>
-                                                <select name="temRetencao" id="temRetencao" class="form-control">
-                                                    <option value="">Selecione</option>
-                                                    <option value="Sim">Sim</option>
-                                                    <option value="Não">Não</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" id="divPercentualRetencao" style="display: none;">
-                                            <div class="form-group">
-                                                <label for="">Percentual de Retenção:</label>
-                                                <input type="text" name="percentualRetencao" id="percentualRetencao" class="form-control" value="5%">
-                                            </div>
+                                    <div class="col-md-6 campoLocacaoImovel">
+                                        <div class="form-group">
+                                            <label>Valor Mensal do Aluguel:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" class="form-control inputInfoChamado" id="valorMensalAluguel"
+                                                name="valorMensalAluguel" />
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6 campoLocacaoEquipamento">
-                                            <div class="form-group">
-                                                <label for="">REIDI?</label>
-                                                <select name="temREIDI" id="temREIDI" class="form-control">
-                                                    <option value="">Selecione</option>
-                                                    <option value="Sim">Sim</option>
-                                                    <option value="Não">Não</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" id="divPercentualReidi" style="display: none;">
-                                            <div class="form-group">
-                                                <label for="">Percentual do REIDI</label>
-                                                <select name="percentualREIDI" id="percentualREIDI" class="form-control">
-                                                    <option value=""></option>
-                                                    <option value="3.65">3,65%</option>
-                                                    <option value="9.25">9,25%</option>
-                                                </select>
-                                            </div>
+                                    <div class="col-md-6 campoLocacaoImovel">
+                                        <div class="form-group">
+                                            <label>Endereço do Imóvel:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="enderecoImovel" name="enderecoImovel" class="form-control inputInfoChamado" />
                                         </div>
                                     </div>
+                                    <div class="col-md-6 campoLocacaoImovel">
+                                        <div class="form-group">
+                                            <label>Matrícula do Imóvel:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="matriculaImovel" name="matriculaImovel" class="form-control inputInfoChamado" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoImovel">
+                                        <div class="form-group">
+                                            <label>Finalidade da Locação:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="finalidadeLocacao" name="finalidadeLocacao"
+                                                class="form-control inputInfoChamado" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 campoLocacaoImovel">
+                                        <div class="form-group">
+                                            <label>Período de Locação:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="periodoLocacao" name="periodoLocacao" class="form-control inputInfoChamado" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoEquipamento">
+                                        <div class="form-group">
+                                            <label>Data Início Locação:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="dataInicioLocacao" name="dataInicioLocacao"
+                                                class="form-control inputInfoChamado date" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoEquipamento">
+                                        <div class="form-group">
+                                            <label>Data Fim Locação:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="dataFimLocacao" name="dataFimLocacao"
+                                                class="form-control inputInfoChamado date" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoImovel">
+                                        <div class="form-group">
+                                            <label>Janela de Pagamento:</label><strong class="strongAlert">*</strong>
+                                            <select name="janelaPagamento" id="janelaPagamento" class="form-control inputInfoChamado">
+                                                <option value="">Selecione</option>
+                                                <option value="8">8</option>
+                                                <option value="18">18</option>
+                                                <option value="28">28</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoImovel">
+                                        <div class="form-group">
+                                            <label>Caução?</label><strong class="strongAlert">*</strong>
+                                            <select name="caucao" id="caucao" class="form-control inputInfoChamado">
+                                                <option value="">Selecione</option>
+                                                <option value="Sim">Sim</option>
+                                                <option value="Não">Não</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoEquipamento">
+                                        <div class="form-group">
+                                            <label>Valor Mensal:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="valorMensalLocacao" name="valorMensalLocacao"
+                                                class="form-control inputInfoChamado" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoEquipamento">
+                                        <div class="form-group">
+                                            <label for="">Valor Total da Locação:</label>
+                                            <input type="text" name="valorTotalLocacao" id="valorTotalLocacao" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoEquipamento">
+                                        <div class="form-group">
+                                            <label>Prazo:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="prazoLocacao" name="prazoLocacao" class="form-control inputInfoChamado"
+                                                readonly />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoEquipamento">
+                                        <div class="form-group">
+                                            <label>Desconto por Dia de Chuva:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="descontoPorDiaChuva" name="descontoPorDiaChuva"
+                                                class="form-control inputInfoChamado" value="50%" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoEquipamento">
+                                        <div class="form-group">
+                                            <label>Desconto por Dia Parado:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="descontoPorDiaParado" name="descontoPorDiaParado"
+                                                class="form-control inputInfoChamado" value="50%" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 campoLocacaoEquipamento">
+                                        <div class="form-group">
+                                            <label for="">Reajuste?:</label>
+                                            <select name="temReajuste" id="temReajuste" class="form-control">
+                                                <option value=""></option>
+                                                <option value="Sim">Sim</option>
+                                                <option value="Não">Não</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="divCampoReajuste" style="display: none;">
+                                        <div class="form-group">
+                                            <label for="">Índice de Reajuste:</label>
+                                            <select name="indiceReajuste" id="indiceReajuste" class="form-control">
+                                                <option value=""></option>
+                                                <option value="IGPM" selected>IGPM</option>
+                                                <option value="IPCA">IPCA</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" id="divValorCaucao" style="display: none">
+                                        <div class="form-group">
+                                            <label>Valor do Caução:</label><strong class="strongAlert">*</strong>
+                                            <input id="valorCaucao" name="valorCaucao" class="form-control inputInfoChamado" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="divDataPagamentoCaucao" style="display: none">
+                                        <div class="form-group">
+                                            <label>Data Pagamento do Caução:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="dataPagamentoCaucao" name="dataPagamentoCaucao"
+                                                class="form-control inputInfoChamado date" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 campoLocacaoEquipamento">
+                                        <div class="form-group">
+                                            <label for="">Retenção?</label>
+                                            <select name="temRetencao" id="temRetencao" class="form-control">
+                                                <option value="">Selecione</option>
+                                                <option value="Sim">Sim</option>
+                                                <option value="Não">Não</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="divPercentualRetencao" style="display: none;">
+                                        <div class="form-group">
+                                            <label for="">Percentual de Retenção:</label>
+                                            <input type="text" name="percentualRetencao" id="percentualRetencao" class="form-control" value="5%">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 campoLocacaoEquipamento">
+                                        <div class="form-group">
+                                            <label for="">REIDI?</label>
+                                            <select name="temREIDI" id="temREIDI" class="form-control">
+                                                <option value="">Selecione</option>
+                                                <option value="Sim">Sim</option>
+                                                <option value="Não">Não</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="divPercentualReidi" style="display: none;">
+                                        <div class="form-group">
+                                            <label for="">Percentual do REIDI</label>
+                                            <select name="percentualREIDI" id="percentualREIDI" class="form-control">
+                                                <option value=""></option>
+                                                <option value="3.65">3,65%</option>
+                                                <option value="9.25">9,25%</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- Dados Pagamento -->
                             <div class="col-md-6">
