@@ -569,6 +569,7 @@ async function renderizarAnexosEtapaAprovacao() {
 function anexosPorTipoDeContrato(tipoDoContrato){
     const listaAnexosPorTipoDeContrato = {
         "Locação de Equipamento":["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
+        "Locação de Equipamento - Com Mão de Obra":["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
         "Locação de Imóvel - PF":["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
         "Locação de Imóvel - PJ":["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
     };

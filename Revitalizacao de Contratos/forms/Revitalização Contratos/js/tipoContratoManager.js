@@ -7,7 +7,7 @@ function onChangeTipoContrato(that) {
         $("#dadosContrato").show();
         $(".campoLocacaoImovel").show();
     } 
-    else if($(that).val() === "Locação de Equipamento" || $(that).text() === "Locação de Equipamento"){
+    else if($(that).val() === "Locação de Equipamento" || $(that).text() === "Locação de Equipamento" || $(that).val() === "Locação de Equipamento - Com Mão de Obra" || $(that).text() === "Locação de Equipamento - Com Mão de Obra"){
         $("#dadosContrato").show();
         $(".campoLocacaoEquipamento").show();
         $("#paginationEquipamentos").show();

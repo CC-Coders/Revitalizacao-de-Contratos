@@ -33,7 +33,7 @@ var TIPOS_CONTRATO = {
     "Locação de Equipamentos - S/M.O.": "06",
     "Prestação de Serviços - Sub-Empreiteiros": "07",
     "Fornecimento de Material": "08",
-    "Locação de Equipamentos - C/M.O.": "09",
+    "Locação de Equipamento - Com Mão de Obra": "09",
     "Prestação de Serviços": "10",
     "Transporte de Material - S/M.O.": "11",
     Finame: "12",
@@ -78,7 +78,7 @@ function beforeTaskSave_inicio() {
     try {
         hAPI.setCardValue("numProces", getValue("WKNumProces"));
 
-        if (hAPI.getCardValue("tipoContrato") == "Locação de Equipamento") {
+        if (hAPI.getCardValue("tipoContrato") == "Locação de Equipamento" || hAPI.getCardValue("tipoContrato") == "Locação de Equipamento - Com Mão de Obra") {
             atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
             hAPI.setCardValue("dataCriadoEm", getDateNow());
         }
@@ -124,10 +124,10 @@ function beforeTaskSave_engenheiro() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Engenheiro");
 
     if (hAPI.getCardValue("decisao") == "Aprovar") {
-        if (hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("coordenador") == "") {
+        if (hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento - Com Mão de Obra" && hAPI.getCardValue("coordenador") == "") {
             // Se não tiver coordenador vai para assinatura eletrônica
             criaAssinaturaEletronica();
-        }else if(hAPI.getCardValue("tipoContrato") == "Locação de Equipamento" && hAPI.getCardValue("coordenador") == "" && hAPI.getCardValue("CODCOLIGADA") != 1 ){
+        }else if((hAPI.getCardValue("tipoContrato") == "Locação de Equipamento" || hAPI.getCardValue("tipoContrato") == "Locação de Equipamento - Com Mão de Obra") && hAPI.getCardValue("coordenador") == "" && hAPI.getCardValue("CODCOLIGADA") != 1 ){
             // Caso seja Locação de Equipamento e não tiver coordenador
             // Vai para assinatura eletrônica somente quando não for Coligada 1, pois na Coligada 1 vai para aprovação do Jerson
             criaAssinaturaEletronica();
@@ -137,7 +137,7 @@ function beforeTaskSave_engenheiro() {
 function beforeTaskSave_coordenadorObras() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Coordenador");
 
-    if (hAPI.getCardValue("decisao") == "Aprovar" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento") {
+    if (hAPI.getCardValue("decisao") == "Aprovar" && (hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento - Com Mão de Obra")) {
         criaAssinaturaEletronica();
     }
 }
@@ -593,7 +593,11 @@ function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){
 
         if (tipo_contrato == "Locação de Equipamento") {
             insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR);
-        }else if(tipo_contrato == "Locação de Imóvel"){
+        }
+        if (tipo_contrato == "Locação de Equipamento - Com Mão de Obra") {
+            insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR);
+        }
+        else if(tipo_contrato == "Locação de Imóvel"){
             insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR);
         }
 

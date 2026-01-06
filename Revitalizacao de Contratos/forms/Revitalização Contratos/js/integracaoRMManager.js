@@ -40,7 +40,7 @@ function preencheCamposAutomaticamente() {
 
         var TIPO_CONTRATO = $("#tipoContrato").val();
         $("#novoContratoObjeto").val(TIPO_CONTRATO);
-        if (TIPO_CONTRATO == "Locação de Imóvel" || TIPO_CONTRATO == "Locação de Equipamento") {
+        if (TIPO_CONTRATO == "Locação de Imóvel" || TIPO_CONTRATO == "Locação de Equipamento" || TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
             $("#novoContratoTipoContrato").val(regraTipoDeContrato());
         }
         
@@ -61,7 +61,7 @@ function preencheCamposAutomaticamente() {
             $("#novoContratoDataInicio").val(periodoInit);
             $("#novoContratoDataFim").val(periodoEnd);
         }
-        else  if (TIPO_CONTRATO == "Locação de Equipamento") {
+        else  if (TIPO_CONTRATO == "Locação de Equipamento" || TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
             var periodoInit = $("#dataInicioLocacao").val();
             var periodoEnd = $("#dataFimLocacao").val();
             $("#novoContratoDataInicio").val(periodoInit);
@@ -110,6 +110,9 @@ function preencheCamposAutomaticamente() {
 
         var codigoProduto = null;
         if (TIPO_CONTRATO == "Locação de Equipamento") {
+            codigoProduto = 1727;
+        }
+        else if (TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
             codigoProduto = 1727;
         }
 
@@ -179,7 +182,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
         return [
             {
                 representante: "Jerson Godoy Leski Junior",
-                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamentos - C/M.O", "Transporte de Material - S/M.O", "Locação de Equipamento"],
+                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamento - Com Mão de Obra", "Transporte de Material - S/M.O", "Locação de Equipamento"],
             },
             {
                 representante: "Augusto Cesar de Almeida Pereira de Lyra",
@@ -195,7 +198,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
         return [
             {
                 representante: "Jerson Godoy Leski Junior",
-                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamentos - C/M.O", "Transporte de Material - S/M.O"],
+                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamento - Com Mão de Obra", "Transporte de Material - S/M.O"],
             },
             {
                 representante: "Marcio Rinaldo Guinossi",
@@ -213,7 +216,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
         return [
             {
                 representante: "Jerson Godoy Leski Junior",
-                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamentos - C/M.O", "Transporte de Material - S/M.O"],
+                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamento - Com Mão de Obra", "Transporte de Material - S/M.O"],
             },
             {
                 representante: "Servulo Sanches Correa",
@@ -233,7 +236,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                 representante: "Mario Rogers de Castilho",
                 tipos: [
                     "Locação de Equipamentos - S/M.O",
-                    "Locação de Equipamentos - C/M.O",
+                    "Locação de Equipamentos - Locação de Equipamento - Com Mão de Obra",
                     "Transporte de Material - S/M.O",
                     "Prestação de Serviços - Sub-Empreiteiros",
                     "Prestação de Serviços",
@@ -250,7 +253,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                 representante: "Mario Rogers de Castilho",
                 tipos: [
                     "Locação de Equipamentos - S/M.O",
-                    "Locação de Equipamentos - C/M.O",
+                    "Locação de Equipamentos - Locação de Equipamento - Com Mão de Obra",
                     "Transporte de Material - S/M.O",
                     "Prestação de Serviços - Sub-Empreiteiros",
                     "Prestação de Serviços",
@@ -270,6 +273,9 @@ function regraTipoDeContrato() {
         return "06";
     }
     if (tipoContrato == "Locação de Imóvel") {
+        return "04"
+    }
+    if (tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
         return "04"
     }
 

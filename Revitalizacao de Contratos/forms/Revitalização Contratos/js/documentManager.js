@@ -16,10 +16,12 @@ const codigosModelos = {
     HOMOLOGACAO: {
         "Locação de Imóvel": 39635,
         "Locação de Equipamento": 39636,
+        "Locação de Equipamento - Com Mão de Obra": 39959,
     },
     DESENVOLVIMENTO: {
         "Locação de Imóvel": 29328,
         "Locação de Equipamento": 30545,
+        "Locação de Equipamento - Com Mão de Obra": 32448,
     }
 };
 
@@ -105,7 +107,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 ANO: ano,
                 CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`
             };
-        } else if (tipoContrato == "Locação de Equipamento") {
+        } else if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
             var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
             var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
 

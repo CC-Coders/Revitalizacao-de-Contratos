@@ -1,7 +1,7 @@
 function beforeCancelProcess(colleagueId,processId){
     var tipoContrato = hAPI.getCardValue("tipoContrato");
     
-    if (tipoContrato == "Locação de Equipamento") {
+    if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
         resetaStatusDosEquipamentosParaPendenteContrato();
     }
 }

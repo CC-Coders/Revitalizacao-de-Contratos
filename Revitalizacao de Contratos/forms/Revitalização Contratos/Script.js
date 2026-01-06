@@ -230,25 +230,29 @@ function bindings() {
     });
     $("#descontoPorDiaChuva").on("change", function(){
         if ($("#atividade").val() != ATIVIDADES.JURIDICO) {
-            if ($(this).val().replace("%","") < 50) {
-                FLUIGC.toast({
-                    title:"Caso seja necessário informar desconto por dia de chuva menor que 50%, a alteração deve ser solicitada ao Jurídico.",
-                    message:"",
-                    type:"warning"
-                });
-                $(this).val("50%");
+            if ($("#modeloContrato").val() == "Modelo Castilho") {
+                if ($(this).val().replace("%","") < 50) {
+                    FLUIGC.toast({
+                        title:"Caso seja necessário informar desconto por dia de chuva menor que 50%, a alteração deve ser solicitada ao Jurídico.",
+                        message:"",
+                        type:"warning"
+                    });
+                    $(this).val("50%");
+                }
             }
         }
     });
     $("#descontoPorDiaParado").on("change", function(){
         if ($("#atividade").val() != ATIVIDADES.JURIDICO) {
-            if ($(this).val().replace("%","") < 50) {
-                FLUIGC.toast({
-                    title:"Caso seja necessário informar desconto por dia parado menor que 50%, a alteração deve ser solicitada ao Jurídico.",
-                    message:"",
-                    type:"warning"
-                });
-                $(this).val("50%");
+            if ($("#modeloContrato").val() == "Modelo Castilho") {
+                if ($(this).val().replace("%","") < 50) {
+                    FLUIGC.toast({
+                        title:"Caso seja necessário informar desconto por dia parado menor que 50%, a alteração deve ser solicitada ao Jurídico.",
+                        message:"",
+                        type:"warning"
+                    });
+                    $(this).val("50%");
+                }
             }
         }
     });
@@ -277,7 +281,7 @@ function bindings() {
         var obra = $("#obra").val();
         var locador = $("#locador").val();
 
-        if (tipoContrato == "Locação de Equipamento" && obra && locador) {
+        if ((tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") && obra && locador) {
             preencheListaDeEquipamentos();
         }
     });
@@ -316,7 +320,7 @@ function loadTelaInicio() {
 
     initDataTableEquipamentos();
     preencheListaDeEquipamentos();
-    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+    if ($("#tipoContrato").val() == "Locação de Equipamento" || $("#tipoContrato").val() == "Locação de Equipamento - Com Mão de Obra") {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
     }
@@ -361,7 +365,7 @@ function loadTelaInicioRetorno() {
         }
     });
 
-    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+    if ($("#tipoContrato").val() == "Locação de Equipamento" || $("#tipoContrato").val() == "Locação de Equipamento - Com Mão de Obra") {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
 
@@ -408,7 +412,7 @@ function loadTelaJuridico() {
         $("#btnVisualizarPreContrato").hide();
     }
 
-    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+    if ($("#tipoContrato").val() == "Locação de Equipamento" || $("#tipoContrato").val() == "Locação de Equipamento - Com Mão de Obra") {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
     }
@@ -465,7 +469,7 @@ async function loadTelaControladoria() {
     }
 
 
-    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+    if ($("#tipoContrato").val() == "Locação de Equipamento" || $("#tipoContrato").val() == "Locação de Equipamento - Com Mão de Obra") {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
     }
@@ -513,7 +517,7 @@ function loadTelaAprovacao() {
         $("#btnVisualizarPreContrato").hide();
     }
 
-    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+    if ($("#tipoContrato").val() == "Locação de Equipamento" || $("#tipoContrato").val() == "Locação de Equipamento - Com Mão de Obra") {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
     }
@@ -555,7 +559,7 @@ function loadTelaAssinaturaManual() {
     bloqueiaCamposAprovacao();
     renderizarAnexosEtapaAprovacao();
 
-    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+    if ($("#tipoContrato").val() == "Locação de Equipamento" || $("#tipoContrato").val() == "Locação de Equipamento - Com Mão de Obra") {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
     }
@@ -602,7 +606,7 @@ function loadTelaAssinaturaEletronica() {
     asyncGeraQuadroStatusAssinatura();
     bloqueiaCamposAprovacao();
 
-    if ($("#tipoContrato").val() == "Locação de Equipamento") {
+    if ($("#tipoContrato").val() == "Locação de Equipamento" || $("#tipoContrato").val() == "Locação de Equipamento - Com Mão de Obra") {
         $("#paginationEquipamentos").show();
         $("#paginationEquipamentos").removeClass("hidden");
     }
