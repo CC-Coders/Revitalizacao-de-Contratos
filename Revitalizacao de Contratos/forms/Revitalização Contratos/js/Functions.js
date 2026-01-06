@@ -547,7 +547,7 @@ const documentosPorTipo = {
     F: ["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
     J: ["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
 };
-const documentosAnexados = {};
+var documentosAnexados = {};
 async function renderizarAnexosEtapaAprovacao() {
     const hiddenValue = document.getElementById("hiddenDocumentosAnexados").value;
     if (!hiddenValue) return;
@@ -625,45 +625,45 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
             }
         }
     }
-    async function insereDocumentoCriado(tipo, documentosAnexados, name, docId){
-        const lista = $("#listaAnexos");
-        const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
+}
+async function insereDocumentoCriado(tipo, documentosAnexados, name, docId){
+    const lista = $("#listaAnexos");
+    const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
 
-        if (tipo === "CNH") {
-            documentosAnexados["RG"] = null;
-            documentosAnexados["CPF"] = null;
+    if (tipo === "CNH") {
+        documentosAnexados["RG"] = null;
+        documentosAnexados["CPF"] = null;
 
-            $("#item-identidade-rg-cnh").remove();
-            $("#item-identidade-cpf-cnh").remove();
-            $("#item-RG").remove();
-            $("#item-CPF").remove();
-            const item = $("#item-CNH");
-            if (item) {
-                $(item).html(`<span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${name}</a></span>`);
-            }
-        } else if (tipo === "RG") {
-            documentosAnexados["CNH"] = null;
-            $("#item-identidade-rg-cnh").remove();
-            $("#item-CNH").remove();
-
-            $(lista).append(`<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${name}</a></span></li>`);
-            if (!documentosAnexados["CPF"]) {
-                $("#item-identidade-cpf-cnh").remove();
-                $(lista).append(`<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`);
-            }
-        } else if (tipo === "CPF") {
-            documentosAnexados["CNH"] = null;
-            $("#item-identidade-cpf-cnh").remove();
-            $("#item-CNH").remove();
-
-            $(lista).append(`<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${name}</a></span></li>`);
-            if (!documentosAnexados["RG"]) {
-                $("#item-identidade-rg-cnh").remove();
-                $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
-            }
-        } else {
-            $(`#item-${tipo.split(" ").join("-").split("(")[0]}`).html(`<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${file.name}</a></span>`);
+        $("#item-identidade-rg-cnh").remove();
+        $("#item-identidade-cpf-cnh").remove();
+        $("#item-RG").remove();
+        $("#item-CPF").remove();
+        const item = $("#item-CNH");
+        if (item) {
+            $(item).html(`<span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${name}</a></span>`);
         }
+    } else if (tipo === "RG") {
+        documentosAnexados["CNH"] = null;
+        $("#item-identidade-rg-cnh").remove();
+        $("#item-CNH").remove();
+
+        $(lista).append(`<li id="item-RG"><span>✅ <b>RG:</b> <a href="${link}" target="_blank">${name}</a></span></li>`);
+        if (!documentosAnexados["CPF"]) {
+            $("#item-identidade-cpf-cnh").remove();
+            $(lista).append(`<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`);
+        }
+    } else if (tipo === "CPF") {
+        documentosAnexados["CNH"] = null;
+        $("#item-identidade-cpf-cnh").remove();
+        $("#item-CNH").remove();
+
+        $(lista).append(`<li id="item-CPF"><span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${name}</a></span></li>`);
+        if (!documentosAnexados["RG"]) {
+            $("#item-identidade-rg-cnh").remove();
+            $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
+        }
+    } else {
+        $(`#item-${tipo.split(" ").join("-").split("(")[0]}`).html(`<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${name}</a></span>`);
     }
 }
 function handleFileUpload(inputId, descricaoArquivo) {
@@ -748,4 +748,7 @@ function criaDocFluigRetornaDocumentId(file, parentId) {
             );
         };
     });
+}
+async function asyncGetDocumentDetails(documentId){
+    return await axios.get(`/content-management/api/v2/documents/${documentId}`);
 }

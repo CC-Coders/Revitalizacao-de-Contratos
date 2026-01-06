@@ -327,7 +327,7 @@ function loadTelaInicio() {
 
     $("#temRetencao").attr("readonly","readonly");
 }
-function loadTelaInicioRetorno() {
+async function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
     $("#divTipoAssinaturaContrato").show();
     $("#dadosContrato").show();
@@ -340,7 +340,6 @@ function loadTelaInicioRetorno() {
     inicializarPeriodoLocacao();
     asyncMontaHistorico()
     onChangeTipoContrato($("#tipoContrato"));
-    renderizarAnexosEtapaAprovacao();
     $(".endereco-fornecedor").slideDown();
     $("#formContainer").show();
     mostrarPagina("0");
@@ -386,6 +385,30 @@ function loadTelaInicioRetorno() {
 
 
     $("#temRetencao").attr("readonly","readonly");
+
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
+        $("#btnAnexarContrato").show();
+            
+        var documentId = $("#contratoPdfId").val();
+        $("#nomeAnexoContrato").attr("href",await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId));
+        var documentData = await      asyncGetDocumentDetails(documentId);
+        $("#nomeAnexoContrato").text(documentData.data.description);
+    }else{
+        $("#btnAnexarContrato").hide();
+    }
+
+    const hiddenValue = $("#hiddenDocumentosAnexados").val(); 
+    const anexos = JSON.parse(hiddenValue);
+    documentosAnexados = anexos;
+      
+    anexosPorTipoDeContrato($("#tipoContrato").val());
+
+    for (const anexo in documentosAnexados) {
+        var dataAnexo = await asyncGetDocumentDetails(documentosAnexados[anexo]);
+
+        insereDocumentoCriado(anexo,documentosAnexados, dataAnexo.data.description,  documentosAnexados[anexo]);
+    }
+
 }
 function loadTelaJuridico() {
     $(".panelAprovacao").show();
