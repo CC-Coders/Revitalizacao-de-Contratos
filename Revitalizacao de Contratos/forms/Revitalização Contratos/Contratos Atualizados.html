@@ -119,6 +119,9 @@
                 <input type="hidden" name="hiddenCGCCFO" id="hiddenCGCCFO" />
                 <input type="hidden" name="hiddenFORNECEDOR" id="hiddenFORNECEDOR" />
 
+                <!-- Assinatura -->
+                <input type="hidden" name="jsonTestemunhas" id="jsonTestemunhas">
+
                 <!-- Tabela Historico -->
                 <div>
                     <table id="tableHistorico" tablename="tableHistorico" noaddbuttom="true" nodeletebuttom="true">
@@ -652,19 +655,16 @@
                                     <label for="nomeRepresentanteCastilho">Nome: </label>
                                     <input type="text" name="nomeRepresentanteCastilho" id="nomeRepresentanteCastilho"
                                         class="form-control readonlyField" readonly inert />
-                                    <br />
                                 </div>
                                 <div>
                                     <label for="cpfRepresentanteCastilho">CPF: </label>
                                     <input type="text" name="cpfRepresentanteCastilho" id="cpfRepresentanteCastilho"
                                         class="form-control readonlyField" readonly inert />
-                                    <br />
                                 </div>
                                 <div>
                                     <label for="mailRepresentanteCastilho">E-mail: </label>
                                     <input type="text" name="mailRepresentanteCastilho" id="mailRepresentanteCastilho"
                                         class="form-control readonlyField" readonly inert />
-                                    <br />
                                 </div>
                         </div>
                         <div class="col-md-6">
@@ -673,22 +673,45 @@
                                     <label for="nomeRepresentanteFornecedor">Nome: </label>
                                     <input type="text" name="nomeRepresentanteFornecedor"
                                         id="nomeRepresentanteFornecedor" class="form-control" />
-                                    <br />
                                 </div>
                                 <div>
                                     <label for="cpfRepresentanteFornecedor">CPF: </label>
                                     <input type="text" name="cpfRepresentanteFornecedor" id="cpfRepresentanteFornecedor"
                                         class="form-control" />
-                                    <br />
                                 </div>
                                 <div>
                                     <label for="mailRepresentanteFornecedor">E-mail: </label>
                                     <input type="text" name="mailRepresentanteFornecedor"
                                         id="mailRepresentanteFornecedor" class="form-control" />
-                                    <br />
                                 </div>
                         </div>
                     </div>
+                    <br>
+                    <hr>
+                    <div id="divTestemunhas" class="row">
+                        <div class="col-md-12">
+                            <h2>Testemunhas</h2>
+                            <div style="display: flex;" id="divAdicionarTestemunha">
+                                <div style="width: 100%;">
+                                    <select name="selectTestemunha" id="selectTestemunha"></select>
+                                </div>
+                                <button type="button" id="btnAdicionarTestemunha" class="btn btn-success">Adicionar</button>
+                                <button type="button" id="btnCadastrarAssinante" class="btn btn-info">Cadastrar Novo</button>
+                            </div>
+                            <table id="tableTestemunhas" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>E-mail</th>
+                                        <th>CPF</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
                     <div id="divTipoAssinaturaContrato" class="row">
                         <div class="col-md-12">
                                 <h2>Assinatura do Contrato</h2>

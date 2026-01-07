@@ -164,6 +164,137 @@ function modalAssinantes(assinantes, title){
     }
 }
 
+
+// Testemunhas
+function abreModalCadastrarAssinante(){
+   var myModal = FLUIGC.modal({
+        title: 'Adicionar testemunha',
+        content: modalHtml(),
+        id: 'fluig-modal',
+        size: 'full',
+        actions: [{
+            'label': 'Cadastrar',
+            'bind': 'data-open-modal',
+        },{
+            'label': 'Cancelar',
+            'autoClose': true
+        }]
+    }, function(err, data) {
+        if(err) {
+         
+        } else {
+            $(".cpfCadastroAssinante").mask("000.000.000-00", { placeholder: "___.___.___-__" });
+            $("[data-open-modal]").on("click", async function(){
+                var nome = $(".nomeCadastroAssinante").val();
+                var email = $(".emailCadastroAssinante").val();
+                var cpf = $(".cpfCadastroAssinante").val();
+
+                var assinantesCadastrados = await promiseBuscaAssinantes();
+                var found = assinantesCadastrados.find(e=>hex2a(e.email) == email || e.email == email);
+                if (found) {
+                    showMessage("E-mail já cadastrado.","","warning");
+                    return;
+                }
+                
+                var ds = DatasetFactory.getDataset('ds_auxiliar_wesign', null, [
+                    DatasetFactory.createConstraint("nome", nome, nome, ConstraintType.MUST),
+                    DatasetFactory.createConstraint("email", email, email, ConstraintType.MUST),
+                    DatasetFactory.createConstraint("cEmail", email, email, ConstraintType.MUST),
+                    DatasetFactory.createConstraint("tipo", "E", "E", ConstraintType.MUST),
+                    DatasetFactory.createConstraint("cpf", cpf, cpf, ConstraintType.MUST),
+                    DatasetFactory.createConstraint("cCpf", cpf, cpf, ConstraintType.MUST),
+                    DatasetFactory.createConstraint("titulo", "", "", ConstraintType.MUST),
+                    DatasetFactory.createConstraint("empresa", "", "", ConstraintType.MUST),
+                    DatasetFactory.createConstraint("metodo", "createSigner", "createSigner", ConstraintType.MUST)
+                ], null);
+
+                if (ds.values[0].Result == "OK") {
+                    asyncAtualizaListaDeAssinantes();
+                    $(window["fluig-modal"]).find("[data-dismiss]").click();
+                }
+                else {
+                    FLUGIC.toast({
+                        title:"Erro ao cadastrar assinante",
+                        message:"",
+                        type:"warning",
+                    });
+                }
+            });
+        }
+    });
+
+    function modalHtml(){
+        return `
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Nome: </label>
+                    <input type="text" class="form-control nomeCadastroAssinante"/>
+                </div>
+                <div class="col-md-12">
+                    <label>E-mail: </label>
+                    <input type="text" class="form-control emailCadastroAssinante"/>
+                </div>
+                <div class="col-md-12">
+                    <label>CPF: </label>
+                    <input type="text" class="form-control cpfCadastroAssinante"/>
+                </div>
+            </div>
+        `;
+    }
+}
+function promiseBuscaAssinantes(){
+    return new Promise((resolve, reject)=>{
+        DatasetFactory.getDataset("dsCadastroAssinantesWesign",null,null,null,{
+            success:ds=>{
+                if (ds.values[0].STATUS != "SUCCESS") {
+                    reject(ds.values[0].MENSAGEM)
+                }
+                else{
+                    resolve(JSON.parse(ds.values[0].RESULT));
+                }
+
+            },
+            error:e=>{
+                console.error(e);
+                reject(e);
+            }
+        });
+    });
+}
+async function asyncAtualizaListaDeAssinantes(){
+    var assinantes = await promiseBuscaAssinantes();
+    $("#selectTestemunha")[0].selectize.addOption(assinantes.map(e=>{return {value:`${e.NOME} - ${hex2a(e.email)} - ${hex2a(e.cpf)}`, text:`${e.NOME} - ${hex2a(e.email)} - ${hex2a(e.cpf)}`}}));
+}
+function salvaTestemunhasNoCampoHidden(){
+    var json = [];
+    $("#tableTestemunhas>tbody>tr").each(function(){
+        var list = [];
+        $(this).find("td:not(:last)").each(function(){
+            list.push($(this).text());
+        });
+        var [nome, email, cpf] = list;
+        json.push({nome, email, cpf});
+    });
+
+    $("#jsonTestemunhas").val(JSON.stringify(json));
+}
+function carregaTestemunhas(){
+    var json = JSON.parse($("#jsonTestemunhas").val());
+    var html = "";
+    for (const testemunha of json) {
+        html += 
+        `<tr>
+            <td>${testemunha.nome}</td>
+            <td>${testemunha.email}</td>
+            <td>${testemunha.cpf}</td>
+            <td></td>
+        </tr>`;
+        
+    }
+    
+    $("#tableTestemunhas>tbody").html(html);
+}
+
 // Utils
 function hex2a(e) {
     for (

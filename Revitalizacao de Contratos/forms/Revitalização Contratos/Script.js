@@ -265,6 +265,35 @@ function bindings() {
             asyncPreencheRepresentanteCastilho();
         }
     });
+    $("#btnCadastrarAssinante").on("click", abreModalCadastrarAssinante);
+    $("#btnAdicionarTestemunha").on("click", function(){
+        var value = $("#selectTestemunha")[0].selectize.items[0];
+        if (!value) {
+            return; 
+        }
+
+        var [nome, email, cpf] = value.split(" - ");
+
+        $("#tableTestemunhas>tbody").append(`
+            <tr>
+                <td>${nome}</td>
+                <td>${email}</td>
+                <td>${cpf}</td>
+                <td style="text-align:center;">
+                    <button class="btn btn-danger btnDelete">
+                        <i class="flaticon flaticon-trash icon-md" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>    
+        `);
+
+        $("#selectTestemunha")[0].selectize.clear();
+        salvaTestemunhasNoCampoHidden();
+        $("#tableTestemunhas>tbody>tr:last").find(".btnDelete").on("click", function(){
+            $(this).closest("tr").remove();
+            salvaTestemunhasNoCampoHidden();
+        });
+    });
 
     // Paginacao
     $("#btn-avancar").on("click", avancarPagina);
@@ -298,11 +327,10 @@ function bindings() {
     // Anexos
     $("#btnAnexarDocumento").on("click", function(){$("#inputAnexo").click()});
     $("#inputAnexo").on("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
-
 }
 
 
-function loadTelaInicio() {
+async function loadTelaInicio() {
     $(".panelAprovacao").hide();
     $(".panelInput").show();
     $("#divTipoAssinaturaContrato").show();
@@ -326,6 +354,8 @@ function loadTelaInicio() {
     }
 
     $("#temRetencao").attr("readonly","readonly");
+    $("#selectTestemunha").selectize();
+    asyncAtualizaListaDeAssinantes();
 }
 async function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
@@ -455,12 +485,14 @@ function loadTelaJuridico() {
     }else{
         $("#divCampoReajuste").hide();
     }
+
+    $("#divAdicionarTestemunha").hide();
+    carregaTestemunhas();
 }
 async function loadTelaControladoria() {
     $(".panelAprovacao").show();
     $("#rowAnexosSelecao").hide();
     $("#formContainer").show();
-    $("#divBtnEnviar").hide();
 
     // Preenche campos de integração
     bindingCamposIntegracaoRM();
@@ -512,6 +544,8 @@ async function loadTelaControladoria() {
     }else{
         $("#divCampoReajuste").hide();
     }
+$("#divAdicionarTestemunha").hide();
+    carregaTestemunhas();
 }
 function loadTelaAprovacao() {
     $(".panelAprovacao, #formContainer").show();
@@ -560,6 +594,8 @@ function loadTelaAprovacao() {
     }else{
         $("#divCampoReajuste").hide();
     }
+    $("#divAdicionarTestemunha").hide();
+    carregaTestemunhas();
 }
 function loadTelaAssinaturaManual() {
     $(".panelAprovacao, #formContainer, #dadosContrato").show();
@@ -603,6 +639,8 @@ function loadTelaAssinaturaManual() {
     }else{
         $("#divCampoReajuste").hide();
     }
+$("#divAdicionarTestemunha").hide();
+    carregaTestemunhas();
 }
 function loadTelaAssinaturaEletronica() {
 
@@ -649,4 +687,7 @@ function loadTelaAssinaturaEletronica() {
     }else{
         $("#divCampoReajuste").hide();
     }
+
+    $("#divAdicionarTestemunha").hide();
+    carregaTestemunhas();
 }

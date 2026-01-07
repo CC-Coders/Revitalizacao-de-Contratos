@@ -198,6 +198,7 @@ async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value
         return { engenherio, coordenador, diretor };
     }
 }
+
 function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(cgccfo) {
     // Nome da função alterado para descrever as resposabilidades da função corretamente
     // Necessário quebrar a função em várias funções, cada uma com uma responsabilidade
@@ -278,8 +279,15 @@ async function enviarSolicitacao() {
         }else{
             $("#workflowActions > button:first-child", window.parent.document).click();
         }
+    } 
+    else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {
+        var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
+        var pdf = await convertDocxToPdf(filePreenchido, geraNomeDoArquivo() + ".pdf");
+        await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo() + ".pdf", pastaDeAnexos);
+        $("#workflowActions > button:first-child", window.parent.document).click();
 
-    } else {
+    }
+    else {
         $("#workflowActions > button:first-child", window.parent.document).click();
     }
 }

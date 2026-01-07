@@ -756,6 +756,18 @@ function criaAssinaturaEletronica() {
             status: "Pendente",
         });
 
+        var testemunhas = JSON.parse(hAPI.getCardValue("jsonTestemunhas"));
+        for (var i = 0; i < testemunhas.length; i++) {
+            var testemunha = testemunhas[i];
+  
+            arrSigners.push({
+                nome: testemunha.nome,
+                email: testemunha.email,
+                cpf: testemunha.cpf,
+                tipo: "E",
+                status: "Pendente",
+            });            
+        }
 
         var ds = DatasetFactory.getDataset("ds_auxiliar_wesign", null, [
             DatasetFactory.createConstraint("nmArquivo", documentName, documentName, ConstraintType.MUST),
