@@ -7,6 +7,7 @@ const pastasDeAnexosPorServidor = {
 var ds = DatasetFactory.getDataset("dsGetServerURL", null, null, null);
 const env = ds.values[0].URL == "http://homologacao.castilho.com.br:2020" ? "HOMOLOGACAO" : ds.values[0].URL == "http://desenvolvimento.castilho.com.br:3232" ? "DESENVOLVIMENTO" : "PRODUCAO";
 const pastaDeAnexos = pastasDeAnexosPorServidor[env];
+const CK5_JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2Nzc5MjcxNCwiZXhwIjozNjAwMDAxNzY3Nzg5MTE0fQ.JAQyAu0pMvpAfYwDk3z6wGyPDQ5aCE-I2eZg0kR74BY";
 
 
 const codigosModelos = {
@@ -200,17 +201,17 @@ async function salvaModeloAlterado() {
             },
         });
 
+        // Gera o docx
         var response = await promiseConverteEditorParaDocx();
-
         const blob = new Blob([response.data], {
             type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         });
-
         const file = new File([blob], geraNomeDoArquivo() + ".docx", {
             type: blob.type,
         });
         await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val(), geraNomeDoArquivo() + ".docx", pastaDeAnexos);
 
+        // Gera o PDF
         var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
         var pdf = await convertDocxToPdf(filePreenchido, geraNomeDoArquivo() + ".pdf");
         await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo() + ".pdf", pastaDeAnexos);
@@ -263,8 +264,8 @@ async function salvaModeloAlterado() {
 
             axios
                 .post("https://docx-converter.cke-cs.com/v2/convert/html-docx", data, { responseType: "arraybuffer", headers: {
-        'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM"
-        }})
+                    'Authorization': CK5_JWT
+                }})
                 .then(async (response) => {
                     resolve(response);
                 })
@@ -311,13 +312,13 @@ async function convertDocxToPdf(docxBlob, name) {
     let html, headerHtml, footerHtml;
     try {
         const docxHtmlResponse = await axios.post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, { responseType: "json", headers: {
-        'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM"
+            'Authorization': CK5_JWT
         }});
 
 
 
         html = docxHtmlResponse.data.html;
-        if ($("#atividade").val() != ATIVIDADES.JURIDICO) {
+        if ($("#atividade").val() != ATIVIDADES.CONTROLADORIA) {
             html += `<div class="watermark" style="font-size: 50px;opacity: 0.5;color: black;position: fixed;left: 20%;top: 50%;transform: rotate(25deg);letter-spacing: 10px;">SEM VALOR CONTRATUAL</div>`;
         }
 
@@ -351,7 +352,7 @@ async function convertDocxToPdf(docxBlob, name) {
             { 
                 responseType: "arraybuffer",
                 headers: {
-                    'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM"
+                    'Authorization': CK5_JWT
                 }
              }
         );
@@ -771,22 +772,14 @@ async function carregaDocumentoParaOCKEditor(documentId) {
     formData.append("file", blob, "file.docx");
     axios
         .post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, {  headers: {
-        'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2NzYxODEzMywiZXhwIjozNjAwMDAxNzY3NjE0NTMzfQ.kuApfajFgYVveQ8fP4Yb8FHEtjwpzO7GD7L1JDhG-tM"
+            'Authorization': CK5_JWT
         }})
         .then((response) => {
             console.log("Conversion result", response.data);
             header = response.data.headers.default.html;
             footer = response.data.footers.default.html;
-            ckeditor.setData(
-                `${response.data.html}
-                <style>
-                        .ck-content figure.table:not(.layout-table)>table, .ck-content table.table:not(.layout-table){
-                            border-collapse: collapse !important;
-                        }
-                </style>`
-            );
-            // ckeditor.config._config.exportPdf.converterOptions.header_html = header;
-            // ckeditor.config._config.exportPdf.converterOptions.footer_html = footer;
+            ckeditor.setData(response.data.html);
+
             Swal.close();
         })
         .catch((error) => {
