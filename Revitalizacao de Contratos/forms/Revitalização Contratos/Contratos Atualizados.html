@@ -33,6 +33,7 @@
     
 
     <!-- Formulário -->
+    <script src="js/ParametrosColigadas.js"></script>
     <script src="js/Paginacao.js"></script>
     <script src="js/documentManager.js"></script>
     <script src="js/integracaoRMManager.js"></script>
@@ -118,6 +119,7 @@
                 <input type="hidden" name="hiddenCODCFO" id="hiddenCODCFO" />
                 <input type="hidden" name="hiddenCGCCFO" id="hiddenCGCCFO" />
                 <input type="hidden" name="hiddenFORNECEDOR" id="hiddenFORNECEDOR" />
+                <input type="hidden" name="FORNECEDOR_PF_PJ" id="FORNECEDOR_PF_PJ" />
 
                 <!-- Assinatura -->
                 <input type="hidden" name="jsonTestemunhas" id="jsonTestemunhas">
@@ -372,6 +374,12 @@
                                                     class="form-control inputInfoChamado" />
                                             </div>
                                         </div>
+                                        <div class="col-md-12 campoLocacaoEquipamento">
+                                            <div class="form-group">
+                                                <label>Localização dos Serviços:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" name="localizacaoServico" id="localizacaoServico" class="inputInfoChamado form-control" />
+                                            </div>
+                                        </div>
                                     </div>
                             </div>
                             <!-- Dados Contratuais -->
@@ -622,8 +630,18 @@
 
                     <!-- Botões -->
                     <div id="divBotoesEdicaoContrato" style="text-align: center; margin-top: 20px; display: none;">
-                        <button type="button" class="btn btn-primary" id="btnEditarArquivo">Editar Arquivo</button>
-                        <button type="button" class="btn btn-primary" id="btnVisualizarArquivo">Abrir Arquivo</button>
+                        <button type="button" class="btn btn-primary" id="btnEditarArquivo">
+                            <i class="flaticon flaticon-edit-square icon-sm" aria-hidden="true"></i>
+                            Editar Arquivo
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btnVisualizarArquivo">
+                            <i class="flaticon flaticon-documents icon-sm" aria-hidden="true"></i>
+                            Abrir Arquivo
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btnVisualizarDadosContrato" style="display: none;">
+                            <i class="flaticon flaticon-file-settings icon-sm" aria-hidden="true"></i>                            
+                            Dados do Contrato
+                        </button>
                         <button type="button" class="btn btn-primary" id="btnVisualizarPreContrato" style="display: none;">Abrir Pré-Contrato</button>
                     </div>
                 </div>

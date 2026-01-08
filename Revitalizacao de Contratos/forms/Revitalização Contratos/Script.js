@@ -257,6 +257,10 @@ function bindings() {
         }
     });
 
+    $("#btnVisualizarDadosContrato").on("click", function(){
+        modalDadosDoFormulario();
+    });
+
     // Aba Assinatura
     $("#assinaturaContrato").on("change", () => onchangeTipoAssinaturaContrato())
     $("#nomeRepresentanteFornecedor").on("change", asyncVerificaSeExisteAssinanteCadastradoPorNome);
@@ -439,6 +443,14 @@ async function loadTelaInicioRetorno() {
         insereDocumentoCriado(anexo,documentosAnexados, dataAnexo.data.description,  documentosAnexados[anexo]);
     }
 
+    var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+    if (tipoPessoa === "F") {
+        $(".pessoa-fisica").show();
+        $(".pessoa-juridica").hide();
+    } else if (tipoPessoa === "J") {
+        $(".pessoa-fisica").hide();
+        $(".pessoa-juridica").show();
+    }
 }
 function loadTelaJuridico() {
     $(".panelAprovacao").show();
@@ -488,6 +500,17 @@ function loadTelaJuridico() {
 
     $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
+
+    $("#btnVisualizarDadosContrato").show();
+
+    var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+    if (tipoPessoa === "F") {
+        $(".pessoa-fisica").show();
+        $(".pessoa-juridica").hide();
+    } else if (tipoPessoa === "J") {
+        $(".pessoa-fisica").hide();
+        $(".pessoa-juridica").show();
+    }
 }
 async function loadTelaControladoria() {
     $(".panelAprovacao").show();
@@ -546,6 +569,15 @@ async function loadTelaControladoria() {
     }
 $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
+
+       var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+    if (tipoPessoa === "F") {
+        $(".pessoa-fisica").show();
+        $(".pessoa-juridica").hide();
+    } else if (tipoPessoa === "J") {
+        $(".pessoa-fisica").hide();
+        $(".pessoa-juridica").show();
+    }
 }
 function loadTelaAprovacao() {
     $(".panelAprovacao, #formContainer").show();
@@ -596,6 +628,15 @@ function loadTelaAprovacao() {
     }
     $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
+
+       var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+    if (tipoPessoa === "F") {
+        $(".pessoa-fisica").show();
+        $(".pessoa-juridica").hide();
+    } else if (tipoPessoa === "J") {
+        $(".pessoa-fisica").hide();
+        $(".pessoa-juridica").show();
+    }
 }
 function loadTelaAssinaturaManual() {
     $(".panelAprovacao, #formContainer, #dadosContrato").show();
@@ -641,6 +682,15 @@ function loadTelaAssinaturaManual() {
     }
 $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
+
+    var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+    if (tipoPessoa === "F") {
+        $(".pessoa-fisica").show();
+        $(".pessoa-juridica").hide();
+    } else if (tipoPessoa === "J") {
+        $(".pessoa-fisica").hide();
+        $(".pessoa-juridica").show();
+    }
 }
 function loadTelaAssinaturaEletronica() {
 
@@ -690,4 +740,13 @@ function loadTelaAssinaturaEletronica() {
 
     $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
+
+    var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+    if (tipoPessoa === "F") {
+        $(".pessoa-fisica").show();
+        $(".pessoa-juridica").hide();
+    } else if (tipoPessoa === "J") {
+        $(".pessoa-fisica").hide();
+        $(".pessoa-juridica").show();
+    }
 }

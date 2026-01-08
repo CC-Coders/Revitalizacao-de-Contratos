@@ -207,8 +207,9 @@ function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoForneced
             if (dataset.values && dataset.values.length > 0) {
                 const endereco = dataset.values[0];
                 const tipoPessoa = endereco.PESSOAFISOUJUR;
-                const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrang eiro";
+                const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrangeiro";
 
+                $("#FORNECEDOR_PF_PJ").val(tipoPessoa);
                 if (tipoPessoa === "F") {
                     $(".pessoa-fisica").show();
                     $(".pessoa-juridica").hide();

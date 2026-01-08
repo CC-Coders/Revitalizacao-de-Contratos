@@ -279,7 +279,11 @@ function salvaTestemunhasNoCampoHidden(){
     $("#jsonTestemunhas").val(JSON.stringify(json));
 }
 function carregaTestemunhas(){
-    var json = JSON.parse($("#jsonTestemunhas").val());
+    var json = $("#jsonTestemunhas").val();
+    if(!json){
+        return;
+    }
+    json = JSON.parse(json);
     var html = "";
     for (const testemunha of json) {
         html += 
