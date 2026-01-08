@@ -235,8 +235,8 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
             {
                 representante: "Mario Rogers de Castilho",
                 tipos: [
-                    "Locação de Equipamentos - S/M.O",
-                    "Locação de Equipamentos - Locação de Equipamento - Com Mão de Obra",
+                    "Locação de Equipamento - Com Mão de Obra", 
+                    "Locação de Equipamento",
                     "Transporte de Material - S/M.O",
                     "Prestação de Serviços - Sub-Empreiteiros",
                     "Prestação de Serviços",
@@ -252,8 +252,8 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
             {
                 representante: "Mario Rogers de Castilho",
                 tipos: [
-                    "Locação de Equipamentos - S/M.O",
-                    "Locação de Equipamentos - Locação de Equipamento - Com Mão de Obra",
+                    "Locação de Equipamento - Com Mão de Obra", 
+                    "Locação de Equipamento",
                     "Transporte de Material - S/M.O",
                     "Prestação de Serviços - Sub-Empreiteiros",
                     "Prestação de Serviços",

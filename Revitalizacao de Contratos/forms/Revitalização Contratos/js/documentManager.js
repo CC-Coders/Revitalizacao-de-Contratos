@@ -7,7 +7,7 @@ const pastasDeAnexosPorServidor = {
 var ds = DatasetFactory.getDataset("dsGetServerURL", null, null, null);
 const env = ds.values[0].URL == "http://homologacao.castilho.com.br:2020" ? "HOMOLOGACAO" : ds.values[0].URL == "http://desenvolvimento.castilho.com.br:3232" ? "DESENVOLVIMENTO" : "PRODUCAO";
 const pastaDeAnexos = pastasDeAnexosPorServidor[env];
-const CK5_JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2Nzc5MjcxNCwiZXhwIjozNjAwMDAxNzY3Nzg5MTE0fQ.JAQyAu0pMvpAfYwDk3z6wGyPDQ5aCE-I2eZg0kR74BY";
+const CK5_JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2Nzg4MDQ0MSwiZXhwIjoxNzk4OTg0NDQxfQ.rXmG6m_DGiLr3TQdUKDhNx7BV-BdMe62ZqwhaY27FWY";
 
 
 const codigosModelos = {
@@ -63,100 +63,204 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
             console.error(error);
         }
     }
-    async function buscaDadosDoFormulario(tipoContrato) {
-        const meses = [
-            "",
-            "Janeiro",
-            "Fevereiro",
-            "Março",
-            "Abril",
-            "Maio",
-            "Junho",
-            "Julho",
-            "Agosto",
-            "Setembro",
-            "Outubro",
-            "Novembro",
-            "Dezembro",
-        ];
-        var [ano, mes, dia] = getDateNow().split("-");
+
+}
+async function buscaDadosDoFormulario(tipoContrato) {
+    var dadosColigada = getDadosDaColigada();
+    const CODCOLIGADA = $("#CODCOLIGADA").val();
+    const TIPO_CONTRATO = $("#tipoContrato").val();
+    var representante = regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO);
+    var dadosRepresentante = jsonRepresentantes[representante];
 
 
-        if (tipoContrato == "Locação de Imóvel") {
-            var retorno = {
-                CODIGO_DO_CONTRATO: $("#novoContratoCodigo").val() || "___________",
-                FORNECEDOR: $("#hiddenFORNECEDOR").val(),
-                FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
-                    "#cidadeFornecedor"
-                ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
-                FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
-                FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
-                FORNECEDOR_CPF_REPRESENTANTE: $("#cpfAdministrador").val(),
-                IMOVEL_DESCRICAO: $("#descricaoImovel").val(),
-                IMOVEL_MATRICULA: $("#matriculaImovel").val(),
-                IMOVEL_FINALIDADE: $("#finalidadeLocacao").val(),
-                LOCACAO_PERIODO: $("#periodoLocacao").val(),
-                LOCACAO_VALOR: $("#valorMensalAluguel").val(),
-                LOCACAO_DIA_VENCIMENTO: $("#periodoLocacao").val(),
-                LOCACAO_VALOR_CAUCAO: $("#valorCaucao").val(),
-                LOCACAO_DATA_CAUCAO: $("#dataPagamentoCaucao").val(),
-                BANCO: $("#banco").val(),
-                BANCO_AGENCIA: $("#agencia").val(),
-                BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
-                DIA: dia,
-                MES: meses[parseInt(mes)],
-                ANO: ano,
-                CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`
-            };
-        } else if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
-            var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
-            var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
-
-            var retorno = {
-                CODIGO_DO_CONTRATO: $("#novoContratoCodigo").val() || "___________",
-                FORNECEDOR: $("#hiddenFORNECEDOR").val(),
-                FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
-                    "#cidadeFornecedor"
-                ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
-                FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
-                FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
-                FORNECEDOR_CPF_REPRESENTANTE: $("#cpfAdministrador").val(),
-
-                PERIODOINICIO: $("#dataInicioLocacao").val(),
-                PERIODOFIM: $("#dataFimLocacao").val(),
-
-                TEM_RETENCAO: $("#temRetencao").val() == "Sim" ? true:false,
-                PERCENTUAL_RETENCAO: $("#temRetencao").val() == "Sim" ? $("#percentualRetencao").val() : "",
-
-                TEM_REIDI: $("#temREIDI").val() == "Sim" ? true:false,
-                PERCENTUAL_REIDI: $("#temREIDI").val() == "Sim" ? $("#percentualREIDI").val() : "",
-                
-                TEM_REAJUSTE:$("#temReajuste").val() == "Sim" ? true:false,
-                INDICE_REAJUSTE: $("#temReajuste").val() == "Sim" ? $("#indiceReajuste").val() : "",
-
-                VALOR_TOTAL: $("#valorTotalLocacao").val(),
-                VALOR_TOTAL_EXTENSO: numeroPorExtenso($("#valorTotalLocacao").val().replace("R$", "").replace(".", "").replace(",", ".").trim(), true),
-
-                BANCO: $("#banco").val(),
-                BANCO_AGENCIA: $("#agencia").val(),
-                BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
-                BANCO_TITULAR: $("#titular").val(),
-
-                DIA: dia,
-                MES: meses[parseInt(mes)],
-                ANO: ano,
-                CODIGO_CENTRO_DE_CUSTO: $("#NOMECCUSTO").val(),
-                OBRA: $("#NOMECCUSTO").val(),
-
-                PRAZO: parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
-                PRAZO_EXTENSO: numeroPorExtenso(calculaDiferencaEmMeses(prazo_inicio, prazo_fim).toString()),
+    const meses = [
+        "",
+        "Janeiro",
+        "Fevereiro",
+        "Março",
+        "Abril",
+        "Maio",
+        "Junho",
+        "Julho",
+        "Agosto",
+        "Setembro",
+        "Outubro",
+        "Novembro",
+        "Dezembro",
+    ];
+    var [ano, mes, dia] = getDateNow().split("-");
 
 
-                EQUIPAMENTOS: await asyncConsultaEquipamentosSelecionados()
-            };
+    if (tipoContrato == "Locação de Imóvel") {
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#novoContratoCodigo").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
+            FORNECEDOR_CPF_REPRESENTANTE: $("#cpfAdministrador").val(),
+            IMOVEL_DESCRICAO: $("#descricaoImovel").val(),
+            IMOVEL_MATRICULA: $("#matriculaImovel").val(),
+            IMOVEL_FINALIDADE: $("#finalidadeLocacao").val(),
+            LOCACAO_PERIODO: $("#periodoLocacao").val(),
+            LOCACAO_VALOR: $("#valorMensalAluguel").val(),
+            LOCACAO_DIA_VENCIMENTO: $("#periodoLocacao").val(),
+            LOCACAO_VALOR_CAUCAO: $("#valorCaucao").val(),
+            LOCACAO_DATA_CAUCAO: $("#dataPagamentoCaucao").val(),
+            BANCO: $("#banco").val(),
+            BANCO_AGENCIA: $("#agencia").val(),
+            BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+            CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`
+        };
+    } else if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
+        var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
+        var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
 
+        var equipamentos = await asyncConsultaEquipamentosSelecionados();
+
+       var EQUIPAMENTOS = equipamentos.map(e => ({
+            PREFIXO: e.PREFIXO,
+            ANO_FABRICACAO: e.ANO_FABRICACAO,
+            ANO_MODELO: e.ANO_MODELO,
+            CAPACIDADE_COMBUSTIVEL: e.CAPACIDADE_COMBUSTIVEL,
+            CHASSI: e.CHASSI,
+            CLASSEMECANICA: e.CLASSEMECANICA,
+            CLASSEOPERACIONAL: e.CLASSEOPERACIONAL,
+            COMBUSTIVEL: e.COMBUSTIVEL,
+            DESCRICAO: e.DESCRICAO,
+            FABRICANTE: e.FABRICANTE,
+            MODELO: e.MODELO,
+            PLACA: e.PLACA,
+            POTENCIAHP: e.POTENCIAHP,
+            UN_DESMOBILIZACAO: e.UN_DESMOBILIZACAO,
+            VALOR_DESMOBILIZACAO: floatToMoney(e.VALOR_DESMOBILIZACAO),
+            UN_MOBILIZADO: e.UN_MOBILIZADO,
+            VALOR_MOBILIZADO: floatToMoney(e.VALOR_MOBILIZADO),
+            UN_EXTRA: e.UN_EXTRA,
+            VALOR_EXTRA: floatToMoney(e.VALOR_EXTRA),
+            VALOR_TOTAL: floatToMoney(e.VALOR_LOCACAO + e.MAODEOBRA)
+        }));
+
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#novoContratoCodigo").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
+            FORNECEDOR_CPF_REPRESENTANTE: $("#cpfAdministrador").val(),
+
+            PERIODOINICIO: $("#dataInicioLocacao").val(),
+            PERIODOFIM: $("#dataFimLocacao").val(),
+
+            TEM_RETENCAO: $("#temRetencao").val() == "Sim" ? true : false,
+            PERCENTUAL_RETENCAO: $("#temRetencao").val() == "Sim" ? $("#percentualRetencao").val() : "",
+
+            TEM_REIDI: $("#temREIDI").val() == "Sim" ? true : false,
+            PERCENTUAL_REIDI: $("#temREIDI").val() == "Sim" ? $("#percentualREIDI").val() : "",
+
+            TEM_REAJUSTE: $("#temReajuste").val() == "Sim" ? true : false,
+            INDICE_REAJUSTE: $("#temReajuste").val() == "Sim" ? $("#indiceReajuste").val() : "",
+
+            VALOR_TOTAL: $("#valorTotalLocacao").val(),
+            VALOR_TOTAL_EXTENSO: numeroPorExtenso($("#valorTotalLocacao").val().replace("R$", "").replace(".", "").replace(",", ".").trim(), true),
+
+            BANCO: $("#banco").val(),
+            BANCO_AGENCIA: $("#agencia").val(),
+            BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
+            BANCO_TITULAR: $("#titular").val(),
+
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+            CODIGO_CENTRO_DE_CUSTO: $("#CODCCUSTO").val(),
+            OBRA: $("#NOMECCUSTO").val(),
+
+            PRAZO: parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
+            PRAZO_EXTENSO: numeroPorExtenso(calculaDiferencaEmMeses(prazo_inicio, prazo_fim).toString()),
+
+            EQUIPAMENTOS:EQUIPAMENTOS,
+
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo,
+            LOCALIZACAO: $("#localizacaoServico").val()
+        };
+
+    }
+    return retorno;
+}
+async function modalDadosDoFormulario(){
+    var myModal = FLUIGC.modal(
+        {
+            title: "Dados do contrato",
+            content: await geraHtml(),
+            id: "fluig-modal",
+            size: "full",
+            actions: [
+                {
+                    label: "Fechar",
+                    autoClose: true,
+                },
+            ],
         }
-        return retorno;
+    );
+
+    async function geraHtml(){
+        var input = await buscaDadosDoFormulario($("#tipoContrato").val());
+        var tbody = "";
+
+        for (const tag in input) {
+            if (!Object.hasOwn(input, tag)) continue;
+            
+            const valor = input[tag];
+
+            if (tag != "EQUIPAMENTOS") {
+                tbody+=`<tr>
+                    <td>${tag}</td>
+                    <td>${valor}</td>
+                </tr>`;   
+            }else{
+
+                var equipamento = valor[0];
+
+                for (const tagEquipamento in equipamento) {
+                    if (!Object.hasOwn(equipamento, tagEquipamento)) continue;
+                    
+                    const valorEquipamento = equipamento[tagEquipamento];
+                    tbody+=`<tr>
+                        <td>EQUIPAMENTO.${tagEquipamento}</td>
+                        <td>${valorEquipamento}</td>
+                    </tr>`;   
+
+                }
+
+            }
+        }
+
+        var html = 
+        `<table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tag</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>${tbody}</tbody>
+        </table>`;
+
+
+        return html;
     }
 }
 async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
@@ -307,59 +411,68 @@ async function geraPreContrato() {
     saveAs(pdf, "teste.pdf");
 }
 async function convertDocxToPdf(docxBlob, name) {
-    const formData = new FormData();
-    formData.append("file", docxBlob, name);
-    let html, headerHtml, footerHtml;
     try {
-        const docxHtmlResponse = await axios.post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, { responseType: "json", headers: {
-            'Authorization': CK5_JWT
-        }});
-
-
-
-        html = docxHtmlResponse.data.html;
-        if ($("#atividade").val() != ATIVIDADES.CONTROLADORIA) {
-            html += `<div class="watermark" style="font-size: 50px;opacity: 0.5;color: black;position: fixed;left: 20%;top: 50%;transform: rotate(25deg);letter-spacing: 10px;">SEM VALOR CONTRATUAL</div>`;
-        }
-
-
-        headerHtml = docxHtmlResponse.data.headers?.default?.html || "";
-        footerHtml = docxHtmlResponse.data.footers?.default?.html || "";
+        var html = await converteDocxParaHTML(docxBlob, name);
+        var pdf = await converteHtmlParaPDF(html);
+        return pdf;
     } catch (error) {
-        console.error("DOCX to HTML conversion error", error);
-        throw error;
+        console.error(error);
+        showMessage("Erro ao gerar PDF.", "", "danger");
     }
-    headerHtml = headerHtml.replace("absolute", "static");
+    async function converteDocxParaHTML(docxBlob, name) {
+        try {
+            const formData = new FormData();
+            formData.append("file", docxBlob, name);
 
-    const composedHtml = `<div>${html}</div>`;
-
-    try {
-        const pdfResponse = await axios.post(
-            "https://pdf-converter.cke-cs.com/v1/convert",
-            {
-                html: composedHtml,
-                options: {
-                    format: "Tabloid",
-                    margin_top: "20mm",
-                    margin_bottom: "35mm",
-                    margin_right: "24mm",
-                    margin_left: "24mm",
-                    page_orientation: "portrait",
-                    header_html: headerHtml,
-                    footer_html: footerHtml,
-                },
-            },
-            { 
-                responseType: "arraybuffer",
-                headers: {
+            const docxHtmlResponse = await axios.post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, {
+                responseType: "json", headers: {
                     'Authorization': CK5_JWT
                 }
-             }
-        );
-        return new Blob([pdfResponse.data], { type: "application/pdf" });
-    } catch (error) {
-        console.error("HTML to PDF conversion error", error);
-        throw error;
+            });
+
+
+            var html = docxHtmlResponse.data.html;
+            if ($("#atividade").val() != ATIVIDADES.CONTROLADORIA) {
+                html += `<div class="watermark" style="font-size: 50px;opacity: 0.5;color: black;position: fixed;left: 20%;top: 50%;transform: rotate(25deg);letter-spacing: 10px;">SEM VALOR CONTRATUAL</div>`;
+            }
+
+            return html;
+        } catch (error) {
+            console.error("DOCX to HTML conversion error", error);
+            throw error;
+        }
+    }
+    async function converteHtmlParaPDF(html) {
+        try {
+            var dadosColigadas = getDadosDaColigada();
+
+            const pdfResponse = await axios.post(
+                "https://pdf-converter.cke-cs.com/v1/convert",
+                {
+                    html: `<div>${html}</div>`,
+                    options: {
+                        format: "Tabloid",
+                        margin_top: "20mm",
+                        margin_bottom: "35mm",
+                        margin_right: "24mm",
+                        margin_left: "24mm",
+                        page_orientation: "portrait",
+                        header_html: `<div style="text-align:right;padding:10px;"><img src="${await getBase64FromUrl(dadosColigadas.header)}" alt='Dromos' style='margin-right: 8%; height: 54px;'></div>`,
+                        footer_html: dadosColigadas.footer,
+                    },
+                },
+                {
+                    responseType: "arraybuffer",
+                    headers: {
+                        'Authorization': CK5_JWT
+                    }
+                }
+            );
+            return new Blob([pdfResponse.data], { type: "application/pdf" });
+        } catch (error) {
+            console.error("HTML to PDF conversion error", error);
+            throw error;
+        }
     }
 }
 
@@ -984,4 +1097,20 @@ async function visualizaDocumento() {
     var documentId = $("#contratoPdfId").val();
     var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
     window.open(url, '_blank');
+}
+function getDadosDaColigada(){
+    var CODCOLIGADA = $("#CODCOLIGADA").val();
+    var dadosColigada = jsonClausulasColigadas[CODCOLIGADA];
+
+    return dadosColigada;
+}
+async function getBase64FromUrl(url) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+    });
 }
