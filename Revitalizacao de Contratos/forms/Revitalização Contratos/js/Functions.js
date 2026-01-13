@@ -606,7 +606,7 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
 
         insereLabelCarregando(tipo, itemId, listaCarregar);
 
-        const docId = await criaDocFluigRetornaDocumentId(file, 10133);
+        const docId = await criaDocFluigRetornaDocumentId(file, pastaDeAnexos);
 
         documentosAnexados[tipo] = docId;
         $("#hiddenDocumentosAnexados").val(JSON.stringify(documentosAnexados));
