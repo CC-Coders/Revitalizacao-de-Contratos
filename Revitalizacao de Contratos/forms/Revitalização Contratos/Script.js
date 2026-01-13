@@ -11,10 +11,10 @@ const ATIVIDADES = {
     DIRETORIA: 53,
     INTERMEDIARIO_ASSINATURA_ELETRONICA: 58,
     ASSINATURA_ELETRONICA: 66,
-    ADM_OBRA:64,
-    CONTROLADORIA_RECEBIMENTO:74,
-    CONTROLADORIA_RECOLHE_ASSINATURA:72,
-    OBRA_RECEBE_VIAS:76,
+    ADM_OBRA: 64,
+    CONTROLADORIA_RECEBIMENTO: 74,
+    CONTROLADORIA_RECOLHE_ASSINATURA: 72,
+    OBRA_RECEBE_VIAS: 76,
 };
 
 $(document).ready(function () {
@@ -33,10 +33,10 @@ $(document).ready(function () {
         loadTelaAprovacao();
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.ASSINATURA_ELETRONICA || ATIVIDADE_ATUAL == ATIVIDADES.INTERMEDIARIO_ASSINATURA_ELETRONICA) {
         loadTelaAssinaturaEletronica();
-    } else if([ATIVIDADES.ADM_OBRA,ATIVIDADES.CONTROLADORIA_RECEBIMENTO, ATIVIDADES.CONTROLADORIA_RECOLHE_ASSINATURA, ATIVIDADES.OBRA_RECEBE_VIAS].includes(ATIVIDADE_ATUAL)){
+    } else if ([ATIVIDADES.ADM_OBRA, ATIVIDADES.CONTROLADORIA_RECEBIMENTO, ATIVIDADES.CONTROLADORIA_RECOLHE_ASSINATURA, ATIVIDADES.OBRA_RECEBE_VIAS].includes(ATIVIDADE_ATUAL)) {
         // Se for atividade de Assinatura Manual
         loadTelaAssinaturaManual();
-    }else{
+    } else {
         loadTelaAprovacao();
     }
 
@@ -45,9 +45,9 @@ $(document).ready(function () {
 
 var beforeSendValidate = function (numState, nextState) {
     var atividade = parseInt(document.getElementById("atividade").value);
-       if (atividade == 0) {
-           return validaCampos();
-       }
+    if (atividade == 0) {
+        return validaCampos();
+    }
     return validaCampos();
 };
 
@@ -86,15 +86,14 @@ function bindings() {
         },
         onChange: (value) => {
             salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value);
-            
-             var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = value.split(" - ");
-            if(!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)){
+
+            var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = value.split(" - ");
+            if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
                 $("#temREIDI").closest("div.row").hide();
                 $("#temREIDI").val("Não");
                 $("#percentualREIDI").val("");
-            }else{
+            } else {
                 $("#temREIDI").closest("div.row").show();
-
             }
         }
     });
@@ -119,14 +118,14 @@ function bindings() {
     });
 
     // Aba Dados Gerais
-    $("#modeloContrato").on("change", function(){
+    $("#modeloContrato").on("change", function () {
         if ($(this).val() == "Contrato fora do modelo") {
             $("#btnAnexarContrato").show();
-        }else{
+        } else {
             $("#btnAnexarContrato").hide();
         }
-    }); 
-    $("#tipoContrato").on("change", ()=> onChangeTipoContrato($("#tipoContrato")));
+    });
+    $("#tipoContrato").on("change", () => onChangeTipoContrato($("#tipoContrato")));
     $("#caucao").on("change", function () {
         if ($(this).val() == "Sim") {
             $("#divValorCaucao, #divDataPagamentoCaucao").show();
@@ -153,6 +152,7 @@ function bindings() {
     $("#percentualRetencao").mask("000%", { reverse: true });
     $("#descontoPorDiaChuva").mask("000%", { reverse: true });
     $("#descontoPorDiaParado").mask("000%", { reverse: true });
+    $(".cpfAdministrador").mask("000.000.000-00");
 
     $("#locador").selectize({
         onChange: (value) => {
@@ -176,7 +176,7 @@ function bindings() {
 
     $("#banco").selectize();
 
-    $("#dataInicioLocacao, #dataFimLocacao").on("change", function(){
+    $("#dataInicioLocacao, #dataFimLocacao").on("change", function () {
         atualizaValorTotalLocacao();
     });
 
@@ -195,61 +195,61 @@ function bindings() {
         }
     });
 
-    $("#btnAnexarContrato").on("click", function(){
+    $("#btnAnexarContrato").on("click", function () {
         $("#inputFileAnexarContrato").click();
-    }); 
-    $("#inputFileAnexarContrato").on("change",async function(){
-        if ($(this)[0].files.length>0) {
+    });
+    $("#inputFileAnexarContrato").on("change", async function () {
+        if ($(this)[0].files.length > 0) {
             $("#nomeAnexoContrato").text("Carregando...");
             var docId = await criaDocFluigRetornaDocumentId($(this)[0].files[0], pastaDeAnexos);
             $("#contratoPdfId").val(docId);
             $("#nomeAnexoContrato").text($(this)[0].files[0].name);
-            $("#nomeAnexoContrato").attr("href",await promiseBuscaDownloadUrlDocumentoNoFLuig(docId));
+            $("#nomeAnexoContrato").attr("href", await promiseBuscaDownloadUrlDocumentoNoFLuig(docId));
         }
     });
 
-    $("#temReajuste").on("change", function(){
+    $("#temReajuste").on("change", function () {
         var val = $(this).val();
         if (val == "Sim") {
             $("#divCampoReajuste").show();
-        }else{
+        } else {
             $("#divCampoReajuste").hide();
         }
     });
-    $("#percentualRetencao").on("change", function(){
+    $("#percentualRetencao").on("change", function () {
         if ($("#atividade").val() != ATIVIDADES.JURIDICO) {
-            if ($(this).val().replace("%","") < 5) {
+            if ($(this).val().replace("%", "") < 5) {
                 FLUIGC.toast({
-                    title:"Caso seja necessário informar retenção menor que 5%, a alteração deve ser solicitada ao Jurídico.",
-                    message:"",
-                    type:"warning"
+                    title: "Caso seja necessário informar retenção menor que 5%, a alteração deve ser solicitada ao Jurídico.",
+                    message: "",
+                    type: "warning"
                 });
                 $(this).val("5%");
             }
         }
     });
-    $("#descontoPorDiaChuva").on("change", function(){
+    $("#descontoPorDiaChuva").on("change", function () {
         if ($("#atividade").val() != ATIVIDADES.JURIDICO) {
             if ($("#modeloContrato").val() == "Modelo Castilho") {
-                if ($(this).val().replace("%","") < 50) {
+                if ($(this).val().replace("%", "") < 50) {
                     FLUIGC.toast({
-                        title:"Caso seja necessário informar desconto por dia de chuva menor que 50%, a alteração deve ser solicitada ao Jurídico.",
-                        message:"",
-                        type:"warning"
+                        title: "Caso seja necessário informar desconto por dia de chuva menor que 50%, a alteração deve ser solicitada ao Jurídico.",
+                        message: "",
+                        type: "warning"
                     });
                     $(this).val("50%");
                 }
             }
         }
     });
-    $("#descontoPorDiaParado").on("change", function(){
+    $("#descontoPorDiaParado").on("change", function () {
         if ($("#atividade").val() != ATIVIDADES.JURIDICO) {
             if ($("#modeloContrato").val() == "Modelo Castilho") {
-                if ($(this).val().replace("%","") < 50) {
+                if ($(this).val().replace("%", "") < 50) {
                     FLUIGC.toast({
-                        title:"Caso seja necessário informar desconto por dia parado menor que 50%, a alteração deve ser solicitada ao Jurídico.",
-                        message:"",
-                        type:"warning"
+                        title: "Caso seja necessário informar desconto por dia parado menor que 50%, a alteração deve ser solicitada ao Jurídico.",
+                        message: "",
+                        type: "warning"
                     });
                     $(this).val("50%");
                 }
@@ -257,7 +257,7 @@ function bindings() {
         }
     });
 
-    $("#btnVisualizarDadosContrato").on("click", function(){
+    $("#btnVisualizarDadosContrato").on("click", function () {
         modalDadosDoFormulario();
     });
 
@@ -270,10 +270,10 @@ function bindings() {
         }
     });
     $("#btnCadastrarAssinante").on("click", abreModalCadastrarAssinante);
-    $("#btnAdicionarTestemunha").on("click", function(){
+    $("#btnAdicionarTestemunha").on("click", function () {
         var value = $("#selectTestemunha")[0].selectize.items[0];
         if (!value) {
-            return; 
+            return;
         }
 
         var [nome, email, cpf] = value.split(" - ");
@@ -293,7 +293,7 @@ function bindings() {
 
         $("#selectTestemunha")[0].selectize.clear();
         salvaTestemunhasNoCampoHidden();
-        $("#tableTestemunhas>tbody>tr:last").find(".btnDelete").on("click", function(){
+        $("#tableTestemunhas>tbody>tr:last").find(".btnDelete").on("click", function () {
             $(this).closest("tr").remove();
             salvaTestemunhasNoCampoHidden();
         });
@@ -329,12 +329,14 @@ function bindings() {
     });
 
     // Anexos
-    $("#btnAnexarDocumento").on("click", function(){$("#inputAnexo").click()});
+    $("#btnAnexarDocumento").on("click", function () { $("#inputAnexo").click() });
     $("#inputAnexo").on("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
 }
 
 
 async function loadTelaInicio() {
+    parent.$("#workflowActions").hide();
+
     $(".panelAprovacao").hide();
     $(".panelInput").show();
     $("#divTipoAssinaturaContrato").show();
@@ -357,7 +359,7 @@ async function loadTelaInicio() {
         $("#paginationEquipamentos").removeClass("hidden");
     }
 
-    $("#temRetencao").attr("readonly","readonly");
+    $("#temRetencao").attr("readonly", "readonly");
     $("#selectTestemunha").selectize();
     asyncAtualizaListaDeAssinantes();
 }
@@ -383,10 +385,10 @@ async function loadTelaInicioRetorno() {
     if ($("#tipoPagamento").val() == "Depósito") {
         $("#divPagamento, #divBanco").show();
     }
-    
+
     if ($("#temReajuste").val() == "Sim") {
         $("#divCampoReajuste").show();
-    }else{
+    } else {
         $("#divCampoReajuste").hide();
     }
 
@@ -418,29 +420,29 @@ async function loadTelaInicioRetorno() {
     }
 
 
-    $("#temRetencao").attr("readonly","readonly");
+    $("#temRetencao").attr("readonly", "readonly");
 
     if ($("#modeloContrato").val() == "Contrato fora do modelo") {
         $("#btnAnexarContrato").show();
-            
+
         var documentId = $("#contratoPdfId").val();
-        $("#nomeAnexoContrato").attr("href",await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId));
-        var documentData = await      asyncGetDocumentDetails(documentId);
+        $("#nomeAnexoContrato").attr("href", await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId));
+        var documentData = await asyncGetDocumentDetails(documentId);
         $("#nomeAnexoContrato").text(documentData.data.description);
-    }else{
+    } else {
         $("#btnAnexarContrato").hide();
     }
 
-    const hiddenValue = $("#hiddenDocumentosAnexados").val(); 
+    const hiddenValue = $("#hiddenDocumentosAnexados").val();
     const anexos = JSON.parse(hiddenValue);
     documentosAnexados = anexos;
-      
+
     anexosPorTipoDeContrato($("#tipoContrato").val());
 
     for (const anexo in documentosAnexados) {
         var dataAnexo = await asyncGetDocumentDetails(documentosAnexados[anexo]);
 
-        insereDocumentoCriado(anexo,documentosAnexados, dataAnexo.data.description,  documentosAnexados[anexo]);
+        insereDocumentoCriado(anexo, documentosAnexados, dataAnexo.data.description, documentosAnexados[anexo]);
     }
 
     var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
@@ -450,6 +452,14 @@ async function loadTelaInicioRetorno() {
     } else if (tipoPessoa === "J") {
         $(".pessoa-fisica").hide();
         $(".pessoa-juridica").show();
+    }
+
+    if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
+        $("#temREIDI").closest("div.row").hide();
+        $("#temREIDI").val("Não");
+        $("#percentualREIDI").val("");
+    } else {
+        $("#temREIDI").closest("div.row").show();
     }
 }
 function loadTelaJuridico() {
@@ -472,7 +482,7 @@ function loadTelaJuridico() {
 
     $("#paginationIntegracaoRM").remove();
 
-    if($("#modeloContrato").val() == "Contrato fora do modelo"){
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
         $("#btnEditarArquivo").hide();
         $("#btnVisualizarPreContrato").hide();
     }
@@ -492,10 +502,14 @@ function loadTelaJuridico() {
     } else {
         $("#divPercentualReidi").hide();
     }
-        if ($("#temReajuste").val() == "Sim") {
+    if ($("#temReajuste").val() == "Sim") {
         $("#divCampoReajuste").show();
-    }else{
+    } else {
         $("#divCampoReajuste").hide();
+    }
+
+    if ($("#tipoPagamento").val() == "Depósito") {
+        $("#divPagamento, #divBanco").show();
     }
 
     $("#divAdicionarTestemunha").hide();
@@ -511,8 +525,17 @@ function loadTelaJuridico() {
         $(".pessoa-fisica").hide();
         $(".pessoa-juridica").show();
     }
+
+    if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
+        $("#temREIDI").closest("div.row").hide();
+        $("#temREIDI").val("Não");
+        $("#percentualREIDI").val("");
+    } else {
+        $("#temREIDI").closest("div.row").show();
+    }
 }
 async function loadTelaControladoria() {
+    parent.$("#workflowActions").hide();
     $(".panelAprovacao").show();
     $("#rowAnexosSelecao").hide();
     $("#formContainer").show();
@@ -532,20 +555,23 @@ async function loadTelaControladoria() {
     $("#divBotoesEdicaoContrato").show();
     $("#btnEditarArquivo").hide();
     $("#btnVisualizarPreContrato").hide();
-            
-            
+
+
     setAtividadeAtivaProgresso(2);
     asyncMontaHistorico();
     mostrarPagina("0");
-            
+
     renderizarAnexosEtapaAprovacao();
     bloqueiaCamposAprovacao();
 
-    if($("#modeloContrato").val() == "Contrato fora do modelo"){
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
         $("#btnEditarArquivo").hide();
         $("#btnVisualizarPreContrato").hide();
     }
 
+    if ($("#tipoPagamento").val() == "Depósito") {
+        $("#divPagamento, #divBanco").show();
+    }
 
     if ($("#tipoContrato").val() == "Locação de Equipamento" || $("#tipoContrato").val() == "Locação de Equipamento - Com Mão de Obra") {
         $("#paginationEquipamentos").show();
@@ -564,13 +590,13 @@ async function loadTelaControladoria() {
     }
     if ($("#temReajuste").val() == "Sim") {
         $("#divCampoReajuste").show();
-    }else{
+    } else {
         $("#divCampoReajuste").hide();
     }
-$("#divAdicionarTestemunha").hide();
+    $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
 
-       var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+    var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
     if (tipoPessoa === "F") {
         $(".pessoa-fisica").show();
         $(".pessoa-juridica").hide();
@@ -578,12 +604,20 @@ $("#divAdicionarTestemunha").hide();
         $(".pessoa-fisica").hide();
         $(".pessoa-juridica").show();
     }
+
+    if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
+        $("#temREIDI").closest("div.row").hide();
+        $("#temREIDI").val("Não");
+        $("#percentualREIDI").val("");
+    } else {
+        $("#temREIDI").closest("div.row").show();
+    }
 }
 function loadTelaAprovacao() {
     $(".panelAprovacao, #formContainer").show();
     $("#rowAnexosSelecao").hide();
     setAtividadeAtivaProgresso(3);
-    
+
     onChangeTipoContrato($("#tipoContrato"));
     buscaBancos();
 
@@ -601,7 +635,7 @@ function loadTelaAprovacao() {
     bloqueiaCamposAprovacao();
     $(".endereco-fornecedor").slideDown();
 
-    if($("#modeloContrato").val() == "Contrato fora do modelo"){
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
         $("#btnEditarArquivo").hide();
         $("#btnVisualizarPreContrato").hide();
     }
@@ -623,19 +657,31 @@ function loadTelaAprovacao() {
     }
     if ($("#temReajuste").val() == "Sim") {
         $("#divCampoReajuste").show();
-    }else{
+    } else {
         $("#divCampoReajuste").hide();
     }
     $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
 
-       var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+    var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
     if (tipoPessoa === "F") {
         $(".pessoa-fisica").show();
         $(".pessoa-juridica").hide();
     } else if (tipoPessoa === "J") {
         $(".pessoa-fisica").hide();
         $(".pessoa-juridica").show();
+    }
+
+    if ($("#tipoPagamento").val() == "Depósito") {
+        $("#divPagamento, #divBanco").show();
+    }
+
+    if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
+        $("#temREIDI").closest("div.row").hide();
+        $("#temREIDI").val("Não");
+        $("#percentualREIDI").val("");
+    } else {
+        $("#temREIDI").closest("div.row").show();
     }
 }
 function loadTelaAssinaturaManual() {
@@ -649,7 +695,7 @@ function loadTelaAssinaturaManual() {
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
 
-    if($("#modeloContrato").val() == "Contrato fora do modelo"){
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
         $("#btnEditarArquivo").hide();
         $("#btnVisualizarPreContrato").hide();
     }
@@ -677,10 +723,10 @@ function loadTelaAssinaturaManual() {
     }
     if ($("#temReajuste").val() == "Sim") {
         $("#divCampoReajuste").show();
-    }else{
+    } else {
         $("#divCampoReajuste").hide();
     }
-$("#divAdicionarTestemunha").hide();
+    $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
 
     var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
@@ -690,6 +736,18 @@ $("#divAdicionarTestemunha").hide();
     } else if (tipoPessoa === "J") {
         $(".pessoa-fisica").hide();
         $(".pessoa-juridica").show();
+    }
+
+    if ($("#tipoPagamento").val() == "Depósito") {
+        $("#divPagamento, #divBanco").show();
+    }
+
+    if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
+        $("#temREIDI").closest("div.row").hide();
+        $("#temREIDI").val("Não");
+        $("#percentualREIDI").val("");
+    } else {
+        $("#temREIDI").closest("div.row").show();
     }
 }
 function loadTelaAssinaturaEletronica() {
@@ -704,7 +762,7 @@ function loadTelaAssinaturaEletronica() {
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo").remove();
 
-    if($("#modeloContrato").val() == "Contrato fora do modelo"){
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
         $("#btnEditarArquivo").hide();
         $("#btnVisualizarPreContrato").hide();
     }
@@ -712,10 +770,14 @@ function loadTelaAssinaturaEletronica() {
 
     onChangeTipoContrato($("#tipoContrato"));
     renderizarAnexosEtapaAprovacao();
-        
+
     $("#divQuadroStatusAssinaturaEletronica").show();
     asyncGeraQuadroStatusAssinatura();
     bloqueiaCamposAprovacao();
+
+    if ($("#tipoPagamento").val() == "Depósito") {
+        $("#divPagamento, #divBanco").show();
+    }
 
     if ($("#tipoContrato").val() == "Locação de Equipamento" || $("#tipoContrato").val() == "Locação de Equipamento - Com Mão de Obra") {
         $("#paginationEquipamentos").show();
@@ -734,7 +796,7 @@ function loadTelaAssinaturaEletronica() {
     }
     if ($("#temReajuste").val() == "Sim") {
         $("#divCampoReajuste").show();
-    }else{
+    } else {
         $("#divCampoReajuste").hide();
     }
 
@@ -748,5 +810,13 @@ function loadTelaAssinaturaEletronica() {
     } else if (tipoPessoa === "J") {
         $(".pessoa-fisica").hide();
         $(".pessoa-juridica").show();
+    }
+
+    if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
+        $("#temREIDI").closest("div.row").hide();
+        $("#temREIDI").val("Não");
+        $("#percentualREIDI").val("");
+    } else {
+        $("#temREIDI").closest("div.row").show();
     }
 }

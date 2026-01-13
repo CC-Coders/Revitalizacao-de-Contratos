@@ -420,6 +420,9 @@ function bloqueiaCamposAprovacao(){
     $("#ruaFornecedor").attr("readonly","readonly");
     $("#numeroFornecedor").attr("readonly","readonly");
     $("#bairroFornecedor").attr("readonly","readonly");
+    $("#administradorFornecedor").attr("readonly","readonly");
+    $("#cpfAdministrador").attr("readonly","readonly");
+    $("#localizacaoServico").attr("readonly","readonly");
     $("#cidadeFornecedor").attr("readonly","readonly");
     $("#estadoFornecedor").attr("readonly","readonly");
     $("#cepFornecedor").attr("readonly","readonly");
