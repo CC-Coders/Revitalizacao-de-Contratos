@@ -3,9 +3,9 @@ const jsonClausulasColigadas = {
         coligada: "1",
         nome: "CASTILHO ENGENHARIA E EMPREENDIMENTOS S/A",
         endereco: "Avenida Cândido de Abreu, nº 70 - Térreo Sala 01, bairro Centro Cívico, na cidade de Curitiba, estado do Paraná",
-        cnpj: "92.779.503/0001-25</span>",
-        header: "<img src='http://fluig.castilho.com.br:1010/volume/stream/Rmx1aWc=/P3Q9MSZ2b2w9RGVmYXVsdCZpZD00MDEzNDQmdmVyPTEwMDAmZmlsZT1sb2dvLWNhc3RpbGhvLnBuZyZjcmM9MjgzMDg1MDgwNCZzaXplPTAuMDI1NjM4JnVJZD0xNDUmZlNJZD0xJnVTSWQ9MSZkPWZhbHNlJnRrbj0mcHVibGljVXJsPXRydWUmYXR0YWNoPWZhbHNl.png' id='CastilhoLogo' alt='Castilho' style='margin-right: 8%; height: 54px;'>",
-        footer: "Castilho Engenharia e Empreendimentos S/A"
+        cnpj: "92.779.503/0001-25",
+        header: "http://fluig.castilho.com.br:1010/volume/stream/Rmx1aWc=/P3Q9MSZ2b2w9RGVmYXVsdCZpZD00MDEzNDQmdmVyPTEwMDAmZmlsZT1sb2dvLWNhc3RpbGhvLnBuZyZjcmM9MjgzMDg1MDgwNCZzaXplPTAuMDI1NjM4JnVJZD0xNDUmZlNJZD0xJnVTSWQ9MSZkPWZhbHNlJnRrbj0mcHVibGljVXJsPXRydWUmYXR0YWNoPWZhbHNl.png",
+        footer: `<div style="text-align:center;"><h3>Castilho Engenharia e Empreendimentos S/A</h3></div>`
     },
     2: {
         coligada: "2",
@@ -13,8 +13,8 @@ const jsonClausulasColigadas = {
         nomeSimplificado: "Mineração",
         endereco: "Rodovia BR-116 – km 60 – Taquari do Corvo - na cidade de Campina Grande do Sul  – Estado do Paraná",
         cnpj: "08.528.581/0005-74",
-        header: "<img src='http://fluig.castilho.com.br:1010/volume/stream/Rmx1aWc=/P3Q9MSZ2b2w9RGVmYXVsdCZpZD00MDEzNDYmdmVyPTEwMDAmZmlsZT1taW5lcmFjYW9ub3ZvLnBuZyZjcmM9MjAxOTk0MTgzNiZzaXplPTAuMDc2MzI3JnVJZD0xNDUmZlNJZD0xJnVTSWQ9MSZkPWZhbHNlJnRrbj0mcHVibGljVXJsPXRydWUmYXR0YWNoPWZhbHNl.png' alt='Mineracao' style='float: right; margin-right: 8%; height: 54px;'>",
-        footer: "CASTILHO MINERACAO LTDA"
+        header: "http://fluig.castilho.com.br:1010/volume/stream/Rmx1aWc=/P3Q9MSZ2b2w9RGVmYXVsdCZpZD00MDEzNDYmdmVyPTEwMDAmZmlsZT1taW5lcmFjYW9ub3ZvLnBuZyZjcmM9MjAxOTk0MTgzNiZzaXplPTAuMDc2MzI3JnVJZD0xNDUmZlNJZD0xJnVTSWQ9MSZkPWZhbHNlJnRrbj0mcHVibGljVXJsPXRydWUmYXR0YWNoPWZhbHNl.png",
+        footer: `<div style="text-align:center;"><h3>CASTILHO MINERACAO LTDA</h3></div>`
     },
     12: {
         coligada: "12",
