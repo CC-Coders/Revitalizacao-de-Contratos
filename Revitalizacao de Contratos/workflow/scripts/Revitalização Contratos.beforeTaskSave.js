@@ -103,18 +103,19 @@ function beforeTaskSave_juridico() {
 function beforeTaskSave_controladoria() {
     try {
         insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Controladoria");
-
-        var tipo = hAPI.getCardValue("origemContrato");
-        if (tipo == "Novo") {
-            var IDCNT = criaNovoContrato();
-            hAPI.setCardValue("IDCNT", IDCNT);
-            updateTcntAuxiliar(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
-        } else if (tipo == "Aditivos") {
-            alteraStatusContrato(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "PENDENTE OBRA");
-            // TODO - Inserir relação do Aditivo com o Contrato na tabela Custom de Contratos
-        } else if (tipo == "Rescisões") {
-            alteraStatusContrato(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "RESCISÃO EM ANDAMENTO");
-            // TODO - Inserir relação da Rescisão com o Contrato na tabela Custom de Contratos
+        if (hAPI.getCardValue("decisao") == "Aprovar") {
+            var tipo = hAPI.getCardValue("origemContrato");
+            if (tipo == "Novo") {
+                var IDCNT = criaNovoContrato();
+                hAPI.setCardValue("IDCNT", IDCNT);
+                updateTcntAuxiliar(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
+            } else if (tipo == "Aditivos") {
+                alteraStatusContrato(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "PENDENTE OBRA");
+                // TODO - Inserir relação do Aditivo com o Contrato na tabela Custom de Contratos
+            } else if (tipo == "Rescisões") {
+                alteraStatusContrato(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "RESCISÃO EM ANDAMENTO");
+                // TODO - Inserir relação da Rescisão com o Contrato na tabela Custom de Contratos
+            }
         }
     } catch (error) {
         throw error;
