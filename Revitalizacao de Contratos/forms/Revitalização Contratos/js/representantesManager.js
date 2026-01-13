@@ -32,7 +32,7 @@ function promiseBuscaCadastroDeAssinantePorNome(nome) {
             DatasetFactory.createConstraint("nome", nome, nome, ConstraintType.MUST)
         ], null, {
             success: ds => {
-                if (ds.values.length != 1) {
+                if (ds.values.length < 1) {
                     reject("Assinante não encontrado");
                 }
                 else {
