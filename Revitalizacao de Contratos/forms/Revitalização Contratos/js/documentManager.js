@@ -7,12 +7,13 @@ const pastasDeAnexosPorServidor = {
 var ds = DatasetFactory.getDataset("dsGetServerURL", null, null, null);
 const env = ds.values[0].URL == "http://homologacao.castilho.com.br:2020" ? "HOMOLOGACAO" : ds.values[0].URL == "http://desenvolvimento.castilho.com.br:3232" ? "DESENVOLVIMENTO" : "PRODUCAO";
 const pastaDeAnexos = pastasDeAnexosPorServidor[env];
-const CK5_JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidEJvR0tWVVlxNzlWb3FWVkFPTiIsImlhdCI6MTc2Nzg4MDQ0MSwiZXhwIjoxNzk4OTg0NDQxfQ.rXmG6m_DGiLr3TQdUKDhNx7BV-BdMe62ZqwhaY27FWY";
 
 
 const codigosModelos = {
     PRODUCAO: {
-
+        "Locação de Imóvel": 2070415,
+        "Locação de Equipamento": 2070416,
+        "Locação de Equipamento - Com Mão de Obra": 2070417,
     },
     HOMOLOGACAO: {
         "Locação de Imóvel": 39635,
@@ -368,7 +369,7 @@ async function salvaModeloAlterado() {
 
             axios
                 .post("https://docx-converter.cke-cs.com/v2/convert/html-docx", data, { responseType: "arraybuffer", headers: {
-                    'Authorization': CK5_JWT
+                    'Authorization': await getJWT()
                 }})
                 .then(async (response) => {
                     resolve(response);
@@ -426,7 +427,7 @@ async function convertDocxToPdf(docxBlob, name) {
 
             const docxHtmlResponse = await axios.post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, {
                 responseType: "json", headers: {
-                    'Authorization': CK5_JWT
+                    'Authorization': await getJWT()
                 }
             });
 
@@ -458,13 +459,13 @@ async function convertDocxToPdf(docxBlob, name) {
                         margin_left: "24mm",
                         page_orientation: "portrait",
                         header_html: `<div style="text-align:right;padding:10px;"><img src="${await getBase64FromUrl(dadosColigadas.header)}" alt='Dromos' style='margin-right: 8%; height: 54px;'></div>`,
-                        footer_html: dadosColigadas.footer,
+                        footer_html: dadosColigadas.footer + `<div style="text-align:right; padding:5px;"><span class="pageNumber"></span> de <span class="totalPages"></span></div>`,
                     },
                 },
                 {
                     responseType: "arraybuffer",
                     headers: {
-                        'Authorization': CK5_JWT
+                        'Authorization': await getJWT()
                     }
                 }
             );
@@ -885,7 +886,7 @@ async function carregaDocumentoParaOCKEditor(documentId) {
     formData.append("file", blob, "file.docx");
     axios
         .post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, {  headers: {
-            'Authorization': CK5_JWT
+            'Authorization': await getJWT()
         }})
         .then((response) => {
             console.log("Conversion result", response.data);
@@ -1114,3 +1115,44 @@ async function getBase64FromUrl(url) {
         reader.readAsDataURL(blob);
     });
 }
+
+async function getJWT(){
+    const accessKey ='wqNvgzQtZbz1Q42vjKExfxBur9XlXHA1vSfqQHZ0YTKpGTz7Bae4SNI9YxeMdWcdHrphZKJH5WTpCR5KD9shZ4QlZvoTruKnvXYpx508WSNnASt9LwIAvaVu'
+    const environmentId = 'btBoGKVUYq79VoqVVAON'
+
+  function base64url(source) {
+    return CryptoJS.enc.Base64.stringify(source)
+      .replace(/=+$/, '')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+  }
+
+  function generateJWT() {
+    const header = {
+      alg: 'HS256',
+      typ: 'JWT'
+    }
+
+    const payload = {
+      aud: environmentId,
+      iat: Math.floor(Date.now() / 1000)
+    }
+
+    const encodedHeader = base64url(
+      CryptoJS.enc.Utf8.parse(JSON.stringify(header))
+    )
+    const encodedPayload = base64url(
+      CryptoJS.enc.Utf8.parse(JSON.stringify(payload))
+    )
+
+    const signature = CryptoJS.HmacSHA256(
+      `${encodedHeader}.${encodedPayload}`,
+      accessKey
+    )
+
+    return `${encodedHeader}.${encodedPayload}.${base64url(signature)}`
+  }
+
+  return generateJWT();
+}
+
