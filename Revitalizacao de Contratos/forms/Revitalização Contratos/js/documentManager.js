@@ -113,6 +113,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             BANCO: $("#banco").val(),
             BANCO_AGENCIA: $("#agencia").val(),
             BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
+            BANCO_TITULAR: $("#titular").val(),
             DIA: dia,
             MES: meses[parseInt(mes)],
             ANO: ano,
