@@ -294,7 +294,7 @@ async function onClickDetailsEquipamento(that) {
                         <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
                         Anexos
                     </button>
-                    ${data.STATUS == 1 ?
+                    ${(data.STATUS == 1 || data.STATUS == 2) ?
                     `<button class="btn btn-primary btnAlterarEquipamento">
                             <i class="flaticon flaticon-edit icon-sm" aria-hidden="true"></i>
                             Alterar
