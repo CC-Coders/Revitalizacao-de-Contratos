@@ -1,24 +1,41 @@
 function onChangeTipoContrato(that) {
-    $(".campoLocacaoImovel, .campoLocacaoEquipamento").hide();
-    $("#paginationEquipamentos").hide();
-    $("#paginationEquipamentos").addClass("hidden");
+    var tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val():$("#tipoContrato").text();
+    var origemContrato = $("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text();
 
-    if ($(that).val() === "Locação de Imóvel" || $(that).text() === "Locação de Imóvel") {
-        $("#dadosContrato").show();
-        $(".campoLocacaoImovel").show();
-    } 
-    else if($(that).val() === "Locação de Equipamento" || $(that).text() === "Locação de Equipamento" || $(that).val() === "Locação de Equipamento - Com Mão de Obra" || $(that).text() === "Locação de Equipamento - Com Mão de Obra"){
-        $("#dadosContrato").show();
-        $(".campoLocacaoEquipamento").show();
-        $("#paginationEquipamentos").show();
-        $("#paginationEquipamentos").removeClass("hidden");
-        if ($(that).val()) {
-            anexosPorTipoDeContrato($(that).val());
+    if (origemContrato == "Novo") {
+        $(".campoLocacaoImovel, .campoLocacaoEquipamento").hide();
+        $("#paginationEquipamentos").hide();
+        $("#paginationEquipamentos").addClass("hidden");
 
-            $("#temRetencao").val("Sim").change();
+        if (tipoContrato === "Locação de Imóvel") {
+            $("#dadosContrato").show();
+            $(".campoLocacaoImovel").show();
+        } 
+        else if(tipoContrato === "Locação de Equipamento"  || tipoContrato === "Locação de Equipamento - Com Mão de Obra"){
+            $("#dadosContrato").show();
+            $(".campoLocacaoEquipamento").show();
+            $("#paginationEquipamentos").show();
+            $("#paginationEquipamentos").removeClass("hidden");
+            if ($(that).val()) {
+                anexosPorTipoDeContrato($(that).val());
+
+                $("#temRetencao").val("Sim").change();
+            }
+        }
+        else {
+            $("#dadosContrato").hide();
         }
     }
-    else {
-        $("#dadosContrato").hide();
+    else if(origemContrato == "Aditivos"){
+        $("#dadosContrato").show();
+        $(".campoLocacaoImovel, .campoLocacaoEquipamento").hide();
+        $("#campoAditivo").show();
+        
+       
+
+
     }
+
+
+    
 }
