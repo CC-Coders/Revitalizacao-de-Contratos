@@ -86,6 +86,7 @@ function bindings() {
         },
         onChange: (value) => {
             salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value);
+            atualizaDatatableContratoPrincipal();
 
             var [CODCOLIGADA, CODCCUSTO, NOMECCUSTO] = value.split(" - ");
             if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
@@ -168,6 +169,7 @@ function bindings() {
 
             if (cgccfo) {
                 buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(cgccfo);
+                atualizaDatatableContratoPrincipal();
             } else {
                 $(".endereco-fornecedor").slideUp();
             }
@@ -351,6 +353,8 @@ async function loadTelaInicio() {
     buscaBancos();
     inicializarCalendario();
     inicializarPeriodoLocacao();
+
+    initDataTableContratoPrincipal();
 
     initDataTableEquipamentos();
     preencheListaDeEquipamentos();
