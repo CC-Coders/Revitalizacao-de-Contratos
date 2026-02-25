@@ -530,7 +530,7 @@ async function asyncMontaHistorico() {
                         <div>
                             <h3 class="card-title" style="margin-bottom:0px; color:black;">${BuscaNomeUsuario(linha.USUARIO)} <small>${linha.ACAO}</small></h3>
                             <small>${DATA}</small>
-                            <p class="card-text">${linha.OBSERVACAO && linha.OBSERVACAO.trim() ? linha.OBSERVACAO : "Aprovado"}</p>
+                            <p class="card-text">${linha.OBSERVACAO && linha.OBSERVACAO.trim() ? linha.OBSERVACAO.split("\n").join("<br>") : "Aprovado"}</p>
                         </div>
                     </div>
                 </div>
