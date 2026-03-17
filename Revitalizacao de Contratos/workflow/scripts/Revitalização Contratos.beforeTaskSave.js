@@ -105,7 +105,9 @@ function beforeTaskSave_controladoria() {
         insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Controladoria");
         if (hAPI.getCardValue("decisao") == "Aprovar") {
             var tipo = hAPI.getCardValue("origemContrato");
-            if (tipo == "Novo") {
+            var IDCNT = hAPI.getCardValue("IDCNT");
+
+            if (tipo == "Novo" && IDCNT == "" ) {
                 var IDCNT = criaNovoContrato();
                 hAPI.setCardValue("IDCNT", IDCNT);
                 updateTcntAuxiliar(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
