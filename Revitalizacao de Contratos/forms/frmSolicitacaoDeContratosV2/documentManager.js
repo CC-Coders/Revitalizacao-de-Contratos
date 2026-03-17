@@ -108,6 +108,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             LOCACAO_PERIODO: $("#periodoLocacao").val(),
             LOCACAO_VALOR: $("#valorMensalAluguel").val(),
             LOCACAO_DIA_VENCIMENTO: $("#periodoLocacao").val(),
+            TEM_CAUCAO: $("#caucao").val() == "Sim" ? true : false,
             LOCACAO_VALOR_CAUCAO: $("#valorCaucao").val(),
             LOCACAO_DATA_CAUCAO: $("#dataPagamentoCaucao").val(),
             BANCO: $("#banco").val(),
@@ -291,8 +292,14 @@ function geraNomeDoArquivo() {
     var CODCCUSTO = $("#CODCCUSTO").val();
     var NOME_FORNECEDOR = $("#hiddenFORNECEDOR").val();
     var TIPO_CONTRATO = $("#tipoContrato").val();
-
-    return `${CODCCUSTO} - ${TIPO_CONTRATO} - ${NOME_FORNECEDOR}`;
+    var CODIGOCONTRATO = $("#novoContratoCodigo").val();
+    var NUM_PROCES = $("#numProces").val();
+    
+    if (CODIGOCONTRATO) {
+        return `${CODIGOCONTRATO} - ${NUM_PROCES} - ${TIPO_CONTRATO} - ${NOME_FORNECEDOR}`;
+    }else{
+        return `${CODCCUSTO} - ${NUM_PROCES} - ${TIPO_CONTRATO} - ${NOME_FORNECEDOR}`;
+    }
 }
 async function salvaModeloAlterado() {
     try {
