@@ -466,7 +466,7 @@ async function loadTelaInicioRetorno() {
         $("#temREIDI").closest("div.row").show();
     }
 }
-function loadTelaJuridico() {
+async function loadTelaJuridico() {
     $(".panelAprovacao").show();
     $("#rowAnexosSelecao").hide();
     $("#formContainer").show();
@@ -516,9 +516,21 @@ function loadTelaJuridico() {
         $("#divPagamento, #divBanco").show();
     }
 
-    $("#divAdicionarTestemunha").hide();
-    carregaTestemunhas();
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
+        $("#btnAnexarContrato").show();
+        $("#btnVisualizarArquivo").hide();
 
+        var documentId = $("#contratoPdfId").val();
+        $("#nomeAnexoContrato").attr("href", await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId));
+        var documentData = await asyncGetDocumentDetails(documentId);
+        $("#nomeAnexoContrato").text(documentData.data.description);
+    } else {
+        $("#btnAnexarContrato").hide();
+    }
+
+    $("#selectTestemunha").selectize();
+    carregaTestemunhas(true);
+    asyncAtualizaListaDeAssinantes();
     $("#btnVisualizarDadosContrato").show();
 
     var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
@@ -548,7 +560,12 @@ async function loadTelaControladoria() {
     bindingCamposIntegracaoRM();
     $("#dadosRMNovoContrato").show();
     await asyncPreencheOptionsColigada();
-    preencheCamposAutomaticamente();
+
+    if ($("#IDCNT").val() == "") {
+        preencheCamposAutomaticamente();
+    }else{
+        bloqueiaCamposIntegracaoRM();
+    }
 
     geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
@@ -559,7 +576,8 @@ async function loadTelaControladoria() {
     $("#divBotoesEdicaoContrato").show();
     $("#btnEditarArquivo").hide();
     $("#btnVisualizarPreContrato").hide();
-
+    $("#selectTestemunha").selectize();
+    asyncAtualizaListaDeAssinantes();
 
     setAtividadeAtivaProgresso(2);
     asyncMontaHistorico();
@@ -567,6 +585,18 @@ async function loadTelaControladoria() {
 
     renderizarAnexosEtapaAprovacao();
     bloqueiaCamposAprovacao();
+
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
+        $("#btnAnexarContrato").show();
+        $("#btnVisualizarArquivo").hide();
+
+        var documentId = $("#contratoPdfId").val();
+        $("#nomeAnexoContrato").attr("href", await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId));
+        var documentData = await asyncGetDocumentDetails(documentId);
+        $("#nomeAnexoContrato").text(documentData.data.description);
+    } else {
+        $("#btnAnexarContrato").hide();
+    }
 
     if ($("#modeloContrato").val() == "Contrato fora do modelo") {
         $("#btnEditarArquivo").hide();
@@ -597,8 +627,7 @@ async function loadTelaControladoria() {
     } else {
         $("#divCampoReajuste").hide();
     }
-    $("#divAdicionarTestemunha").hide();
-    carregaTestemunhas();
+    carregaTestemunhas(true);
 
     var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
     if (tipoPessoa === "F") {
