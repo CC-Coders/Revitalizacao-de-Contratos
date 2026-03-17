@@ -100,7 +100,7 @@ function preencheCamposAutomaticamente() {
 
         
         var valorMensalLocacao = $("#valorMensalLocacao").val();
-        var temRetencao = $("#temRetencao").val() == "Sim"
+        var temRetencao = $("#temRetencao").val() == "Sim";
         if (temRetencao) {
             // Se tem retenção calcula o valor da retenção e reduz do valor total
             var percentualRetencao = parseInt($("#percentualRetencao").val().replace("%","").trim());
@@ -109,27 +109,55 @@ function preencheCamposAutomaticamente() {
         }
 
         var codigoProduto = null;
-        if (TIPO_CONTRATO == "Locação de Equipamento") {
-            codigoProduto = 1727;
+        if (CODCOLIGADA == 1) {
+            if (TIPO_CONTRATO == "Locação de Equipamento") {
+                codigoProduto = 1727;
+            }
+            else if (TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
+                codigoProduto = 1727;
+            }
+            codigoProdutoRetencao = 4650;
         }
-        else if (TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
-            codigoProduto = 1727;
+        else if(CODCOLIGADA == 12){
+            if (TIPO_CONTRATO == "Locação de Equipamento") {
+                codigoProduto = 87713;
+            }
+            else if (TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
+                codigoProduto = 87713;
+            }
+            codigoProdutoRetencao = 85752;
+        }
+        else if(CODCOLIGADA == 13){
+            if (TIPO_CONTRATO == "Locação de Equipamento") {
+                codigoProduto = 99992;
+            }
+            else if (TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
+                codigoProduto = 99992;
+            }
+            codigoProdutoRetencao = 95395;
+        }
+        if (codigoProduto) {
+            // Insere item do Produto
+            await insereItem(codigoProduto, valorMensalLocacao, '1.3.03');
+    
+            if (temRetencao) {
+                // Se tem retenção gera o item de retenção
+                await insereItem(4650, floatToMoney(valorRetencao), "1.3.81");
+            }
         }
 
-        // Insere item do Produto
-        await insereItem(codigoProduto, valorMensalLocacao, '1.3.03');
-
-        if (temRetencao) {
-            // Se tem retenção gera o item de retenção
-            await insereItem(4650, floatToMoney(valorRetencao), "1.3.81");
-        }
 
         promiseBuscaCodigoDoContrato(CODCOLIGADA, CCUSTO).then(ds=>{
             var CODIGOCONTRATO = ds[0].CODIGOCONTRATO;
-            CODIGOCONTRATO = parseInt(CODIGOCONTRATO.split("/")[0].split("-")[1]);
-            CODIGOCONTRATO++;
-
-            CODIGOCONTRATO = `${CCUSTO}-${CODIGOCONTRATO}/25`;
+            if (CODIGOCONTRATO) {
+                CODIGOCONTRATO = parseInt(CODIGOCONTRATO.split("/")[0].split("-")[1]);
+                CODIGOCONTRATO++;
+            }else{
+                // Caso não encontre nenhum contrato no CCusto assume o contrato 001
+                CODIGOCONTRATO = "001";
+            }
+            
+            CODIGOCONTRATO = `${CCUSTO}-${(CODIGOCONTRATO).toString().padStart(3,"0")}/26`;
             $("#novoContratoCodigo").val(CODIGOCONTRATO);
         });
     }, 1000);
@@ -279,6 +307,31 @@ function regraTipoDeContrato() {
         return "04"
     }
 
+
+}
+function bloqueiaCamposIntegracaoRM(){
+    $("#novoContratoColigada").attr("readonly","readonly");
+    $("#novoContratoFilial").attr("readonly","readonly");
+    $("#novoContratoTipoContrato").attr("readonly","readonly");
+    $("#novoContratoCCUSTO").attr("readonly","readonly");
+    $("#novoContratoCodigo").attr("readonly","readonly");
+    $("#novoContratoLocalDeEstoque").attr("readonly","readonly");
+    $("#novoContratoSTATUS").attr("readonly","readonly");
+    $("#novoContratoCondicaoPagamento").attr("readonly","readonly");
+    $("#novoContratoRepresentante").attr("readonly","readonly");
+    $("#novoContratoDataInicio").attr("readonly","readonly");
+    $("#novoContratoDataFim").attr("readonly","readonly");
+    $("#novoContratoObjeto").attr("readonly","readonly");
+    $("#novoContratoTipoFaturamento").attr("readonly","readonly");
+    $("#novoContratoDiaFaturamento").attr("readonly","readonly");
+    $("#novoContratoQtdeFaturamento").attr("readonly","readonly");
+    
+    $("#tableNovoContratoItens>tbody>tr:not(:first)").each(function(){
+        var id = $(this).find(".novoContratoJsonRateiosItem").attr("id").split("___")[1];
+
+        $("#novoContratoItemProduto___" + id).attr("readonly","readonly");
+        $(".novoContratoItemValor").attr("readonly","readonly");
+    });
 
 }
 
@@ -493,7 +546,7 @@ async function asyncAdicionarItemNovoContrato() {
         fnWdkRemoveChild($(this).closest("tr")[0]);
     });
 
-    $("#novoContratoItemProduto" + "___" + id).html(await promiseRetornaHtmlOptionsProdutosDeItemDeContrato());
+    $("#novoContratoItemProduto" + "___" + id).html(await promiseRetornaHtmlOptionsProdutosDeItemDeContrato($("#novoContratoColigada").val()));
     $("#novoContratoItemProduto" + "___" + id).selectize({});
     $("#novoContratoItemValor" + "___" + id).maskMoney({
         prefix: "R$ ",
@@ -622,14 +675,14 @@ function promiseRetornaHtmlOptionsDepartamentos() {
         );
     });
 }
-function promiseRetornaHtmlOptionsProdutosDeItemDeContrato() {
+function promiseRetornaHtmlOptionsProdutosDeItemDeContrato(CODCOLIGADA) {
     return new Promise((resolve, reject) => {
         DatasetFactory.getDataset(
             "DatasetProcessoContratos",
             null,
             [
                 DatasetFactory.createConstraint("OPERACAO", "BuscaProduto", "BuscaProduto", ConstraintType.MUST),
-                DatasetFactory.createConstraint("CODCOLIGADA", 1, 1, ConstraintType.MUST),
+                DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
             ],
             null,
             {
