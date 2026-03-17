@@ -278,7 +278,7 @@ function salvaTestemunhasNoCampoHidden(){
 
     $("#jsonTestemunhas").val(JSON.stringify(json));
 }
-function carregaTestemunhas(){
+function carregaTestemunhas(edita){
     var json = $("#jsonTestemunhas").val();
     if(!json){
         return;
@@ -291,10 +291,23 @@ function carregaTestemunhas(){
             <td>${testemunha.nome}</td>
             <td>${testemunha.email}</td>
             <td>${testemunha.cpf}</td>
-            <td></td>
+            <td>${edita ? 
+                    `<button class="btn btn-danger btnDelete">
+                        <i class="flaticon flaticon-trash icon-md" aria-hidden="true"></i>
+                    </button>`:""
+                }
+            </td>
         </tr>`;
         
+        if (edita) {
+            $("#tableTestemunhas>tbody>tr").find(".btnDelete").on("click", function () {
+                $(this).closest("tr").remove();
+                salvaTestemunhasNoCampoHidden();
+            });
+        }
     }
+
+
     
     $("#tableTestemunhas>tbody").html(html);
 }
