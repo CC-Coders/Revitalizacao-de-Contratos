@@ -1,4 +1,6 @@
 dataTableEquipamentos=null;
+dataTableEquipamentosAditivoRescisao = null;
+dataTableEquipamentosParaInclusaoExclusao = null;
 datatablesLanguage = {
     sEmptyTable: "Nenhum registro encontrado",
     sInfo: "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -73,7 +75,8 @@ function initDataTableEquipamentos(){
                 type: "string",
             },
             {
-                data: "POTENCIAHP",
+                data: "CAPACIDADE",
+                defaultContent: "",
                 className: "dt-left",
                 class: "nowrap",
                 type: "string",
@@ -111,10 +114,11 @@ function initDataTableEquipamentos(){
                 className: "alignCenter",
                 orderable: false,
                 render: function (data, type, row) {
-                    if (row.STATUS == 1) {
+                    //if (row.STATUS == 1 || row.STATUS == 5) { // Status 5 porque são equipamentos com Contrato rescindido // Testes
+                    if (row.STATUS == 1) { // "Equipamento cadastrado e disponível para seleção no processo de Contratos"
                         return `<input type="checkbox" class="checkboxSelecionaEquipamento" />`;
                     }
-                    else if(row.STATUS == 2){
+                    else if(row.STATUS == 2){ // STATUS 2 = Contrato em Andamento com análise pendente
                         var  list = retornaListaComEquipamentosSelecionadosPeloUsuario();
                         if (list.includes(row.PREFIXO)) {
                             return `<input type="checkbox" checked class="checkboxSelecionaEquipamento" />`;
@@ -184,6 +188,7 @@ async function preencheListaDeEquipamentos(){
 function consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ){
     return new Promise((resolve, reject)=>{
         DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
+            DatasetFactory.createConstraint("OPERACAO","ConsultaEquipPorCcustoFornecedor","ConsultaEquipPorCcustoFornecedor",ConstraintType.MUST),
             DatasetFactory.createConstraint("CODCOLIGADA",CODCOLIGADA,CODCOLIGADA,ConstraintType.MUST),
             DatasetFactory.createConstraint("CCUSTO",CCUSTO,CCUSTO,ConstraintType.MUST),
             DatasetFactory.createConstraint("CNPJ",CNPJ,CNPJ,ConstraintType.MUST),
@@ -201,9 +206,15 @@ function consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ){
 }
 async function onClickDetailsEquipamento(that) {
     var self = that;
-
     var tr = $(self).closest('tr');
-    var row = dataTableEquipamentos.row(tr);
+    var tableId = $(self).closest('table').attr("id");
+    var dt =
+        tableId == "tableEquipamentosAditivoRescisao" ? dataTableEquipamentosAditivoRescisao :
+        tableId == "tableEquipamentosParaInclusaoExclusao" ? dataTableEquipamentosParaInclusaoExclusao :
+        dataTableEquipamentos;
+
+    var permitiAlterar = (tableId != "tableEquipamentosAditivoRescisao");
+    var row = dt.row(tr);
     console.log(row)
     if (row.child.isShown()) {
         // Fecha a linha expandida
@@ -234,13 +245,28 @@ async function onClickDetailsEquipamento(that) {
                 }
             });
         });
-        $("div").find(".btnAlterarEquipamento").on("click", { equipamento: row.data() }, async function (event) {
-            modalAlterarEquipamento(event.data.equipamento)
-        });
+        if (permitiAlterar) {
+            $("div").find(".btnAlterarEquipamento").on("click", { equipamento: row.data() }, async function (event) {
+                modalAlterarEquipamento(event.data.equipamento)
+            });
+        }
 
     }
 
     async function geraDetailsRow(data) {
+
+        // ?? é o operador de coalescência nula (nullish coalescing operator) do JavaScript
+        // Exemplo: a ?? b
+        // a se a NÃO for null nem undefined
+        // b se a for null ou undefined
+
+        // Diferença para || (OR lógico)
+        // valor || "padrão"
+        // Troca o valor se ele for falsy: 0, "", false, null, undefined
+
+        // valor ?? "padrão"
+        // Troca o valor somente se for nulo: null, undefined
+
         try {
             console.log(data)
             var html = `
@@ -268,12 +294,12 @@ async function onClickDetailsEquipamento(that) {
                 </div>
                 ${data.VALOR_MOBILIZADO ?
                     `<div class="col-md-4">
-                        <label>Valor Mobilização: </label> ${floatToMoney(data.VALOR_MOBILIZADO)} ${data.UN_MOBILIZADO}
+                        <label>Valor Mobilização: </label> ${floatToMoney(Number(data.VALOR_MOBILIZADO) || 0)} ${data.UN_MOBILIZADO ?? ""}
                     </div>`: ""
                 }
                 ${data.VALOR_DESMOBILIZACAO ?
                     `<div class="col-md-4">
-                        <label>Valor Desmobilização: </label> ${floatToMoney(data.VALOR_DESMOBILIZACAO)} ${data.UN_DESMOBILIZACAO}
+                        <label>Valor Desmobilização: </label> ${floatToMoney(Number(data.VALOR_DESMOBILIZACAO) || 0)} ${data.UN_DESMOBILIZACAO ?? ""}
                     </div>`: ""
                 }
                 ${data.VALOR_EXTRA ?
@@ -294,7 +320,7 @@ async function onClickDetailsEquipamento(that) {
                         <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
                         Anexos
                     </button>
-                    ${data.STATUS == 1 ?
+                    ${permitiAlterar && data.STATUS == 1 ?
                     `<button class="btn btn-primary btnAlterarEquipamento">
                             <i class="flaticon flaticon-edit icon-sm" aria-hidden="true"></i>
                             Alterar
@@ -363,15 +389,42 @@ async function onClickCheckEquipamento(that) {
     }
 
     function salvaPrefixoSelecionado(PREFIXO){
+        // Flag de controle para saber se o prefixo já existe na tabela pai-filho
+        var jaExiste = false;
+
+        // Percorre todas as linhas da tabela pai-filho
+        // :not(:first) -> ignora a primeira linha (template escondido do Fluig)
+        $("#tableEquipamentosSelecionados>tbody>tr:not(:first)").each(function () {
+
+            // Para cada linha, pega o valor do input hidden que guarda o prefixo
+            var prefixoLinha = $(this).find(".equipamentoSelecionadoPrefixo").val();
+
+            // Compara o prefixo atual da linha com o prefixo que estamos tentando inserir
+            if (prefixoLinha == PREFIXO) {
+
+                // Se encontrar igual, marca como existente
+                jaExiste = true;
+
+                // Interrompe o loop imediatamente (equivalente a um break)
+                return false;
+            }
+        });
+
+        // Após percorrer todas as linhas:
+        // Se já existir o prefixo, NÃO faz nada (evita duplicação)
+        if (jaExiste) {
+            return;
+}
+
         var id = wdkAddChild("tableEquipamentosSelecionados");
         $("#equipamentoSelecionadoPrefixo" + "___" + id).val(PREFIXO);
-        atualizaValorTotalLocacao();
+        atualizaValorTotalLocacao_prazo();
     }
     function removePrefixoSelecionado(PREFIXO){
         $("#tableEquipamentosSelecionados>tbody>tr:not(:first)").each(function(){
             if($(this).find(".equipamentoSelecionadoPrefixo").val() == PREFIXO){
                 fnWdkRemoveChild(this);
-                atualizaValorTotalLocacao();
+                atualizaValorTotalLocacao_prazo();
             }
         });
     }
@@ -504,7 +557,7 @@ function alteraDadosEquipamento(IDEQUI, PREFIXO){
         return ds.values[0].MENSAGEM;
     }
 }
-function atualizaValorTotalLocacao(){
+function atualizaValorTotalLocacao_prazo(){
     var valorTotalMensal = 0;
     $("#tableEquipamentos>tbody>tr").each(function(){
         if ($(this).find(".checkboxSelecionaEquipamento").is(":checked")) {
@@ -532,44 +585,986 @@ function atualizaValorTotalLocacao(){
     }
 }
 
+// Aditivos
+function initDataTableEquipamentos_aditivoRescisao(){
+    dataTableEquipamentosAditivoRescisao = new DataTable("#tableEquipamentosAditivoRescisao", {
+        pageLength: 10,
+        responsive: true,
+        fixedHeader: true,
+        columnDefs: [{
+            className: 'dt-left', // Applies to all cells in the specified target(s)
+            targets: '_all' // Applies to all columns
+        }],
+        columns: [
+            {
+                render:function(data,type,row){
+                    return `<button type="button" class="btn btn-success btnDetailsEquipamento"><i class="flaticon flaticon-circle-plus icon-md" aria-hidden="true"></i></button>`;
+                }
+            },
+            {
+                data: "PREFIXO",    
+                className: "dt-left",
+            },
+            {
+                data: "MODELO",    
+                className: "dt-left",
+            },
+            {
+                data: "DESCRICAO",
+                className: "dt-left",
+            },
+            {
+                data: "POTENCIAHP",
+                className: "dt-left",
+                class: "nowrap",
+                type: "string",
+            },
+            {
+                data: "CAPACIDADE",
+                defaultContent: "",
+                className: "dt-left",
+                class: "nowrap",
+                type: "string",
+            },
+            {
+                data: "PLACA",
+                className: "dt-left",
+            },
+            {
+                data: "FABRICANTE",
+                type: "num",
+                className: "dt-left",
+            },
+            {
+                data: "FORNECEDOR",
+                className: "dt-left",
+                render: function (data, type, row) {
+                    return `${row.FORNECEDOR_CNPJ} - ${row.FORNECEDOR}`;
+                },
+            },
+            {
+                data: "VALOR_LOCACAO",
+                className: "dt-left",
+                render: function (data, type, row) {
+                    var total = parseFloat(row.VALOR_LOCACAO);
+                    if (row.MAODEOBRA && row.MAODEOBRA != "null") {
+                        total+= parseFloat(row.MAODEOBRA);
+                    }
+
+                    return floatToMoney(total);
+                },
+            },
+            {
+                data: "VALOR_LOCACAO_REAJUSTADO",
+                className: "dt-left",
+                orderable: false,
+                render: function (data, type, row) {
+                    return `<input type="text" class="form-control inputValorLocacaoReajustado" data-prefixo="${row.PREFIXO}"></input>`
+                },
+            },
+            {
+                data: null,
+                className: "alignCenter",
+                orderable: false,
+                render: function (data, type, row) {
+                    var list = retornaListaComEquipamentosSelecionadosAditivo();
+                    return `<input type="checkbox" class="checkboxSelecionaEquipamentoAditivo" ${list.includes(row.PREFIXO) ? "checked" : ""} />`;
+                },
+            },
+        ],
+        language: datatablesLanguage,
+        layout: {
+            bottomStart: null,
+            bottom: "paging",
+            bottomEnd: null,
+            topStart: {
+                buttons: [
+                    {
+                        text: "Red",
+                        className: "btn btn-info",
+                        extend: "excel",
+                        text: "Excel",
+                        exportOptions: {
+                            modifier: {
+                                page: "all",
+                            },
+                        },
+                    },
+                ],
+            },
+        },
+    });
+
+    dataTableEquipamentosAditivoRescisao.on("draw", function () {
+
+        $(".inputValorLocacaoReajustado").off("change").on("change", function () {
+            getEquipamentosAditivo_insereNaTabelaPaiFilho();
+
+            // Quando o valor de qualquer input com a classe "inputValorLocacaoReajustado" for alterado (evento change),
+            // executa a função "atualizaValorLocacao_valorReajustado" para recalcular e atualizar os totais no form.
+            atualizaValorMensal_valorReajustado();
+        });
+
+        $(".btnDetailsEquipamento").off("click").on("click", function(){
+            onClickDetailsEquipamento(this);
+        });
+
+        $(".checkboxSelecionaEquipamentoAditivo").off("click").on("click", function(){
+            onClickCheckEquipamento_aditivoRescisao(this);
+        });
+        
+        $(".inputValorLocacaoReajustado").maskMoney({
+            thousands: '.',
+            decimal: ',',
+            prefix: 'R$ '
+        });
+
+        aplicaValoresReajusteSalvos();
+
+        });
+
+        function retornaListaComEquipamentosSelecionadosAditivo(){
+            var list = [];
+            $(".equipSelecionado_aditivos:not(:first)").each(function(){
+                list.push($(this).val());
+            });
+            return list;
+        }
+
+        function aplicaValoresReajusteSalvos() {
+
+            // Percorre todos os inputs de valor reajustado exibidos na grid (DataTable)
+            // Cada input representa o valor de reajuste de um equipamento na interface
+            $(".inputValorLocacaoReajustado").each(function () {
+
+                // Pega o prefixo do equipamento da linha atual da grid
+                // O equipamento exibido na grid com a linha correspondente na tabela pai-filho
+                var prefixo = $(this).data("prefixo");
+
+                // Busca na tabela pai-filho a linha correspondente ao equipamento atual
+                // Primeiro seleciona todas as linhas da tabela (ignorando a primeira linha padrão do Fluig)
+                // Depois utiliza .filter() para manter somente a linha cujo campo "equipSelecionado_aditivos" possui o mesmo prefixo do equipamento da grid
+                var valorSalvo = $("#tableEquipamentosSelecionados_aditivos>tbody>tr:not(:first)")
+                    .filter(function () {
+
+                        // Dentro do filter, "this" representa cada linha da tabela pai-filho
+                        // Aqui verificamos se o prefixo salvo nessa linha é igual ao prefixo da grid
+                        return $(this).find(".equipSelecionado_aditivos").val() == prefixo;
+
+                    })
+
+                    // Após encontrar a linha correta, busca dentro dela o campo que armazena o valor reajustado do equipamento
+                    .find(".equipSelecionado_aditivoValorReajustado")
+
+                    // Obtém o valor salvo
+                    .val();
+
+                // Se existir valor salvo para esse equipamento
+                // reaplica o valor no input correspondente da grid
+                if (valorSalvo) {
+
+                    // Define o valor no input
+                    $(this).val(valorSalvo)
+
+                    // Dispara o evento change para que as regras já existentes no formulário
+                    // (como atualização de totais) sejam executadas automaticamente
+                    .trigger("change");
+                }
+            });
+
+            // Após reaplicar todos os valores individuais,
+            // recalcula o valor total do campo "Valor Locação Reajustado"
+            // que é a soma de todos os equipamentos
+            atualizaValorMensal_valorReajustado();
+        }
+}
+function initDataTableEquipamentosParaInclusaoExclusao() {
+
+    var atividade = parseInt($("#atividade").val());
+    var tipoContrato = $("#tipoContrato").val();
+
+    if (atividade == ATIVIDADES.INICIO || atividade == ATIVIDADES.INICIO_0) {
+        if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+            $("#tituloExclusaoEquip").hide();
+            $("#divEquipamentosParaInclusaoExclusao, #tituloInclusaoEquip").show();
+
+        } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+            $("#tituloInclusaoEquip").hide();
+            $("#divEquipamentosParaInclusaoExclusao, #tituloExclusaoEquip").show();
+
+        } else {
+            $("#divEquipamentosParaInclusaoExclusao, #tituloInclusaoEquip, #divEquipamentosParaInclusaoExclusao, #tituloExclusaoEquip").hide();
+        }
+    }
+
+    dataTableEquipamentosParaInclusaoExclusao = new DataTable("#tableEquipamentosParaInclusaoExclusao", {
+        pageLength: 10,
+        responsive: true,
+        fixedHeader: true,
+        columnDefs: [{
+            className: "dt-left",
+            targets: "_all"
+        }],
+        columns: [
+            {
+                render: function (data, type, row) {
+                    return '<button type="button" class="btn btn-success btnDetailsEquipamentoExclusao"><i class="flaticon flaticon-circle-plus icon-md" aria-hidden="true"></i></button>';
+                }
+            },
+            {
+                data: "PREFIXO",
+                className: "dt-left"
+            },
+            {
+                data: "MODELO",
+                className: "dt-left"
+            },
+            {
+                data: "DESCRICAO",
+                className: "dt-left"
+            },
+            {
+                data: "POTENCIAHP",
+                className: "dt-left",
+                class: "nowrap",
+                type: "string"
+            },
+            {
+                data: "CAPACIDADE",
+                defaultContent: "",
+                className: "dt-left",
+                class: "nowrap",
+                type: "string"
+            },
+            {
+                data: "PLACA",
+                className: "dt-left"
+            },
+            {
+                data: "FABRICANTE",
+                className: "dt-left"
+            },
+            {
+                render: function (data, type, row) {
+                    return (row.FORNECEDOR_CNPJ || "") + (row.FORNECEDOR ? " - " + row.FORNECEDOR : "");
+                },
+                className: "dt-left"
+            },
+            {
+                render: function (data, type, row) {
+                    var valorMensal = parseFloat(row.VALOR_LOCACAO || 0) + parseFloat(row.MAODEOBRA || 0);
+                    return floatToMoney(valorMensal);
+                },
+                className: "dt-left",
+                class: "nowrap",
+                type: "string"
+            },
+            {
+                render: function (data, type, row) {
+                    return '<button type="button" class="btn btn-danger btnRemoverEquipExclusao"><i class="flaticon flaticon-trash icon-md" aria-hidden="true"></i></button>';
+                }
+            }
+        ],
+        language: datatablesLanguage,
+        layout: {
+            bottomStart: null,
+            bottom: "paging",
+            bottomEnd: null,
+            topStart: {
+                buttons: [
+                    {
+                        text: "Red",
+                        className: "btn btn-info",
+                        extend: "excel",
+                        text: "Excel",
+                        exportOptions: {
+                            modifier: {
+                                page: "all",
+                            },
+                        },
+                    },
+                ],
+            },
+        },
+    });
+
+    $("#tableEquipamentosParaInclusaoExclusao").on("click", ".btnDetailsEquipamentoExclusao", function () {
+        onClickDetailsEquipamento(this);
+    });
+
+    $("#tableEquipamentosParaInclusaoExclusao").on("click", ".btnRemoverEquipExclusao", function () {
+        btnRemoverEquip(this);
+    });
+}
+function onClickCheckEquipamento_aditivoRescisao(that) {
+    var tipoContrato = $("#tipoContrato").val();
+    var self = that;
+    var tr = $(self).closest('tr');  
+    var row = dataTableEquipamentosAditivoRescisao.row(tr);
+    var data = row.data();
+    console.log(data);
+
+    if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || 
+        tipoContrato == "Locação de Equipamento - Inclusão de Equipamento"
+    ) {
+        if ($(that).is(":checked")) {
+            adicionarEquipParaInclusaoExclusao(that);
+        }
+        return;
+    }
+
+    if ($(self).is(":checked")) {
+        salvaPrefixoSelecionado(data.PREFIXO);
+    }else{
+        removePrefixoSelecionado(data.PREFIXO);
+    }
+
+    function salvaPrefixoSelecionado(PREFIXO){
+        var id = wdkAddChild("tableEquipamentosSelecionados_aditivos");
+        $("#equipSelecionado_aditivos" + "___" + id).val(PREFIXO);
+        atualizaValorTotalLocacao_prazo();
+    }
+    function removePrefixoSelecionado(PREFIXO){
+        $("#tableEquipamentosSelecionados_aditivos>tbody>tr:not(:first)").each(function(){
+            if($(this).find(".equipSelecionado_aditivos").val() == PREFIXO){
+                fnWdkRemoveChild(this);
+                atualizaValorTotalLocacao_prazo();
+            }
+        });
+    }
+}
+function adicionarEquipParaInclusaoExclusao(that) {
+    var tr = $(that).closest("tr");
+    var row = dataTableEquipamentosAditivoRescisao.row(tr);
+    var data = row.data();
+
+    var id = wdkAddChild("tableEquipamentosSelecionados_aditivos");
+
+    var valorMensal = parseFloat(data.VALOR_LOCACAO || 0);
+    if (data.MAODEOBRA && data.MAODEOBRA != "null") {
+        valorMensal += parseFloat(data.MAODEOBRA || 0);
+    }
+
+    $("#equipSelecionado_aditivos___" + id).val(data.PREFIXO || "");
+    $("#equipModeloAditivo___" + id).val(data.MODELO || "");
+    $("#equipDescricaoAditivo___" + id).val(data.DESCRICAO || "");
+    $("#equipPotenciaAditivo___" + id).val(data.POTENCIAHP || "");
+    $("#equipCapacidadeAditivo___" + id).val(data.CAPACIDADE || "");
+    $("#equipPlacaSerieAditivo___" + id).val(data.PLACA || data.SERIE || "");
+    $("#equipFabricanteAditivo___" + id).val(data.FABRICANTE || "");
+    $("#equipFornecedorAditivo___" + id).val((data.FORNECEDOR_CNPJ || "") + " - " + (data.FORNECEDOR || ""));
+    $("#equipValorMensalAditivo___" + id).val(floatToMoney(valorMensal));
+
+    dataTableEquipamentosParaInclusaoExclusao.row.add(data).draw(false);
+    row.remove().draw(false);
+
+    atualizaValorMensal_valorReajustado();
+
+    if ($("#tipoAlteracao").val() == "Inclusão de Equipamento") {
+        FLUIGC.toast({
+            title: "",
+            message: "Equipamento " + data.PREFIXO + " adicionado para inclusão.",
+            type: "success",
+            timeout: 3000 // Milissegundos (3 segundos)
+        });
+    } else if ($("#tipoAlteracao").val() == "Exclusão de Equipamento") {
+        FLUIGC.toast({
+            title: "",
+            message: "Equipamento " + data.PREFIXO + " adicionado para exclusão.",
+            type: "success",
+            timeout: 3000 // Milissegundos (3 segundos)
+        });
+    }
+}
+function btnRemoverEquip(btn) {
+
+    // Pega a linha (tr) da tabela onde o botão de lixeira foi clicado
+    var tr = $(btn).closest("tr");
+
+    // Obtém a referência da linha dentro da DataTable da tabela de baixo
+    var row = dataTableEquipamentosParaInclusaoExclusao.row(tr);
+
+    // Recupera os dados do equipamento dessa linha (PREFIXO, VALOR_LOCACAO, etc.)
+    var data = row.data();
+
+    // REMOVE O PREFIXO DA TABELA PAI-FILHO DE EQUIPAMENTOS SELECIONADOS
+    // Essa tabela pai-filho (tableEquipamentosSelecionados_aditivos)
+    // é utilizada para armazenar quais equipamentos foram selecionados.
+    //
+    // Se não removermos o PREFIXO daqui antes de voltar o equipamento
+    // para a tabela principal, o render do checkbox entende que ele
+    // ainda está selecionado e o checkbox volta marcado.
+    $("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").each(function () {
+
+        // Verifica se o PREFIXO da linha do pai-filho é igual ao PREFIXO do equipamento removido
+        if ($(this).find(".equipSelecionado_aditivos").val() == data.PREFIXO) {
+
+            // Remove a linha correspondente do pai-filho
+            fnWdkRemoveChild(this);
+
+            // Interrompe o loop após encontrar
+            return false;
+        }
+    });
+
+    // DEVOLVE O EQUIPAMENTO PARA A TABELA PRINCIPAL (TABELA DE CIMA)
+    // Como o PREFIXO já foi removido do pai-filho acima,
+    // o render do checkbox não encontrará mais esse registro,
+    // fazendo com que o checkbox volte DESMARCADO.
+    dataTableEquipamentosAditivoRescisao.row.add(data).draw(false);
+
+    // REMOVE A LINHA DA TABELA DE BAIXO
+    // Remove o equipamento da tabela de equipamentos selecionados
+    row.remove().draw(false);
+
+    // RECALCULA OS VALORES DA LOCAÇÃO
+    // Atualiza os valores mensais e reajustados após a remoção
+    atualizaValorMensal_valorReajustado();
+
+    if ($("#tipoAlteracao").val() == "Inclusão de Equipamento") {
+        FLUIGC.toast({
+            title: "",
+            message: "Equipamento " + data.PREFIXO + " removido da inclusão.",
+            type: "warning",
+            timeout: 3000 // Milissegundos (3 segundos)
+        });
+    } else if ($("#tipoAlteracao").val() == "Exclusão de Equipamento") {
+        FLUIGC.toast({
+            title: "",
+            message: "Equipamento " + data.PREFIXO + " removido da exclusão.",
+            type: "warning",
+            timeout: 3000 // Milissegundos (3 segundos)
+        });
+    }
+}
+function consultaEquipamentos(ID_TCNT_AUXILIAR){
+    var tipoContrato = $("#tipoContrato").val();
+
+    if (tipoContrato == "Locação de Equipamento - Alteração de Valor" || 
+        tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
+        tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" || 
+        tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || 
+        tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)"
+    )
+    {
+        return new Promise((resolve, reject)=>{
+            DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
+                DatasetFactory.createConstraint("OPERACAO","ConsultaEquipPorContrato","ConsultaEquipPorContrato",ConstraintType.MUST),
+                DatasetFactory.createConstraint("ID_TCNT_AUXILIAR",ID_TCNT_AUXILIAR,ID_TCNT_AUXILIAR,ConstraintType.MUST),
+            ],null,{
+                success:ds=>{
+                    if (ds.values[0].STATUS != "SUCCESS") {
+                        reject(ds.values[0].MENSAGEM);
+                    }else{
+                        resolve(JSON.parse(ds.values[0].RESULT));
+                    }
+                },
+                error:e=>reject(e)
+            });
+        });
+        
+    
+    } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+        var CCUSTO = $("#CODCCUSTO").val();
+        var CNPJ = $("#hiddenCGCCFO").val();
+
+        // Busca os equipamentos sem contratos ativos por Centro de Custo e Fornecedor
+        return new Promise((resolve, reject)=>{
+            DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
+                DatasetFactory.createConstraint("OPERACAO","ConsultaEquipPorCcustoFornecedor","ConsultaEquipPorCcustoFornecedor",ConstraintType.MUST),
+                DatasetFactory.createConstraint("CCUSTO",CCUSTO,CCUSTO,ConstraintType.MUST),
+                DatasetFactory.createConstraint("CNPJ",CNPJ,CNPJ,ConstraintType.MUST),
+            ],null,{
+                success:ds=>{
+                    if (ds.values[0].STATUS != "SUCCESS") {
+                        reject(ds.values[0].MENSAGEM);
+                    }else{
+                        resolve(JSON.parse(ds.values[0].RESULT));
+                    }
+                },
+                error:e=>reject(e)
+            });
+        });
+    }
+}
+async function preencheListaDeEquipamentos_aditivosRescisao() {
+    var tipoContrato = $("#tipoContrato").val();
+
+    // Limpa tabela de Inclusão/Exclusão antes de remontar, para não ficar equipamentos de outros contratos.
+    $("#tableEquipamentosParaInclusaoExclusao tbody").empty();
+    
+    // Limpa tabela de equip(s) selecionados aditivo/rescisao antes de remontar, para não ficar equipamentos de outros contratos ou duplicado.
+    $("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").empty();
+    
+    if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+        
+        // Sempre limpa a tabela
+        dataTableEquipamentosAditivoRescisao.clear().draw();
+
+        try {
+
+            // OPERACAO ConsultaEquipPorCcustoFornecedor
+            var equipamentos = await consultaEquipamentos();
+            dataTableEquipamentosAditivoRescisao.clear().draw();
+            dataTableEquipamentosAditivoRescisao.rows.add(equipamentos); // Add new data
+            dataTableEquipamentosAditivoRescisao.columns.adjust().draw(); // Redraw the DataTable
+            carregarTabelaEquipParaIncluirExcluir();
+
+            // Recalcula o valor mensal considerando:
+            // base do contrato principal + inclusões já selecionadas
+            atualizaValorMensal_valorReajustado();
+        } catch (error) {
+            console.error(error);
+        }
+
+    } else if (tipoContrato == "Locação de Equipamento - Alteração de Valor" || 
+        tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
+        tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" ||
+        tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || 
+        tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)")
+    {
+        // Sempre limpa a tabela
+        dataTableEquipamentosAditivoRescisao.clear().draw();
+
+        try {
+            const ID_TCNT_AUXILIAR = $("#ID_TCNT_AUXILIAR").val();
+
+            if (ID_TCNT_AUXILIAR.trim() == "-" || "") {
+                return;
+            }
+
+            $("#valorLocacaoReajustado").val(floatToMoney(0));
+            $("#valorMensalLocacao").val(floatToMoney(0));
+
+            // OPERACAO ConsultaEquipPorContrato
+            var equipamentos = await consultaEquipamentos(ID_TCNT_AUXILIAR);
+            dataTableEquipamentosAditivoRescisao.clear().draw();
+            dataTableEquipamentosAditivoRescisao.rows.add(equipamentos); // Add new data
+            dataTableEquipamentosAditivoRescisao.columns.adjust().draw(); // Redraw the DataTable
+            atualizaValorMensal_valorReajustado();
+            
+            if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+                carregarTabelaEquipParaIncluirExcluir();
+
+            } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo" || 
+            tipoContrato == "Locação de Equipamento (Rescisões)" ||
+            tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)") {
+                
+                preencheTabelaDeAditivo();
+            }
+
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    function carregarTabelaEquipParaIncluirExcluir() {
+
+        // Limpa completamente a tabela visual de exclusão antes de reconstruir.
+        // Isso evita duplicação quando a função é chamada novamente.
+        dataTableEquipamentosParaInclusaoExclusao.clear().draw();
+
+
+        // Array que irá guardar os PREFIXOS salvos na tabela pai-filho
+        // (tableEquipamentosSelecionados_aditivos)
+        var prefixos = [];
+
+
+        // Percorre todas as linhas da tabela pai-filho
+        // Ignorando a primeira linha template
+        $("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").each(function () {
+
+            // Pega o PREFIXO salvo na linha
+            var prefixo = $(this).find(".equipSelecionado_aditivos").val();
+
+            // Se existir, adiciona no array
+            if (prefixo) {
+                prefixos.push(prefixo);
+            }
+
+        });
+
+
+        // Se não houver prefixos selecionados, não faz nada
+        if (prefixos.length == 0) return;
+
+
+        // Array que irá guardar os dados das linhas que devem ir para a tabela de exclusão
+        var linhasParaMover = [];
+
+        // Array que irá guardar os índices das linhas que devem ser removidas da tabela principal
+        var indexesParaRemover = [];
+
+
+        // Percorre todas as linhas da tabela principal (equipamentos do contrato)
+        dataTableEquipamentosAditivoRescisao.rows().every(function () {
+
+            // Dados da linha atual
+            var data = this.data();
+
+            // Se o PREFIXO da linha estiver na lista da pai-filho
+            if (data && prefixos.indexOf(data.PREFIXO) !== -1) {
+
+                // Guarda os dados para adicionar na tabela de exclusão
+                linhasParaMover.push(data);
+
+                // Guarda o índice da linha para remover depois
+                // (não removemos agora para evitar bug de pular linhas)
+                indexesParaRemover.push(this.index());
+            }
+        });
+
+
+        // Adiciona as linhas na tabela visual de exclusão
+        for (var i = 0; i < linhasParaMover.length; i++) {
+            dataTableEquipamentosParaInclusaoExclusao.row.add(linhasParaMover[i]);
+        }
+
+        // Atualiza a tabela de exclusão
+        dataTableEquipamentosParaInclusaoExclusao.draw(false);
+
+
+        // Agora remove todas as linhas da tabela principal de uma vez
+        // (evita problema de remover durante o loop)
+        if (indexesParaRemover.length > 0) {
+            dataTableEquipamentosAditivoRescisao.rows(indexesParaRemover).remove().draw(false);
+        }
+    }
+    function preencheTabelaDeAditivo() {
+
+        // Percorre todos os registros da DataTable
+        dataTableEquipamentosAditivoRescisao.rows().every(function () {
+            var row = this.data();
+
+            if (!row) {
+                return;
+            }
+
+            var id = wdkAddChild("tableEquipamentosSelecionados_aditivos");
+
+            $("#equipSelecionado_aditivos___" + id).val(row.PREFIXO || "");
+        });
+    }
+}
+function getEquipamentosAditivo_insereNaTabelaPaiFilho() {
+
+    // Limpa tudo antes de recriar
+    $("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").each(function () {
+        fnWdkRemoveChild(this);
+    });
+    // rows().every() percorre TODOS os registros da DataTable,
+    // independentemente de paginação, filtro ou ordenação.
+    dataTableEquipamentosAditivoRescisao.rows().every(function () {
+            
+    // Pega o objeto de dados da linha atual, que vem do dataset
+    var row = this.data();
+
+    // Se não tiver dados então encerra aqui.
+    if (!row) {
+        return;
+    }
+
+    // Busca o input que tem o data-prefixo igual o PREFIXO da linha atual
+    var input = $(".inputValorLocacaoReajustado[data-prefixo='" + row.PREFIXO + "']");
+
+    // Pega o valor de locação que vem do dataset e converte para numero float
+    var valorLocacao = parseFloat(row.VALOR_LOCACAO || 0);
+
+    // Pega o valor de mão de obra que vem do dataset e converte para numero float
+    var maoDeObra = 0;
+    if (row.MAODEOBRA && row.MAODEOBRA != "null") {
+        maoDeObra = parseFloat(row.MAODEOBRA || 0);
+    }
+
+    // Pega o valor digitado no input e converte para numero float
+    var valorReajuste = moneyToFloat(input.val() || '0');
+
+    // Valor mensal original do equipamento
+    var valorMensal = valorLocacao + maoDeObra;
+
+    // Se valor de reajuste for diferente de 0 e não for igual ao valor de valorMensal
+    if (valorReajuste != 0 && valorMensal != valorReajuste) {
+
+        // Cria nova linha na tabela pai-filho
+        var id = wdkAddChild("tableEquipamentosSelecionados_aditivos");
+
+        // Preenche o campo hidden com o prefixo e seu ID gerado pelo o Fluig
+        $("#equipSelecionado_aditivos___" + id).val(row.PREFIXO);
+
+        // Preenche campo hidden com o valor reajustado digitado para o prefixo
+        $("#valorReajustado_aditivos___" + id).val(floatToMoney(valorReajuste));
+
+        // Preenhce campo hidden com o valor mensal (valor locação + mão de obra)
+        $("#valorMensalOriginalAditivo___" + id).val(floatToMoney(valorMensal));
+
+        // Preenche campo hidden com o valor de mão de obra, para poder usar na subtração
+        // de valor mensal no beforeTaskSave, para pegar o valor locação
+        $("#valorMaoDeObraAditivos___" + id).val(floatToMoney(maoDeObra));
+        }
+    });
+}
+function atualizaValorMensal_valorReajustado() {
+    var tipoContrato = $("#tipoContrato").val();
+
+    if (tipoContrato == "Locação de Equipamento - Alteração de Valor" || tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor") {
+        var valorReajustado = 0;
+        var valorMensal = 0;
+
+        // dataTableEquipamentosAditivoRescisao é a instância da DataTable
+        // rows() retorna todas as linhas da tabela
+        // every() percorre cada linha da DataTable (similar ao each)
+        dataTableEquipamentosAditivoRescisao.rows().every(function () {
+
+            // this aqui representa a linha atual da DataTable
+            // this.data() retorna o objeto de dados dessa linha
+            var row = this.data();
+
+            // Se por algum motivo não existir dados na linha então interrompe esta iteração
+            if (!row) {
+                return;
+            }
+
+            // Pega o valor de locação vindo do dataset
+            // parseFloat garante que o valor seja tratado como número
+            // || 0 evita NaN caso venha null/undefined
+            var valorLocacao = parseFloat(row.VALOR_LOCACAO || 0);
+
+            // Pega o valor de mão de obra da linha atual
+            // Também converte para número e garante 0 caso esteja vazio
+            var maoDeObra = 0;
+            if (row.MAODEOBRA && row.MAODEOBRA != "null") {
+                maoDeObra = parseFloat(row.MAODEOBRA || 0);
+            }
+
+            // Valor base da locação do equipamento
+            // É composto pela soma da locação do equipamento + mão de obra
+            var valorBase = valorLocacao + maoDeObra;
+
+            // Busca o input correspondente ao equipamento atual
+            // O vínculo é feito através do atributo data-prefixo que contém o PREFIXO do equipamento
+            var input = $(".inputValorLocacaoReajustado[data-prefixo='" + row.PREFIXO + "']");
+
+            // Pega o valor digitado no input de reajuste
+            // input.val() pega o valor digitado
+            // || '0' garante que se estiver vazio será considerado zero
+            // moneyToFloat converte o valor formatado (ex: "R$ 1.000,00") para número decimal (1000.00)
+            var valorInput = moneyToFloat(input.val() || '0');
+
+            // Soma também ao valor mensal
+            valorMensal += valorBase;
+
+            // Só considera o valor digitado como reajuste válido se:
+            // 1 - O valor digitado for maior que zero
+            // 2 - O valor digitado for diferente do valor base do equipamento
+            // Isso evita registrar reajuste quando o valor não foi alterado
+            if (valorInput > 0 && valorInput != valorBase) {
+
+                // Soma o valor reajustado ao total de reajustes
+                valorReajustado += valorInput;
+            }
+        });        
+
+        // Atualiza o campo do formulário com o total de valores reajustados
+        // floatToMoney converte número para formato monetário (ex: 1000 -> "R$ 1.000,00")
+        $("#valorLocacaoReajustado").val(floatToMoney(valorReajustado));
+
+        // Atualiza o campo com o valor mensal total da locação
+        $("#valorMensalLocacao").val(floatToMoney(valorMensal));
+
+    } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+
+        // Valor base do contrato principal,
+        // salvo quando o usuário marcou o checkbox do contrato principal
+        var valorMensalBaseContrato = parseFloat($("#valorMensalLocacao").data("valor-base-contrato") || 0);
+
+        // Variável que irá acumular o valor total dos equipamentos
+        // que estão sendo incluídos no aditivo
+        var valorMensalInclusoes = 0;
+
+        // Percorre todas as linhas da DataTable que representa
+        // a tabela de equipamentos selecionados para inclusão (tabela de baixo)
+        dataTableEquipamentosParaInclusaoExclusao.rows().every(function () {
+
+            // Recupera os dados da linha atual da DataTable
+            // (objeto com PREFIXO, VALOR_LOCACAO, MAODEOBRA, etc.)
+            var row = this.data();
+
+            // Caso a linha não tenha dados, interrompe a execução dessa iteração
+            if (!row) {
+                return;
+            }
+
+            // referente ao equipamento da linha atual
+            var maoDeObra = 0;
+
+            // Verifica se o campo MAODEOBRA possui valor válido
+            // Alguns registros podem vir como null ou string "null"
+            if (row.MAODEOBRA && row.MAODEOBRA != "null") {
+
+                // Converte o valor de mão de obra para número
+                maoDeObra = parseFloat(row.MAODEOBRA || 0);
+            }
+
+            // Soma ao total de inclusões:
+            // VALOR_LOCACAO do equipamento + MAODEOBRA (se houver)
+            valorMensalInclusoes += parseFloat(row.VALOR_LOCACAO || 0) + maoDeObra;
+        });
+
+        // valor base do contrato principal + valor dos equipamentos incluídos
+        var valorMensalFinal = valorMensalBaseContrato + valorMensalInclusoes;
+
+        // Atualiza o campo do formulário #valorMensalLocacao,convertendo o número para formato monetário
+        $("#valorMensalLocacao").val(floatToMoney(valorMensalFinal));
+
+    } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+
+        var valorTotalEquipamentos = 0;
+        var valorEquipamentosRemover = 0;
+
+        // Percorre TODOS os equipamentos da DataTable
+        dataTableEquipamentosAditivoRescisao.rows().every(function () {
+
+            var row = this.data();
+
+            if (!row) {
+                return;
+            }
+
+            var maoDeObra = 0;
+
+            if (row.MAODEOBRA && row.MAODEOBRA != "null") {
+                maoDeObra = parseFloat(row.MAODEOBRA || 0);
+            }
+
+            var valorEquip = parseFloat(row.VALOR_LOCACAO || 0) + maoDeObra;
+
+            // Soma no total de todos equipamentos
+            valorTotalEquipamentos += valorEquip;
+
+            // Se o checkbox da linha estiver marcado
+            var tr = $(this.node());
+            if (tr.find(".checkboxSelecionaEquipamentoAditivo").is(":checked")) {
+                valorEquipamentosRemover += valorEquip;
+            }
+
+        });
+
+        // Subtrai os selecionados
+        var valorMensalFinal = valorTotalEquipamentos - valorEquipamentosRemover;
+
+        $("#valorMensalLocacao").val(floatToMoney(valorMensalFinal));
+
+    } else if (tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)") {
+        var valorMensalContrato = 0;
+
+        // Percorre TODOS os equipamentos da DataTable
+        dataTableEquipamentosAditivoRescisao.rows().every(function () {
+
+            var row = this.data();
+
+            if (!row) {
+                return;
+            }
+
+            var maoDeObra = 0;
+
+            if (row.MAODEOBRA && row.MAODEOBRA != "null") {
+                maoDeObra = parseFloat(row.MAODEOBRA || 0);
+            }
+
+            var valorEquip = parseFloat(row.VALOR_LOCACAO || 0) + maoDeObra;
+
+            // Soma no total de todos equipamentos
+            valorMensalContrato += valorEquip;
+
+        });
+
+        $("#valorMensalLocacao").val(floatToMoney(valorMensalContrato));
+    }
+}
 
 // Equipamentos Selecionados nas telas de Aprovação
 async function geraEquipamentosSelecionados(){
-    try {
-        $("#tableEquipamentos").hide();
-        var equipamentos = await asyncConsultaEquipamentosSelecionados();
+    var origemContrato = $("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text();
 
-        for (const equipamento of equipamentos) {
-            $("#negociacaoHeaderEquipamentos").val(equipamento.NEGOCIACAO_SUPRIMENTOS == "S" ? "Sim":equipamento.NEGOCIACAO_SUPRIMENTOS == "N" ? "Não":"");
-            $("#divEquipamentosSelecionados").append(await geraHtmlEquipamento(equipamento));
-            $(".btnAnexosEquipamento:last").on("click", {equipamento:equipamento}, async function(event){
-                console.log(event)
-                FLUIGC.modal({
-                    title: `Anexos ${event.data.equipamento.PREFIXO}`,
-                    content: await geraHtmlAnexos(event.data.equipamento),
-                    id: 'fluig-modal',
-                    actions: [{
-                        'label': 'Fechar',
-                        'autoClose': true
-                    }]
-                }, function(err, data) {
-                    if(err) {
-                        // do error handling
-                    } else {
-                        // do something with data
-                    }
+    // Sempre limpa os dois divs antes de renderizar de novo
+    $("#divEquipamentosSelecionados").empty();
+    $("#divEquipamentosSelecionadosAditivoRescisao").empty();
+
+    if (origemContrato == "Novos") {
+        try {
+            $("#tableEquipamentos").hide();
+            var equipamentos = await asyncConsultaEquipamentosSelecionados();
+
+            for (const equipamento of equipamentos) {
+                $("#negociacaoHeaderEquipamentos").val(equipamento.NEGOCIACAO_SUPRIMENTOS == "S" ? "Sim":equipamento.NEGOCIACAO_SUPRIMENTOS == "N" ? "Não":"");
+                $("#divEquipamentosSelecionados").append(await geraHtmlEquipamento(equipamento));
+                $(".btnAnexosEquipamento:last").on("click", {equipamento:equipamento}, async function(event){
+                    console.log(event)
+                    FLUIGC.modal({
+                        title: `Anexos ${event.data.equipamento.PREFIXO}`,
+                        content: await geraHtmlAnexos(event.data.equipamento),
+                        id: 'fluig-modal',
+                        actions: [{
+                            'label': 'Fechar',
+                            'autoClose': true
+                        }]
+                    }, function(err, data) {
+                        if(err) {
+                            // do error handling
+                        } else {
+                            // do something with data
+                        }
+                    });
+
                 });
-
+            }
+            $(".divHeaderEquipamento").on("click", function(){
+                $(this).siblings(".divDetailsEquipamento").slideToggle();
             });
+            
         }
-        $(".divHeaderEquipamento").on("click", function(){
-            $(this).siblings(".divDetailsEquipamento").slideToggle();
-        });
-        
-    }
-    catch(error){
-        showMessage("Erro ao consultar equipamentos selecionados", error, "warning");
-        throw error;
+        catch(error){
+            showMessage("Erro ao consultar equipamentos selecionados", error, "warning");
+            throw error;
+        }
+    } else if (origemContrato == "Aditivos" || origemContrato == "Rescisões") {
+        try {
+            $("#tableEquipamentosAditivoRescisao").hide();
+            var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
+
+            for (const equipamento of equipamentos) {
+                $("#negociacaoHeaderEquipamentos").closest("div").hide(); // Oculta já que não passa por Análise do Suprimentos
+                $("#divEquipamentosSelecionadosAditivoRescisao").append(await geraHtmlEquipamento(equipamento));
+                $(".btnAnexosEquipamento:last").on("click", {equipamento:equipamento}, async function(event){
+                    console.log(event)
+                    FLUIGC.modal({
+                        title: `Anexos ${event.data.equipamento.PREFIXO}`,
+                        content: await geraHtmlAnexos(event.data.equipamento),
+                        id: 'fluig-modal',
+                        actions: [{
+                            'label': 'Fechar',
+                            'autoClose': true
+                        }]
+                    }, function(err, data) {
+                        if(err) {
+                            // do error handling
+                        } else {
+                            // do something with data
+                        }
+                    });
+
+                });
+            }
+            $(".divHeaderEquipamento").on("click", function(){
+                $(this).siblings(".divDetailsEquipamento").slideToggle();
+            });
+            
+        }
+        catch(error){
+            showMessage("Erro ao consultar equipamentos selecionados", error, "warning");
+            throw error;
+        }
     }
 
 
@@ -771,18 +1766,44 @@ async function htmlNovoAnexo(documentId, documentName) {
 }
 function geraCabecalhoEquipamentos(){
     $("#divHeaderEquipamentos").show();
-    if($("#formMode").val() == "VIEW"){
+
+    var origemContrato = $("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text();
+    var tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val():$("#tipoContrato").text();
+
+    if ($("#formMode").val() == "VIEW") {
         $("#obraHeaderEquipamentos").text($("#NOMECCUSTO").val());
-        $("#tipoContratoHeaderEquipamentos").text($("#tipoContrato").text());
+        $("#tipoContratoHeaderEquipamentos").text($("#tipoContrato").text() || $("#tipoContrato").val());
         $("#periodoHeaderEquipamentos").text($("#prazoLocacao").text());
         $("#valorMensalHeaderEquipamentos").text($("#valorMensalLocacao").text());
         $("#valorTotalHeaderEquipamentos").text($("#valorTotalLocacao").text());
-    }else{
+
+    } else {
         $("#obraHeaderEquipamentos").val($("#NOMECCUSTO").val());
         $("#tipoContratoHeaderEquipamentos").val($("#tipoContrato").val());
         $("#periodoHeaderEquipamentos").val($("#prazoLocacao").val());
         $("#valorMensalHeaderEquipamentos").val($("#valorMensalLocacao").val());
         $("#valorTotalHeaderEquipamentos").val($("#valorTotalLocacao").val());
+    }
+
+    if (origemContrato == "Aditivos") {
+        if (tipoContrato == "Locação de Equipamento - Alteração de Valor") {
+            $("#periodoHeaderEquipamentos, #valorTotalHeaderEquipamentos, #negociacaoHeaderEquipamentos").closest("div").hide();
+
+        } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo") {
+            $("#valorTotalHeaderEquipamentos, #negociacaoHeaderEquipamentos").closest("div").hide();
+
+        } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor") {
+            $("#valorTotalHeaderEquipamentos, #negociacaoHeaderEquipamentos").closest("div").hide();
+
+        } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" || tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+            $("#periodoHeaderEquipamentos, #valorTotalHeaderEquipamentos, #negociacaoHeaderEquipamentos").closest("div").hide();
+        }
+
+    } else if (origemContrato == "Rescisões") {
+        $("#periodoHeaderEquipamentos, #valorTotalHeaderEquipamentos, #negociacaoHeaderEquipamentos").closest("div").hide();
+
+    } else {
+        $("#divHeaderEquipamentos").show();
     }
 }
 async function asyncConsultaEquipamentosSelecionados() {
@@ -839,9 +1860,125 @@ async function asyncConsultaEquipamentosSelecionados() {
                 }
             })
         });
+    }
 }
+async function asyncConsultaEquipamentosSelecionados_aditivos() {
+    // Pecorre a tabela pai-filho de aditivos e pega os prefixos
+    var prefixos = [];
+    $("#tableEquipamentosSelecionados_aditivos>tbody>tr:not(:first)").each(function () {
+        prefixos.push($(this).find(".equipSelecionado_aditivos").val());
+    });
+
+    var retorno = [];
+    for (const prefixo of prefixos) {
+        var equipamento = await promiseConsultaEquipamento(prefixo);
+        retorno.push(equipamento);
+    }
+    return retorno;
+
+    function promiseConsultaEquipamento(PREFIXO) {
+        return new Promise((resolve, reject) => {
+            DatasetFactory.getDataset("dsConsultaVIEW_EQUIPAMENTOS_CONTRATOS", null, [
+                DatasetFactory.createConstraint("PREFIXO", PREFIXO, PREFIXO, ConstraintType.MUST)
+            ], null, {
+                success: ds => {
+                    if (ds.values[0].STATUS != "SUCCESS") {
+                        reject(ds.values[0].MENSAGEM);
+                    } else {
+                        resolve(JSON.parse(ds.values[0].RESULT)[0]);
+                    }
+                },
+                error: e => {
+                    reject(e);
+                }
+            });
+        });
+    }
 }
 
+// Consulta equip do Contrato selecionado para inclusão/exclusão de equip, e para Rescisão
+async function asyncConsultaEquipamentosPorContrato(ID_TCNT_AUXILIAR) {
+    var equipamentosContrato = await promiseConsultaPrefixosContrato(ID_TCNT_AUXILIAR);
+
+    var retorno = [];
+    for (const item of equipamentosContrato) {
+        var equipamento = await promiseConsultaEquipamento(item.PREFIXO);
+        retorno.push(equipamento);
+    }
+
+    return retorno;
+
+    // Consulta os equipamentos vinculados ao contrato e retorna os prefixos
+    function promiseConsultaPrefixosContrato(ID_TCNT_AUXILIAR) {
+        return new Promise((resolve, reject) => {
+            DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
+                DatasetFactory.createConstraint("OPERACAO", "ConsultaEquipPorContrato", "ConsultaEquipPorContrato", ConstraintType.MUST),
+                DatasetFactory.createConstraint("ID_TCNT_AUXILIAR", ID_TCNT_AUXILIAR, ID_TCNT_AUXILIAR, ConstraintType.MUST)
+            ], null, {
+                success: ds => {
+                    if (ds.values[0].STATUS != "SUCCESS") {
+                        reject(ds.values[0].MENSAGEM);
+                    } else {
+                        resolve(JSON.parse(ds.values[0].RESULT));
+                    }
+                },
+                error: e => reject(e)
+            });
+        });
+    }
+
+    // Consulta os dados completos do equipamento pelo prefixo
+    function promiseConsultaEquipamento(PREFIXO) {
+        return new Promise((resolve, reject) => {
+            DatasetFactory.getDataset("dsConsultaVIEW_EQUIPAMENTOS_CONTRATOS", null, [
+                DatasetFactory.createConstraint("PREFIXO", PREFIXO, PREFIXO, ConstraintType.MUST)
+            ], null, {
+                success: ds => {
+                    if (ds.values[0].STATUS != "SUCCESS") {
+                        reject(ds.values[0].MENSAGEM);
+                    } else {
+                        resolve(JSON.parse(ds.values[0].RESULT)[0]);
+                    }
+                },
+                error: e => reject(e)
+            });
+        });
+    }
+}
+
+// Cosulta equip do Contrato Selecionado para pegar o valor mensal
+// Para uso quando Inclusão de Equipamento
+async function asyncConsultaValorMensalPorContratoPrincipal(ID_TCNT_AUXILIAR) {
+    return new Promise((resolve, reject) => {
+        DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
+            DatasetFactory.createConstraint("OPERACAO", "ConsultaEquipPorContrato", "ConsultaEquipPorContrato", ConstraintType.MUST),
+            DatasetFactory.createConstraint("ID_TCNT_AUXILIAR", ID_TCNT_AUXILIAR, ID_TCNT_AUXILIAR, ConstraintType.MUST),
+        ], null, {
+            success: ds => {
+                if (ds.values[0].STATUS != "SUCCESS") {
+                    reject(ds.values[0].MENSAGEM);
+                } else {
+                    var equipamentosContrato = JSON.parse(ds.values[0].RESULT);
+                    var valorMensalBase = 0;
+
+                    // Soma todos os equipamentos que já pertencem ao contrato principal
+                    for (var i = 0; i < equipamentosContrato.length; i++) {
+                        var item = equipamentosContrato[i];
+
+                        valorMensalBase += parseFloat(item.VALOR_LOCACAO || 0);
+
+                        if (item.MAODEOBRA && item.MAODEOBRA != "null") {
+                            valorMensalBase += parseFloat(item.MAODEOBRA || 0);
+                        }
+                    }
+
+                    resolve(valorMensalBase);
+                }
+            },
+            error: e => reject(e)
+        });
+    });
+}
 
 // Util
 function promiseGetDocumentDescription(documentId){
