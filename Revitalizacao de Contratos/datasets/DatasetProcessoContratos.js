@@ -1,7 +1,7 @@
 function defineStructure() {}
 function onSync(lastSyncDate) {}
 function createDataset(fields, constraints, sortFields) {
-    var dataSource = "/jdbc/FluigRM"; //nome da conexão usada no standalone
+    var dataSource = "/jdbc/CastilhoCustom"; //nome da conexão usada no standalone
     var ic = new javax.naming.InitialContext();
     var ds = ic.lookup(dataSource);
     var OPERACAO, CODCOLIGADA, CCUSTO, ANOCONTRATO, CNPJ, CODIGOPRD, IDCNT, IDPRD, CODCFO, LOCALESTOQUE = null;
@@ -40,11 +40,14 @@ function createDataset(fields, constraints, sortFields) {
                     else if(constraints[i].fieldName == "LOCALESTOQUE"){
                         LOCALESTOQUE = constraints[i].initialValue;
                     }
+                    else if (constraints[i].fieldName == "TIPOCONTRATO"){
+                        TIPOCONTRATO = constraints[i].initialValue;
+                    }
                 }
             }
 
     if(OPERACAO == "BuscaCodContratoPorCCusto"){
-        myQuery = "SELECT max(CODIGOCONTRATO) as CODIGOCONTRATO FROM TCNT WHERE CODIGOCONTRATO like '" + CCUSTO + "%' AND CODIGOCONTRATO not like '%-9%' AND CODIGOCONTRATO not like '%-8%' AND CODCOLIGADA = " + CODCOLIGADA;
+        myQuery = "SELECT max(CODIGOCONTRATO) as CODIGOCONTRATO FROM [SQL-2022].CastilhoRM_homologacao.dbo.TCNT WHERE CODIGOCONTRATO like '" + CCUSTO + "%' AND CODIGOCONTRATO not like '%-9%' AND CODIGOCONTRATO not like '%-8%' AND CODCOLIGADA = " + CODCOLIGADA;
     }
     else if(OPERACAO == "BuscaProduto"){
         myQuery = 
@@ -56,7 +59,7 @@ function createDataset(fields, constraints, sortFields) {
         TPRODUTO.CODIGOPRD + ' - ' + TPRODUTO.NOMEFANTASIA VISUAL,\
         TPRODUTO.TIPO\
     FROM\
-        TPRODUTO\
+        [SQL-2022].CastilhoRM_homologacao.dbo.TPRODUTO\
     WHERE\
         TPRODUTO.DESCRICAO is NOT NULL\
         AND TPRODUTO.INATIVO = 0\
@@ -66,34 +69,30 @@ function createDataset(fields, constraints, sortFields) {
         ORDER BY NOMEFANTASIA";
     }
     else if(OPERACAO == "BuscaProdutoPorCodigo"){
-        myQuery = "SELECT IDPRD FROM TPRODUTO WHERE CODIGOPRD = " + CODIGOPRD + " AND CODCOLPRD = " + CODCOLIGADA;
+        myQuery = "SELECT IDPRD FROM [SQL-2022].CastilhoRM_homologacao.dbo.TPRODUTO WHERE CODIGOPRD = " + CODIGOPRD + " AND CODCOLPRD = " + CODCOLIGADA;
     }
     else if(OPERACAO == "BuscaProdutoPorId"){
-        myQuery = "SELECT CODIGOPRD, DESCRICAO FROM TPRODUTO WHERE IDPRD = " + IDPRD + " AND CODCOLPRD = " + CODCOLIGADA;
+        myQuery = "SELECT CODIGOPRD, DESCRICAO FROM [SQL-2022].CastilhoRM_homologacao.dbo.TPRODUTO WHERE IDPRD = " + IDPRD + " AND CODCOLPRD = " + CODCOLIGADA;
     }
     else if(OPERACAO == "BuscaFornecedorPorCNPJ"){
         myQuery = "SELECT * FROM FCFO WHERE CGCCFO = '" + CNPJ + "'";
     }
     else if(OPERACAO == "BuscaFornecedorPorId"){
-        myQuery = "SELECT NOMEFANTASIA, CGCCFO FROM FCFO WHERE CGCCFO = '" + CODCFO + "'";
+        myQuery = "SELECT NOMEFANTASIA, CGCCFO FROM [SQL-2022].CastilhoRM_homologacao.dbo.FCFO WHERE CGCCFO = '" + CODCFO + "'";
     }
     else if(OPERACAO == "BuscaDadosContratoRM"){
         myQuery = 
         "SELECT CODCOLIGADA, IDCNT, NOME, CODCCUSTO, NATUREZA, CODTCN, CODFILIAL, CODIGOCONTRATO, CODCFO, CODRPR, CODSTACNT, CODCPG, CODCPGPRAZO,DATAINICIO\
-        FROM TCNT\
+        FROM [SQL-2022].CastilhoRM_homologacao.dbo.TCNT\
         WHERE CODCOLIGADA = " + CODCOLIGADA + " AND IDCNT = " + IDCNT;
     }
     else if(OPERACAO == "BuscaLocEstoque"){
-        myQuery = "SELECT * FROM TLOC WHERE NOME = '" + LOCALESTOQUE + "'";
+        myQuery = "SELECT * FROM [SQL-2022].CastilhoRM_homologacao.dbo.TLOC WHERE NOME = '" + LOCALESTOQUE + "'";
     }
     else if(OPERACAO == "BuscaContratos"){
         myQuery =
         "SELECT TCNT.CODCOLIGADA, TCNT.IDCNT, TCNT.CODIGOCONTRATO, FCFO.CGCCFO, FCFO.NOMEFANTASIA as FORNECEDOR, TCNT.VALORCONTRATO, TCNT.NOME AS DESCRICAOCONTRATO,\
-<<<<<<< Updated upstream
-            TTCN.DESCRICAO as TIPOCONTRATO, TCNT.CODCCUSTO, GCCUSTO.NOME AS CCUSTO, TCNT.DATACONTRATO, TSTACNT.DESCRICAO as STATUS\
-=======
             TTCN.DESCRICAO as TIPOCONTRATO, TCNT.CODCCUSTO, GCCUSTO.NOME AS CCUSTO, TCNT.DATACONTRATO, TSTACNT.DESCRICAO as STATUS, TCNT.DATAINICIO, TCNT.DATAFIM\
->>>>>>> Stashed changes
         FROM TCNT\
             INNER JOIN TTCN ON TTCN.CODCOLIGADA = TCNT.CODCOLIGADA AND TCNT.CODTCN = TTCN.CODTCN\
             INNER JOIN GCCUSTO ON GCCUSTO.CODCOLIGADA = TCNT.CODCOLIGADA AND TCNT.CODCCUSTO = GCCUSTO.CODCCUSTO\
@@ -101,26 +100,31 @@ function createDataset(fields, constraints, sortFields) {
             INNER JOIN TSTACNT ON TCNT.CODSTACNT = TSTACNT.CODSTACNT AND TCNT.CODCOLIGADA = TSTACNT.CODCOLIGADA\
         WHERE (TCNT.CODSTACNT = 01 OR TCNT.CODSTACNT = 05) AND TCNT.CODTCN IN (01,02,04,06,07,08,09,10,11,14,15)\
             AND GCCUSTO.CODCCUSTO = '" + CCUSTO + "'\
-<<<<<<< Updated upstream
-            AND TCNT.CODCOLIGADA = " + CODCOLIGADA + "\
-=======
             AND TCNT.CODCOLIGADA = " + CODCOLIGADA + " \
         ORDER BY IDCNT";
     }
     else if(OPERACAO == "BuscaContratosPorFornecedor"){
         myQuery =
-        "SELECT TCNT.CODCOLIGADA, TCNT.IDCNT, TCNT.CODIGOCONTRATO, FCFO.CGCCFO, FCFO.NOMEFANTASIA as FORNECEDOR, TCNT.VALORCONTRATO, TCNT.NOME AS DESCRICAOCONTRATO,\
-            TTCN.DESCRICAO as TIPOCONTRATO, TCNT.CODCCUSTO, GCCUSTO.NOME AS CCUSTO, TCNT.DATACONTRATO, TSTACNT.DESCRICAO as STATUS, TCNT.DATAINICIO, TCNT.DATAFIM\
-        FROM TCNT\
-            INNER JOIN TTCN ON TTCN.CODCOLIGADA = TCNT.CODCOLIGADA AND TCNT.CODTCN = TTCN.CODTCN\
-            INNER JOIN GCCUSTO ON GCCUSTO.CODCOLIGADA = TCNT.CODCOLIGADA AND TCNT.CODCCUSTO = GCCUSTO.CODCCUSTO\
-            INNER JOIN FCFO ON FCFO.CODCFO = TCNT.CODCFO\
-            INNER JOIN TSTACNT ON TCNT.CODSTACNT = TSTACNT.CODSTACNT AND TCNT.CODCOLIGADA = TSTACNT.CODCOLIGADA\
+        "SELECT TCNT.CODCOLIGADA, TCNT.IDCNT, TCNT.CODIGOCONTRATO, TCNT_AUXILIAR_ITENS.ID_TCNT_AUXILIAR, TCNT_AUXILIAR_ITENS.NSEQITEMCNT, TCNT_AUXILIAR.IS_RETENCAO, TCNT_AUXILIAR.PERCENT_RETENCAO, FCFO.CGCCFO, FCFO.NOMEFANTASIA as FORNECEDOR, TCNT.VALORCONTRATO, TCNT_AUXILIAR_ITENS.VALOR, TCNT.NOME AS DESCRICAOCONTRATO,\
+            TTCN.DESCRICAO as TIPOCONTRATO, TCNT_AUXILIAR_ITENS.DESCRICAO AS DESCRICAO_IMOVEL, TCNT_AUXILIAR_ITENS.ENDERECO AS ENDERECO_IMOVEL, TCNT_AUXILIAR.DATA_ASSINATURA, TCNT.CODCCUSTO, GCCUSTO.NOME AS CCUSTO, TCNT.DATACONTRATO, TSTACNT.DESCRICAO as STATUS, TCNT.DATAINICIO, TCNT.DATAFIM\
+        FROM [SQL-2022].CastilhoRM_homologacao.dbo.TCNT\
+            INNER JOIN [SQL-2022].CastilhoRM_homologacao.dbo.TTCN ON TTCN.CODCOLIGADA = TCNT.CODCOLIGADA AND TCNT.CODTCN = TTCN.CODTCN\
+            INNER JOIN [SQL-2022].CastilhoRM_homologacao.dbo.GCCUSTO ON GCCUSTO.CODCOLIGADA = TCNT.CODCOLIGADA AND TCNT.CODCCUSTO = GCCUSTO.CODCCUSTO\
+            INNER JOIN [SQL-2022].CastilhoRM_homologacao.dbo.FCFO ON FCFO.CODCFO = TCNT.CODCFO\
+            INNER JOIN [SQL-2022].CastilhoRM_homologacao.dbo.TSTACNT ON TCNT.CODSTACNT = TSTACNT.CODSTACNT AND TCNT.CODCOLIGADA = TSTACNT.CODCOLIGADA\
+            INNER JOIN TCNT_AUXILIAR AS TCNT_AUXILIAR  ON TCNT.IDCNT = TCNT_AUXILIAR.IDCNT AND TCNT.CODCOLIGADA = TCNT_AUXILIAR.CODCOLIGADA\
+            OUTER APPLY (\
+                SELECT TOP 1 *\
+                FROM TCNT_AUXILIAR_ITENS TAI\
+                WHERE TAI.ID_TCNT_AUXILIAR = TCNT_AUXILIAR.ID\
+                  AND TAI.NSEQITEMCNT = 0\
+                ORDER BY TAI.ID_TCNT_AUXILIAR\
+            ) AS TCNT_AUXILIAR_ITENS\
         WHERE (TCNT.CODSTACNT = 01 OR TCNT.CODSTACNT = 05) AND TCNT.CODTCN IN (01,02,04,06,07,08,09,10,11,14,15)\
             AND GCCUSTO.CODCCUSTO = '" + CCUSTO + "'\
             AND TCNT.CODCOLIGADA = " + CODCOLIGADA + " \
             AND FCFO.CGCCFO = '" + CNPJ + "' \
->>>>>>> Stashed changes
+            AND TTCN.DESCRICAO IN (" + TIPOCONTRATO + ")\
         ORDER BY IDCNT";
     }
     log.info("myQuery: " + myQuery);
@@ -130,7 +134,7 @@ function onMobileSync(user) {}
 
 function executaQuery(query) {
     var newDataset = DatasetBuilder.newDataset();
-    var dataSource = "/jdbc/RM";
+    var dataSource = "/jdbc/CastilhoCustom";
     var ic = new javax.naming.InitialContext();
     var ds = ic.lookup(dataSource);
     var created = false;
