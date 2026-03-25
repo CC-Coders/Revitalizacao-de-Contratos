@@ -16,16 +16,88 @@ const codigosModelos = {
         "Locação de Equipamento - Com Mão de Obra": 2070417,
     },
     HOMOLOGACAO: {
+        // Novos
         "Locação de Imóvel": 39635,
         "Locação de Equipamento": 39636,
         "Locação de Equipamento - Com Mão de Obra": 39959,
+
+        // Aditivos
+        "Locação de Equipamento - Alteração de Valor": 40819,
+        "Locação de Equipamento - Alteração de Prazo": 40817,
+        "Locação de Equipamento - Alteração de Prazo e Valor": 40818,
+        "Locação de Equipamento - Inclusão de Equipamento": 40858,
+        "Locação de Equipamento - Exclusão de Equipamento": 40889,
+
+        "Locação de Imóvel PF - Alteração de Valor": 40813,
+        "Locação de Imóvel PF - Alteração de Prazo": 40812,
+        "Locação de Imóvel PF - Alteração de Prazo e Valor": 40816,
+        "Locação de Imóvel PJ - Alteração de Prazo": 40811,
+        "Locação de Imóvel PJ - Alteração de Valor": 40815,
+        "Locação de Imóvel PJ - Alteração de Prazo e Valor": 40810,
+
+        // Rescisões
+        "Locação de Equipamento (Rescisões)": 40928,
+        "Locação de Equipamento - Com Mão de Obra (Rescisões)": 40939,
+        "Locação de Imóvel (Rescisões)": 40814,
     },
     DESENVOLVIMENTO: {
-        "Locação de Imóvel": 29328,
-        "Locação de Equipamento": 30545,
-        "Locação de Equipamento - Com Mão de Obra": 32448,
+        // Novos
+        "Locação de Imóvel": 32778,
+        "Locação de Equipamento": 32779,
+        "Locação de Equipamento - Com Mão de Obra": 32791,
+
+        // Aditivos
+        "Locação de Equipamento - Alteração de Valor": 32828,
+        "Locação de Equipamento - Alteração de Prazo": 32851,
+        "Locação de Equipamento - Alteração de Prazo e Valor": 32852,
+        "Locação de Equipamento - Inclusão de Equipamento": 0,
+        "Locação de Equipamento - Exclusão de Equipamento": 0,
+
+        "Locação de Imóvel PF - Alteração de Valor": 32624,
+        "Locação de Imóvel PF - Alteração de Prazo": 32628,
+        "Locação de Imóvel PF - Alteração de Prazo e Valor": 32627,
+        "Locação de Imóvel PJ - Alteração de Prazo": 32626,
+        "Locação de Imóvel PJ - Alteração de Valor": 32625,
+        "Locação de Imóvel PJ - Alteração de Prazo e Valor": 32629,
+
+        // Rescisões
+        "Locação de Equipamento (Rescisões)": 0,
+        "Locação de Equipamento - Com Mão de Obra (Rescisões)": 0,
+        "Locação de Imóvel (Rescisões)": 32912,
     }
 };
+
+// Ver se é PJ/PF para usar o modelo de Contrato correto com base nisso.
+function getTipoContrato_tipoPessoa() {
+    const selectTipoContrato = $("#tipoContrato").val(); // Pega a opção que o usuario selecionou no select do form.
+    const tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+
+    const modelosContrato = {
+        "Locação de Imóvel - Alteração de Valor" : {
+            F: "Locação de Imóvel PF - Alteração de Valor",
+            J: "Locação de Imóvel PJ - Alteração de Valor",
+        },
+        "Locação de Imóvel - Alteração de Prazo" : {
+            F: "Locação de Imóvel PF - Alteração de Prazo",
+            J: "Locação de Imóvel PJ - Alteração de Prazo",
+        },
+        "Locação de Imóvel - Alteração de Prazo e Valor" : {
+            F: "Locação de Imóvel PF - Alteração de Prazo e Valor",
+            J: "Locação de Imóvel PJ - Alteração de Prazo e Valor",
+        }
+    };
+
+    if (modelosContrato[selectTipoContrato]) {
+
+        if (!tipoPessoa) {
+            return "";
+        }
+
+        return modelosContrato[selectTipoContrato][tipoPessoa];
+    }
+
+    return selectTipoContrato;
+}
 
 // Gera cópia do Modelo
 async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
@@ -54,7 +126,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
                 },
             });
 
-            var input = await buscaDadosDoFormulario($("#tipoContrato").val());
+            var input = await buscaDadosDoFormulario(getTipoContrato_tipoPessoa());
             console.log(input);
             doc.render(input);
             var file = doc.toBlob();
@@ -62,6 +134,7 @@ async function asyncPreencheDocumentoComDadosDoFormulario(documentId) {
             return file;
         } catch (error) {
             console.error(error);
+            throw error;
         }
     }
 
@@ -70,6 +143,9 @@ async function buscaDadosDoFormulario(tipoContrato) {
     var dadosColigada = getDadosDaColigada();
     const CODCOLIGADA = $("#CODCOLIGADA").val();
     const TIPO_CONTRATO = $("#tipoContrato").val();
+    const TIPO_MODELO = getTipoContrato_tipoPessoa();
+    const origemContrato = $("#origemContrato").val();
+    const tipoPessoa_pf_pj = $("#FORNECEDOR_PF_PJ").val();
     var representante = regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO);
     var dadosRepresentante = jsonRepresentantes[representante];
 
@@ -91,8 +167,17 @@ async function buscaDadosDoFormulario(tipoContrato) {
     ];
     var [ano, mes, dia] = getDateNow().split("-");
 
+    // Novos
+    if (TIPO_MODELO == "Locação de Imóvel") {
+        var formaPagamento = null;
+        
+        if ($("#tipoPagamento").val() == "Depósito") {
+            formaPagamento = `${$("#tipoPagamento").val()} em conta corrente bancária. Banco ${$("#banco").val()}, Agência ${$("#agencia").val()}, Conta Corrente ${$("#contaCorrente").val()}.`
 
-    if (tipoContrato == "Locação de Imóvel") {
+        } else if ($("#tipoPagamento").val() == "Boleto") {
+            formaPagamento = `${$("#tipoPagamento").val()}. Banco ${$("#banco").val()}.`
+        }
+
         var retorno = {
             CODIGO_DO_CONTRATO: $("#novoContratoCodigo").val() || "___________",
             FORNECEDOR: $("#hiddenFORNECEDOR").val(),
@@ -110,20 +195,35 @@ async function buscaDadosDoFormulario(tipoContrato) {
             LOCACAO_DIA_VENCIMENTO: $("#periodoLocacao").val(),
             LOCACAO_VALOR_CAUCAO: $("#valorCaucao").val(),
             LOCACAO_DATA_CAUCAO: $("#dataPagamentoCaucao").val(),
-            BANCO: $("#banco").val(),
-            BANCO_AGENCIA: $("#agencia").val(),
-            BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
+            FORMA_PAGAMENTO: $("#tipoPagamento").val() == "Depósito" ? true : false,
             BANCO_TITULAR: $("#titular").val(),
             DIA: dia,
             MES: meses[parseInt(mes)],
             ANO: ano,
-            CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`
+            CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`,
+
+            // Adicionados em 24/02/2026
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo,
         };
-    } else if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
+    } else if (origemContrato == "Novos" && TIPO_MODELO == "Locação de Equipamento" || origemContrato == "Novos" && TIPO_MODELO == "Locação de Equipamento - Com Mão de Obra") {
         var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
         var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
 
         var equipamentos = await asyncConsultaEquipamentosSelecionados();
+
+        var formaPagamento = null;
+        
+        if ($("#tipoPagamento").val() == "Depósito") {
+            formaPagamento = `de depósito bancário, na conta corrente da LOCADORA, no Banco ${$("#banco").val()}, Agência: ${$("#agencia").val()}; Conta Corrente: ${$("#contaCorrente").val()}. Em nome de ${$("#titular").val()}.`
+
+        } else if ($("#tipoPagamento").val() == "Boleto") {
+            formaPagamento = `${$("#tipoPagamento").val()}. Banco ${$("#banco").val()}.`
+        }
 
        var EQUIPAMENTOS = equipamentos.map(e => ({
             PREFIXO: e.PREFIXO,
@@ -145,7 +245,8 @@ async function buscaDadosDoFormulario(tipoContrato) {
             VALOR_MOBILIZADO: floatToMoney(e.VALOR_MOBILIZADO),
             UN_EXTRA: e.UN_EXTRA,
             VALOR_EXTRA: floatToMoney(e.VALOR_EXTRA),
-            VALOR_TOTAL: floatToMoney(e.VALOR_LOCACAO + e.MAODEOBRA)
+            VALOR_TOTAL: floatToMoney(moneyToFloat(e.VALOR_LOCACAO || "0") + moneyToFloat(e.MAODEOBRA || "0")),
+            VALOR_LOCACAO: floatToMoney(e.VALOR_LOCACAO),
         }));
 
 
@@ -154,7 +255,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             FORNECEDOR: $("#hiddenFORNECEDOR").val(),
             FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
                 "#cidadeFornecedor"
-            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
             FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
             FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
             FORNECEDOR_CPF_REPRESENTANTE: $("#cpfAdministrador").val(),
@@ -174,6 +275,8 @@ async function buscaDadosDoFormulario(tipoContrato) {
             VALOR_TOTAL: $("#valorTotalLocacao").val(),
             VALOR_TOTAL_EXTENSO: numeroPorExtenso($("#valorTotalLocacao").val().replace("R$", "").replace(".", "").replace(",", ".").trim(), true),
 
+            TIPO_PAGAMENTO: $("#tipoPagamento").val() == "Depósito" ? "depósito bancário" : "boleto",
+            FORMA_PAGAMENTO: $("#tipoPagamento").val() == "Depósito" ? true : false,
             BANCO: $("#banco").val(),
             BANCO_AGENCIA: $("#agencia").val(),
             BANCO_CONTA_CORRENTE: $("#contaCorrente").val(),
@@ -182,7 +285,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             DIA: dia,
             MES: meses[parseInt(mes)],
             ANO: ano,
-            CODIGO_CENTRO_DE_CUSTO: $("#CODCCUSTO").val(),
+            CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`,
             OBRA: $("#NOMECCUSTO").val(),
 
             PRAZO: parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
@@ -200,6 +303,445 @@ async function buscaDadosDoFormulario(tipoContrato) {
         };
 
     }
+    
+    // Aditivos
+      else if (TIPO_MODELO == "Locação de Imóvel PF - Alteração de Valor" || TIPO_MODELO == "Locação de Imóvel PJ - Alteração de Valor") {
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            FORNECEDOR_RG: $("#rgFornecedor").val(), // Novo
+            IMOVEL_ENDERECO: $("#enderecoImovel").val(), // Novo
+            LOCACAO_VALOR: $("#valorMensalAluguel").val(),
+            LOCACAO_VALOR_NOVO: $("#valorLocacaoReajustado").val(), // Novo
+            CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
+            DATA_REAJUSTE: $("#dataReajuste").val(), // Novo
+            DATA_ASSINATURA: $("#dataAssinatura").val(), // Novo
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+            
+
+            NOME_COLIGADA: dadosColigada.nome, // Novo
+            ENDERECO_COLIGADA: dadosColigada.endereco, // Novo
+            CNPJ_COLIGADA: dadosColigada.cnpj // Novo
+        }
+    } else if (TIPO_MODELO == "Locação de Imóvel PF - Alteração de Prazo" || TIPO_MODELO == "Locação de Imóvel PJ - Alteração de Prazo") {
+        var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
+        var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            FORNECEDOR_RG: $("#rgFornecedor").val(), // Novo
+            IMOVEL_ENDERECO: $("#enderecoImovel").val(), // Novo
+            PERIODOINICIO: $("#dataInicioLocacao").val(),
+            PERIODOFIM: $("#dataFimLocacao").val(),
+            PRAZO: parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
+            CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
+            DATA_REAJUSTE: $("#dataReajuste").val(), // Novo
+            DATA_ASSINATURA: $("#dataAssinatura").val(), // Novo
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+            
+
+            NOME_COLIGADA: dadosColigada.nome, // Novo
+            ENDERECO_COLIGADA: dadosColigada.endereco, // Novo
+            CNPJ_COLIGADA: dadosColigada.cnpj // Novo
+        }
+    } else if (TIPO_MODELO == "Locação de Imóvel PF - Alteração de Prazo e Valor" || TIPO_MODELO == "Locação de Imóvel PJ - Alteração de Prazo e Valor") {
+        var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
+        var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            FORNECEDOR_RG: $("#rgFornecedor").val(), // Novo
+            IMOVEL_ENDERECO: $("#enderecoImovel").val(), // Novo
+            LOCACAO_VALOR: $("#valorMensalAluguel").val(),
+            LOCACAO_VALOR_NOVO: $("#valorLocacaoReajustado").val(), // Novo
+            PERIODOINICIO: $("#dataInicioLocacao").val(),
+            PERIODOFIM: $("#dataFimLocacao").val(),
+            PRAZO: parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
+            CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
+            DATA_REAJUSTE: $("#dataReajuste").val(), // Novo
+            DATA_ASSINATURA: $("#dataAssinatura").val(), // Novo
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+            
+
+            NOME_COLIGADA: dadosColigada.nome, // Novo
+            ENDERECO_COLIGADA: dadosColigada.endereco, // Novo
+            CNPJ_COLIGADA: dadosColigada.cnpj // Novo
+        }
+    } 
+    
+      else if (TIPO_MODELO == "Locação de Equipamento - Alteração de Valor") {
+        var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
+
+       var EQUIPAMENTOS = equipamentos.map(e => ({
+            PREFIXO: e.PREFIXO,
+            FABRICANTE: e.FABRICANTE,
+            PLACA: e.PLACA,
+            RENAVAM: e.RENAVAM,
+            CHASSI: e.CHASSI,
+            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
+            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)),
+            VALOR_REAJUSTADO: floatToMoney(moneyToFloat($(".inputvalorLocacaoReajustado[data-prefixo='" + e.PREFIXO + "']").val() || '0'))
+        }));
+
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            DATA_ASSINATURA: $("#dataAssinatura").val(),
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+
+            EQUIPAMENTOS:EQUIPAMENTOS,
+            CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
+            DATA_REAJUSTE: $("#dataReajuste").val(),
+
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo
+        };
+
+    } else if (TIPO_MODELO == "Locação de Equipamento - Alteração de Prazo") {
+        var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
+        var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
+
+        var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
+
+       var EQUIPAMENTOS = equipamentos.map(e => ({
+            PREFIXO: e.PREFIXO,
+            FABRICANTE: e.FABRICANTE,
+            PLACA: e.PLACA,
+            RENAVAM: e.RENAVAM,
+            CHASSI: e.CHASSI,
+            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
+            VALOR_LOCACAO: floatToMoney(e.VALOR_LOCACAO),
+        }));
+
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            PERIODOINICIO: $("#dataInicioLocacao").val(),
+            PERIODOFIM: $("#dataFimLocacao").val(),
+            DATA_ASSINATURA: $("#dataAssinatura").val(),
+            PRAZO: parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+
+            EQUIPAMENTOS:EQUIPAMENTOS,
+            CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
+            DATA_REAJUSTE: $("#dataReajuste").val(),
+
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo
+        }; 
+    } else if (TIPO_MODELO == "Locação de Equipamento - Alteração de Prazo e Valor") {
+        var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
+        var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
+
+        var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
+
+       var EQUIPAMENTOS = equipamentos.map(e => ({
+            PREFIXO: e.PREFIXO,
+            FABRICANTE: e.FABRICANTE,
+            PLACA: e.PLACA,
+            RENAVAM: e.RENAVAM,
+            CHASSI: e.CHASSI,
+            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
+            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)),
+            VALOR_REAJUSTADO: floatToMoney(moneyToFloat($(".inputvalorLocacaoReajustado[data-prefixo='" + e.PREFIXO + "']").val() || '0'))
+        }));
+
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            PERIODOINICIO: $("#dataInicioLocacao").val(),
+            PERIODOFIM: $("#dataFimLocacao").val(),
+            DATA_ASSINATURA: $("#dataAssinatura").val(),
+            PRAZO: parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+
+            EQUIPAMENTOS:EQUIPAMENTOS,
+            CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
+            DATA_REAJUSTE: $("#dataReajuste").val(),
+
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo
+        }; 
+    } else if (TIPO_MODELO == "Locação de Equipamento - Inclusão de Equipamento") {
+        var ID_TCNT_AUXILIAR = $("#ID_TCNT_AUXILIAR").val();
+        var equips_contrato = await asyncConsultaEquipamentosPorContrato(ID_TCNT_AUXILIAR);
+
+        var EQUIPAMENTOS_CONTRATO = equips_contrato.map(e => ({
+            PREFIXO: e.PREFIXO,
+            FABRICANTE: e.FABRICANTE,
+            PLACA: e.PLACA,
+            RENAVAM: e.RENAVAM,
+            CHASSI: e.CHASSI,
+            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
+            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+        }));
+
+        var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
+
+        var EQUIPAMENTOS = equipamentos.map(e => ({
+            PREFIXO: e.PREFIXO,
+            FABRICANTE: e.FABRICANTE,
+            PLACA: e.PLACA,
+            RENAVAM: e.RENAVAM,
+            CHASSI: e.CHASSI,
+            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
+            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+        }));
+
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
+            DATA_ASSINATURA: $("#dataAssinatura").val(),
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+
+            EQUIPS_INCLUSAO: EQUIPAMENTOS,
+            EQUIPAMENTOS:EQUIPAMENTOS_CONTRATO,
+
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo
+        };
+
+    }  else if (TIPO_MODELO == "Locação de Equipamento - Exclusão de Equipamento") {
+        var ID_TCNT_AUXILIAR = $("#ID_TCNT_AUXILIAR").val();
+
+        var equips_contrato = await asyncConsultaEquipamentosPorContrato(ID_TCNT_AUXILIAR);
+
+        // Busca os equipamentos marcados para exclusão (pai-filho)
+        var equipamentos_exclusao = await asyncConsultaEquipamentosSelecionados_aditivos();
+
+        // Cria lista apenas com os PREFIXOS que serão excluídos
+        var prefixos_exclusao = equipamentos_exclusao.map(e => e.PREFIXO);
+
+        // Filtra os equipamentos do contrato removendo os que foram marcados para exclusão
+        var equips_contrato_atual = equips_contrato.filter(e => 
+            !prefixos_exclusao.includes(e.PREFIXO)
+        );
+
+        // Agora monta a lista final de equipamentos que permanecerão no contrato
+        var EQUIPAMENTOS_CONTRATO = equips_contrato_atual.map(e => ({
+            PREFIXO: e.PREFIXO,
+            FABRICANTE: e.FABRICANTE,
+            PLACA: e.PLACA,
+            RENAVAM: e.RENAVAM,
+            CHASSI: e.CHASSI,
+            MODELO: e.MODELO + " - " + e.ANO_MODELO,
+            VALOR_TOTAL: floatToMoney(
+                parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)
+            )
+        }));
+
+        var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
+
+        var EQUIPAMENTOS = equipamentos.map(e => ({
+            PREFIXO: e.PREFIXO,
+            FABRICANTE: e.FABRICANTE,
+            PLACA: e.PLACA,
+            RENAVAM: e.RENAVAM,
+            CHASSI: e.CHASSI,
+            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
+            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+        }));
+
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
+            DATA_ASSINATURA: $("#dataAssinatura").val(),
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+
+            EQUIPS_EXCLUSAO: EQUIPAMENTOS,
+            EQUIPAMENTOS:EQUIPAMENTOS_CONTRATO,
+
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo
+        };
+    }
+
+    // Rescisões
+    else if (TIPO_MODELO == "Locação de Imóvel (Rescisões)" && tipoPessoa_pf_pj == "F" || TIPO_MODELO == "Locação de Imóvel (Rescisões)" && tipoPessoa_pf_pj == "J") { // Rescisão
+        var tipoPessoa = null;
+
+        if (tipoPessoa_pf_pj == "J") {
+            tipoPessoa = `CNPJ sob o nº ${$("#FORNECEDOR_CNPJ").val()}, portador(a) da Cédula de Identidade nº ${$("#FORNECEDOR_RG").val()}`
+
+        } else if (tipoPessoa_pf_pj == "F") {
+            tipoPessoa = `CPF sob o nº ${$("#FORNECEDOR_CNPJ").val()}, portador(a) da Cédula de Indentidade nº ${$("#FORNECEDOR_RG").val()}`
+        }
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            TIPO_PESSOA: tipoPessoa_pf_pj == "F" ? true : false,
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            FORNECEDOR_RG: $("#rgFornecedor").val(), // Novo
+            IMOVEL_DESCRICAO: $("#descricaoImovel").val(),
+            DATA_ASSINATURA: $("#dataAssinatura").val(), // Novo
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+            
+
+            NOME_COLIGADA: dadosColigada.nome, // Novo
+            ENDERECO_COLIGADA: dadosColigada.endereco, // Novo
+            CNPJ_COLIGADA: dadosColigada.cnpj // Novo
+        };
+
+    } else if (TIPO_MODELO == "Locação de Equipamento (Rescisões)") {
+        var ID_TCNT_AUXILIAR = $("#ID_TCNT_AUXILIAR").val();
+
+        var equips_contrato = await asyncConsultaEquipamentosPorContrato(ID_TCNT_AUXILIAR);
+
+        // Agora monta a lista final de equipamentos que permanecerão no contrato
+        var EQUIPAMENTOS_CONTRATO = equips_contrato.map(e => ({
+            PREFIXO: e.PREFIXO,
+            FABRICANTE: e.FABRICANTE,
+            PLACA: e.PLACA,
+            RENAVAM: e.RENAVAM,
+            CHASSI: e.CHASSI,
+            MODELO: e.MODELO + " - " + e.ANO_MODELO,
+            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+        }));
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            DATA_ASSINATURA: $("#dataAssinatura").val(),
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+
+            EQUIPAMENTOS:EQUIPAMENTOS_CONTRATO,
+
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo
+        };
+    } else if (TIPO_MODELO == "Locação de Equipamento - Com Mão de Obra (Rescisões)") {
+        var ID_TCNT_AUXILIAR = $("#ID_TCNT_AUXILIAR").val();
+
+        var equips_contrato = await asyncConsultaEquipamentosPorContrato(ID_TCNT_AUXILIAR);
+
+        // Agora monta a lista final de equipamentos que permanecerão no contrato
+        var EQUIPAMENTOS_CONTRATO = equips_contrato.map(e => ({
+            PREFIXO: e.PREFIXO,
+            FABRICANTE: e.FABRICANTE,
+            PLACA: e.PLACA,
+            RENAVAM: e.RENAVAM,
+            CHASSI: e.CHASSI,
+            MODELO: e.MODELO + " - " + e.ANO_MODELO,
+            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+        }));
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
+                "#cidadeFornecedor"
+            ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            DATA_ASSINATURA: $("#dataAssinatura").val(),
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+
+            EQUIPAMENTOS:EQUIPAMENTOS_CONTRATO,
+
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo
+        };
+    }
+
     return retorno;
 }
 async function modalDadosDoFormulario(){
@@ -219,7 +761,7 @@ async function modalDadosDoFormulario(){
     );
 
     async function geraHtml(){
-        var input = await buscaDadosDoFormulario($("#tipoContrato").val());
+        var input = await buscaDadosDoFormulario(getTipoContrato_tipoPessoa());
         var tbody = "";
 
         for (const tag in input) {
@@ -266,7 +808,7 @@ async function modalDadosDoFormulario(){
     }
 }
 async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
-    const tipoContrato = $("#tipoContrato").val();
+    const tipoContrato = getTipoContrato_tipoPessoa();
     const documentIdModelo = codigosModelos[env][tipoContrato];
 
     var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentIdModelo);
@@ -290,7 +832,7 @@ async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
 function geraNomeDoArquivo() {
     var CODCCUSTO = $("#CODCCUSTO").val();
     var NOME_FORNECEDOR = $("#hiddenFORNECEDOR").val();
-    var TIPO_CONTRATO = $("#tipoContrato").val();
+    var TIPO_CONTRATO = getTipoContrato_tipoPessoa();
 
     return `${CODCCUSTO} - ${TIPO_CONTRATO} - ${NOME_FORNECEDOR}`;
 }
