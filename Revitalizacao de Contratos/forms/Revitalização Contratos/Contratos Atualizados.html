@@ -44,6 +44,7 @@
     <script src="js/equipamentosManager.js"></script>
     <script src="js/tipoContratoManager.js"></script>
     <script src="js/Functions.js"></script>
+    <script src="js/aditivosRescicoesManager.js"></script>
 
     <script src="Script.js"></script>
     <link rel="stylesheet" href="css/Style.css" />
@@ -109,7 +110,10 @@
                 <input type="hidden" id="NOMECCUSTO" name="NOMECCUSTO" />
                 <input type="hidden" id="IDCNT" name="IDCNT" />
                 <input type="hidden" id="ID_TCNT_AUXILIAR" name="ID_TCNT_AUXILIAR" />
+                <input type="hidden" name="codigoContratoPrincipal" id="codigoContratoPrincipal">
+                <input type="hidden" name="NSEQITEMCNT" id="NSEQITEMCNT">
 
+                <input type="hidden" name="tipoContrato"id="tipoContrato">
                 <input type="hidden" name="hiddenDocumentosAnexados" id="hiddenDocumentosAnexados" />
                 <input type="hidden" name="dataAberturaSol" id="dataAberturaSol" />
                 <input type="hidden" name="dataCriadoEm" id="dataCriadoEm" />
@@ -124,11 +128,21 @@
                 <input type="hidden" name="FORNECEDOR_PF_PJ" id="FORNECEDOR_PF_PJ" />
 
                 <!-- Assinatura -->
-                <input type="hidden" name="jsonTestemunhas" id="jsonTestemunhas">
+                <input type="hidden" name="jsonTestemunhas" id="jsonTestemunhas" value="[]">
+                <input type="hidden" name="dataAssinatura" id="dataAssinatura">
+
+                <!-- Dados salvos do Contrato Principal selecionado para Aditivo/Rescisão -->
+                <input type="hidden" id="contratoSelecCodigo" name="contratoSelecCodigo">
+                <input type="hidden" id="contratoSelecdoFornecedor" name="contratoSelecdoFornecedor">
+                <input type="hidden" id="contratoSelecDescricao" name="contratoSelecDescricao">
+                <input type="hidden" id="contratoSelecoTipo" name="contratoSelecoTipo">
+                <input type="hidden" id="contratoSelecStatus" name="contratoSelecStatus">
+                <input type="hidden" id="contratoSelecDataInicio" name="contratoSelecDataInicio">
+                <input type="hidden" id="contratoSelecDataFim" name="contratoSelecDataFim">
 
                 <!-- Tabela Historico -->
                 <div>
-                    <table id="tableHistorico" tablename="tableHistorico" noaddbuttom="true" nodeletebuttom="true">
+                    <table id="tableHistorico" tablename="tableHistorico" noaddbutton="true" nodeletebutton="true">
                         <thead>
                             <tr>
                                 <th>Usuario</th>
@@ -140,16 +154,11 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input type="hidden" class="tableHistoricoUsuario" name="tableHistoricoUsuario"
-                                        id="tableHistoricoUsuario" /></td>
-                                <td><input type="hidden" class="tableHistoricoData" name="tableHistoricoData"
-                                        id="tableHistoricoData" /></td>
-                                <td><input type="hidden" class="tableHistoricoAtividade" name="tableHistoricoAtividade"
-                                        id="tableHistoricoAtividade" /></td>
-                                <td><input type="hidden" class="tableHistoricoObservacao"
-                                        name="tableHistoricoObservacao" id="tableHistoricoObservacao" /></td>
-                                <td><input type="hidden" class="tableHistoricoAcao" name="tableHistoricoAcao"
-                                        id="tableHistoricoAcao" /></td>
+                                <td><input type="hidden" class="tableHistoricoUsuario" name="tableHistoricoUsuario" id="tableHistoricoUsuario" /></td>
+                                <td><input type="hidden" class="tableHistoricoData" name="tableHistoricoData" id="tableHistoricoData" /></td>
+                                <td><input type="hidden" class="tableHistoricoAtividade" name="tableHistoricoAtividade" id="tableHistoricoAtividade" /></td>
+                                <td><input type="hidden" class="tableHistoricoObservacao" name="tableHistoricoObservacao" id="tableHistoricoObservacao" /></td>
+                                <td><input type="hidden" class="tableHistoricoAcao" name="tableHistoricoAcao" id="tableHistoricoAcao" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -158,7 +167,7 @@
                 <!-- Tabela Equipamentos Selecionados-->
                 <div>
                     <table id="tableEquipamentosSelecionados" tablename="tableEquipamentosSelecionados"
-                        noaddbuttom="true" nodeletebuttom="true">
+                        noaddbutton="true" nodeletebutton="true">
                         <thead>
                             <tr>
                                 <th>PREFIXO</th>
@@ -169,6 +178,38 @@
                                 <td>
                                     <input type="hidden" name="equipamentoSelecionadoPrefixo"
                                         id="equipamentoSelecionadoPrefixo" class="equipamentoSelecionadoPrefixo" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tabela Equipamentos Selecionados - Aditivos -->
+                <div>
+                    <table id="tableEquipamentosSelecionados_aditivos" tablename="tableEquipamentosSelecionados_aditivos"
+                        noaddbutton="true" nodeletebutton="true">
+                        <thead>
+                            <tr>
+                                <th>PREFIXO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="equipSelecionado_aditivos"id="equipSelecionado_aditivos" class="equipSelecionado_aditivos" />
+                                    <input type="hidden" name="valorReajustado_aditivos" id="valorReajustado_aditivos" class="equipSelecionado_aditivoValorReajustado">
+                                    <input type="hidden" name="valorMensalOriginalAditivo" id="valorMensalOriginalAditivo" class="equipSelec_aditivoValorMensalOrig">
+                                    <input type="hidden" name="valorMaoDeObraAditivos" id="valorMaoDeObraAditivos">
+
+                                    <!-- Inputs para quando for Inclusão/Exclusão de equipamento -->
+                                    <input type="hidden" name="equipModeloAditivo" id="equipModeloAditivo">
+                                    <input type="hidden" name="equipDescricaoAditivo" id="equipDescricaoAditivo">
+                                    <input type="hidden" name="equipPotenciaAditivo" id="equipPotenciaAditivo">
+                                    <input type="hidden" name="equipCapacidadeAditivo" id="equipCapacidadeAditivo">
+                                    <input type="hidden" name="equipPlacaSerieAditivo" id="equipPlacaSerieAditivo">
+                                    <input type="hidden" name="equipFabricanteAditivo" id="equipFabricanteAditivo">
+                                    <input type="hidden" name="equipFornecedorAditivo" id="equipFornecedorAditivo">
+                                    <input type="hidden" name="equipValorMensalAditivo" id="equipValorMensalAditivo">
                                 </td>
                             </tr>
                         </tbody>
@@ -210,18 +251,18 @@
                         <div class="col-md-12">
                                 <h2>Dados Iniciais</h2>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-input">
                                             <label>Origem do Contrato:</label><select name="origemContrato"
                                                 id="origemContrato" class="form-control inputInfoChamado">
                                                 <option value="">Selecione</option>
-                                                <option value="Novo">Novo</option>
-                                                <option disabled value="Aditivos">Aditivos</option>
-                                                <option disabled value="Rescisões">Rescisões</option>
+                                                <option value="Novos">Novos</option>
+                                                <option value="Aditivos">Aditivos</option>
+                                                <option value="Rescisões">Rescisões</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-input">
                                             <label>Modelo de Contrato:</label><select name="modeloContrato"
                                                 id="modeloContrato" class="form-control inputInfoChamado">
@@ -231,27 +272,27 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-input">
-                                            <label>Tipo de Contrato:</label><select name="tipoContrato"
-                                                id="tipoContrato" class="form-control inputInfoChamado">
-                                                <option value="">Selecione</option>
-                                                <option disabled value="Ferrovias - Locação de Equipamento">Ferrovias - Locação
-                                                    de
-                                                    Equipamento</option>
-                                                <option disabled value="Ferrovias – Locação de Imóvel">Ferrovias - Locação de
-                                                    Imóvel</option>
-                                                <option disabled value="Locação de Container">Locação de Container</option>
-                                                <option value="Locação de Equipamento">Locação de Equipamento</option>
-                                                <option value="Locação de Equipamento - Com Mão de Obra">Locação de Equipamento - Com Mão de Obra</option>
-                                                <option value="Locação de Imóvel">Locação de Imóvel</option>
-                                                <option disabled value="Locação de Sanitários">Locação de Sanitários</option>
-                                                <option disabled value="Prestação de Serviços">Prestação de Serviços</option>
-                                                <option disabled value="Transporte de Material">Transporte de Material</option>
-                                                <option disabled value="Transporte de Funcionários">Transporte de Funcionários
-                                                </option>
-                                            </select>
-                                        </div>
+                                    
+                                    <div class="col-md-3">
+                                        <label for="tipoContratoBase">Tipo de Contrato:</label>
+                                        <select name="tipoContratoBase" id="tipoContratoBase" class="form-control inputInfoChamado">
+                                            <option value="">Selecione</option>
+
+                                            <option value="Locação de Equipamento" data-origem="Novos,Aditivos,Rescisões">Locação de Equipamento</option>
+                                            <option value="Locação de Equipamento - Com Mão de Obra" data-origem="Novos,Rescisões">Locação de Equipamento - Com Mão de Obra</option>
+                                            <option value="Locação de Imóvel" data-origem="Novos,Aditivos,Rescisões">Locação de Imóvel</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 divTipoAlteracao" style="display: none;">
+                                        <label for="tipoAlteracao">Tipo de Alteração:</label>
+                                        <select name="tipoAlteracao" id="tipoAlteracao" class="form-control inputInfoChamado">
+                                            <option value="">Selecione</option>
+                                            <option value="Alteração de Valor">Alteração de Valor</option>
+                                            <option value="Alteração de Prazo">Alteração de Prazo</option>
+                                            <option value="Alteração de Prazo e Valor">Alteração de Prazo e Valor</option>
+                                            <option value="Inclusão de Equipamento">Inclusão de Equipamento</option>
+                                            <option value="Exclusão de Equipamento">Exclusão de Equipamento</option>
+                                        </select>
                                     </div>
                             </div>
                         </div>
@@ -261,187 +302,220 @@
                     <div id="dadosContrato" style="display: none">
                         <div class="row panelInput rowFlex" id="divInputDadosContrato">
                             <!-- Dados Gerais -->
-                            <div class="col-md-6">
+                            <div class="col-md-6 campoLocacaoImovel campoLocacaoEquipamento campoLocacaoImovelAditivo_alteracaoValor campoLocacaoImovelAditivo_alteracaoPrazo 
+                            campoLocacaoEquipamento_alteracaoValor campoLocacaoEquipamento_alteracaoPrazo campoLocacaoEquipamento_rescisao
+                            campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento campoLocacaoImovel_rescisao">
                                     <h2>Dados Gerais</h2>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Obra:</label><strong class="strongAlert">*</strong><select
-                                                    name="obra" id="obra"
-                                                    class="inputInfoChamado"></select>
+                                            <div>
+                                                <label>Obra:</label><strong class="strongAlert">*</strong>
+                                                <select name="obra" id="obra" class="inputInfoChamado"></select>
                                             </div>
+                                            <br>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="form-group">
+                                            <div>
                                                 <label>Locador:</label><strong class="strongAlert">*</strong>
-                                                <select name="locador" id="locador"
-                                                    class="inputInfoChamado"></select>
+                                                <select name="locador" id="locador" class="inputInfoChamado"></select>
                                             </div>
+                                            <br>
                                         </div>
                                     </div>
                                     <div class="row endereco-fornecedor" style="display: none">
                                         <div class="col-md-12">
-                                            <div class="form-group">
+                                            <div>
                                                 <label>Informações do Locador:</label>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 campoLocacaoImovel campoLocacaoEquipamento campoLocacaoImovelAditivo_alteracaoValor campoLocacaoImovelAditivo_alteracaoPrazo 
+                                                    campoLocacaoEquipamento_alteracaoValor campoLocacaoEquipamento_alteracaoPrazo campoLocacaoEquipamento_rescisao 
+                                                    campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento
+                                                    campoLocacaoImovel_rescisao">
                                                         <small class="form-text text-muted">CPF/CNPJ</small>
                                                         <input type="text" class="form-control" id="cpfFornecedor"
                                                             name="cpfFornecedor" placeholder="CPF/CNPJ" />
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 campoLocacaoImovel campoLocacaoEquipamento campoLocacaoImovelAditivo_alteracaoValor campoLocacaoImovelAditivo_alteracaoPrazo
+                                                    campoLocacaoImovel_rescisao">
                                                         <small class="form-text text-muted">RG</small>
                                                         <input type="text" class="form-control" id="rgFornecedor"
                                                             name="rgFornecedor" placeholder="RG" />
                                                     </div>
                                                     <!-- Pessoa Física -->
-                                                    <div class="col-md-6 pessoa-fisica">
+                                                    <div class="col-md-6 pessoa-fisica campoLocacaoImovel campoLocacaoEquipamento" style="display: none">
                                                         <small class="form-text text-muted">Nacionalidade</small>
                                                         <input type="text" class="form-control"
                                                             id="nacionalidadeFornecedor" name="nacionalidadeFornecedor"
                                                             placeholder="Nacionalidade" />
                                                     </div>
-                                                    <div class="col-md-6 pessoa-fisica">
+                                                    <div class="col-md-6 pessoa-fisica campoLocacaoImovel campoLocacaoEquipamento" style="display: none">
                                                         <small class="form-text text-muted">Estado Civil</small>
                                                         <input type="text" class="form-control"
                                                             id="estadoCivilFornecedor" name="estadoCivilFornecedor"
                                                             placeholder="Estado Civil" />
                                                     </div>
                                                     <!-- Pessoa Jurídica -->
-                                                    <div class="col-md-6 pessoa-juridica" style="display: none">
+                                                    <div class="col-md-6 pessoa-juridica campoLocacaoImovel campoLocacaoEquipamento" style="display: none">
                                                         <small class="form-text text-muted">Administrador</small>
-                                                        <input type="text" class="form-control"
-                                                            id="administradorFornecedor" name="administradorFornecedor"
-                                                            placeholder="Administrador" />
+                                                        <input type="text" class="form-control" id="administradorFornecedor" name="administradorFornecedor" placeholder="Administrador" />
                                                     </div>
-                                                    <div class="col-md-6 pessoa-juridica" style="display: none">
+                                                    <div class="col-md-6 pessoa-juridica campoLocacaoImovel campoLocacaoEquipamento" style="display: none">
                                                         <small class="form-text text-muted">CPF do Administrador</small>
-                                                        <input type="text" class="form-control" id="cpfAdministrador"
-                                                            name="cpfAdministrador" placeholder="CPF" />
+                                                        <input type="text" class="form-control" id="cpfAdministrador" name="cpfAdministrador" placeholder="CPF" />
                                                     </div>
                                                 </div>
+                                                <br>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="campoLocacaoImovel campoLocacaoEquipamento divEnderecoFornecedor campoLocacaoImovelAditivo_alteracaoValor 
+                                            campoLocacaoImovelAditivo_alteracaoPrazo campoLocacaoEquipamento_alteracaoValor campoLocacaoEquipamento_alteracaoPrazo 
+                                            campoLocacaoEquipamento_rescisao campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento campoLocacaoImovel_rescisao">
                                                 <label>Endereço do Locador:</label>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <small class="form-text text-muted">Rua</small>
-                                                        <input type="text" class="form-control" id="ruaFornecedor"
-                                                            name="ruaFornecedor" placeholder="Rua" />
+                                                        <input type="text" class="form-control" id="ruaFornecedor" name="ruaFornecedor" placeholder="Rua" />
                                                     </div>
                                                     <div class="col-md-3">
                                                         <small class="form-text text-muted">Número</small>
-                                                        <input type="text" class="form-control" id="numeroFornecedor"
-                                                            name="numeroFornecedor" placeholder="NÂº" />
+                                                        <input type="text" class="form-control" id="numeroFornecedor" name="numeroFornecedor" placeholder="NÂº" />
                                                     </div>
                                                     <div class="col-md-3">
                                                         <small class="form-text text-muted">Bairro</small>
-                                                        <input type="text" class="form-control" id="bairroFornecedor"
-                                                            name="bairroFornecedor" placeholder="Bairro" />
+                                                        <input type="text" class="form-control" id="bairroFornecedor" name="bairroFornecedor" placeholder="Bairro" />
                                                     </div>
                                                 </div>
                                                 <div class="row" style="margin-top: 10px">
                                                     <div class="col-md-6">
                                                         <small class="form-text text-muted">Cidade</small>
-                                                        <input type="text" class="form-control" id="cidadeFornecedor"
-                                                            name="cidadeFornecedor" placeholder="Cidade" />
+                                                        <input type="text" class="form-control" id="cidadeFornecedor" name="cidadeFornecedor" placeholder="Cidade" />
                                                     </div>
                                                     <div class="col-md-3">
                                                         <small class="form-text text-muted">UF</small>
-                                                        <input type="text" class="form-control" id="estadoFornecedor"
-                                                            name="estadoFornecedor" placeholder="UF" maxlength="2" />
+                                                        <input type="text" class="form-control" id="estadoFornecedor" name="estadoFornecedor" placeholder="UF" maxlength="2" />
                                                     </div>
                                                     <div class="col-md-3">
                                                         <small class="form-text text-muted">CEP</small>
-                                                        <input type="text" class="form-control" id="cepFornecedor"
-                                                            name="cepFornecedor" placeholder="CEP" />
+                                                        <input type="text" class="form-control" id="cepFornecedor" name="cepFornecedor" placeholder="CEP" />
                                                     </div>
                                                 </div>
+                                                <br>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
+                                        <div class="col-md-12 campoLocacaoImovel campoLocacaoEquipamento">
+                                            <div>
                                                 <label>Procurador:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" id="procurador" name="procurador"
                                                     class="form-control inputInfoChamado" />
                                             </div>
+                                            <br>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
+                                        <div class="col-md-12 campoLocacaoImovel campoLocacaoEquipamento">
+                                            <div>
                                                 <label>Contratante Principal:</label><strong
                                                     class="strongAlert">*</strong>
                                                 <input type="text" id="contratantePrincipal" name="contratantePrincipal"
                                                     class="form-control inputInfoChamado" />
                                             </div>
+                                            <br>
                                         </div>
                                         <div class="col-md-12 campoLocacaoEquipamento">
-                                            <div class="form-group">
+                                            <div>
                                                 <label>Localização dos Serviços:</label><strong class="strongAlert">*</strong>
                                                 <input type="text" name="localizacaoServico" id="localizacaoServico" class="inputInfoChamado form-control" />
                                             </div>
                                         </div>
+                                        <br>
                                     </div>
                             </div>
                             <!-- Dados Contratuais -->
-                            <div class="col-md-6">
+                            <div class="col-md-6 divDadosContratuais">
                                 <h2>Dados Contratuais</h2>
                                 <div class="row">
-                                    <div class="col-md-6 campoLocacaoImovel">
-                                        <div class="form-group">
+                                    <div class="col-md-6 campoLocacaoImovel campoLocacaoImovel_rescisao">
+                                        <div>
                                             <label>Descrição do Imóvel:</label><strong class="strongAlert">*</strong>
                                             <input type="text" class="form-control inputInfoChamado" id="descricaoImovel" name="descricaoImovel" />
                                         </div>
+                                        <br>
                                     </div>
-                                    <div class="col-md-6 campoLocacaoImovel">
-                                        <div class="form-group">
+                                    <div class="col-md-6 campoLocacaoImovel campoLocacaoImovelAditivo_alteracaoValor">
+                                        <div>
                                             <label>Valor Mensal do Aluguel:</label><strong class="strongAlert">*</strong>
-                                            <input type="text" class="form-control inputInfoChamado" id="valorMensalAluguel"
-                                                name="valorMensalAluguel" />
+                                            <input type="text" class="form-control inputInfoChamado" id="valorMensalAluguel" name="valorMensalAluguel" />
                                         </div>
+                                        <br>
                                     </div>
-                                    <div class="col-md-6 campoLocacaoImovel">
-                                        <div class="form-group">
+                                    <div class="col-md-6 campoLocacaoImovel campoLocacaoImovelAditivo_alteracaoValor campoLocacaoImovelAditivo_alteracaoPrazo">
+                                        <div>
                                             <label>Endereço do Imóvel:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="enderecoImovel" name="enderecoImovel" class="form-control inputInfoChamado" />
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6 campoLocacaoImovel">
-                                        <div class="form-group">
+                                        <div>
                                             <label>Matrícula do Imóvel:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="matriculaImovel" name="matriculaImovel" class="form-control inputInfoChamado" />
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6 campoLocacaoImovel">
-                                        <div class="form-group">
+                                        <div>
                                             <label>Finalidade da Locação:</label><strong class="strongAlert">*</strong>
-                                            <input type="text" id="finalidadeLocacao" name="finalidadeLocacao"
-                                                class="form-control inputInfoChamado" />
+                                            <input type="text" id="finalidadeLocacao" name="finalidadeLocacao" class="form-control inputInfoChamado" />
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-12 campoLocacaoImovel">
-                                        <div class="form-group">
+                                        <div>
                                             <label>Período de Locação:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="periodoLocacao" name="periodoLocacao" class="form-control inputInfoChamado" />
                                         </div>
+                                        <br>
                                     </div>
-                                    <div class="col-md-6 campoLocacaoEquipamento">
-                                        <div class="form-group">
+                                    <div class="col-md-6 campoLocacaoImovelAditivo_alteracaoValor campoLocacaoEquipamento_alteracaoValor">
+                                        <div>
+                                            <label>Valor Reajustado:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="valorLocacaoReajustado" name="valorLocacaoReajustado" class="form-control inputInfoChamado">
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoImovelAditivo_alteracaoValor campoLocacaoEquipamento_alteracaoValor">
+                                        <div>
+                                            <label>Data de Reajuste:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="dataReajuste" name="dataReajuste" class="form-control inputInfoChamado date">
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoImovelAditivo_alteracaoValor campoLocacaoImovelAditivo_alteracaoPrazo
+                                    campoLocacaoEquipamento_alteracaoValor campoLocacaoEquipamento_alteracaoPrazo
+                                    campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento">
+                                        <div>
+                                            <label>Cláusulas Alteradas:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="clausulaAlterada" name="clausulaAlterada" class="form-control inputInfoChamado">
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6 campoLocacaoEquipamento campoLocacaoImovelAditivo_alteracaoPrazo campoLocacaoEquipamento_alteracaoPrazo">
+                                        <div>
                                             <label>Data Início Locação:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="dataInicioLocacao" name="dataInicioLocacao"
                                                 class="form-control inputInfoChamado date" />
                                         </div>
+                                        <br>
                                     </div>
-                                    <div class="col-md-6 campoLocacaoEquipamento">
-                                        <div class="form-group">
+                                    <div class="col-md-6 campoLocacaoEquipamento campoLocacaoImovelAditivo_alteracaoPrazo campoLocacaoEquipamento_alteracaoPrazo">
+                                        <div>
                                             <label>Data Fim Locação:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="dataFimLocacao" name="dataFimLocacao"
                                                 class="form-control inputInfoChamado date" />
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6 campoLocacaoImovel">
-                                        <div class="form-group">
+                                        <div>
                                             <label>Janela de Pagamento:</label><strong class="strongAlert">*</strong>
                                             <select name="janelaPagamento" id="janelaPagamento" class="form-control inputInfoChamado">
                                                 <option value="">Selecione</option>
@@ -450,9 +524,10 @@
                                                 <option value="28">28</option>
                                             </select>
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6 campoLocacaoImovel">
-                                        <div class="form-group">
+                                        <div>
                                             <label>Caução?</label><strong class="strongAlert">*</strong>
                                             <select name="caucao" id="caucao" class="form-control inputInfoChamado">
                                                 <option value="">Selecione</option>
@@ -460,45 +535,50 @@
                                                 <option value="Não">Não</option>
                                             </select>
                                         </div>
+                                        <br>
                                     </div>
-                                    <div class="col-md-6 campoLocacaoEquipamento">
-                                        <div class="form-group">
+                                    <div class="col-md-6 campoLocacaoEquipamento campoLocacaoEquipamento_alteracaoValor 
+                                    campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento campoLocacaoEquipamento_rescisao">
+                                        <div>
                                             <label>Valor Mensal:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="valorMensalLocacao" name="valorMensalLocacao"
                                                 class="form-control inputInfoChamado" readonly />
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6 campoLocacaoEquipamento">
-                                        <div class="form-group">
+                                        <div>
                                             <label for="">Valor Total da Locação:</label>
                                             <input type="text" name="valorTotalLocacao" id="valorTotalLocacao" readonly class="form-control">
                                         </div>
+                                        <br>
                                     </div>
-                                    <div class="col-md-6 campoLocacaoEquipamento">
-                                        <div class="form-group">
-                                            <label>Prazo:</label><strong class="strongAlert">*</strong>
-                                            <input type="text" id="prazoLocacao" name="prazoLocacao" class="form-control inputInfoChamado"
-                                                readonly />
+                                    <div class="col-md-6 campoLocacaoEquipamento campoLocacaoImovelAditivo_alteracaoPrazo campoLocacaoEquipamento_alteracaoPrazo">
+                                        <div>
+                                            <label>Prazo:</label>
+                                            <input type="text" id="prazoLocacao" name="prazoLocacao" class="form-control" readonly />
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6 campoLocacaoEquipamento">
-                                        <div class="form-group">
+                                        <div>
                                             <label>Desconto por Dia de Chuva:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="descontoPorDiaChuva" name="descontoPorDiaChuva"
                                                 class="form-control inputInfoChamado" value="50%" />
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6 campoLocacaoEquipamento">
-                                        <div class="form-group">
+                                        <div>
                                             <label>Desconto por Dia Parado:</label><strong class="strongAlert">*</strong>
-                                            <input type="text" id="descontoPorDiaParado" name="descontoPorDiaParado"
-                                                class="form-control inputInfoChamado" value="50%" />
+                                            <input type="text" id="descontoPorDiaParado" name="descontoPorDiaParado" class="form-control inputInfoChamado" value="50%" />
                                         </div>
+                                        <br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 campoLocacaoEquipamento">
-                                        <div class="form-group">
+                                        <div>
                                             <label for="">Reajuste?:</label>
                                             <select name="temReajuste" id="temReajuste" class="form-control">
                                                 <option value=""></option>
@@ -506,9 +586,10 @@
                                                 <option value="Não">Não</option>
                                             </select>
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6" id="divCampoReajuste" style="display: none;">
-                                        <div class="form-group">
+                                        <div>
                                             <label for="">Índice de Reajuste:</label>
                                             <select name="indiceReajuste" id="indiceReajuste" class="form-control">
                                                 <option value=""></option>
@@ -516,17 +597,19 @@
                                                 <option value="IPCA">IPCA</option>
                                             </select>
                                         </div>
+                                        <br>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6" id="divValorCaucao" style="display: none">
-                                        <div class="form-group">
+                                        <div>
                                             <label>Valor do Caução:</label><strong class="strongAlert">*</strong>
                                             <input id="valorCaucao" name="valorCaucao" class="form-control inputInfoChamado" />
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6" id="divDataPagamentoCaucao" style="display: none">
-                                        <div class="form-group">
+                                        <div>
                                             <label>Data Pagamento do Caução:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="dataPagamentoCaucao" name="dataPagamentoCaucao"
                                                 class="form-control inputInfoChamado date" />
@@ -535,7 +618,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 campoLocacaoEquipamento">
-                                        <div class="form-group">
+                                        <div>
                                             <label for="">Retenção?</label>
                                             <select name="temRetencao" id="temRetencao" class="form-control">
                                                 <option value="">Selecione</option>
@@ -543,9 +626,10 @@
                                                 <option value="Não">Não</option>
                                             </select>
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6" id="divPercentualRetencao" style="display: none;">
-                                        <div class="form-group">
+                                        <div>
                                             <label for="">Percentual de Retenção:</label>
                                             <input type="text" name="percentualRetencao" id="percentualRetencao" class="form-control" value="5%">
                                         </div>
@@ -553,7 +637,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 campoLocacaoEquipamento">
-                                        <div class="form-group">
+                                        <div>
                                             <label for="">REIDI?</label>
                                             <select name="temREIDI" id="temREIDI" class="form-control">
                                                 <option value="">Selecione</option>
@@ -561,9 +645,10 @@
                                                 <option value="Não">Não</option>
                                             </select>
                                         </div>
+                                        <br>
                                     </div>
                                     <div class="col-md-6" id="divPercentualReidi" style="display: none;">
-                                        <div class="form-group">
+                                        <div>
                                             <label for="">Percentual do REIDI</label>
                                             <select name="percentualREIDI" id="percentualREIDI" class="form-control">
                                                 <option value=""></option>
@@ -575,11 +660,11 @@
                                 </div>
                             </div>
                             <!-- Dados Pagamento -->
-                            <div class="col-md-6">
+                            <div class="col-md-6 divDadosPagamento">
                                     <h2>Dados Pagamento</h2>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div>
                                                 <label for="tipoPagamento">Tipo de Pagamento:</label>
                                                 <select name="tipoPagamento" id="tipoPagamento"
                                                     class="form-control inputInfoChamado">
@@ -588,32 +673,35 @@
                                                     <option value="Depósito">Depósito</option>
                                                 </select>
                                             </div>
+                                            <br>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div>
                                                 <label for="banco">Banco:</label>
-                                                <select name="banco" id="banco"
-                                                    class="inputInfoChamado"></select>
+                                                <select name="banco" id="banco" class="inputInfoChamado"></select>
                                             </div>
+                                            <br>
                                         </div>
                                     </div>
                                     <div class="row" id="divPagamento" style="display: none">
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div>
                                                 <label for="titular">Titular da Conta:</label>
                                                 <input type="text" id="titular" name="titular"
                                                     class="form-control inputInfoChamado" />
                                             </div>
+                                            <br>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
+                                            <div>
                                                 <label for="agencia">Agência:</label>
                                                 <input type="text" id="agencia" name="agencia"
                                                     class="form-control inputInfoChamado" />
                                             </div>
+                                            <br>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
+                                            <div>
                                                 <label for="contaCorrente">Conta Corrente:</label>
                                                 <input type="text" id="contaCorrente" name="contaCorrente"
                                                     class="form-control inputInfoChamado" />
@@ -681,7 +769,7 @@
                                     <input type="text" name="cpfRepresentanteCastilho" id="cpfRepresentanteCastilho"
                                         class="form-control readonlyField" readonly inert />
                                 </div>
-                                <div>
+                                <div style="display: none;">
                                     <label for="mailRepresentanteCastilho">E-mail: </label>
                                     <input type="text" name="mailRepresentanteCastilho" id="mailRepresentanteCastilho"
                                         class="form-control readonlyField" readonly inert />
@@ -692,17 +780,17 @@
                                 <div>
                                     <label for="nomeRepresentanteFornecedor">Nome: </label>
                                     <input type="text" name="nomeRepresentanteFornecedor"
-                                        id="nomeRepresentanteFornecedor" class="form-control" />
+                                        id="nomeRepresentanteFornecedor" class="form-control inputInfoChamado" />
                                 </div>
                                 <div>
                                     <label for="cpfRepresentanteFornecedor">CPF: </label>
                                     <input type="text" name="cpfRepresentanteFornecedor" id="cpfRepresentanteFornecedor"
-                                        class="form-control" />
+                                        class="form-control inputInfoChamado" />
                                 </div>
-                                <div>
+                                <div style="display: none;">
                                     <label for="mailRepresentanteFornecedor">E-mail: </label>
                                     <input type="text" name="mailRepresentanteFornecedor"
-                                        id="mailRepresentanteFornecedor" class="form-control" />
+                                        id="mailRepresentanteFornecedor" class="form-control inputInfoChamado" />
                                 </div>
                         </div>
                     </div>
@@ -735,7 +823,7 @@
                     <div id="divTipoAssinaturaContrato" class="row">
                         <div class="col-md-12">
                                 <h2>Assinatura do Contrato</h2>
-                                <div class="form-group">
+                                <div>
                                     <label for="assinaturaContrato">Formato da Assinatura:</label>
                                     <!-- <strong class="strongAlert">*</strong> -->
                                     <select name="assinaturaContrato" id="assinaturaContrato"
@@ -1029,13 +1117,13 @@
                                 <br>
                             </div>
                             <div class="col-md-3">
-                                <b>Negociação realizada pelo Suprimentos: </b>
+                                <b>Negociação Realizada pelo Suprimentos: </b>
                                 <input type="text" name="negociacaoHeaderEquipamentos" id="negociacaoHeaderEquipamentos" class="form-control" readonly>
                                 <br>
                             </div>
                         </div>
                     </div>
-                    <div class="row panelInput" style="margin-top: 20px;">
+                    <div class="row panelInput" id="divTableEquipamentos" style="margin-top: 20px;">
                         <div class="col-md-12">
                                 <table class="table table-bordered" id="tableEquipamentos">
                                     <thead>
@@ -1061,6 +1149,95 @@
                                 </div>
                         </div>
                     </div>
+                    <div class="row" id="divTableEquipamentosAditivoRescisao" style="margin-top: 20px;" >
+                        <div class="col-md-12">
+                            <table class="table table-bordered" id="tableEquipamentosAditivoRescisao">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Prefixo</th>
+                                        <th>Modelo</th>
+                                        <th>Descrição</th>
+                                        <th>Potência</th>
+                                        <th>Capacidade</th>
+                                        <th>Placa/Serie</th>
+                                        <th>Fabricante</th>
+                                        <th>Fornecedor</th>
+                                        <th>Valor Mensal</th>
+                                        <th>Valor Reajustado</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <div id="divEquipamentosSelecionadosAditivoRescisao">
+
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" id="divEquipamentosParaInclusaoExclusao" style="margin-top: 20px; display: none;">
+                        <hr>
+                        <div class="col-md-12" style="margin-bottom: 20px; margin-top: -10px;">
+                            <div id="tituloInclusaoEquip" style="display: none;">
+                                <h2>Equipamentos para Inclusão</h2>
+                            </div>
+                            <div id="tituloExclusaoEquip" style="display: none;">
+                                <h2>Equipamentos para Exclusão</h2>
+                            </div>
+                            <table id="tableEquipamentosParaInclusaoExclusao" class="table table-bordered" style="margin-top: 20px;">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Prefixo</th>
+                                        <th>Modelo</th>
+                                        <th>Descrição</th>
+                                        <th>Potência</th>
+                                        <th>Capacidade</th>
+                                        <th>Placa/Série</th>
+                                        <th>Fabricante</th>
+                                        <th>Fornecedor</th>
+                                        <th>Valor Mensal</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="paginaContratoPrincipal" data-index="6" class="pagina" style="padding-top: 50px;">
+                    <table class="table table-bordered" id="tableContratoPrincipal">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Código</th>
+                                <th>Fornecedor</th>
+                                <th>Descrição</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Data Início</th>
+                                <th>Data Fim</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                    <table class="table table-bordered" id="tableContratoPrincipalSelecionado" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Fornecedor</th>
+                                <th>Descrição</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Data Início</th>
+                                <th>Data Fim</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
             </div>
 
@@ -1071,9 +1248,10 @@
 
                 <div class="bolinhas" style="overflow-x: scroll">
                     <div class="pagination pagination-active" data-index="0">Dados Gerais</div>
+                    <div class="pagination hidden" data-index="6" id="paginationContratoPrincipal" style="display: none;">Contrato Principal</div>
                     <div class="pagination" data-index="1">Assinatura</div>
                     <div class="pagination hidden" data-index="5" id="paginationEquipamentos" style="display: none;">Equipamentos</div>
-                    <div class="pagination" data-index="2">Anexos</div>
+                    <div class="pagination" data-index="2" id="paginationAnexos">Anexos</div>
                     <div class="pagination" data-index="3" id="paginationIntegracaoRM">Integração RM</div>
                     <div class="pagination" data-index="4">Decisão</div>
                 </div>
