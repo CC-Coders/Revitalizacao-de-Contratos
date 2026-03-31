@@ -37,6 +37,7 @@
 
     <!-- Formulário -->
     <script src="js/ParametrosColigadas.js"></script>
+    <script src="js/aditivosRescicoesManager.js"></script>
     <script src="js/Paginacao.js"></script>
     <script src="js/documentManager.js"></script>
     <script src="js/integracaoRMManager.js"></script>
@@ -63,6 +64,11 @@
     <!-- CK5 Editor -->
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/47.3.0/ckeditor5.css" />
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5-premium-features/47.3.0/ckeditor5-premium-features.css" />
+    <style>
+        .ck.ck-balloon-panel {
+            z-index: 1100 !important;
+        }
+    </style>
 
     <!-- Scripts -->
     <script src="https://cdn.ckeditor.com/ckeditor5/47.3.0/ckeditor5.umd.js"></script>
@@ -321,6 +327,15 @@
                                             </div>
                                             <br>
                                         </div>
+                                        <!-- <div class="col-md-12 campoAditivo">
+                                            <div class="form-group">
+                                                <label>Tipo aditivo:</label><strong class="strongAlert">*</strong>
+                                                <select name="tipoAditivo" id="tipoAditivo"
+                                                    class="inputInfoChamado form-control">
+                                                    <option value="Alteração de Valor">Alteração de Valor</option>
+                                                </select>
+                                            </div>
+                                        </div> -->
                                     </div>
                                     <div class="row endereco-fornecedor" style="display: none">
                                         <div class="col-md-12">
@@ -837,6 +852,23 @@
                         </div>
                     </div>
                 </div>
+                <div id="paginaContratoPrincipal" data-index="6" class="pagina" style="padding-top: 60px;">
+                    <table class="table table-bordered" id="tableContratoPrincipal">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Código</th>
+                                <th>Fornecedor</th>
+                                <th>Descrição</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Data início</th>
+                                <th>Data Fim</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
                 <div id="pagina-anexos" data-index="2" class="pagina">
                     <div class="row panelInput" style="margin-top: 20px;">
                         <div class="col-md-12">
@@ -1250,6 +1282,7 @@
                     <div class="pagination pagination-active" data-index="0">Dados Gerais</div>
                     <div class="pagination hidden" data-index="6" id="paginationContratoPrincipal" style="display: none;">Contrato Principal</div>
                     <div class="pagination" data-index="1">Assinatura</div>
+                    <!-- <div class="pagination" data-index="6" id="paginationContratoPrincipal" >Contrato Principal</div> -->
                     <div class="pagination hidden" data-index="5" id="paginationEquipamentos" style="display: none;">Equipamentos</div>
                     <div class="pagination" data-index="2" id="paginationAnexos">Anexos</div>
                     <div class="pagination" data-index="3" id="paginationIntegracaoRM">Integração RM</div>
