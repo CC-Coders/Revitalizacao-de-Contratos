@@ -684,8 +684,8 @@ function validaAnexosPorTipoContrato() {
     if (tipoContrato.includes("Locação de Equipamento") && 
         tipoContrato != "Locação de Equipamento - Alteração de Prazo" &&
         tipoContrato != "Locação de Equipamento - Alteração de Valor" &&
-        tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" &&
-        tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" &&
+        tipoContrato != "Locação de Equipamento - Alteração de Prazo e Valor" &&
+        tipoContrato != "Locação de Equipamento - Inclusão de Equipamento" &&
         tipoContrato != "Locação de Equipamento - Exclusão de Equipamento") {
 
         if (!documentos["Cartão CNPJ"]) {
