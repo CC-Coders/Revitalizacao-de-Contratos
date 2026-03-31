@@ -97,7 +97,7 @@ function onChangeTipoContrato(that) {
 
         // Mostra simbolo de obrigatoriedade ( * )
         $("#descricaoImovel, #enderecoImovel, #prazoLocacao, #valorMensalLocacao, #valorMensalAluguel").closest("div").find("strong.strongAlert").show();
-        $("#valorMensalLocacao, #valorMensalAluguel").maskMoney({
+        $("#valorMensalAluguel").maskMoney({
             prefix: "R$ ",
             thousands: ".",
             decimal: ",",
