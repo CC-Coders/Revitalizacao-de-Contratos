@@ -134,8 +134,8 @@ function beforeTaskSave_controladoria() {
                     hAPI.setCardValue("diretor", "mario")
                 }
             }
-
-            if (tipo == "Novos") {
+            var IDCNT = hAPI.getCardValue("IDCNT");
+            if (tipo == "Novos" && IDCNT == "") {
                 var IDCNT = criaNovoContrato();
                 hAPI.setCardValue("IDCNT", IDCNT);
                 updateTcntAuxiliar_IDCNT(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
