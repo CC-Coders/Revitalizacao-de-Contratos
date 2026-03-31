@@ -430,7 +430,9 @@
     }
 
 .readonlyField{
-  color: black !important;
+  color: rgb(88, 89, 91) !important; /* Cor que o Fluig usa para os campos, usei aqui para não ficar diferente do resto (antes era cor black) */
+  cursor: not-allowed; /* Cursor de "proibido" ao passar o mouse no campo */
+  border-color: #d1d3d4 !important; /* Força a cor da borda quando o mouse passa por cima como se não tivesse passado (quando passa, altera a cor para preto) */
 }
 
 .dt-hasChild.shown>td:nth-child(0),.dt-hasChild.shown>td:nth-child(0){
@@ -514,6 +516,86 @@
   margin-bottom: 12px !important;
 }
 
-.nowrap{
-  white-space: nowrap;
+/* Formata a cor de fundo dos inputs do formulario */
+.form-control {
+    background-color: #F7F8FA !important;
+}
+
+#tableEquipamentos, #tableEquipamentosAditivoRescisao, #tableContratoPrincipal {
+  width: 100% !important;
+}
+
+
+/* Seleciona todas as .pagina que NÃO possuem a classe .ativa */
+.pagina:not(.ativa) {
+
+  /* Colapsa completamente a altura do elemento */
+  height: 0 !important;
+
+  /* Esconde qualquer conteúdo que ultrapasse a altura (0) */
+  overflow: hidden !important;
+
+  /* Remove margem superior para não deixar espaço vazio */
+  margin-top: 0 !important;
+
+  /* Remove margem inferior para não afetar o layout */
+  margin-bottom: 0 !important;
+}
+
+/* Seleciona apenas a página atualmente ativa/visível */
+.pagina.ativa {
+
+  /* Permite que a altura se ajuste automaticamente ao conteúdo */
+  height: auto !important;
+
+  /* Permite que o conteúdo seja exibido normalmente */
+  overflow: visible !important;
+
+  /* Adiciona espaço acima/abaixo da página ativa */
+  margin-top: 45px !important;
+  margin-bottom: 65px !important;
+}
+
+.checkboxSelecionaEquipamentoAditivo, 
+.checkboxSelecionaEquipamento,
+.checkboxContratoPrincipal {
+	width: 20px;
+	height: 20px;
+}
+
+/* Container geral */
+.selectize-control.form-control {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+/* Input do selectize */
+.selectize-control .selectize-input {
+  height: 34px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: none;
+}
+
+/* Focus igual Fluig */
+.selectize-control .selectize-input.focus {
+  border-color: #66afe9;
+  outline: 0;
+}
+
+/* Dropdown */
+.selectize-dropdown {
+  border-radius: 4px;
+}
+
+.hidden {
+  display: none;
+}
+
+[readonly] {
+  color: rgb(88, 89, 91) !important; /* Cor que o Fluig usa para os campos */
+  cursor: not-allowed; /* Cursor de "proibido" ao passar o mouse no campo */
 }

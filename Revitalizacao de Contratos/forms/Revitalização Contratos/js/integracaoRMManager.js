@@ -182,15 +182,36 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
         return [
             {
                 representante: "Jerson Godoy Leski Junior",
-                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamento - Com Mão de Obra", "Transporte de Material - S/M.O", "Locação de Equipamento"],
+                tipos: [
+                    "Locação de Equipamentos - S/M.O", 
+                    "Locação de Equipamento - Com Mão de Obra", 
+                    "Transporte de Material - S/M.O", 
+                    "Locação de Equipamento",
+                    "Locação de Equipamento - Alteração de Valor", 
+                    "Locação de Equipamento - Alteração de Prazo",
+                    "Locação de Equipamento - Alteração de Prazo e Valor",
+                    "Locação de Equipamento - Inclusão de Equipamento",
+                    "Locação de Equipamento - Exclusão de Equipamento",
+                    "Locação de Equipamento - Com Mão de Obra (Rescisões)",
+                    "Locação de Equipamento (Rescisões)"
+                ],
             },
             {
                 representante: "Augusto Cesar de Almeida Pereira de Lyra",
-                tipos: ["Prestação de Serviços - Sub-Empreiteiros", "Prestação de Serviços", "Prestação de Serviços - Vigilância", "Prestação de Serviços - Sub/Retenção"],
+                tipos: [
+                    "Prestação de Serviços - Sub-Empreiteiros", 
+                    "Prestação de Serviços", "Prestação de Serviços - Vigilância", 
+                    "Prestação de Serviços - Sub/Retenção"],
             },
             {
                 representante: "Emanuel Mascarenhas Padilha Junior",
-                tipos: ["Locação de Imóvel"],
+                tipos: [
+                    "Locação de Imóvel", 
+                    "Locação de Imóvel - Alteração de Valor", 
+                    "Locação de Imóvel - Alteração de Prazo", 
+                    "Locação de Imóvel - Alteração de Prazo e Valor",
+                    "Locação de Imóvel (Rescisões)"
+                ],
             },
         ];
     }
@@ -198,7 +219,16 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
         return [
             {
                 representante: "Jerson Godoy Leski Junior",
-                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamento - Com Mão de Obra", "Transporte de Material - S/M.O"],
+                tipos: [
+                    "Locação de Equipamentos - S/M.O", 
+                    "Locação de Equipamento - Com Mão de Obra", 
+                    "Transporte de Material - S/M.O",
+                    "Locação de Equipamento - Alteração de Valor", 
+                    "Locação de Equipamento - Alteração de Prazo",
+                    "Locação de Equipamento - Alteração de Prazo e Valor",
+                    "Locação de Equipamento - Com Mão de Obra (Rescisões)",
+                    "Locação de Equipamento (Rescisões)"
+                ],
             },
             {
                 representante: "Marcio Rinaldo Guinossi",
@@ -208,6 +238,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                     "Prestação de Serviços - Vigilância",
                     "Prestação de Serviços - Sub/Retenção",
                     "Locação de Imóvel",
+                    "Locação de Imóvel (Rescisões)"
                 ],
             },
         ];
@@ -216,7 +247,18 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
         return [
             {
                 representante: "Jerson Godoy Leski Junior",
-                tipos: ["Locação de Equipamentos - S/M.O", "Locação de Equipamento - Com Mão de Obra", "Transporte de Material - S/M.O"],
+                tipos: [
+                    "Locação de Equipamentos - S/M.O", 
+                    "Locação de Equipamento - Com Mão de Obra", 
+                    "Transporte de Material - S/M.O",
+                    "Locação de Equipamento - Alteração de Valor",
+                    "Locação de Equipamento - Alteração de Prazo",
+                    "Locação de Equipamento - Alteração de Prazo e Valor",
+                    "Locação de Equipamento - Inclusão de Equipamento",
+                    "Locação de Equipamento - Exclusão de Equipamento",
+                    "Locação de Equipamento - Com Mão de Obra (Rescisões)",
+                    "Locação de Equipamento (Rescisões)"
+                ],
             },
             {
                 representante: "Servulo Sanches Correa",
@@ -226,6 +268,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                     "Prestação de Serviços - Vigilância",
                     "Prestação de Serviços - Sub/Retenção",
                     "Locação de Imóvel",
+                    "Locação de Imóvel (Rescisões)"
                 ],
             },
         ];
@@ -237,12 +280,22 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                 tipos: [
                     "Locação de Equipamento - Com Mão de Obra", 
                     "Locação de Equipamento",
+                    "Locação de Equipamento - Alteração de Valor",
+                    "Locação de Equipamento - Alteração de Prazo",
+                    "Locação de Equipamento - Alteração de Prazo e Valor",
+                    "Locação de Equipamento - Inclusão de Equipamento",
+                    "Locação de Equipamento - Exclusão de Equipamento",
+                    "Locação de Equipamento - Com Mão de Obra (Rescisões)",
+                    "Locação de Equipamento (Rescisões)",
+
                     "Transporte de Material - S/M.O",
                     "Prestação de Serviços - Sub-Empreiteiros",
                     "Prestação de Serviços",
                     "Prestação de Serviços - Vigilância",
                     "Prestação de Serviços - Sub/Retenção",
+                    
                     "Locação de Imóvel",
+                    "Locação de Imóvel (Rescisões)"
                 ],
             },
         ];
@@ -254,12 +307,22 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                 tipos: [
                     "Locação de Equipamento - Com Mão de Obra", 
                     "Locação de Equipamento",
+                    "Locação de Equipamento - Alteração de Valor",
+                    "Locação de Equipamento - Alteração de Prazo",
+                    "Locação de Equipamento - Alteração de Prazo e Valor",
+                    "Locação de Equipamento - Inclusão de Equipamento",
+                    "Locação de Equipamento - Exclusão de Equipamento",
+                    "Locação de Equipamento - Com Mão de Obra (Rescisões)",
+                    "Locação de Equipamento (Rescisões)",
+
                     "Transporte de Material - S/M.O",
                     "Prestação de Serviços - Sub-Empreiteiros",
                     "Prestação de Serviços",
                     "Prestação de Serviços - Vigilância",
                     "Prestação de Serviços - Sub/Retenção",
+
                     "Locação de Imóvel",
+                    "Locação de Imóvel (Rescisões)"
                 ],
             },
         ];
@@ -276,7 +339,7 @@ function regraTipoDeContrato() {
         return "04"
     }
     if (tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
-        return "04"
+        return "09" // Antes era 04
     }
 
 

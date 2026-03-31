@@ -29,10 +29,10 @@
     <processDefinitionVersionPK>
       <companyId>1</companyId>
       <processId>Revitalização Contratos</processId>
-      <version>2</version>
+      <version>81</version>
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
-    <formId>2070280</formId>
+    <formId>40684</formId>
     <editionMode>true</editionMode>
     <updateAttachmentsVersion>false</updateAttachmentsVersion>
     <controlsAttachmentsSecurity>false</controlsAttachmentsSecurity>
@@ -127,7 +127,7 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>276</positionX>
+      <positionX>270</positionX>
       <positionY>268</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
@@ -179,8 +179,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>426</positionX>
-      <positionY>460</positionY>
+      <positionX>423</positionX>
+      <positionY>459</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -232,7 +232,7 @@
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
       <positionX>566</positionX>
-      <positionY>616</positionY>
+      <positionY>615</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -284,7 +284,7 @@
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
       <positionX>830</positionX>
-      <positionY>616</positionY>
+      <positionY>615</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -319,8 +319,8 @@
       <deadlineFieldName></deadlineFieldName>
       <joint>false</joint>
       <agreementPercentage>0</agreementPercentage>
-      <engineAllocationId>Usuário</engineAllocationId>
-      <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;User&gt;jerson&lt;/User&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
+      <engineAllocationId>Campo Formulário</engineAllocationId>
+      <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;FormField&gt;diretor&lt;/FormField&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
       <selectColleague>1</selectColleague>
       <initialState>false</initialState>
       <notifyAuthorityDelay>true</notifyAuthorityDelay>
@@ -336,7 +336,7 @@
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
       <positionX>1210</positionX>
-      <positionY>616</positionY>
+      <positionY>615</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -646,7 +646,7 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1466</positionX>
+      <positionX>1471</positionX>
       <positionY>626</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
@@ -752,7 +752,7 @@
       <formFolder>0</formFolder>
       <automatic>true</automatic>
       <positionX>586</positionX>
-      <positionY>444</positionY>
+      <positionY>443</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -777,7 +777,7 @@
       <formFolder>0</formFolder>
       <automatic>true</automatic>
       <positionX>726</positionX>
-      <positionY>600</positionY>
+      <positionY>599</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -801,8 +801,8 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>1350</positionX>
-      <positionY>600</positionY>
+      <positionX>1343</positionX>
+      <positionY>599</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -826,7 +826,7 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>1456</positionX>
+      <positionX>1459</positionX>
       <positionY>740</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
@@ -851,7 +851,7 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>1636</positionX>
+      <positionX>1633</positionX>
       <positionY>867</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
@@ -877,7 +877,7 @@
       <formFolder>0</formFolder>
       <automatic>true</automatic>
       <positionX>980</positionX>
-      <positionY>600</positionY>
+      <positionY>599</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -963,7 +963,7 @@
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
       <positionX>1646</positionX>
-      <positionY>770</positionY>
+      <positionY>766</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -1010,7 +1010,7 @@
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
       <positionX>1746</positionX>
-      <positionY>100</positionY>
+      <positionY>87</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -1034,7 +1034,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1046,7 +1046,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1060,7 +1060,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1072,7 +1072,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1084,7 +1084,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1098,7 +1098,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1110,7 +1110,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1122,7 +1122,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1134,7 +1134,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1146,7 +1146,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>5</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1158,7 +1158,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1172,7 +1172,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1184,7 +1184,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1196,7 +1196,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1208,7 +1208,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>5</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1220,7 +1220,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1232,7 +1232,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1244,7 +1244,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>68</sequence>
       </conditionProcessStatePK>
       <condition>true</condition>
@@ -1256,31 +1256,44 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
-      <destinationSequenceId>55</destinationSequenceId>
-      <conditionType>1</conditionType>
+      <condition>  hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot; &amp;&amp;&#xd;
+  (hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento&quot; || hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Com Mão de Obra&quot;)</condition>
+      <destinationSequenceId>104</destinationSequenceId>
+      <conditionType>0</conditionType>
     </ConditionProcessState>
     <ConditionProcessState>
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>2</version>
+        <version>81</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition></condition>
+      <condition>hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Aditivos&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;</condition>
       <destinationSequenceId>104</destinationSequenceId>
-      <conditionType>1</conditionType>
+      <conditionType>0</conditionType>
     </ConditionProcessState>
     <ConditionProcessState>
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>2</version>
+        <version>81</version>
+        <sequence>88</sequence>
+      </conditionProcessStatePK>
+      <condition>hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;origemContrato&quot;) != &quot;Novos&quot; &amp;&amp; (hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot;)</condition>
+      <destinationSequenceId>55</destinationSequenceId>
+      <conditionType>0</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>4</expressionOrder>
+        <version>81</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1293,8 +1306,8 @@
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <expressionOrder>4</expressionOrder>
-        <version>2</version>
+        <expressionOrder>5</expressionOrder>
+        <version>81</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1305,24 +1318,12 @@
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <expressionOrder>5</expressionOrder>
-        <version>2</version>
+        <expressionOrder>6</expressionOrder>
+        <version>81</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
       <destinationSequenceId>32</destinationSequenceId>
-      <conditionType>1</conditionType>
-    </ConditionProcessState>
-    <ConditionProcessState>
-      <conditionProcessStatePK>
-        <companyId>1</companyId>
-        <processId>Revitalização Contratos</processId>
-        <expressionOrder>6</expressionOrder>
-        <version>2</version>
-        <sequence>88</sequence>
-      </conditionProcessStatePK>
-      <condition></condition>
-      <destinationSequenceId>55</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
   </list>
@@ -1530,6 +1531,9 @@
       <automaticLink>false</automaticLink>
       <defaultLink>false</defaultLink>
       <type>0</type>
+      <movementTitle></movementTitle>
+      <movementDescription></movementDescription>
+      <movementAccessLinkDescription></movementAccessLinkDescription>
     </ProcessLink>
     <ProcessLink>
       <processLinkPK>
@@ -2000,87 +2004,87 @@
         <processId>Revitalização Contratos</processId>
         <version>1</version>
       </workflowProcessEventPK>
-      <eventDescription>function intermediateconditional104() {
-  var returnAnalisePendente = false;
-    var returnAnaliseCompleta = true;
-
-    var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);
-    for (var i = 0; i &lt; indexes.length; i++) {
-        var id = indexes[i];
-        var PREFIXO = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);
-
-        var query = &quot;SELECT STATUS FROM EQUIPAMENTOS_CONTRATOS_AUXILIAR WHERE PREFIXO = ?&quot;;
-        var retorno = executaQuery(query,[
-            {type:&quot;varchar&quot;, value:PREFIXO}
-        ], &quot;/jdbc/CastilhoCustom&quot;);
-
-        log.info(&quot;Verifica status equipamentos&quot;);
-        log.dir(retorno);
-        log.dir(retorno[0].STATUS);
-        log.dir(retorno.STATUS);
-        if (retorno[0].STATUS != &quot;3&quot;) {
-            log.info(&quot;Returno analise pendente&quot;);
-            return returnAnalisePendente;
-        }
-    }
-
-    log.info(&quot;Returno analise concluida&quot;);
-    return returnAnaliseCompleta;
-}
-function executaQuery(query, constraints, dataSource) {
-    try {
-        var dataSource = dataSource;
-        var ic = new javax.naming.InitialContext();
-        var ds = ic.lookup(dataSource);
-
-        var conn = ds.getConnection();
-        var stmt = conn.prepareStatement(query);
-
-        var counter = 1;
-        for (var i = 0; i &lt; constraints.length; i++) {
-            var val = constraints[i];
-            if (val.type == &quot;int&quot;) {
-                stmt.setInt(counter, val.value);
-            }
-            else if (val.type == &quot;float&quot;) {
-                stmt.setFloat(counter, val.value);
-            }
-            else if (val.type == &quot;date&quot;) {
-                stmt.setString(counter, val.value);
-            }
-            else if (val.type == &quot;datetime&quot;) {
-                stmt.setString(counter, val.value);
-            } else {
-                stmt.setString(counter, val.value);
-            }
-            counter++;
-        }
-
-        var rs = stmt.executeQuery();
-        var columnCount = rs.getMetaData().getColumnCount();
-        var retorno = [];
-
-        while (rs.next()) {
-            var linha = {};
-            for (var j = 1; j &lt; columnCount + 1; j++) {
-                linha[rs.getMetaData().getColumnName(j)] = rs.getObject(rs.getMetaData().getColumnName(j)) + &quot;&quot;;
-            }
-            retorno.push(linha);
-        }
-
-        return retorno;
-
-    } catch (e) {
-        log.error(&quot;ERRO==============&gt; &quot; + e.message);
-        throw e;
-    } finally {
-        if (stmt != null) {
-            stmt.close();
-        }
-        if (conn != null) {
-            conn.close();
-        }
-    }
+      <eventDescription>function intermediateconditional104() {&#xd;
+  var returnAnalisePendente = false;&#xd;
+    var returnAnaliseCompleta = true;&#xd;
+&#xd;
+    var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);&#xd;
+    for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+        var id = indexes[i];&#xd;
+        var PREFIXO = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);&#xd;
+&#xd;
+        var query = &quot;SELECT STATUS FROM EQUIPAMENTOS_CONTRATOS_AUXILIAR WHERE PREFIXO = ?&quot;;&#xd;
+        var retorno = executaQuery(query,[&#xd;
+            {type:&quot;varchar&quot;, value:PREFIXO}&#xd;
+        ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+&#xd;
+        log.info(&quot;Verifica status equipamentos&quot;);&#xd;
+        log.dir(retorno);&#xd;
+        log.dir(retorno[0].STATUS);&#xd;
+        log.dir(retorno.STATUS);&#xd;
+        if (retorno[0].STATUS != &quot;3&quot;) {&#xd;
+            log.info(&quot;Returno analise pendente&quot;);&#xd;
+            return returnAnalisePendente;&#xd;
+        }&#xd;
+    }&#xd;
+&#xd;
+    log.info(&quot;Returno analise concluida&quot;);&#xd;
+    return returnAnaliseCompleta;&#xd;
+}&#xd;
+function executaQuery(query, constraints, dataSource) {&#xd;
+    try {&#xd;
+        var dataSource = dataSource;&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+        var ds = ic.lookup(dataSource);&#xd;
+&#xd;
+        var conn = ds.getConnection();&#xd;
+        var stmt = conn.prepareStatement(query);&#xd;
+&#xd;
+        var counter = 1;&#xd;
+        for (var i = 0; i &lt; constraints.length; i++) {&#xd;
+            var val = constraints[i];&#xd;
+            if (val.type == &quot;int&quot;) {&#xd;
+                stmt.setInt(counter, val.value);&#xd;
+            }&#xd;
+            else if (val.type == &quot;float&quot;) {&#xd;
+                stmt.setFloat(counter, val.value);&#xd;
+            }&#xd;
+            else if (val.type == &quot;date&quot;) {&#xd;
+                stmt.setString(counter, val.value);&#xd;
+            }&#xd;
+            else if (val.type == &quot;datetime&quot;) {&#xd;
+                stmt.setString(counter, val.value);&#xd;
+            } else {&#xd;
+                stmt.setString(counter, val.value);&#xd;
+            }&#xd;
+            counter++;&#xd;
+        }&#xd;
+&#xd;
+        var rs = stmt.executeQuery();&#xd;
+        var columnCount = rs.getMetaData().getColumnCount();&#xd;
+        var retorno = [];&#xd;
+&#xd;
+        while (rs.next()) {&#xd;
+            var linha = {};&#xd;
+            for (var j = 1; j &lt; columnCount + 1; j++) {&#xd;
+                linha[rs.getMetaData().getColumnName(j)] = rs.getObject(rs.getMetaData().getColumnName(j)) + &quot;&quot;;&#xd;
+            }&#xd;
+            retorno.push(linha);&#xd;
+        }&#xd;
+&#xd;
+        return retorno;&#xd;
+&#xd;
+    } catch (e) {&#xd;
+        log.error(&quot;ERRO==============&gt; &quot; + e.message);&#xd;
+        throw e;&#xd;
+    } finally {&#xd;
+        if (stmt != null) {&#xd;
+            stmt.close();&#xd;
+        }&#xd;
+        if (conn != null) {&#xd;
+            conn.close();&#xd;
+        }&#xd;
+    }&#xd;
 }</eventDescription>
     </WorkflowProcessEvent>
     <WorkflowProcessEvent>
@@ -2204,7 +2208,9 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
     ENGENHEIRO: 43,&#xd;
     COORDENADOR_OBRAS: 48,&#xd;
     DIRETORIA: 53,&#xd;
+    STATUS_ASSINATURA_ELETRONICA: 58,&#xd;
     ASSINATURA_ELETRONICA: 66,&#xd;
+    OBRA_RECEBE_VIAS_ORIGINAIS: 76,&#xd;
 };&#xd;
 &#xd;
 var STATUS_CONTRATOS = {&#xd;
@@ -2263,6 +2269,10 @@ function beforeTaskSave(colleagueId, nextSequenceId, userList) {&#xd;
             beforeTaskSave_coordenadorObras();&#xd;
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {&#xd;
             beforeTaskSave_diretoria();&#xd;
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.OBRA_RECEBE_VIAS_ORIGINAIS) { // Tipo de assinatura manual&#xd;
+            beforeTaskSave_obraRecebeViasOriginais();&#xd;
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.STATUS_ASSINATURA_ELETRONICA) { // Tipo de assintaura eletrônica, com status &quot;Assinado&quot;&#xd;
+            beforeTaskSave_statusAssinaturaEletronica();&#xd;
         }&#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
@@ -2272,17 +2282,29 @@ function beforeTaskSave(colleagueId, nextSequenceId, userList) {&#xd;
 function beforeTaskSave_inicio() {&#xd;
     try {&#xd;
         hAPI.setCardValue(&quot;numProces&quot;, getValue(&quot;WKNumProces&quot;));&#xd;
-&#xd;
-        if (hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento&quot; || hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
+        var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+        &#xd;
+        if (tipoContrato == &quot;Locação de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
             atualizaStatusEquipamento(&quot;Contrato_em_Andamento_com_análise_pendente&quot;);&#xd;
             hAPI.setCardValue(&quot;dataCriadoEm&quot;, getDateNow());&#xd;
-        }&#xd;
 &#xd;
-        var id = insereDadosNaTabelaAuxiliar();&#xd;
-        insereDadosNaTabelaAuxiliarItens(id);&#xd;
-        hAPI.setCardValue(&quot;ID_TCNT_AUXILIAR&quot;, id);&#xd;
-    &#xd;
- &#xd;
+            var id = insereDadosNaTabelaAuxiliar();&#xd;
+            insereDadosNaTabelaAuxiliarItens(id);&#xd;
+            hAPI.setCardValue(&quot;ID_TCNT_AUXILIAR&quot;, id);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
+            // Insere o(s) equip(s) na tabela para poder ver na Analise do Suprimentos, mas insere com Status Desativado&#xd;
+            insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+            atualizaStatusEquipamento(&quot;Contrato_em_Andamento_com_análise_pendente&quot;);&#xd;
+&#xd;
+        }&#xd;
+            &#xd;
+        /*&#xd;
+        // Só insere (cria) dados se for contrato Novos.&#xd;
+        if (hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot;) {&#xd;
+&#xd;
+        }&#xd;
+        */&#xd;
         var pdfIdContrato = hAPI.getCardValue(&quot;contratoPdfId&quot;);&#xd;
         if (pdfIdContrato) {&#xd;
             anexaDocumentoNoProcesso(pdfIdContrato);&#xd;
@@ -2300,15 +2322,35 @@ function beforeTaskSave_controladoria() {&#xd;
         insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Controladoria&quot;);&#xd;
         if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot;) {&#xd;
             var tipo = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
-            if (tipo == &quot;Novo&quot;) {&#xd;
+            var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+            var codColigada = hAPI.getCardValue(&quot;CODCOLIGADA&quot;);&#xd;
+&#xd;
+            // Seta Diretor conforme Coligada, para Contratos Novos de Locação de Equipamento&#xd;
+            if (tipoContrato == &quot;Locação de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
+&#xd;
+                // Segui o integracaoRMManager.js &gt; function(s) representante....&#xd;
+&#xd;
+                // Castilho ou Mineração ou Estação Luz&#xd;
+                if (codColigada == 1 || codColigada == 2 || codColigada == 5) {&#xd;
+                    hAPI.setCardValue(&quot;diretor&quot;, &quot;jerson&quot;);&#xd;
+&#xd;
+                // Dromos ou EPYA&#xd;
+                } else if (codColigada == 12 || codColigada == 13) {&#xd;
+                    hAPI.setCardValue(&quot;diretor&quot;, &quot;mario&quot;)&#xd;
+                }&#xd;
+            }&#xd;
+&#xd;
+            if (tipo == &quot;Novos&quot;) {&#xd;
                 var IDCNT = criaNovoContrato();&#xd;
                 hAPI.setCardValue(&quot;IDCNT&quot;, IDCNT);&#xd;
-                updateTcntAuxiliar(IDCNT, hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+                updateTcntAuxiliar_IDCNT(IDCNT, hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+&#xd;
             } else if (tipo == &quot;Aditivos&quot;) {&#xd;
-                alteraStatusContrato(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;PENDENTE OBRA&quot;);&#xd;
+                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;PENDENTE OBRA&quot;);&#xd;
                 // TODO - Inserir relação do Aditivo com o Contrato na tabela Custom de Contratos&#xd;
+&#xd;
             } else if (tipo == &quot;Rescisões&quot;) {&#xd;
-                alteraStatusContrato(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;RESCISÃO EM ANDAMENTO&quot;);&#xd;
+                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;RESCISÃO EM ANDAMENTO&quot;);&#xd;
                 // TODO - Inserir relação da Rescisão com o Contrato na tabela Custom de Contratos&#xd;
             }&#xd;
         }&#xd;
@@ -2320,10 +2362,10 @@ function beforeTaskSave_engenheiro() {&#xd;
     insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Aprovação Engenheiro&quot;);&#xd;
 &#xd;
     if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot;) {&#xd;
-        if (hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot; &amp;&amp; hAPI.getCardValue(&quot;coordenador&quot;) == &quot;&quot;) {&#xd;
+        if (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot; &amp;&amp; hAPI.getCardValue(&quot;coordenador&quot;) == &quot;&quot;) {&#xd;
             // Se não tiver coordenador vai para assinatura eletrônica&#xd;
             criaAssinaturaEletronica();&#xd;
-        }else if((hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento&quot; || hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Com Mão de Obra&quot;) &amp;&amp; hAPI.getCardValue(&quot;coordenador&quot;) == &quot;&quot; &amp;&amp; hAPI.getCardValue(&quot;CODCOLIGADA&quot;) != 1 ){&#xd;
+        }else if(hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot; &amp;&amp; (hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento&quot; || hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Com Mão de Obra&quot;) &amp;&amp; hAPI.getCardValue(&quot;coordenador&quot;) == &quot;&quot; &amp;&amp; hAPI.getCardValue(&quot;CODCOLIGADA&quot;) != 1 ){&#xd;
             // Caso seja Locação de Equipamento e não tiver coordenador&#xd;
             // Vai para assinatura eletrônica somente quando não for Coligada 1, pois na Coligada 1 vai para aprovação do Jerson&#xd;
             criaAssinaturaEletronica();&#xd;
@@ -2333,15 +2375,322 @@ function beforeTaskSave_engenheiro() {&#xd;
 function beforeTaskSave_coordenadorObras() {&#xd;
     insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Aprovação Coordenador&quot;);&#xd;
 &#xd;
-    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; (hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot;)) {&#xd;
+    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot;)) {&#xd;
         criaAssinaturaEletronica();&#xd;
     }&#xd;
 }&#xd;
 function beforeTaskSave_diretoria() {&#xd;
     insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Aprovação Diretoria&quot;);&#xd;
 &#xd;
-    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; ){&#xd;
+    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot;){&#xd;
         criaAssinaturaEletronica();&#xd;
+    }&#xd;
+}&#xd;
+function beforeTaskSave_statusAssinaturaEletronica() {&#xd;
+&#xd;
+    // Aqui não atualiza dataAssinatura na base CastilhoCustom porque já é feito isso em ...intermediateconditional58.js&#xd;
+    // Mas qundo assinatura manual, atualiza a dataAssinatura através da função beforeTaskSave_obraRecebeViasOriginais / atividade obraRecebeViasOriginais&#xd;
+&#xd;
+    if (hAPI.getCardValue(&quot;statusAssinatura&quot;) == &quot;Assinado&quot;) {&#xd;
+        alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;ATIVO&quot;);&#xd;
+        regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();&#xd;
+    }&#xd;
+&#xd;
+    /*&#xd;
+    // Formata valor monetario para float&#xd;
+    var valorLocacaoReajustado = ValorToFloat(hAPI.getCardValue(&quot;valorLocacaoReajustado&quot;));&#xd;
+&#xd;
+    var IDCNT = hAPI.getCardValue(&quot;IDCNT&quot;);&#xd;
+    var ID_TCNT_AUXILIAR = hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;);&#xd;
+    var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+    var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
+    var dataFimLocacao = hAPI.getCardValue(&quot;dataFimLocacao&quot;);&#xd;
+&#xd;
+    // Aqui não atualiza dataAssinatura na base CastilhoCustom porque já é feito isso em ...intermediateconditional58.js&#xd;
+    // Mas qundo assinatura manual, atualiza a dataAssinatura através da função beforeTaskSave_obraRecebeViasOriginais / atividade obraRecebeViasOriginais&#xd;
+&#xd;
+    if (origemContrato == &quot;Aditivos&quot;) {&#xd;
+        if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot; ||&#xd;
+            tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot; ||&#xd;
+            tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot; || tipoContrato == &quot;Locação de &quot;&#xd;
+        ) {&#xd;
+            insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot; || &#xd;
+            tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;&#xd;
+        ) {&#xd;
+            insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
+        }&#xd;
+            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
+    }&#xd;
+&#xd;
+    if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot;) {&#xd;
+        updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao);&#xd;
+&#xd;
+    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot;) {&#xd;
+        updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
+        &#xd;
+        // Comentado para usar quando fazer UPDATE na base CastilhoCustom dos NSEQITEMCNT para inicar do 1 certo?&#xd;
+        //updateTCNT_alteracaoValorLocacao(IDCNT, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
+        updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
+&#xd;
+    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) {&#xd;
+        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+        updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue(&quot;dataFimLocacao&quot;));&#xd;
+        updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
+        updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
+&#xd;
+    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Imóvel (Rescisões)&quot;) { // Rescisão&#xd;
+        // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
+        alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
+        &#xd;
+    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot;) {&#xd;
+        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+        updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
+&#xd;
+    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot;) {&#xd;
+        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+        updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+&#xd;
+    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot;) {&#xd;
+        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+        updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
+        updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+&#xd;
+    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
+        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+        updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+&#xd;
+        // Atualiza o ATIVO para ativado ( 1 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
+        updateTcntAuxiliarItens_statusEquipNoContrato(&quot;1&quot;, ID_TCNT_AUXILIAR);&#xd;
+        atualizaStatusEquipamento(&quot;Contrato_Vigente&quot;);&#xd;
+&#xd;
+    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
+        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+        updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+&#xd;
+        // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
+        updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
+        atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;);&#xd;
+&#xd;
+    } else if (tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;) {&#xd;
+        // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
+        alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
+&#xd;
+        // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado essa rescisão&#xd;
+        updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
+        atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;);&#xd;
+&#xd;
+    }&#xd;
+    */&#xd;
+}&#xd;
+function beforeTaskSave_obraRecebeViasOriginais() {&#xd;
+    var ID_TCNT_AUXILIAR = hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;);&#xd;
+&#xd;
+    if (hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot;) {&#xd;
+        var IDCNT = hAPI.getCardValue(&quot;IDCNT&quot;);&#xd;
+        var DATA_ASSINATURA = getDateTimeNow();&#xd;
+        hAPI.setCardValue(&quot;dataAssinatura&quot;, DATA_ASSINATURA);&#xd;
+        updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR);&#xd;
+        alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
+        &#xd;
+    }&#xd;
+&#xd;
+    regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();&#xd;
+&#xd;
+    /*&#xd;
+    // Formata valor monetario para float&#xd;
+    var valorLocacaoReajustado = ValorToFloat(hAPI.getCardValue(&quot;valorLocacaoReajustado&quot;));&#xd;
+&#xd;
+    var IDCNT = hAPI.getCardValue(&quot;IDCNT&quot;);&#xd;
+    var ID_TCNT_AUXILIAR = hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;);&#xd;
+    var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+    var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
+    var dataFimLocacao = hAPI.getCardValue(&quot;dataFimLocacao&quot;);&#xd;
+&#xd;
+    try {&#xd;
+        // Atualiza a DATA_ASSINATURA da tabela da base Custom somente se a &quot;Origem do Contrato&quot; for &quot;Novos&quot;&#xd;
+        if (origemContrato == &quot;Novos&quot;) {&#xd;
+            var DATA_ASSINATURA = getDateTimeNow();&#xd;
+            hAPI.setCardValue(&quot;dataAssinatura&quot;, DATA_ASSINATURA);&#xd;
+            updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR);&#xd;
+        &#xd;
+        } else if (origemContrato == &quot;Aditivos&quot; || origemContrato == &quot;Rescisões&quot;) {&#xd;
+            if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot; ||&#xd;
+                tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot; ||&#xd;
+                tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot;)&#xd;
+            {&#xd;
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
+&#xd;
+            } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot; || &#xd;
+                tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) &#xd;
+            {&#xd;
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
+            }&#xd;
+                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
+        }&#xd;
+        &#xd;
+        if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue(&quot;dataFimLocacao&quot;));&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
+            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao);&#xd;
+            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
+            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Imóvel (Rescisões)&quot;) { // Rescisão&#xd;
+            // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
+            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
+        &#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+            updateSISMA_alteracaoAluguelContrato_equipamento();&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+&#xd;
+            // Atualiza o ATIVO para ativado ( 1 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;1&quot;, ID_TCNT_AUXILIAR);&#xd;
+            atualizaStatusEquipamento(&quot;Contrato_Vigente&quot;);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+&#xd;
+            // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
+            atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;) {&#xd;
+            // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
+            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
+&#xd;
+            // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado essa rescisão&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
+            atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;);&#xd;
+&#xd;
+        }&#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
+    }&#xd;
+    */&#xd;
+}&#xd;
+&#xd;
+// Centraliza as regras que beforeTaskSave_statusAssinaturaEletronica e beforeTaskSave_obraRecebeViasOriginais usam&#xd;
+function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {&#xd;
+&#xd;
+    // Formata valor monetario para float&#xd;
+    var valorLocacaoReajustado = ValorToFloat(hAPI.getCardValue(&quot;valorLocacaoReajustado&quot;));&#xd;
+&#xd;
+    var IDCNT = hAPI.getCardValue(&quot;IDCNT&quot;);&#xd;
+    var ID_TCNT_AUXILIAR = hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;);&#xd;
+    var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+    var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
+    var dataFimLocacao = hAPI.getCardValue(&quot;dataFimLocacao&quot;);&#xd;
+&#xd;
+    try {&#xd;
+&#xd;
+        if (origemContrato == &quot;Aditivos&quot; || origemContrato == &quot;Rescisões&quot;) {&#xd;
+            if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot; ||&#xd;
+                tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot; ||&#xd;
+                tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; || &#xd;
+                tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;)&#xd;
+            {&#xd;
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
+&#xd;
+            } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot; || &#xd;
+                tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) &#xd;
+            {&#xd;
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
+            }&#xd;
+                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
+        }&#xd;
+        &#xd;
+        if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue(&quot;dataFimLocacao&quot;));&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
+            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao);&#xd;
+            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
+            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Imóvel (Rescisões)&quot;) { // Rescisão&#xd;
+            // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
+            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
+        &#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+            updateSISMA_alteracaoAluguelContrato_equipamento();&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+            updateSISMA_alteracaoAluguelContrato_equipamento();&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+&#xd;
+            // Atualiza o ATIVO para ativado ( 1 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;1&quot;, ID_TCNT_AUXILIAR);&#xd;
+            atualizaStatusEquipamento(&quot;Contrato_Vigente&quot;);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+&#xd;
+            // Desativa equipamentos no SISMA&#xd;
+            updateSISMA_statusEquipamento();&#xd;
+&#xd;
+            // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
+            atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;) {&#xd;
+            // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
+            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
+&#xd;
+            // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado essa rescisão&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
+            atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;);&#xd;
+&#xd;
+            // Desativa equipamentos no SISMA&#xd;
+            updateSISMA_statusEquipamento();&#xd;
+&#xd;
+        }&#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
     }&#xd;
 }&#xd;
 &#xd;
@@ -2448,6 +2797,7 @@ function buscaParamentrosCriacaoContrato() {&#xd;
     };&#xd;
 }&#xd;
 function validaParametros(parametros) {&#xd;
+    log.info(&quot;Antes de validaParametros, CODTCN = &quot; + parametros.CODTCN);&#xd;
 &#xd;
     var erroRetorno = [];&#xd;
     if (parametros.CODCOLIGADA == undefined || parametros.CODCOLIGADA == null || parametros.CODCOLIGADA == &quot;&quot;) {&#xd;
@@ -2650,7 +3000,7 @@ function geraXML_TITMCNT(parametros) {&#xd;
         xml += &quot;    &lt;DATAFIM&gt;&quot; + setDateXMLFormat(parametros.DATAFIM) + &quot;T00:00:00&lt;/DATAFIM&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODCPGPRAZO&gt;130&lt;/CODCPGPRAZO&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODRPR&gt;&quot; + parametros.CODRPR + &quot;&lt;/CODRPR&gt;&quot;;&#xd;
-        if (parametros.CODCPG == TIPOS_FATURAMENTO[&quot;Periódico&quot;]) {&#xd;
+        if (parametros.TIPOFATURAMENTO  == TIPOS_FATURAMENTO[&quot;Periódico&quot;]) { // Antes era parametros.CODCPG&#xd;
             xml += &quot;&lt;DIAFATURAMENTO&gt;&quot; + parametros.DIAFATURAMENTO + &quot;&lt;/DIAFATURAMENTO&gt;&quot;;&#xd;
             xml += &quot;&lt;QTDEFATURAMENTOS&gt;&quot; + parametros.QTDEFATURAMENTOS + &quot;&lt;/QTDEFATURAMENTOS&gt;&quot;;&#xd;
         }&#xd;
@@ -2700,10 +3050,230 @@ function geraXML_TITMCNTRATDEP(parametros) {&#xd;
     }&#xd;
     return xml;&#xd;
 }&#xd;
+function updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao) {&#xd;
 &#xd;
+    var CODCOLIGADA = hAPI.getCardValue(&quot;CODCOLIGADA&quot;);&#xd;
 &#xd;
+    var xml = &quot;&quot;;&#xd;
+    xml += &quot;&lt;CTRCNT&gt;&quot;;&#xd;
+    xml += &quot;  &lt;TCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+    xml += &quot;    &lt;IDCNT&gt;&quot; + IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;DATAFIM&gt;&quot; + setDateXMLFormat(dataFimLocacao, 0) + &quot;&lt;/DATAFIM&gt;&quot;;&#xd;
+    xml += &quot;  &lt;/TCNT&gt;&quot;;&#xd;
+    xml += &quot;&lt;/CTRCNT&gt;&quot;;&#xd;
 &#xd;
-function alteraStatusContrato(STATUS) {&#xd;
+    var contexto = &quot;CODSISTEMA=G;CODCOLIGADA=&quot; + CODCOLIGADA + &quot;;CODUSUARIO=fluig&quot;;&#xd;
+&#xd;
+    var retorno = DatasetFactory.getDataset(&#xd;
+        &quot;InsereContratoRM&quot;,&#xd;
+        null,&#xd;
+        [&#xd;
+            DatasetFactory.createConstraint(&quot;coligada&quot;, CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;idContrato&quot;, IDCNT, IDCNT, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;contexto&quot;, contexto, contexto, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;xml&quot;, xml, xml, ConstraintType.MUST),&#xd;
+        ],&#xd;
+        null&#xd;
+    );&#xd;
+&#xd;
+    if (retorno.values[0][0] == &quot;false&quot;) {&#xd;
+        throw &quot;Erro ao alterar prazo: &quot; + retorno.values[0][1];&#xd;
+    }&#xd;
+}&#xd;
+function updateTCNT_alteracaoValorAluguel_imovel(IDCNT) {&#xd;
+&#xd;
+    var CODCOLIGADA = hAPI.getCardValue(&quot;CODCOLIGADA&quot;);&#xd;
+    var valorMensalLocacao = hAPI.getCardValue(&quot;valorLocacaoReajustado&quot;);&#xd;
+&#xd;
+    var xml = &quot;&quot;;&#xd;
+    xml += &quot;&lt;CTRCNT&gt;&quot;;&#xd;
+&#xd;
+    // Tabela TCNT&#xd;
+    xml += &quot;  &lt;TCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+    xml += &quot;    &lt;IDCNT&gt;&quot; + IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+    xml += &quot;  &lt;/TCNT&gt;&quot;;&#xd;
+&#xd;
+    // Tabela TITMCNT&#xd;
+    xml += &quot;  &lt;TITMCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+    xml += &quot;    &lt;IDCNT&gt;&quot; + IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;NSEQITMCNT&gt;&quot; + 1 + &quot;&lt;/NSEQITMCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;PRECOFATURAMENTO&gt;&quot; + ValorToFloat(valorMensalLocacao).toString().replace(&quot;.&quot;, &quot;,&quot;) + &quot;&lt;/PRECOFATURAMENTO&gt;&quot;;&#xd;
+    xml += &quot;  &lt;/TITMCNT&gt;&quot;;&#xd;
+    xml += &quot;&lt;/CTRCNT&gt;&quot;;&#xd;
+&#xd;
+    var contexto = &quot;CODSISTEMA=G;CODCOLIGADA=&quot; + CODCOLIGADA + &quot;;CODUSUARIO=fluig&quot;;&#xd;
+&#xd;
+    var retorno = DatasetFactory.getDataset(&#xd;
+        &quot;InsereContratoRM&quot;,&#xd;
+        null,&#xd;
+        [&#xd;
+            DatasetFactory.createConstraint(&quot;coligada&quot;, CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;idContrato&quot;, IDCNT, IDCNT, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;contexto&quot;, contexto, contexto, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;xml&quot;, xml, xml, ConstraintType.MUST),&#xd;
+        ],&#xd;
+        null&#xd;
+    );&#xd;
+&#xd;
+    if (retorno.values[0][0] == &quot;false&quot;) {&#xd;
+        throw &quot;Erro ao alterar valor: &quot; + retorno.values[0][1];&#xd;
+    }&#xd;
+}&#xd;
+function updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao) {&#xd;
+&#xd;
+    var CODCOLIGADA = hAPI.getCardValue(&quot;CODCOLIGADA&quot;);&#xd;
+&#xd;
+    var xml = &quot;&quot;;&#xd;
+    xml += &quot;&lt;CTRCNT&gt;&quot;;&#xd;
+    xml += &quot;  &lt;TCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+    xml += &quot;    &lt;IDCNT&gt;&quot; + IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;DATAFIM&gt;&quot; + setDateXMLFormat(dataFimLocacao, 0) + &quot;&lt;/DATAFIM&gt;&quot;;&#xd;
+    xml += &quot;  &lt;/TCNT&gt;&quot;;&#xd;
+    xml += &quot;&lt;/CTRCNT&gt;&quot;;&#xd;
+&#xd;
+    var contexto = &quot;CODSISTEMA=G;CODCOLIGADA=&quot; + CODCOLIGADA + &quot;;CODUSUARIO=fluig&quot;;&#xd;
+&#xd;
+    var retorno = DatasetFactory.getDataset(&#xd;
+        &quot;InsereContratoRM&quot;,&#xd;
+        null,&#xd;
+        [&#xd;
+            DatasetFactory.createConstraint(&quot;coligada&quot;, CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;idContrato&quot;, IDCNT, IDCNT, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;contexto&quot;, contexto, contexto, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;xml&quot;, xml, xml, ConstraintType.MUST),&#xd;
+        ],&#xd;
+        null&#xd;
+    );&#xd;
+&#xd;
+    if (retorno.values[0][0] == &quot;false&quot;) {&#xd;
+        throw &quot;Erro ao alterar prazo: &quot; + retorno.values[0][1];&#xd;
+    }&#xd;
+}&#xd;
+function updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT) {&#xd;
+    var CODCOLIGADA = hAPI.getCardValue(&quot;CODCOLIGADA&quot;);&#xd;
+&#xd;
+    var temRetencao = hAPI.getCardValue(&quot;temRetencao&quot;);&#xd;
+    var percentualRetencao = parseFloat(String(hAPI.getCardValue(&quot;percentualRetencao&quot;) || &quot;0&quot;).replace(&quot;%&quot;, &quot;&quot;));&#xd;
+&#xd;
+    var valorMensalLocacao = 0;&#xd;
+&#xd;
+    if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot;) {&#xd;
+&#xd;
+        // Valor mensal original total do contrato&#xd;
+        // Contém todos os equipamentos, tanto os que terão reajuste quanto os que não terão&#xd;
+        var valorTotalContrato = ValorToFloat(hAPI.getCardValue(&quot;valorMensalLocacao&quot;));&#xd;
+        var somaValoresOriginaisAlterados = 0;&#xd;
+        var somaValoresReajustadosAlterados = 0;&#xd;
+&#xd;
+        // Percorre as linhas do pai-filho com os equipamentos selecionados no aditivo&#xd;
+        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
+        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+            var id = indexes[i];&#xd;
+&#xd;
+            // Valor original do equipamento antes do reajuste&#xd;
+            var valorMensalOriginalAditivo = ValorToFloat(hAPI.getCardValue(&quot;valorMensalOriginalAditivo___&quot; + id));&#xd;
+&#xd;
+            // Valor reajustado informado no aditivo&#xd;
+            var valorReajustadoAditivo = ValorToFloat(hAPI.getCardValue(&quot;valorReajustado_aditivos___&quot; + id));&#xd;
+&#xd;
+            somaValoresOriginaisAlterados += valorMensalOriginalAditivo;&#xd;
+            somaValoresReajustadosAlterados += valorReajustadoAditivo;&#xd;
+        }&#xd;
+&#xd;
+        // Remove os valores antigos dos equipamentos alterados, e soma os novos valores reajustados&#xd;
+        valorMensalLocacao = valorTotalContrato - somaValoresOriginaisAlterados + somaValoresReajustadosAlterados;&#xd;
+&#xd;
+    } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;|| tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
+&#xd;
+        // O campo valorMensalLocacao do formulário já foi calculado&#xd;
+        valorMensalLocacao = ValorToFloat(hAPI.getCardValue(&quot;valorMensalLocacao&quot;));&#xd;
+    }&#xd;
+&#xd;
+    var valorRetencao = 0;&#xd;
+    var valorLiquido = 0;&#xd;
+&#xd;
+    // Se houver retenção, separa o valor entre item principal e item de retenção&#xd;
+    if (temRetencao == &quot;Sim&quot; &amp;&amp; percentualRetencao &gt; 0) {&#xd;
+        valorRetencao = (valorMensalLocacao * percentualRetencao) / 100;&#xd;
+        valorLiquido = valorMensalLocacao - valorRetencao;&#xd;
+    } else {&#xd;
+        valorLiquido = valorMensalLocacao;&#xd;
+    }&#xd;
+&#xd;
+    var xml = &quot;&quot;;&#xd;
+    xml += &quot;&lt;CTRCNT&gt;&quot;;&#xd;
+&#xd;
+    // Tabela TCNT&#xd;
+    xml += &quot;  &lt;TCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+    xml += &quot;    &lt;IDCNT&gt;&quot; + IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+    xml += &quot;  &lt;/TCNT&gt;&quot;;&#xd;
+&#xd;
+    // Tabela TITMCNT - Item 1 (Principal)&#xd;
+    xml += &quot;  &lt;TITMCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+    xml += &quot;    &lt;IDCNT&gt;&quot; + IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;NSEQITMCNT&gt;1&lt;/NSEQITMCNT&gt;&quot;;&#xd;
+    xml += &quot;    &lt;PRECOFATURAMENTO&gt;&quot; + valorLiquido.toString().replace(&quot;.&quot;, &quot;,&quot;) + &quot;&lt;/PRECOFATURAMENTO&gt;&quot;;&#xd;
+    xml += &quot;  &lt;/TITMCNT&gt;&quot;;&#xd;
+&#xd;
+    // Tabela TITMCNT - Item 2 (Retenção)&#xd;
+    if (temRetencao == &quot;Sim&quot; &amp;&amp; percentualRetencao &gt; 0) {&#xd;
+        xml += &quot;  &lt;TITMCNT&gt;&quot;;&#xd;
+        xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
+        xml += &quot;    &lt;IDCNT&gt;&quot; + IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
+        xml += &quot;    &lt;NSEQITMCNT&gt;2&lt;/NSEQITMCNT&gt;&quot;;&#xd;
+        xml += &quot;    &lt;PRECOFATURAMENTO&gt;&quot; + valorRetencao.toString().replace(&quot;.&quot;,&quot;,&quot;) + &quot;&lt;/PRECOFATURAMENTO&gt;&quot;;&#xd;
+        xml += &quot;  &lt;/TITMCNT&gt;&quot;;&#xd;
+    }&#xd;
+&#xd;
+    xml += &quot;&lt;/CTRCNT&gt;&quot;;&#xd;
+&#xd;
+    var contexto = &quot;CODSISTEMA=G;CODCOLIGADA=&quot; + CODCOLIGADA + &quot;;CODUSUARIO=fluig&quot;;&#xd;
+&#xd;
+    var retorno = DatasetFactory.getDataset(&#xd;
+        &quot;InsereContratoRM&quot;,&#xd;
+        null,&#xd;
+        [&#xd;
+            DatasetFactory.createConstraint(&quot;coligada&quot;, CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;idContrato&quot;, IDCNT, IDCNT, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;contexto&quot;, contexto, contexto, ConstraintType.MUST),&#xd;
+            DatasetFactory.createConstraint(&quot;xml&quot;, xml, xml, ConstraintType.MUST),&#xd;
+        ],&#xd;
+        null&#xd;
+    );&#xd;
+&#xd;
+    if (retorno.values[0][0] == &quot;false&quot;) {&#xd;
+        throw &quot;Erro ao alterar valor: &quot; + retorno.values[0][1];&#xd;
+    }&#xd;
+}&#xd;
+function updateSISMA_alteracaoAluguelContrato_equipamento() {&#xd;
+    try {&#xd;
+        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
+        var counter = 0;&#xd;
+        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+            var id = indexes[i]&#xd;
+            var prefixo = hAPI.getCardValue(&quot;equipSelecionado_aditivos___&quot; + id);&#xd;
+            var valorReajustado = ValorToFloat(hAPI.getCardValue(&quot;valorReajustado_aditivos___&quot; + id));&#xd;
+            var valorMaoDeObra = ValorToFloat(hAPI.getCardValue(&quot;valorMaoDeObraAditivos___&quot; + id));&#xd;
+            var valorAluguelContrato = valorReajustado - valorMaoDeObra;&#xd;
+&#xd;
+            var query = &quot;UPDATE EQUIPAMENTO SET ALUGUEL_CONTRATO = ? WHERE NUMEEQUI = ?&quot;;&#xd;
+            executaUpdate(query, [&#xd;
+                {type:&quot;float&quot;, value: valorAluguelContrato},&#xd;
+                {type:&quot;varchar&quot;, value: prefixo},&#xd;
+            ], &quot;jdbc/Sisma&quot;);&#xd;
+            counter++;&#xd;
+        }&#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
+    }&#xd;
+}&#xd;
+function alteraStatusContrato_RM(CODCOLIGADA, IDCNT, STATUS) {&#xd;
     try {&#xd;
         var CODSTACNT = STATUS_CONTRATOS[STATUS];&#xd;
         if (!CODSTACNT || CODSTACNT == null || CODSTACNT == &quot;&quot;) {&#xd;
@@ -2744,8 +3314,7 @@ function alteraStatusContrato(STATUS) {&#xd;
     }&#xd;
 }&#xd;
 &#xd;
-&#xd;
-function insereDadosNaTabelaAuxiliar(){&#xd;
+function insereDadosNaTabelaAuxiliar(){ //Contratos Novos&#xd;
     try {&#xd;
         &#xd;
         var query = &quot;INSERT INTO TCNT_AUXILIAR (&quot;;&#xd;
@@ -2783,7 +3352,236 @@ function insereDadosNaTabelaAuxiliar(){&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){&#xd;
+function insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR) { //Tabela Historico de Aditivo/Rescisão&#xd;
+    var valorMensalAluguel = hAPI.getCardValue(&quot;valorMensalAluguel&quot;);&#xd;
+    var valorLocacaoReajustado = hAPI.getCardValue(&quot;valorLocacaoReajustado&quot;);&#xd;
+    var dataInicioLocacao = hAPI.getCardValue(&quot;dataInicioLocacao&quot;);&#xd;
+    var dataFimLocacao = hAPI.getCardValue(&quot;dataFimLocacao&quot;);&#xd;
+    var dataAtual = getDateNow();&#xd;
+    var descricao = null;&#xd;
+&#xd;
+    // Monta/usa DESCRICAO conforme #tipoContrato&#xd;
+    if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) {&#xd;
+        descricao = &quot;Alterado prazo e valor do contrato, prazo de &quot; + dataInicioLocacao + &quot; para &quot; + dataFimLocacao + &quot;, e valor de &quot; + valorMensalAluguel + &quot; para &quot; + valorLocacaoReajustado;&#xd;
+    }&#xd;
+        &#xd;
+    else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot;) {&#xd;
+        descricao = &quot;Alterado valor do contrato de &quot; + valorMensalAluguel + &quot; para &quot; + valorLocacaoReajustado;&#xd;
+&#xd;
+    } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot;) {&#xd;
+        descricao = &quot;Alterado prazo do contrato de &quot; + dataInicioLocacao + &quot; para &quot; + dataFimLocacao;&#xd;
+&#xd;
+    } else if (tipoContrato == &quot;Locação de Imóvel (Rescisões)&quot;) {&#xd;
+        descricao = &quot;Contrato rescindido&quot;;&#xd;
+    }&#xd;
+&#xd;
+    try {&#xd;
+        var query = &quot;INSERT INTO TCNT_AUXILIAR_ADITIVOS_RESCISOES (&quot;;&#xd;
+        query += &quot; ID_TCNT_AUXILIAR, &quot;;&#xd;
+        query += &quot; TIPO, &quot;;&#xd;
+        query += &quot; DESCRICAO, &quot;;&#xd;
+        query += &quot; ID_FLUIG, &quot;;&#xd;
+        query += &quot; DATA, &quot;;&#xd;
+        query += &quot; DATA_ASSINATURA &quot;;&#xd;
+        query += &quot;) &quot;;&#xd;
+        query += &quot; VALUES (?,?,?,?,?,?);&quot;;&#xd;
+&#xd;
+        var id = executeInsert(query,[&#xd;
+            {type:&quot;int&quot;, value: ID_TCNT_AUXILIAR},&#xd;
+            {type:&quot;varchar&quot;, value: hAPI.getCardValue(&quot;tipoContrato&quot;)}, // Tipo do contrato&#xd;
+            {type:&quot;varchar&quot;, value: descricao}, // Descrição do que foi alterado no Contrato&#xd;
+            {type:&quot;int&quot;, value: getValue(&quot;WKNumProces&quot;)}, // Nº da Solicitação Fluig&#xd;
+            {type:&quot;date&quot;, value: dataAtual}, // Data atual do processo&#xd;
+            {type:&quot;date&quot;, value: dataAtual}, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)&#xd;
+        ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+&#xd;
+        return id;&#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
+    }&#xd;
+}&#xd;
+function insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR) { //Tabela Historico de Aditivo/Rescisão&#xd;
+    try {&#xd;
+        var valorTotalContrato = ValorToFloat(hAPI.getCardValue(&quot;valorMensalLocacao&quot;));&#xd;
+        var valorTotalContartoMask = hAPI.getCardValue(&quot;valorMensalLocacao&quot;);&#xd;
+        var dataInicioLocacao = hAPI.getCardValue(&quot;dataInicioLocacao&quot;);&#xd;
+        var dataFimLocacao = hAPI.getCardValue(&quot;dataFimLocacao&quot;);&#xd;
+        var dataAtual = getDateNow();&#xd;
+        var dataReajuste = hAPI.getCardValue(&quot;dataReajuste&quot;);&#xd;
+        var descricao = null;&#xd;
+&#xd;
+        // Soma dos valores originais apenas dos equipamentos alterados&#xd;
+        var somaValoresOriginaisAlterados = 0;&#xd;
+        // Soma dos valores reajustados apenas dos equipamentos alterados&#xd;
+        var somaValoresReajustadosAlterados = 0;&#xd;
+&#xd;
+        // hAPI.getChildrenIndexes retorna uma array de indexes que contém na tabela, exemplo [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]&#xd;
+        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
+&#xd;
+        // Cria array para armazenar todos os prefixos encontrados na tabela, para depois concatenar prefixos separado por ,&#xd;
+        var listaPrefixos = [];&#xd;
+&#xd;
+        // Pecorre cada linha da tabela&#xd;
+        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+&#xd;
+            // Pega o indice atual da tabela&#xd;
+            var id = indexes[i]&#xd;
+&#xd;
+            // Monta o nome do campo para buscar o valor salvo na linha&#xd;
+            var prefixo = hAPI.getCardValue(&quot;equipSelecionado_aditivos&quot; + &quot;___&quot; + id);&#xd;
+&#xd;
+            // Pega o valor mensal original salvo para o prefixo alterado&#xd;
+            var valorMensalOriginalAditivo = ValorToFloat(hAPI.getCardValue(&quot;valorMensalOriginalAditivo___&quot; + id));&#xd;
+&#xd;
+            // Pega o valor reajustado salvo para o prefixo alterado&#xd;
+            var valorReajustadoAditivo = ValorToFloat(hAPI.getCardValue(&quot;valorReajustado_aditivos___&quot; + id));&#xd;
+&#xd;
+            // Soma os valores originais dos equipamentos alterados&#xd;
+            somaValoresOriginaisAlterados += valorMensalOriginalAditivo;&#xd;
+            // Soma os valores reajustados dos equipamentos alterados&#xd;
+            somaValoresReajustadosAlterados += valorReajustadoAditivo;&#xd;
+&#xd;
+            // Se prefixo não vazio adiciona o prefixo na array de listaPrefixos&#xd;
+            if (prefixo) {&#xd;
+                listaPrefixos.push(prefixo);&#xd;
+            }&#xd;
+        }&#xd;
+&#xd;
+        // Novo valor mensal do contrato:&#xd;
+        // valor original total&#xd;
+        // menos os valores originais dos equipamentos alterados&#xd;
+        // mais os valores reajustados dos equipamentos alterados&#xd;
+        var valorMensalLocacao = valorTotalContrato - somaValoresOriginaisAlterados + somaValoresReajustadosAlterados;&#xd;
+&#xd;
+        // Formata para valor monetario&#xd;
+        var novoValorContrato = FloatToMoney(valorMensalLocacao);&#xd;
+&#xd;
+        // Concatena os prefixos seperando eles por ,&#xd;
+        var prefixos = listaPrefixos.join(&quot;, &quot;);&#xd;
+&#xd;
+        // Monta/usa DESCRICAO conforme #tipoContrato&#xd;
+        if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot;) {&#xd;
+            descricao = &#xd;
+            &quot;Alterado prazo e valor do contrato, prazo de &quot; + dataInicioLocacao + &quot; para &quot; + dataFimLocacao + &quot;, e valor de &quot; + valorTotalContartoMask + &quot; para &quot; + novoValorContrato + &quot; dos equipamentos: &quot; + prefixos;&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot;) {&#xd;
+            descricao = &quot;Alterado valor do contrato de &quot; + valorTotalContartoMask + &quot; para &quot; + novoValorContrato + &quot; dos equipamentos: &quot; + prefixos;&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot;) {&#xd;
+            descricao = &quot;Alterado prazo do contrato de &quot; + dataInicioLocacao + &quot; para &quot; + dataFimLocacao + &quot; dos equipamentos: &quot; + prefixos;&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
+            descricao = &quot;Incluído no contrato os equipamentos: &quot; + prefixos;&#xd;
+&#xd;
+            // Usa a mesma data atual porque não tem data de reajuste.&#xd;
+            dataReajuste = dataAtual;&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
+            descricao = &quot;Excluído do contrato os equipamentos: &quot; + prefixos;&#xd;
+&#xd;
+            // Usa a mesma data atual porque não tem data de reajuste.&#xd;
+            dataReajuste = dataAtual;&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;) {&#xd;
+            descricao = &quot;Contrato rescindido, dos equipamentos: &quot; + prefixos;&#xd;
+&#xd;
+            // Usa a mesma data atual porque não tem data de reajuste.&#xd;
+            dataReajuste = dataAtual;&#xd;
+        }&#xd;
+&#xd;
+        var query = &quot;INSERT INTO TCNT_AUXILIAR_ADITIVOS_RESCISOES (&quot;;&#xd;
+        query += &quot; ID_TCNT_AUXILIAR, &quot;;&#xd;
+        query += &quot; TIPO, &quot;;&#xd;
+        query += &quot; DESCRICAO, &quot;;&#xd;
+        query += &quot; ID_FLUIG, &quot;;&#xd;
+        query += &quot; DATA, &quot;;&#xd;
+        query += &quot; DATA_ASSINATURA &quot;;&#xd;
+        query += &quot;) &quot;;&#xd;
+        query += &quot; VALUES (?,?,?,?,?,?)&quot;;&#xd;
+&#xd;
+        var id = executeInsert(query,[&#xd;
+            {type:&quot;int&quot;, value: ID_TCNT_AUXILIAR},&#xd;
+            {type:&quot;varchar&quot;, value: hAPI.getCardValue(&quot;tipoContrato&quot;)}, // Tipo do contrato&#xd;
+            {type:&quot;varchar&quot;, value: descricao}, // Descrição do que foi alterado no Contrato&#xd;
+            {type:&quot;int&quot;, value: getValue(&quot;WKNumProces&quot;)}, // Nº da Solicitação Fluig&#xd;
+            {type:&quot;date&quot;, value: dataReajuste}, // Data do reajuste informado no form&#xd;
+            {type:&quot;date&quot;, value: dataAtual}, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)&#xd;
+        ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+        &#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
+    }&#xd;
+}&#xd;
+function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclusão de Equip&#xd;
+    try {&#xd;
+        var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+&#xd;
+        // hAPI.getChildrenIndexes retorna uma array de indexes que contém na tabela, exemplo [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]&#xd;
+        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
+&#xd;
+        // Busca o próximo NSEQITEMCNT disponível para esse contrato auxiliar&#xd;
+        var proximoNSEQITEMCNT = getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
+&#xd;
+        // Pecorre cada linha da tabela&#xd;
+        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+&#xd;
+            // Pega o indice atual da tabela&#xd;
+            var id = indexes[i]&#xd;
+&#xd;
+            // Monta o nome do campo para buscar o valor salvo na linha&#xd;
+            var prefixo = hAPI.getCardValue(&quot;equipSelecionado_aditivos&quot; + &quot;___&quot; + id);&#xd;
+&#xd;
+            // Se não tiver prefixo, ignora a linha&#xd;
+            if (!prefixo) {&#xd;
+                continue;&#xd;
+            }&#xd;
+&#xd;
+            var query = &quot;&quot;;&#xd;
+            query += &quot;INSERT INTO TCNT_AUXILIAR_ITENS&quot;;&#xd;
+            query += &quot;( &quot;;&#xd;
+            query += &quot;ID_TCNT_AUXILIAR, &quot;;&#xd;
+            query += &quot;NSEQITEMCNT, &quot;;&#xd;
+            query += &quot;PREFIXO, &quot;;&#xd;
+            query += &quot;ATIVO &quot;&#xd;
+            query += &quot;) &quot;&#xd;
+            query += &quot;VALUES (?,?,?,?)&quot;;&#xd;
+&#xd;
+            executeInsert(query, [&#xd;
+                { type : &quot;int&quot;, value: ID_TCNT_AUXILIAR },&#xd;
+                { type: &quot;int&quot;, value: proximoNSEQITEMCNT },&#xd;
+                { type: &quot;varchar&quot;, value: prefixo },&#xd;
+                { type: &quot;int&quot;, value: &apos;0&apos; }, // STATUS Desativado, vai ser reativado depois no final do Solict caso seja aprovado o Aditivo/Rescisão&#xd;
+            ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+&#xd;
+            // Próximo item já vai com a próxima sequência&#xd;
+            proximoNSEQITEMCNT++;&#xd;
+        }&#xd;
+&#xd;
+    } catch (error) {&#xd;
+        // O bloco catch captura qualquer erro lançado dentro do try.&#xd;
+        // Em JavaScript/TypeScript, o valor capturado pode ser qualquer coisa&#xd;
+        // (Error, string, objeto, número, etc).&#xd;
+&#xd;
+        if (error instanceof Error) {&#xd;
+            // Se o erro já for uma instância da classe Error,&#xd;
+            // simplesmente relança o mesmo erro.&#xd;
+            throw error;&#xd;
+        } else {&#xd;
+            // Caso o erro NÃO seja um Error (ex: string, objeto, número),&#xd;
+            // criamos um novo Error para padronizar o tipo de erro lançado.&#xd;
+&#xd;
+            throw new Error(&#xd;
+                // Se for uma string, usamos diretamente como mensagem&#xd;
+                typeof error === &quot;string&quot;&#xd;
+                    ? error&#xd;
+                    // Caso contrário, converte o valor para JSON&#xd;
+                    // para gerar uma mensagem legível.&#xd;
+                    : JSON.stringify(error)&#xd;
+            );&#xd;
+        }&#xd;
+    }&#xd;
+}&#xd;
+function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
     try {&#xd;
         var tipo_contrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
 &#xd;
@@ -2802,7 +3600,11 @@ function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){&#xd;
+function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
+&#xd;
+    // Nos testes vai pode ser inserido mais de 1 PREFIXO igual para o mesmo ID_TCNT_AUXILIAR&#xd;
+    // Mas em produção o PREFIXO será único, &#xd;
+    // já que sempre o novo processo de Cadastro de equip exigirá um PREFIXO não existente na base do SISMA&#xd;
     try {        &#xd;
         var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);&#xd;
         var counter = 0;&#xd;
@@ -2813,13 +3615,15 @@ function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){&#xd;
             var query = &quot;INSERT INTO TCNT_AUXILIAR_ITENS (&quot;;&#xd;
             query += &quot;ID_TCNT_AUXILIAR, &quot;;&#xd;
             query += &quot;NSEQITEMCNT, &quot;;&#xd;
-            query += &quot;PREFIXO) &quot;;&#xd;
-            query += &quot;VALUES (?,?,?)&quot;;&#xd;
+            query += &quot;PREFIXO,  &quot;;&#xd;
+            query += &quot;ATIVO) &quot;&#xd;
+            query += &quot;VALUES (?,?,?,?)&quot;;&#xd;
 &#xd;
             executeInsert(query,[&#xd;
                 {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},//ID_TCNT_AUXILIAR&#xd;
                 {type:&quot;int&quot;, value:counter},//NSEQITEMCNT&#xd;
                 {type:&quot;varchar&quot;, value:prefixo},//PREFIXO&#xd;
+                {type:&quot;int&quot;, value: &quot;1&quot;}, // Ativado&#xd;
             ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
             counter++;&#xd;
         }&#xd;
@@ -2827,7 +3631,7 @@ function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){&#xd;
+function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
  try {        &#xd;
         var query = &quot;INSERT INTO TCNT_AUXILIAR_ITENS (&quot;;&#xd;
         query += &quot;ID_TCNT_AUXILIAR, &quot;;&#xd;
@@ -2835,8 +3639,9 @@ function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){&#xd;
         query += &quot;TIPO, &quot;;&#xd;
         query += &quot;DESCRICAO, &quot;;&#xd;
         query += &quot;VALOR, &quot;;&#xd;
-        query += &quot;UN) &quot;;&#xd;
-        query += &quot;VALUES (?,?,?,?,?,?)&quot;;&#xd;
+        query += &quot;UN, &quot;;&#xd;
+        query += &quot;ENDERECO) &quot;&#xd;
+        query += &quot;VALUES (?,?,?,?,?,?,?)&quot;;&#xd;
 &#xd;
         executeInsert(query,[&#xd;
             {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},//ID_TCNT_AUXILIAR&#xd;
@@ -2845,6 +3650,7 @@ function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){&#xd;
             {type:&quot;varchar&quot;, value:hAPI.getCardValue(&quot;descricaoImovel&quot;)},//DESCRICAO&#xd;
             {type:&quot;float&quot;, value:ValorToFloat(hAPI.getCardValue(&quot;valorMensalAluguel&quot;)+&quot;&quot;)},//VALOR&#xd;
             {type:&quot;varchar&quot;, value:&quot;MES&quot;},//UN&#xd;
+            {type:&quot;date&quot;, value:hAPI.getCardValue(&quot;enderecoImovel&quot;)},// ENDERECO&#xd;
         ], &quot;/jdbc/CastilhoCustom&quot;);  &#xd;
 &#xd;
     } catch (error) {&#xd;
@@ -2852,7 +3658,7 @@ function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){&#xd;
     }&#xd;
 }&#xd;
 &#xd;
-function updateTcntAuxiliar(IDCNT, ID_TCNT_AUXILIAR){&#xd;
+function updateTcntAuxiliar_IDCNT(IDCNT, ID_TCNT_AUXILIAR){&#xd;
     try {&#xd;
         var query = &quot;UPDATE TCNT_AUXILIAR SET IDCNT = ? WHERE ID = ?&quot;;&#xd;
         executaUpdate(query, [&#xd;
@@ -2861,6 +3667,193 @@ function updateTcntAuxiliar(IDCNT, ID_TCNT_AUXILIAR){&#xd;
         ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
     } catch (error) {&#xd;
         throw error;   &#xd;
+    }&#xd;
+}&#xd;
+function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR){&#xd;
+    try {&#xd;
+        var query = &quot;UPDATE TCNT_AUXILIAR SET DATA_ASSINATURA = ? WHERE ID = ?&quot;;&#xd;
+        executaUpdate(query, [&#xd;
+            {type:&quot;date&quot;, value:DATA_ASSINATURA},&#xd;
+            {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},&#xd;
+        ], &quot;jdbc/CastilhoCustom&quot;);&#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
+    }&#xd;
+}&#xd;
+function updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, NSEQITEMCNT) {&#xd;
+    try {&#xd;
+        // Inicia um bloco de proteção contra erros, se algo der errado durante a execução, o erro será capturado.&#xd;
+&#xd;
+        // Monta a query que será enviada ao banco e atualizar o campos VALOR&#xd;
+        var query = &quot;UPDATE TCNT_AUXILIAR_ITENS SET VALOR = ? WHERE ID_TCNT_AUXILIAR = ? AND NSEQITEMCNT = ?&quot;;&#xd;
+&#xd;
+        // Executa o comando no banco.&#xd;
+        // Os &quot;?&quot; da query serão substituídos pelos valores abaixo, na mesma ordem em que aparecem.&#xd;
+        executaUpdate(query, [&#xd;
+            &#xd;
+            // Primeiro &quot;?&quot; &gt; novo valor de aluguel&#xd;
+            {type: &quot;float&quot;, value: valorLocacaoReajustado},&#xd;
+            // Segundo &quot;?&quot; &gt; código do contrato que será atualizado&#xd;
+            {type: &quot;int&quot;, value: ID_TCNT_AUXILIAR},&#xd;
+            // Terceiro &quot;?&quot; &gt; numero de sequencia do item do contrato&#xd;
+            {type: &quot;int&quot;, value: NSEQITEMCNT},&#xd;
+&#xd;
+        ], &quot;jdbc/CastilhoCustom&quot;); &#xd;
+        // &quot;jdbc/CastilhoCustom&quot; é o nome da conexão usada para acessar o banco.&#xd;
+&#xd;
+    } catch (error) {&#xd;
+        // Se ocorrer algum erro durante a execução da query, ele é capturado aqui.&#xd;
+&#xd;
+        // O erro é reenviado para quem chamou essa função, permitindo que seja tratado em outro ponto do sistema.&#xd;
+        throw error;&#xd;
+    }&#xd;
+}&#xd;
+function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR) { //Inclusão/Exclusão de Equip&#xd;
+    try {&#xd;
+        // hAPI.getChildrenIndexes retorna uma array de indexes que contém na tabela, exemplo [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]&#xd;
+        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
+&#xd;
+        // Pecorre cada linha da tabela&#xd;
+        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+&#xd;
+            // Pega o indice atual da tabela&#xd;
+            var id = indexes[i]&#xd;
+&#xd;
+            // Monta o nome do campo para buscar o valor salvo na linha&#xd;
+            var prefixo = hAPI.getCardValue(&quot;equipSelecionado_aditivos&quot; + &quot;___&quot; + id);&#xd;
+&#xd;
+            // Se não tiver prefixo, ignora a linha&#xd;
+            if (!prefixo) {&#xd;
+                continue;&#xd;
+            }&#xd;
+&#xd;
+            var query = &quot;&quot;;&#xd;
+            query += &quot;UPDATE TCNT_AUXILIAR_ITENS SET ATIVO = ? WHERE PREFIXO = ? AND ID_TCNT_AUXILIAR = ? &quot;&#xd;
+&#xd;
+            executeInsert(query, [&#xd;
+                { type: &quot;int&quot;, value: ATIVO },&#xd;
+                { type: &quot;varchar&quot;, value: prefixo },&#xd;
+                { type : &quot;int&quot;, value: ID_TCNT_AUXILIAR }&#xd;
+            ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+        }&#xd;
+&#xd;
+    } catch (error) {&#xd;
+        // O bloco catch captura qualquer erro lançado dentro do try.&#xd;
+        // Em JavaScript/TypeScript, o valor capturado pode ser qualquer coisa&#xd;
+        // (Error, string, objeto, número, etc).&#xd;
+&#xd;
+        if (error instanceof Error) {&#xd;
+            // Se o erro já for uma instância da classe Error,&#xd;
+            // simplesmente relança o mesmo erro.&#xd;
+            throw error;&#xd;
+        } else {&#xd;
+            // Caso o erro NÃO seja um Error (ex: string, objeto, número),&#xd;
+            // criamos um novo Error para padronizar o tipo de erro lançado.&#xd;
+&#xd;
+            throw new Error(&#xd;
+                // Se for uma string, usamos diretamente como mensagem&#xd;
+                typeof error === &quot;string&quot;&#xd;
+                    ? error&#xd;
+                    // Caso contrário, convertemos o valor para JSON&#xd;
+                    // para gerar uma mensagem legível.&#xd;
+                    : JSON.stringify(error)&#xd;
+            );&#xd;
+        }&#xd;
+    }&#xd;
+}&#xd;
+function getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR) {&#xd;
+    try {&#xd;
+        if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
+            var query = &quot;SELECT MAX(NSEQITEMCNT) +1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?&quot;&#xd;
+&#xd;
+            var result = executaQuery(query, [&#xd;
+                { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR }&#xd;
+            ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+&#xd;
+            return parseInt(result[0].NSEQITEMCNT);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
+&#xd;
+&#xd;
+        }&#xd;
+&#xd;
+    } catch (error) {&#xd;
+        // O bloco catch captura qualquer erro lançado dentro do try.&#xd;
+        // Em JavaScript/TypeScript, o valor capturado pode ser qualquer coisa&#xd;
+        // (Error, string, objeto, número, etc).&#xd;
+&#xd;
+        if (error instanceof Error) {&#xd;
+            // Se o erro já for uma instância da classe Error,&#xd;
+            // simplesmente relança o mesmo erro.&#xd;
+            throw error;&#xd;
+        } else {&#xd;
+            // Caso o erro NÃO seja um Error (ex: string, objeto, número),&#xd;
+            // criamos um novo Error para padronizar o tipo de erro lançado.&#xd;
+&#xd;
+            throw new Error(&#xd;
+                // Se for uma string, usamos diretamente como mensagem&#xd;
+                typeof error === &quot;string&quot;&#xd;
+                    ? error&#xd;
+                    // Caso contrário, convertemos o valor para JSON&#xd;
+                    // para gerar uma mensagem legível.&#xd;
+                    : JSON.stringify(error)&#xd;
+            );&#xd;
+        }&#xd;
+    }&#xd;
+}&#xd;
+function updateSISMA_statusEquipamento() { // Exclusão/Rescisão do Contrato de Equip&#xd;
+    try {&#xd;
+        var dataAtual = getDateNow() + &quot; 00:00:00&quot;;&#xd;
+&#xd;
+        // hAPI.getChildrenIndexes retorna uma array de indexes que contém na tabela, exemplo [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]&#xd;
+        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
+&#xd;
+        // Pecorre cada linha da tabela&#xd;
+        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+&#xd;
+            // Pega o indice atual da tabela&#xd;
+            var id = indexes[i]&#xd;
+&#xd;
+            // Monta o nome do campo para buscar o valor salvo na linha&#xd;
+            var prefixo = hAPI.getCardValue(&quot;equipSelecionado_aditivos&quot; + &quot;___&quot; + id);&#xd;
+&#xd;
+            // Se não tiver prefixo, ignora a linha&#xd;
+            if (!prefixo) {&#xd;
+                continue;&#xd;
+            }&#xd;
+&#xd;
+            var query = &quot;&quot;;&#xd;
+            query += &quot;UPDATE EQUIPAMENTO SET CODIINES = ?, DATADESA = CONVERT(datetime, ?, 120) WHERE NUMEEQUI = ?&quot;&#xd;
+&#xd;
+            executeInsert(query, [&#xd;
+                { type: &quot;int&quot;, value: &apos;1&apos; },&#xd;
+                { type: &quot;datetime&quot;, value: dataAtual },&#xd;
+                { type: &quot;varchar&quot;, value: prefixo }&#xd;
+            ], &quot;/jdbc/Sisma&quot;);&#xd;
+        }&#xd;
+&#xd;
+    } catch (error) {&#xd;
+        // O bloco catch captura qualquer erro lançado dentro do try.&#xd;
+        // Em JavaScript/TypeScript, o valor capturado pode ser qualquer coisa&#xd;
+        // (Error, string, objeto, número, etc).&#xd;
+&#xd;
+        if (error instanceof Error) {&#xd;
+            // Se o erro já for uma instância da classe Error,&#xd;
+            // simplesmente relança o mesmo erro.&#xd;
+            throw error;&#xd;
+        } else {&#xd;
+            // Caso o erro NÃO seja um Error (ex: string, objeto, número),&#xd;
+            // criamos um novo Error para padronizar o tipo de erro lançado.&#xd;
+&#xd;
+            throw new Error(&#xd;
+                // Se for uma string, usamos diretamente como mensagem&#xd;
+                typeof error === &quot;string&quot;&#xd;
+                    ? error&#xd;
+                    // Caso contrário, convertemos o valor para JSON&#xd;
+                    // para gerar uma mensagem legível.&#xd;
+                    : JSON.stringify(error)&#xd;
+            );&#xd;
+        }&#xd;
     }&#xd;
 }&#xd;
 &#xd;
@@ -2876,15 +3869,48 @@ var codigoStatusEquipamentos = {&#xd;
 }&#xd;
 &#xd;
 function atualizaStatusEquipamento(status){&#xd;
-    try {&#xd;
-        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);&#xd;
- &#xd;
-        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
-            var id = indexes[i]&#xd;
-            var prefixo = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);&#xd;
+    var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
 &#xd;
-            var isMAouOutros = buscaCategoriaPorPrefixo(prefixo);&#xd;
-            if (isMAouOutros[0].CATEGORIA != &quot;Outros&quot;) {&#xd;
+    if (origemContrato == &quot;Novos&quot;) {&#xd;
+        try {&#xd;
+            var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);&#xd;
+    &#xd;
+            for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+                var id = indexes[i]&#xd;
+                var prefixo = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);&#xd;
+&#xd;
+                var isMAouOutros = buscaCategoriaPorPrefixo(prefixo);&#xd;
+                if (isMAouOutros[0].CATEGORIA != &quot;Outros&quot;) {&#xd;
+                    var query = &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET &quot;;&#xd;
+                    query += &quot;STATUS = ? &quot;;&#xd;
+                    query +=&quot;WHERE PREFIXO = ?&quot;;&#xd;
+&#xd;
+                    executeInsert(query, [&#xd;
+                        {type:&quot;int&quot;, value:codigoStatusEquipamentos[status]},&#xd;
+                        {type:&quot;varchar&quot;, value:prefixo},&#xd;
+                    ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+                }else{&#xd;
+                    var query = &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR_OUTROS SET &quot;;&#xd;
+                    query += &quot;STATUS = ? &quot;;&#xd;
+                    query +=&quot;WHERE PREFIXO = ?&quot;;&#xd;
+&#xd;
+                    executeInsert(query, [&#xd;
+                        {type:&quot;int&quot;, value:codigoStatusEquipamentos[status]},&#xd;
+                        {type:&quot;varchar&quot;, value:prefixo},&#xd;
+                    ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+                }&#xd;
+            }&#xd;
+        } catch (error) {&#xd;
+            throw error;&#xd;
+        }&#xd;
+    } else if (origemContrato == &quot;Aditivos&quot; || origemContrato == &quot;Rescisões&quot;) {&#xd;
+        try {&#xd;
+            var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
+    &#xd;
+            for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+                var id = indexes[i]&#xd;
+                var prefixo = hAPI.getCardValue(&quot;equipSelecionado_aditivos&quot; + &quot;___&quot; + id);&#xd;
+&#xd;
                 var query = &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET &quot;;&#xd;
                 query += &quot;STATUS = ? &quot;;&#xd;
                 query +=&quot;WHERE PREFIXO = ?&quot;;&#xd;
@@ -2893,19 +3919,11 @@ function atualizaStatusEquipamento(status){&#xd;
                     {type:&quot;int&quot;, value:codigoStatusEquipamentos[status]},&#xd;
                     {type:&quot;varchar&quot;, value:prefixo},&#xd;
                 ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
-            }else{&#xd;
-                var query = &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR_OUTROS SET &quot;;&#xd;
-                query += &quot;STATUS = ? &quot;;&#xd;
-                query +=&quot;WHERE PREFIXO = ?&quot;;&#xd;
-&#xd;
-                executeInsert(query, [&#xd;
-                    {type:&quot;int&quot;, value:codigoStatusEquipamentos[status]},&#xd;
-                    {type:&quot;varchar&quot;, value:prefixo},&#xd;
-                ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+                &#xd;
             }&#xd;
+        } catch (error) {&#xd;
+            throw error;&#xd;
         }&#xd;
-    } catch (error) {&#xd;
-        throw error;&#xd;
     }&#xd;
 }&#xd;
 &#xd;
@@ -3121,11 +4139,28 @@ function setDateXMLFormat(data, sql) {&#xd;
     return retorno;&#xd;
 }&#xd;
 function ValorToFloat(valor) {&#xd;
+    valor = String(valor);&#xd;
+&#xd;
     if (valor.split(&quot;R$&quot;).length &gt; 1) {&#xd;
         valor = valor.split(&quot;R$&quot;)[1].trim();&#xd;
     }&#xd;
     valor = valor.split(&quot;.&quot;).join(&quot;&quot;).split(&quot;,&quot;).join(&quot;.&quot;);&#xd;
     return parseFloat(valor);&#xd;
+}&#xd;
+function FloatToMoney(valor) {&#xd;
+    // Converte o valor recebido para número.&#xd;
+    // Se vier vazio, null ou undefined, usa 0.&#xd;
+    // toFixed(2) garante que sempre teremos duas casas decimais.&#xd;
+    valor = parseFloat(valor || 0).toFixed(2);&#xd;
+&#xd;
+    // Troca o ponto decimal por vírgula para seguir o padrão brasileiro&#xd;
+    // Ex: 14635.25 → 14635,25&#xd;
+    valor = valor.replace(&quot;.&quot;, &quot;,&quot;);&#xd;
+&#xd;
+    // Insere separadores de milhar (pontos) na parte inteira do número&#xd;
+    // Ex: 14635,25 → 14.635,25&#xd;
+    // A expressão regular encontra posições corretas para inserir os pontos&#xd;
+    return &quot;R$ &quot; + valor.replace(/\B(?=(\d{3})+(?!\d))/g, &quot;.&quot;);&#xd;
 }&#xd;
 function BuscaNomeUsuario(CodUsuario) {&#xd;
     var ds = DatasetFactory.getDataset(&quot;colleague&quot;, [&quot;colleagueName&quot;], [&#xd;
@@ -3326,14 +4361,85 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
         var status = ds.getValue(i, &quot;statusAssinatura&quot;);&#xd;
         log.info(&quot;status&quot;);&#xd;
         log.info(status);&#xd;
-        hAPI.setCardValue(&quot;statusAssinatura&quot;, status)&#xd;
+        hAPI.setCardValue(&quot;statusAssinatura&quot;, status);&#xd;
+&#xd;
+        // Se o status da assinatura for igual a &quot;Assinado&quot;&#xd;
+        if (status == &quot;Assinado&quot;) {&#xd;
+&#xd;
+            // Pega a data de assinatura do form &quot;ds_form_aux_wesign&quot; do campo dataAssinatura (mesmo nome)&#xd;
+            var dataAssinado = ds.getValue(i, &quot;dataAssinatura&quot;);&#xd;
+&#xd;
+            // Se dataAssinatura (do form &quot;ds_form_aux_wesign&quot;) não estiver como &quot;null&quot; então seta a data no campo dataAssinatura do form de Revitalização de Contrato.&#xd;
+            if (dataAssinado !== &quot;null&quot;) {&#xd;
+                hAPI.setCardValue(&quot;dataAssinatura&quot;, dataAssinado);&#xd;
+                updateTcntAuxiliar_dataAssinatura(dataAssinado, hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+            }&#xd;
+            &#xd;
+            log.info(&quot;intermediate58 - antes do return true&quot;);&#xd;
+            return true;&#xd;
+        }&#xd;
 &#xd;
         if (status == &quot;Pendente Assinatura&quot;) {&#xd;
             return false;&#xd;
         }&#xd;
     }&#xd;
+}&#xd;
 &#xd;
-    return true;&#xd;
+function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR){&#xd;
+    try {&#xd;
+        var query = &quot;UPDATE TCNT_AUXILIAR SET DATA_ASSINATURA = ? WHERE ID = ?&quot;;&#xd;
+        executaUpdate(query, [&#xd;
+            {type:&quot;date&quot;, value:DATA_ASSINATURA},&#xd;
+            {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},&#xd;
+        ], &quot;jdbc/CastilhoCustom&quot;);&#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
+    }&#xd;
+}&#xd;
+&#xd;
+function executaUpdate(query, constraints, dataSource) {&#xd;
+    try {&#xd;
+        var dataSource = dataSource;&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+        var ds = ic.lookup(dataSource);&#xd;
+&#xd;
+        var conn = ds.getConnection();&#xd;
+        var stmt = conn.prepareStatement(query);&#xd;
+&#xd;
+        var counter = 1;&#xd;
+        for (var i = 0; i &lt; constraints.length; i++) {&#xd;
+            var val = constraints[i];&#xd;
+            if (val.type == &quot;int&quot;) {&#xd;
+                stmt.setInt(counter, val.value);&#xd;
+            }&#xd;
+            else if (val.type == &quot;float&quot;) {&#xd;
+                stmt.setFloat(counter, val.value);&#xd;
+            }&#xd;
+            else if (val.type == &quot;date&quot;) {&#xd;
+                stmt.setString(counter, val.value);&#xd;
+            }&#xd;
+            else if (val.type == &quot;datetime&quot;) {&#xd;
+                stmt.setString(counter, val.value);&#xd;
+            } else {&#xd;
+                stmt.setString(counter, val.value);&#xd;
+            }&#xd;
+            counter++;&#xd;
+        }&#xd;
+&#xd;
+        stmt.executeUpdate();&#xd;
+        return true;&#xd;
+&#xd;
+    } catch (e) {&#xd;
+        log.error(&quot;ERRO==============&gt; &quot; + e.message);&#xd;
+        throw e;&#xd;
+    } finally {&#xd;
+        if (stmt != null) {&#xd;
+            stmt.close();&#xd;
+        }&#xd;
+        if (conn != null) {&#xd;
+            conn.close();&#xd;
+        }&#xd;
+    }&#xd;
 }</eventDescription>
     </WorkflowProcessEvent>
   </list>
@@ -3427,7 +4533,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>36</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3438,7 +4544,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>36</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3449,7 +4555,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>36</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3460,7 +4566,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>39</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3471,7 +4577,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>39</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3482,7 +4588,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>71</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3493,7 +4599,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>71</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3504,7 +4610,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>73</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3515,7 +4621,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>78</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3526,7 +4632,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>78</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3537,7 +4643,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>78</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3548,7 +4654,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>79</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3559,7 +4665,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>79</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3570,29 +4676,29 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>80</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
       <positionX>810</positionX>
-      <positionY>576</positionY>
+      <positionY>575</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>80</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
       <positionX>1315</positionX>
-      <positionY>576</positionY>
+      <positionY>575</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>82</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3603,7 +4709,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>82</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3614,7 +4720,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>85</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3625,7 +4731,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>85</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3636,7 +4742,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>86</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3647,7 +4753,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>86</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3658,7 +4764,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>86</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3669,7 +4775,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>87</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3680,7 +4786,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>87</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3691,7 +4797,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>87</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3702,7 +4808,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>91</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3713,7 +4819,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>91</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3724,7 +4830,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>91</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3735,7 +4841,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>92</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3746,7 +4852,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>92</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3757,7 +4863,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>92</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3768,7 +4874,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>93</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3779,7 +4885,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>93</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3790,7 +4896,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>94</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3801,7 +4907,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>94</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3812,7 +4918,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>94</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3823,7 +4929,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>95</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -3834,7 +4940,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>95</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -3845,7 +4951,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>95</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -3856,23 +4962,23 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>107</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
       <positionX>1068</positionX>
-      <positionY>706</positionY>
+      <positionY>705</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <linkSequence>107</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
       <positionX>1304</positionX>
-      <positionY>706</positionY>
+      <positionY>705</positionY>
     </ProcessLinkBend>
   </list>
   <list>
@@ -3880,7 +4986,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <stateSequence>58</stateSequence>
         <triggerSequence>0</triggerSequence>
       </processStateTriggerPK>
@@ -3894,7 +5000,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>2</version>
+        <version>81</version>
         <stateSequence>104</stateSequence>
         <triggerSequence>1</triggerSequence>
       </processStateTriggerPK>
@@ -4184,43 +5290,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
     </ConditionProcessAutomaticRules>
     <ConditionProcessAutomaticRules>
       <sequence>88</sequence>
-      <expressionOrder>1</expressionOrder>
-      <ruleOrder>1</ruleOrder>
-      <field>decisao</field>
-      <value>Aprovar</value>
-      <operator>1</operator>
-      <valueType>1</valueType>
-    </ConditionProcessAutomaticRules>
-    <ConditionProcessAutomaticRules>
-      <sequence>88</sequence>
-      <expressionOrder>1</expressionOrder>
-      <ruleOrder>2</ruleOrder>
-      <field>tipoContrato</field>
-      <value>Locação de Equipamento</value>
-      <operator>2</operator>
-      <valueType>1</valueType>
-    </ConditionProcessAutomaticRules>
-    <ConditionProcessAutomaticRules>
-      <sequence>88</sequence>
-      <expressionOrder>2</expressionOrder>
-      <ruleOrder>1</ruleOrder>
-      <field>decisao</field>
-      <value>Aprovar</value>
-      <operator>1</operator>
-      <valueType>1</valueType>
-    </ConditionProcessAutomaticRules>
-    <ConditionProcessAutomaticRules>
-      <sequence>88</sequence>
-      <expressionOrder>2</expressionOrder>
-      <ruleOrder>2</ruleOrder>
-      <field>tipoContrato</field>
-      <value>Locação de Equipamento</value>
-      <operator>1</operator>
-      <valueType>1</valueType>
-    </ConditionProcessAutomaticRules>
-    <ConditionProcessAutomaticRules>
-      <sequence>88</sequence>
-      <expressionOrder>3</expressionOrder>
+      <expressionOrder>4</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
       <value>Retornar</value>
@@ -4229,7 +5299,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
     </ConditionProcessAutomaticRules>
     <ConditionProcessAutomaticRules>
       <sequence>88</sequence>
-      <expressionOrder>3</expressionOrder>
+      <expressionOrder>4</expressionOrder>
       <ruleOrder>2</ruleOrder>
       <field>destinoRetorno</field>
       <value>OBRA</value>
@@ -4238,7 +5308,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
     </ConditionProcessAutomaticRules>
     <ConditionProcessAutomaticRules>
       <sequence>88</sequence>
-      <expressionOrder>4</expressionOrder>
+      <expressionOrder>5</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
       <value>Retornar</value>
@@ -4247,7 +5317,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
     </ConditionProcessAutomaticRules>
     <ConditionProcessAutomaticRules>
       <sequence>88</sequence>
-      <expressionOrder>4</expressionOrder>
+      <expressionOrder>5</expressionOrder>
       <ruleOrder>2</ruleOrder>
       <field>destinoRetorno</field>
       <value>JURIDICO</value>
@@ -4256,7 +5326,7 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
     </ConditionProcessAutomaticRules>
     <ConditionProcessAutomaticRules>
       <sequence>88</sequence>
-      <expressionOrder>5</expressionOrder>
+      <expressionOrder>6</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
       <value>Retornar</value>
@@ -4265,29 +5335,11 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
     </ConditionProcessAutomaticRules>
     <ConditionProcessAutomaticRules>
       <sequence>88</sequence>
-      <expressionOrder>5</expressionOrder>
+      <expressionOrder>6</expressionOrder>
       <ruleOrder>2</ruleOrder>
       <field>destinoRetorno</field>
       <value>CONTROLADORIA</value>
       <operator>1</operator>
-      <valueType>1</valueType>
-    </ConditionProcessAutomaticRules>
-    <ConditionProcessAutomaticRules>
-      <sequence>88</sequence>
-      <expressionOrder>6</expressionOrder>
-      <ruleOrder>1</ruleOrder>
-      <field>decisao</field>
-      <value>Aprovar</value>
-      <operator>1</operator>
-      <valueType>1</valueType>
-    </ConditionProcessAutomaticRules>
-    <ConditionProcessAutomaticRules>
-      <sequence>88</sequence>
-      <expressionOrder>6</expressionOrder>
-      <ruleOrder>2</ruleOrder>
-      <field>tipoContrato</field>
-      <value>Locação de Equipamento</value>
-      <operator>2</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
   </list>
