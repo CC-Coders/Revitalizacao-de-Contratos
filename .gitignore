@@ -2,3 +2,7 @@
 .metadata/.log
 /.metadata
 com.totvs.tds.ecm.dataservers
+*.cache
+*.bkp
+.vscode/servers.json
+*.cache

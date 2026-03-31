@@ -9,7 +9,9 @@ var ATIVIDADES = {
     ENGENHEIRO: 43,
     COORDENADOR_OBRAS: 48,
     DIRETORIA: 53,
+    STATUS_ASSINATURA_ELETRONICA: 58,
     ASSINATURA_ELETRONICA: 66,
+    OBRA_RECEBE_VIAS_ORIGINAIS: 76,
 };
 
 var STATUS_CONTRATOS = {
@@ -68,6 +70,10 @@ function beforeTaskSave(colleagueId, nextSequenceId, userList) {
             beforeTaskSave_coordenadorObras();
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {
             beforeTaskSave_diretoria();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.OBRA_RECEBE_VIAS_ORIGINAIS) { // Tipo de assinatura manual
+            beforeTaskSave_obraRecebeViasOriginais();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.STATUS_ASSINATURA_ELETRONICA) { // Tipo de assintaura eletrônica, com status "Assinado"
+            beforeTaskSave_statusAssinaturaEletronica();
         }
     } catch (error) {
         throw error;
@@ -77,17 +83,23 @@ function beforeTaskSave(colleagueId, nextSequenceId, userList) {
 function beforeTaskSave_inicio() {
     try {
         hAPI.setCardValue("numProces", getValue("WKNumProces"));
-
-        if (hAPI.getCardValue("tipoContrato") == "Locação de Equipamento" || hAPI.getCardValue("tipoContrato") == "Locação de Equipamento - Com Mão de Obra") {
+        var tipoContrato = hAPI.getCardValue("tipoContrato");
+        
+        if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
             atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
             hAPI.setCardValue("dataCriadoEm", getDateNow());
-        }
 
-        var id = insereDadosNaTabelaAuxiliar();
-        insereDadosNaTabelaAuxiliarItens(id);
-        hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
-    
- 
+            var id = insereDadosNaTabelaAuxiliar();
+            insereDadosNaTabelaAuxiliarItens(id);
+            hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
+
+        } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+            // Insere o(s) equip(s) na tabela para poder ver na Analise do Suprimentos, mas insere com Status Desativado
+            insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"));
+            atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
+
+        }
+        
         var pdfIdContrato = hAPI.getCardValue("contratoPdfId");
         if (pdfIdContrato) {
             anexaDocumentoNoProcesso(pdfIdContrato);
@@ -105,17 +117,35 @@ function beforeTaskSave_controladoria() {
         insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Controladoria");
         if (hAPI.getCardValue("decisao") == "Aprovar") {
             var tipo = hAPI.getCardValue("origemContrato");
-            var IDCNT = hAPI.getCardValue("IDCNT");
+            var tipoContrato = hAPI.getCardValue("tipoContrato");
+            var codColigada = hAPI.getCardValue("CODCOLIGADA");
 
-            if (tipo == "Novo" && IDCNT == "" ) {
+            // Seta Diretor conforme Coligada, para Contratos Novos de Locação de Equipamento
+            if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
+
+                // Segui o integracaoRMManager.js > function(s) representante....
+
+                // Castilho ou Mineração ou Estação Luz
+                if (codColigada == 1 || codColigada == 2 || codColigada == 5) {
+                    hAPI.setCardValue("diretor", "jerson");
+
+                // Dromos ou EPYA
+                } else if (codColigada == 12 || codColigada == 13) {
+                    hAPI.setCardValue("diretor", "mario")
+                }
+            }
+            var IDCNT = hAPI.getCardValue("IDCNT");
+            if (tipo == "Novos" && IDCNT == "") {
                 var IDCNT = criaNovoContrato();
                 hAPI.setCardValue("IDCNT", IDCNT);
-                updateTcntAuxiliar(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
+                updateTcntAuxiliar_IDCNT(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
+
             } else if (tipo == "Aditivos") {
-                alteraStatusContrato(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "PENDENTE OBRA");
+                alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "PENDENTE OBRA");
                 // TODO - Inserir relação do Aditivo com o Contrato na tabela Custom de Contratos
+
             } else if (tipo == "Rescisões") {
-                alteraStatusContrato(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "RESCISÃO EM ANDAMENTO");
+                alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "RESCISÃO EM ANDAMENTO");
                 // TODO - Inserir relação da Rescisão com o Contrato na tabela Custom de Contratos
             }
         }
@@ -127,10 +157,10 @@ function beforeTaskSave_engenheiro() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Engenheiro");
 
     if (hAPI.getCardValue("decisao") == "Aprovar") {
-        if (hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento - Com Mão de Obra" && hAPI.getCardValue("coordenador") == "") {
+        if (hAPI.getCardValue("assinaturaContrato") == "Eletrônica" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento - Com Mão de Obra" && hAPI.getCardValue("coordenador") == "") {
             // Se não tiver coordenador vai para assinatura eletrônica
             criaAssinaturaEletronica();
-        }else if((hAPI.getCardValue("tipoContrato") == "Locação de Equipamento" || hAPI.getCardValue("tipoContrato") == "Locação de Equipamento - Com Mão de Obra") && hAPI.getCardValue("coordenador") == "" && hAPI.getCardValue("CODCOLIGADA") != 1 ){
+        }else if(hAPI.getCardValue("assinaturaContrato") == "Eletrônica" && (hAPI.getCardValue("tipoContrato") == "Locação de Equipamento" || hAPI.getCardValue("tipoContrato") == "Locação de Equipamento - Com Mão de Obra") && hAPI.getCardValue("coordenador") == "" && hAPI.getCardValue("CODCOLIGADA") != 1 ){
             // Caso seja Locação de Equipamento e não tiver coordenador
             // Vai para assinatura eletrônica somente quando não for Coligada 1, pois na Coligada 1 vai para aprovação do Jerson
             criaAssinaturaEletronica();
@@ -140,15 +170,139 @@ function beforeTaskSave_engenheiro() {
 function beforeTaskSave_coordenadorObras() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Coordenador");
 
-    if (hAPI.getCardValue("decisao") == "Aprovar" && (hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento - Com Mão de Obra")) {
+    if (hAPI.getCardValue("decisao") == "Aprovar" && (hAPI.getCardValue("assinaturaContrato") == "Eletrônica" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento - Com Mão de Obra")) {
         criaAssinaturaEletronica();
     }
 }
 function beforeTaskSave_diretoria() {
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Diretoria");
 
-    if (hAPI.getCardValue("decisao") == "Aprovar" ){
+    if (hAPI.getCardValue("decisao") == "Aprovar" && hAPI.getCardValue("assinaturaContrato") == "Eletrônica"){
         criaAssinaturaEletronica();
+    }
+}
+function beforeTaskSave_statusAssinaturaEletronica() {
+
+    // Aqui não atualiza dataAssinatura na base CastilhoCustom porque já é feito isso em ...intermediateconditional58.js
+    // Mas qundo assinatura manual, atualiza a dataAssinatura através da função beforeTaskSave_obraRecebeViasOriginais / atividade obraRecebeViasOriginais
+
+    if (hAPI.getCardValue("statusAssinatura") == "Assinado") {
+        alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "ATIVO");
+        regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();
+    }
+}
+function beforeTaskSave_obraRecebeViasOriginais() {
+    var ID_TCNT_AUXILIAR = hAPI.getCardValue("ID_TCNT_AUXILIAR");
+
+    if (hAPI.getCardValue("origemContrato") == "Novos") {
+        var IDCNT = hAPI.getCardValue("IDCNT");
+        var DATA_ASSINATURA = getDateTimeNow();
+        hAPI.setCardValue("dataAssinatura", DATA_ASSINATURA);
+        updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR);
+        alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "ATIVO");
+        
+    }
+    regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();
+}
+
+// Centraliza as regras que beforeTaskSave_statusAssinaturaEletronica e beforeTaskSave_obraRecebeViasOriginais usam
+// Antes se repetia as lógicas nas 2 funções (Assinatura eletrônica/manual) o que dificultava manutenção
+function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {
+
+    // Formata valor monetario para float
+    var valorLocacaoReajustado = ValorToFloat(hAPI.getCardValue("valorLocacaoReajustado"));
+
+    var IDCNT = hAPI.getCardValue("IDCNT");
+    var ID_TCNT_AUXILIAR = hAPI.getCardValue("ID_TCNT_AUXILIAR");
+    var tipoContrato = hAPI.getCardValue("tipoContrato");
+    var origemContrato = hAPI.getCardValue("origemContrato");
+    var dataFimLocacao = hAPI.getCardValue("dataFimLocacao");
+
+    try {
+
+        if (origemContrato == "Aditivos" || origemContrato == "Rescisões") {
+            if (tipoContrato == "Locação de Equipamento - Alteração de Valor" || tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
+                tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" || tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
+                tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || tipoContrato == "Locação de Equipamento (Rescisões)" || 
+                tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)")
+            {
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR);
+
+            } else if (tipoContrato == "Locação de Imóvel - Alteração de Valor" || tipoContrato == "Locação de Imóvel - Alteração de Prazo" || 
+                tipoContrato == "Locação de Imóvel - Alteração de Prazo e Valor") 
+            {
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR);
+            }
+                alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "ATIVO");
+        }
+        
+        if (tipoContrato == "Locação de Imóvel - Alteração de Prazo") {
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
+            updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue("dataFimLocacao"));
+
+        } else if (tipoContrato == "Locação de Imóvel - Alteração de Valor") {
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
+            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue("NSEQITEMCNT"));
+            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);
+
+        } else if (tipoContrato == "Locação de Imóvel - Alteração de Prazo e Valor") {
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
+            updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao);
+            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue("NSEQITEMCNT"));
+            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);
+
+        } else if (tipoContrato == "Locação de Imóvel (Rescisões)") { // Rescisão
+            // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.
+            alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "CANCELADO");
+        
+        } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo") {
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);
+
+        } else if (tipoContrato == "Locação de Equipamento - Alteração de Valor") {
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);
+            updateSISMA_alteracaoAluguelContrato_equipamento();
+
+        } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor") {
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);
+            updateSISMA_alteracaoAluguelContrato_equipamento();
+
+        } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);
+
+            // Atualiza o ATIVO para ativado ( 1 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo
+            updateTcntAuxiliarItens_statusEquipNoContrato("1", ID_TCNT_AUXILIAR);
+            atualizaStatusEquipamento("Contrato_Vigente");
+
+        } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);
+
+            // Desativa equipamentos no SISMA
+            updateSISMA_statusEquipamento();
+
+            // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo
+            updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR);
+            atualizaStatusEquipamento("Equipamento_desmobilizado");
+
+        } else if (tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)") {
+            // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.
+            alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "CANCELADO");
+
+            // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado essa rescisão
+            updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR);
+            atualizaStatusEquipamento("Equipamento_desmobilizado");
+
+            // Desativa equipamentos no SISMA
+            updateSISMA_statusEquipamento();
+
+        }
+    } catch (error) {
+        throw error;
     }
 }
 
@@ -255,6 +409,7 @@ function buscaParamentrosCriacaoContrato() {
     };
 }
 function validaParametros(parametros) {
+    log.info("Antes de validaParametros, CODTCN = " + parametros.CODTCN);
 
     var erroRetorno = [];
     if (parametros.CODCOLIGADA == undefined || parametros.CODCOLIGADA == null || parametros.CODCOLIGADA == "") {
@@ -457,7 +612,7 @@ function geraXML_TITMCNT(parametros) {
         xml += "    <DATAFIM>" + setDateXMLFormat(parametros.DATAFIM) + "T00:00:00</DATAFIM>";
         xml += "    <CODCPGPRAZO>130</CODCPGPRAZO>";
         xml += "    <CODRPR>" + parametros.CODRPR + "</CODRPR>";
-        if (parametros.CODCPG == TIPOS_FATURAMENTO["Periódico"]) {
+        if (parametros.TIPOFATURAMENTO  == TIPOS_FATURAMENTO["Periódico"]) { // Antes era parametros.CODCPG
             xml += "<DIAFATURAMENTO>" + parametros.DIAFATURAMENTO + "</DIAFATURAMENTO>";
             xml += "<QTDEFATURAMENTOS>" + parametros.QTDEFATURAMENTOS + "</QTDEFATURAMENTOS>";
         }
@@ -507,10 +662,230 @@ function geraXML_TITMCNTRATDEP(parametros) {
     }
     return xml;
 }
+function updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao) {
 
+    var CODCOLIGADA = hAPI.getCardValue("CODCOLIGADA");
 
+    var xml = "";
+    xml += "<CTRCNT>";
+    xml += "  <TCNT>";
+    xml += "    <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "    <IDCNT>" + IDCNT + "</IDCNT>";
+    xml += "    <DATAFIM>" + setDateXMLFormat(dataFimLocacao, 0) + "</DATAFIM>";
+    xml += "  </TCNT>";
+    xml += "</CTRCNT>";
 
-function alteraStatusContrato(STATUS) {
+    var contexto = "CODSISTEMA=G;CODCOLIGADA=" + CODCOLIGADA + ";CODUSUARIO=fluig";
+
+    var retorno = DatasetFactory.getDataset(
+        "InsereContratoRM",
+        null,
+        [
+            DatasetFactory.createConstraint("coligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+            DatasetFactory.createConstraint("idContrato", IDCNT, IDCNT, ConstraintType.MUST),
+            DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST),
+            DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST),
+        ],
+        null
+    );
+
+    if (retorno.values[0][0] == "false") {
+        throw "Erro ao alterar prazo: " + retorno.values[0][1];
+    }
+}
+function updateTCNT_alteracaoValorAluguel_imovel(IDCNT) {
+
+    var CODCOLIGADA = hAPI.getCardValue("CODCOLIGADA");
+    var valorMensalLocacao = hAPI.getCardValue("valorLocacaoReajustado");
+
+    var xml = "";
+    xml += "<CTRCNT>";
+
+    // Tabela TCNT
+    xml += "  <TCNT>";
+    xml += "    <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "    <IDCNT>" + IDCNT + "</IDCNT>";
+    xml += "  </TCNT>";
+
+    // Tabela TITMCNT
+    xml += "  <TITMCNT>";
+    xml += "    <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "    <IDCNT>" + IDCNT + "</IDCNT>";
+    xml += "    <NSEQITMCNT>" + 1 + "</NSEQITMCNT>";
+    xml += "    <PRECOFATURAMENTO>" + ValorToFloat(valorMensalLocacao).toString().replace(".", ",") + "</PRECOFATURAMENTO>";
+    xml += "  </TITMCNT>";
+    xml += "</CTRCNT>";
+
+    var contexto = "CODSISTEMA=G;CODCOLIGADA=" + CODCOLIGADA + ";CODUSUARIO=fluig";
+
+    var retorno = DatasetFactory.getDataset(
+        "InsereContratoRM",
+        null,
+        [
+            DatasetFactory.createConstraint("coligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+            DatasetFactory.createConstraint("idContrato", IDCNT, IDCNT, ConstraintType.MUST),
+            DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST),
+            DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST),
+        ],
+        null
+    );
+
+    if (retorno.values[0][0] == "false") {
+        throw "Erro ao alterar valor: " + retorno.values[0][1];
+    }
+}
+function updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao) {
+
+    var CODCOLIGADA = hAPI.getCardValue("CODCOLIGADA");
+
+    var xml = "";
+    xml += "<CTRCNT>";
+    xml += "  <TCNT>";
+    xml += "    <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "    <IDCNT>" + IDCNT + "</IDCNT>";
+    xml += "    <DATAFIM>" + setDateXMLFormat(dataFimLocacao, 0) + "</DATAFIM>";
+    xml += "  </TCNT>";
+    xml += "</CTRCNT>";
+
+    var contexto = "CODSISTEMA=G;CODCOLIGADA=" + CODCOLIGADA + ";CODUSUARIO=fluig";
+
+    var retorno = DatasetFactory.getDataset(
+        "InsereContratoRM",
+        null,
+        [
+            DatasetFactory.createConstraint("coligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+            DatasetFactory.createConstraint("idContrato", IDCNT, IDCNT, ConstraintType.MUST),
+            DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST),
+            DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST),
+        ],
+        null
+    );
+
+    if (retorno.values[0][0] == "false") {
+        throw "Erro ao alterar prazo: " + retorno.values[0][1];
+    }
+}
+function updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT) {
+    var CODCOLIGADA = hAPI.getCardValue("CODCOLIGADA");
+
+    var temRetencao = hAPI.getCardValue("temRetencao");
+    var percentualRetencao = parseFloat(String(hAPI.getCardValue("percentualRetencao") || "0").replace("%", ""));
+
+    var valorMensalLocacao = 0;
+
+    if (tipoContrato == "Locação de Equipamento - Alteração de Valor" || tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor") {
+
+        // Valor mensal original total do contrato
+        // Contém todos os equipamentos, tanto os que terão reajuste quanto os que não terão
+        var valorTotalContrato = ValorToFloat(hAPI.getCardValue("valorMensalLocacao"));
+        var somaValoresOriginaisAlterados = 0;
+        var somaValoresReajustadosAlterados = 0;
+
+        // Percorre as linhas do pai-filho com os equipamentos selecionados no aditivo
+        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
+        for (var i = 0; i < indexes.length; i++) {
+            var id = indexes[i];
+
+            // Valor original do equipamento antes do reajuste
+            var valorMensalOriginalAditivo = ValorToFloat(hAPI.getCardValue("valorMensalOriginalAditivo___" + id));
+
+            // Valor reajustado informado no aditivo
+            var valorReajustadoAditivo = ValorToFloat(hAPI.getCardValue("valorReajustado_aditivos___" + id));
+
+            somaValoresOriginaisAlterados += valorMensalOriginalAditivo;
+            somaValoresReajustadosAlterados += valorReajustadoAditivo;
+        }
+
+        // Remove os valores antigos dos equipamentos alterados, e soma os novos valores reajustados
+        valorMensalLocacao = valorTotalContrato - somaValoresOriginaisAlterados + somaValoresReajustadosAlterados;
+
+    } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento"|| tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+
+        // O campo valorMensalLocacao do formulário já foi calculado
+        valorMensalLocacao = ValorToFloat(hAPI.getCardValue("valorMensalLocacao"));
+    }
+
+    var valorRetencao = 0;
+    var valorLiquido = 0;
+
+    // Se houver retenção, separa o valor entre item principal e item de retenção
+    if (temRetencao == "Sim" && percentualRetencao > 0) {
+        valorRetencao = (valorMensalLocacao * percentualRetencao) / 100;
+        valorLiquido = valorMensalLocacao - valorRetencao;
+    } else {
+        valorLiquido = valorMensalLocacao;
+    }
+
+    var xml = "";
+    xml += "<CTRCNT>";
+
+    // Tabela TCNT
+    xml += "  <TCNT>";
+    xml += "    <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "    <IDCNT>" + IDCNT + "</IDCNT>";
+    xml += "  </TCNT>";
+
+    // Tabela TITMCNT - Item 1 (Principal)
+    xml += "  <TITMCNT>";
+    xml += "    <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "    <IDCNT>" + IDCNT + "</IDCNT>";
+    xml += "    <NSEQITMCNT>1</NSEQITMCNT>";
+    xml += "    <PRECOFATURAMENTO>" + valorLiquido.toString().replace(".", ",") + "</PRECOFATURAMENTO>";
+    xml += "  </TITMCNT>";
+
+    // Tabela TITMCNT - Item 2 (Retenção)
+    if (temRetencao == "Sim" && percentualRetencao > 0) {
+        xml += "  <TITMCNT>";
+        xml += "    <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
+        xml += "    <IDCNT>" + IDCNT + "</IDCNT>";
+        xml += "    <NSEQITMCNT>2</NSEQITMCNT>";
+        xml += "    <PRECOFATURAMENTO>" + valorRetencao.toString().replace(".",",") + "</PRECOFATURAMENTO>";
+        xml += "  </TITMCNT>";
+    }
+
+    xml += "</CTRCNT>";
+
+    var contexto = "CODSISTEMA=G;CODCOLIGADA=" + CODCOLIGADA + ";CODUSUARIO=fluig";
+
+    var retorno = DatasetFactory.getDataset(
+        "InsereContratoRM",
+        null,
+        [
+            DatasetFactory.createConstraint("coligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+            DatasetFactory.createConstraint("idContrato", IDCNT, IDCNT, ConstraintType.MUST),
+            DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST),
+            DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST),
+        ],
+        null
+    );
+
+    if (retorno.values[0][0] == "false") {
+        throw "Erro ao alterar valor: " + retorno.values[0][1];
+    }
+}
+function updateSISMA_alteracaoAluguelContrato_equipamento() {
+    try {
+        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
+        var counter = 0;
+        for (var i = 0; i < indexes.length; i++) {
+            var id = indexes[i]
+            var prefixo = hAPI.getCardValue("equipSelecionado_aditivos___" + id);
+            var valorReajustado = ValorToFloat(hAPI.getCardValue("valorReajustado_aditivos___" + id));
+            var valorMaoDeObra = ValorToFloat(hAPI.getCardValue("valorMaoDeObraAditivos___" + id));
+            var valorAluguelContrato = valorReajustado - valorMaoDeObra;
+
+            var query = "UPDATE EQUIPAMENTO SET ALUGUEL_CONTRATO = ? WHERE NUMEEQUI = ?";
+            executaUpdate(query, [
+                {type:"float", value: valorAluguelContrato},
+                {type:"varchar", value: prefixo},
+            ], "jdbc/Sisma");
+            counter++;
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+function alteraStatusContrato_RM(CODCOLIGADA, IDCNT, STATUS) {
     try {
         var CODSTACNT = STATUS_CONTRATOS[STATUS];
         if (!CODSTACNT || CODSTACNT == null || CODSTACNT == "") {
@@ -551,8 +926,7 @@ function alteraStatusContrato(STATUS) {
     }
 }
 
-
-function insereDadosNaTabelaAuxiliar(){
+function insereDadosNaTabelaAuxiliar(){ //Contratos Novos
     try {
         
         var query = "INSERT INTO TCNT_AUXILIAR (";
@@ -590,7 +964,236 @@ function insereDadosNaTabelaAuxiliar(){
         throw error;
     }
 }
-function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){
+function insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR) { //Tabela Historico de Aditivo/Rescisão
+    var valorMensalAluguel = hAPI.getCardValue("valorMensalAluguel");
+    var valorLocacaoReajustado = hAPI.getCardValue("valorLocacaoReajustado");
+    var dataInicioLocacao = hAPI.getCardValue("dataInicioLocacao");
+    var dataFimLocacao = hAPI.getCardValue("dataFimLocacao");
+    var dataAtual = getDateNow();
+    var descricao = null;
+
+    // Monta/usa DESCRICAO conforme #tipoContrato
+    if (tipoContrato == "Locação de Imóvel - Alteração de Prazo e Valor") {
+        descricao = "Alterado prazo e valor do contrato, prazo de " + dataInicioLocacao + " para " + dataFimLocacao + ", e valor de " + valorMensalAluguel + " para " + valorLocacaoReajustado;
+    }
+        
+    else if (tipoContrato == "Locação de Imóvel - Alteração de Valor") {
+        descricao = "Alterado valor do contrato de " + valorMensalAluguel + " para " + valorLocacaoReajustado;
+
+    } else if (tipoContrato == "Locação de Imóvel - Alteração de Prazo") {
+        descricao = "Alterado prazo do contrato de " + dataInicioLocacao + " para " + dataFimLocacao;
+
+    } else if (tipoContrato == "Locação de Imóvel (Rescisões)") {
+        descricao = "Contrato rescindido";
+    }
+
+    try {
+        var query = "INSERT INTO TCNT_AUXILIAR_ADITIVOS_RESCISOES (";
+        query += " ID_TCNT_AUXILIAR, ";
+        query += " TIPO, ";
+        query += " DESCRICAO, ";
+        query += " ID_FLUIG, ";
+        query += " DATA, ";
+        query += " DATA_ASSINATURA ";
+        query += ") ";
+        query += " VALUES (?,?,?,?,?,?);";
+
+        var id = executeInsert(query,[
+            {type:"int", value: ID_TCNT_AUXILIAR},
+            {type:"varchar", value: hAPI.getCardValue("tipoContrato")}, // Tipo do contrato
+            {type:"varchar", value: descricao}, // Descrição do que foi alterado no Contrato
+            {type:"int", value: getValue("WKNumProces")}, // Nº da Solicitação Fluig
+            {type:"date", value: dataAtual}, // Data atual do processo
+            {type:"date", value: dataAtual}, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)
+        ], "/jdbc/CastilhoCustom");
+
+        return id;
+    } catch (error) {
+        throw error;
+    }
+}
+function insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR) { //Tabela Historico de Aditivo/Rescisão
+    try {
+        var valorTotalContrato = ValorToFloat(hAPI.getCardValue("valorMensalLocacao"));
+        var valorTotalContartoMask = hAPI.getCardValue("valorMensalLocacao");
+        var dataInicioLocacao = hAPI.getCardValue("dataInicioLocacao");
+        var dataFimLocacao = hAPI.getCardValue("dataFimLocacao");
+        var dataAtual = getDateNow();
+        var dataReajuste = hAPI.getCardValue("dataReajuste");
+        var descricao = null;
+
+        // Soma dos valores originais apenas dos equipamentos alterados
+        var somaValoresOriginaisAlterados = 0;
+        // Soma dos valores reajustados apenas dos equipamentos alterados
+        var somaValoresReajustadosAlterados = 0;
+
+        // hAPI.getChildrenIndexes retorna uma array de indexes que contém na tabela, exemplo ["1", "2", "3"]
+        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
+
+        // Cria array para armazenar todos os prefixos encontrados na tabela, para depois concatenar prefixos separado por ,
+        var listaPrefixos = [];
+
+        // Pecorre cada linha da tabela
+        for (var i = 0; i < indexes.length; i++) {
+
+            // Pega o indice atual da tabela
+            var id = indexes[i]
+
+            // Monta o nome do campo para buscar o valor salvo na linha
+            var prefixo = hAPI.getCardValue("equipSelecionado_aditivos" + "___" + id);
+
+            // Pega o valor mensal original salvo para o prefixo alterado
+            var valorMensalOriginalAditivo = ValorToFloat(hAPI.getCardValue("valorMensalOriginalAditivo___" + id));
+
+            // Pega o valor reajustado salvo para o prefixo alterado
+            var valorReajustadoAditivo = ValorToFloat(hAPI.getCardValue("valorReajustado_aditivos___" + id));
+
+            // Soma os valores originais dos equipamentos alterados
+            somaValoresOriginaisAlterados += valorMensalOriginalAditivo;
+            // Soma os valores reajustados dos equipamentos alterados
+            somaValoresReajustadosAlterados += valorReajustadoAditivo;
+
+            // Se prefixo não vazio adiciona o prefixo na array de listaPrefixos
+            if (prefixo) {
+                listaPrefixos.push(prefixo);
+            }
+        }
+
+        // Novo valor mensal do contrato:
+        // valor original total
+        // menos os valores originais dos equipamentos alterados
+        // mais os valores reajustados dos equipamentos alterados
+        var valorMensalLocacao = valorTotalContrato - somaValoresOriginaisAlterados + somaValoresReajustadosAlterados;
+
+        // Formata para valor monetario
+        var novoValorContrato = FloatToMoney(valorMensalLocacao);
+
+        // Concatena os prefixos seperando eles por ,
+        var prefixos = listaPrefixos.join(", ");
+
+        // Monta/usa DESCRICAO conforme #tipoContrato
+        if (tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor") {
+            descricao = 
+            "Alterado prazo e valor do contrato, prazo de " + dataInicioLocacao + " para " + dataFimLocacao + ", e valor de " + valorTotalContartoMask + " para " + novoValorContrato + " dos equipamentos: " + prefixos;
+
+        } else if (tipoContrato == "Locação de Equipamento - Alteração de Valor") {
+            descricao = "Alterado valor do contrato de " + valorTotalContartoMask + " para " + novoValorContrato + " dos equipamentos: " + prefixos;
+
+        } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo") {
+            descricao = "Alterado prazo do contrato de " + dataInicioLocacao + " para " + dataFimLocacao + " dos equipamentos: " + prefixos;
+
+        } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+            descricao = "Incluído no contrato os equipamentos: " + prefixos;
+
+            // Usa a mesma data atual porque não tem data de reajuste.
+            dataReajuste = dataAtual;
+
+        } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+            descricao = "Excluído do contrato os equipamentos: " + prefixos;
+
+            // Usa a mesma data atual porque não tem data de reajuste.
+            dataReajuste = dataAtual;
+
+        } else if (tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)") {
+            descricao = "Contrato rescindido, dos equipamentos: " + prefixos;
+
+            // Usa a mesma data atual porque não tem data de reajuste.
+            dataReajuste = dataAtual;
+        }
+
+        var query = "INSERT INTO TCNT_AUXILIAR_ADITIVOS_RESCISOES (";
+        query += " ID_TCNT_AUXILIAR, ";
+        query += " TIPO, ";
+        query += " DESCRICAO, ";
+        query += " ID_FLUIG, ";
+        query += " DATA, ";
+        query += " DATA_ASSINATURA ";
+        query += ") ";
+        query += " VALUES (?,?,?,?,?,?)";
+
+        var id = executeInsert(query,[
+            {type:"int", value: ID_TCNT_AUXILIAR},
+            {type:"varchar", value: hAPI.getCardValue("tipoContrato")}, // Tipo do contrato
+            {type:"varchar", value: descricao}, // Descrição do que foi alterado no Contrato
+            {type:"int", value: getValue("WKNumProces")}, // Nº da Solicitação Fluig
+            {type:"date", value: dataReajuste}, // Data do reajuste informado no form
+            {type:"date", value: dataAtual}, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)
+        ], "/jdbc/CastilhoCustom");
+        
+    } catch (error) {
+        throw error;
+    }
+}
+function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclusão de Equip
+    try {
+        var tipoContrato = hAPI.getCardValue("tipoContrato");
+
+        // hAPI.getChildrenIndexes retorna uma array de indexes que contém na tabela, exemplo ["1", "2", "3"]
+        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
+
+        // Busca o próximo NSEQITEMCNT disponível para esse contrato auxiliar
+        var proximoNSEQITEMCNT = getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR);
+
+        // Pecorre cada linha da tabela
+        for (var i = 0; i < indexes.length; i++) {
+
+            // Pega o indice atual da tabela
+            var id = indexes[i]
+
+            // Monta o nome do campo para buscar o valor salvo na linha
+            var prefixo = hAPI.getCardValue("equipSelecionado_aditivos" + "___" + id);
+
+            // Se não tiver prefixo, ignora a linha
+            if (!prefixo) {
+                continue;
+            }
+
+            var query = "";
+            query += "INSERT INTO TCNT_AUXILIAR_ITENS";
+            query += "( ";
+            query += "ID_TCNT_AUXILIAR, ";
+            query += "NSEQITEMCNT, ";
+            query += "PREFIXO, ";
+            query += "ATIVO "
+            query += ") "
+            query += "VALUES (?,?,?,?)";
+
+            executeInsert(query, [
+                { type : "int", value: ID_TCNT_AUXILIAR },
+                { type: "int", value: proximoNSEQITEMCNT },
+                { type: "varchar", value: prefixo },
+                { type: "int", value: '0' }, // STATUS Desativado, vai ser reativado depois no final do Solict caso seja aprovado o Aditivo/Rescisão
+            ], "/jdbc/CastilhoCustom");
+
+            // Próximo item já vai com a próxima sequência
+            proximoNSEQITEMCNT++;
+        }
+
+    } catch (error) {
+        // O bloco catch captura qualquer erro lançado dentro do try.
+        // Em JavaScript/TypeScript, o valor capturado pode ser qualquer coisa
+        // (Error, string, objeto, número, etc).
+
+        if (error instanceof Error) {
+            // Se o erro já for uma instância da classe Error,
+            // simplesmente relança o mesmo erro.
+            throw error;
+        } else {
+            // Caso o erro NÃO seja um Error (ex: string, objeto, número),
+            // criamos um novo Error para padronizar o tipo de erro lançado.
+
+            throw new Error(
+                // Se for uma string, usamos diretamente como mensagem
+                typeof error === "string"
+                    ? error
+                    // Caso contrário, converte o valor para JSON
+                    // para gerar uma mensagem legível.
+                    : JSON.stringify(error)
+            );
+        }
+    }
+}
+function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){ //Contratos novos
     try {
         var tipo_contrato = hAPI.getCardValue("tipoContrato");
 
@@ -609,7 +1212,11 @@ function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){
         throw error;
     }
 }
-function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){
+function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){ //Contratos novos
+
+    // Nos testes vai pode ser inserido mais de 1 PREFIXO igual para o mesmo ID_TCNT_AUXILIAR
+    // Mas em produção o PREFIXO será único, 
+    // já que sempre o novo processo de Cadastro de equip exigirá um PREFIXO não existente na base do SISMA
     try {        
         var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados");
         var counter = 0;
@@ -620,13 +1227,15 @@ function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){
             var query = "INSERT INTO TCNT_AUXILIAR_ITENS (";
             query += "ID_TCNT_AUXILIAR, ";
             query += "NSEQITEMCNT, ";
-            query += "PREFIXO) ";
-            query += "VALUES (?,?,?)";
+            query += "PREFIXO,  ";
+            query += "ATIVO) "
+            query += "VALUES (?,?,?,?)";
 
             executeInsert(query,[
                 {type:"int", value:ID_TCNT_AUXILIAR},//ID_TCNT_AUXILIAR
                 {type:"int", value:counter},//NSEQITEMCNT
                 {type:"varchar", value:prefixo},//PREFIXO
+                {type:"int", value: "1"}, // Ativado
             ], "/jdbc/CastilhoCustom");
             counter++;
         }
@@ -634,7 +1243,7 @@ function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){
         throw error;
     }
 }
-function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){
+function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){ //Contratos novos
  try {        
         var query = "INSERT INTO TCNT_AUXILIAR_ITENS (";
         query += "ID_TCNT_AUXILIAR, ";
@@ -642,8 +1251,9 @@ function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){
         query += "TIPO, ";
         query += "DESCRICAO, ";
         query += "VALOR, ";
-        query += "UN) ";
-        query += "VALUES (?,?,?,?,?,?)";
+        query += "UN, ";
+        query += "ENDERECO) "
+        query += "VALUES (?,?,?,?,?,?,?)";
 
         executeInsert(query,[
             {type:"int", value:ID_TCNT_AUXILIAR},//ID_TCNT_AUXILIAR
@@ -652,6 +1262,7 @@ function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){
             {type:"varchar", value:hAPI.getCardValue("descricaoImovel")},//DESCRICAO
             {type:"float", value:ValorToFloat(hAPI.getCardValue("valorMensalAluguel")+"")},//VALOR
             {type:"varchar", value:"MES"},//UN
+            {type:"date", value:hAPI.getCardValue("enderecoImovel")},// ENDERECO
         ], "/jdbc/CastilhoCustom");  
 
     } catch (error) {
@@ -659,7 +1270,7 @@ function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){
     }
 }
 
-function updateTcntAuxiliar(IDCNT, ID_TCNT_AUXILIAR){
+function updateTcntAuxiliar_IDCNT(IDCNT, ID_TCNT_AUXILIAR){
     try {
         var query = "UPDATE TCNT_AUXILIAR SET IDCNT = ? WHERE ID = ?";
         executaUpdate(query, [
@@ -668,6 +1279,193 @@ function updateTcntAuxiliar(IDCNT, ID_TCNT_AUXILIAR){
         ], "/jdbc/CastilhoCustom");
     } catch (error) {
         throw error;   
+    }
+}
+function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR){
+    try {
+        var query = "UPDATE TCNT_AUXILIAR SET DATA_ASSINATURA = ? WHERE ID = ?";
+        executaUpdate(query, [
+            {type:"date", value:DATA_ASSINATURA},
+            {type:"int", value:ID_TCNT_AUXILIAR},
+        ], "jdbc/CastilhoCustom");
+    } catch (error) {
+        throw error;
+    }
+}
+function updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, NSEQITEMCNT) {
+    try {
+        // Inicia um bloco de proteção contra erros, se algo der errado durante a execução, o erro será capturado.
+
+        // Monta a query que será enviada ao banco e atualizar o campos VALOR
+        var query = "UPDATE TCNT_AUXILIAR_ITENS SET VALOR = ? WHERE ID_TCNT_AUXILIAR = ? AND NSEQITEMCNT = ?";
+
+        // Executa o comando no banco.
+        // Os "?" da query serão substituídos pelos valores abaixo, na mesma ordem em que aparecem.
+        executaUpdate(query, [
+            
+            // Primeiro "?" > novo valor de aluguel
+            {type: "float", value: valorLocacaoReajustado},
+            // Segundo "?" > código do contrato que será atualizado
+            {type: "int", value: ID_TCNT_AUXILIAR},
+            // Terceiro "?" > numero de sequencia do item do contrato
+            {type: "int", value: NSEQITEMCNT},
+
+        ], "jdbc/CastilhoCustom"); 
+        // "jdbc/CastilhoCustom" é o nome da conexão usada para acessar o banco.
+
+    } catch (error) {
+        // Se ocorrer algum erro durante a execução da query, ele é capturado aqui.
+
+        // O erro é reenviado para quem chamou essa função, permitindo que seja tratado em outro ponto do sistema.
+        throw error;
+    }
+}
+function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR) { //Inclusão/Exclusão de Equip
+    try {
+        // hAPI.getChildrenIndexes retorna uma array de indexes que contém na tabela, exemplo ["1", "2", "3"]
+        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
+
+        // Pecorre cada linha da tabela
+        for (var i = 0; i < indexes.length; i++) {
+
+            // Pega o indice atual da tabela
+            var id = indexes[i]
+
+            // Monta o nome do campo para buscar o valor salvo na linha
+            var prefixo = hAPI.getCardValue("equipSelecionado_aditivos" + "___" + id);
+
+            // Se não tiver prefixo, ignora a linha
+            if (!prefixo) {
+                continue;
+            }
+
+            var query = "";
+            query += "UPDATE TCNT_AUXILIAR_ITENS SET ATIVO = ? WHERE PREFIXO = ? AND ID_TCNT_AUXILIAR = ? "
+
+            executeInsert(query, [
+                { type: "int", value: ATIVO },
+                { type: "varchar", value: prefixo },
+                { type : "int", value: ID_TCNT_AUXILIAR }
+            ], "/jdbc/CastilhoCustom");
+        }
+
+    } catch (error) {
+        // O bloco catch captura qualquer erro lançado dentro do try.
+        // Em JavaScript/TypeScript, o valor capturado pode ser qualquer coisa
+        // (Error, string, objeto, número, etc).
+
+        if (error instanceof Error) {
+            // Se o erro já for uma instância da classe Error,
+            // simplesmente relança o mesmo erro.
+            throw error;
+        } else {
+            // Caso o erro NÃO seja um Error (ex: string, objeto, número),
+            // criamos um novo Error para padronizar o tipo de erro lançado.
+
+            throw new Error(
+                // Se for uma string, usamos diretamente como mensagem
+                typeof error === "string"
+                    ? error
+                    // Caso contrário, convertemos o valor para JSON
+                    // para gerar uma mensagem legível.
+                    : JSON.stringify(error)
+            );
+        }
+    }
+}
+function getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR) {
+    try {
+        if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+            var query = "SELECT MAX(NSEQITEMCNT) +1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?"
+
+            var result = executaQuery(query, [
+                { type: "int", value: ID_TCNT_AUXILIAR }
+            ], "/jdbc/CastilhoCustom");
+
+            return parseInt(result[0].NSEQITEMCNT);
+
+        } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+
+
+        }
+
+    } catch (error) {
+        // O bloco catch captura qualquer erro lançado dentro do try.
+        // Em JavaScript/TypeScript, o valor capturado pode ser qualquer coisa
+        // (Error, string, objeto, número, etc).
+
+        if (error instanceof Error) {
+            // Se o erro já for uma instância da classe Error,
+            // simplesmente relança o mesmo erro.
+            throw error;
+        } else {
+            // Caso o erro NÃO seja um Error (ex: string, objeto, número),
+            // criamos um novo Error para padronizar o tipo de erro lançado.
+
+            throw new Error(
+                // Se for uma string, usamos diretamente como mensagem
+                typeof error === "string"
+                    ? error
+                    // Caso contrário, convertemos o valor para JSON
+                    // para gerar uma mensagem legível.
+                    : JSON.stringify(error)
+            );
+        }
+    }
+}
+function updateSISMA_statusEquipamento() { // Exclusão/Rescisão do Contrato de Equip
+    try {
+        var dataAtual = getDateNow() + " 00:00:00";
+
+        // hAPI.getChildrenIndexes retorna uma array de indexes que contém na tabela, exemplo ["1", "2", "3"]
+        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
+
+        // Pecorre cada linha da tabela
+        for (var i = 0; i < indexes.length; i++) {
+
+            // Pega o indice atual da tabela
+            var id = indexes[i]
+
+            // Monta o nome do campo para buscar o valor salvo na linha
+            var prefixo = hAPI.getCardValue("equipSelecionado_aditivos" + "___" + id);
+
+            // Se não tiver prefixo, ignora a linha
+            if (!prefixo) {
+                continue;
+            }
+
+            var query = "";
+            query += "UPDATE EQUIPAMENTO SET CODIINES = ?, DATADESA = CONVERT(datetime, ?, 120) WHERE NUMEEQUI = ?"
+
+            executeInsert(query, [
+                { type: "int", value: '1' },
+                { type: "datetime", value: dataAtual },
+                { type: "varchar", value: prefixo }
+            ], "/jdbc/Sisma");
+        }
+
+    } catch (error) {
+        // O bloco catch captura qualquer erro lançado dentro do try.
+        // Em JavaScript/TypeScript, o valor capturado pode ser qualquer coisa
+        // (Error, string, objeto, número, etc).
+
+        if (error instanceof Error) {
+            // Se o erro já for uma instância da classe Error,
+            // simplesmente relança o mesmo erro.
+            throw error;
+        } else {
+            // Caso o erro NÃO seja um Error (ex: string, objeto, número),
+            // criamos um novo Error para padronizar o tipo de erro lançado.
+
+            throw new Error(
+                // Se for uma string, usamos diretamente como mensagem
+                typeof error === "string"
+                    ? error
+                    // Caso contrário, convertemos o valor para JSON
+                    // para gerar uma mensagem legível.
+                    : JSON.stringify(error)
+            );
+        }
     }
 }
 
@@ -683,15 +1481,48 @@ var codigoStatusEquipamentos = {
 }
 
 function atualizaStatusEquipamento(status){
-    try {
-        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados");
- 
-        for (var i = 0; i < indexes.length; i++) {
-            var id = indexes[i]
-            var prefixo = hAPI.getCardValue("equipamentoSelecionadoPrefixo" + "___" + id);
+    var origemContrato = hAPI.getCardValue("origemContrato");
 
-            var isMAouOutros = buscaCategoriaPorPrefixo(prefixo);
-            if (isMAouOutros[0].CATEGORIA != "Outros") {
+    if (origemContrato == "Novos") {
+        try {
+            var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados");
+    
+            for (var i = 0; i < indexes.length; i++) {
+                var id = indexes[i]
+                var prefixo = hAPI.getCardValue("equipamentoSelecionadoPrefixo" + "___" + id);
+
+                var isMAouOutros = buscaCategoriaPorPrefixo(prefixo);
+                if (isMAouOutros[0].CATEGORIA != "Outros") {
+                    var query = "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET ";
+                    query += "STATUS = ? ";
+                    query +="WHERE PREFIXO = ?";
+
+                    executeInsert(query, [
+                        {type:"int", value:codigoStatusEquipamentos[status]},
+                        {type:"varchar", value:prefixo},
+                    ], "/jdbc/CastilhoCustom");
+                }else{
+                    var query = "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR_OUTROS SET ";
+                    query += "STATUS = ? ";
+                    query +="WHERE PREFIXO = ?";
+
+                    executeInsert(query, [
+                        {type:"int", value:codigoStatusEquipamentos[status]},
+                        {type:"varchar", value:prefixo},
+                    ], "/jdbc/CastilhoCustom");
+                }
+            }
+        } catch (error) {
+            throw error;
+        }
+    } else if (origemContrato == "Aditivos" || origemContrato == "Rescisões") {
+        try {
+            var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
+    
+            for (var i = 0; i < indexes.length; i++) {
+                var id = indexes[i]
+                var prefixo = hAPI.getCardValue("equipSelecionado_aditivos" + "___" + id);
+
                 var query = "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET ";
                 query += "STATUS = ? ";
                 query +="WHERE PREFIXO = ?";
@@ -700,19 +1531,11 @@ function atualizaStatusEquipamento(status){
                     {type:"int", value:codigoStatusEquipamentos[status]},
                     {type:"varchar", value:prefixo},
                 ], "/jdbc/CastilhoCustom");
-            }else{
-                var query = "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR_OUTROS SET ";
-                query += "STATUS = ? ";
-                query +="WHERE PREFIXO = ?";
-
-                executeInsert(query, [
-                    {type:"int", value:codigoStatusEquipamentos[status]},
-                    {type:"varchar", value:prefixo},
-                ], "/jdbc/CastilhoCustom");
+                
             }
+        } catch (error) {
+            throw error;
         }
-    } catch (error) {
-        throw error;
     }
 }
 
@@ -928,11 +1751,28 @@ function setDateXMLFormat(data, sql) {
     return retorno;
 }
 function ValorToFloat(valor) {
+    valor = String(valor);
+
     if (valor.split("R$").length > 1) {
         valor = valor.split("R$")[1].trim();
     }
     valor = valor.split(".").join("").split(",").join(".");
     return parseFloat(valor);
+}
+function FloatToMoney(valor) {
+    // Converte o valor recebido para número.
+    // Se vier vazio, null ou undefined, usa 0.
+    // toFixed(2) garante que sempre teremos duas casas decimais.
+    valor = parseFloat(valor || 0).toFixed(2);
+
+    // Troca o ponto decimal por vírgula para seguir o padrão brasileiro
+    // Ex: 14635.25 → 14635,25
+    valor = valor.replace(".", ",");
+
+    // Insere separadores de milhar (pontos) na parte inteira do número
+    // Ex: 14635,25 → 14.635,25
+    // A expressão regular encontra posições corretas para inserir os pontos
+    return "R$ " + valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 function BuscaNomeUsuario(CodUsuario) {
     var ds = DatasetFactory.getDataset("colleague", ["colleagueName"], [

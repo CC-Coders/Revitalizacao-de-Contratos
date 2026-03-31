@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="ASCII" standalone="no"?><xmi:XMI xmlns:xmi="http://www.omg.org/XMI" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="2.0">
-  <pi:Diagram diagramTypeId="BPMNdiagram" gridUnit="10" name="Revitaliza&#231;&#227;o Contratos" pictogramLinks="/0/@children.4/@link /0/@children.3/@link /0/@children.2/@link /0/@children.1/@link /0/@children.0/@link /0/@children.5/@link /0/@children.6/@link /0/@children.7/@link /0/@children.8/@link /0/@children.9/@link /0/@children.10/@link /0/@children.11/@link /0/@children.12/@link /0/@children.13/@link /0/@children.14/@link /0/@children.15/@link /0/@children.16/@link /0/@children.17/@link /0/@children.18/@link /0/@children.19/@link /0/@children.20/@link /0/@children.21/@link /0/@children.22/@link /0/@children.23/@link /0/@children.24/@link /0/@children.25/@link /0/@children.26/@link /0/@children.27/@link /0/@connections.0/@link /0/@connections.1/@link /0/@connections.2/@link /0/@connections.3/@link /0/@connections.4/@link /0/@connections.5/@link /0/@connections.6/@link /0/@connections.7/@link /0/@connections.8/@link /0/@connections.9/@link /0/@connections.10/@link /0/@connections.11/@link /0/@connections.12/@link /0/@connections.13/@link /0/@connections.14/@link /0/@connections.15/@link /0/@connections.16/@link /0/@connections.17/@link /0/@connections.18/@link /0/@connections.19/@link /0/@connections.20/@link /0/@connections.21/@link /0/@connections.22/@link /0/@connections.23/@link /0/@connections.24/@link /0/@connections.25/@link /0/@connections.26/@link /0/@connections.27/@link /0/@connections.28/@link /0/@connections.29/@link /0/@connections.30/@link /0/@connections.31/@link /0/@connections.32/@link /0/@connections.33/@link /0/@connections.34/@link /0/@connections.35/@link /0/@connections.36/@link /0/@connections.37/@link /0/@connections.38/@link" snapToGrid="true" version="0.16.0" visible="true">
+  <pi:Diagram diagramTypeId="BPMNdiagram" gridUnit="10" name="Revitaliza&#231;&#227;o Contratos" pictogramLinks="/0/@children.4/@link /0/@children.3/@link /0/@children.2/@link /0/@children.1/@link /0/@children.0/@link /0/@children.5/@link /0/@children.6/@link /0/@children.7/@link /0/@children.8/@link /0/@children.9/@link /0/@children.10/@link /0/@children.11/@link /0/@children.12/@link /0/@children.13/@link /0/@children.14/@link /0/@children.15/@link /0/@children.16/@link /0/@children.17/@link /0/@children.18/@link /0/@children.19/@link /0/@children.20/@link /0/@children.21/@link /0/@children.22/@link /0/@children.23/@link /0/@children.24/@link /0/@children.25/@link /0/@children.26/@link /0/@connections.0/@link /0/@connections.1/@link /0/@connections.2/@link /0/@connections.3/@link /0/@connections.4/@link /0/@connections.5/@link /0/@connections.6/@link /0/@connections.7/@link /0/@connections.8/@link /0/@connections.9/@link /0/@connections.10/@link /0/@connections.11/@link /0/@connections.12/@link /0/@connections.13/@link /0/@connections.14/@link /0/@connections.15/@link /0/@connections.16/@link /0/@connections.17/@link /0/@connections.18/@link /0/@connections.19/@link /0/@connections.20/@link /0/@connections.21/@link /0/@connections.22/@link /0/@connections.23/@link /0/@connections.24/@link /0/@connections.25/@link /0/@connections.26/@link /0/@connections.27/@link /0/@connections.28/@link /0/@connections.29/@link /0/@connections.30/@link /0/@connections.31/@link /0/@connections.32/@link /0/@connections.33/@link /0/@connections.34/@link /0/@connections.35/@link /0/@children.27/@link /0/@connections.36/@link /0/@connections.37/@link /0/@connections.38/@link" snapToGrid="true" version="0.16.0" visible="true">
     <graphicsAlgorithm background="/0/@styles.11/@renderingStyle/@adaptedGradientColoredAreas/@adaptedGradientColoredAreas.0/@gradientColor.2/@end/@color" foreground="/0/@colors.0" height="1000" lineWidth="1" transparency="0.0" width="1000" xsi:type="al:Rectangle"/>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm background="/0/@colors.9" foreground="/0/@colors.4" height="171" lineWidth="1" style="/0/@styles.9" transparency="0.0" width="1781" xsi:type="al:Rectangle" y="400"/>
-      <link businessObjects="bpmnswimlane4"/>
+      <graphicsAlgorithm background="/0/@colors.9" foreground="/0/@colors.4" height="323" lineWidth="1" style="/0/@styles.9" transparency="0.0" width="1781" xsi:type="al:Rectangle" y="714"/>
+      <link businessObjects="bpmnswimlane3"/>
       <anchors xsi:type="pi:ChopboxAnchor"/>
       <anchors xsi:type="pi:ChopboxAnchor"/>
       <anchors active="true" referencedGraphicsAlgorithm="/0/@children.0/@graphicsAlgorithm" relativeHeight="0.51" relativeWidth="1.0" visible="true" xsi:type="pi:BoxRelativeAnchor">
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm angle="270" filled="false" font="/0/@fonts.1" height="171" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" rotation="270.0" style="/0/@styles.10" transparency="0.0" value="CONTROLADORIA" verticalAlignment="ALIGNMENT_MIDDLE" width="30" xsi:type="al:Text"/>
+        <graphicsAlgorithm angle="270" filled="false" font="/0/@fonts.1" height="323" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" rotation="270.0" style="/0/@styles.10" transparency="0.0" value="Aprova&#231;&#245;es" verticalAlignment="ALIGNMENT_MIDDLE" width="30" xsi:type="al:Text"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm background="/0/@colors.8" foreground="/0/@colors.4" height="145" lineWidth="1" style="/0/@styles.7" transparency="0.0" width="1781" xsi:type="al:Rectangle" y="570"/>
-      <link businessObjects="bpmnswimlane3"/>
+      <graphicsAlgorithm background="/0/@colors.8" foreground="/0/@colors.4" height="171" lineWidth="1" style="/0/@styles.7" transparency="0.0" width="1781" xsi:type="al:Rectangle" y="400"/>
+      <link businessObjects="bpmnswimlane2"/>
       <anchors xsi:type="pi:ChopboxAnchor"/>
       <anchors xsi:type="pi:ChopboxAnchor"/>
       <anchors active="true" referencedGraphicsAlgorithm="/0/@children.1/@graphicsAlgorithm" relativeHeight="0.51" relativeWidth="1.0" visible="true" xsi:type="pi:BoxRelativeAnchor">
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm angle="270" filled="false" font="/0/@fonts.1" height="145" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" rotation="270.0" style="/0/@styles.8" transparency="0.0" value="APROVA&#199;&#195;O OBRA" verticalAlignment="ALIGNMENT_MIDDLE" width="30" xsi:type="al:Text"/>
+        <graphicsAlgorithm angle="270" filled="false" font="/0/@fonts.1" height="171" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" rotation="270.0" style="/0/@styles.8" transparency="0.0" value="CONTROLADORIA" verticalAlignment="ALIGNMENT_MIDDLE" width="30" xsi:type="al:Text"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm background="/0/@colors.7" foreground="/0/@colors.4" height="323" lineWidth="1" style="/0/@styles.5" transparency="0.0" width="1781" xsi:type="al:Rectangle" y="714"/>
+      <graphicsAlgorithm background="/0/@colors.7" foreground="/0/@colors.4" height="145" lineWidth="1" style="/0/@styles.5" transparency="0.0" width="1781" xsi:type="al:Rectangle" y="570"/>
       <link businessObjects="bpmnswimlane5"/>
       <anchors xsi:type="pi:ChopboxAnchor"/>
       <anchors xsi:type="pi:ChopboxAnchor"/>
@@ -34,12 +34,12 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm angle="270" filled="false" font="/0/@fonts.1" height="323" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" rotation="270.0" style="/0/@styles.6" transparency="0.0" value="Aprova&#231;&#245;es" verticalAlignment="ALIGNMENT_MIDDLE" width="30" xsi:type="al:Text"/>
+        <graphicsAlgorithm angle="270" filled="false" font="/0/@fonts.1" height="145" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" rotation="270.0" style="/0/@styles.6" transparency="0.0" value="APROVA&#199;&#195;O OBRA" verticalAlignment="ALIGNMENT_MIDDLE" width="30" xsi:type="al:Text"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
       <graphicsAlgorithm background="/0/@colors.6" foreground="/0/@colors.4" height="184" lineWidth="1" style="/0/@styles.3" transparency="0.0" width="1781" xsi:type="al:Rectangle" y="2"/>
-      <link businessObjects="bpmnswimlane2"/>
+      <link businessObjects="bpmnswimlane4"/>
       <anchors xsi:type="pi:ChopboxAnchor"/>
       <anchors xsi:type="pi:ChopboxAnchor"/>
       <anchors active="true" referencedGraphicsAlgorithm="/0/@children.3/@graphicsAlgorithm" relativeHeight="0.51" relativeWidth="1.0" visible="true" xsi:type="pi:BoxRelativeAnchor">
@@ -72,7 +72,7 @@
       </anchors>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="56" lineVisible="false" lineWidth="1" transparency="0.0" width="106" x="276" xsi:type="al:Rectangle" y="268"/>
+      <graphicsAlgorithm filled="false" height="56" lineVisible="false" lineWidth="1" transparency="0.0" width="106" x="270" xsi:type="al:Rectangle" y="268"/>
       <link businessObjects="task5"/>
       <anchors incomingConnections="/0/@connections.3 /0/@connections.28 /0/@connections.31 /0/@connections.33 /0/@connections.35" outgoingConnections="/0/@connections.0" xsi:type="pi:ChopboxAnchor"/>
       <anchors active="true" referencedGraphicsAlgorithm="/0/@children.6/@graphicsAlgorithm" relativeHeight="0.51" relativeWidth="1.0" visible="true" xsi:type="pi:BoxRelativeAnchor">
@@ -87,7 +87,7 @@
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
       <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="446" xsi:type="al:Rectangle" y="252">
-        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.14" transparency="0.0" width="60" xsi:type="al:Polygon">
+        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.16" transparency="0.0" width="60" xsi:type="al:Polygon">
           <points y="30"/>
           <points x="30"/>
           <points x="60" y="30"/>
@@ -106,26 +106,26 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.15" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.17" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="56" lineVisible="false" lineWidth="1" transparency="0.0" width="106" x="426" xsi:type="al:Rectangle" y="460"/>
+      <graphicsAlgorithm filled="false" height="56" lineVisible="false" lineWidth="1" transparency="0.0" width="106" x="423" xsi:type="al:Rectangle" y="459"/>
       <link businessObjects="task32"/>
       <anchors incomingConnections="/0/@connections.1 /0/@connections.17 /0/@connections.22 /0/@connections.24 /0/@connections.32" outgoingConnections="/0/@connections.2" xsi:type="pi:ChopboxAnchor"/>
       <anchors active="true" referencedGraphicsAlgorithm="/0/@children.8/@graphicsAlgorithm" relativeHeight="0.51" relativeWidth="1.0" visible="true" xsi:type="pi:BoxRelativeAnchor">
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="56" lineWidth="1" style="/0/@styles.16" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
+        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="56" lineWidth="1" style="/0/@styles.18" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
       </children>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="46" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.17" transparency="0.0" value="Controladoria" width="96" x="5" xsi:type="al:MultiText" y="5"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="46" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.19" transparency="0.0" value="Controladoria" width="96" x="5" xsi:type="al:MultiText" y="5"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="586" xsi:type="al:Rectangle" y="444">
-        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.18" transparency="0.0" width="60" xsi:type="al:Polygon">
+      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="586" xsi:type="al:Rectangle" y="443">
+        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.20" transparency="0.0" width="60" xsi:type="al:Polygon">
           <points y="30"/>
           <points x="30"/>
           <points x="60" y="30"/>
@@ -144,12 +144,12 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.19" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.21" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
       <graphicsAlgorithm filled="false" height="35" lineVisible="false" lineWidth="1" transparency="0.0" width="35" x="706" xsi:type="al:Ellipse" y="470">
-        <graphicsAlgorithmChildren height="35" lineWidth="3" style="/0/@styles.20" transparency="0.0" width="35" xsi:type="al:Ellipse"/>
+        <graphicsAlgorithmChildren height="35" lineWidth="3" style="/0/@styles.22" transparency="0.0" width="35" xsi:type="al:Ellipse"/>
       </graphicsAlgorithm>
       <link businessObjects="endevent37"/>
       <anchors incomingConnections="/0/@connections.4" xsi:type="pi:ChopboxAnchor"/>
@@ -158,22 +158,22 @@
       </anchors>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="56" lineVisible="false" lineWidth="1" transparency="0.0" width="106" x="566" xsi:type="al:Rectangle" y="616"/>
+      <graphicsAlgorithm filled="false" height="56" lineVisible="false" lineWidth="1" transparency="0.0" width="106" x="566" xsi:type="al:Rectangle" y="615"/>
       <link businessObjects="task43"/>
       <anchors incomingConnections="/0/@connections.6 /0/@connections.26" outgoingConnections="/0/@connections.7" xsi:type="pi:ChopboxAnchor"/>
       <anchors active="true" referencedGraphicsAlgorithm="/0/@children.11/@graphicsAlgorithm" relativeHeight="0.51" relativeWidth="1.0" visible="true" xsi:type="pi:BoxRelativeAnchor">
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="56" lineWidth="1" style="/0/@styles.21" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
+        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="56" lineWidth="1" style="/0/@styles.23" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
       </children>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="46" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.22" transparency="0.0" value="Engenheiro" width="96" x="5" xsi:type="al:MultiText" y="5"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="46" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.24" transparency="0.0" value="Engenheiro" width="96" x="5" xsi:type="al:MultiText" y="5"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="726" xsi:type="al:Rectangle" y="600">
-        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.23" transparency="0.0" width="60" xsi:type="al:Polygon">
+      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="726" xsi:type="al:Rectangle" y="599">
+        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.25" transparency="0.0" width="60" xsi:type="al:Polygon">
           <points y="30"/>
           <points x="30"/>
           <points x="60" y="30"/>
@@ -192,40 +192,40 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.24" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.26" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="56" lineVisible="false" lineWidth="1" transparency="0.0" width="106" x="830" xsi:type="al:Rectangle" y="616"/>
+      <graphicsAlgorithm filled="false" height="56" lineVisible="false" lineWidth="1" transparency="0.0" width="106" x="830" xsi:type="al:Rectangle" y="615"/>
       <link businessObjects="task48"/>
       <anchors incomingConnections="/0/@connections.8" outgoingConnections="/0/@connections.29" xsi:type="pi:ChopboxAnchor"/>
       <anchors active="true" referencedGraphicsAlgorithm="/0/@children.13/@graphicsAlgorithm" relativeHeight="0.51" relativeWidth="1.0" visible="true" xsi:type="pi:BoxRelativeAnchor">
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="56" lineWidth="1" style="/0/@styles.25" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
+        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="56" lineWidth="1" style="/0/@styles.27" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
       </children>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="46" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.26" transparency="0.0" value="Coord. Obras" width="96" x="5" xsi:type="al:MultiText" y="5"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="46" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.28" transparency="0.0" value="Coord. Obras" width="96" x="5" xsi:type="al:MultiText" y="5"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="56" lineVisible="false" lineWidth="1" transparency="0.0" width="106" x="1210" xsi:type="al:Rectangle" y="616"/>
+      <graphicsAlgorithm filled="false" height="56" lineVisible="false" lineWidth="1" transparency="0.0" width="106" x="1210" xsi:type="al:Rectangle" y="615"/>
       <link businessObjects="task53"/>
       <anchors incomingConnections="/0/@connections.37" outgoingConnections="/0/@connections.9" xsi:type="pi:ChopboxAnchor"/>
       <anchors active="true" referencedGraphicsAlgorithm="/0/@children.14/@graphicsAlgorithm" relativeHeight="0.51" relativeWidth="1.0" visible="true" xsi:type="pi:BoxRelativeAnchor">
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="56" lineWidth="1" style="/0/@styles.27" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
+        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="56" lineWidth="1" style="/0/@styles.29" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
       </children>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="46" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.28" transparency="0.0" value="Diretoria" width="96" x="5" xsi:type="al:MultiText" y="5"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="46" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.30" transparency="0.0" value="Diretoria" width="96" x="5" xsi:type="al:MultiText" y="5"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="1350" xsi:type="al:Rectangle" y="600">
-        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.29" transparency="0.0" width="60" xsi:type="al:Polygon">
+      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="1343" xsi:type="al:Rectangle" y="599">
+        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.31" transparency="0.0" width="60" xsi:type="al:Polygon">
           <points y="30"/>
           <points x="30"/>
           <points x="60" y="30"/>
@@ -244,12 +244,12 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.30" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.32" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="35" lineVisible="false" lineWidth="1" transparency="0.0" width="35" x="1466" xsi:type="al:Ellipse" y="626">
-        <graphicsAlgorithmChildren height="35" lineWidth="1" style="/0/@styles.31" transparency="0.0" width="35" xsi:type="al:Ellipse"/>
+      <graphicsAlgorithm filled="false" height="35" lineVisible="false" lineWidth="1" transparency="0.0" width="35" x="1471" xsi:type="al:Ellipse" y="626">
+        <graphicsAlgorithmChildren height="35" lineWidth="1" style="/0/@styles.33" transparency="0.0" width="35" xsi:type="al:Ellipse"/>
       </graphicsAlgorithm>
       <link businessObjects="intermediateconditional58"/>
       <anchors incomingConnections="/0/@connections.10" outgoingConnections="/0/@connections.11" xsi:type="pi:ChopboxAnchor"/>
@@ -285,8 +285,8 @@
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="1456" xsi:type="al:Rectangle" y="740">
-        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.32" transparency="0.0" width="60" xsi:type="al:Polygon">
+      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="1459" xsi:type="al:Rectangle" y="740">
+        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.34" transparency="0.0" width="60" xsi:type="al:Polygon">
           <points y="30"/>
           <points x="30"/>
           <points x="60" y="30"/>
@@ -305,12 +305,12 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.33" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.35" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="35" lineVisible="false" lineWidth="1" transparency="0.0" width="35" x="1646" xsi:type="al:Ellipse" y="770">
-        <graphicsAlgorithmChildren height="35" lineWidth="3" style="/0/@styles.34" transparency="0.0" width="35" xsi:type="al:Ellipse"/>
+      <graphicsAlgorithm filled="false" height="35" lineVisible="false" lineWidth="1" transparency="0.0" width="35" x="1646" xsi:type="al:Ellipse" y="766">
+        <graphicsAlgorithmChildren height="35" lineWidth="3" style="/0/@styles.36" transparency="0.0" width="35" xsi:type="al:Ellipse"/>
       </graphicsAlgorithm>
       <link businessObjects="endevent62"/>
       <anchors incomingConnections="/0/@connections.12 /0/@connections.16" xsi:type="pi:ChopboxAnchor"/>
@@ -326,10 +326,10 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="56" lineWidth="1" style="/0/@styles.35" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
+        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="56" lineWidth="1" style="/0/@styles.37" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
       </children>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="46" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.36" transparency="0.0" value="Adm. Obra" width="96" x="5" xsi:type="al:MultiText" y="5"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="46" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.38" transparency="0.0" value="Adm. Obra" width="96" x="5" xsi:type="al:MultiText" y="5"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
@@ -340,15 +340,15 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="70" lineWidth="1" style="/0/@styles.37" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
+        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="70" lineWidth="1" style="/0/@styles.39" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
       </children>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="60" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.38" transparency="0.0" value="Assinatura Eletr&#244;nica" width="96" x="5" xsi:type="al:MultiText" y="5"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="60" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.40" transparency="0.0" value="Assinatura Eletr&#244;nica" width="96" x="5" xsi:type="al:MultiText" y="5"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="1636" xsi:type="al:Rectangle" y="867">
-        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.39" transparency="0.0" width="60" xsi:type="al:Polygon">
+      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="1633" xsi:type="al:Rectangle" y="867">
+        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.41" transparency="0.0" width="60" xsi:type="al:Polygon">
           <points y="30"/>
           <points x="30"/>
           <points x="60" y="30"/>
@@ -367,7 +367,7 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.40" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.42" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
@@ -378,10 +378,10 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="84" lineWidth="1" style="/0/@styles.41" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
+        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="84" lineWidth="1" style="/0/@styles.43" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
       </children>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="74" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.42" transparency="0.0" value="Controladoria  Recolhe Assinaturas" width="96" x="5" xsi:type="al:MultiText" y="5"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="74" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.44" transparency="0.0" value="Controladoria  Recolhe Assinaturas" width="96" x="5" xsi:type="al:MultiText" y="5"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
@@ -392,10 +392,10 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="84" lineWidth="1" style="/0/@styles.43" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
+        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="84" lineWidth="1" style="/0/@styles.45" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
       </children>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="74" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.44" transparency="0.0" value="Controladoria Aguarda Recebimento" width="96" x="5" xsi:type="al:MultiText" y="5"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="74" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.46" transparency="0.0" value="Controladoria Aguarda Recebimento" width="96" x="5" xsi:type="al:MultiText" y="5"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
@@ -406,15 +406,15 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="70" lineWidth="1" style="/0/@styles.45" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
+        <graphicsAlgorithm cornerHeight="5" cornerWidth="5" height="70" lineWidth="1" style="/0/@styles.47" transparency="0.0" width="106" xsi:type="al:RoundedRectangle"/>
       </children>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="60" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.46" transparency="0.0" value="Obra Recebe Vias Originais" width="96" x="5" xsi:type="al:MultiText" y="5"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="60" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.48" transparency="0.0" value="Obra Recebe Vias Originais" width="96" x="5" xsi:type="al:MultiText" y="5"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="35" lineVisible="false" lineWidth="1" transparency="0.0" width="35" x="1746" xsi:type="al:Ellipse" y="100">
-        <graphicsAlgorithmChildren height="35" lineWidth="3" style="/0/@styles.47" transparency="0.0" width="35" xsi:type="al:Ellipse"/>
+      <graphicsAlgorithm filled="false" height="35" lineVisible="false" lineWidth="1" transparency="0.0" width="35" x="1746" xsi:type="al:Ellipse" y="87">
+        <graphicsAlgorithmChildren height="35" lineWidth="3" style="/0/@styles.49" transparency="0.0" width="35" xsi:type="al:Ellipse"/>
       </graphicsAlgorithm>
       <link businessObjects="endevent83"/>
       <anchors incomingConnections="/0/@connections.25" xsi:type="pi:ChopboxAnchor"/>
@@ -423,8 +423,8 @@
       </anchors>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
-      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="980" xsi:type="al:Rectangle" y="600">
-        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.48" transparency="0.0" width="60" xsi:type="al:Polygon">
+      <graphicsAlgorithm filled="false" height="88" lineVisible="false" lineWidth="1" transparency="0.0" width="60" x="980" xsi:type="al:Rectangle" y="599">
+        <graphicsAlgorithmChildren filled="true" height="60" lineWidth="1" style="/0/@styles.50" transparency="0.0" width="60" xsi:type="al:Polygon">
           <points y="30"/>
           <points x="30"/>
           <points x="60" y="30"/>
@@ -443,12 +443,12 @@
         <graphicsAlgorithm filled="false" lineVisible="false" xsi:type="al:Ellipse"/>
       </anchors>
       <children visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.49" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.1" height="28" horizontalAlignment="ALIGNMENT_CENTER" lineVisible="true" lineWidth="1" style="/0/@styles.51" transparency="0.0" value="Op&#231;&#227;o&#10;" width="60" xsi:type="al:MultiText" y="60"/>
       </children>
     </children>
     <children active="true" visible="true" xsi:type="pi:ContainerShape">
       <graphicsAlgorithm filled="false" height="35" lineVisible="false" lineWidth="1" transparency="0.0" width="35" x="1100" xsi:type="al:Ellipse" y="626">
-        <graphicsAlgorithmChildren height="35" lineWidth="1" style="/0/@styles.50" transparency="0.0" width="35" xsi:type="al:Ellipse"/>
+        <graphicsAlgorithmChildren height="35" lineWidth="1" style="/0/@styles.106" transparency="0.0" width="35" xsi:type="al:Ellipse"/>
       </graphicsAlgorithm>
       <link businessObjects="intermediateconditional104"/>
       <anchors incomingConnections="/0/@connections.36" outgoingConnections="/0/@connections.37" xsi:type="pi:ChopboxAnchor"/>
@@ -847,6 +847,23 @@
       </renderingStyle>
     </styles>
     <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.4" id="GATEWAY">
+      <renderingStyle>
+        <adaptedGradientColoredAreas definedStyleId="GATEWAY" gradientType="0">
+          <adaptedGradientColoredAreas styleAdaption="0">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color blue="252" green="251" red="250"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color blue="204" green="255" red="255"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+        </adaptedGradientColoredAreas>
+      </renderingStyle>
+    </styles>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
     <styles foreground="/0/@colors.1" id="TASK">
       <renderingStyle>
         <adaptedGradientColoredAreas definedStyleId="blue-white-gloss" gradientType="0">
@@ -2454,38 +2471,6 @@
       </renderingStyle>
     </styles>
     <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
-    <styles foreground="/0/@colors.13" id="INTERMEDIATE-EVENT">
-      <renderingStyle>
-        <adaptedGradientColoredAreas definedStyleId="INTERMEDIATE-EVENT" gradientType="0">
-          <adaptedGradientColoredAreas styleAdaption="0">
-            <gradientColor>
-              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
-                <color blue="102" green="255" red="255"/>
-              </start>
-              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="10">
-                <color blue="150" green="255" red="255"/>
-              </end>
-            </gradientColor>
-            <gradientColor>
-              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="10">
-                <color blue="150" green="255" red="255"/>
-              </start>
-              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="20">
-                <color blue="182" green="255" red="255"/>
-              </end>
-            </gradientColor>
-            <gradientColor>
-              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="20">
-                <color blue="182" green="255" red="255"/>
-              </start>
-              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="50">
-                <color blue="255" green="255" red="255"/>
-              </end>
-            </gradientColor>
-          </adaptedGradientColoredAreas>
-        </adaptedGradientColoredAreas>
-      </renderingStyle>
-    </styles>
     <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
     <styles background="/0/@colors.4" foreground="/0/@colors.4" id="BPMN-POLYGON-ARROW" lineWidth="1"/>
     <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
@@ -2526,14 +2511,430 @@
     <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
     <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
     <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.13" id="INTERMEDIATE-EVENT">
+      <renderingStyle>
+        <adaptedGradientColoredAreas definedStyleId="INTERMEDIATE-EVENT" gradientType="0">
+          <adaptedGradientColoredAreas styleAdaption="0">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color blue="102" green="255" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="10">
+                <color blue="150" green="255" red="255"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="10">
+                <color blue="150" green="255" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="20">
+                <color blue="182" green="255" red="255"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="20">
+                <color blue="182" green="255" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="50">
+                <color blue="255" green="255" red="255"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+        </adaptedGradientColoredAreas>
+      </renderingStyle>
+    </styles>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.1" id="TASK">
+      <renderingStyle>
+        <adaptedGradientColoredAreas definedStyleId="blue-white-gloss" gradientType="0">
+          <adaptedGradientColoredAreas styleAdaption="0">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color blue="254" green="251" red="248"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="254" green="251" red="248"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="252" green="245" red="237"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="252" green="245" red="237"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="250" green="237" red="222"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="250" green="237" red="222"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="248" green="231" red="212"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="252" green="251" red="250"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="233" green="229" red="226"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color blue="233" green="229" red="226"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+          <adaptedGradientColoredAreas styleAdaption="1">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color blue="253" green="246" red="238"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="253" green="246" red="238"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="249" green="230" red="208"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="249" green="230" red="208"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="244" green="210" red="172"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="244" green="210" red="172"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="234" green="185" red="129"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="242" green="208" red="170"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="224" green="191" red="154"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color blue="224" green="191" red="154"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+          <adaptedGradientColoredAreas styleAdaption="2">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color blue="254" green="249" red="245"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="254" green="249" red="245"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="252" green="239" red="226"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="252" green="239" red="226"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="249" green="227" red="203"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="249" green="227" red="203"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="247" green="218" red="187"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="247" green="224" red="197"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="229" green="205" red="178"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color blue="229" green="205" red="178"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+          <adaptedGradientColoredAreas styleAdaption="3">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color green="204" red="153"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color blue="102" green="153" red="51"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+          <adaptedGradientColoredAreas styleAdaption="4">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color green="204" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color green="102" red="255"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+        </adaptedGradientColoredAreas>
+      </renderingStyle>
+    </styles>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.13" id="INTERMEDIATE-EVENT">
+      <renderingStyle>
+        <adaptedGradientColoredAreas definedStyleId="INTERMEDIATE-EVENT" gradientType="0">
+          <adaptedGradientColoredAreas styleAdaption="0">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color blue="102" green="255" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="10">
+                <color blue="150" green="255" red="255"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="10">
+                <color blue="150" green="255" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="20">
+                <color blue="182" green="255" red="255"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="20">
+                <color blue="182" green="255" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="50">
+                <color blue="255" green="255" red="255"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+        </adaptedGradientColoredAreas>
+      </renderingStyle>
+    </styles>
+    <styles foreground="/0/@colors.1" id="TASK">
+      <renderingStyle>
+        <adaptedGradientColoredAreas definedStyleId="blue-white-gloss" gradientType="0">
+          <adaptedGradientColoredAreas styleAdaption="0">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color blue="254" green="251" red="248"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="254" green="251" red="248"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="252" green="245" red="237"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="252" green="245" red="237"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="250" green="237" red="222"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="250" green="237" red="222"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="248" green="231" red="212"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="252" green="251" red="250"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="233" green="229" red="226"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color blue="233" green="229" red="226"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+          <adaptedGradientColoredAreas styleAdaption="1">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color blue="253" green="246" red="238"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="253" green="246" red="238"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="249" green="230" red="208"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="249" green="230" red="208"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="244" green="210" red="172"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="244" green="210" red="172"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="234" green="185" red="129"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="242" green="208" red="170"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="224" green="191" red="154"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color blue="224" green="191" red="154"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+          <adaptedGradientColoredAreas styleAdaption="2">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color blue="254" green="249" red="245"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="254" green="249" red="245"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="1">
+                <color blue="252" green="239" red="226"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="252" green="239" red="226"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="2">
+                <color blue="249" green="227" red="203"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="249" green="227" red="203"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="3">
+                <color blue="247" green="218" red="187"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="247" green="224" red="197"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="2">
+                <color blue="229" green="205" red="178"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color blue="229" green="205" red="178"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+          <adaptedGradientColoredAreas styleAdaption="3">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color green="204" red="153"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color blue="102" green="153" red="51"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+          <adaptedGradientColoredAreas styleAdaption="4">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color green="204" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_END" locationValue="0">
+                <color green="102" red="255"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+        </adaptedGradientColoredAreas>
+      </renderingStyle>
+    </styles>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.13" id="INTERMEDIATE-EVENT">
+      <renderingStyle>
+        <adaptedGradientColoredAreas definedStyleId="INTERMEDIATE-EVENT" gradientType="0">
+          <adaptedGradientColoredAreas styleAdaption="0">
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="0">
+                <color blue="102" green="255" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="10">
+                <color blue="150" green="255" red="255"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="10">
+                <color blue="150" green="255" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="20">
+                <color blue="182" green="255" red="255"/>
+              </end>
+            </gradientColor>
+            <gradientColor>
+              <start locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="20">
+                <color blue="182" green="255" red="255"/>
+              </start>
+              <end locationType="LOCATION_TYPE_ABSOLUTE_START" locationValue="50">
+                <color blue="255" green="255" red="255"/>
+              </end>
+            </gradientColor>
+          </adaptedGradientColoredAreas>
+        </adaptedGradientColoredAreas>
+      </renderingStyle>
+    </styles>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles foreground="/0/@colors.11" id="BPMNCLASS-TEXT"/>
+    <styles background="/0/@colors.4" foreground="/0/@colors.4" id="BPMN-POLYGON-ARROW-0-0-0" lineWidth="1"/>
+    <styles background="/0/@colors.14" foreground="/0/@colors.14" id="BPMN-POLYGON-ARROW-0-150-0" lineWidth="1"/>
+    <styles background="/0/@colors.15" foreground="/0/@colors.15" id="BPMN-POLYGON-ARROW-240-0-0" lineWidth="1"/>
     <connections active="true" end="/0/@children.7/@anchors.0" start="/0/@children.6/@anchors.0" visible="true" xsi:type="pi:FreeFormConnection">
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow31"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.51" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.55" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2545,10 +2946,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow33"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.53" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.56" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2560,10 +2961,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow35"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.54" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.57" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2575,10 +2976,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow36"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.55" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.58" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2593,10 +2994,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow38"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.56" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.59" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2608,10 +3009,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow39"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.57" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.60" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2625,10 +3026,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow45"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.58" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.61" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2640,10 +3041,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow47"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.59" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.62" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2655,10 +3056,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow49"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.60" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.63" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2670,10 +3071,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow56"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.61" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.64" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2685,10 +3086,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow59"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.62" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.65" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2700,10 +3101,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow61"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.63" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm background="/0/@colors.4" filled="false" font="/0/@fonts.0" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.110" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.110" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2715,10 +3116,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow63"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.64" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.67" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2730,10 +3131,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow65"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.65" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.68" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2745,10 +3146,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow67"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.66" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.69" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2760,10 +3161,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow69"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.67" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.70" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2775,10 +3176,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow70"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.68" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.71" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2790,10 +3191,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow71"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.69" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.72" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2807,10 +3208,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow73"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.70" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.73" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2823,10 +3224,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow75"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.71" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.74" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2838,10 +3239,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow77"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.72" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.75" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2853,10 +3254,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow78"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.73" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.76" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2871,10 +3272,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow79"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.74" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.77" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2888,27 +3289,27 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow80"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.75" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.78" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
           <points after="3" before="3" x="-8"/>
         </graphicsAlgorithm>
       </connectionDecorators>
-      <bendpoints x="810" y="576"/>
-      <bendpoints x="1315" y="576"/>
+      <bendpoints x="810" y="575"/>
+      <bendpoints x="1315" y="575"/>
     </connections>
     <connections active="true" end="/0/@children.8/@anchors.0" start="/0/@children.15/@anchors.0" visible="true" xsi:type="pi:FreeFormConnection">
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow82"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.76" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.80" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2922,10 +3323,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow84"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.77" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.81" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2937,10 +3338,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow85"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.78" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.82" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2954,10 +3355,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow86"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.79" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.83" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2972,10 +3373,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow87"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.80" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.84" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -2990,10 +3391,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow89"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.81" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.85" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -3005,10 +3406,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow91"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.82" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.87" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -3023,10 +3424,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow92"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.83" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.88" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -3041,10 +3442,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow93"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.84" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.89" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -3058,10 +3459,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow94"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.85" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.90" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -3076,10 +3477,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow95"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.86" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.91" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -3094,10 +3495,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow96"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.87" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.92" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -3109,10 +3510,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow105"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.88" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.107" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -3124,10 +3525,10 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow106"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.89" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.108" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
@@ -3139,18 +3540,18 @@
       <graphicsAlgorithm filled="false" foreground="/0/@colors.4" lineWidth="1" transparency="0.0" xsi:type="al:Polyline"/>
       <link businessObjects="flow107"/>
       <connectionDecorators active="true" location="0.5" locationRelative="true" visible="true">
-        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.90" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
+        <graphicsAlgorithm filled="false" font="/0/@fonts.0" lineWidth="1" style="/0/@styles.109" transparency="0.0" value="" x="10" xsi:type="al:Text"/>
       </connectionDecorators>
       <connectionDecorators location="1.0" locationRelative="true" visible="true">
-        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.52" transparency="0.0" xsi:type="al:Polygon">
+        <graphicsAlgorithm background="/0/@colors.4" filled="true" foreground="/0/@colors.4" lineWidth="1" style="/0/@styles.53" transparency="0.0" xsi:type="al:Polygon">
           <points after="3" before="3" x="-10" y="-5"/>
           <points/>
           <points after="3" before="3" x="-10" y="5"/>
           <points after="3" before="3" x="-8"/>
         </graphicsAlgorithm>
       </connectionDecorators>
-      <bendpoints x="1068" y="706"/>
-      <bendpoints x="1304" y="706"/>
+      <bendpoints x="1068" y="705"/>
+      <bendpoints x="1304" y="705"/>
     </connections>
     <colors blue="249" green="238" red="227"/>
     <colors blue="112" green="25" red="25"/>
@@ -3159,34 +3560,36 @@
     <colors/>
     <colors blue="67" green="67" red="67"/>
     <colors blue="248" green="248" red="241"/>
-    <colors blue="185" green="185" red="113"/>
     <colors blue="199" green="199" red="141"/>
     <colors blue="213" green="213" red="168"/>
+    <colors blue="185" green="185" red="113"/>
     <colors blue="51" green="102" red="51"/>
     <colors blue="153" green="51" red="51"/>
     <colors blue="51" green="51" red="153"/>
     <colors green="153" red="153"/>
+    <colors green="150"/>
+    <colors red="240"/>
     <fonts name="Arial" size="8"/>
     <fonts bold="true" name="Arial" size="8"/>
   </pi:Diagram>
   <bpmn2:BpmnSwimLane cores="C0E0E0" id="bpmnswimlane1" name="JUR&#205;DICO"/>
-  <bpmn2:BpmnSwimLane cores="F1F8F8" id="bpmnswimlane2" name="OBRA"/>
-  <bpmn2:BpmnSwimLane cores="71B9B9" id="bpmnswimlane5" name="Aprova&#231;&#245;es"/>
-  <bpmn2:BpmnSwimLane cores="8DC7C7" id="bpmnswimlane3" name="APROVA&#199;&#195;O OBRA"/>
-  <bpmn2:BpmnSwimLane cores="A8D5D5" id="bpmnswimlane4" name="CONTROLADORIA"/>
+  <bpmn2:BpmnSwimLane cores="F1F8F8" id="bpmnswimlane4" name="OBRA"/>
+  <bpmn2:BpmnSwimLane cores="8DC7C7" id="bpmnswimlane5" name="APROVA&#199;&#195;O OBRA"/>
+  <bpmn2:BpmnSwimLane cores="A8D5D5" id="bpmnswimlane2" name="CONTROLADORIA"/>
+  <bpmn2:BpmnSwimLane cores="71B9B9" id="bpmnswimlane3" name="Aprova&#231;&#245;es"/>
   <bpmn2:BpmnStartEvent esforcoCalculo="0" expediente="" extendedFields="&lt;list/&gt;" id="startevent4" incoming="flow39 flow78 flow86 flow91 flow95" initializerConfiguration="&lt;org.eclipse.bpmn2.impl.AssignmentControllerGroup&gt;&#10;  &lt;groupId&gt;permissaoCadastroEquipamentosV2&lt;/groupId&gt;&#10;  &lt;mechanismName&gt;Grupo&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerGroup&gt;" name="In&#237;cio" outgoing="flow96" selecionaColaboradores="1" signalId="0" type="10"/>
   <bpmn2:BpmnTask authNotify="true" esforcoCalculo="0" executionAttempts="0" expediente="" extendedFields="&lt;list/&gt;" frequency="0" id="task5" incoming="flow36 flow87 flow92 flow94 flow96" loopType="0" managerAssignmentControllerString="&lt;org.eclipse.bpmn2.impl.AssignmentControllerPoolGroup&gt;&#10;  &lt;groupId&gt;Juridico&lt;/groupId&gt;&#10;  &lt;mechanismName&gt;Pool Grupo&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerPoolGroup&gt;" managerMechanism="Pool Grupo" name="Jur&#237;dico" outgoing="flow31" selecionaColaboradores="1" type="80"/>
-  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task32&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;30&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;startevent4&lt;/targetTask&gt;&#10;    &lt;mechanism&gt;Executor Atividade&lt;/mechanism&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;mecanismoAtribuicaoConfiguracao class=&quot;org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&quot;&gt;&#10;      &lt;idNode&gt;startevent4&lt;/idNode&gt;&#10;      &lt;returns&gt;1&lt;/returns&gt;&#10;      &lt;mechanismName&gt;Executor Atividade&lt;/mechanismName&gt;&#10;    &lt;/mecanismoAtribuicaoConfiguracao&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;30&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;30&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;OBRA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway30" incoming="flow31" name="Op&#231;&#227;o" outgoing="flow33 flow39" type="120"/>
+  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task32&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;30&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;&lt;/expression&gt;&#10;    &lt;targetTask&gt;startevent4&lt;/targetTask&gt;&#10;    &lt;mechanism&gt;Executor Atividade&lt;/mechanism&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;mecanismoAtribuicaoConfiguracao class=&quot;org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&quot;&gt;&#10;      &lt;idNode&gt;startevent4&lt;/idNode&gt;&#10;      &lt;returns&gt;1&lt;/returns&gt;&#10;      &lt;mechanismName&gt;Executor Atividade&lt;/mechanismName&gt;&#10;    &lt;/mecanismoAtribuicaoConfiguracao&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;30&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;30&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;OBRA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway30" incoming="flow31" name="Op&#231;&#227;o" outgoing="flow33 flow39" type="120"/>
   <bpmn2:BpmnTask authNotify="true" esforcoCalculo="0" executionAttempts="0" expediente="" extendedFields="&lt;list/&gt;" frequency="0" id="task32" incoming="flow33 flow71 flow79 flow82 flow93" loopType="0" managerAssignmentControllerString="&lt;org.eclipse.bpmn2.impl.AssignmentControllerPoolGroup&gt;&#10;  &lt;groupId&gt;Controladoria&lt;/groupId&gt;&#10;  &lt;mechanismName&gt;Pool Grupo&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerPoolGroup&gt;" managerMechanism="Pool Grupo" name="Controladoria" outgoing="flow35" selecionaColaboradores="1" type="80"/>
-  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task43&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;34&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task5&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;34&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;34&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;JURIDICO&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;3&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;startevent4&lt;/targetTask&gt;&#10;    &lt;mechanism&gt;Executor Atividade&lt;/mechanism&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;mecanismoAtribuicaoConfiguracao class=&quot;org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&quot;&gt;&#10;      &lt;idNode&gt;startevent4&lt;/idNode&gt;&#10;      &lt;returns&gt;1&lt;/returns&gt;&#10;      &lt;mechanismName&gt;Executor Atividade&lt;/mechanismName&gt;&#10;    &lt;/mecanismoAtribuicaoConfiguracao&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;34&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;34&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;OBRA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway34" incoming="flow35" name="Op&#231;&#227;o" outgoing="flow36 flow38 flow45 flow91" type="120"/>
+  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task43&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;34&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task5&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;34&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;34&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;JURIDICO&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;3&lt;/order&gt;&#10;    &lt;expression&gt;&lt;/expression&gt;&#10;    &lt;targetTask&gt;startevent4&lt;/targetTask&gt;&#10;    &lt;mechanism&gt;Executor Atividade&lt;/mechanism&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;mecanismoAtribuicaoConfiguracao class=&quot;org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&quot;&gt;&#10;      &lt;idNode&gt;startevent4&lt;/idNode&gt;&#10;      &lt;returns&gt;1&lt;/returns&gt;&#10;      &lt;mechanismName&gt;Executor Atividade&lt;/mechanismName&gt;&#10;    &lt;/mecanismoAtribuicaoConfiguracao&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;34&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;34&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;OBRA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway34" incoming="flow35" name="Op&#231;&#227;o" outgoing="flow36 flow38 flow45 flow91" type="120"/>
   <bpmn2:BpmnEndEvent extendedFields="&lt;list/&gt;" id="endevent37" incoming="flow38" name="Fim" signalId="0" type="60"/>
   <bpmn2:BpmnTask authNotify="true" esforcoCalculo="0" executionAttempts="0" expediente="" extendedFields="&lt;list/&gt;" frequency="0" id="task43" incoming="flow45 flow85" loopType="0" managerAssignmentControllerString="&lt;org.eclipse.bpmn2.impl.AssignmentControllerFormField&gt;&#10;  &lt;formField&gt;engenheiro&lt;/formField&gt;&#10;  &lt;mechanismName&gt;Campo Formul&#225;rio&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerFormField&gt;" managerMechanism="Campo Formul&#225;rio" name="Engenheiro" outgoing="flow47" selecionaColaboradores="1" type="80"/>
-  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;exclusivegateway55&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;coordenador&lt;/field&gt;&#10;        &lt;value&gt;&lt;/value&gt;&#10;        &lt;operator&gt;0&lt;/operator&gt;&#10;        &lt;valueType&gt;0&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;3&lt;/ruleOrder&gt;&#10;        &lt;field&gt;diretor&lt;/field&gt;&#10;        &lt;value&gt;&lt;/value&gt;&#10;        &lt;operator&gt;0&lt;/operator&gt;&#10;        &lt;valueType&gt;0&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task48&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;3&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;startevent4&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;OBRA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;4&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task5&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;JURIDICO&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;5&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task32&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;CONTROLADORIA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway46" incoming="flow47" name="Op&#231;&#227;o" outgoing="flow49 flow78 flow79 flow80 flow87" type="120"/>
+  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;&lt;/expression&gt;&#10;    &lt;targetTask&gt;exclusivegateway55&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;coordenador&lt;/field&gt;&#10;        &lt;value&gt;&lt;/value&gt;&#10;        &lt;operator&gt;0&lt;/operator&gt;&#10;        &lt;valueType&gt;0&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;3&lt;/ruleOrder&gt;&#10;        &lt;field&gt;diretor&lt;/field&gt;&#10;        &lt;value&gt;&lt;/value&gt;&#10;        &lt;operator&gt;0&lt;/operator&gt;&#10;        &lt;valueType&gt;0&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task48&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;3&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;startevent4&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;OBRA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;4&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task5&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;JURIDICO&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;5&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task32&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;46&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;CONTROLADORIA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway46" incoming="flow47" name="Op&#231;&#227;o" outgoing="flow49 flow78 flow79 flow80 flow87" type="120"/>
   <bpmn2:BpmnTask authNotify="true" esforcoCalculo="0" executionAttempts="0" expediente="" extendedFields="&lt;list/&gt;" frequency="0" id="task48" incoming="flow49" loopType="0" managerAssignmentControllerString="&lt;org.eclipse.bpmn2.impl.AssignmentControllerFormField&gt;&#10;  &lt;formField&gt;coordenador&lt;/formField&gt;&#10;  &lt;mechanismName&gt;Campo Formul&#225;rio&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerFormField&gt;" managerMechanism="Campo Formul&#225;rio" name="Coord. Obras" outgoing="flow89" selecionaColaboradores="1" type="80"/>
-  <bpmn2:BpmnTask authNotify="true" esforcoCalculo="0" executionAttempts="0" expediente="" extendedFields="&lt;list/&gt;" frequency="0" id="task53" incoming="flow106" loopType="0" managerAssignmentControllerString="&lt;org.eclipse.bpmn2.impl.AssignmentControllerColleague&gt;&#10;  &lt;colleagueId&gt;jerson&lt;/colleagueId&gt;&#10;  &lt;mechanismName&gt;Usu&#225;rio&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerColleague&gt;" managerMechanism="Usu&#225;rio" name="Diretoria" outgoing="flow56" selecionaColaboradores="1" type="80"/>
-  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;startevent4&lt;/targetTask&gt;&#10;    &lt;mechanism&gt;Executor Atividade&lt;/mechanism&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;mecanismoAtribuicaoConfiguracao class=&quot;org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&quot;&gt;&#10;      &lt;idNode&gt;startevent4&lt;/idNode&gt;&#10;      &lt;returns&gt;1&lt;/returns&gt;&#10;      &lt;mechanismName&gt;Executor Atividade&lt;/mechanismName&gt;&#10;    &lt;/mecanismoAtribuicaoConfiguracao&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;OBRA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task32&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;CONTROLADORIA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;3&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task5&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;JURIDICO&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;4&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;intermediateconditional58&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;assinaturaContrato&lt;/field&gt;&#10;        &lt;value&gt;Eletr&#244;nica&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;5&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task64&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;assinaturaContrato&lt;/field&gt;&#10;        &lt;value&gt;Manual&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway55" incoming="flow56 flow80 flow107" name="Op&#231;&#227;o" outgoing="flow59 flow65 flow82 flow85 flow86 flow92" type="120"/>
+  <bpmn2:BpmnTask authNotify="true" esforcoCalculo="0" executionAttempts="0" expediente="" extendedFields="&lt;list/&gt;" frequency="0" id="task53" incoming="flow106" loopType="0" managerAssignmentControllerString="&lt;org.eclipse.bpmn2.impl.AssignmentControllerFormField&gt;&#10;  &lt;formField&gt;diretor&lt;/formField&gt;&#10;  &lt;mechanismName&gt;Campo Formul&#225;rio&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerFormField&gt;" managerMechanism="Campo Formul&#225;rio" name="Diretoria" outgoing="flow56" selecionaColaboradores="1" type="80"/>
+  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;&lt;/expression&gt;&#10;    &lt;targetTask&gt;startevent4&lt;/targetTask&gt;&#10;    &lt;mechanism&gt;Executor Atividade&lt;/mechanism&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;mecanismoAtribuicaoConfiguracao class=&quot;org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&quot;&gt;&#10;      &lt;idNode&gt;startevent4&lt;/idNode&gt;&#10;      &lt;returns&gt;1&lt;/returns&gt;&#10;      &lt;mechanismName&gt;Executor Atividade&lt;/mechanismName&gt;&#10;    &lt;/mecanismoAtribuicaoConfiguracao&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;OBRA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task32&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;CONTROLADORIA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;3&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task5&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;JURIDICO&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;4&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;intermediateconditional58&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;assinaturaContrato&lt;/field&gt;&#10;        &lt;value&gt;Eletr&#244;nica&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;5&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task64&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;55&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;assinaturaContrato&lt;/field&gt;&#10;        &lt;value&gt;Manual&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway55" incoming="flow56 flow80 flow107" name="Op&#231;&#227;o" outgoing="flow59 flow65 flow82 flow85 flow86 flow92" type="120"/>
   <bpmn2:BpmnIntermediateEvent extendedFields="&lt;list/&gt;" id="intermediateconditional58" incoming="flow59" name="Intermedi&#225;rio" outgoing="flow61" sequenceAttached="0" signalId="0" trigger="&lt;org.eclipse.bpmn2.documentacional.BpmnTriggerData&gt;&#10;  &lt;runType&gt;HOUR&lt;/runType&gt;&#10;  &lt;timeTrigger&gt;0:0:0&lt;/timeTrigger&gt;&#10;  &lt;frequencia&gt;12&lt;/frequencia&gt;&#10;  &lt;isCondition&gt;false&lt;/isCondition&gt;&#10;&lt;/org.eclipse.bpmn2.documentacional.BpmnTriggerData&gt;" type="35"/>
-  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;endevent62&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;60&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;statusAssinatura&lt;/field&gt;&#10;        &lt;value&gt;Assinado&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task66&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;60&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;statusAssinatura&lt;/field&gt;&#10;        &lt;value&gt;Assinado&lt;/value&gt;&#10;        &lt;operator&gt;2&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway60" incoming="flow61" name="Op&#231;&#227;o" outgoing="flow63 flow67" type="120"/>
+  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;&lt;/expression&gt;&#10;    &lt;targetTask&gt;endevent62&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;60&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;statusAssinatura&lt;/field&gt;&#10;        &lt;value&gt;Assinado&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;&lt;/expression&gt;&#10;    &lt;targetTask&gt;task66&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;60&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;statusAssinatura&lt;/field&gt;&#10;        &lt;value&gt;Assinado&lt;/value&gt;&#10;        &lt;operator&gt;2&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway60" incoming="flow61" name="Op&#231;&#227;o" outgoing="flow63 flow67" type="120"/>
   <bpmn2:BpmnEndEvent extendedFields="&lt;list/&gt;" id="endevent62" incoming="flow63 flow70" name="Fim" signalId="0" type="60"/>
   <bpmn2:BpmnTask authNotify="true" esforcoCalculo="0" executionAttempts="0" expediente="" extendedFields="&lt;list/&gt;" frequency="0" id="task64" incoming="flow65" loopType="0" managerAssignmentControllerString="&lt;org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&gt;&#10;  &lt;idNode&gt;startevent4&lt;/idNode&gt;&#10;  &lt;returns&gt;1&lt;/returns&gt;&#10;  &lt;mechanismName&gt;Executor Atividade&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&gt;" managerMechanism="Executor Atividade" name="Adm. Obra" outgoing="flow73" selecionaColaboradores="1" type="80"/>
   <bpmn2:BpmnTask authNotify="true" esforcoCalculo="0" executionAttempts="0" expediente="" extendedFields="&lt;list/&gt;" frequency="0" id="task66" incoming="flow67" loopType="0" managerAssignmentControllerString="&lt;org.eclipse.bpmn2.impl.AssignmentControllerPoolGroup&gt;&#10;  &lt;groupId&gt;Controladoria&lt;/groupId&gt;&#10;  &lt;mechanismName&gt;Pool Grupo&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerPoolGroup&gt;" managerMechanism="Pool Grupo" name="Assinatura Eletr&#244;nica" outgoing="flow69" selecionaColaboradores="1" type="80"/>
@@ -3195,9 +3598,8 @@
   <bpmn2:BpmnTask authNotify="true" esforcoCalculo="0" executionAttempts="0" expediente="" extendedFields="&lt;list/&gt;" frequency="0" id="task74" incoming="flow73" loopType="0" managerAssignmentControllerString="&lt;org.eclipse.bpmn2.impl.AssignmentControllerPoolRole&gt;&#10;  &lt;roleId&gt;concluiProcessoDeContratos&lt;/roleId&gt;&#10;  &lt;mechanismName&gt;Pool Papel&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerPoolRole&gt;" managerMechanism="Pool Papel" name="Controladoria Aguarda Recebimento" outgoing="flow75" selecionaColaboradores="1" type="80"/>
   <bpmn2:BpmnTask authNotify="true" esforcoCalculo="0" executionAttempts="0" expediente="" extendedFields="&lt;list/&gt;" frequency="0" id="task76" incoming="flow77" loopType="0" managerAssignmentControllerString="&lt;org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&gt;&#10;  &lt;idNode&gt;task64&lt;/idNode&gt;&#10;  &lt;returns&gt;1&lt;/returns&gt;&#10;  &lt;mechanismName&gt;Executor Atividade&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&gt;" managerMechanism="Executor Atividade" name="Obra Recebe Vias Originais" outgoing="flow84" selecionaColaboradores="1" type="80"/>
   <bpmn2:BpmnEndEvent extendedFields="&lt;list/&gt;" id="endevent83" incoming="flow84" name="Fim" signalId="0" type="60"/>
-  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;exclusivegateway55&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;1&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;tipoContrato&lt;/field&gt;&#10;        &lt;value&gt;Loca&#231;&#227;o de Equipamento&lt;/value&gt;&#10;        &lt;operator&gt;2&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;intermediateconditional104&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;2&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;tipoContrato&lt;/field&gt;&#10;        &lt;value&gt;Loca&#231;&#227;o de Equipamento&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;3&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;startevent4&lt;/targetTask&gt;&#10;    &lt;mechanism&gt;Executor Atividade&lt;/mechanism&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;mecanismoAtribuicaoConfiguracao class=&quot;org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&quot;&gt;&#10;      &lt;idNode&gt;startevent4&lt;/idNode&gt;&#10;      &lt;returns&gt;1&lt;/returns&gt;&#10;      &lt;mechanismName&gt;Executor Atividade&lt;/mechanismName&gt;&#10;    &lt;/mecanismoAtribuicaoConfiguracao&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;3&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;OBRA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;4&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task5&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;JURIDICO&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;5&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task32&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;CONTROLADORIA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;6&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;exclusivegateway55&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;6&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Aprovar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;6&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;tipoContrato&lt;/field&gt;&#10;        &lt;value&gt;Loca&#231;&#227;o de Equipamento&lt;/value&gt;&#10;        &lt;operator&gt;2&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway88" incoming="flow89" name="Op&#231;&#227;o" outgoing="flow93 flow94 flow95 flow105 flow107" type="120"/>
-  <bpmn2:BpmnIntermediateEvent extendedFields="&lt;list/&gt;" id="intermediateconditional104" incoming="flow105" name="Intermedi&#225;rio" outgoing="flow106" sequenceAttached="0" signalId="0" trigger="&lt;org.eclipse.bpmn2.documentacional.BpmnTriggerData&gt;&#10;  &lt;runType&gt;HOUR&lt;/runType&gt;&#10;  &lt;timeTrigger&gt;0:0:0&lt;/timeTrigger&gt;&#10;  &lt;frequencia&gt;04&lt;/frequencia&gt;&#10;  &lt;isCondition&gt;false&lt;/isCondition&gt;&#10;&lt;/org.eclipse.bpmn2.documentacional.BpmnTriggerData&gt;" type="35"/>
-  <bpmn2:BpmnProcess author="" cardIndex="2070280" category="Contratos" complementsLevel="1" descriptorFields="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.BpmnProcessFormField&gt;&#10;    &lt;id&gt;CODCOLIGADA&lt;/id&gt;&#10;    &lt;label&gt;CODCOLIGADA&lt;/label&gt;&#10;    &lt;cardIndex&gt;frmSolicitacaoDeContratosV2&lt;/cardIndex&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.BpmnProcessFormField&gt;&#10;  &lt;org.eclipse.bpmn2.impl.BpmnProcessFormField&gt;&#10;    &lt;id&gt;modeloContrato&lt;/id&gt;&#10;    &lt;label&gt;modeloContrato&lt;/label&gt;&#10;    &lt;cardIndex&gt;frmSolicitacaoDeContratosV2&lt;/cardIndex&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.BpmnProcessFormField&gt;&#10;  &lt;org.eclipse.bpmn2.impl.BpmnProcessFormField&gt;&#10;    &lt;id&gt;tipoContrato&lt;/id&gt;&#10;    &lt;label&gt;tipoContrato&lt;/label&gt;&#10;    &lt;cardIndex&gt;frmSolicitacaoDeContratosV2&lt;/cardIndex&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.BpmnProcessFormField&gt;&#10;  &lt;org.eclipse.bpmn2.impl.BpmnProcessFormField&gt;&#10;    &lt;id&gt;origemContrato&lt;/id&gt;&#10;    &lt;label&gt;origemContrato&lt;/label&gt;&#10;    &lt;cardIndex&gt;frmSolicitacaoDeContratosV2&lt;/cardIndex&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.BpmnProcessFormField&gt;&#10;  &lt;org.eclipse.bpmn2.impl.BpmnProcessFormField&gt;&#10;    &lt;id&gt;hiddenFORNECEDOR&lt;/id&gt;&#10;    &lt;label&gt;hiddenFORNECEDOR&lt;/label&gt;&#10;    &lt;cardIndex&gt;frmSolicitacaoDeContratosV2&lt;/cardIndex&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.BpmnProcessFormField&gt;&#10;&lt;/list&gt;" expedient="Default" extendedFields="&lt;list/&gt;" formSource="server" formType="ECM_FORM_BUILDER" id="Revitaliza&#231;&#227;o Contratos" instruction="" keyWord="" managerAssignmentController="&lt;org.eclipse.bpmn2.impl.AssignmentControllerGroup&gt;&#10;  &lt;groupId&gt;Controladoria&lt;/groupId&gt;&#10;  &lt;mechanismName&gt;Grupo&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerGroup&gt;" managerMechanism="Grupo" name="Revitaliza&#231;&#227;o Contratos" notifyRequisitionerComplements="true" notifyResponsibleComplements="true" serverId="CASTILHO-PRODUCAO" version="7" volume="Default"/>
+  <bpmn2:BpmnGateway condition="&lt;list&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;1&lt;/order&gt;&#10;    &lt;expression&gt;  hAPI.getCardValue(&amp;quot;decisao&amp;quot;) == &amp;quot;Aprovar&amp;quot; &amp;amp;&amp;amp; hAPI.getCardValue(&amp;quot;origemContrato&amp;quot;) == &amp;quot;Novos&amp;quot; &amp;amp;&amp;amp;&amp;#xd;&#10;  (hAPI.getCardValue(&amp;quot;tipoContrato&amp;quot;) == &amp;quot;Loca&#231;&#227;o de Equipamento&amp;quot; || hAPI.getCardValue(&amp;quot;tipoContrato&amp;quot;) == &amp;quot;Loca&#231;&#227;o de Equipamento - Com M&#227;o de Obra&amp;quot;)&lt;/expression&gt;&#10;    &lt;targetTask&gt;intermediateconditional104&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;0&lt;/conditionType&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;2&lt;/order&gt;&#10;    &lt;expression&gt;hAPI.getCardValue(&amp;quot;origemContrato&amp;quot;) == &amp;quot;Aditivos&amp;quot; &amp;amp;&amp;amp; hAPI.getCardValue(&amp;quot;tipoContrato&amp;quot;) == &amp;quot;Loca&#231;&#227;o de Equipamento - Inclus&#227;o de Equipamento&amp;quot;&lt;/expression&gt;&#10;    &lt;targetTask&gt;intermediateconditional104&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;0&lt;/conditionType&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;3&lt;/order&gt;&#10;    &lt;expression&gt;hAPI.getCardValue(&amp;quot;decisao&amp;quot;) == &amp;quot;Aprovar&amp;quot; &amp;amp;&amp;amp; hAPI.getCardValue(&amp;quot;origemContrato&amp;quot;) != &amp;quot;Novos&amp;quot; &amp;amp;&amp;amp; (hAPI.getCardValue(&amp;quot;tipoContrato&amp;quot;) != &amp;quot;Loca&#231;&#227;o de Equipamento&amp;quot; &amp;amp;&amp;amp; hAPI.getCardValue(&amp;quot;tipoContrato&amp;quot;) != &amp;quot;Loca&#231;&#227;o de Equipamento - Com M&#227;o de Obra&amp;quot;)&lt;/expression&gt;&#10;    &lt;targetTask&gt;exclusivegateway55&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;0&lt;/conditionType&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;4&lt;/order&gt;&#10;    &lt;expression&gt;&lt;/expression&gt;&#10;    &lt;targetTask&gt;startevent4&lt;/targetTask&gt;&#10;    &lt;mechanism&gt;Executor Atividade&lt;/mechanism&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;mecanismoAtribuicaoConfiguracao class=&quot;org.eclipse.bpmn2.impl.AssignmentControllerExecutorMechanism&quot;&gt;&#10;      &lt;idNode&gt;startevent4&lt;/idNode&gt;&#10;      &lt;returns&gt;1&lt;/returns&gt;&#10;      &lt;mechanismName&gt;Executor Atividade&lt;/mechanismName&gt;&#10;    &lt;/mecanismoAtribuicaoConfiguracao&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;4&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;OBRA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;5&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task5&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;5&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;JURIDICO&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;  &lt;org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;    &lt;order&gt;6&lt;/order&gt;&#10;    &lt;expression&gt;false&lt;/expression&gt;&#10;    &lt;targetTask&gt;task32&lt;/targetTask&gt;&#10;    &lt;conditionType&gt;1&lt;/conditionType&gt;&#10;    &lt;rules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;6&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;1&lt;/ruleOrder&gt;&#10;        &lt;field&gt;decisao&lt;/field&gt;&#10;        &lt;value&gt;Retornar&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;      &lt;com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;        &lt;tenantId&gt;0&lt;/tenantId&gt;&#10;        &lt;version&gt;0&lt;/version&gt;&#10;        &lt;sequence&gt;88&lt;/sequence&gt;&#10;        &lt;expressionOrder&gt;6&lt;/expressionOrder&gt;&#10;        &lt;ruleOrder&gt;2&lt;/ruleOrder&gt;&#10;        &lt;field&gt;destinoRetorno&lt;/field&gt;&#10;        &lt;value&gt;CONTROLADORIA&lt;/value&gt;&#10;        &lt;operator&gt;1&lt;/operator&gt;&#10;        &lt;valueType&gt;1&lt;/valueType&gt;&#10;      &lt;/com.totvs.tds.ecm.workflow.model.ConditionProcessAutomaticRules&gt;&#10;    &lt;/rules&gt;&#10;  &lt;/org.eclipse.bpmn2.impl.ConditionImpl&gt;&#10;&lt;/list&gt;" extendedFields="&lt;list/&gt;" id="exclusivegateway88" incoming="flow89" name="Op&#231;&#227;o" outgoing="flow93 flow94 flow95 flow105 flow107" type="120"/>
+  <bpmn2:BpmnProcess author="" cardIndex="40684" category="Contratos" complementsLevel="1" expedient="Default" extendedFields="&lt;list/&gt;" formSource="server" formType="ECM_FORM_BUILDER" id="Revitaliza&#231;&#227;o Contratos" instruction="" keyWord="" managerAssignmentController="&lt;org.eclipse.bpmn2.impl.AssignmentControllerGroup&gt;&#10;  &lt;groupId&gt;Controladoria&lt;/groupId&gt;&#10;  &lt;mechanismName&gt;Grupo&lt;/mechanismName&gt;&#10;&lt;/org.eclipse.bpmn2.impl.AssignmentControllerGroup&gt;" managerMechanism="Grupo" name="Revitaliza&#231;&#227;o Contratos" notifyRequisitionerComplements="true" notifyResponsibleComplements="true" serverId="CASTILHO-HOMOLOGA&#199;&#195;O" version="81" volume="Default"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow31" name="" sourceRef="task5" targetRef="exclusivegateway30"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow33" name="" sourceRef="exclusivegateway30" targetRef="task32"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow35" name="" sourceRef="task32" targetRef="exclusivegateway34"/>
@@ -3209,7 +3611,7 @@
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow49" name="" sourceRef="exclusivegateway46" targetRef="task48"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow56" name="" sourceRef="task53" targetRef="exclusivegateway55"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow59" name="" sourceRef="exclusivegateway55" targetRef="intermediateconditional58"/>
-  <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow61" name="" sourceRef="intermediateconditional58" targetRef="exclusivegateway60"/>
+  <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow61" movementAccessLinkDescription="" movementDescription="" movementTitle="" name="" sourceRef="intermediateconditional58" targetRef="exclusivegateway60"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow63" name="" sourceRef="exclusivegateway60" targetRef="endevent62"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow65" name="" sourceRef="exclusivegateway55" targetRef="task64"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow67" name="" sourceRef="exclusivegateway60" targetRef="task66"/>
@@ -3234,6 +3636,7 @@
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow94" name="" sourceRef="exclusivegateway88" targetRef="task5"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow95" name="" sourceRef="exclusivegateway88" targetRef="startevent4"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow96" name="" sourceRef="startevent4" targetRef="task5"/>
+  <bpmn2:BpmnIntermediateEvent id="intermediateconditional104" incoming="flow105" name="Intermedi&#225;rio" outgoing="flow106" sequenceAttached="0" signalId="0" trigger="&lt;org.eclipse.bpmn2.documentacional.BpmnTriggerData&gt;&#10;  &lt;runType&gt;HOUR&lt;/runType&gt;&#10;  &lt;timeTrigger&gt;0:0:0&lt;/timeTrigger&gt;&#10;  &lt;frequencia&gt;04&lt;/frequencia&gt;&#10;  &lt;scriptCondition&gt;Revitaliza&#231;&#227;o Contratos.intermediateconditional104.js&lt;/scriptCondition&gt;&#10;  &lt;isCondition&gt;false&lt;/isCondition&gt;&#10;&lt;/org.eclipse.bpmn2.documentacional.BpmnTriggerData&gt;" type="35"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow105" name="" sourceRef="exclusivegateway88" targetRef="intermediateconditional104"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow106" name="" sourceRef="intermediateconditional104" targetRef="task53"/>
   <bpmn2:SequenceFlow atividadeFluxo="" atividadeRetorno="" extendedFields="&lt;list/&gt;" id="flow107" name="" sourceRef="exclusivegateway88" targetRef="exclusivegateway55"/>
