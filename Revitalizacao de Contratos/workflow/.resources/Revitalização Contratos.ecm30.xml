@@ -1219,6 +1219,18 @@
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
+        <expressionOrder>6</expressionOrder>
+        <version>81</version>
+        <sequence>55</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>62</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
         <version>81</version>
         <sequence>60</sequence>
@@ -1994,6 +2006,23 @@
       <defaultLink>false</defaultLink>
       <type>0</type>
     </ProcessLink>
+    <ProcessLink>
+      <processLinkPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+        <linkSequence>108</linkSequence>
+      </processLinkPK>
+      <actionLabel></actionLabel>
+      <returnPermited>false</returnPermited>
+      <initialStateSequence>55</initialStateSequence>
+      <finalStateSequence>62</finalStateSequence>
+      <returnLabel></returnLabel>
+      <name></name>
+      <automaticLink>false</automaticLink>
+      <defaultLink>false</defaultLink>
+      <type>0</type>
+    </ProcessLink>
   </list>
   <list/>
   <list>
@@ -2283,7 +2312,7 @@ function beforeTaskSave_inicio() {&#xd;
     try {&#xd;
         hAPI.setCardValue(&quot;numProces&quot;, getValue(&quot;WKNumProces&quot;));&#xd;
         var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
-        &#xd;
+&#xd;
         if (tipoContrato == &quot;Locação de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
             atualizaStatusEquipamento(&quot;Contrato_em_Andamento_com_análise_pendente&quot;);&#xd;
             hAPI.setCardValue(&quot;dataCriadoEm&quot;, getDateNow());&#xd;
@@ -2298,20 +2327,14 @@ function beforeTaskSave_inicio() {&#xd;
             atualizaStatusEquipamento(&quot;Contrato_em_Andamento_com_análise_pendente&quot;);&#xd;
 &#xd;
         }&#xd;
-            &#xd;
-        /*&#xd;
-        // Só insere (cria) dados se for contrato Novos.&#xd;
-        if (hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot;) {&#xd;
 &#xd;
-        }&#xd;
-        */&#xd;
         var pdfIdContrato = hAPI.getCardValue(&quot;contratoPdfId&quot;);&#xd;
         if (pdfIdContrato) {&#xd;
             anexaDocumentoNoProcesso(pdfIdContrato);&#xd;
         }&#xd;
         insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), &quot;Início&quot;, &quot;Início&quot;);&#xd;
     } catch (error) {&#xd;
-        throw error;   &#xd;
+        throw error;&#xd;
     }&#xd;
 }&#xd;
 function beforeTaskSave_juridico() {&#xd;
@@ -2334,13 +2357,13 @@ function beforeTaskSave_controladoria() {&#xd;
                 if (codColigada == 1 || codColigada == 2 || codColigada == 5) {&#xd;
                     hAPI.setCardValue(&quot;diretor&quot;, &quot;jerson&quot;);&#xd;
 &#xd;
-                // Dromos ou EPYA&#xd;
+                    // Dromos ou EPYA&#xd;
                 } else if (codColigada == 12 || codColigada == 13) {&#xd;
                     hAPI.setCardValue(&quot;diretor&quot;, &quot;mario&quot;)&#xd;
                 }&#xd;
             }&#xd;
-&#xd;
-            if (tipo == &quot;Novos&quot;) {&#xd;
+            var IDCNT = hAPI.getCardValue(&quot;IDCNT&quot;);&#xd;
+            if (tipo == &quot;Novos&quot; &amp;&amp; IDCNT == &quot;&quot;) {&#xd;
                 var IDCNT = criaNovoContrato();&#xd;
                 hAPI.setCardValue(&quot;IDCNT&quot;, IDCNT);&#xd;
                 updateTcntAuxiliar_IDCNT(IDCNT, hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
@@ -2365,10 +2388,18 @@ function beforeTaskSave_engenheiro() {&#xd;
         if (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot; &amp;&amp; hAPI.getCardValue(&quot;coordenador&quot;) == &quot;&quot;) {&#xd;
             // Se não tiver coordenador vai para assinatura eletrônica&#xd;
             criaAssinaturaEletronica();&#xd;
-        }else if(hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot; &amp;&amp; (hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento&quot; || hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Com Mão de Obra&quot;) &amp;&amp; hAPI.getCardValue(&quot;coordenador&quot;) == &quot;&quot; &amp;&amp; hAPI.getCardValue(&quot;CODCOLIGADA&quot;) != 1 ){&#xd;
+        } else if (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot; &amp;&amp; (hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento&quot; || hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Com Mão de Obra&quot;) &amp;&amp; hAPI.getCardValue(&quot;coordenador&quot;) == &quot;&quot; &amp;&amp; hAPI.getCardValue(&quot;CODCOLIGADA&quot;) != 1) {&#xd;
             // Caso seja Locação de Equipamento e não tiver coordenador&#xd;
             // Vai para assinatura eletrônica somente quando não for Coligada 1, pois na Coligada 1 vai para aprovação do Jerson&#xd;
             criaAssinaturaEletronica();&#xd;
+        }&#xd;
+        ////////////PAOLA&#xd;
+        if (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Já Assinado&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot; &amp;&amp; hAPI.getCardValue(&quot;coordenador&quot;) == &quot;&quot;) {&#xd;
+            updateTcntAuxiliar_dataAssinatura(getDateNow(), hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+            regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais()&#xd;
+        } else if (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Já Assinado&quot; &amp;&amp; (hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento&quot; || hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Com Mão de Obra&quot;) &amp;&amp; hAPI.getCardValue(&quot;coordenador&quot;) == &quot;&quot; &amp;&amp; hAPI.getCardValue(&quot;CODCOLIGADA&quot;) != 1) {&#xd;
+            updateTcntAuxiliar_dataAssinatura(getDateNow(), hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+            regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais()&#xd;
         }&#xd;
     }&#xd;
 }&#xd;
@@ -2378,12 +2409,24 @@ function beforeTaskSave_coordenadorObras() {&#xd;
     if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot;)) {&#xd;
         criaAssinaturaEletronica();&#xd;
     }&#xd;
+&#xd;
+    /////////////////////////PAOLA&#xd;
+    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Já Assinado&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot;)) {&#xd;
+&#xd;
+        updateTcntAuxiliar_dataAssinatura(getDateNow(), hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+        regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais()&#xd;
+    }&#xd;
 }&#xd;
 function beforeTaskSave_diretoria() {&#xd;
     insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Aprovação Diretoria&quot;);&#xd;
 &#xd;
-    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot;){&#xd;
+    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot;) {&#xd;
         criaAssinaturaEletronica();&#xd;
+    }&#xd;
+    /////////////////////////////////////PAOLA&#xd;
+    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Já Assinado&quot;) {&#xd;
+        updateTcntAuxiliar_dataAssinatura(getDateNow(), hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+        regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais()&#xd;
     }&#xd;
 }&#xd;
 function beforeTaskSave_statusAssinaturaEletronica() {&#xd;
@@ -2395,94 +2438,6 @@ function beforeTaskSave_statusAssinaturaEletronica() {&#xd;
         alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;ATIVO&quot;);&#xd;
         regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();&#xd;
     }&#xd;
-&#xd;
-    /*&#xd;
-    // Formata valor monetario para float&#xd;
-    var valorLocacaoReajustado = ValorToFloat(hAPI.getCardValue(&quot;valorLocacaoReajustado&quot;));&#xd;
-&#xd;
-    var IDCNT = hAPI.getCardValue(&quot;IDCNT&quot;);&#xd;
-    var ID_TCNT_AUXILIAR = hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;);&#xd;
-    var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
-    var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
-    var dataFimLocacao = hAPI.getCardValue(&quot;dataFimLocacao&quot;);&#xd;
-&#xd;
-    // Aqui não atualiza dataAssinatura na base CastilhoCustom porque já é feito isso em ...intermediateconditional58.js&#xd;
-    // Mas qundo assinatura manual, atualiza a dataAssinatura através da função beforeTaskSave_obraRecebeViasOriginais / atividade obraRecebeViasOriginais&#xd;
-&#xd;
-    if (origemContrato == &quot;Aditivos&quot;) {&#xd;
-        if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot; ||&#xd;
-            tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot; ||&#xd;
-            tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot; || tipoContrato == &quot;Locação de &quot;&#xd;
-        ) {&#xd;
-            insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot; || &#xd;
-            tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;&#xd;
-        ) {&#xd;
-            insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
-        }&#xd;
-            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
-    }&#xd;
-&#xd;
-    if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot;) {&#xd;
-        updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao);&#xd;
-&#xd;
-    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot;) {&#xd;
-        updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
-        &#xd;
-        // Comentado para usar quando fazer UPDATE na base CastilhoCustom dos NSEQITEMCNT para inicar do 1 certo?&#xd;
-        //updateTCNT_alteracaoValorLocacao(IDCNT, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
-        updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
-&#xd;
-    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) {&#xd;
-        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-        updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue(&quot;dataFimLocacao&quot;));&#xd;
-        updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
-        updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
-&#xd;
-    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Imóvel (Rescisões)&quot;) { // Rescisão&#xd;
-        // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
-        alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
-        &#xd;
-    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot;) {&#xd;
-        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-        updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
-&#xd;
-    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot;) {&#xd;
-        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-        updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
-&#xd;
-    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot;) {&#xd;
-        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-        updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
-        updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
-&#xd;
-    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
-        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-        updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
-&#xd;
-        // Atualiza o ATIVO para ativado ( 1 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
-        updateTcntAuxiliarItens_statusEquipNoContrato(&quot;1&quot;, ID_TCNT_AUXILIAR);&#xd;
-        atualizaStatusEquipamento(&quot;Contrato_Vigente&quot;);&#xd;
-&#xd;
-    } else if (statusAssinatura == &quot;Assinado&quot; &amp;&amp; tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
-        // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-        updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
-&#xd;
-        // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
-        updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
-        atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;);&#xd;
-&#xd;
-    } else if (tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;) {&#xd;
-        // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
-        alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
-&#xd;
-        // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado essa rescisão&#xd;
-        updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
-        atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;);&#xd;
-&#xd;
-    }&#xd;
-    */&#xd;
 }&#xd;
 function beforeTaskSave_obraRecebeViasOriginais() {&#xd;
     var ID_TCNT_AUXILIAR = hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;);&#xd;
@@ -2493,108 +2448,13 @@ function beforeTaskSave_obraRecebeViasOriginais() {&#xd;
         hAPI.setCardValue(&quot;dataAssinatura&quot;, DATA_ASSINATURA);&#xd;
         updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR);&#xd;
         alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
-        &#xd;
-    }&#xd;
 &#xd;
+    }&#xd;
     regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();&#xd;
-&#xd;
-    /*&#xd;
-    // Formata valor monetario para float&#xd;
-    var valorLocacaoReajustado = ValorToFloat(hAPI.getCardValue(&quot;valorLocacaoReajustado&quot;));&#xd;
-&#xd;
-    var IDCNT = hAPI.getCardValue(&quot;IDCNT&quot;);&#xd;
-    var ID_TCNT_AUXILIAR = hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;);&#xd;
-    var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
-    var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
-    var dataFimLocacao = hAPI.getCardValue(&quot;dataFimLocacao&quot;);&#xd;
-&#xd;
-    try {&#xd;
-        // Atualiza a DATA_ASSINATURA da tabela da base Custom somente se a &quot;Origem do Contrato&quot; for &quot;Novos&quot;&#xd;
-        if (origemContrato == &quot;Novos&quot;) {&#xd;
-            var DATA_ASSINATURA = getDateTimeNow();&#xd;
-            hAPI.setCardValue(&quot;dataAssinatura&quot;, DATA_ASSINATURA);&#xd;
-            updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR);&#xd;
-        &#xd;
-        } else if (origemContrato == &quot;Aditivos&quot; || origemContrato == &quot;Rescisões&quot;) {&#xd;
-            if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot; ||&#xd;
-                tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot; ||&#xd;
-                tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot;)&#xd;
-            {&#xd;
-                insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
-&#xd;
-            } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot; || &#xd;
-                tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) &#xd;
-            {&#xd;
-                insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
-            }&#xd;
-                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
-        }&#xd;
-        &#xd;
-        if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot;) {&#xd;
-            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue(&quot;dataFimLocacao&quot;));&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot;) {&#xd;
-            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
-            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) {&#xd;
-            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao);&#xd;
-            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
-            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Locação de Imóvel (Rescisões)&quot;) { // Rescisão&#xd;
-            // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
-            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
-        &#xd;
-        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot;) {&#xd;
-            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot;) {&#xd;
-            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
-            updateSISMA_alteracaoAluguelContrato_equipamento();&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot;) {&#xd;
-            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
-            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
-&#xd;
-            // Atualiza o ATIVO para ativado ( 1 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
-            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;1&quot;, ID_TCNT_AUXILIAR);&#xd;
-            atualizaStatusEquipamento(&quot;Contrato_Vigente&quot;);&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
-            // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
-&#xd;
-            // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
-            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
-            atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;);&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;) {&#xd;
-            // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
-            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
-&#xd;
-            // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado essa rescisão&#xd;
-            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
-            atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;);&#xd;
-&#xd;
-        }&#xd;
-    } catch (error) {&#xd;
-        throw error;&#xd;
-    }&#xd;
-    */&#xd;
 }&#xd;
 &#xd;
 // Centraliza as regras que beforeTaskSave_statusAssinaturaEletronica e beforeTaskSave_obraRecebeViasOriginais usam&#xd;
+// Antes se repetia as lógicas nas 2 funções (Assinatura eletrônica/manual) o que dificultava manutenção&#xd;
 function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {&#xd;
 &#xd;
     // Formata valor monetario para float&#xd;
@@ -2611,19 +2471,17 @@ function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {&#xd;
         if (origemContrato == &quot;Aditivos&quot; || origemContrato == &quot;Rescisões&quot;) {&#xd;
             if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot; ||&#xd;
                 tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot; || tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot; ||&#xd;
-                tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; || &#xd;
-                tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;)&#xd;
-            {&#xd;
+                tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; ||&#xd;
+                tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;) {&#xd;
                 insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
 &#xd;
-            } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot; || &#xd;
-                tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) &#xd;
-            {&#xd;
+            } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot; ||&#xd;
+                tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) {&#xd;
                 insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
             }&#xd;
-                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
+            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
         }&#xd;
-        &#xd;
+&#xd;
         if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot;) {&#xd;
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
             updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue(&quot;dataFimLocacao&quot;));&#xd;
@@ -2642,7 +2500,7 @@ function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {&#xd;
         } else if (tipoContrato == &quot;Locação de Imóvel (Rescisões)&quot;) { // Rescisão&#xd;
             // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
             alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
-        &#xd;
+&#xd;
         } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot;) {&#xd;
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
             updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
@@ -3000,7 +2858,7 @@ function geraXML_TITMCNT(parametros) {&#xd;
         xml += &quot;    &lt;DATAFIM&gt;&quot; + setDateXMLFormat(parametros.DATAFIM) + &quot;T00:00:00&lt;/DATAFIM&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODCPGPRAZO&gt;130&lt;/CODCPGPRAZO&gt;&quot;;&#xd;
         xml += &quot;    &lt;CODRPR&gt;&quot; + parametros.CODRPR + &quot;&lt;/CODRPR&gt;&quot;;&#xd;
-        if (parametros.TIPOFATURAMENTO  == TIPOS_FATURAMENTO[&quot;Periódico&quot;]) { // Antes era parametros.CODCPG&#xd;
+        if (parametros.TIPOFATURAMENTO == TIPOS_FATURAMENTO[&quot;Periódico&quot;]) { // Antes era parametros.CODCPG&#xd;
             xml += &quot;&lt;DIAFATURAMENTO&gt;&quot; + parametros.DIAFATURAMENTO + &quot;&lt;/DIAFATURAMENTO&gt;&quot;;&#xd;
             xml += &quot;&lt;QTDEFATURAMENTOS&gt;&quot; + parametros.QTDEFATURAMENTOS + &quot;&lt;/QTDEFATURAMENTOS&gt;&quot;;&#xd;
         }&#xd;
@@ -3187,7 +3045,7 @@ function updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT) {&#xd
         // Remove os valores antigos dos equipamentos alterados, e soma os novos valores reajustados&#xd;
         valorMensalLocacao = valorTotalContrato - somaValoresOriginaisAlterados + somaValoresReajustadosAlterados;&#xd;
 &#xd;
-    } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;|| tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
+    } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
 &#xd;
         // O campo valorMensalLocacao do formulário já foi calculado&#xd;
         valorMensalLocacao = ValorToFloat(hAPI.getCardValue(&quot;valorMensalLocacao&quot;));&#xd;
@@ -3227,7 +3085,7 @@ function updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT) {&#xd
         xml += &quot;    &lt;CODCOLIGADA&gt;&quot; + CODCOLIGADA + &quot;&lt;/CODCOLIGADA&gt;&quot;;&#xd;
         xml += &quot;    &lt;IDCNT&gt;&quot; + IDCNT + &quot;&lt;/IDCNT&gt;&quot;;&#xd;
         xml += &quot;    &lt;NSEQITMCNT&gt;2&lt;/NSEQITMCNT&gt;&quot;;&#xd;
-        xml += &quot;    &lt;PRECOFATURAMENTO&gt;&quot; + valorRetencao.toString().replace(&quot;.&quot;,&quot;,&quot;) + &quot;&lt;/PRECOFATURAMENTO&gt;&quot;;&#xd;
+        xml += &quot;    &lt;PRECOFATURAMENTO&gt;&quot; + valorRetencao.toString().replace(&quot;.&quot;, &quot;,&quot;) + &quot;&lt;/PRECOFATURAMENTO&gt;&quot;;&#xd;
         xml += &quot;  &lt;/TITMCNT&gt;&quot;;&#xd;
     }&#xd;
 &#xd;
@@ -3264,8 +3122,8 @@ function updateSISMA_alteracaoAluguelContrato_equipamento() {&#xd;
 &#xd;
             var query = &quot;UPDATE EQUIPAMENTO SET ALUGUEL_CONTRATO = ? WHERE NUMEEQUI = ?&quot;;&#xd;
             executaUpdate(query, [&#xd;
-                {type:&quot;float&quot;, value: valorAluguelContrato},&#xd;
-                {type:&quot;varchar&quot;, value: prefixo},&#xd;
+                { type: &quot;float&quot;, value: valorAluguelContrato },&#xd;
+                { type: &quot;varchar&quot;, value: prefixo },&#xd;
             ], &quot;jdbc/Sisma&quot;);&#xd;
             counter++;&#xd;
         }&#xd;
@@ -3314,9 +3172,9 @@ function alteraStatusContrato_RM(CODCOLIGADA, IDCNT, STATUS) {&#xd;
     }&#xd;
 }&#xd;
 &#xd;
-function insereDadosNaTabelaAuxiliar(){ //Contratos Novos&#xd;
+function insereDadosNaTabelaAuxiliar() { //Contratos Novos&#xd;
     try {&#xd;
-        &#xd;
+&#xd;
         var query = &quot;INSERT INTO TCNT_AUXILIAR (&quot;;&#xd;
         query += &quot; CODCOLIGADA, &quot;;&#xd;
         query += &quot; IS_MODELO_CASTILHO, &quot;;&#xd;
@@ -3333,18 +3191,18 @@ function insereDadosNaTabelaAuxiliar(){ //Contratos Novos&#xd;
         query += &quot; VALUES (?,?,?,?,?,?,?,?,?,?, ?);&quot;;&#xd;
 &#xd;
 &#xd;
-        var id = executeInsert(query,[&#xd;
-            {type:&quot;int&quot;, value:hAPI.getCardValue(&quot;CODCOLIGADA&quot;)},&#xd;
-            {type:&quot;int&quot;, value:hAPI.getCardValue(&quot;modeloContrato&quot;) == &quot;Modelo Castilho&quot; ? 1:0},&#xd;
-            {type:&quot;int&quot;, value:hAPI.getCardValue(&quot;temRetencao&quot;) == &quot;Sim&quot; ? 1:0},//Tem Retencao&#xd;
-            {type:&quot;float&quot;, value:hAPI.getCardValue(&quot;percentualRetencao&quot;).replace(&quot;%&quot;,&quot;&quot;)},// Percentual Retencao&#xd;
-            {type:&quot;int&quot;, value:hAPI.getCardValue(&quot;temREIDI&quot;) == &quot;Sim&quot; ? 1:0},// Tem REIDI&#xd;
-            {type:&quot;float&quot;, value:hAPI.getCardValue(&quot;percentualREIDI&quot;)},//Percentual REIDI&#xd;
-            {type:&quot;varchar&quot;, value:hAPI.getCardValue(&quot;assinaturaContrato&quot;)},//TIPO_ASSINATURA&#xd;
-            {type:&quot;varchar&quot;, value:hAPI.getCardValue(&quot;tipoContrato&quot;)},//TIPO_CONTRATO&#xd;
-            {type:&quot;varchar&quot;, value:hAPI.getCardValue(&quot;descontoPorDiaChuva&quot;).replace(&quot;%&quot;,&quot;&quot;)},//PERCENT_DESCONTO_CHUVA&#xd;
-            {type:&quot;varchar&quot;, value:hAPI.getCardValue(&quot;descontoPorDiaParado&quot;).replace(&quot;%&quot;,&quot;&quot;)},//PERCENT_DESCONTO_DIAS_PARADO&#xd;
-            {type:&quot;int&quot;, value:getValue(&quot;WKNumProces&quot;)},//TIPO_CONTRATO&#xd;
+        var id = executeInsert(query, [&#xd;
+            { type: &quot;int&quot;, value: hAPI.getCardValue(&quot;CODCOLIGADA&quot;) },&#xd;
+            { type: &quot;int&quot;, value: hAPI.getCardValue(&quot;modeloContrato&quot;) == &quot;Modelo Castilho&quot; ? 1 : 0 },&#xd;
+            { type: &quot;int&quot;, value: hAPI.getCardValue(&quot;temRetencao&quot;) == &quot;Sim&quot; ? 1 : 0 },//Tem Retencao&#xd;
+            { type: &quot;float&quot;, value: hAPI.getCardValue(&quot;percentualRetencao&quot;).replace(&quot;%&quot;, &quot;&quot;) },// Percentual Retencao&#xd;
+            { type: &quot;int&quot;, value: hAPI.getCardValue(&quot;temREIDI&quot;) == &quot;Sim&quot; ? 1 : 0 },// Tem REIDI&#xd;
+            { type: &quot;float&quot;, value: hAPI.getCardValue(&quot;percentualREIDI&quot;) },//Percentual REIDI&#xd;
+            { type: &quot;varchar&quot;, value: hAPI.getCardValue(&quot;assinaturaContrato&quot;) },//TIPO_ASSINATURA&#xd;
+            { type: &quot;varchar&quot;, value: hAPI.getCardValue(&quot;tipoContrato&quot;) },//TIPO_CONTRATO&#xd;
+            { type: &quot;varchar&quot;, value: hAPI.getCardValue(&quot;descontoPorDiaChuva&quot;).replace(&quot;%&quot;, &quot;&quot;) },//PERCENT_DESCONTO_CHUVA&#xd;
+            { type: &quot;varchar&quot;, value: hAPI.getCardValue(&quot;descontoPorDiaParado&quot;).replace(&quot;%&quot;, &quot;&quot;) },//PERCENT_DESCONTO_DIAS_PARADO&#xd;
+            { type: &quot;int&quot;, value: getValue(&quot;WKNumProces&quot;) },//TIPO_CONTRATO&#xd;
         ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
 &#xd;
         return id;&#xd;
@@ -3364,7 +3222,7 @@ function insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCN
     if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) {&#xd;
         descricao = &quot;Alterado prazo e valor do contrato, prazo de &quot; + dataInicioLocacao + &quot; para &quot; + dataFimLocacao + &quot;, e valor de &quot; + valorMensalAluguel + &quot; para &quot; + valorLocacaoReajustado;&#xd;
     }&#xd;
-        &#xd;
+&#xd;
     else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot;) {&#xd;
         descricao = &quot;Alterado valor do contrato de &quot; + valorMensalAluguel + &quot; para &quot; + valorLocacaoReajustado;&#xd;
 &#xd;
@@ -3386,13 +3244,13 @@ function insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCN
         query += &quot;) &quot;;&#xd;
         query += &quot; VALUES (?,?,?,?,?,?);&quot;;&#xd;
 &#xd;
-        var id = executeInsert(query,[&#xd;
-            {type:&quot;int&quot;, value: ID_TCNT_AUXILIAR},&#xd;
-            {type:&quot;varchar&quot;, value: hAPI.getCardValue(&quot;tipoContrato&quot;)}, // Tipo do contrato&#xd;
-            {type:&quot;varchar&quot;, value: descricao}, // Descrição do que foi alterado no Contrato&#xd;
-            {type:&quot;int&quot;, value: getValue(&quot;WKNumProces&quot;)}, // Nº da Solicitação Fluig&#xd;
-            {type:&quot;date&quot;, value: dataAtual}, // Data atual do processo&#xd;
-            {type:&quot;date&quot;, value: dataAtual}, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)&#xd;
+        var id = executeInsert(query, [&#xd;
+            { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR },&#xd;
+            { type: &quot;varchar&quot;, value: hAPI.getCardValue(&quot;tipoContrato&quot;) }, // Tipo do contrato&#xd;
+            { type: &quot;varchar&quot;, value: descricao }, // Descrição do que foi alterado no Contrato&#xd;
+            { type: &quot;int&quot;, value: getValue(&quot;WKNumProces&quot;) }, // Nº da Solicitação Fluig&#xd;
+            { type: &quot;date&quot;, value: dataAtual }, // Data atual do processo&#xd;
+            { type: &quot;date&quot;, value: dataAtual }, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)&#xd;
         ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
 &#xd;
         return id;&#xd;
@@ -3461,8 +3319,8 @@ function insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, I
 &#xd;
         // Monta/usa DESCRICAO conforme #tipoContrato&#xd;
         if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot;) {&#xd;
-            descricao = &#xd;
-            &quot;Alterado prazo e valor do contrato, prazo de &quot; + dataInicioLocacao + &quot; para &quot; + dataFimLocacao + &quot;, e valor de &quot; + valorTotalContartoMask + &quot; para &quot; + novoValorContrato + &quot; dos equipamentos: &quot; + prefixos;&#xd;
+            descricao =&#xd;
+                &quot;Alterado prazo e valor do contrato, prazo de &quot; + dataInicioLocacao + &quot; para &quot; + dataFimLocacao + &quot;, e valor de &quot; + valorTotalContartoMask + &quot; para &quot; + novoValorContrato + &quot; dos equipamentos: &quot; + prefixos;&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot;) {&#xd;
             descricao = &quot;Alterado valor do contrato de &quot; + valorTotalContartoMask + &quot; para &quot; + novoValorContrato + &quot; dos equipamentos: &quot; + prefixos;&#xd;
@@ -3499,15 +3357,15 @@ function insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, I
         query += &quot;) &quot;;&#xd;
         query += &quot; VALUES (?,?,?,?,?,?)&quot;;&#xd;
 &#xd;
-        var id = executeInsert(query,[&#xd;
-            {type:&quot;int&quot;, value: ID_TCNT_AUXILIAR},&#xd;
-            {type:&quot;varchar&quot;, value: hAPI.getCardValue(&quot;tipoContrato&quot;)}, // Tipo do contrato&#xd;
-            {type:&quot;varchar&quot;, value: descricao}, // Descrição do que foi alterado no Contrato&#xd;
-            {type:&quot;int&quot;, value: getValue(&quot;WKNumProces&quot;)}, // Nº da Solicitação Fluig&#xd;
-            {type:&quot;date&quot;, value: dataReajuste}, // Data do reajuste informado no form&#xd;
-            {type:&quot;date&quot;, value: dataAtual}, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)&#xd;
+        var id = executeInsert(query, [&#xd;
+            { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR },&#xd;
+            { type: &quot;varchar&quot;, value: hAPI.getCardValue(&quot;tipoContrato&quot;) }, // Tipo do contrato&#xd;
+            { type: &quot;varchar&quot;, value: descricao }, // Descrição do que foi alterado no Contrato&#xd;
+            { type: &quot;int&quot;, value: getValue(&quot;WKNumProces&quot;) }, // Nº da Solicitação Fluig&#xd;
+            { type: &quot;date&quot;, value: dataReajuste }, // Data do reajuste informado no form&#xd;
+            { type: &quot;date&quot;, value: dataAtual }, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)&#xd;
         ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
-        &#xd;
+&#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
     }&#xd;
@@ -3547,7 +3405,7 @@ function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclu
             query += &quot;VALUES (?,?,?,?)&quot;;&#xd;
 &#xd;
             executeInsert(query, [&#xd;
-                { type : &quot;int&quot;, value: ID_TCNT_AUXILIAR },&#xd;
+                { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR },&#xd;
                 { type: &quot;int&quot;, value: proximoNSEQITEMCNT },&#xd;
                 { type: &quot;varchar&quot;, value: prefixo },&#xd;
                 { type: &quot;int&quot;, value: &apos;0&apos; }, // STATUS Desativado, vai ser reativado depois no final do Solict caso seja aprovado o Aditivo/Rescisão&#xd;
@@ -3581,7 +3439,7 @@ function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclu
         }&#xd;
     }&#xd;
 }&#xd;
-function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
+function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR) { //Contratos novos&#xd;
     try {&#xd;
         var tipo_contrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
 &#xd;
@@ -3591,21 +3449,21 @@ function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){ //Contratos novos&#
         if (tipo_contrato == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
             insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR);&#xd;
         }&#xd;
-        else if(tipo_contrato == &quot;Locação de Imóvel&quot;){&#xd;
+        else if (tipo_contrato == &quot;Locação de Imóvel&quot;) {&#xd;
             insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR);&#xd;
         }&#xd;
 &#xd;
-       &#xd;
+&#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
+function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR) { //Contratos novos&#xd;
 &#xd;
     // Nos testes vai pode ser inserido mais de 1 PREFIXO igual para o mesmo ID_TCNT_AUXILIAR&#xd;
     // Mas em produção o PREFIXO será único, &#xd;
     // já que sempre o novo processo de Cadastro de equip exigirá um PREFIXO não existente na base do SISMA&#xd;
-    try {        &#xd;
+    try {&#xd;
         var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);&#xd;
         var counter = 0;&#xd;
         for (var i = 0; i &lt; indexes.length; i++) {&#xd;
@@ -3619,11 +3477,11 @@ function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){ //Contratos novos&#x
             query += &quot;ATIVO) &quot;&#xd;
             query += &quot;VALUES (?,?,?,?)&quot;;&#xd;
 &#xd;
-            executeInsert(query,[&#xd;
-                {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},//ID_TCNT_AUXILIAR&#xd;
-                {type:&quot;int&quot;, value:counter},//NSEQITEMCNT&#xd;
-                {type:&quot;varchar&quot;, value:prefixo},//PREFIXO&#xd;
-                {type:&quot;int&quot;, value: &quot;1&quot;}, // Ativado&#xd;
+            executeInsert(query, [&#xd;
+                { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR },//ID_TCNT_AUXILIAR&#xd;
+                { type: &quot;int&quot;, value: counter },//NSEQITEMCNT&#xd;
+                { type: &quot;varchar&quot;, value: prefixo },//PREFIXO&#xd;
+                { type: &quot;int&quot;, value: &quot;1&quot; }, // Ativado&#xd;
             ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
             counter++;&#xd;
         }&#xd;
@@ -3631,8 +3489,8 @@ function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){ //Contratos novos&#x
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
- try {        &#xd;
+function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR) { //Contratos novos&#xd;
+    try {&#xd;
         var query = &quot;INSERT INTO TCNT_AUXILIAR_ITENS (&quot;;&#xd;
         query += &quot;ID_TCNT_AUXILIAR, &quot;;&#xd;
         query += &quot;NSEQITEMCNT, &quot;;&#xd;
@@ -3643,38 +3501,38 @@ function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
         query += &quot;ENDERECO) &quot;&#xd;
         query += &quot;VALUES (?,?,?,?,?,?,?)&quot;;&#xd;
 &#xd;
-        executeInsert(query,[&#xd;
-            {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},//ID_TCNT_AUXILIAR&#xd;
-            {type:&quot;int&quot;, value:&quot;0&quot;},//NSEQITEMCNT&#xd;
-            {type:&quot;varchar&quot;, value:hAPI.getCardValue(&quot;finalidadeLocacao&quot;)},//TIPO&#xd;
-            {type:&quot;varchar&quot;, value:hAPI.getCardValue(&quot;descricaoImovel&quot;)},//DESCRICAO&#xd;
-            {type:&quot;float&quot;, value:ValorToFloat(hAPI.getCardValue(&quot;valorMensalAluguel&quot;)+&quot;&quot;)},//VALOR&#xd;
-            {type:&quot;varchar&quot;, value:&quot;MES&quot;},//UN&#xd;
-            {type:&quot;date&quot;, value:hAPI.getCardValue(&quot;enderecoImovel&quot;)},// ENDERECO&#xd;
-        ], &quot;/jdbc/CastilhoCustom&quot;);  &#xd;
+        executeInsert(query, [&#xd;
+            { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR },//ID_TCNT_AUXILIAR&#xd;
+            { type: &quot;int&quot;, value: &quot;0&quot; },//NSEQITEMCNT&#xd;
+            { type: &quot;varchar&quot;, value: hAPI.getCardValue(&quot;finalidadeLocacao&quot;) },//TIPO&#xd;
+            { type: &quot;varchar&quot;, value: hAPI.getCardValue(&quot;descricaoImovel&quot;) },//DESCRICAO&#xd;
+            { type: &quot;float&quot;, value: ValorToFloat(hAPI.getCardValue(&quot;valorMensalAluguel&quot;) + &quot;&quot;) },//VALOR&#xd;
+            { type: &quot;varchar&quot;, value: &quot;MES&quot; },//UN&#xd;
+            { type: &quot;date&quot;, value: hAPI.getCardValue(&quot;enderecoImovel&quot;) },// ENDERECO&#xd;
+        ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
 &#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
 &#xd;
-function updateTcntAuxiliar_IDCNT(IDCNT, ID_TCNT_AUXILIAR){&#xd;
+function updateTcntAuxiliar_IDCNT(IDCNT, ID_TCNT_AUXILIAR) {&#xd;
     try {&#xd;
         var query = &quot;UPDATE TCNT_AUXILIAR SET IDCNT = ? WHERE ID = ?&quot;;&#xd;
         executaUpdate(query, [&#xd;
-            {type:&quot;int&quot;, value:IDCNT},&#xd;
-            {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},&#xd;
+            { type: &quot;int&quot;, value: IDCNT },&#xd;
+            { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR },&#xd;
         ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
     } catch (error) {&#xd;
-        throw error;   &#xd;
+        throw error;&#xd;
     }&#xd;
 }&#xd;
-function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR){&#xd;
+function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR) {&#xd;
     try {&#xd;
         var query = &quot;UPDATE TCNT_AUXILIAR SET DATA_ASSINATURA = ? WHERE ID = ?&quot;;&#xd;
         executaUpdate(query, [&#xd;
-            {type:&quot;date&quot;, value:DATA_ASSINATURA},&#xd;
-            {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},&#xd;
+            { type: &quot;date&quot;, value: DATA_ASSINATURA },&#xd;
+            { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR },&#xd;
         ], &quot;jdbc/CastilhoCustom&quot;);&#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
@@ -3690,15 +3548,15 @@ function updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado,
         // Executa o comando no banco.&#xd;
         // Os &quot;?&quot; da query serão substituídos pelos valores abaixo, na mesma ordem em que aparecem.&#xd;
         executaUpdate(query, [&#xd;
-            &#xd;
-            // Primeiro &quot;?&quot; &gt; novo valor de aluguel&#xd;
-            {type: &quot;float&quot;, value: valorLocacaoReajustado},&#xd;
-            // Segundo &quot;?&quot; &gt; código do contrato que será atualizado&#xd;
-            {type: &quot;int&quot;, value: ID_TCNT_AUXILIAR},&#xd;
-            // Terceiro &quot;?&quot; &gt; numero de sequencia do item do contrato&#xd;
-            {type: &quot;int&quot;, value: NSEQITEMCNT},&#xd;
 &#xd;
-        ], &quot;jdbc/CastilhoCustom&quot;); &#xd;
+            // Primeiro &quot;?&quot; &gt; novo valor de aluguel&#xd;
+            { type: &quot;float&quot;, value: valorLocacaoReajustado },&#xd;
+            // Segundo &quot;?&quot; &gt; código do contrato que será atualizado&#xd;
+            { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR },&#xd;
+            // Terceiro &quot;?&quot; &gt; numero de sequencia do item do contrato&#xd;
+            { type: &quot;int&quot;, value: NSEQITEMCNT },&#xd;
+&#xd;
+        ], &quot;jdbc/CastilhoCustom&quot;);&#xd;
         // &quot;jdbc/CastilhoCustom&quot; é o nome da conexão usada para acessar o banco.&#xd;
 &#xd;
     } catch (error) {&#xd;
@@ -3733,7 +3591,7 @@ function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR) 
             executeInsert(query, [&#xd;
                 { type: &quot;int&quot;, value: ATIVO },&#xd;
                 { type: &quot;varchar&quot;, value: prefixo },&#xd;
-                { type : &quot;int&quot;, value: ID_TCNT_AUXILIAR }&#xd;
+                { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR }&#xd;
             ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
         }&#xd;
 &#xd;
@@ -3860,21 +3718,21 @@ function updateSISMA_statusEquipamento() { // Exclusão/Rescisão do Contrato de
 &#xd;
 // Equipamentos&#xd;
 var codigoStatusEquipamentos = {&#xd;
-    &quot;Pendente_Contrato&quot;:1,&#xd;
-    &quot;Contrato_em_Andamento_com_análise_pendente&quot;:2,&#xd;
-    &quot;Contrato_em_Andamento_com_análise_realizada&quot;:3,&#xd;
-    &quot;Contrato_Vigente&quot;:4,&#xd;
-    &quot;Equipamento_desmobilizado&quot;:5,&#xd;
-    &quot;Contrato_encerrado&quot;:6,&#xd;
+    &quot;Pendente_Contrato&quot;: 1,&#xd;
+    &quot;Contrato_em_Andamento_com_análise_pendente&quot;: 2,&#xd;
+    &quot;Contrato_em_Andamento_com_análise_realizada&quot;: 3,&#xd;
+    &quot;Contrato_Vigente&quot;: 4,&#xd;
+    &quot;Equipamento_desmobilizado&quot;: 5,&#xd;
+    &quot;Contrato_encerrado&quot;: 6,&#xd;
 }&#xd;
 &#xd;
-function atualizaStatusEquipamento(status){&#xd;
+function atualizaStatusEquipamento(status) {&#xd;
     var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
 &#xd;
     if (origemContrato == &quot;Novos&quot;) {&#xd;
         try {&#xd;
             var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);&#xd;
-    &#xd;
+&#xd;
             for (var i = 0; i &lt; indexes.length; i++) {&#xd;
                 var id = indexes[i]&#xd;
                 var prefixo = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);&#xd;
@@ -3883,20 +3741,20 @@ function atualizaStatusEquipamento(status){&#xd;
                 if (isMAouOutros[0].CATEGORIA != &quot;Outros&quot;) {&#xd;
                     var query = &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET &quot;;&#xd;
                     query += &quot;STATUS = ? &quot;;&#xd;
-                    query +=&quot;WHERE PREFIXO = ?&quot;;&#xd;
+                    query += &quot;WHERE PREFIXO = ?&quot;;&#xd;
 &#xd;
                     executeInsert(query, [&#xd;
-                        {type:&quot;int&quot;, value:codigoStatusEquipamentos[status]},&#xd;
-                        {type:&quot;varchar&quot;, value:prefixo},&#xd;
+                        { type: &quot;int&quot;, value: codigoStatusEquipamentos[status] },&#xd;
+                        { type: &quot;varchar&quot;, value: prefixo },&#xd;
                     ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
-                }else{&#xd;
+                } else {&#xd;
                     var query = &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR_OUTROS SET &quot;;&#xd;
                     query += &quot;STATUS = ? &quot;;&#xd;
-                    query +=&quot;WHERE PREFIXO = ?&quot;;&#xd;
+                    query += &quot;WHERE PREFIXO = ?&quot;;&#xd;
 &#xd;
                     executeInsert(query, [&#xd;
-                        {type:&quot;int&quot;, value:codigoStatusEquipamentos[status]},&#xd;
-                        {type:&quot;varchar&quot;, value:prefixo},&#xd;
+                        { type: &quot;int&quot;, value: codigoStatusEquipamentos[status] },&#xd;
+                        { type: &quot;varchar&quot;, value: prefixo },&#xd;
                     ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
                 }&#xd;
             }&#xd;
@@ -3906,20 +3764,20 @@ function atualizaStatusEquipamento(status){&#xd;
     } else if (origemContrato == &quot;Aditivos&quot; || origemContrato == &quot;Rescisões&quot;) {&#xd;
         try {&#xd;
             var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
-    &#xd;
+&#xd;
             for (var i = 0; i &lt; indexes.length; i++) {&#xd;
                 var id = indexes[i]&#xd;
                 var prefixo = hAPI.getCardValue(&quot;equipSelecionado_aditivos&quot; + &quot;___&quot; + id);&#xd;
 &#xd;
                 var query = &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET &quot;;&#xd;
                 query += &quot;STATUS = ? &quot;;&#xd;
-                query +=&quot;WHERE PREFIXO = ?&quot;;&#xd;
+                query += &quot;WHERE PREFIXO = ?&quot;;&#xd;
 &#xd;
                 executeInsert(query, [&#xd;
-                    {type:&quot;int&quot;, value:codigoStatusEquipamentos[status]},&#xd;
-                    {type:&quot;varchar&quot;, value:prefixo},&#xd;
+                    { type: &quot;int&quot;, value: codigoStatusEquipamentos[status] },&#xd;
+                    { type: &quot;varchar&quot;, value: prefixo },&#xd;
                 ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
-                &#xd;
+&#xd;
             }&#xd;
         } catch (error) {&#xd;
             throw error;&#xd;
@@ -3927,11 +3785,11 @@ function atualizaStatusEquipamento(status){&#xd;
     }&#xd;
 }&#xd;
 &#xd;
-function buscaCategoriaPorPrefixo(PREFIXO){&#xd;
+function buscaCategoriaPorPrefixo(PREFIXO) {&#xd;
     try {&#xd;
         var query = &quot;SELECT CATEGORIA FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE PREFIXO = ?&quot;;&#xd;
         var retorno = executaQuery(query, [&#xd;
-            {type:&quot;varchar&quot;, value:PREFIXO}&#xd;
+            { type: &quot;varchar&quot;, value: PREFIXO }&#xd;
         ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
 &#xd;
         return retorno;&#xd;
@@ -3973,14 +3831,14 @@ function criaAssinaturaEletronica() {&#xd;
         var testemunhas = JSON.parse(hAPI.getCardValue(&quot;jsonTestemunhas&quot;));&#xd;
         for (var i = 0; i &lt; testemunhas.length; i++) {&#xd;
             var testemunha = testemunhas[i];&#xd;
-  &#xd;
+&#xd;
             arrSigners.push({&#xd;
                 nome: testemunha.nome,&#xd;
                 email: testemunha.email,&#xd;
                 cpf: testemunha.cpf,&#xd;
                 tipo: &quot;E&quot;,&#xd;
                 status: &quot;Pendente&quot;,&#xd;
-            });            &#xd;
+            });&#xd;
         }&#xd;
 &#xd;
         var ds = DatasetFactory.getDataset(&quot;ds_auxiliar_wesign&quot;, null, [&#xd;
@@ -4007,10 +3865,10 @@ function criaAssinaturaEletronica() {&#xd;
             throw &quot;Erro ao Criar a Assinatura Eletrôncia: &quot; + ds.getValue(0, &quot;mensagem&quot;);&#xd;
         }&#xd;
     } catch (error) {&#xd;
-        throw error;    &#xd;
+        throw error;&#xd;
     }&#xd;
 }&#xd;
-function buscaDadosDoArquivo(documentId){&#xd;
+function buscaDadosDoArquivo(documentId) {&#xd;
     try {&#xd;
         var clientService = fluigAPI.getAuthorizeClientService();&#xd;
         var data = {&#xd;
@@ -4032,11 +3890,11 @@ function buscaDadosDoArquivo(documentId){&#xd;
 &#xd;
         if (vo.getResult() == null || vo.getResult().isEmpty()) {&#xd;
             throw &quot;Erro ao consultar o arquivo do Contrato&quot;;&#xd;
-        } else{&#xd;
+        } else {&#xd;
             var result = vo.getResult();&#xd;
             if (vo.httpStatusResult != 200) {&#xd;
                 throw result;&#xd;
-            }else{&#xd;
+            } else {&#xd;
                 return JSON.parse(result);&#xd;
             }&#xd;
         }&#xd;
@@ -4325,7 +4183,7 @@ function executeInsert(query, constraints, dataSource) {&#xd;
 &#xd;
     return insertedId;&#xd;
 }&#xd;
-function anexaDocumentoNoProcesso(documentId){&#xd;
+function anexaDocumentoNoProcesso(documentId) {&#xd;
     var attachments = hAPI.listAttachments();&#xd;
     var isAnexado = false;&#xd;
 &#xd;
@@ -4702,7 +4560,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
         <linkSequence>82</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1345</positionX>
+      <positionX>1372</positionX>
       <positionY>908</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
@@ -4724,7 +4582,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
         <linkSequence>85</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1344</positionX>
+      <positionX>1372</positionX>
       <positionY>908</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
@@ -4746,7 +4604,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
         <linkSequence>86</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1344</positionX>
+      <positionX>1372</positionX>
       <positionY>908</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
@@ -4845,7 +4703,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
         <linkSequence>92</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1346</positionX>
+      <positionX>1372</positionX>
       <positionY>904</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
@@ -4979,6 +4837,28 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       </processLinkBendPK>
       <positionX>1304</positionX>
       <positionY>705</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>81</version>
+        <linkSequence>108</linkSequence>
+        <bendSequence>1</bendSequence>
+      </processLinkBendPK>
+      <positionX>1427</positionX>
+      <positionY>589</positionY>
+    </ProcessLinkBend>
+    <ProcessLinkBend>
+      <processLinkBendPK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <version>81</version>
+        <linkSequence>108</linkSequence>
+        <bendSequence>2</bendSequence>
+      </processLinkBendPK>
+      <positionX>1663</positionX>
+      <positionY>589</positionY>
     </ProcessLinkBend>
   </list>
   <list>
@@ -5267,6 +5147,24 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <ruleOrder>2</ruleOrder>
       <field>assinaturaContrato</field>
       <value>Manual</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>55</sequence>
+      <expressionOrder>6</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Aprovar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>55</sequence>
+      <expressionOrder>6</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>assinaturaContrato</field>
+      <value>JaAssinado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
