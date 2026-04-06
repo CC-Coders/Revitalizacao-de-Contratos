@@ -11,9 +11,30 @@ const pastaDeAnexos = pastasDeAnexosPorServidor[env];
 
 const codigosModelos = {
     PRODUCAO: {
+        // Novos
         "Locação de Imóvel": 2070415,
         "Locação de Equipamento": 2070416,
         "Locação de Equipamento - Com Mão de Obra": 2070417,
+
+        // Aditivos
+        "Locação de Equipamento - Alteração de Valor": 2245474,
+        "Locação de Equipamento - Alteração de Prazo": 2245464,
+        "Locação de Equipamento - Alteração de Prazo e Valor": 2245463,
+        "Locação de Equipamento - Inclusão de Equipamento": 2245476,
+        "Locação de Equipamento - Exclusão de Equipamento": 2245475,
+
+        "Locação de Imóvel PF - Alteração de Valor": 2245471,
+        "Locação de Imóvel PF - Alteração de Prazo": 2245466,
+        "Locação de Imóvel PF - Alteração de Prazo e Valor": 2245473,
+        "Locação de Imóvel PJ - Alteração de Prazo": 2245467,
+        "Locação de Imóvel PJ - Alteração de Valor": 2245472,
+        "Locação de Imóvel PJ - Alteração de Prazo e Valor": 2245462,
+
+        // Rescisões
+        "Locação de Equipamento (Rescisões)": 2245470,
+        "Locação de Equipamento - Com Mão de Obra (Rescisões)": 2245469,
+        "Locação de Imóvel (Rescisões)": 2245468,
+
     },
     HOMOLOGACAO: {
         // Novos
