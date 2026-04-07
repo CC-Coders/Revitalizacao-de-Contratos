@@ -7,7 +7,7 @@ function inicializarCalendario() {
         maxDate: "12/31/2030",
         language: "pt-br",
         dateFormat: "dd/mm/yyyy",
-    });
+    });    
 }
 function inicializarPeriodoLocacao() {
     const periodoLocacao = document.getElementById("periodoLocacao");
@@ -48,7 +48,7 @@ function buscaBancos() {
     if ($("#formMode").val() == "VIEW") {
         return;
     }
-
+    
     DatasetFactory.getDataset("GBANCO", null, null, null, {
         success: (ds) => {
             if (ds.values[0].STATUS != "SUCCESS") {
@@ -61,7 +61,7 @@ function buscaBancos() {
             var value = $(selectBanco).val();
 
             $(selectBanco)[0].selectize.clearOptions();
-            $(selectBanco)[0].selectize.addOption(bancos.map(e => { return { value: `${e.NUMBANCO} - ${e.NOME}`, text: `${e.NUMBANCO} - ${e.NOME}` } }));
+            $(selectBanco)[0].selectize.addOption(bancos.map(e=>{return {value:`${e.NUMBANCO} - ${e.NOME}`, text:`${e.NUMBANCO} - ${e.NOME}`}}));
 
             selectBanco[0].selectize.setValue(value);
         },
@@ -97,14 +97,14 @@ function preencherObrasDoUsuario() {
         const selectObra = $("#obra");
         permissoes.forEach((ccusto) => {
             if (!selectObra[0].selectize.optgroups[ccusto.NOMEFANTASIA]) {
-                $("#obra")[0].selectize.addOptionGroup(ccusto.CODCOLIGADA, { value: ccusto.CODCOLIGADA, label: `${ccusto.CODCOLIGADA} - ${ccusto.NOMEFANTASIA}` });
+                $("#obra")[0].selectize.addOptionGroup(ccusto.CODCOLIGADA, {value:ccusto.CODCOLIGADA, label: `${ccusto.CODCOLIGADA} - ${ccusto.NOMEFANTASIA}` });
             }
 
             const optionValue = `${ccusto.CODCOLIGADA} - ${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
             const optionLabel = `${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
-            selectObra[0].selectize.addOption({ value: optionValue, label: optionLabel, optgroup: ccusto.CODCOLIGADA });
+            selectObra[0].selectize.addOption({ value: optionValue, label:optionLabel, optgroup:ccusto.CODCOLIGADA });
         });
-
+      
 
     } catch (error) {
         console.error("Erro ao preencher obras do usuário:", error);
@@ -116,72 +116,72 @@ function preencherObrasDoUsuario() {
     }
 }
 function buscaFornecedores_preencheOptionsDoCampoLocador() {
-    var selectizeLocador = $("#locador")[0].selectize;
+        var selectizeLocador = $("#locador")[0].selectize;
 
-    // Guarda o valor atual antes de inserir a opção temporária.
-    // Isso evita que depois o valor salvo seja "carregando".
-    var optSelected = $("#locador").val();
+        // Guarda o valor atual antes de inserir a opção temporária.
+        // Isso evita que depois o valor salvo seja "carregando".
+        var optSelected = $("#locador").val();
 
-    // Bloqueia a interação do usuário enquanto o dataset está carregando.
-    selectizeLocador.lock();
+        // Bloqueia a interação do usuário enquanto o dataset está carregando.
+        selectizeLocador.lock();
 
-    if (!optSelected) {
-        // Limpa o valor atual e remove todas as opções do selectize. Para exibir temporariamente apenas a opção de carregamento.
-        selectizeLocador.clear(true);
-        selectizeLocador.clearOptions();
-
-        // Adiciona uma opção temporária só para mostrar visualmente "Carregando fornecedores..." enquanto o dataset ainda não retornou.
-        selectizeLocador.addOption({ value: "carregando", text: "Carregando fornecedores..." });
-
-        // Seleciona a opção temporária
-        selectizeLocador.setValue("carregando", true);
-    }
-
-    DatasetFactory.getDataset("FCFO", ["CODCFO", "CGCCFO", "NOMEFANTASIA"], [
-        DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST),
-        DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
-    ], null, {
-        success: (fornecedores) => {
-            if (fornecedores.columns[0] == "error") {
-                FLUIGC.toast({
-                    title: "Erro ao buscar fornecedores: ",
-                    message: fornecedores.values[0].error,
-                    type: "warning",
-                });
-            } else {
-
-                // Remove completamente a opção temporária e qualquer valor atual.
-                // Assim, quando as opções reais entrarem, "carregando" desaparece.
-                selectizeLocador.clear(true);
-                selectizeLocador.clearOptions();
-
-                selectizeLocador.addOption(fornecedores.values.map(e => { return { value: `${e.CODCFO} - ${e.CGCCFO} - ${e.NOMEFANTASIA}`, text: `${e.CGCCFO} - ${e.NOMEFANTASIA}` } }));
-
-                // Se já tinha valor antes, restaura
-                if (optSelected) {
-                    selectizeLocador.setValue(optSelected);
-                }
-            }
-
-            // Libera novamente o campo para uso normal.
-            selectizeLocador.unlock();
-        },
-        error: (error) => {
-            FLUIGC.toast({
-                title: "Erro ao buscar fornecedores: ",
-                message: error,
-                type: "warning",
-            });
-
-            // Em caso de erro, limpa a opção temporária para não deixar
-            // o select preso com "Carregando fornecedores...".
+        if (!optSelected) {
+            // Limpa o valor atual e remove todas as opções do selectize. Para exibir temporariamente apenas a opção de carregamento.
             selectizeLocador.clear(true);
             selectizeLocador.clearOptions();
 
-            // Libera o campo novamente.
-            selectizeLocador.unlock();
-        },
-    }
+            // Adiciona uma opção temporária só para mostrar visualmente "Carregando fornecedores..." enquanto o dataset ainda não retornou.
+            selectizeLocador.addOption({value: "carregando", text: "Carregando fornecedores..."});
+
+            // Seleciona a opção temporária
+            selectizeLocador.setValue("carregando", true);
+        }
+
+        DatasetFactory.getDataset("FCFO", ["CODCFO", "CGCCFO", "NOMEFANTASIA"], [
+            DatasetFactory.createConstraint("ATIVO", 1, 1, ConstraintType.MUST),
+            DatasetFactory.createConstraint("CODCOLIGADA", 0, 0, ConstraintType.MUST)
+        ], null, {
+            success: (fornecedores) => {
+                if (fornecedores.columns[0] == "error") {
+                    FLUIGC.toast({
+                        title: "Erro ao buscar fornecedores: ",
+                        message: fornecedores.values[0].error,
+                        type: "warning",
+                    });
+                } else {
+                    
+                    // Remove completamente a opção temporária e qualquer valor atual.
+                    // Assim, quando as opções reais entrarem, "carregando" desaparece.
+                    selectizeLocador.clear(true);
+                    selectizeLocador.clearOptions();
+
+                    selectizeLocador.addOption(fornecedores.values.map(e=>{return {value:`${e.CODCFO} - ${e.CGCCFO} - ${e.NOMEFANTASIA}`, text:`${e.CGCCFO} - ${e.NOMEFANTASIA}`}}));
+                
+                    // Se já tinha valor antes, restaura
+                    if (optSelected) {
+                        selectizeLocador.setValue(optSelected);
+                    }
+                }
+
+                // Libera novamente o campo para uso normal.
+                selectizeLocador.unlock();
+            },
+            error: (error) => {
+                FLUIGC.toast({
+                    title: "Erro ao buscar fornecedores: ",
+                    message: error,
+                    type: "warning",
+                });
+
+                // Em caso de erro, limpa a opção temporária para não deixar
+                // o select preso com "Carregando fornecedores...".
+                selectizeLocador.clear(true);
+                selectizeLocador.clearOptions();
+
+                // Libera o campo novamente.
+                selectizeLocador.unlock();
+            },
+        }
     );
 }
 
@@ -248,20 +248,20 @@ async function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFo
     // Nome da função alterado para descrever as resposabilidades da função corretamente
     // Necessário quebrar a função em várias funções, cada uma com uma responsabilidade
     return new Promise((resolve, reject) => {
-        DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)], null, {
+            DatasetFactory.getDataset("RetornaEnderecoFornecedor", null, [DatasetFactory.createConstraint("CGCCFO", cgccfo, cgccfo, ConstraintType.MUST)], null, {
             success: (dataset) => {
                 if (dataset.values && dataset.values.length > 0) {
                     const endereco = dataset.values[0];
                     const tipoPessoa = endereco.PESSOAFISOUJUR;
                     const nacionalidadeTexto = endereco.NACIONALIDADE == 0 ? "Brasileiro" : "Estrangeiro";
-                    var origemContrato = $("#origemContrato").val() ? $("#origemContrato").val() : $("#origemContrato").text();
-                    var tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val() : $("#tipoContrato").text();
+                    var origemContrato = $("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text();
+                    var tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val():$("#tipoContrato").text();
                     $("#FORNECEDOR_PF_PJ").val(tipoPessoa);
 
                     if (tipoPessoa === "F") {
                         $("#nacionalidadeFornecedor").val(nacionalidadeTexto);
                         $("#estadoCivilFornecedor").val(endereco.ESTADOCIVIL || "");
-
+                        
                     } else if (tipoPessoa === "J") {
                         $("#administradorFornecedor").val(endereco.ADMINISTRADOR || "");
                         $("#cnpjFornecedor").val(endereco.CPF || "");
@@ -279,19 +279,19 @@ async function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFo
 
                     // Pega o value de tipoContrato e se conter "Locação de Imóvel" chama a função para listar os anexos necessarios com base no tipo de pessoa
                     if (tipoContrato.includes("Locação de Imóvel") && origemContrato != "Aditivos") {
-                        anexosPorTipoDeContrato(tipoPessoa == "F" ? "Locação de Imóvel - PF" : "Locação de Imóvel - PJ");
+                        anexosPorTipoDeContrato(tipoPessoa == "F" ? "Locação de Imóvel - PF":"Locação de Imóvel - PJ");
 
                     } else if (
-                        tipoContrato.includes("Locação de Equipamento") &&
-                        tipoContrato != "Locação de Equipamento - Alteração de Prazo" ||
-                        tipoContrato != "Locação de Equipamento - Alteração de Valor" ||
+                        tipoContrato.includes("Locação de Equipamento") && 
+                        tipoContrato != "Locação de Equipamento - Alteração de Prazo" || 
+                        tipoContrato != "Locação de Equipamento - Alteração de Valor" || 
                         tipoContrato != "Locação de Equipamento - Alteração de Prazo e Valor" ||
                         tipoContrato != "Locação de Equipamento - Inclusão de Equipamento"
                     ) {
                         anexosPorTipoDeContrato("Locação de Equipamento");
 
                     }
-
+                    
                     if (tipoContrato == "Locação de Equipamento - Alteração de Prazo") {
                         anexosPorTipoDeContrato("Locação de Equipamento - Alteração de Prazo");
 
@@ -300,14 +300,14 @@ async function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFo
 
                     } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor") {
                         anexosPorTipoDeContrato("Locação de Equipamento - Alteração de Prazo e Valor");
-
+                    
                     } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
                         anexosPorTipoDeContrato("Locação de Equipamento - Inclusão de Equipamento");
 
                     }
 
                     resolve(tipoPessoa);
-
+                    
                 } else {
                     FLUIGC.toast({
                         title: "Endereço não encontrado",
@@ -315,7 +315,7 @@ async function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFo
                         type: "warning",
                     });
                     $(".endereco-fornecedor").slideUp();
-
+                    
                     resolve(null);
                 }
             },
@@ -334,7 +334,7 @@ async function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFo
 
 
 async function enviarSolicitacao() {
-
+    
     if (!validaCampos()) {
         return;
     }
@@ -354,18 +354,16 @@ async function enviarSolicitacao() {
                 },
             });
             await asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao();
-            Swal.close();
+            Swal.close();            
             $("#workflowActions > button:first-child", window.parent.document).click();
-        } else {
+        }else{
             $("#workflowActions > button:first-child", window.parent.document).click();
         }
-    }
+    } 
     else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {
-        if ($("#modeloContrato").val() == "Modelo Castilho") {
-            var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
-            var pdf = await convertDocxToPdf(filePreenchido, geraNomeDoArquivo() + ".pdf");
-            await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo() + ".pdf", pastaDeAnexos);
-        }
+        var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
+        var pdf = await convertDocxToPdf(filePreenchido, geraNomeDoArquivo() + ".pdf");
+        await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo() + ".pdf", pastaDeAnexos);
         $("#workflowActions > button:first-child", window.parent.document).click();
 
     }
@@ -401,7 +399,7 @@ function validaCampos() {
             }
         }
 
-        if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
+        if (tipoContrato  == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
             // Tabela de Equipamentos selecioandos para criar o contrato
             // Se não tem nenhum prefixo com valor reajustado preenchdio e contrato principal selecionado (hidden preenchido)
             if ($("#tableEquipamentosSelecionados > tbody > tr:not(:first)").length == 0 && $("#contratoSelecCodigo").val()) {
@@ -411,13 +409,13 @@ function validaCampos() {
         }
 
         // Toda a parte de Dados Inicias
-        if (origemContrato == "Novos" || origemContrato == "Rescisões") {
-            if (!origemContrato || !tipoContrato || !tipoContrato) {
+        if (origemContrato == "Novos" || origemContrato == "Rescisões") { 
+            if(!origemContrato || !tipoContrato || !tipoContrato) {
                 mensagens.push("Preencha todos os campos de Dados Iniciais")
             }
 
         } else if (origemContrato == "Aditivos") {
-            if (!origemContrato || !tipoContrato || !tipoContrato || !$("#tipoAlteracao").val()) {
+            if(!origemContrato || !tipoContrato || !tipoContrato || !$("#tipoAlteracao").val()) {
                 mensagens.push("Preencha todos os campos de Dados Iniciais")
             }
             /*
@@ -434,21 +432,21 @@ function validaCampos() {
                 // Tabela de Equipamentos selecioandos, usada para guardar prefixos que foram informados valor de reajuste
                 // Se não tem nenhum prefixo com valor reajustado preenchdio e contrato principal selecionado (hidden preenchido)
                 if ($("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").length == 0 && $("#contratoSelecCodigo").val()) {
-
+                    
                     toastSeparado.push("Informe reajuste de valor em pelo menos 1 equipamento!");
                     valida = false;
                 }
 
-                /*
-                    Locação de Imóvel
-                */
+            /*
+                Locação de Imóvel
+            */
             } else if (tipoContrato == "Locação de Imóvel - Alteração de Valor" || tipoContrato == "Locação de Imóvel - Alteração de Prazo e Valor") {
                 if (!$("#valorLocacaoReajustado").val()) {
                     $("#valorLocacaoReajustado").addClass("has-error");
                     mensagens.push("Valor Reajustado");
                     valida = false;
                 }
-            }
+            } 
         }
         // Obra
         if (!$("#obra").val()) {
@@ -683,7 +681,7 @@ function validaAnexosPorTipoContrato() {
     var faltando = [];
 
     // Flavio confirmou com o Juridico que não precisa de anexos para quando "Alteração de Prazo" ou "Alteração de Valor" ou "Exclusão de Equipamento"
-    if (tipoContrato.includes("Locação de Equipamento") &&
+    if (tipoContrato.includes("Locação de Equipamento") && 
         tipoContrato != "Locação de Equipamento - Alteração de Prazo" &&
         tipoContrato != "Locação de Equipamento - Alteração de Valor" &&
         tipoContrato != "Locação de Equipamento - Alteração de Prazo e Valor" &&
@@ -718,11 +716,11 @@ function validaAnexosPorTipoContrato() {
             faltando.push("CNH ou RG + CPF");
         }
     }
-
+    
     else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
-        tipoContrato == "Locação de Equipamento - Alteração de Valor" ||
-        tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" ||
-        tipoContrato == "Locação de Equipamento - Inclusão de Equipamento"
+            tipoContrato == "Locação de Equipamento - Alteração de Valor" ||
+            tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" ||
+            tipoContrato == "Locação de Equipamento - Inclusão de Equipamento"
     ) {
         if (!documentos["Proposta Comercial"]) {
             faltando.push("Proposta Comercial");
@@ -865,12 +863,12 @@ function validaCampos() {
     return valida;
 }
 */
-function bloqueiaCamposAprovacao() {
-    $("#origemContrato").attr("readonly", "readonly");
-    $("#modeloContrato").attr("readonly", "readonly");
-    $("#tipoContratoBase").attr("readonly", "readonly");
-    $("#tipoAlteracao").attr("readonly", "readonly");
-
+function bloqueiaCamposAprovacao(){
+    $("#origemContrato").attr("readonly","readonly");
+    $("#modeloContrato").attr("readonly","readonly");
+    $("#tipoContratoBase").attr("readonly","readonly");
+    $("#tipoAlteracao").attr("readonly","readonly");
+    
     // Pra evitar problemas de ler o campo quando não estiver com selectize (só quando não VIEW)
     if ($("#formMode").val() != "VIEW") {
         $("#obra")[0].selectize.lock();
@@ -878,63 +876,63 @@ function bloqueiaCamposAprovacao() {
         $("#banco")[0].selectize.lock();
     }
 
-    $("#procurador").attr("readonly", "readonly");
-    $("#contratantePrincipal").attr("readonly", "readonly");
+    $("#procurador").attr("readonly","readonly");
+    $("#contratantePrincipal").attr("readonly","readonly");
+    
+    $("#valorLocacaoReajustado").attr("readonly","readonly"); // Novo
+    $("#dataReajuste").attr("readonly","readonly"); // Novo
+    $("#clausulaAlterada").attr("readonly","readonly"); // Novo
+    $("#dataInicioLocacao").attr("readonly","readonly");
+    $("#dataFimLocacao").attr("readonly","readonly");
+    $("#temReajuste").attr("readonly","readonly");
+    $("#indiceReajuste").attr("readonly","readonly");
+    $("#temRetencao").attr("readonly","readonly");
+    $("#percentualRetencao").attr("readonly","readonly");
+    $("#temREIDI").attr("readonly","readonly");
+    $("#percentualREIDI").attr("readonly","readonly");
 
-    $("#valorLocacaoReajustado").attr("readonly", "readonly"); // Novo
-    $("#dataReajuste").attr("readonly", "readonly"); // Novo
-    $("#clausulaAlterada").attr("readonly", "readonly"); // Novo
-    $("#dataInicioLocacao").attr("readonly", "readonly");
-    $("#dataFimLocacao").attr("readonly", "readonly");
-    $("#temReajuste").attr("readonly", "readonly");
-    $("#indiceReajuste").attr("readonly", "readonly");
-    $("#temRetencao").attr("readonly", "readonly");
-    $("#percentualRetencao").attr("readonly", "readonly");
-    $("#temREIDI").attr("readonly", "readonly");
-    $("#percentualREIDI").attr("readonly", "readonly");
+    $("#tipoPagamento").attr("readonly","readonly");
+    $("#titular").attr("readonly","readonly");
+    $("#agencia").attr("readonly","readonly");
+    $("#contaCorrente").attr("readonly","readonly");
+    
+    
+    $("#nomeRepresentanteFornecedor").attr("readonly","readonly");
+    $("#cpfRepresentanteFornecedor").attr("readonly","readonly");
+    $("#mailRepresentanteFornecedor").attr("readonly","readonly");
+    $("#assinaturaContrato").attr("readonly","readonly");
 
-    $("#tipoPagamento").attr("readonly", "readonly");
-    $("#titular").attr("readonly", "readonly");
-    $("#agencia").attr("readonly", "readonly");
-    $("#contaCorrente").attr("readonly", "readonly");
-
-
-    $("#nomeRepresentanteFornecedor").attr("readonly", "readonly");
-    $("#cpfRepresentanteFornecedor").attr("readonly", "readonly");
-    $("#mailRepresentanteFornecedor").attr("readonly", "readonly");
-    $("#assinaturaContrato").attr("readonly", "readonly");
-
-
-
-    $("#descricaoImovel").attr("readonly", "readonly");
-    $("#valorMensalAluguel").attr("readonly", "readonly");
-    $("#valorMensalLocacao").attr("readonly", "readonly");
-    $("#enderecoImovel").attr("readonly", "readonly");
-    $("#matriculaImovel").attr("readonly", "readonly");
-    $("#finalidadeLocacao").attr("readonly", "readonly");
-    $("#periodoLocacao").attr("readonly", "readonly");
-    $("#janelaPagamento").attr("readonly", "readonly");
-    $("#caucao").attr("readonly", "readonly");
-    $("#valorCaucao").attr("readonly", "readonly");
-    $("#dataPagamentoCaucao").attr("readonly", "readonly");
-
-    $("#descontoPorDiaChuva").attr("readonly", "readonly");
-    $("#descontoPorDiaParado").attr("readonly", "readonly");
-
-
-    $("#ruaFornecedor").attr("readonly", "readonly");
-    $("#numeroFornecedor").attr("readonly", "readonly");
-    $("#bairroFornecedor").attr("readonly", "readonly");
-    $("#administradorFornecedor").attr("readonly", "readonly");
-    $("#cpfAdministrador").attr("readonly", "readonly");
-    $("#localizacaoServico").attr("readonly", "readonly");
-    $("#cidadeFornecedor").attr("readonly", "readonly");
-    $("#estadoFornecedor").attr("readonly", "readonly");
-    $("#cepFornecedor").attr("readonly", "readonly");
-    $("#cpfFornecedor").attr("readonly", "readonly");
-    $("#rgFornecedor").attr("readonly", "readonly");
-    $("#nacionalidadeFornecedor").attr("readonly", "readonly");
-    $("#estadoCivilFornecedor").attr("readonly", "readonly");
+    
+    
+    $("#descricaoImovel").attr("readonly","readonly");
+    $("#valorMensalAluguel").attr("readonly","readonly");
+    $("#valorMensalLocacao").attr("readonly","readonly");
+    $("#enderecoImovel").attr("readonly","readonly");
+    $("#matriculaImovel").attr("readonly","readonly");
+    $("#finalidadeLocacao").attr("readonly","readonly");
+    $("#periodoLocacao").attr("readonly","readonly");
+    $("#janelaPagamento").attr("readonly","readonly");
+    $("#caucao").attr("readonly","readonly");
+    $("#valorCaucao").attr("readonly","readonly");
+    $("#dataPagamentoCaucao").attr("readonly","readonly");
+    
+    $("#descontoPorDiaChuva").attr("readonly","readonly");
+    $("#descontoPorDiaParado").attr("readonly","readonly");
+    
+    
+    $("#ruaFornecedor").attr("readonly","readonly");
+    $("#numeroFornecedor").attr("readonly","readonly");
+    $("#bairroFornecedor").attr("readonly","readonly");
+    $("#administradorFornecedor").attr("readonly","readonly");
+    $("#cpfAdministrador").attr("readonly","readonly");
+    $("#localizacaoServico").attr("readonly","readonly");
+    $("#cidadeFornecedor").attr("readonly","readonly");
+    $("#estadoFornecedor").attr("readonly","readonly");
+    $("#cepFornecedor").attr("readonly","readonly");
+    $("#cpfFornecedor").attr("readonly","readonly");
+    $("#rgFornecedor").attr("readonly","readonly");
+    $("#nacionalidadeFornecedor").attr("readonly","readonly");
+    $("#estadoCivilFornecedor").attr("readonly","readonly");
 }
 function popularDestinoRetorno() {
     const ATIVIDADE_ATUAL = $("#atividade").val();
@@ -970,27 +968,27 @@ function popularDestinoRetorno() {
         }));
     });
 }
-function obraPermiteReidi(CODCOLIGADA, CODCCUSTO) {
+function obraPermiteReidi(CODCOLIGADA, CODCCUSTO){
     const obrasComReidi = {
-        "1": {
-            "1.2.043": "Obra Parapuã",
-            "1.4.011": "Obra Conserva Echaporã",
-            "1.4.016": "Obra Duplicação Oriente",
-            "1.4.021": "Obra COFCO",
-            "1.4.027": "Obra Conserva Maracaí",
-            "1.4.030": "Obra MRS Pátios Vale do Paraíba",
-            "1.4.034": "Obra MRS Campo Grande",
+        "1":{
+            "1.2.043":"Obra Parapuã",
+            "1.4.011":"Obra Conserva Echaporã",
+            "1.4.016":"Obra Duplicação Oriente",
+            "1.4.021":"Obra COFCO",
+            "1.4.027":"Obra Conserva Maracaí",
+            "1.4.030":"Obra MRS Pátios Vale do Paraíba",
+            "1.4.034":"Obra MRS Campo Grande",
         },
-        "13": {
-            "1.4.030": "Obra MRS Pátios Vale do Paraíba",
-            "1.4.034": "Obra MRS Campo Grande",
+        "13":{
+            "1.4.030":"Obra MRS Pátios Vale do Paraíba",
+            "1.4.034":"Obra MRS Campo Grande",
         }
     };
 
     if (obrasComReidi[CODCOLIGADA] && obrasComReidi[CODCOLIGADA][CODCCUSTO]) {
         return true;
     }
-    else {
+    else{
         return false;
     }
 }
@@ -1083,20 +1081,20 @@ async function renderizarAnexosEtapaAprovacao() {
         console.error("Erro ao carregar anexos:", e);
     }
 }
-function anexosPorTipoDeContrato(tipoDoContrato) {
+function anexosPorTipoDeContrato(tipoDoContrato){
     const listaAnexosPorTipoDeContrato = {
-        "Locação de Equipamento": ["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
-        "Locação de Equipamento - Com Mão de Obra": ["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
-        "Locação de Imóvel - PF": ["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
-        "Locação de Imóvel - PJ": ["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
+        "Locação de Equipamento":["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
+        "Locação de Equipamento - Com Mão de Obra":["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
+        "Locação de Imóvel - PF":["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
+        "Locação de Imóvel - PJ":["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
 
         // Aditivos
         "Locação de Equipamento - Alteração de Prazo": ["Proposta Comercial"],
         "Locação de Equipamento - Alteração de Valor": ["Proposta Comercial"],
         "Locação de Equipamento - Alteração de Prazo e Valor": ["Proposta Comercial"],
         "Locação de Equipamento - Inclusão de Equipamento": ["Proposta Comercial"],
-
-
+        
+        
         //"Transporte de Materiais/Funcionários" ...
     };
 
@@ -1138,7 +1136,7 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
         alert("Erro ao anexar documento.");
     }
 
-    function insereLabelCarregando(tipo, itemId, listaCarregar) {
+    function insereLabelCarregando(tipo, itemId, listaCarregar){
         if (["CNH", "RG", "CPF"].includes(tipo)) {
             let item = $("#" + itemId);
 
@@ -1160,7 +1158,7 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
         }
     }
 }
-async function insereDocumentoCriado(tipo, documentosAnexados, name, docId) {
+async function insereDocumentoCriado(tipo, documentosAnexados, name, docId){
     const lista = $("#listaAnexos");
     const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
 
@@ -1292,6 +1290,6 @@ function criaDocFluigRetornaDocumentId(file, parentId) {
         };
     });
 }
-async function asyncGetDocumentDetails(documentId) {
+async function asyncGetDocumentDetails(documentId){
     return await axios.get(`/content-management/api/v2/documents/${documentId}`);
 }

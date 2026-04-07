@@ -1,4 +1,3 @@
-
 const ATIVIDADES = {
     INICIO_0: 0,
     INICIO: 4,
@@ -102,26 +101,26 @@ function bindings() {
         });
 
         $("#locador").selectize({
-            onChange: async (value) => {
-                var [codcfo, cgccfo, nomeFornecedor] = value.split(" - ");
+          onChange: async (value) => {
+            var [codcfo, cgccfo, nomeFornecedor] = value.split(" - ");
 
-                // Por padrão os fornecedores são cadastrados no Coligada 0 = Global
-                // Nos casos de cadastros errados tem que verificar a filial
-                // Como a consulta não está retornando o CODCOLCFO ficou fixo como 0
-                $("#hiddenCODCOLCFO").val(0);
-                $("#hiddenCODCFO").val(codcfo);
-                $("#hiddenCGCCFO").val(cgccfo);
-                $("#hiddenFORNECEDOR").val(nomeFornecedor);
+            // Por padrão os fornecedores são cadastrados no Coligada 0 = Global
+            // Nos casos de cadastros errados tem que verificar a filial
+            // Como a consulta não está retornando o CODCOLCFO ficou fixo como 0
+            $("#hiddenCODCOLCFO").val(0);
+            $("#hiddenCODCFO").val(codcfo);
+            $("#hiddenCGCCFO").val(cgccfo);
+            $("#hiddenFORNECEDOR").val(nomeFornecedor);
 
-                if (cgccfo) {
-                    await buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(
-                        cgccfo,
-                    );
-                    atualizaDatatableContratoPrincipal();
-                } else {
-                    $(".endereco-fornecedor").slideUp();
-                }
-            },
+            if (cgccfo) {
+              await buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(
+                cgccfo,
+              );
+              atualizaDatatableContratoPrincipal();
+            } else {
+              $(".endereco-fornecedor").slideUp();
+            }
+          },
         });
 
         $("#banco").selectize();
@@ -158,7 +157,7 @@ function bindings() {
         }
     });
 
-    if ($("#origemContrato").val() ? $("#origemContrato").val() : $("#origemContrato").text() == "Aditivos") {
+    if ($("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text() == "Aditivos") {
         $(".divTipoAlteracao").show();
 
     } else {
@@ -166,7 +165,7 @@ function bindings() {
     }
 
     // Colocado aqui em bidings() para centralizar... antes era feito isso em varias telas ( loadTela.... )
-    var tipoPessoa = $("#FORNECEDOR_PF_PJ").val() ? $("#FORNECEDOR_PF_PJ").val() : $("#FORNECEDOR_PF_PJ").text();
+    var tipoPessoa = $("#FORNECEDOR_PF_PJ").val() ? $("#FORNECEDOR_PF_PJ").val():$("#FORNECEDOR_PF_PJ").text();
     if (tipoPessoa === "F") {
         $(".pessoa-juridica").hide();
         $(".pessoa-fisica").show();
@@ -208,9 +207,9 @@ function bindings() {
             anexosPorTipoDeContrato(tipoPessoa == "F" ? "Locação de Imóvel - PF" : "Locação de Imóvel - PJ");
 
         } else if (
-            tipoContrato.includes("Locação de Equipamento") &&
+            tipoContrato.includes("Locação de Equipamento") && 
             tipoContrato != "Locação de Equipamento - Alteração de Prazo" &&
-            tipoContrato != "Locação de Equipamento - Alteração de Valor" &&
+            tipoContrato != "Locação de Equipamento - Alteração de Valor" && 
             tipoContrato != "Locação de Equipamento - Alteração de Prazo e Valor" &&
             tipoContrato != "Locação de Equipamento - Inclusão de Equipamento" &&
             tipoContrato != "Locação de Equipamento - Exclusão de Equipamento" // Não pedir nenhum anexo
@@ -218,7 +217,7 @@ function bindings() {
             anexosPorTipoDeContrato("Locação de Equipamento");
 
         }
-
+        
         if (tipoContrato == "Locação de Equipamento - Alteração de Prazo") {
             anexosPorTipoDeContrato("Locação de Equipamento - Alteração de Prazo");
 
@@ -227,7 +226,7 @@ function bindings() {
 
         } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor") {
             anexosPorTipoDeContrato("Locação de Equipamento - Alteração de Prazo e Valor");
-
+        
         } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
             anexosPorTipoDeContrato("Locação de Equipamento - Inclusão de Equipamento");
 
@@ -256,25 +255,25 @@ function bindings() {
             }
         }
     });
-
+    
     // Seleciona todos os inputs de valor reajustado da grid
     $(".inputValorLocacaoReajustado")
 
-        // Remove qualquer evento "change" previamente vinculado a esses inputs
-        // Isso evita duplicação de execução caso a função bindings() seja chamada novamente
-        .off("change")
+    // Remove qualquer evento "change" previamente vinculado a esses inputs
+    // Isso evita duplicação de execução caso a função bindings() seja chamada novamente
+    .off("change")
 
-        // Adiciona novamente o evento "change"
-        // Esse evento será disparado sempre que o valor do input for alterado
-        .on("change", function () {
+    // Adiciona novamente o evento "change"
+    // Esse evento será disparado sempre que o valor do input for alterado
+    .on("change", function () {
 
-            // Atualiza a estrutura de equipamentos (pai-filho)
-            // Recoleta os valores digitados na grid
-            getEquipamentosAditivo_insereNaTabelaPaiFilho();
+        // Atualiza a estrutura de equipamentos (pai-filho)
+        // Recoleta os valores digitados na grid
+        getEquipamentosAditivo_insereNaTabelaPaiFilho();
 
-            // Recalcula ou atualiza o campo principal de valor de locação reajustado
-            atualizaValorMensal_valorReajustado();
-        });
+        // Recalcula ou atualiza o campo principal de valor de locação reajustado
+        atualizaValorMensal_valorReajustado();
+    });
 
     // Escuta mudanças (marcar ou desmarcar) nos checkboxes de seleção de equipamentos
     // dentro da tabela #tableEquipamentosAditivoRescisao.
@@ -343,7 +342,7 @@ function bindings() {
                 });
                 return;
 
-                // Se data fim não vazio e data inicio maior que a data fim
+            // Se data fim não vazio e data inicio maior que a data fim
             } else if (dataFimLocacao !== "" && dataInicioLocacao > dataFimLocacao) {
                 $("#dataInicioLocacao").val("");
                 $("#dataFimLocacao").val("");
@@ -369,7 +368,7 @@ function bindings() {
                 return;
             }
         } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo" || tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor") {
-
+            
             if (dataInicioLocacao === "" && dataFimLocacao !== "") {
                 // Limpa o campo, aqui funciona porque esta no evento "blur"
                 // (ou seja, depois que o usuário saiu do campo e o componente já terminou de processar)
@@ -382,10 +381,10 @@ function bindings() {
                     timeout: 4000
                 });
                 return;
-
+                
             } else if (dataFimLocacao == dataInicioLocacao) {
                 $(this).val("");
-
+            
                 FLUIGC.toast({
                     title: "",
                     message: "A data fim de locação não pode ser igual à data de inicio de locação!",
@@ -415,10 +414,10 @@ function bindings() {
                     timeout: 4000
                 });
                 return;
-
+                
             } else if (dataInicioContrato == dataInicioLocacao) {
                 $(this).val("");
-
+            
                 FLUIGC.toast({
                     title: "",
                     message: "A data de inicio locação não pode ser igual à data de inicio do contrato!",
@@ -454,7 +453,7 @@ function bindings() {
         var tipoContrato = $("#tipoContrato").val();
         var dataReajuste = $(this).val();
         var dataInicioContrato = $("#contratoSelecDataInicio").val();
-
+        
         // Se não tem contrato selecionado mas o usuário informou uma data
         if (dataInicioContrato === "" && dataReajuste !== "") {
             // Limpa o campo, aqui funciona porque esta no evento "blur"
@@ -472,7 +471,7 @@ function bindings() {
 
         if (dataReajuste === dataInicioContrato) {
             $(this).val("");
-
+            
             FLUIGC.toast({
                 title: "",
                 message: "A data de reajuste não pode ser igual à data de inicio do contrato!",
@@ -577,16 +576,16 @@ function bindings() {
 
     // Aba Assinatura
     $("#assinaturaContrato").on("change", () => onchangeTipoAssinaturaContrato())
-    var val = $("#assinaturaContrato").val() ? $("#assinaturaContrato").val() : $("#assinaturaContrato").text();
+    var val = $("#assinaturaContrato").val() ? $("#assinaturaContrato").val():$("#assinaturaContrato").text();
 
     if (val == "Eletrônica") {
 
         $("#mailRepresentanteCastilho, #mailRepresentanteFornecedor").closest("div").show();
-
+        
     } else if (val == "Manual") {
         $("#mailRepresentanteCastilho, #mailRepresentanteFornecedor").closest("div").hide();
     }
-
+    
     $("#nomeRepresentanteFornecedor").on("change", asyncVerificaSeExisteAssinanteCadastradoPorNome);
     $("#tipoContrato, #obra").on("change", function () {
         if ($("#tipoContrato").val() != "" && $("#obra").val() != "") {
@@ -631,7 +630,7 @@ function bindings() {
         var index = $(this).attr("data-index");
         mostrarPagina(index, "set");
     });
-
+    
     //Equipamentos
     $("#tipoContrato, #obra, #locador").on("change", function () {
         var tipoContrato = $("#tipoContrato").val();
@@ -655,12 +654,12 @@ function bindings() {
         var origemContrato = $("#origemContrato").val();
 
         if (origemContrato == "Aditivos" || origemContrato == "Rescisões") {
-
+            
             // Limpa tabela antes de montar novamente
-            $("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").each(function () {
+            $("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").each(function(){
                 fnWdkRemoveChild(this);
             });
-
+            
             preencheListaDeEquipamentos_aditivosRescisao();
         }
 
@@ -727,7 +726,7 @@ async function loadTelaInicioRetorno() {
     initDataTableEquipamentos_aditivoRescisao();
     initDataTableEquipamentosParaInclusaoExclusao();
     preencheListaDeEquipamentos_aditivosRescisao();
-
+    
     atualizaDatatableContratoPrincipal();
     asyncMontaHistorico()
     onChangeTipoContrato($("#tipoContrato"));
@@ -746,16 +745,15 @@ async function loadTelaInicioRetorno() {
     } else {
         $("#divCampoReajuste").hide();
     }
-    
-   
 
+    // Configurar o select de banco
     $("#banco").one('click', function () {
         if (!$(this).hasClass('opcoes-carregadas')) {
             buscaBancos();
             $(this).addClass('opcoes-carregadas');
         }
     });
-
+    
     if ($("#tipoContrato").val() == "Locação de Equipamento" || $("#tipoContrato").val() == "Locação de Equipamento - Com Mão de Obra") {
 
         initDataTableEquipamentos();
@@ -798,9 +796,9 @@ async function loadTelaInicioRetorno() {
 
         insereDocumentoCriado(anexo, documentosAnexados, dataAnexo.data.description, documentosAnexados[anexo]);
     }
-
+    
     var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
-
+    
     if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
         $("#temREIDI").closest("div.row").hide();
         $("#temREIDI").val("Não");
@@ -866,7 +864,7 @@ function loadTelaJuridico() {
     carregaTestemunhas();
 
     $("#btnVisualizarDadosContrato").show();
-
+    
     if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
         $("#temREIDI").closest("div.row").hide();
         $("#temREIDI").val("Não");
@@ -881,6 +879,7 @@ async function loadTelaControladoria() {
     $("#rowAnexosSelecao").hide();
     $("#formContainer").show();
 
+
     // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
     $("#tableContratoPrincipalSelecionado").show();
     // Carrega dados do Contrato Principal selecionado
@@ -888,7 +887,7 @@ async function loadTelaControladoria() {
     // Oculta Tabela Principal para selecionar o contrato (mostra somente na Inicio)
     $("#tableContratoPrincipal").hide();
 
-
+    
     if ($("#origemContrato").val() == "Novos") {
         bindingCamposIntegracaoRM();
     } else {
@@ -918,12 +917,6 @@ async function loadTelaControladoria() {
     renderizarAnexosEtapaAprovacao();
     bloqueiaCamposAprovacao();
 
-    ///////////PAOLA
-    const select = $("#assinaturaContrato");
-    select.removeAttr("readonly");
-    select.find('option[value="Já Assinado"]').removeAttr("hidden");
-   
-
     if ($("#modeloContrato").val() == "Contrato fora do modelo") {
         $("#btnEditarArquivo").hide();
         $("#btnVisualizarPreContrato").hide();
@@ -950,7 +943,7 @@ async function loadTelaControladoria() {
     }
     $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
-
+    
     if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
         $("#temREIDI").closest("div.row").hide();
         $("#temREIDI").val("Não");
@@ -965,13 +958,6 @@ function loadTelaAprovacao() {
     $("#rowAnexosSelecao").hide();
     setAtividadeAtivaProgresso(3);
 
-    //PAOLA
-    const select = $("#assinaturaContrato");
-    select.removeAttr("readonly");
-    select.find('option[value="Já Assinado"]').removeAttr("hidden");
-    
-    
-    
     // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
     $("#tableContratoPrincipalSelecionado").show();
     // Carrega dados do Contrato Principal selecionado
@@ -995,7 +981,6 @@ function loadTelaAprovacao() {
     $("#btnEditarArquivo").remove();
     bloqueiaCamposAprovacao();
     $(".endereco-fornecedor").slideDown();
-    
 
     if ($("#modeloContrato").val() == "Contrato fora do modelo") {
         $("#btnEditarArquivo").hide();
@@ -1019,7 +1004,7 @@ function loadTelaAprovacao() {
     }
     $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
-
+    
     if ($("#tipoPagamento").val() == "Depósito") {
         $("#divPagamento, #divBanco").show();
     }
