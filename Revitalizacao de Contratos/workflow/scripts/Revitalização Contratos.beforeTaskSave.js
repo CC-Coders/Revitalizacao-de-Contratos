@@ -89,15 +89,18 @@ function beforeTaskSave_inicio() {
             atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
             hAPI.setCardValue("dataCriadoEm", getDateNow());
 
-            var id = insereDadosNaTabelaAuxiliar();
-            insereDadosNaTabelaAuxiliarItens(id);
-            hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
-
         } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
             // Insere o(s) equip(s) na tabela para poder ver na Analise do Suprimentos, mas insere com Status Desativado
             insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"));
             atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
 
+        }
+
+        // Cria/insere somente quando contratos novos.
+        if (hAPI.getCardValue("origemContrato") == "Novos") {
+            var id = insereDadosNaTabelaAuxiliar();
+            insereDadosNaTabelaAuxiliarItens(id);
+            hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
         }
         
         var pdfIdContrato = hAPI.getCardValue("contratoPdfId");
