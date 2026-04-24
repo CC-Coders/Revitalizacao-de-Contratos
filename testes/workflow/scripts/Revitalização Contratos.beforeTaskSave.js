@@ -89,6 +89,10 @@ function beforeTaskSave_inicio() {
             atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
             hAPI.setCardValue("dataCriadoEm", getDateNow());
 
+            var id = insereDadosNaTabelaAuxiliar();
+            insereDadosNaTabelaAuxiliarItens(id);
+            hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
+
         } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
             // Insere o(s) equip(s) na tabela para poder ver na Analise do Suprimentos, mas insere com Status Desativado
             insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"));
@@ -96,19 +100,6 @@ function beforeTaskSave_inicio() {
 
         }
 
-        // Cria/insere somente quando contratos novos.
-        if (hAPI.getCardValue("origemContrato") == "Novos") {
-            var id = insereDadosNaTabelaAuxiliar();
-            insereDadosNaTabelaAuxiliarItens(id);
-            hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
-        }
-
-        // Cria/insere somente quando contratos novos.
-        if (hAPI.getCardValue("origemContrato") == "Novos") {
-            var id = insereDadosNaTabelaAuxiliar();
-            insereDadosNaTabelaAuxiliarItens(id);
-            hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
-        }
         var pdfIdContrato = hAPI.getCardValue("contratoPdfId");
         if (pdfIdContrato) {
             anexaDocumentoNoProcesso(pdfIdContrato);
@@ -1793,11 +1784,11 @@ function FloatToMoney(valor) {
     valor = parseFloat(valor || 0).toFixed(2);
 
     // Troca o ponto decimal por vírgula para seguir o padrão brasileiro
-    // Ex: 14635.25 → 14635,25
+    // Ex: 14635.25 ? 14635,25
     valor = valor.replace(".", ",");
 
     // Insere separadores de milhar (pontos) na parte inteira do número
-    // Ex: 14635,25 → 14.635,25
+    // Ex: 14635,25 ? 14.635,25
     // A expressão regular encontra posições corretas para inserir os pontos
     return "R$ " + valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
