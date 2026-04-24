@@ -311,7 +311,10 @@ function bindings() {
         affixesStay: true,
     });
     $("#agencia").mask("0000-0", { placeholder: "____-_" });
-    $("#contaCorrente").mask("00000-0", { placeholder: "_____-_" });
+  //  $("#contaCorrente").mask("00000-0", { placeholder: "_____-_" });
+    $("#contaCorrente").mask("0000099-0", {
+        placeholder: "_____-_"
+    });
     $("#percentualRetencao").mask("000%", { reverse: true });
     $("#descontoPorDiaChuva").mask("000%", { reverse: true });
     $("#descontoPorDiaParado").mask("000%", { reverse: true });
