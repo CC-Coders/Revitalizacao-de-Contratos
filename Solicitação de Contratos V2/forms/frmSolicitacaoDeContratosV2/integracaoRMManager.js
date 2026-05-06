@@ -129,7 +129,7 @@ function preencheCamposAutomaticamente() {
             CODIGOCONTRATO = parseInt(CODIGOCONTRATO.split("/")[0].split("-")[1]);
             CODIGOCONTRATO++;
 
-            CODIGOCONTRATO = `${CCUSTO}-${CODIGOCONTRATO}/25`;
+            CODIGOCONTRATO = `${CCUSTO}-${CODIGOCONTRATO.toString().padStart(3,"0")}/26`;
             $("#novoContratoCodigo").val(CODIGOCONTRATO);
         });
     }, 1000);
@@ -692,7 +692,7 @@ function promiseRetornaHtmlOptionsProdutosDeItemDeContrato() {
             null,
             [
                 DatasetFactory.createConstraint("OPERACAO", "BuscaProduto", "BuscaProduto", ConstraintType.MUST),
-                DatasetFactory.createConstraint("CODCOLIGADA", 1, 1, ConstraintType.MUST),
+                DatasetFactory.createConstraint("CODCOLIGADA", $("#CODCOLIGADA").val(), $("#CODCOLIGADA").val(), ConstraintType.MUST),
             ],
             null,
             {

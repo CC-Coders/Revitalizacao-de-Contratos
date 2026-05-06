@@ -13,6 +13,7 @@ const codigosModelos = {
     PRODUCAO: {
         // Novos
         "Locação de Imóvel": 2070415,
+        "Locação de Imóvel - PF": 2316784,
         "Locação de Equipamento": 2070416,
         "Locação de Equipamento - Com Mão de Obra": 2070417,
 
@@ -94,15 +95,15 @@ function getTipoContrato_tipoPessoa() {
     const tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
 
     const modelosContrato = {
-        "Locação de Imóvel - Alteração de Valor" : {
+        "Locação de Imóvel - Alteração de Valor": {
             F: "Locação de Imóvel PF - Alteração de Valor",
             J: "Locação de Imóvel PJ - Alteração de Valor",
         },
-        "Locação de Imóvel - Alteração de Prazo" : {
+        "Locação de Imóvel - Alteração de Prazo": {
             F: "Locação de Imóvel PF - Alteração de Prazo",
             J: "Locação de Imóvel PJ - Alteração de Prazo",
         },
-        "Locação de Imóvel - Alteração de Prazo e Valor" : {
+        "Locação de Imóvel - Alteração de Prazo e Valor": {
             F: "Locação de Imóvel PF - Alteração de Prazo e Valor",
             J: "Locação de Imóvel PJ - Alteração de Prazo e Valor",
         }
@@ -190,34 +191,23 @@ async function buscaDadosDoFormulario(tipoContrato) {
 
     // Novos
     if (TIPO_MODELO == "Locação de Imóvel") {
-        var formaPagamento = null;
-        
-        if ($("#tipoPagamento").val() == "Depósito") {
-            formaPagamento = `${$("#tipoPagamento").val()} em conta corrente bancária. Banco ${$("#banco").val()}, Agência ${$("#agencia").val()}, Conta Corrente ${$("#contaCorrente").val()}.`
-
-        } else if ($("#tipoPagamento").val() == "Boleto") {
-            formaPagamento = `${$("#tipoPagamento").val()}. Banco ${$("#banco").val()}.`
-        }
-
         var retorno = {
             CODIGO_DO_CONTRATO: $("#novoContratoCodigo").val() || "___________",
             FORNECEDOR: $("#hiddenFORNECEDOR").val(),
             FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$(
                 "#cidadeFornecedor"
             ).val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()},`,
-            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
-            FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
-            FORNECEDOR_CPF_REPRESENTANTE: $("#cpfAdministrador").val(),
+           
             IMOVEL_DESCRICAO: $("#descricaoImovel").val(),
             IMOVEL_MATRICULA: $("#matriculaImovel").val(),
             IMOVEL_FINALIDADE: $("#finalidadeLocacao").val(),
             LOCACAO_PERIODO: $("#periodoLocacao").val(),
             LOCACAO_VALOR: $("#valorMensalAluguel").val(),
-            LOCACAO_DIA_VENCIMENTO: $("#periodoLocacao").val(),
+            TEM_CAUCAO: $("#caucao").val() == "Sim" ? true : false,
+            LOCACAO_DIA_VENCIMENTO: $("#janelaPagamento").val(),
             LOCACAO_VALOR_CAUCAO: $("#valorCaucao").val(),
             LOCACAO_DATA_CAUCAO: $("#dataPagamentoCaucao").val(),
-            FORMA_PAGAMENTO: $("#tipoPagamento").val() == "Depósito" ? true : false,
-            BANCO_TITULAR: $("#titular").val(),
+            FORMA_PAGAMENTO_DEPOSITO: $("#tipoPagamento").val() == "Depósito" ? true : false,
             DIA: dia,
             MES: meses[parseInt(mes)],
             ANO: ano,
@@ -231,6 +221,32 @@ async function buscaDadosDoFormulario(tipoContrato) {
             CPF_REPRESENTANTE: dadosRepresentante.cpf,
             CARGO_REPRESENTANTE: dadosRepresentante.cargo,
         };
+
+        const tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+        if (tipoPessoa == "F") {
+            retorno.FORNECEDOR_CPF = $("#hiddenCGCCFO").val();
+            retorno.FORNECEDOR_RG = $("#rgFornecedor").val();
+            retorno.FORNECEDOR_NACIONALIDADE = $("#nacionalidadeFornecedor").val();
+            retorno.FORNECEDOR_ESTADO_CIVIL = $("#estadoCivilFornecedor").val();
+        }else{
+            retorno.FORNECEDOR_CNPJ = $("#hiddenCGCCFO").val();
+            retorno.FORNECEDOR_NOME_REPRESENTANTE = $("#administradorFornecedor").val();
+            retorno.FORNECEDOR_CPF_REPRESENTANTE = $("#cpfAdministrador").val();
+        }
+
+
+
+        var formaPagamento = $("#tipoPagamento").val();
+        if (formaPagamento == "Depósito") {
+            retorno.BANCO = $("#banco").val();
+            retorno.BANCO_AGENCIA = $("#agencia").val();
+            retorno.BANCO_CONTA_CORRENTE = $("#contaCorrente").val();
+            retorno.BANCO_TITULAR = $("#titular").val();
+        } else if (formaPagamento == "Boleto") {
+            retorno.BANCO = $("#banco").val();
+        }
+
+
     } else if (origemContrato == "Novos" && TIPO_MODELO == "Locação de Equipamento" || origemContrato == "Novos" && TIPO_MODELO == "Locação de Equipamento - Com Mão de Obra") {
         var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
         var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
@@ -238,7 +254,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
         var equipamentos = await asyncConsultaEquipamentosSelecionados();
 
         var formaPagamento = null;
-        
+
         if ($("#tipoPagamento").val() == "Depósito") {
             formaPagamento = `de depósito bancário, na conta corrente da LOCADORA, no Banco ${$("#banco").val()}, Agência: ${$("#agencia").val()}; Conta Corrente: ${$("#contaCorrente").val()}. Em nome de ${$("#titular").val()}.`
 
@@ -246,7 +262,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             formaPagamento = `${$("#tipoPagamento").val()}. Banco ${$("#banco").val()}.`
         }
 
-       var EQUIPAMENTOS = equipamentos.map(e => ({
+        var EQUIPAMENTOS = equipamentos.map(e => ({
             PREFIXO: e.PREFIXO,
             ANO_FABRICACAO: e.ANO_FABRICACAO,
             ANO_MODELO: e.ANO_MODELO,
@@ -312,7 +328,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             PRAZO: parseInt(calculaDiferencaEmMeses(prazo_inicio, prazo_fim)),
             PRAZO_EXTENSO: numeroPorExtenso(calculaDiferencaEmMeses(prazo_inicio, prazo_fim).toString()),
 
-            EQUIPAMENTOS:EQUIPAMENTOS,
+            EQUIPAMENTOS: EQUIPAMENTOS,
 
             NOME_COLIGADA: dadosColigada.nome,
             ENDERECO_COLIGADA: dadosColigada.endereco,
@@ -324,9 +340,9 @@ async function buscaDadosDoFormulario(tipoContrato) {
         };
 
     }
-    
+
     // Aditivos
-      else if (TIPO_MODELO == "Locação de Imóvel PF - Alteração de Valor" || TIPO_MODELO == "Locação de Imóvel PJ - Alteração de Valor") {
+    else if (TIPO_MODELO == "Locação de Imóvel PF - Alteração de Valor" || TIPO_MODELO == "Locação de Imóvel PJ - Alteração de Valor") {
 
         var retorno = {
             CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
@@ -345,7 +361,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             DIA: dia,
             MES: meses[parseInt(mes)],
             ANO: ano,
-            
+
 
             NOME_COLIGADA: dadosColigada.nome, // Novo
             ENDERECO_COLIGADA: dadosColigada.endereco, // Novo
@@ -373,7 +389,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             DIA: dia,
             MES: meses[parseInt(mes)],
             ANO: ano,
-            
+
 
             NOME_COLIGADA: dadosColigada.nome, // Novo
             ENDERECO_COLIGADA: dadosColigada.endereco, // Novo
@@ -403,18 +419,18 @@ async function buscaDadosDoFormulario(tipoContrato) {
             DIA: dia,
             MES: meses[parseInt(mes)],
             ANO: ano,
-            
+
 
             NOME_COLIGADA: dadosColigada.nome, // Novo
             ENDERECO_COLIGADA: dadosColigada.endereco, // Novo
             CNPJ_COLIGADA: dadosColigada.cnpj // Novo
         }
-    } 
-    
-      else if (TIPO_MODELO == "Locação de Equipamento - Alteração de Valor") {
+    }
+
+    else if (TIPO_MODELO == "Locação de Equipamento - Alteração de Valor") {
         var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
 
-       var EQUIPAMENTOS = equipamentos.map(e => ({
+        var EQUIPAMENTOS = equipamentos.map(e => ({
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
@@ -438,7 +454,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             MES: meses[parseInt(mes)],
             ANO: ano,
 
-            EQUIPAMENTOS:EQUIPAMENTOS,
+            EQUIPAMENTOS: EQUIPAMENTOS,
             CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
             DATA_REAJUSTE: $("#dataReajuste").val(),
 
@@ -456,7 +472,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
 
         var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
 
-       var EQUIPAMENTOS = equipamentos.map(e => ({
+        var EQUIPAMENTOS = equipamentos.map(e => ({
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
@@ -482,7 +498,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             MES: meses[parseInt(mes)],
             ANO: ano,
 
-            EQUIPAMENTOS:EQUIPAMENTOS,
+            EQUIPAMENTOS: EQUIPAMENTOS,
             CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
             DATA_REAJUSTE: $("#dataReajuste").val(),
 
@@ -492,14 +508,14 @@ async function buscaDadosDoFormulario(tipoContrato) {
             NOME_REPRESENTANTE: dadosRepresentante.nome,
             CPF_REPRESENTANTE: dadosRepresentante.cpf,
             CARGO_REPRESENTANTE: dadosRepresentante.cargo
-        }; 
+        };
     } else if (TIPO_MODELO == "Locação de Equipamento - Alteração de Prazo e Valor") {
         var prazo_inicio = $("#dataInicioLocacao").val().split("/").reverse().join("-");
         var prazo_fim = $("#dataFimLocacao").val().split("/").reverse().join("-");
 
         var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
 
-       var EQUIPAMENTOS = equipamentos.map(e => ({
+        var EQUIPAMENTOS = equipamentos.map(e => ({
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
@@ -526,7 +542,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             MES: meses[parseInt(mes)],
             ANO: ano,
 
-            EQUIPAMENTOS:EQUIPAMENTOS,
+            EQUIPAMENTOS: EQUIPAMENTOS,
             CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
             DATA_REAJUSTE: $("#dataReajuste").val(),
 
@@ -536,7 +552,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             NOME_REPRESENTANTE: dadosRepresentante.nome,
             CPF_REPRESENTANTE: dadosRepresentante.cpf,
             CARGO_REPRESENTANTE: dadosRepresentante.cargo
-        }; 
+        };
     } else if (TIPO_MODELO == "Locação de Equipamento - Inclusão de Equipamento") {
         var ID_TCNT_AUXILIAR = $("#ID_TCNT_AUXILIAR").val();
         var equips_contrato = await asyncConsultaEquipamentosPorContrato(ID_TCNT_AUXILIAR);
@@ -578,7 +594,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             ANO: ano,
 
             EQUIPS_INCLUSAO: EQUIPAMENTOS,
-            EQUIPAMENTOS:EQUIPAMENTOS_CONTRATO,
+            EQUIPAMENTOS: EQUIPAMENTOS_CONTRATO,
 
             NOME_COLIGADA: dadosColigada.nome,
             ENDERECO_COLIGADA: dadosColigada.endereco,
@@ -588,7 +604,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             CARGO_REPRESENTANTE: dadosRepresentante.cargo
         };
 
-    }  else if (TIPO_MODELO == "Locação de Equipamento - Exclusão de Equipamento") {
+    } else if (TIPO_MODELO == "Locação de Equipamento - Exclusão de Equipamento") {
         var ID_TCNT_AUXILIAR = $("#ID_TCNT_AUXILIAR").val();
 
         var equips_contrato = await asyncConsultaEquipamentosPorContrato(ID_TCNT_AUXILIAR);
@@ -600,7 +616,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
         var prefixos_exclusao = equipamentos_exclusao.map(e => e.PREFIXO);
 
         // Filtra os equipamentos do contrato removendo os que foram marcados para exclusão
-        var equips_contrato_atual = equips_contrato.filter(e => 
+        var equips_contrato_atual = equips_contrato.filter(e =>
             !prefixos_exclusao.includes(e.PREFIXO)
         );
 
@@ -644,7 +660,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             ANO: ano,
 
             EQUIPS_EXCLUSAO: EQUIPAMENTOS,
-            EQUIPAMENTOS:EQUIPAMENTOS_CONTRATO,
+            EQUIPAMENTOS: EQUIPAMENTOS_CONTRATO,
 
             NOME_COLIGADA: dadosColigada.nome,
             ENDERECO_COLIGADA: dadosColigada.endereco,
@@ -680,7 +696,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             DIA: dia,
             MES: meses[parseInt(mes)],
             ANO: ano,
-            
+
 
             NOME_COLIGADA: dadosColigada.nome, // Novo
             ENDERECO_COLIGADA: dadosColigada.endereco, // Novo
@@ -715,7 +731,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             MES: meses[parseInt(mes)],
             ANO: ano,
 
-            EQUIPAMENTOS:EQUIPAMENTOS_CONTRATO,
+            EQUIPAMENTOS: EQUIPAMENTOS_CONTRATO,
 
             NOME_COLIGADA: dadosColigada.nome,
             ENDERECO_COLIGADA: dadosColigada.endereco,
@@ -752,7 +768,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             MES: meses[parseInt(mes)],
             ANO: ano,
 
-            EQUIPAMENTOS:EQUIPAMENTOS_CONTRATO,
+            EQUIPAMENTOS: EQUIPAMENTOS_CONTRATO,
 
             NOME_COLIGADA: dadosColigada.nome,
             ENDERECO_COLIGADA: dadosColigada.endereco,
@@ -765,7 +781,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
 
     return retorno;
 }
-async function modalDadosDoFormulario(){
+async function modalDadosDoFormulario() {
     var myModal = FLUIGC.modal(
         {
             title: "Dados do contrato",
@@ -781,40 +797,40 @@ async function modalDadosDoFormulario(){
         }
     );
 
-    async function geraHtml(){
+    async function geraHtml() {
         var input = await buscaDadosDoFormulario(getTipoContrato_tipoPessoa());
         var tbody = "";
 
         for (const tag in input) {
             if (!Object.hasOwn(input, tag)) continue;
-            
+
             const valor = input[tag];
 
             if (tag != "EQUIPAMENTOS") {
-                tbody+=`<tr>
+                tbody += `<tr>
                     <td>${tag}</td>
                     <td>${valor}</td>
-                </tr>`;   
-            }else{
+                </tr>`;
+            } else {
 
                 var equipamento = valor[0];
 
                 for (const tagEquipamento in equipamento) {
                     if (!Object.hasOwn(equipamento, tagEquipamento)) continue;
-                    
+
                     const valorEquipamento = equipamento[tagEquipamento];
-                    tbody+=`<tr>
+                    tbody += `<tr>
                         <td>EQUIPAMENTO.${tagEquipamento}</td>
                         <td>${valorEquipamento}</td>
-                    </tr>`;   
+                    </tr>`;
 
                 }
 
             }
         }
 
-        var html = 
-        `<table class="table table-bordered">
+        var html =
+            `<table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Tag</th>
@@ -829,7 +845,12 @@ async function modalDadosDoFormulario(){
     }
 }
 async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
-    const tipoContrato = getTipoContrato_tipoPessoa();
+    var tipoContrato = getTipoContrato_tipoPessoa();
+    const tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
+    if (tipoContrato == "Locação de Imóvel" && tipoPessoa == "F") {
+        tipoContrato = "Locação de Imóvel - PF";
+    }
+
     const documentIdModelo = codigosModelos[env][tipoContrato];
 
     var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentIdModelo);
@@ -854,8 +875,14 @@ function geraNomeDoArquivo() {
     var CODCCUSTO = $("#CODCCUSTO").val();
     var NOME_FORNECEDOR = $("#hiddenFORNECEDOR").val();
     var TIPO_CONTRATO = getTipoContrato_tipoPessoa();
+    var CODIGOCONTRATO = $("#novoContratoCodigo").val().replace("/", "_");
+    var NUM_PROCES = $("#numProces").val();
 
-    return `${CODCCUSTO} - ${TIPO_CONTRATO} - ${NOME_FORNECEDOR}`;
+    if (CODIGOCONTRATO) {
+        return `${CODIGOCONTRATO} - ${NUM_PROCES} - ${TIPO_CONTRATO} - ${NOME_FORNECEDOR}`;
+    } else {
+        return `${CODCCUSTO} - ${NUM_PROCES} - ${TIPO_CONTRATO} - ${NOME_FORNECEDOR}`;
+    }
 }
 async function salvaModeloAlterado() {
     try {
@@ -932,9 +959,11 @@ async function salvaModeloAlterado() {
             };
 
             axios
-                .post("https://docx-converter.cke-cs.com/v2/convert/html-docx", data, { responseType: "arraybuffer", headers: {
-                    'Authorization': await getJWT()
-                }})
+                .post("https://docx-converter.cke-cs.com/v2/convert/html-docx", data, {
+                    responseType: "arraybuffer", headers: {
+                        'Authorization': await getJWT()
+                    }
+                })
                 .then(async (response) => {
                     resolve(response);
                 })
@@ -1118,7 +1147,7 @@ async function loadCkEditor() {
         Bold,
         Bookmark,
         CKBox,
-        ImageResizeEditing, ImageResizeHandles, 
+        ImageResizeEditing, ImageResizeHandles,
         CKBoxImageEdit,
         CloudServices,
         Code,
@@ -1282,61 +1311,61 @@ async function loadCkEditor() {
 
         ],
         toolbar: {
-		items: [
-			'undo',
-			'redo',
-			'|',
-			'insertMergeField',
-			'previewMergeFields',
-			'|',
-			'importWord',
-			'exportWord',
-			'exportPdf',
-			'formatPainter',
-			'caseChange',
-			'findAndReplace',
-			'fullscreen',
-			'|',
-			'heading',
-			'|',
-			'fontSize',
-			'fontFamily',
-			'fontColor',
-			'fontBackgroundColor',
-			'|',
-			'bold',
-			'italic',
-			'underline',
-			'strikethrough',
-			'subscript',
-			'superscript',
-			'code',
-			'removeFormat',
-			'|',
-			'emoji',
-			'specialCharacters',
-			'horizontalLine',
-			'pageBreak',
-			'link',
-			'insertFootnote',
-			'insertImageViaUrl',
-			'insertTable',
-			'tableOfContents',
-			'insertTemplate',
-			'|',
-			'alignment',
-			'lineHeight',
-			'|',
-			'bulletedList',
-			'numberedList',
-			'multiLevelList',
-			'todoList',
-			'outdent',
-			'indent'
-		],
-		shouldNotGroupWhenFull: true
-	},
-        
+            items: [
+                'undo',
+                'redo',
+                '|',
+                'insertMergeField',
+                'previewMergeFields',
+                '|',
+                'importWord',
+                'exportWord',
+                'exportPdf',
+                'formatPainter',
+                'caseChange',
+                'findAndReplace',
+                'fullscreen',
+                '|',
+                'heading',
+                '|',
+                'fontSize',
+                'fontFamily',
+                'fontColor',
+                'fontBackgroundColor',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'subscript',
+                'superscript',
+                'code',
+                'removeFormat',
+                '|',
+                'emoji',
+                'specialCharacters',
+                'horizontalLine',
+                'pageBreak',
+                'link',
+                'insertFootnote',
+                'insertImageViaUrl',
+                'insertTable',
+                'tableOfContents',
+                'insertTemplate',
+                '|',
+                'alignment',
+                'lineHeight',
+                '|',
+                'bulletedList',
+                'numberedList',
+                'multiLevelList',
+                'todoList',
+                'outdent',
+                'indent'
+            ],
+            shouldNotGroupWhenFull: true
+        },
+
         menuBar: {
             isVisible: true,
         },
@@ -1449,9 +1478,11 @@ async function carregaDocumentoParaOCKEditor(documentId) {
     const formData = new FormData();
     formData.append("file", blob, "file.docx");
     axios
-        .post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, {  headers: {
-            'Authorization': await getJWT()
-        }})
+        .post("https://docx-converter.cke-cs.com/v2/convert/docx-html", formData, {
+            headers: {
+                'Authorization': await getJWT()
+            }
+        })
         .then((response) => {
             console.log("Conversion result", response.data);
             header = response.data.headers.default.html;
@@ -1663,7 +1694,7 @@ async function visualizaDocumento() {
     var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
     window.open(url, '_blank');
 }
-function getDadosDaColigada(){
+function getDadosDaColigada() {
     var CODCOLIGADA = $("#CODCOLIGADA").val();
     var dadosColigada = jsonClausulasColigadas[CODCOLIGADA];
 
@@ -1680,43 +1711,43 @@ async function getBase64FromUrl(url) {
     });
 }
 
-async function getJWT(){
-    const accessKey ='wqNvgzQtZbz1Q42vjKExfxBur9XlXHA1vSfqQHZ0YTKpGTz7Bae4SNI9YxeMdWcdHrphZKJH5WTpCR5KD9shZ4QlZvoTruKnvXYpx508WSNnASt9LwIAvaVu'
+async function getJWT() {
+    const accessKey = 'wqNvgzQtZbz1Q42vjKExfxBur9XlXHA1vSfqQHZ0YTKpGTz7Bae4SNI9YxeMdWcdHrphZKJH5WTpCR5KD9shZ4QlZvoTruKnvXYpx508WSNnASt9LwIAvaVu'
     const environmentId = 'btBoGKVUYq79VoqVVAON'
 
-  function base64url(source) {
-    return CryptoJS.enc.Base64.stringify(source)
-      .replace(/=+$/, '')
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_')
-  }
-
-  function generateJWT() {
-    const header = {
-      alg: 'HS256',
-      typ: 'JWT'
+    function base64url(source) {
+        return CryptoJS.enc.Base64.stringify(source)
+            .replace(/=+$/, '')
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
     }
 
-    const payload = {
-      aud: environmentId,
-      iat: Math.floor(Date.now() / 1000)
+    function generateJWT() {
+        const header = {
+            alg: 'HS256',
+            typ: 'JWT'
+        }
+
+        const payload = {
+            aud: environmentId,
+            iat: Math.floor(Date.now() / 1000)
+        }
+
+        const encodedHeader = base64url(
+            CryptoJS.enc.Utf8.parse(JSON.stringify(header))
+        )
+        const encodedPayload = base64url(
+            CryptoJS.enc.Utf8.parse(JSON.stringify(payload))
+        )
+
+        const signature = CryptoJS.HmacSHA256(
+            `${encodedHeader}.${encodedPayload}`,
+            accessKey
+        )
+
+        return `${encodedHeader}.${encodedPayload}.${base64url(signature)}`
     }
 
-    const encodedHeader = base64url(
-      CryptoJS.enc.Utf8.parse(JSON.stringify(header))
-    )
-    const encodedPayload = base64url(
-      CryptoJS.enc.Utf8.parse(JSON.stringify(payload))
-    )
-
-    const signature = CryptoJS.HmacSHA256(
-      `${encodedHeader}.${encodedPayload}`,
-      accessKey
-    )
-
-    return `${encodedHeader}.${encodedPayload}.${base64url(signature)}`
-  }
-
-  return generateJWT();
+    return generateJWT();
 }
 

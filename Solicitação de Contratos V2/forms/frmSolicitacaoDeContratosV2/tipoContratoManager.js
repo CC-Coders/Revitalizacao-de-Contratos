@@ -89,8 +89,8 @@ function onChangeTipoContrato(that) {
         $("#descricaoImovel, #enderecoImovel, #valorMensalAluguel").removeAttr("readonly");
 
         // Readonly
-        $(".divEnderecoFornecedor, .pessoa-fisica, .pessoa-juridica").find("input").attr("readonly","readonly");
-        $("#cpfFornecedor, #rgFornecedor, #prazoLocacao, #dataReajuste").attr("readonly","readonly");
+        //$(".divEnderecoFornecedor, .pessoa-fisica, .pessoa-juridica").find("input").attr("readonly","readonly");
+        $("#cpfFornecedor, #prazoLocacao, #dataReajuste").attr("readonly","readonly");
 
         // Remove class de preenhcimento obrigatório.
         $("#rgFornecedor").removeClass("inputInfoChamado");

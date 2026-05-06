@@ -910,7 +910,11 @@ async function loadTelaControladoria() {
     $(".endereco-fornecedor").slideDown();
 
     $("#divBotoesEdicaoContrato").show();
-    $("#btnEditarArquivo").hide();
+    
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
+        $("#btnEditarArquivo").hide();
+        $("#btnVisualizarPreContrato").hide();
+    }
     $("#btnVisualizarPreContrato").hide();
 
 
@@ -961,6 +965,10 @@ async function loadTelaControladoria() {
     } else {
         $("#temREIDI").closest("div.row").show();
     }
+
+    $(".btnRemoverItemNovoContrato").off("click").on("click", function () {
+        fnWdkRemoveChild($(this).closest("tr")[0]);
+    });
 }
 function loadTelaAprovacao() {
     parent.$("#workflowActions").hide();
