@@ -1,16 +1,68 @@
 function createDataset(fields, constraints, sortFields) {
     try {
-        var constraints = getConstraints(constraints);
-        lancaErroSeConstraintsObrigatoriasNaoInformadas(constraints, ["CODCOLIGADA","CCUSTO", "CNPJ"]);
+        var c = getConstraints(constraints);
+        lancaErroSeConstraintsObrigatoriasNaoInformadas(c, ["OPERACAO"]);
 
-        var query = "SELECT * FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE (STATUS = 1 OR STATUS = 2) AND CCUSTO = ? AND FORNECEDOR_CNPJ = ?;";
-        var retorno = executaQuery(query,[
-            {type:"varchar", value:constraints.CCUSTO},
-            {type:"varchar", value:constraints.CNPJ},
+        var operacao = (c.OPERACAO);
+        var query = null;
+        var params = null;
 
-        ],"/jdbc/CastilhoCustom");
+        if (operacao == "ConsultaEquipPorCcustoFornecedor") {
+            lancaErroSeConstraintsObrigatoriasNaoInformadas(c, ["CCUSTO", "CNPJ"]);
 
+            query = "SELECT * FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE (STATUS = 1 OR STATUS = 2) AND CCUSTO = ? AND FORNECEDOR_CNPJ = ?;";
+
+            params = [
+                {type: "varchar", value: c.CCUSTO},
+                {type: "varchar", value: c.CNPJ}
+            ];
+
+        } else if (operacao == "ConsultaEquipPorContrato") {
+            lancaErroSeConstraintsObrigatoriasNaoInformadas(c, ["ID_TCNT_AUXILIAR"]);
+
+            query = 
+                "SELECT DISTINCT\
+                VIEW_EQUIPAMENTOS_CONTRATOS.NUMPROCES_CADASTROEQUIPAMENTOS,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.FORNECEDOR_CNPJ,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.FORNECEDOR,\
+                TCNT_AUXILIAR_ITENS.PREFIXO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.PLACA,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.CHASSI,\
+                '' AS RENAVAM,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.DESCRICAO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.MODELO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.ANO_MODELO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.FABRICANTE,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.ANO_FABRICACAO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.POTENCIAHP,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.DATA_CHEGADA,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.CAPACIDADE_COMBUSTIVEL,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.VALOR_MOBILIZADO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.UN_MOBILIZADO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.VALOR_DESMOBILIZACAO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.UN_DESMOBILIZACAO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.MAODEOBRA,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.VALOR_LOCACAO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.VALOR_EXTRA,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.UN_EXTRA,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.ANEXOS_DOCUMENTACAO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.ANEXOS_ART,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.ANEXOS_FOTOS,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.ANEXOS_LAUDO,\
+                VIEW_EQUIPAMENTOS_CONTRATOS.ANEXOS_PLANO_MANUTENCAO\
+            FROM TCNT_AUXILIAR_ITENS\
+                JOIN VIEW_EQUIPAMENTOS_CONTRATOS AS VIEW_EQUIPAMENTOS_CONTRATOS ON VIEW_EQUIPAMENTOS_CONTRATOS.PREFIXO = TCNT_AUXILIAR_ITENS.PREFIXO\
+            WHERE TCNT_AUXILIAR_ITENS.ID_TCNT_AUXILIAR = ?\
+            AND TCNT_AUXILIAR_ITENS.ATIVO = 1";
+
+            params = [
+                {type: "int", value: c.ID_TCNT_AUXILIAR}
+            ];
+        }
+
+        var retorno = executaQuery(query, params, "/jdbc/CastilhoCustom");
         return returnDataset("SUCCESS", "", JSON.stringify(retorno));
+
     } catch (error) {
         if (typeof error == "object") {
             var mensagem = "";
