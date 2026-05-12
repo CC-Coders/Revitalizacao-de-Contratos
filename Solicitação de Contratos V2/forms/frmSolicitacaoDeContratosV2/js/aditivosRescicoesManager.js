@@ -109,10 +109,22 @@ async function atualizaDatatableContratoPrincipal(){
         var CODCOLIGADA = $("#CODCOLIGADA").val();
         var CODCCUSTO = $("#CODCCUSTO").val();
         var CNPJ = $("#hiddenCGCCFO").val();
+
         if (CODCOLIGADA && CODCCUSTO && CNPJ) {
             var contratos = await buscaContratos(CODCOLIGADA, CODCCUSTO, CNPJ, tipoContrato);
             
             dataTableContratoPrincipal.clear().draw();
+
+            if (!contratos || contratos.length === 0 || !contratos[0].CODIGOCONTRATO) {
+                FLUIGC.toast({
+                    title: "Contrato não encontrado: ",
+                    message: "Não existe contrato ativo para o fornecedor / tipo de contrato selecionado.",
+                    type: "danger"
+                });
+
+                return;
+            }
+
             dataTableContratoPrincipal.rows.add(contratos); // Add new data
             dataTableContratoPrincipal.columns.adjust().draw(); // Redraw the DataTable
             
@@ -265,20 +277,46 @@ function buscaContratos(CODCOLIGADA, CCUSTO, CNPJ, tipoContrato){
         tipoContrato = "'Locação de Equipamentos - S/M.O.','Locação de Equipamentos - C/M.O.'" // Passa valores que o RM usa
     }
 
-    return new Promise((resolve, reject)=>{
-        DatasetFactory.getDataset("DatasetProcessoContratos", null,[
-            DatasetFactory.createConstraint("OPERACAO", "BuscaContratosPorFornecedor", "BuscaContratosPorFornecedor", ConstraintType.MUST),
-            DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
-            DatasetFactory.createConstraint("CCUSTO", CCUSTO, CCUSTO, ConstraintType.MUST),
-            DatasetFactory.createConstraint("CNPJ", CNPJ, CNPJ, ConstraintType.MUST),
-            DatasetFactory.createConstraint("TIPOCONTRATO", tipoContrato, tipoContrato, ConstraintType.MUST),
-        ],null,{
-            success:ds=>{
-                resolve(ds.values);
-            },
-            error:e=>{
-                reject(e);
-            }
+    var origemContrato = $("#origemContrato").val();
+
+    if (origemContrato == "Aditivos") {
+
+        return new Promise((resolve, reject)=>{
+            DatasetFactory.getDataset("DatasetProcessoContratos", null,[
+                DatasetFactory.createConstraint("OPERACAO", "BuscaContratosPorFornecedorAditivo", "BuscaContratosPorFornecedor", ConstraintType.MUST),
+                DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+                DatasetFactory.createConstraint("CCUSTO", CCUSTO, CCUSTO, ConstraintType.MUST),
+                DatasetFactory.createConstraint("CNPJ", CNPJ, CNPJ, ConstraintType.MUST),
+                DatasetFactory.createConstraint("TIPOCONTRATO", tipoContrato, tipoContrato, ConstraintType.MUST),
+            ],null,{
+                success:ds=>{
+                    resolve(ds.values);
+                },
+                error:e=>{
+                    reject(e);
+                }
+            });
         });
-    });
+
+    } else if (origemContrato == "Rescisões") {
+
+        return new Promise((resolve, reject)=>{
+            DatasetFactory.getDataset("DatasetProcessoContratos", null,[
+                DatasetFactory.createConstraint("OPERACAO", "BuscaContratosPorFornecedorRescisao", "BuscaContratosPorFornecedorRescisao", ConstraintType.MUST),
+                DatasetFactory.createConstraint("CODCOLIGADA", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+                DatasetFactory.createConstraint("CCUSTO", CCUSTO, CCUSTO, ConstraintType.MUST),
+                DatasetFactory.createConstraint("CNPJ", CNPJ, CNPJ, ConstraintType.MUST),
+                DatasetFactory.createConstraint("TIPOCONTRATO", tipoContrato, tipoContrato, ConstraintType.MUST),
+            ],null,{
+                success:ds=>{
+                    resolve(ds.values);
+                },
+                error:e=>{
+                    reject(e);
+                }
+            });
+        });
+    }
+
+    
 }
