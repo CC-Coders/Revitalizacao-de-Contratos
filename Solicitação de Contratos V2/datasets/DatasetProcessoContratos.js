@@ -1,9 +1,6 @@
 function defineStructure() { }
 function onSync(lastSyncDate) { }
 function createDataset(fields, constraints, sortFields) {
-    var dataSource = "/jdbc/CastilhoCustom"; //nome da conexão usada no standalone
-    var ic = new javax.naming.InitialContext();
-    var ds = ic.lookup(dataSource);
     var OPERACAO, CODCOLIGADA, CCUSTO, ANOCONTRATO, CNPJ, CODIGOPRD, IDCNT, IDPRD, CODCFO, LOCALESTOQUE, TIPOCONTRATO = null;
 
     var myQuery = null;
@@ -49,7 +46,7 @@ function createDataset(fields, constraints, sortFields) {
     if (OPERACAO == "BuscaCodContratoPorCCusto") {
         myQuery = "SELECT max(CODIGOCONTRATO) as CODIGOCONTRATO FROM TCNT WHERE CODIGOCONTRATO like '" + CCUSTO + "%' AND CODIGOCONTRATO not like '%-9%' AND CODIGOCONTRATO not like '%-8%' AND CODCOLIGADA = " + CODCOLIGADA;
         log.info("myQuery: " + myQuery);
-        return executaQuery(myQuery, "/jdbc/CastilhoRM");
+        return executaQuery(myQuery, "/jdbc/FluigRM");
     }
     else if (OPERACAO == "BuscaProduto") {
         myQuery =
@@ -70,17 +67,17 @@ function createDataset(fields, constraints, sortFields) {
         AND (TPRODUTO.CODIGOPRD IN ('11.001.00001', '11.001.00002', '11.004.00001', '11.004.00003', '11.001.00054', '11.003.00002', '11.003.00005', '11.004.00003', '11.004.00010', '11.006.00010', '11.006.00144', '21.001.00001', '21.001.00002') OR TPRODUTO.CODIGOPRD LIKE '41.%' OR TPRODUTO.CODIGOPRD LIKE '21.%')\
         ORDER BY NOMEFANTASIA";
         log.info("myQuery: " + myQuery);
-        return executaQuery(myQuery, "/jdbc/CastilhoRM");
+        return executaQuery(myQuery, "/jdbc/FluigRM");
     }
     else if (OPERACAO == "BuscaProdutoPorCodigo") {
         myQuery = "SELECT IDPRD FROM TPRODUTO WHERE CODIGOPRD = " + CODIGOPRD + " AND CODCOLPRD = " + CODCOLIGADA;
         log.info("myQuery: " + myQuery);
-        return executaQuery(myQuery, "/jdbc/CastilhoRM");
+        return executaQuery(myQuery, "/jdbc/FluigRM");
     }
     else if (OPERACAO == "BuscaProdutoPorId") {
         myQuery = "SELECT CODIGOPRD, DESCRICAO FROM TPRODUTO WHERE IDPRD = " + IDPRD + " AND CODCOLPRD = " + CODCOLIGADA;
         log.info("myQuery: " + myQuery);
-        return executaQuery(myQuery, "/jdbc/CastilhoRM");
+        return executaQuery(myQuery, "/jdbc/FluigRM");
     }
     else if (OPERACAO == "BuscaFornecedorPorCNPJ") {
         myQuery = "SELECT * FROM FCFO WHERE CGCCFO = '" + CNPJ + "'";
@@ -88,7 +85,7 @@ function createDataset(fields, constraints, sortFields) {
     else if (OPERACAO == "BuscaFornecedorPorId") {
         myQuery = "SELECT NOMEFANTASIA, CGCCFO FROM FCFO WHERE CGCCFO = '" + CODCFO + "'";
         log.info("myQuery: " + myQuery);
-        return executaQuery(myQuery, "/jdbc/CastilhoRM");
+        return executaQuery(myQuery, "/jdbc/FluigRM");
     }
     else if (OPERACAO == "BuscaDadosContratoRM") {
         myQuery =
@@ -96,12 +93,12 @@ function createDataset(fields, constraints, sortFields) {
             FROM TCNT\
             WHERE CODCOLIGADA = " + CODCOLIGADA + " AND IDCNT = " + IDCNT;
         log.info("myQuery: " + myQuery);
-        return executaQuery(myQuery, "/jdbc/CastilhoRM");
+        return executaQuery(myQuery, "/jdbc/FluigRM");
     }
     else if (OPERACAO == "BuscaLocEstoque") {
         myQuery = "SELECT * FROM TLOC WHERE NOME = '" + LOCALESTOQUE + "'";
         log.info("myQuery: " + myQuery);
-        return executaQuery(myQuery, "/jdbc/CastilhoRM");
+        return executaQuery(myQuery, "/jdbc/FluigRM");
     }
     else if (OPERACAO == "BuscaContratos") {
         myQuery =
@@ -117,7 +114,7 @@ function createDataset(fields, constraints, sortFields) {
             AND TCNT.CODCOLIGADA = " + CODCOLIGADA + " \
         ORDER BY IDCNT";
         log.info("myQuery: " + myQuery);
-        return executaQuery(myQuery, "/jdbc/CastilhoRM");
+        return executaQuery(myQuery, "/jdbc/FluigRM");
     }
     else if (OPERACAO == "BuscaContratosPorFornecedorRescisao") {
         var ds = DatasetFactory.getDataset("dsGetServerURL", null, null, null);
