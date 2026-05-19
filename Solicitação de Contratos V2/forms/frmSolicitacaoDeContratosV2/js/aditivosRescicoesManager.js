@@ -109,6 +109,11 @@ async function atualizaDatatableContratoPrincipal(){
         var CODCOLIGADA = $("#CODCOLIGADA").val();
         var CODCCUSTO = $("#CODCCUSTO").val();
         var CNPJ = $("#hiddenCGCCFO").val();
+        
+        // Não se utiiliza a tabela de contratos quando vai criar um contrato.
+        if ($("#origemContrato").val() == "Novos") {
+            return;
+        }
 
         if (CODCOLIGADA && CODCCUSTO && CNPJ) {
             var contratos = await buscaContratos(CODCOLIGADA, CODCCUSTO, CNPJ, tipoContrato);
