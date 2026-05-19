@@ -282,7 +282,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             VALOR_MOBILIZADO: floatToMoney(e.VALOR_MOBILIZADO),
             UN_EXTRA: e.UN_EXTRA,
             VALOR_EXTRA: floatToMoney(e.VALOR_EXTRA),
-            VALOR_TOTAL: floatToMoney(moneyToFloat(e.VALOR_LOCACAO || "0") + moneyToFloat(e.MAODEOBRA || "0")),
+            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)),
             VALOR_LOCACAO: floatToMoney(e.VALOR_LOCACAO),
         }));
 
