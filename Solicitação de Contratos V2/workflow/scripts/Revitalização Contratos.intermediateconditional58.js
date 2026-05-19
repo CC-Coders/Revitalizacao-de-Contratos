@@ -34,6 +34,8 @@ function intermediateconditional58() {
             return false;
         }
     }
+
+    return true;
 }
 
 function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR){
