@@ -1295,3 +1295,46 @@ function criaDocFluigRetornaDocumentId(file, parentId) {
 async function asyncGetDocumentDetails(documentId) {
     return await axios.get(`/content-management/api/v2/documents/${documentId}`);
 }
+
+
+function preencherCamposViaSessionStorage() {
+    var dadosRaw = sessionStorage.getItem("rescisaoContrato");
+    if (!dadosRaw) return;
+    var dados = JSON.parse(dadosRaw);
+    console.log("Dados sessionStorage:", dados);
+    $("#origemContrato").val(dados.origemContrato).trigger("change");
+    $("#modeloContrato").val(dados.modeloContrato).trigger("change");
+    $("#tipoContratoBase").val(dados.tipoContratoBase).trigger("change");
+    console.log( $("#origemContrato").val())
+    console.log( $("#modeloContrato").val())
+    console.log( $("#tipoContratoBase").val())
+    var tentativasObra = 0;
+    var intervalObra = setInterval(function () {
+        var selectize = $("#obra")[0].selectize;
+        console.log(selectize)
+        tentativasObra++;
+        if (Object.keys(selectize.options).length > 0) {
+            selectize.setValue(dados.obra);
+            clearInterval(intervalObra);
+        }
+        if (tentativasObra > 30) {
+            console.warn("Timeout ao tentar preencher Obra via sessionStorage");
+            clearInterval(intervalObra);
+        }
+    }, 300);
+    var tentativasLocador = 0;
+    var intervalLocador = setInterval(function () {
+        var selectize = $("#locador")[0].selectize;
+        console.log(selectize)
+        tentativasLocador++;
+        if (Object.keys(selectize.options).length > 0) {
+            selectize.setValue(dados.locador);
+            clearInterval(intervalLocador);
+        }
+        if (tentativasLocador > 30) {
+            console.warn("Timeout ao tentar preencher Locador via sessionStorage");
+            clearInterval(intervalLocador);
+        }
+    }, 300);
+    sessionStorage.removeItem("rescisaoContrato");
+}
