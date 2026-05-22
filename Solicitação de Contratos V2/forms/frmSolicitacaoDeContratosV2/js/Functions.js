@@ -1305,13 +1305,9 @@ function preencherCamposViaSessionStorage() {
     $("#origemContrato").val(dados.origemContrato).trigger("change");
     $("#modeloContrato").val(dados.modeloContrato).trigger("change");
     $("#tipoContratoBase").val(dados.tipoContratoBase).trigger("change");
-    console.log( $("#origemContrato").val())
-    console.log( $("#modeloContrato").val())
-    console.log( $("#tipoContratoBase").val())
     var tentativasObra = 0;
     var intervalObra = setInterval(function () {
         var selectize = $("#obra")[0].selectize;
-        console.log(selectize)
         tentativasObra++;
         if (Object.keys(selectize.options).length > 0) {
             selectize.setValue(dados.obra);
@@ -1325,16 +1321,20 @@ function preencherCamposViaSessionStorage() {
     var tentativasLocador = 0;
     var intervalLocador = setInterval(function () {
         var selectize = $("#locador")[0].selectize;
-        console.log(selectize)
         tentativasLocador++;
-        if (Object.keys(selectize.options).length > 0) {
+
+        var temOpcoes = Object.keys(selectize.options).length > 0;
+        var estaDesbloqueado = !selectize.isLocked;
+
+        if (temOpcoes && estaDesbloqueado) {
             selectize.setValue(dados.locador);
+            console.log("Valor setado. Valor atual após set:", selectize.getValue());
             clearInterval(intervalLocador);
         }
-        if (tentativasLocador > 30) {
-            console.warn("Timeout ao tentar preencher Locador via sessionStorage");
+
+        if (tentativasLocador > 60) {
             clearInterval(intervalLocador);
         }
-    }, 300);
+    }, 500);
     sessionStorage.removeItem("rescisaoContrato");
 }
