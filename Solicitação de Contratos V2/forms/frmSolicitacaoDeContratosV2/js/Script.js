@@ -681,6 +681,35 @@ function bindings() {
     // Anexos
     $("#btnAnexarDocumento").on("click", function () { $("#inputAnexo").click() });
     $("#inputAnexo").on("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
+    
+    // Transporte de Materiais - Abrir Formato de Cobrança
+    $("#formatoCobrancaTransporte").on("change", function () {
+        var formato = $(this).val();
+        $("#divValorMensalTransporte").toggle(formato === "Valor Fixo");
+        $("#divValorM3Transporte, #divKmTransporte").toggle(formato === "Valor por Parâmetro");
+        if (formato !== "Valor Fixo")          { $("#valorMensalTransporte").val(""); }
+        if (formato !== "Valor por Parâmetro") { $("#valorM3Transporte").val(""); $("#kmTransporte").val(""); }
+    });
+
+    // Transporte de Materiais - Máscaras de Dinheiro
+    $("#valorMensalTransporte, #valorM3Transporte").maskMoney({
+        prefix: "R$ ", thousands: ".", decimal: ",", allowZero: true, affixesStay: true,
+    });
+
+    // Transporte de Materiais - Cálculo de meses
+    $("#dataInicioTransporte, #dataFimTransporte").on("change", function () {
+        var ini = $("#dataInicioTransporte").val();
+        var fim = $("#dataFimTransporte").val();
+        if (!ini || !fim) { $("#mesesContratoTransporte").val(""); return; }
+        if (fim < ini) {
+            FLUIGC.toast({ title: "", message: "A data final não pode ser menor que a data inicial!", type: "warning", timeout: 4000 });
+            $(this).val(""); $("#mesesContratoTransporte").val(""); return;
+        }
+        var d1 = new Date(ini), d2 = new Date(fim);
+        var m = (d2.getFullYear() - d1.getFullYear()) * 12 + (d2.getMonth() - d1.getMonth());
+        if (d2.getDate() >= d1.getDate()) m++;
+        $("#mesesContratoTransporte").val(m + (m === 1 ? " mês" : " meses"));
+    });
 }
 
 

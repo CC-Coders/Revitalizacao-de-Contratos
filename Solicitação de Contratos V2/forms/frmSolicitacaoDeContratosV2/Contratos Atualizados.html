@@ -287,6 +287,7 @@
                                             <option value="Locação de Equipamento" data-origem="Novos,Aditivos,Rescisões">Locação de Equipamento</option>
                                             <option value="Locação de Equipamento - Com Mão de Obra" data-origem="Novos,Rescisões">Locação de Equipamento - Com Mão de Obra</option>
                                             <option value="Locação de Imóvel" data-origem="Novos,Aditivos,Rescisões">Locação de Imóvel</option>
+                                            <option value="Transporte de Materiais" data-origem="Novos">Transporte de Materiais</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3 divTipoAlteracao" style="display: none;">
@@ -671,6 +672,80 @@
                                                 <option value="9.25">9,25%</option>
                                             </select>
                                         </div>
+                                    </div>
+                                </div>
+                                <!-- Dados Contratuais - Transporte de Materiais -->
+                            </div>
+                                                        <div class="col-md-6 campoTransporteMateriais">
+                                <h2>Dados Contratuais</h2>
+                                <div class="row">
+                                                                         <div class="col-md-12 campoTransporteMateriais">
+                                            <div>
+                                                <label>Administrador:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="administradorTransporte" name="administradorTransporte" class="form-control inputInfoChamado" />
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div class="col-md-12 campoTransporteMateriais">
+                                            <div>
+                                                <label>Contratante Principal:</label><strong class="strongAlert">*</strong>
+                                                <input type="text" id="contratantePrincipalTransporte" name="contratantePrincipalTransporte" class="form-control inputInfoChamado" />
+                                            </div>
+                                            <br>
+                                        </div>
+                                
+                                    <div class="col-md-6">
+                                        <div>
+                                            <label>Data Inicial:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="dataInicioTransporte" name="dataInicioTransporte" class="form-control inputInfoChamado date" />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <label>Data Final:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="dataFimTransporte" name="dataFimTransporte" class="form-control inputInfoChamado date" />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div>
+                                            <label>Meses de Contrato:</label>
+                                            <input type="text" id="mesesContratoTransporte" name="mesesContratoTransporte" class="form-control" readonly placeholder="Calculado automaticamente" />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div>
+                                            <label>Formato de Cobrança:</label><strong class="strongAlert">*</strong>
+                                            <select id="formatoCobrancaTransporte" name="formatoCobrancaTransporte" class="form-control inputInfoChamado">
+                                                <option value="">Selecione</option>
+                                                <option value="Valor Fixo">Valor Fixo</option>
+                                                <option value="Valor por Parâmetro">Valor por Parâmetro</option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6" id="divValorMensalTransporte" style="display:none;">
+                                        <div>
+                                            <label>Valor Mensal:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="valorMensalTransporte" name="valorMensalTransporte" class="form-control inputInfoChamado" placeholder="R$ 0,00" />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6" id="divValorM3Transporte" style="display:none;">
+                                        <div>
+                                            <label>Valor m³:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="valorM3Transporte" name="valorM3Transporte" class="form-control inputInfoChamado" placeholder="R$ 0,00" />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6" id="divKmTransporte" style="display:none;">
+                                        <div>
+                                            <label>KM:</label><strong class="strongAlert">*</strong>
+                                            <input type="number" id="kmTransporte" name="kmTransporte" class="form-control inputInfoChamado" placeholder="Ex: 150" min="0" />
+                                        </div>
+                                        <br>
                                     </div>
                                 </div>
                             </div>

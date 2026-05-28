@@ -81,7 +81,7 @@ function onChangeTipoContrato(that) {
     if (origemContrato == "Novos") {
         $(
             `.campoLocacaoImovel, .campoLocacaoEquipamento, .campoLocacaoImovelAditivo_alteracaoValor, .campoLocacaoEquipamento_alteracaoValor, 
-            .campoLocacaoEquipamento_rescisao, .campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento`
+            .campoLocacaoEquipamento_rescisao, .campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento, .campoTransporteMateriais`
         ).hide();
         
         $(".divDadosPagamento, .divDadosContratuais").show();
@@ -118,6 +118,12 @@ function onChangeTipoContrato(that) {
 
                 $("#temRetencao").val("Sim").change();
             }
+        }
+        else if (tipoContrato === "Transporte de Materiais") {
+            $("#dadosContrato").show();
+            $(".campoLocacaoEquipamento").show();  
+            $(".divDadosContratuais").hide();        
+            $(".campoTransporteMateriais").show();
         }
         else {
             $("#dadosContrato").hide();
