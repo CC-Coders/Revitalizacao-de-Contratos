@@ -2,6 +2,12 @@ function onChangeTipoContrato(that) {
     var tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val():$("#tipoContrato").text();
     var origemContrato = $("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text();
     
+    if (tipoContrato === "Transporte de Materiais") {
+        $('label[for="locador"]').text("Fornecedor:");
+    } else {
+        $('label[for="locador"]').text("Locador:");
+    }
+    
     if (dataTableEquipamentosAditivoRescisao) {
         if (tipoContrato == "Locação de Equipamento - Alteração de Prazo" || 
             tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)") {
