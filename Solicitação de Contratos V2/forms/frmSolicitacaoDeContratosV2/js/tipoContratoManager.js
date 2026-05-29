@@ -1,11 +1,11 @@
 function onChangeTipoContrato(that) {
     var tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val():$("#tipoContrato").text();
     var origemContrato = $("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text();
-    
+
     if (tipoContrato === "Transporte de Materiais") {
-        $('label[for="locador"]').text("Fornecedor:");
+        $("#locador").closest("div").find("label").first().text("Fornecedor:");
     } else {
-        $('label[for="locador"]').text("Locador:");
+        $("#locador").closest("div").find("label").first().text("Locador:");
     }
     
     if (dataTableEquipamentosAditivoRescisao) {
