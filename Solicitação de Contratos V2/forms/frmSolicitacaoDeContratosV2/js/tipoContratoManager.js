@@ -80,6 +80,10 @@ function onChangeTipoContrato(that) {
             $("#tableEquipamentosAditivoRescisao").hide();
         }
 
+    } else if (tipoContrato === "Transporte de Materiais") {
+        $("#paginationContratoPrincipal, #divTableEquipamentosAditivoRescisao").addClass("hidden").hide();
+        $("#paginationEquipamentos, #divTableEquipamentos, #paginationAnexos").removeClass("hidden").show();
+
     } else {
         $("#paginationEquipamentos, #paginationContratoPrincipal").addClass("hidden").hide();
     }
