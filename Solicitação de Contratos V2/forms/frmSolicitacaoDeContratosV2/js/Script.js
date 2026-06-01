@@ -701,25 +701,23 @@ function bindings() {
         var ini = $("#dataInicioTransporte").val();
         var fim = $("#dataFimTransporte").val();
         if (!ini || !fim) { $("#mesesContratoTransporte").val(""); return; }
+
         function parseDate(s) {
             var p = s.split("/");
             return new Date(p[2], p[1] - 1, p[0]);
         }
+
         var d1 = parseDate(ini);
         var d2 = parseDate(fim);
+
         if (d2 < d1) {
             FLUIGC.toast({ title: "", message: "A data final não pode ser menor que a data inicial!", type: "warning", timeout: 4000 });
             $(this).val(""); $("#mesesContratoTransporte").val(""); return;
         }
+
         var meses = (d2.getFullYear() - d1.getFullYear()) * 12 + (d2.getMonth() - d1.getMonth());
-        var diaInicio = d1.getDate();
-        var diaFim    = d2.getDate();
-        if (diaFim < diaInicio) { meses--; }
-        var dAjustada = new Date(d1.getFullYear(), d1.getMonth() + meses, diaInicio);
-        var diasRestantes = Math.round((d2 - dAjustada) / (1000 * 60 * 60 * 24));
-        var resultado = meses + (meses === 1 ? " mês" : " meses");
-        if (diasRestantes > 0) resultado += " e " + diasRestantes + (diasRestantes === 1 ? " dia" : " dias");
-        $("#mesesContratoTransporte").val(resultado);
+        if (d2.getDate() < d1.getDate()) { meses--; }
+        $("#mesesContratoTransporte").val(meses + (meses === 1 ? " mês" : " meses"));
     });
 }
 
