@@ -690,6 +690,9 @@ function bindings() {
         if (formato !== "Valor Fixo")          { $("#valorMensalTransporte").val(""); }
         if (formato !== "Valor por Parâmetro") { $("#valorM3Transporte").val(""); $("#kmTransporte").val(""); }
     });
+    var formato = $("#formatoCobrancaTransporte").val();
+    $("#divValorMensalTransporte").toggle(formato === "Valor Fixo");
+    $("#divValorM3Transporte, #divKmTransporte").toggle(formato === "Valor por Parâmetro");
 
     // Transporte de Materiais - Máscaras de Dinheiro
     $("#valorMensalTransporte, #valorM3Transporte").maskMoney({

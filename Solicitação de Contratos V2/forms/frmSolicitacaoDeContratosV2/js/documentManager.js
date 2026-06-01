@@ -67,6 +67,7 @@ const codigosModelos = {
         "Locação de Imóvel": 32778,
         "Locação de Equipamento": 32779,
         "Locação de Equipamento - Com Mão de Obra": 32791,
+        "Transporte de Materiais": 34933,
 
         // Aditivos
         "Locação de Equipamento - Alteração de Valor": 32828,
@@ -339,6 +340,64 @@ async function buscaDadosDoFormulario(tipoContrato) {
             LOCALIZACAO: $("#localizacaoServico").val()
         };
 
+    }
+    
+    //Transporte de Materiais
+    else if (TIPO_MODELO == "Transporte de Materiais") {
+        var prazo_inicio = $("#dataInicioTransporte").val().split("/").reverse().join("-");
+        var prazo_fim    = $("#dataFimTransporte").val().split("/").reverse().join("-");
+
+        var equipamentos = await asyncConsultaEquipamentosSelecionados();
+        var EQUIPAMENTOS = equipamentos.map(e => ({
+            PREFIXO:        e.PREFIXO,
+            DESCRICAO:      e.DESCRICAO,
+            MODELO:         e.MODELO,
+            PLACA:          e.PLACA,
+            FABRICANTE:     e.FABRICANTE,
+            ANO_FABRICACAO: e.ANO_FABRICACAO,
+            ANO_MODELO:     e.ANO_MODELO,
+            POTENCIAHP:     e.POTENCIAHP,
+            CAPACIDADE:     e.CAPACIDADE,
+        }));
+
+        var retorno = {
+            CODIGO_DO_CONTRATO:    $("#novoContratoCodigo").val() || "___________",
+            FORNECEDOR:            $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_CNPJ:       $("#hiddenCGCCFO").val(),
+            FORNECEDOR_ENDERECO:   `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$("#cidadeFornecedor").val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
+            FORNECEDOR_CPF_REPRESENTANTE:  $("#cpfAdministrador").val(),
+
+            ADMINISTRADOR:         $("#administradorTransporte").val(),
+            CONTRATANTE_PRINCIPAL: $("#contratantePrincipal").val(),
+
+            PERIODOINICIO:         $("#dataInicioTransporte").val(),
+            PERIODOFIM:            $("#dataFimTransporte").val(),
+            MESES:         		   $("#mesesContratoTransporte").val(),
+
+            FORMATO_COBRANCA:      $("#formatoCobrancaTransporte").val(),
+            VALOR_MENSAL:          $("#valorMensalTransporte").val(),   
+            VALOR_M3:              $("#valorM3Transporte").val(),        
+            KM:                    $("#kmTransporte").val(),             
+            EH_VALOR_FIXO:         $("#formatoCobrancaTransporte").val() == "Valor Fixo",
+            EH_VALOR_PARAMETRO:    $("#formatoCobrancaTransporte").val() == "Valor por Parâmetro",
+
+            EQUIPAMENTOS:          EQUIPAMENTOS,
+
+            OBRA:                  $("#NOMECCUSTO").val(),
+            CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`,
+
+            DIA:                   dia,
+            MES:                   meses[parseInt(mes)],
+            ANO:                   ano,
+
+            NOME_COLIGADA:         dadosColigada.nome,
+            ENDERECO_COLIGADA:     dadosColigada.endereco,
+            CNPJ_COLIGADA:         dadosColigada.cnpj,
+            NOME_REPRESENTANTE:    dadosRepresentante.nome,
+            CPF_REPRESENTANTE:     dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE:   dadosRepresentante.cargo,
+        };
     }
 
     // Aditivos
@@ -862,9 +921,11 @@ async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
     });
     var documentId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDeAnexos);
     $("#contratoDocumentId").val(documentId);
-
+    console.log("### Iniciando preenchimento do documento...");
     var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
+    console.log("### Documento preenchido, convertendo para PDF...")
     var pdf = await convertDocxToPdf(filePreenchido);
+    console.log("### PDF gerado, salvando...")
     const filePdf = new File([pdf], geraNomeDoArquivo() + ".pdf", {
         type: blob.type,
     });
