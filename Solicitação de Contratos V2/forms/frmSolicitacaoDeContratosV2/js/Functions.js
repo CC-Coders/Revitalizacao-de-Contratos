@@ -283,13 +283,14 @@ async function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFo
 
                     } else if (
                         tipoContrato.includes("Locação de Equipamento") &&
-                        tipoContrato != "Locação de Equipamento - Alteração de Prazo" ||
-                        tipoContrato != "Locação de Equipamento - Alteração de Valor" ||
-                        tipoContrato != "Locação de Equipamento - Alteração de Prazo e Valor" ||
+                        tipoContrato != "Locação de Equipamento - Alteração de Prazo" &&
+                        tipoContrato != "Locação de Equipamento - Alteração de Valor" &&
+                        tipoContrato != "Locação de Equipamento - Alteração de Prazo e Valor" &&
                         tipoContrato != "Locação de Equipamento - Inclusão de Equipamento"
                     ) {
                         anexosPorTipoDeContrato("Locação de Equipamento");
-
+                    } else if (tipoContrato == "Transporte de Materiais") {   
+                        anexosPorTipoDeContrato("Transporte de Materiais");
                     }
 
                     if (tipoContrato == "Locação de Equipamento - Alteração de Prazo") {
@@ -303,7 +304,6 @@ async function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFo
 
                     } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
                         anexosPorTipoDeContrato("Locação de Equipamento - Inclusão de Equipamento");
-
                     }
 
                     resolve(tipoPessoa);
@@ -355,10 +355,8 @@ async function enviarSolicitacao() {
             });
             await asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao();
             Swal.close();
-           // $("#workflowActions > button:first-child", window.parent.document).click();
             parent.$("#send-process-button").click();
         } else {
-          //  $("#workflowActions > button:first-child", window.parent.document).click();
         	parent.$("#send-process-button").click();
         }
     }
@@ -368,11 +366,9 @@ async function enviarSolicitacao() {
             var pdf = await convertDocxToPdf(filePreenchido, geraNomeDoArquivo() + ".pdf");
             await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo() + ".pdf", pastaDeAnexos);
         }
-      //  $("#workflowActions > button:first-child", window.parent.document).click();
         parent.$("#send-process-button").click();
     }
     else {
-      //  $("#workflowActions > button:first-child", window.parent.document).click();
     	parent.$("#send-process-button").click();
     }
 }
@@ -775,7 +771,30 @@ function validaAnexosPorTipoContrato() {
             faltando.push("Cartão QSA");
         }
     }
+    else if (tipoContrato == "Transporte de Materiais") {
+        if (!documentos["Cartão CNPJ"]) {
+            faltando.push("Cartão CNPJ");
+        }
+        if (!documentos["QSA"]) {
+            faltando.push("QSA");
+        }
+        if (!documentos["NF de Remessa"]) {
+            faltando.push("NF de Remessa");
+        }
+        if (!documentos["Certidão de regularidade FGTS"]) {
+            faltando.push("Certidão de regularidade FGTS");
+        }
+        if (!documentos["CNDs (municipal, estadual, federal e trabalhista)"]) {
+            faltando.push("CNDs (municipal, estadual, federal e trabalhista)");
+        }
+        var temCNH = !!documentos["CNH"];
+        var temRG  = !!documentos["RG"];
+        var temCPF = !!documentos["CPF"];
+        if (!temCNH && !(temRG && temCPF)) {
+            faltando.push("CNH ou RG + CPF");
+        }
 
+    }
     if (faltando.length > 0) {
         FLUIGC.toast({
             title: "Anexos obrigatórios pendentes",
@@ -1087,12 +1106,13 @@ async function renderizarAnexosEtapaAprovacao() {
     }
 }
 function anexosPorTipoDeContrato(tipoDoContrato) {
+	   console.log("[ANEXOS] chamado com:", tipoDoContrato); 
     const listaAnexosPorTipoDeContrato = {
         "Locação de Equipamento": ["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
         "Locação de Equipamento - Com Mão de Obra": ["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
         "Locação de Imóvel - PF": ["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
         "Locação de Imóvel - PJ": ["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
-
+        "Transporte de Materiais": ["Cartão CNPJ", "QSA", "NF de Remessa", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF", "Outros"],
         // Aditivos
         "Locação de Equipamento - Alteração de Prazo": ["Proposta Comercial"],
         "Locação de Equipamento - Alteração de Valor": ["Proposta Comercial"],

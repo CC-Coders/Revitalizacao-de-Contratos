@@ -217,7 +217,9 @@ function bindings() {
         ) {
             anexosPorTipoDeContrato("Locação de Equipamento");
 
-        }
+        }else if (tipoContrato == "Transporte de Materiais") {   
+            anexosPorTipoDeContrato("Transporte de Materiais");   
+        } 
 
         if (tipoContrato == "Locação de Equipamento - Alteração de Prazo") {
             anexosPorTipoDeContrato("Locação de Equipamento - Alteração de Prazo");
