@@ -1295,3 +1295,46 @@ function criaDocFluigRetornaDocumentId(file, parentId) {
 async function asyncGetDocumentDetails(documentId) {
     return await axios.get(`/content-management/api/v2/documents/${documentId}`);
 }
+
+
+function preencherCamposViaSessionStorage() {
+    var dadosRaw = sessionStorage.getItem("rescisaoContrato");
+    if (!dadosRaw) return;
+    var dados = JSON.parse(dadosRaw);
+    console.log("Dados sessionStorage:", dados);
+    $("#origemContrato").val(dados.origemContrato).trigger("change");
+    $("#modeloContrato").val(dados.modeloContrato).trigger("change");
+    $("#tipoContratoBase").val(dados.tipoContratoBase).trigger("change");
+    var tentativasObra = 0;
+    var intervalObra = setInterval(function () {
+        var selectize = $("#obra")[0].selectize;
+        tentativasObra++;
+        if (Object.keys(selectize.options).length > 0) {
+            selectize.setValue(dados.obra);
+            clearInterval(intervalObra);
+        }
+        if (tentativasObra > 30) {
+            console.warn("Timeout ao tentar preencher Obra via sessionStorage");
+            clearInterval(intervalObra);
+        }
+    }, 300);
+    var tentativasLocador = 0;
+    var intervalLocador = setInterval(function () {
+        var selectize = $("#locador")[0].selectize;
+        tentativasLocador++;
+
+        var temOpcoes = Object.keys(selectize.options).length > 0;
+        var estaDesbloqueado = !selectize.isLocked;
+
+        if (temOpcoes && estaDesbloqueado) {
+            selectize.setValue(dados.locador);
+            console.log("Valor setado. Valor atual após set:", selectize.getValue());
+            clearInterval(intervalLocador);
+        }
+
+        if (tentativasLocador > 60) {
+            clearInterval(intervalLocador);
+        }
+    }, 500);
+    sessionStorage.removeItem("rescisaoContrato");
+}

@@ -713,6 +713,7 @@ async function loadTelaInicio() {
     $("#temRetencao").attr("readonly", "readonly");
     $("#selectTestemunha").selectize();
     asyncAtualizaListaDeAssinantes();
+    preencherCamposViaSessionStorage();
 }
 async function loadTelaInicioRetorno() {
     $(".panelAprovacao").hide();
