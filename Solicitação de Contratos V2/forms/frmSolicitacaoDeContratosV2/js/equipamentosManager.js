@@ -171,6 +171,21 @@ function initDataTableEquipamentos(){
         return list;
     }
 }
+//async function preencheListaDeEquipamentos(){
+//    try {
+//        const CODCOLIGADA = $("#CODCOLIGADA").val();
+//        const CCUSTO = $("#CODCCUSTO").val();
+//        const CNPJ = $("#hiddenCGCCFO").val();
+//
+//        var equipamentos = await consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ);
+//        dataTableEquipamentos.clear().draw();
+//        dataTableEquipamentos.rows.add(equipamentos); // Add new data
+//        dataTableEquipamentos.columns.adjust().draw(); // Redraw the DataTable
+//    } catch (error) {
+//        console.error(error);
+//    }
+//}
+
 async function preencheListaDeEquipamentos(){
     try {
         const CODCOLIGADA = $("#CODCOLIGADA").val();
@@ -178,13 +193,22 @@ async function preencheListaDeEquipamentos(){
         const CNPJ = $("#hiddenCGCCFO").val();
 
         var equipamentos = await consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ);
+
+        var tipoContrato = $("#tipoContrato").val();
+        if (tipoContrato === "Transporte de Materiais") {
+            equipamentos = equipamentos.filter(function (e) {
+                return e.CATEGORIA && e.CATEGORIA.toUpperCase() === "PA";
+            });
+        }
+
         dataTableEquipamentos.clear().draw();
-        dataTableEquipamentos.rows.add(equipamentos); // Add new data
-        dataTableEquipamentos.columns.adjust().draw(); // Redraw the DataTable
+        dataTableEquipamentos.rows.add(equipamentos);
+        dataTableEquipamentos.columns.adjust().draw();
     } catch (error) {
         console.error(error);
     }
 }
+
 function consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ){
     return new Promise((resolve, reject)=>{
         DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
