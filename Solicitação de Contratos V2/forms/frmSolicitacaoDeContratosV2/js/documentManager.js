@@ -67,7 +67,7 @@ const codigosModelos = {
         "Locação de Imóvel": 32778,
         "Locação de Equipamento": 32779,
         "Locação de Equipamento - Com Mão de Obra": 32791,
-        "Transporte de Materiais": 34933,
+        "Transporte de Materiais": 35098,
 
         // Aditivos
         "Locação de Equipamento - Alteração de Valor": 32828,
@@ -346,6 +346,10 @@ async function buscaDadosDoFormulario(tipoContrato) {
     else if (TIPO_MODELO == "Transporte de Materiais") {
         var prazo_inicio = $("#dataInicioTransporte").val().split("/").reverse().join("-");
         var prazo_fim    = $("#dataFimTransporte").val().split("/").reverse().join("-");
+        var valorMensalFloat = parseFloat($("#valorMensalTransporte").val().replace(/[R$\s.]/g, "").replace(",", ".")) || 0;
+        var pctParado = parseFloat($("#descontoPorDiaParadoTransporte").val().replace("%", "").trim()) || 0;
+        var pctChuva  = parseFloat($("#descontoPorDiaChuvaTransporte").val().replace("%", "").trim()) || 0;
+        var valorDiario = valorMensalFloat / 30;
 
         var equipamentos = await asyncConsultaEquipamentosSelecionados();
         var EQUIPAMENTOS = equipamentos.map(e => ({
@@ -381,7 +385,8 @@ async function buscaDadosDoFormulario(tipoContrato) {
             KM:                    $("#kmTransporte").val(),             
             EH_VALOR_FIXO:         $("#formatoCobrancaTransporte").val() == "Valor Fixo",
             EH_VALOR_PARAMETRO:    $("#formatoCobrancaTransporte").val() == "Valor por Parâmetro",
-
+            DESCONTO_QUEBRADO: "R$ " + (valorDiario * pctParado / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+            DESCONTO_CHUVA:    "R$ " + (valorDiario * pctChuva  / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
             EQUIPAMENTOS:          EQUIPAMENTOS,
 
             OBRA:                  $("#NOMECCUSTO").val(),

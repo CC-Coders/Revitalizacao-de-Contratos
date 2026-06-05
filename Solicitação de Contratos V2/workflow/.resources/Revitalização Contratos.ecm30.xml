@@ -32,7 +32,8 @@
       <version>18</version>
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
-    <formId>2070280</formId>
+    <formId>0</formId>
+    <formIdV2>0</formIdV2>
     <editionMode>true</editionMode>
     <updateAttachmentsVersion>false</updateAttachmentsVersion>
     <controlsAttachmentsSecurity>false</controlsAttachmentsSecurity>
@@ -1336,6 +1337,18 @@
       </conditionProcessStatePK>
       <condition>false</condition>
       <destinationSequenceId>32</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>8</expressionOrder>
+        <version>18</version>
+        <sequence>88</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
+      <destinationSequenceId>55</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
   </list>
@@ -5240,6 +5253,33 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <ruleOrder>2</ruleOrder>
       <field>destinoRetorno</field>
       <value>CONTROLADORIA</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>88</sequence>
+      <expressionOrder>8</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>origemContrato</field>
+      <value>Novos</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>88</sequence>
+      <expressionOrder>8</expressionOrder>
+      <ruleOrder>2</ruleOrder>
+      <field>tipoContrato</field>
+      <value>Transporte de Materiais</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>88</sequence>
+      <expressionOrder>8</expressionOrder>
+      <ruleOrder>3</ruleOrder>
+      <field>decisao</field>
+      <value>Aprovar</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
