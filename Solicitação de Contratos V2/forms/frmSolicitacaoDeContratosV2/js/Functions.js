@@ -355,9 +355,9 @@ async function enviarSolicitacao() {
             });
             await asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao();
             Swal.close();
-            $("#workflowActions > button:first-child", window.parent.document).click();
+            parent.$("#send-process-button").click();
         } else {
-            $("#workflowActions > button:first-child", window.parent.document).click();
+            parent.$("#send-process-button").click();
         }
     }
     else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {
@@ -366,11 +366,11 @@ async function enviarSolicitacao() {
             var pdf = await convertDocxToPdf(filePreenchido, geraNomeDoArquivo() + ".pdf");
             await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo() + ".pdf", pastaDeAnexos);
         }
-        $("#workflowActions > button:first-child", window.parent.document).click();
+        parent.$("#send-process-button").click();
 
     }
     else {
-        $("#workflowActions > button:first-child", window.parent.document).click();
+        parent.$("#send-process-button").click();
     }
 }
 function validaCampos() {

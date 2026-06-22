@@ -606,6 +606,7 @@ function geraXML_TITMCNT(parametros) {
         xml += "    <CODCCUSTO>" + parametros.CODCCUSTO + "</CODCCUSTO>";
         xml += "    <CODCFO>" + parametros.CODCFO + "</CODCFO>";
         xml += "    <QUANTIDADE>1</QUANTIDADE>";
+        xml += "    <DESCRICAO> - </DESCRICAO>";
         xml += "    <CODCPG>" + parametros.CODCPG + "</CODCPG>";
         xml += "    <CODMOEPRECOFATURAMENTO>R$</CODMOEPRECOFATURAMENTO>";
         xml += "    <CODSTACNT>" + parametros.CODSTACNT + "</CODSTACNT>";
