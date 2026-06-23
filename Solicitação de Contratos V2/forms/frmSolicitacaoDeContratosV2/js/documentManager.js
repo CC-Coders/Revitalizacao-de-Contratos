@@ -363,16 +363,16 @@ async function buscaDadosDoFormulario(tipoContrato) {
             ANO_MODELO:     e.ANO_MODELO,
             POTENCIAHP:     e.POTENCIAHP,
             CAPACIDADE:     e.CAPACIDADE,
+            CHASSI:         e.CHASSI,
         }));
 
         var retorno = {
-            CODIGO_DO_CONTRATO:    $("#novoContratoCodigo").val() || "___________",
+            CODIGO_DO_CONTRATO:    $("#novoContratoCodigo").val() || "_",
             FORNECEDOR:            $("#hiddenFORNECEDOR").val(),
             FORNECEDOR_CNPJ:       $("#hiddenCGCCFO").val(),
             FORNECEDOR_ENDERECO:   `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$("#cidadeFornecedor").val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
             FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
             FORNECEDOR_CPF_REPRESENTANTE:  $("#cpfAdministrador").val(),
-            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
             ADMINISTRADOR:         $("#administradorTransporte").val(),
             CONTRATANTE_PRINCIPAL: $("#contratantePrincipal").val(),
 

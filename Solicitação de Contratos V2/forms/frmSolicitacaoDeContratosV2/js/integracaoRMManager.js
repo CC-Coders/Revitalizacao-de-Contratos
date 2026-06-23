@@ -55,7 +55,7 @@ function preencheCamposAutomaticamente() {
             }
         });
 
-         if (TIPO_CONTRATO == "Locação de Imóvel" ) {
+        if (TIPO_CONTRATO == "Locação de Imóvel" ) {
             var periodo = $("#periodoLocacao").val();
             var [periodoInit, periodoEnd] = periodo.split(" até ");
             $("#novoContratoDataInicio").val(periodoInit);
@@ -64,6 +64,12 @@ function preencheCamposAutomaticamente() {
         else  if (TIPO_CONTRATO == "Locação de Equipamento" || TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
             var periodoInit = $("#dataInicioLocacao").val();
             var periodoEnd = $("#dataFimLocacao").val();
+            $("#novoContratoDataInicio").val(periodoInit);
+            $("#novoContratoDataFim").val(periodoEnd);
+        }
+        else  if (TIPO_CONTRATO == "Transporte de Materiais") {
+            var periodoInit = $("#dataInicioTransporte").val();
+            var periodoEnd = $("#dataFimTransporte").val();
             $("#novoContratoDataInicio").val(periodoInit);
             $("#novoContratoDataFim").val(periodoEnd);
         }
