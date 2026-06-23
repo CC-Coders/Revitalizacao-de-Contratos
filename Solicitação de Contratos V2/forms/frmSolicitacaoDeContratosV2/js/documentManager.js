@@ -67,7 +67,7 @@ const codigosModelos = {
         "Locação de Imóvel": 32778,
         "Locação de Equipamento": 32779,
         "Locação de Equipamento - Com Mão de Obra": 32791,
-        "Transporte de Materiais": 35098,
+        "Transporte de Materiais": 35284,
 
         // Aditivos
         "Locação de Equipamento - Alteração de Valor": 32828,
@@ -276,6 +276,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             FABRICANTE: e.FABRICANTE,
             MODELO: e.MODELO,
             PLACA: e.PLACA,
+            CHASSI: e.CHASSI,
             POTENCIAHP: e.POTENCIAHP,
             UN_DESMOBILIZACAO: e.UN_DESMOBILIZACAO,
             VALOR_DESMOBILIZACAO: floatToMoney(e.VALOR_DESMOBILIZACAO),
@@ -371,7 +372,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             FORNECEDOR_ENDERECO:   `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$("#cidadeFornecedor").val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
             FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
             FORNECEDOR_CPF_REPRESENTANTE:  $("#cpfAdministrador").val(),
-
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
             ADMINISTRADOR:         $("#administradorTransporte").val(),
             CONTRATANTE_PRINCIPAL: $("#contratantePrincipal").val(),
 
@@ -391,11 +392,13 @@ async function buscaDadosDoFormulario(tipoContrato) {
 
             OBRA:                  $("#NOMECCUSTO").val(),
             CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`,
-
+            LOCALIZACAO: $("#localizacaoServico").val(),
             DIA:                   dia,
             MES:                   meses[parseInt(mes)],
             ANO:                   ano,
-
+            BANCO:                 $("#banco").val() || "",
+            BANCO_AGENCIA:         $("#agencia").val() || "",
+            BANCO_CONTA_CORRENTE:  $("#contaCorrente").val() || "",
             NOME_COLIGADA:         dadosColigada.nome,
             ENDERECO_COLIGADA:     dadosColigada.endereco,
             CNPJ_COLIGADA:         dadosColigada.cnpj,
