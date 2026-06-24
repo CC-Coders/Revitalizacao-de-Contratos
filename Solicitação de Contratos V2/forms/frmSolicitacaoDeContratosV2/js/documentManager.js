@@ -1485,8 +1485,8 @@ async function carregaDocumentoParaOCKEditor(documentId) {
         })
         .then((response) => {
             console.log("Conversion result", response.data);
-            header = response.data.headers.default.html;
-            footer = response.data.footers.default.html;
+            header = response?.data?.headers?.default?.html;
+            footer = response?.data?.footers?.default?.html;
             ckeditor.setData(response.data.html);
 
             Swal.close();
