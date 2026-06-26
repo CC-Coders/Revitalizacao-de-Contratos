@@ -33,6 +33,7 @@
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
     <formId>0</formId>
+    <formIdV2>0</formIdV2>
     <editionMode>true</editionMode>
     <updateAttachmentsVersion>false</updateAttachmentsVersion>
     <controlsAttachmentsSecurity>false</controlsAttachmentsSecurity>

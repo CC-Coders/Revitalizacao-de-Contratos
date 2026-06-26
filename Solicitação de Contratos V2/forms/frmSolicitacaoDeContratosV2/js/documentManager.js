@@ -1135,7 +1135,6 @@ async function loadCkEditor() {
     const CLOUD_SERVICES_TOKEN_URL =
         'https://riccys8ecxzq.cke-cs.com/token/dev/21a778b99face29865582bf7e8d4515fcd885eaacbc2e6d1e0b23a69215a?limit=10';
 
-
     const { ClassicEditor,
         Alignment,
         ListEditing,
