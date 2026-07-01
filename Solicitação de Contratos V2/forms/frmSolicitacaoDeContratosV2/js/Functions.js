@@ -71,6 +71,7 @@ function buscaBancos() {
         },
     });
 }
+
 function preencherObrasDoUsuario() {
     const userCode = $("#solicitante").val();
     if (!userCode) {
@@ -84,7 +85,17 @@ function preencherObrasDoUsuario() {
     }
 
     try {
-        const permissoes = buscaObrasPorPermissaoDoUsuario(userCode, true);
+    	//grupos que possuem permissão geral
+        var dsGrupos = DatasetFactory.getDataset("colleagueGroup", null, [
+            DatasetFactory.createConstraint("colleagueId", userCode, userCode, ConstraintType.MUST),
+            DatasetFactory.createConstraint("groupId", "Controladoria",    "Controladoria",    ConstraintType.SHOULD),
+            DatasetFactory.createConstraint("groupId", "Administrador TI", "Administrador TI", ConstraintType.SHOULD),
+            DatasetFactory.createConstraint("groupId", "Comprador",        "Comprador",        ConstraintType.SHOULD),
+            DatasetFactory.createConstraint("groupId", "Juridico",         "Juridico",         ConstraintType.SHOULD),
+        ], null);
+        
+        var permissaoGeral = dsGrupos.values.length > 0;
+        const permissoes = buscaObrasPorPermissaoDoUsuario(userCode, permissaoGeral);
         if (permissoes.length == 0) {
             FLUIGC.toast({
                 title: "Aviso:",
@@ -98,13 +109,11 @@ function preencherObrasDoUsuario() {
         permissoes.forEach((ccusto) => {
             if (!selectObra[0].selectize.optgroups[ccusto.NOMEFANTASIA]) {
                 $("#obra")[0].selectize.addOptionGroup(ccusto.CODCOLIGADA, { value: ccusto.CODCOLIGADA, label: `${ccusto.CODCOLIGADA} - ${ccusto.NOMEFANTASIA}` });
-            }
-
+            }           
             const optionValue = `${ccusto.CODCOLIGADA} - ${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
             const optionLabel = `${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
             selectObra[0].selectize.addOption({ value: optionValue, label: optionLabel, optgroup: ccusto.CODCOLIGADA });
         });
-
 
     } catch (error) {
         console.error("Erro ao preencher obras do usuário:", error);
@@ -115,6 +124,7 @@ function preencherObrasDoUsuario() {
         });
     }
 }
+
 function buscaFornecedores_preencheOptionsDoCampoLocador() {
     var selectizeLocador = $("#locador")[0].selectize;
 
