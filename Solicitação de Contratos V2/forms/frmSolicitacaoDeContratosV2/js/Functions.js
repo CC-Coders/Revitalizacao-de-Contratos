@@ -967,6 +967,16 @@ function bloqueiaCamposAprovacao() {
     $("#rgFornecedor").attr("readonly", "readonly");
     $("#nacionalidadeFornecedor").attr("readonly", "readonly");
     $("#estadoCivilFornecedor").attr("readonly", "readonly");
+    
+    $("#administradorTransporte").attr("readonly", "readonly")
+    $("#dataInicioTransporte").attr("readonly", "readonly");
+    $("#dataFimTransporte").attr("readonly", "readonly");
+    $("#descontoPorDiaChuvaTransporte").attr("readonly", "readonly");
+    $("#descontoPorDiaParadoTransporte").attr("readonly", "readonly");
+    $("#formatoCobrancaTransporte").attr("readonly", "readonly");
+    $("#valorMensalTransporte").attr("readonly", "readonly");
+    $("#valorM3Transporte").attr("readonly", "readonly");
+    $("#kmTransporte").attr("readonly", "readonly");
 }
 function popularDestinoRetorno() {
     const ATIVIDADE_ATUAL = $("#atividade").val();
