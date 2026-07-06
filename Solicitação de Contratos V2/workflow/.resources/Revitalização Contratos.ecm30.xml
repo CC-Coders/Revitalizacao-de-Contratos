@@ -624,8 +624,8 @@
         <version>1</version>
         <sequence>58</sequence>
       </processStatePK>
-      <stateName>Intermediário</stateName>
-      <stateDescription>Intermediário</stateDescription>
+      <stateName>Aguardando Assinatura</stateName>
+      <stateDescription>Aguardando Assinatura</stateDescription>
       <instruction>Evento intermediário do processo</instruction>
       <deadlineTime>0</deadlineTime>
       <joint>false</joint>
@@ -671,8 +671,8 @@
         <version>1</version>
         <sequence>104</sequence>
       </processStatePK>
-      <stateName>Intermediário</stateName>
-      <stateDescription>Intermediário</stateDescription>
+      <stateName>Análise de Equipamentos</stateName>
+      <stateDescription>Análise de Equipamentos</stateDescription>
       <instruction>Evento intermediário do processo</instruction>
       <deadlineTime>0</deadlineTime>
       <joint>false</joint>
