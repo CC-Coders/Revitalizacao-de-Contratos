@@ -111,12 +111,20 @@ function onChangeTipoContrato(that) {
             $("#percentualRetencao").closest("div").hide();
         } 
         else if(tipoContrato === "Locação de Equipamento"  || tipoContrato === "Locação de Equipamento - Com Mão de Obra"){
+            if ( tipoContrato === "Locação de Equipamento - Com Mão de Obra") {
+                $("#divRetencao").show();
+                $("#temRetencao").val("Sim").change();
+                $("#percentualRetencao").val("5%");
+            }else{
+                $("#divRetencao").hide();
+                $("#temRetencao").val("Não").change();
+                $("#percentualRetencao").val("0%");
+            }
+
             $("#dadosContrato").show();
             $(".campoLocacaoEquipamento").show();
             if ($(that).val()) {
                 anexosPorTipoDeContrato($(that).val());
-
-                $("#temRetencao").val("Sim").change();
             }
         }
         else {
