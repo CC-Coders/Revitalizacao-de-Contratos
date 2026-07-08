@@ -708,13 +708,24 @@ function bindings() {
         if (!ini || !fim) { $("#mesesContratoTransporte").val(""); return; }
 
         function parseDate(s) {
-            var p = s.split("/");
-            return new Date(p[2], p[1] - 1, p[0]);
-        }
+        	            var digits = s.replace(/\D/g, ""); 
+        	            if (digits.length !== 8) { return null; }
+        	            var dia = parseInt(digits.substring(0, 2), 10);
+        	            var mes = parseInt(digits.substring(2, 4), 10);
+        	            var ano = parseInt(digits.substring(4, 8), 10);
+        	            var d = new Date(ano, mes - 1, dia);
+        	            if (d.getFullYear() !== ano || d.getMonth() !== mes - 1 || d.getDate() !== dia) { return null; }
+        	            return d;
+       }
 
         var d1 = parseDate(ini);
         var d2 = parseDate(fim);
 
+        if (!d1 || !d2) {
+        	            FLUIGC.toast({ title: "", message: "Data inválida! Use o formato dd/mm/aaaa.", type: "warning", timeout: 4000 });
+        	            $(this).val(""); $("#mesesContratoTransporte").val(""); return;
+        }
+        
         if (d2 < d1) {
             FLUIGC.toast({ title: "", message: "A data final não pode ser menor que a data inicial!", type: "warning", timeout: 4000 });
             $(this).val(""); $("#mesesContratoTransporte").val(""); return;
@@ -723,6 +734,8 @@ function bindings() {
         var meses = (d2.getFullYear() - d1.getFullYear()) * 12 + (d2.getMonth() - d1.getMonth());
         if (d2.getDate() < d1.getDate()) { meses--; }
         $("#mesesContratoTransporte").val(meses + (meses === 1 ? " mês" : " meses"));
+        $("#dataInicioTransporte").val(("0" + d1.getDate()).slice(-2) + "/" + ("0" + (d1.getMonth() + 1)).slice(-2) + "/" + d1.getFullYear());
+        $("#dataFimTransporte").val(("0" + d2.getDate()).slice(-2) + "/" + ("0" + (d2.getMonth() + 1)).slice(-2) + "/" + d2.getFullYear());
     });
 }
 
