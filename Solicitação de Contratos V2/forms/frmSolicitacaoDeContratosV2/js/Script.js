@@ -326,8 +326,8 @@ function bindings() {
         atualizaValorTotalLocacao_prazo();
 
         var tipoContrato = $("#tipoContrato").val();
-        var dataInicioLocacao = $("#dataInicioLocacao").val();
-        var dataFimLocacao = $("#dataFimLocacao").val();
+        var dataInicioLocacao = $("#dataInicioLocacao").val().split("/").reverse().join("-");
+        var dataFimLocacao = $("#dataFimLocacao").val().split("/").reverse().join("-");
         var dataInicioContrato = $("#contratoSelecDataInicio").val();
 
         /*
