@@ -647,6 +647,33 @@ function validaCampos() {
             valida = false;
             mensagens.push("Anexo do contrato fora do modelo");
         }
+
+         if ($("#tipoContratoBase").val() == "Transporte de Materiais") {
+            var formatoCobranca = $("#formatoCobrancaTransporte").val();
+            var camposTransporte = [
+                { id: "administradorTransporte",         label: "Administrador" },
+                { id: "dataInicioTransporte",            label: "Data inicial (transporte)" },
+                { id: "dataFimTransporte",               label: "Data final (transporte)" },
+                { id: "descontoPorDiaChuvaTransporte",   label: "Desconto por dia de chuva" },
+                { id: "descontoPorDiaParadoTransporte",  label: "Desconto por dia parado" },
+                { id: "formatoCobrancaTransporte",       label: "Formato de cobrança" }
+            ];
+
+            if (formatoCobranca == "Valor Fixo") {
+                camposTransporte.push({ id: "valorMensalTransporte", label: "Valor mensal (transporte)" });
+            } else if (formatoCobranca == "Valor por Parâmetro") {
+                camposTransporte.push({ id: "valorM3Transporte", label: "Valor m³" });
+                camposTransporte.push({ id: "kmTransporte", label: "KM" });
+            }
+
+            camposTransporte.forEach(function (campo) {               
+                if (!$("#" + campo.id).val()) {
+                    $("#" + campo.id).addClass("has-error");
+                    mensagens.push(campo.label);
+                    valida = false;
+                }
+            });
+        }
     }
 
     if (isRetornar) {

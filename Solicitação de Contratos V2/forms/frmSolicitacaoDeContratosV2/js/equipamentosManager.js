@@ -1793,20 +1793,30 @@ function geraCabecalhoEquipamentos(){
 
     var origemContrato = $("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text();
     var tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val():$("#tipoContrato").text();
-
+    var valMensal = $("#valorMensalTransporte").val();
+    var valorTotalTransporte = tipoContrato != "Transporte de Materiais" ? 0
+        : valMensal ? (parseFloat(valMensal.replace(/[^\d,]/g, '').replace(',', '.')) || 0) * (parseFloat($("#mesesContratoTransporte").val()) || 0)
+        : (parseFloat($("#valorM3Transporte").val().replace(/[^\d,]/g, '').replace(',', '.')) || 0);
+        
     if ($("#formMode").val() == "VIEW") {
         $("#obraHeaderEquipamentos").text($("#NOMECCUSTO").val());
         $("#tipoContratoHeaderEquipamentos").text($("#tipoContrato").text() || $("#tipoContrato").val());
-        $("#periodoHeaderEquipamentos").text($("#prazoLocacao").text());
-        $("#valorMensalHeaderEquipamentos").text($("#valorMensalLocacao").text());
-        $("#valorTotalHeaderEquipamentos").text($("#valorTotalLocacao").text());
+//        $("#periodoHeaderEquipamentos").text($("#prazoLocacao").text());
+//        $("#valorMensalHeaderEquipamentos").text($("#valorMensalLocacao").text());
+//        $("#valorTotalHeaderEquipamentos").text($("#valorTotalLocacao").text());
+        $("#periodoHeaderEquipamentos").text(tipoContrato == "Transporte de Materiais" ? $("#mesesContratoTransporte").val() : $("#prazoLocacao").text());
+        $("#valorMensalHeaderEquipamentos").text(tipoContrato == "Transporte de Materiais" ? $("#valorMensalTransporte").val() : $("#valorMensalLocacao").text());
+        $("#valorTotalHeaderEquipamentos").text(tipoContrato == "Transporte de Materiais" ? valorTotalTransporte.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : $("#valorTotalLocacao").text());
 
     } else {
         $("#obraHeaderEquipamentos").val($("#NOMECCUSTO").val());
         $("#tipoContratoHeaderEquipamentos").val($("#tipoContrato").val());
-        $("#periodoHeaderEquipamentos").val($("#prazoLocacao").val());
-        $("#valorMensalHeaderEquipamentos").val($("#valorMensalLocacao").val());
-        $("#valorTotalHeaderEquipamentos").val($("#valorTotalLocacao").val());
+//        $("#periodoHeaderEquipamentos").val($("#prazoLocacao").val());
+//        $("#valorMensalHeaderEquipamentos").val($("#valorMensalLocacao").val());
+//        $("#valorTotalHeaderEquipamentos").val($("#valorTotalLocacao").val());
+        $("#periodoHeaderEquipamentos").val(tipoContrato == "Transporte de Materiais" ? $("#mesesContratoTransporte").val() : $("#prazoLocacao").val());
+        $("#valorMensalHeaderEquipamentos").val(tipoContrato == "Transporte de Materiais" ? $("#valorMensalTransporte").val() : $("#valorMensalLocacao").val());
+        $("#valorTotalHeaderEquipamentos").val(tipoContrato == "Transporte de Materiais" ? valorTotalTransporte.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : $("#valorTotalLocacao").val());
     }
 
     if (origemContrato == "Aditivos") {
