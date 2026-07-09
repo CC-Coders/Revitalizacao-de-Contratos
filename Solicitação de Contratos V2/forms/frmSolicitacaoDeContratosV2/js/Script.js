@@ -60,6 +60,17 @@ function bindings() {
     // Amarra eventos e elementos do HTML, mantendo todas definições de evento agrupadas
     $("#btnGerarArquivo").on("click", asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao);
     $("#btnEditarArquivo").on("click", editarArquivoNoCKEditor);
+
+    $("#divInputFileSubstituirWord").html(`<input type="file" id="inputFileSubstituirWord" name="inputFileSubstituirWord"
+                            accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                            style="display: none;">`);
+    $("#btnSubstituirWord").on("click", function () {
+        $("#inputFileSubstituirWord").click();
+    });
+    $("#inputFileSubstituirWord").on("change", function () {
+        substituiModeloPorUploadDeDocx(this);
+    });
+    $("#btnBaixarWord").on("click", baixaDocxDoContrato);
     $("#btnSalvarArquivo").on("click", salvaModeloAlterado);
     $("#btnVisualizarArquivo").on("click", visualizaDocumento);
     $("#btnEnviarSolicitacao").on("click", enviarSolicitacao);
@@ -842,7 +853,7 @@ function loadTelaJuridico() {
     $("#paginationIntegracaoRM").remove();
 
     if ($("#modeloContrato").val() == "Contrato fora do modelo") {
-        $("#btnEditarArquivo").hide();
+        $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").hide();
         $("#btnVisualizarPreContrato").hide();
     }
 
@@ -913,7 +924,7 @@ async function loadTelaControladoria() {
     $("#divBotoesEdicaoContrato").show();
     
     if ($("#modeloContrato").val() == "Contrato fora do modelo") {
-        $("#btnEditarArquivo").hide();
+        $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").hide();
         $("#btnVisualizarPreContrato").hide();
     }
     $("#btnVisualizarPreContrato").hide();
@@ -933,7 +944,7 @@ async function loadTelaControladoria() {
    
 
     if ($("#modeloContrato").val() == "Contrato fora do modelo") {
-        $("#btnEditarArquivo").hide();
+        $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").hide();
         $("#btnVisualizarPreContrato").hide();
     }
 
@@ -995,7 +1006,7 @@ function loadTelaAprovacao() {
     buscaBancos();
 
     $("#divBotoesEdicaoContrato").show();
-    $("#btnEditarArquivo").hide();
+    $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").hide();
     $("#btnVisualizarPreContrato").hide();
 
     asyncMontaHistorico();
@@ -1004,13 +1015,13 @@ function loadTelaAprovacao() {
     geraCabecalhoEquipamentos();
     renderizarAnexosEtapaAprovacao();
     $("#paginationIntegracaoRM").remove();
-    $("#btnEditarArquivo").remove();
+    $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").remove();
     bloqueiaCamposAprovacao();
     $(".endereco-fornecedor").slideDown();
     
 
     if ($("#modeloContrato").val() == "Contrato fora do modelo") {
-        $("#btnEditarArquivo").hide();
+        $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").hide();
         $("#btnVisualizarPreContrato").hide();
     }
 
@@ -1053,7 +1064,7 @@ function loadTelaAssinaturaManual() {
     geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
     $("#paginationIntegracaoRM").remove();
-    $("#btnEditarArquivo").remove();
+    $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").remove();
 
     // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
     $("#tableContratoPrincipalSelecionado").show();
@@ -1063,7 +1074,7 @@ function loadTelaAssinaturaManual() {
     $("#tableContratoPrincipal").hide();
 
     if ($("#modeloContrato").val() == "Contrato fora do modelo") {
-        $("#btnEditarArquivo").hide();
+        $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").hide();
         $("#btnVisualizarPreContrato").hide();
     }
     $(".endereco-fornecedor").slideDown();
@@ -1114,7 +1125,7 @@ function loadTelaAssinaturaEletronica() {
     geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
     $("#paginationIntegracaoRM").remove();
-    $("#btnEditarArquivo").remove();
+    $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").remove();
 
     // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
     $("#tableContratoPrincipalSelecionado").show();
@@ -1124,7 +1135,7 @@ function loadTelaAssinaturaEletronica() {
     $("#tableContratoPrincipal").hide();
 
     if ($("#modeloContrato").val() == "Contrato fora do modelo") {
-        $("#btnEditarArquivo").hide();
+        $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").hide();
         $("#btnVisualizarPreContrato").hide();
     }
     $(".endereco-fornecedor").slideDown();
