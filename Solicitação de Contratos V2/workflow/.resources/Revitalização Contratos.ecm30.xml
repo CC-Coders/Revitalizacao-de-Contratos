@@ -29,7 +29,7 @@
     <processDefinitionVersionPK>
       <companyId>1</companyId>
       <processId>Revitalização Contratos</processId>
-      <version>199</version>
+      <version>200</version>
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
     <formId>0</formId>
@@ -77,8 +77,8 @@
       <notifyAuthorityFollowUp>false</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>306</positionX>
-      <positionY>20</positionY>
+      <positionX>626</positionX>
+      <positionY>140</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -128,8 +128,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>270</positionX>
-      <positionY>268</positionY>
+      <positionX>590</positionX>
+      <positionY>388</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -180,8 +180,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>423</positionX>
-      <positionY>459</positionY>
+      <positionX>743</positionX>
+      <positionY>579</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -232,8 +232,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>566</positionX>
-      <positionY>615</positionY>
+      <positionX>886</positionX>
+      <positionY>735</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -284,8 +284,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>830</positionX>
-      <positionY>615</positionY>
+      <positionX>1150</positionX>
+      <positionY>735</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -336,8 +336,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1210</positionX>
-      <positionY>615</positionY>
+      <positionX>1530</positionX>
+      <positionY>735</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -388,8 +388,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1320</positionX>
-      <positionY>68</positionY>
+      <positionX>1640</positionX>
+      <positionY>188</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -440,8 +440,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1436</positionX>
-      <positionY>877</positionY>
+      <positionX>1756</positionX>
+      <positionY>997</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -492,8 +492,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1586</positionX>
-      <positionY>446</positionY>
+      <positionX>1906</positionX>
+      <positionY>566</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -544,8 +544,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1430</positionX>
-      <positionY>446</positionY>
+      <positionX>1750</positionX>
+      <positionY>566</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -596,8 +596,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1586</positionX>
-      <positionY>70</positionY>
+      <positionX>1906</positionX>
+      <positionY>190</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -647,8 +647,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1471</positionX>
-      <positionY>626</positionY>
+      <positionX>1791</positionX>
+      <positionY>746</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -694,8 +694,8 @@
       <notifyAuthorityFollowUp>true</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1100</positionX>
-      <positionY>626</positionY>
+      <positionX>1420</positionX>
+      <positionY>746</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -727,8 +727,8 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>446</positionX>
-      <positionY>252</positionY>
+      <positionX>766</positionX>
+      <positionY>372</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -752,8 +752,8 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>586</positionX>
-      <positionY>443</positionY>
+      <positionX>906</positionX>
+      <positionY>563</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -777,8 +777,8 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>726</positionX>
-      <positionY>599</positionY>
+      <positionX>1046</positionX>
+      <positionY>719</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -802,8 +802,8 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>1343</positionX>
-      <positionY>599</positionY>
+      <positionX>1663</positionX>
+      <positionY>719</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -827,8 +827,8 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>1459</positionX>
-      <positionY>740</positionY>
+      <positionX>1779</positionX>
+      <positionY>860</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -852,8 +852,8 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>1633</positionX>
-      <positionY>867</positionY>
+      <positionX>1953</positionX>
+      <positionY>987</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -877,8 +877,8 @@
       <subProcessId></subProcessId>
       <formFolder>0</formFolder>
       <automatic>true</automatic>
-      <positionX>980</positionX>
-      <positionY>599</positionY>
+      <positionX>1300</positionX>
+      <positionY>719</positionY>
       <inhibitTransfer>false</inhibitTransfer>
       <stateType>1</stateType>
       <bpmnType>120</bpmnType>
@@ -916,8 +916,8 @@
       <notifyAuthorityFollowUp>false</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>706</positionX>
-      <positionY>470</positionY>
+      <positionX>1026</positionX>
+      <positionY>590</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -963,8 +963,8 @@
       <notifyAuthorityFollowUp>false</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1646</positionX>
-      <positionY>766</positionY>
+      <positionX>1966</positionX>
+      <positionY>886</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -1010,8 +1010,8 @@
       <notifyAuthorityFollowUp>false</notifyAuthorityFollowUp>
       <notifyRequisitionerFollowUp>false</notifyRequisitionerFollowUp>
       <automatic>false</automatic>
-      <positionX>1746</positionX>
-      <positionY>87</positionY>
+      <positionX>2066</positionX>
+      <positionY>207</positionY>
       <forecastedEffortType>0</forecastedEffortType>
       <forecastedEffort>0</forecastedEffort>
       <notifyManagerFollowUp>false</notifyManagerFollowUp>
@@ -1035,7 +1035,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1047,7 +1047,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1061,7 +1061,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1073,7 +1073,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1085,7 +1085,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1099,7 +1099,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1111,7 +1111,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1123,7 +1123,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1135,7 +1135,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1147,7 +1147,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>5</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1159,7 +1159,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1173,7 +1173,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1185,7 +1185,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1197,7 +1197,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1209,7 +1209,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>5</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1221,7 +1221,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1233,7 +1233,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1245,19 +1245,31 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>68</sequence>
       </conditionProcessStatePK>
-      <condition>true</condition>
+      <condition></condition>
+      <destinationSequenceId>62</destinationSequenceId>
+      <conditionType>1</conditionType>
+    </ConditionProcessState>
+    <ConditionProcessState>
+      <conditionProcessStatePK>
+        <companyId>1</companyId>
+        <processId>Revitalização Contratos</processId>
+        <expressionOrder>2</expressionOrder>
+        <version>200</version>
+        <sequence>68</sequence>
+      </conditionProcessStatePK>
+      <condition></condition>
       <destinationSequenceId>32</destinationSequenceId>
-      <conditionType>0</conditionType>
+      <conditionType>1</conditionType>
     </ConditionProcessState>
     <ConditionProcessState>
       <conditionProcessStatePK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>  hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot; &amp;&amp;&#xd;
@@ -1270,7 +1282,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Aditivos&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;</condition>
@@ -1282,7 +1294,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1294,7 +1306,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;origemContrato&quot;) != &quot;Novos&quot; &amp;&amp; (hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot;)</condition>
@@ -1306,7 +1318,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>5</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1320,7 +1332,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>6</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1332,7 +1344,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>7</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1344,7 +1356,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>8</expressionOrder>
-        <version>199</version>
+        <version>200</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -4291,8 +4303,8 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <color>A8D5D5</color>
       <height>171</height>
       <width>1781</width>
-      <positionX>0</positionX>
-      <positionY>400</positionY>
+      <positionX>320</positionX>
+      <positionY>520</positionY>
       <stateName>CONTROLADORIA</stateName>
       <type>2</type>
       <parentSequence>0</parentSequence>
@@ -4304,12 +4316,12 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       </swimLanePK>
     </SwimLane>
     <SwimLane>
-      <color>C0E0E0</color>
-      <height>216</height>
+      <color>F1F8F8</color>
+      <height>184</height>
       <width>1781</width>
-      <positionX>0</positionX>
-      <positionY>185</positionY>
-      <stateName>JURÍDICO</stateName>
+      <positionX>320</positionX>
+      <positionY>122</positionY>
+      <stateName>OBRA</stateName>
       <type>2</type>
       <parentSequence>0</parentSequence>
       <swimLanePK>
@@ -4320,12 +4332,12 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       </swimLanePK>
     </SwimLane>
     <SwimLane>
-      <color>F1F8F8</color>
-      <height>184</height>
+      <color>71B9B9</color>
+      <height>323</height>
       <width>1781</width>
-      <positionX>0</positionX>
-      <positionY>2</positionY>
-      <stateName>OBRA</stateName>
+      <positionX>320</positionX>
+      <positionY>834</positionY>
+      <stateName>Aprovações</stateName>
       <type>2</type>
       <parentSequence>0</parentSequence>
       <swimLanePK>
@@ -4336,12 +4348,12 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       </swimLanePK>
     </SwimLane>
     <SwimLane>
-      <color>71B9B9</color>
-      <height>323</height>
+      <color>8DC7C7</color>
+      <height>145</height>
       <width>1781</width>
-      <positionX>0</positionX>
-      <positionY>714</positionY>
-      <stateName>Aprovações</stateName>
+      <positionX>320</positionX>
+      <positionY>690</positionY>
+      <stateName>APROVAÇÃO OBRA</stateName>
       <type>2</type>
       <parentSequence>0</parentSequence>
       <swimLanePK>
@@ -4352,12 +4364,12 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       </swimLanePK>
     </SwimLane>
     <SwimLane>
-      <color>8DC7C7</color>
-      <height>145</height>
+      <color>C0E0E0</color>
+      <height>216</height>
       <width>1781</width>
       <positionX>0</positionX>
-      <positionY>570</positionY>
-      <stateName>APROVAÇÃO OBRA</stateName>
+      <positionY>0</positionY>
+      <stateName>JURÍDICO</stateName>
       <type>2</type>
       <parentSequence>0</parentSequence>
       <swimLanePK>
@@ -4375,452 +4387,452 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>36</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>539</positionX>
-      <positionY>556</positionY>
+      <positionX>859</positionX>
+      <positionY>676</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>36</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>204</positionX>
-      <positionY>556</positionY>
+      <positionX>524</positionX>
+      <positionY>676</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>36</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
-      <positionX>203</positionX>
-      <positionY>296</positionY>
+      <positionX>523</positionX>
+      <positionY>416</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>39</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>476</positionX>
-      <positionY>37</positionY>
+      <positionX>796</positionX>
+      <positionY>157</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>39</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>408</positionX>
-      <positionY>37</positionY>
+      <positionX>728</positionX>
+      <positionY>157</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>71</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1666</positionX>
-      <positionY>1004</positionY>
+      <positionX>1986</positionX>
+      <positionY>1124</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>71</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>478</positionX>
-      <positionY>1004</positionY>
+      <positionX>798</positionX>
+      <positionY>1124</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>73</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1482</positionX>
-      <positionY>95</positionY>
+      <positionX>1802</positionX>
+      <positionY>215</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>78</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>754</positionX>
-      <positionY>908</positionY>
+      <positionX>1074</positionX>
+      <positionY>1028</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>78</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>196</positionX>
-      <positionY>908</positionY>
+      <positionX>516</positionX>
+      <positionY>1028</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>78</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
-      <positionX>197</positionX>
-      <positionY>36</positionY>
+      <positionX>517</positionX>
+      <positionY>156</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>79</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>754</positionX>
-      <positionY>908</positionY>
+      <positionX>1074</positionX>
+      <positionY>1028</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>79</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>478</positionX>
-      <positionY>908</positionY>
+      <positionX>798</positionX>
+      <positionY>1028</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>80</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>810</positionX>
-      <positionY>575</positionY>
+      <positionX>1130</positionX>
+      <positionY>695</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>80</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>1315</positionX>
-      <positionY>575</positionY>
+      <positionX>1635</positionX>
+      <positionY>695</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>82</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1345</positionX>
-      <positionY>908</positionY>
+      <positionX>1665</positionX>
+      <positionY>1028</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>82</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>478</positionX>
-      <positionY>908</positionY>
+      <positionX>798</positionX>
+      <positionY>1028</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>85</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1344</positionX>
-      <positionY>908</positionY>
+      <positionX>1664</positionX>
+      <positionY>1028</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>85</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>618</positionX>
-      <positionY>908</positionY>
+      <positionX>938</positionX>
+      <positionY>1028</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>86</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1344</positionX>
-      <positionY>908</positionY>
+      <positionX>1664</positionX>
+      <positionY>1028</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>86</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>198</positionX>
-      <positionY>908</positionY>
+      <positionX>518</positionX>
+      <positionY>1028</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>86</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
-      <positionX>198</positionX>
-      <positionY>36</positionY>
+      <positionX>518</positionX>
+      <positionY>156</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>87</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>754</positionX>
-      <positionY>902</positionY>
+      <positionX>1074</positionX>
+      <positionY>1022</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>87</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>199</positionX>
-      <positionY>901</positionY>
+      <positionX>519</positionX>
+      <positionY>1021</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>87</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
-      <positionX>198</positionX>
-      <positionY>296</positionY>
+      <positionX>518</positionX>
+      <positionY>416</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>91</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>536</positionX>
-      <positionY>556</positionY>
+      <positionX>856</positionX>
+      <positionY>676</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>91</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>197</positionX>
-      <positionY>556</positionY>
+      <positionX>517</positionX>
+      <positionY>676</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>91</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
-      <positionX>197</positionX>
-      <positionY>36</positionY>
+      <positionX>517</positionX>
+      <positionY>156</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>92</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1346</positionX>
-      <positionY>904</positionY>
+      <positionX>1666</positionX>
+      <positionY>1024</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>92</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>198</positionX>
-      <positionY>904</positionY>
+      <positionX>518</positionX>
+      <positionY>1024</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>92</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
-      <positionX>198</positionX>
-      <positionY>296</positionY>
+      <positionX>518</positionX>
+      <positionY>416</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>93</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1010</positionX>
-      <positionY>909</positionY>
+      <positionX>1330</positionX>
+      <positionY>1029</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>93</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>478</positionX>
-      <positionY>909</positionY>
+      <positionX>798</positionX>
+      <positionY>1029</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>94</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1010</positionX>
-      <positionY>909</positionY>
+      <positionX>1330</positionX>
+      <positionY>1029</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>94</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>197</positionX>
-      <positionY>909</positionY>
+      <positionX>517</positionX>
+      <positionY>1029</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>94</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
-      <positionX>197</positionX>
-      <positionY>296</positionY>
+      <positionX>517</positionX>
+      <positionY>416</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>95</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1010</positionX>
-      <positionY>906</positionY>
+      <positionX>1330</positionX>
+      <positionY>1026</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>95</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>197</positionX>
-      <positionY>906</positionY>
+      <positionX>517</positionX>
+      <positionY>1026</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>95</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
-      <positionX>197</positionX>
-      <positionY>36</positionY>
+      <positionX>517</positionX>
+      <positionY>156</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>107</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
-      <positionX>1068</positionX>
-      <positionY>705</positionY>
+      <positionX>1388</positionX>
+      <positionY>825</positionY>
     </ProcessLinkBend>
     <ProcessLinkBend>
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <linkSequence>107</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
-      <positionX>1304</positionX>
-      <positionY>705</positionY>
+      <positionX>1624</positionX>
+      <positionY>825</positionY>
     </ProcessLinkBend>
   </list>
   <list>
@@ -4828,7 +4840,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <stateSequence>58</stateSequence>
         <triggerSequence>0</triggerSequence>
       </processStateTriggerPK>
@@ -4842,7 +4854,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>199</version>
+        <version>200</version>
         <stateSequence>104</stateSequence>
         <triggerSequence>1</triggerSequence>
       </processStateTriggerPK>
@@ -5174,6 +5186,24 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <field>statusAssinatura</field>
       <value>Assinado</value>
       <operator>2</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>68</sequence>
+      <expressionOrder>1</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Aprovar</value>
+      <operator>1</operator>
+      <valueType>1</valueType>
+    </ConditionProcessAutomaticRules>
+    <ConditionProcessAutomaticRules>
+      <sequence>68</sequence>
+      <expressionOrder>2</expressionOrder>
+      <ruleOrder>1</ruleOrder>
+      <field>decisao</field>
+      <value>Retornar</value>
+      <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
     <ConditionProcessAutomaticRules>

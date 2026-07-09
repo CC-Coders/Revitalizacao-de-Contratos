@@ -454,6 +454,7 @@ async function onClickCheckEquipamento(that) {
     }
 }
 async function modalAlterarEquipamento(data) {
+     var isTransporteMateriais = $("#tipoContratoBase").val() == "Transporte de Materiais"
     var html = 
     `<div style="min-height:200px">
         <div class="row">
@@ -463,7 +464,7 @@ async function modalAlterarEquipamento(data) {
                     <option></option>
                     <option>CNPJ</option>
                     <option>Valor de Locação</option>
-                    <option>Valor de Mão de Obra</option>
+                    ${isTransporteMateriais ? "" : "<option>Valor de Mão de Obra</option>"}
                 </select>
             </div>
             <div class="col-md-4">
