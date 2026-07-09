@@ -43,7 +43,14 @@ function preencheCamposAutomaticamente() {
         if (TIPO_CONTRATO == "Locação de Imóvel" || TIPO_CONTRATO == "Locação de Equipamento" || TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
             $("#novoContratoTipoContrato").val(regraTipoDeContrato());
         }
-        
+        else if (TIPO_CONTRATO == "Transporte de Materiais") {
+        	            $("#novoContratoTipoContrato option").each(function () {
+        	                if ($(this).text().trim().indexOf("Transporte de Material") === 0) {
+        	                    $("#novoContratoTipoContrato").val($(this).val());
+        	                }
+        	            });
+        	            $("#novoContratoTipoContrato").attr("readonly", "readonly");
+        	        }
         var CCUSTO = $("#CODCCUSTO").val();
         $("#novoContratoCCUSTO").val(CCUSTO);
 
