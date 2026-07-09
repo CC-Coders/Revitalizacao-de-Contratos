@@ -988,6 +988,92 @@ async function salvaModeloAlterado() {
         return retorno;
     }
 }
+// Substitui o modelo (.docx) por um arquivo Word enviado pelo usuário e atualiza o docx e o PDF no GED
+async function substituiModeloPorUploadDeDocx(inputFile) {
+    if (!inputFile || !inputFile.files || inputFile.files.length === 0) {
+        return;
+    }
+
+    var arquivoEnviado = inputFile.files[0];
+
+    // Valida a extensão do arquivo
+    if (!arquivoEnviado.name.toLowerCase().endsWith(".docx")) {
+        showMessage("Arquivo inválido.", "Selecione um arquivo do Word (.docx).", "danger");
+        inputFile.value = "";
+        return;
+    }
+
+    try {
+        Swal.fire({
+            icon: "info",
+            title: "Atualizando Contrato, por favor aguarde...",
+            showConfirmButton: false,
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        });
+
+        // Renomeia o arquivo enviado seguindo o padrão do fluxo
+        var file = new File([arquivoEnviado], geraNomeDoArquivo() + ".docx", {
+            type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        });
+
+        // Atualiza o docx (modelo) no GED
+        await promiseAtualizaDocumentoNoGED(file, $("#contratoDocumentId").val(), geraNomeDoArquivo() + ".docx", pastaDeAnexos);
+
+        // Regenera o PDF a partir do novo docx e atualiza no GED
+        var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
+        var pdf = await convertDocxToPdf(filePreenchido, geraNomeDoArquivo() + ".pdf");
+        await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo() + ".pdf", pastaDeAnexos);
+
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            toast: true,
+            title: "Contrato atualizado!",
+            timer: 1500,
+            preConfirm: false,
+        });
+    } catch (error) {
+        console.error(error);
+        showMessage("Erro ao substituir o arquivo do contrato.", "", "danger");
+    } finally {
+        inputFile.value = "";
+    }
+}
+// Baixa o docx (modelo) atualizado do contrato armazenado no GED
+async function baixaDocxDoContrato() {
+    var documentId = $("#contratoDocumentId").val();
+    if (!documentId) {
+        showMessage("Nenhum documento Word disponível para download.", "", "warning");
+        return;
+    }
+
+    try {
+        Swal.fire({
+            icon: "info",
+            title: "Preparando download, por favor aguarde...",
+            showConfirmButton: false,
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        });
+
+        var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
+        var response = await fetch(url);
+        var blob = await response.blob();
+        saveAs(blob, geraNomeDoArquivo() + ".docx");
+
+        Swal.close();
+    } catch (error) {
+        console.error(error);
+        showMessage("Erro ao baixar o arquivo Word.", "", "danger");
+    }
+}
 async function geraPreContrato() {
     Swal.fire({
         icon: "info",
