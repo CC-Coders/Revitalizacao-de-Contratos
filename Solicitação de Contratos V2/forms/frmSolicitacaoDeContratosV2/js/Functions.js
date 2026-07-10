@@ -1083,11 +1083,15 @@ async function renderizarAnexosEtapaAprovacao() {
         const anexos = JSON.parse(hiddenValue);
         const lista = document.getElementById("listaAnexos");
         lista.innerHTML = "";
-
-        for (const [tipo, docId] of Object.entries(anexos)) {
-            if (!docId) continue;
-            const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
-            lista.innerHTML += `<li><span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">Visualizar</a></span></li>`;
+          for (const [tipo, valor] of Object.entries(anexos)) { //percorre anexos e permite visualizar como múltiplos links
+            const ids = docIdsDoTipo(valor);
+            if (ids.length === 0) continue;
+            var links = [];
+            for (const docId of ids) {
+                const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
+                links.push(`<a href="${link}" target="_blank">Visualizar</a>`);
+            }
+            lista.innerHTML += `<li><span>✅ <b>${tipo}:</b> ${links.join(" | ")}</span></li>`;
         }
     } catch (e) {
         console.error("Erro ao carregar anexos:", e);
@@ -1126,6 +1130,8 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
     if (!file || !tipo) {
         return;
     }
+    if (window.uploadAnexoEmAndamento) { return; }
+    window.uploadAnexoEmAndamento = true;
 
     try {
         const listaCarregar = $("#listaAnexos");
@@ -1134,8 +1140,13 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
         insereLabelCarregando(tipo, itemId, listaCarregar);
 
         const docId = await criaDocFluigRetornaDocumentId(file, pastaDeAnexos);
-
-        documentosAnexados[tipo] = docId;
+        if (["CNH", "RG", "CPF"].includes(tipo)) {
+            documentosAnexados[tipo] = docId; // Identidade continua só um anexo
+        } else {
+            var docsDoTipo = docIdsDoTipo(documentosAnexados[tipo]); 
+            docsDoTipo.push(docId);
+            documentosAnexados[tipo] = docsDoTipo;
+        }
         // Primeiro deixa a função ajustar as regras entre CNH / RG / CPF
         await insereDocumentoCriado(tipo, documentosAnexados, file.name, docId);
 
@@ -1147,7 +1158,8 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
         console.error("Erro ao anexar:", e);
         alert("Erro ao anexar documento.");
     }
-
+    window.uploadAnexoEmAndamento = false
+    
     function insereLabelCarregando(tipo, itemId, listaCarregar) {
         if (["CNH", "RG", "CPF"].includes(tipo)) {
             let item = $("#" + itemId);
@@ -1164,7 +1176,9 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
             // Antes usava if (!item), mas em jQuery isso nunca funciona corretamente,
             // pois sempre retorna um objeto.
             // Agora usa item.length === 0 para verificar se o elemento realmente existe.
-            if (item.length > 0) {
+          if (item.length > 0 && item.find("a").length > 0) { //add carregando para novo anexo ao invés de substituir anterior (múltiplos anexos)
+                item.append(`<span class="anexoCarregando"> ⏳ carregando...</span>`);
+           } else if (item.length > 0) {
                 $(item).html(`<span>⏳ <b>${tipo}:</b> carregando...</span>`);
             }
         }
@@ -1216,7 +1230,17 @@ async function insereDocumentoCriado(tipo, documentosAnexados, name, docId) {
             $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
         }
     } else {
-        $(`#item-${tipo.split(" ").join("-").split("(")[0]}`).html(`<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${name}</a></span>`);
+        var item = $(`#item-${tipo.split(" ").join("-").split("(")[0]}`); //add novo anexo como link (múltiplos anexos)
+        item.find(".anexoCarregando").remove();
+         var htmlLink = `<span class="anexoLink" data-tipo="${tipo}" data-docid="${docId}">
+            <a href="${link}" target="_blank">${name}</a>
+            <a href="#" class="btnRemoveAnexo" title="Remover anexo">🗑</a>
+        </span>`;
+        if (item.find("a").length > 0) {
+            item.find("span").first().append(", " + htmlLink)
+        } else {
+            item.html(`<span>✅ <b>${tipo}:</b> ${htmlLink}</span>`)
+        }
     }
 }
 function handleFileUpload(inputId, descricaoArquivo) {
@@ -1264,6 +1288,12 @@ function anexarDocumentoAoProcesso(docId) {
 
 
 // Utils
+
+function docIdsDoTipo(valor) { //anexo retorna uma lista
+    if (!valor) { return []; }
+    return Array.isArray(valor) ? valor : [valor];
+}
+
 function criaDocFluigRetornaDocumentId(file, parentId) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
