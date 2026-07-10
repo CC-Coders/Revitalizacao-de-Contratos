@@ -390,6 +390,7 @@ async function onClickDetailsEquipamento(that) {
             return html;
         }
         async function htmlNovoAnexo(documentId, documentName) {
+            if (!documentName) { return ""; }
             var html =
                 `<div class="btn btn-default btnAnexo">
             <b><a target="_blank" href=${documentId == "#" ? "#" : await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId)}>${documentName}</a></b>
@@ -2018,6 +2019,8 @@ async function asyncConsultaValorMensalPorContratoPrincipal(ID_TCNT_AUXILIAR) {
 // Util
 function promiseGetDocumentDescription(documentId){
     return new Promise((resolve, reject)=> {
+         documentId = (documentId || "").trim();
+       if (!/^\d+$/.test(documentId)) { resolve(null); return; }
         $.ajax({
             url: `/content-management/api/v2/documents/${documentId}`,
             contentType: "application/json",
@@ -2026,7 +2029,7 @@ function promiseGetDocumentDescription(documentId){
                 console.log(x);
                 console.log(e);
                 FLUIGC.toast({
-                    message: "Erro ao buscar documento: " + e,
+                   message: "Erro ao buscar documento " + documentId + " (HTTP " + x.status + ")",
                     type: "warning"
                 });
                 reject("Erro ao buscar boletim de medição!");
@@ -2043,24 +2046,24 @@ function calculaDiferencaEmMeses(diaInicio, diaFim){
 
     return Math.round(Math.abs(init.diff(end, 'months', true)))
 }
-function promiseGetDocumentDescription(documentId){
-    return new Promise((resolve, reject)=> {
-        $.ajax({
-            url: `/content-management/api/v2/documents/${documentId}`,
-            contentType: "application/json",
-            method: "GET",
-            error: function (x, e) {
-                console.log(x);
-                console.log(e);
-                FLUIGC.toast({
-                    message: "Erro ao buscar documento: " + e,
-                    type: "warning"
-                });
-                reject("Erro ao buscar boletim de medição!");
-            },
-            success: function (data) {
-                resolve(data.description);
-            }
-        });
-    });
-}
+// function promiseGetDocumentDescription(documentId){
+//     return new Promise((resolve, reject)=> {
+//         $.ajax({
+//             url: `/content-management/api/v2/documents/${documentId}`,
+//             contentType: "application/json",
+//             method: "GET",
+//             error: function (x, e) {
+//                 console.log(x);
+//                 console.log(e);
+//                 FLUIGC.toast({
+//                     message: "Erro ao buscar documento: " + e,
+//                     type: "warning"
+//                 });
+//                 reject("Erro ao buscar boletim de medição!");
+//             },
+//             success: function (data) {
+//                 resolve(data.description);
+//             }
+//         });
+//     });
+// }

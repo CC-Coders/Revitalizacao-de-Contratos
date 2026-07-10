@@ -675,7 +675,15 @@ function validaCampos() {
             });
         }
     }
-
+ if (atividade == ATIVIDADES.CONTROLADORIA && origemContrato == "Novos") {
+        $("[name^='novoContratoItemProduto___']").each(function (i) {
+            if (!$(this).val()) {
+                if (this.selectize) { this.selectize.$control.css("border", "1px solid #FF0000"); }
+                mensagens.push("Favor preencher o campo \"Produto\" (Item " + (i + 1) + ")");
+                valida = false;
+            }
+        });
+    }
     if (isRetornar) {
         var destinoRetorno = $("#destinoRetorno").val();
         if (destinoRetorno == null || destinoRetorno == undefined || destinoRetorno == "") {
