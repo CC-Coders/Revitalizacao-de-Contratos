@@ -1234,7 +1234,7 @@ async function insereDocumentoCriado(tipo, documentosAnexados, name, docId) {
         item.find(".anexoCarregando").remove();
          var htmlLink = `<span class="anexoLink" data-tipo="${tipo}" data-docid="${docId}">
             <a href="${link}" target="_blank">${name}</a>
-            <a href="#" class="btnRemoveAnexo" title="Remover anexo">🗑</a>
+            <a href="#" class="btnRemoveAnexo" title="Remover anexo"><i class="animaliaicon animaliaicon-trash icon-sm" aria-hidden="true"></i></a>
         </span>`;
         if (item.find("a").length > 0) {
             item.find("span").first().append(", " + htmlLink)
