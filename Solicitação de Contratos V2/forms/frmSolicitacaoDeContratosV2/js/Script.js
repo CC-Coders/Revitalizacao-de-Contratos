@@ -681,6 +681,24 @@ function bindings() {
     // Anexos
     $("#btnAnexarDocumento").on("click", function () { $("#inputAnexo").click() });
     $("#inputAnexo").on("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
+     $("#listaAnexos").on("click", ".btnRemoveAnexo", function (e) {
+        e.preventDefault();
+        var span = $(this).closest(".anexoLink");
+        var tipo = span.data("tipo");
+        var docId = String(span.data("docid"));
+
+        documentosAnexados[tipo] = docIdsDoTipo(documentosAnexados[tipo])
+            .filter(function (id) { return String(id) !== docId; });
+        if (documentosAnexados[tipo].length === 0) { delete documentosAnexados[tipo]; }
+        $("#hiddenDocumentosAnexados").val(JSON.stringify(documentosAnexados));
+
+        // Se era o único anexo do tipo, volta o item para pendente; senão só remove o link
+        if (!documentosAnexados[tipo]) {
+            span.closest("li").html(`<span>❌</span> <b>${tipo}</b>`);
+        } else {
+            span.remove();
+        }
+    });
 }
 
 
@@ -796,13 +814,12 @@ async function loadTelaInicioRetorno() {
     documentosAnexados = anexos;
 
     anexosPorTipoDeContrato($("#tipoContratoBase").val());
-
     for (const anexo in documentosAnexados) {
-        var dataAnexo = await asyncGetDocumentDetails(documentosAnexados[anexo]);
-
-        insereDocumentoCriado(anexo, documentosAnexados, dataAnexo.data.description, documentosAnexados[anexo]);
+        for (const docId of docIdsDoTipo(documentosAnexados[anexo])) {
+            var dataAnexo = await asyncGetDocumentDetails(docId);
+            insereDocumentoCriado(anexo, documentosAnexados, dataAnexo.data.description, docId);
+        }
     }
-
     var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
 
     if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
