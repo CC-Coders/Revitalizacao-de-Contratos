@@ -321,10 +321,10 @@ function bindings() {
         allowZero: true,
         affixesStay: true,
     });
-    $("#agencia").mask("0000-0", { placeholder: "____-_" });
-  //  $("#contaCorrente").mask("00000-0", { placeholder: "_____-_" });
-    $("#contaCorrente").mask("0000099-0", {
-        placeholder: "_____-_"
+    $("#agencia").mask("000000000000000-0", {reverse:true, placeholder: "____-_" });
+    $("#contaCorrente").mask("000000000000000-0", {
+        placeholder: "_____-_",
+        reverse:true,
     });
     $("#percentualRetencao").mask("000%", { reverse: true });
     $("#descontoPorDiaChuva").mask("000%", { reverse: true });
