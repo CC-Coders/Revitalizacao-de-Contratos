@@ -184,9 +184,21 @@ async function onClickCheckContratoPrincipal(that) {
         $("#percentualRetencao").val(data.PERCENT_RETENCAO);
         if (data.DESCRICAO_IMOVEL.trim() == "-") {
             $("#descricaoImovel").val("");
-            
+
         } else {
             $("#descricaoImovel").val(data.DESCRICAO_IMOVEL);
+        }
+
+        // Aditivos de Transporte de Materiais mostram a vigência atual do contrato
+        // vinda do RM em campos bloqueados, para o usuário ter a referência do que está prorrogando.
+        if (tipoContrato.includes("Transporte de Materiais")) {
+            $("#dataInicioContratoTransporte").val(data.DATAINICIO ? moment(data.DATAINICIO).format("DD/MM/YYYY") : "");
+            $("#dataFimContratoTransporte").val(data.DATAFIM ? moment(data.DATAFIM).format("DD/MM/YYYY") : "");
+            $("#dataAssinaturaTransporte").val(data.DATA_ASSINATURA ? moment(data.DATA_ASSINATURA).format("DD/MM/YYYY") : "");
+            $("#valorMensalExclusaoTransporte").val(floatToMoney(data.VALOR));
+
+            // A nova data de fim depende da vigência recém-carregada, então o prazo é recalculado.
+            atualizaMesesAditivoTransporte();
         }
 
         // Quando selecionar o contrato principal, busca todos os equipamentos
@@ -237,6 +249,11 @@ async function onClickCheckContratoPrincipal(that) {
         // Limpa a base salva quando desmarcar o contrato principal
         $("#valorMensalLocacao").data("valor-base-contrato", 0);
         $("#valorMensalLocacao").val(floatToMoney(0));
+
+        if (tipoContrato.includes("Transporte de Materiais")) {
+            $("#dataInicioContratoTransporte, #dataFimContratoTransporte, #dataAssinaturaTransporte").val("");
+            $("#valorMensalExclusaoTransporte, #mesesAditivoTransporte").val("");
+        }
     }
 }
 function salva_excluiDadosContratoSelecionadoNoHidden(data) {
@@ -269,7 +286,10 @@ function carregaTabelaContratoPrincipalSelecionado() {
 
 function buscaContratos(CODCOLIGADA, CCUSTO, CNPJ, tipoContrato){
 
-    if (tipoContrato.includes("Locação de Imóvel")) { // Caso a opção do usuario CONTENHA o texto "Locação de Imóvel"
+    if (tipoContrato.includes("Transporte de Materiais")) { // Caso a opção do usuario CONTENHA o texto "Transporte de Materiais"
+        tipoContrato = "'Transporte de Material - S/M.O.'" // Passa valores que o RM usa
+
+    } else if (tipoContrato.includes("Locação de Imóvel")) { // Caso a opção do usuario CONTENHA o texto "Locação de Imóvel"
         tipoContrato = "'Aluguel Imóveis', 'Locação de Imóvel', 'Aluguel'" // Passa valores que o RM usa
 
     } else if (tipoContrato == "Locação de Equipamento (Rescisões)") {

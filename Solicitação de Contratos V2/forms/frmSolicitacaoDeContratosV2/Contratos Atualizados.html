@@ -287,7 +287,7 @@
                                             <option value="Locação de Equipamento" data-origem="Novos,Aditivos,Rescisões">Locação de Equipamento</option>
                                             <option value="Locação de Equipamento - Com Mão de Obra" data-origem="Novos,Rescisões">Locação de Equipamento - Com Mão de Obra</option>
                                             <option value="Locação de Imóvel" data-origem="Novos,Aditivos,Rescisões">Locação de Imóvel</option>
-                                            <option value="Transporte de Materiais" data-origem="Novos">Transporte de Materiais</option>
+                                            <option value="Transporte de Materiais" data-origem="Novos,Aditivos">Transporte de Materiais</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3 divTipoAlteracao" style="display: none;">
@@ -309,9 +309,11 @@
                     <div id="dadosContrato" style="display: none">
                         <div class="row panelInput rowFlex" id="divInputDadosContrato">
                             <!-- Dados Gerais -->
-                            <div class="col-md-6 campoLocacaoImovel campoLocacaoEquipamento campoLocacaoImovelAditivo_alteracaoValor campoLocacaoImovelAditivo_alteracaoPrazo 
+                            <div class="col-md-6 campoLocacaoImovel campoLocacaoEquipamento campoLocacaoImovelAditivo_alteracaoValor campoLocacaoImovelAditivo_alteracaoPrazo
                             campoLocacaoEquipamento_alteracaoValor campoLocacaoEquipamento_alteracaoPrazo campoLocacaoEquipamento_rescisao
-                            campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento campoLocacaoImovel_rescisao">
+                            campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento campoLocacaoImovel_rescisao
+                            campoTransporteAditivo_alteracaoValor campoTransporteAditivo_alteracaoPrazo
+                            campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento">
                                     <h2>Dados Gerais</h2>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -498,7 +500,9 @@
                                         </div>
                                         <br>
                                     </div>
-                                    <div class="col-md-6 campoLocacaoImovelAditivo_alteracaoValor campoLocacaoEquipamento_alteracaoValor">
+                                    <div class="col-md-6 campoLocacaoImovelAditivo_alteracaoValor campoLocacaoEquipamento_alteracaoValor
+                                    campoTransporteAditivo_alteracaoValor campoTransporteAditivo_alteracaoPrazo
+                                    campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento">
                                         <div>
                                             <label>Data de Reajuste:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="dataReajuste" name="dataReajuste" class="form-control inputInfoChamado date">
@@ -507,7 +511,9 @@
                                     </div>
                                     <div class="col-md-6 campoLocacaoImovelAditivo_alteracaoValor campoLocacaoImovelAditivo_alteracaoPrazo
                                     campoLocacaoEquipamento_alteracaoValor campoLocacaoEquipamento_alteracaoPrazo
-                                    campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento">
+                                    campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento
+                                    campoTransporteAditivo_alteracaoValor campoTransporteAditivo_alteracaoPrazo
+                                    campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento">
                                         <div>
                                             <label>Cláusulas Alteradas:</label><strong class="strongAlert">*</strong>
                                             <input type="text" id="clausulaAlterada" name="clausulaAlterada" class="form-control inputInfoChamado">
@@ -573,6 +579,71 @@
                                         <div>
                                             <label>Prazo:</label>
                                             <input type="text" id="prazoLocacao" name="prazoLocacao" class="form-control" readonly />
+                                        </div>
+                                        <br>
+                                    </div>
+
+                                    <!-- Transporte de Materiais (Aditivos) -->
+                                    <div class="col-md-6 campoTransporteAditivo_alteracaoValor campoTransporteAditivo_alteracaoPrazo">
+                                        <div>
+                                            <label>Data de Assinatura do Contrato:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="dataAssinaturaTransporte" name="dataAssinaturaTransporte" class="form-control inputInfoChamado date" />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6 campoTransporteAditivo_alteracaoValor">
+                                        <div>
+                                            <label>Valor:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="valorModalidadeTransporte" name="valorModalidadeTransporte" class="form-control inputInfoChamado" placeholder="R$ 0,00" />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6 campoTransporteAditivo_alteracaoValor">
+                                        <div>
+                                            <label>Modalidade do Valor:</label><strong class="strongAlert">*</strong>
+                                            <select id="modalidadeValorTransporte" name="modalidadeValorTransporte" class="form-control inputInfoChamado">
+                                                <option value="">Selecione</option>
+                                                <option value="Por Hora">Por Hora</option>
+                                                <option value="Diário">Diário</option>
+                                                <option value="Mensal">Mensal</option>
+                                                <option value="Anual">Anual</option>
+                                                <option value="Total">Total</option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6 campoTransporteAditivo_alteracaoPrazo campoTransporteAditivo_exclusaoEquipamento">
+                                        <div>
+                                            <label>Data de Início do Contrato:</label>
+                                            <input type="text" id="dataInicioContratoTransporte" name="dataInicioContratoTransporte" class="form-control" readonly />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6 campoTransporteAditivo_alteracaoPrazo campoTransporteAditivo_exclusaoEquipamento">
+                                        <div>
+                                            <label>Data de Fim do Contrato:</label>
+                                            <input type="text" id="dataFimContratoTransporte" name="dataFimContratoTransporte" class="form-control" readonly />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6 campoTransporteAditivo_alteracaoPrazo">
+                                        <div>
+                                            <label>Nova Data de Fim:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="novaDataFimTransporte" name="novaDataFimTransporte" class="form-control inputInfoChamado date" />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6 campoTransporteAditivo_alteracaoPrazo">
+                                        <div>
+                                            <label>Meses de Contrato:</label>
+                                            <input type="text" id="mesesAditivoTransporte" name="mesesAditivoTransporte" class="form-control" readonly placeholder="Calculado automaticamente" />
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-6 campoTransporteAditivo_exclusaoEquipamento">
+                                        <div>
+                                            <label>Valor Mensal:</label><strong class="strongAlert">*</strong>
+                                            <input type="text" id="valorMensalExclusaoTransporte" name="valorMensalExclusaoTransporte" class="form-control inputInfoChamado" placeholder="R$ 0,00" />
                                         </div>
                                         <br>
                                     </div>

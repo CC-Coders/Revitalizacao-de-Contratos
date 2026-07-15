@@ -2,7 +2,7 @@ function onChangeTipoContrato(that) {
     var tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val():$("#tipoContrato").text();
     var origemContrato = $("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text();
 
-    if (tipoContrato === "Transporte de Materiais") {
+    if (tipoContrato.includes("Transporte de Materiais")) {
         $("#locador").closest("div").find("label").first().text("Fornecedor:");
     } else {
         $("#locador").closest("div").find("label").first().text("Locador:");
@@ -80,9 +80,22 @@ function onChangeTipoContrato(that) {
             $("#tableEquipamentosAditivoRescisao").hide();
         }
 
-    } else if (tipoContrato === "Transporte de Materiais") {
-        $("#paginationContratoPrincipal, #divTableEquipamentosAditivoRescisao").addClass("hidden").hide();
-        $("#paginationEquipamentos, #divTableEquipamentos, #paginationAnexos").removeClass("hidden").show();
+    } else if (tipoContrato.includes("Transporte de Materiais")) {
+        if (origemContrato == "Aditivos") {
+            // Só a seleção do contrato principal + os campos de Dados Contratuais.
+            // A lista de equipamentos ainda não é montada para Transporte de Materiais
+            // (preencheListaDeEquipamentos_aditivosRescisao só trata os tipos de Locação),
+            // então a página fica oculta para não exibir uma tabela vazia.
+            $("#divTableEquipamentos, #divTableEquipamentosAditivoRescisao, #paginationEquipamentos").addClass("hidden").hide();
+            $("#paginationContratoPrincipal").removeClass("hidden").show();
+
+            // Mesma regra dos aditivos de Locação de Equipamento: aqui não se pede anexo.
+            $("#paginationAnexos").addClass("hidden").hide();
+
+        } else {
+            $("#paginationContratoPrincipal, #divTableEquipamentosAditivoRescisao").addClass("hidden").hide();
+            $("#paginationEquipamentos, #divTableEquipamentos, #paginationAnexos").removeClass("hidden").show();
+        }
 
     } else {
         $("#paginationEquipamentos, #paginationContratoPrincipal").addClass("hidden").hide();
@@ -90,8 +103,10 @@ function onChangeTipoContrato(that) {
 
     if (origemContrato == "Novos") {
         $(
-            `.campoLocacaoImovel, .campoLocacaoEquipamento, .campoLocacaoImovelAditivo_alteracaoValor, .campoLocacaoEquipamento_alteracaoValor, 
-            .campoLocacaoEquipamento_rescisao, .campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento, .campoTransporteMateriais`
+            `.campoLocacaoImovel, .campoLocacaoEquipamento, .campoLocacaoImovelAditivo_alteracaoValor, .campoLocacaoEquipamento_alteracaoValor,
+            .campoLocacaoEquipamento_rescisao, .campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento, .campoTransporteMateriais,
+            .campoTransporteAditivo_alteracaoValor, .campoTransporteAditivo_alteracaoPrazo,
+            .campoTransporteAditivo_inclusaoEquipamento, .campoTransporteAditivo_exclusaoEquipamento`
         ).hide();
         
         $(".divDadosPagamento, .divDadosContratuais").show();
@@ -142,7 +157,9 @@ function onChangeTipoContrato(that) {
     else if (origemContrato == "Aditivos") {
         $(
             `.campoLocacaoImovel, .campoLocacaoEquipamento, .divDadosPagamento, .campoLocacaoImovelAditivo_alteracaoValor, .campoLocacaoImovelAditivo_alteracaoPrazo,
-            .campoLocacaoEquipamento_alteracaoValor, .campoLocacaoEquipamento_rescisao, .campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento`
+            .campoLocacaoEquipamento_alteracaoValor, .campoLocacaoEquipamento_rescisao, .campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento,
+            .campoTransporteMateriais, .campoTransporteAditivo_alteracaoValor, .campoTransporteAditivo_alteracaoPrazo,
+            .campoTransporteAditivo_inclusaoEquipamento, .campoTransporteAditivo_exclusaoEquipamento`
         ).hide();
         $("#percentualRetencao").closest("div").hide();
         $(".divDadosContratuais").show();
@@ -235,6 +252,29 @@ function onChangeTipoContrato(that) {
             $("#dadosContrato").show();
             $(".campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento").show();
         }
+        else if (tipoContrato.includes("Transporte de Materiais")) {
+            $("#dadosContrato").show();
+
+            // Data de Reajuste é digitada em todos os aditivos de Transporte de Materiais,
+            // igual ao que já acontece nos aditivos de Locação.
+            $("#dataReajuste").removeAttr("readonly");
+
+            if (tipoContrato === "Transporte de Materiais - Alteração de Valor") {
+                $(".campoTransporteAditivo_alteracaoValor").show();
+            }
+            else if (tipoContrato === "Transporte de Materiais - Alteração de Prazo") {
+                $(".campoTransporteAditivo_alteracaoPrazo").show();
+            }
+            else if (tipoContrato === "Transporte de Materiais - Alteração de Prazo e Valor") {
+                $(".campoTransporteAditivo_alteracaoPrazo, .campoTransporteAditivo_alteracaoValor").show();
+            }
+            else if (tipoContrato === "Transporte de Materiais - Inclusão de Equipamento") {
+                $(".campoTransporteAditivo_inclusaoEquipamento").show();
+            }
+            else if (tipoContrato === "Transporte de Materiais - Exclusão de Equipamento") {
+                $(".campoTransporteAditivo_exclusaoEquipamento").show();
+            }
+        }
         else {
             $("#dadosContrato").hide();
         }
@@ -296,6 +336,13 @@ const alteracoesPorTipoContratoBase = {
     "Exclusão de Equipamento"
   ],
   "Locação de Equipamento - Com Mão de Obra": [
+    "Alteração de Valor",
+    "Alteração de Prazo",
+    "Alteração de Prazo e Valor",
+    "Inclusão de Equipamento",
+    "Exclusão de Equipamento"
+  ],
+  "Transporte de Materiais": [
     "Alteração de Valor",
     "Alteração de Prazo",
     "Alteração de Prazo e Valor",
