@@ -192,10 +192,10 @@ async function onClickCheckContratoPrincipal(that) {
         // Aditivos de Transporte de Materiais mostram a vigência atual do contrato
         // vinda do RM em campos bloqueados, para o usuário ter a referência do que está prorrogando.
         if (tipoContrato.includes("Transporte de Materiais")) {
-            $("#dataInicioContratoTransporte").val(data.DATAINICIO ? moment(data.DATAINICIO).format("DD/MM/YYYY") : "");
-            $("#dataFimContratoTransporte").val(data.DATAFIM ? moment(data.DATAFIM).format("DD/MM/YYYY") : "");
-            $("#dataAssinaturaTransporte").val(data.DATA_ASSINATURA ? moment(data.DATA_ASSINATURA).format("DD/MM/YYYY") : "");
-            $("#valorMensalExclusaoTransporte").val(floatToMoney(data.VALOR));
+            $("#dataInicioContratoTransporte").val(formataDataDoRM(data.DATAINICIO));
+            $("#dataFimContratoTransporte").val(formataDataDoRM(data.DATAFIM));
+            $("#dataAssinaturaTransporte").val(formataDataDoRM(data.DATA_ASSINATURA));
+            $("#valorMensalExclusaoTransporte").val(floatToMoney(parseFloat(data.VALOR) || 0));
 
             // A nova data de fim depende da vigência recém-carregada, então o prazo é recalculado.
             atualizaMesesAditivoTransporte();
@@ -255,6 +255,19 @@ async function onClickCheckContratoPrincipal(that) {
             $("#valorMensalExclusaoTransporte, #mesesAditivoTransporte").val("");
         }
     }
+}
+
+function formataDataDoRM(valor) {
+    if (!valor || valor.trim() == "-" || valor.trim() == "") {
+        return "";
+    }
+
+    var data = moment(valor);
+    if (!data.isValid() || data.year() <= 1900) {
+        return "";
+    }
+
+    return data.format("DD/MM/YYYY");
 }
 function salva_excluiDadosContratoSelecionadoNoHidden(data) {
 

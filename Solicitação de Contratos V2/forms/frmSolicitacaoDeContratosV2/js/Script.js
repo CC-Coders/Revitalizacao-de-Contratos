@@ -737,6 +737,56 @@ function bindings() {
         $("#dataInicioTransporte").val(("0" + d1.getDate()).slice(-2) + "/" + ("0" + (d1.getMonth() + 1)).slice(-2) + "/" + d1.getFullYear());
         $("#dataFimTransporte").val(("0" + d2.getDate()).slice(-2) + "/" + ("0" + (d2.getMonth() + 1)).slice(-2) + "/" + d2.getFullYear());
     });
+
+    // Transporte de Materiais (Aditivos) - Máscaras de Dinheiro
+    $("#valorModalidadeTransporte, #valorMensalExclusaoTransporte").maskMoney({
+        prefix: "R$ ", thousands: ".", decimal: ",", allowZero: true, affixesStay: true,
+    });
+
+    // Transporte de Materiais (Aditivos) - Cálculo de meses
+    $("#novaDataFimTransporte").on("change", atualizaMesesAditivoTransporte);
+}
+
+// Prazo do contrato de Transporte de Materiais já considerando a prorrogação do aditivo:
+// conta do início original (vindo do RM) até a nova data de fim.
+function atualizaMesesAditivoTransporte() {
+    var inicio = $("#dataInicioContratoTransporte").val();
+    var novoFim = $("#novaDataFimTransporte").val();
+
+    if (!inicio || !novoFim) { $("#mesesAditivoTransporte").val(""); return; }
+
+    var d1 = parseDataBR(inicio);
+    var d2 = parseDataBR(novoFim);
+
+    if (!d1 || !d2) {
+        FLUIGC.toast({ title: "", message: "Data inválida! Use o formato dd/mm/aaaa.", type: "warning", timeout: 4000 });
+        $("#novaDataFimTransporte").val(""); $("#mesesAditivoTransporte").val(""); return;
+    }
+
+    var fimAtual = parseDataBR($("#dataFimContratoTransporte").val());
+
+    if (fimAtual && d2 <= fimAtual) {
+        FLUIGC.toast({ title: "", message: "A nova data de fim precisa ser maior que a data de fim atual do contrato!", type: "warning", timeout: 4000 });
+        $("#novaDataFimTransporte").val(""); $("#mesesAditivoTransporte").val(""); return;
+    }
+
+    var meses = (d2.getFullYear() - d1.getFullYear()) * 12 + (d2.getMonth() - d1.getMonth());
+    if (d2.getDate() < d1.getDate()) { meses--; }
+    $("#mesesAditivoTransporte").val(meses + (meses === 1 ? " mês" : " meses"));
+}
+
+function parseDataBR(s) {
+    var digits = (s || "").replace(/\D/g, "");
+    if (digits.length !== 8) { return null; }
+
+    var dia = parseInt(digits.substring(0, 2), 10);
+    var mes = parseInt(digits.substring(2, 4), 10);
+    var ano = parseInt(digits.substring(4, 8), 10);
+
+    var d = new Date(ano, mes - 1, dia);
+    if (d.getFullYear() !== ano || d.getMonth() !== mes - 1 || d.getDate() !== dia) { return null; }
+
+    return d;
 }
 
 
