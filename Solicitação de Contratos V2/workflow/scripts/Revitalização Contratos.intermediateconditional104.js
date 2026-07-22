@@ -13,6 +13,11 @@ function intermediateconditional104() {
         ], "/jdbc/CastilhoCustom");
 
         log.info("Verifica status equipamentos");
+        if (retorno.length == 0) {
+            log.info("Prefixo " + PREFIXO + " não encontrado.");
+            continue;
+        }
+
         log.dir(retorno);
         log.dir(retorno[0].STATUS);
         log.dir(retorno.STATUS);
