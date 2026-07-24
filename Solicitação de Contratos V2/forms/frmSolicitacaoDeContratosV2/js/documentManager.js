@@ -42,7 +42,7 @@ const codigosModelos = {
         "Locação de Imóvel": 39635,
         "Locação de Equipamento": 39636,
         "Locação de Equipamento - Com Mão de Obra": 39959,
-        "Transporte de Materiais": 44168,
+        "Transporte de Materiais": 44178,
 
         // Aditivos
         "Locação de Equipamento - Alteração de Valor": 40819,
