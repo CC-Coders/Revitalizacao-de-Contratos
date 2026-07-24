@@ -19,10 +19,16 @@ function createDataset(fields, constraints, sortFields) {
         var senhaAdm = "flu!g@cc#2018"; // Usuario integrador - Senha do usuário administrador
 
 
-        var retornoDocumento = webService.createDocument(loginAdm, senhaAdm, codEmpresa, DTOs.documentoArray, DTOs.attachmentArray, DTOs.documentSecurityConfigDtoArray, DTOs.approverDtoArray, DTOs.relatedDocumentDtoArray);
+        var retornoDocumento = webService.updateDocument(loginAdm, senhaAdm, codEmpresa, DTOs.documentoArray, DTOs.attachmentArray, DTOs.documentSecurityConfigDtoArray, DTOs.approverDtoArray, DTOs.relatedDocumentDtoArray);
         var idDocumento = retornoDocumento.getItem().get(0).getDocumentId();
+        var message = retornoDocumento.getItem().get(0).getWebServiceMessage();
 
         log.info("## [Dataset: createDocument] - Documento criado com SUCESSO! Código: " + idDocumento);
+        log.dir(retornoDocumento);
+
+        if (idDocumento == "0") {
+            return returnDataset("ERROR",message, idDocumento);    
+        }
 
         return returnDataset("SUCCESS", "", idDocumento);
 
@@ -59,6 +65,7 @@ function criaDocumentDTO(webServiceProvider, codEmpresa, PublisherId, constraint
         documento.setDeleted(false);
         documento.setDocumentDescription(constraints.name);
         documento.setDocumentType("2"); // 1 - Pasta; 2 - Documento; 3 - Documento Externo; 4 - Fichario; 5 - Fichas; 9 - Aplicativo; 10 - Relatorio.
+        documento.setDocumentTypeId("2"); // 1 - Pasta; 2 - Documento; 3 - Documento Externo; 4 - Fichario; 5 - Fichas; 9 - Aplicativo; 10 - Relatorio.
         documento.setDownloadEnabled(true);
         documento.setExpires(false);
         documento.setInheritSecurity(true);
@@ -67,6 +74,9 @@ function criaDocumentDTO(webServiceProvider, codEmpresa, PublisherId, constraint
         documento.setPrivateDocument(false);
         documento.setPublisherId(PublisherId);
         documento.setUpdateIsoProperties(true);
+        var gregorianCalendar = new java.util.GregorianCalendar();
+        var xmlGregorianCalendar = javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar(gregorianCalendar);
+        documento.setValidationStartDate(xmlGregorianCalendar);
         documento.setUserNotify(false);
         documento.setVersionOption("0");
         documento.setDocumentPropertyNumber(0);

@@ -1,0 +1,182 @@
+--equipamentos
+INSERT INTO [dbo].[EQUIPAMENTOS_CONTRATOS_AUXILIAR]
+           ([PREFIXO]
+           ,[VALOR_MOBILIZADO]
+           ,[UN_MOBILIZADO]
+           ,[VALOR_EXTRA]
+           ,[UN_EXTRA]
+           ,[STATUS]
+           ,[MAODEOBRA]
+           ,[VALOR_EQUIPAMENTO]
+           ,[PRECO_EQUIPAMENTO]
+           ,[NEGOCIACAO_SUPRIMENTOS]
+           ,[VALOR_DESMOBILIZACAO]
+           ,[UN_DESMOBILIZACAO])
+     VALUES
+           (<PREFIXO, varchar(10),>
+           ,<VALOR_MOBILIZADO, numeric(15,2),>
+           ,<UN_MOBILIZADO, varchar(20),>
+           ,<VALOR_EXTRA, numeric(15,2),>
+           ,<UN_EXTRA, varchar(20),>
+           ,<STATUS, int,>
+           ,<MAODEOBRA, decimal(18,2),>
+           ,<VALOR_EQUIPAMENTO, decimal(10,2),>
+           ,<PRECO_EQUIPAMENTO, decimal(10,2),> 
+           ,<NEGOCIACAO_SUPRIMENTOS, varchar(1),>
+           ,<VALOR_DESMOBILIZACAO, decimal(18,2),>
+           ,<UN_DESMOBILIZACAO, varchar(20),>);
+
+
+
+INSERT INTO [dbo].[TCNT_AUXILIAR]
+           ([CODCOLIGADA]
+           ,[IDCNT]
+           ,[IS_MODELO_CASTILHO]
+           ,[IS_RETENCAO]
+           ,[PERCENT_RETENCAO]
+           ,[IS_REIDI]
+           ,[PERCENT_REIDI]
+           ,[TIPO_ASSINATURA]
+           ,[TIPO_CONTRATO]
+           ,[ID_FLUIG]
+           ,[PERCENT_DESCONTO_CHUVA]
+           ,[PERCENT_DESCONTO_DIAS_PARADO]
+           ,[DATA_ASSINATURA])
+     VALUES
+           (<CODCOLIGADA, int,>
+           ,<IDCNT, int,>
+           ,<IS_MODELO_CASTILHO, bit,>
+           ,<IS_RETENCAO, bit,>
+           ,<PERCENT_RETENCAO, decimal(18,0),>
+           ,<IS_REIDI, bit,>
+           ,<PERCENT_REIDI, decimal(18,2),>
+           ,<TIPO_ASSINATURA, varchar(20),>
+           ,<TIPO_CONTRATO, varchar(100),>
+           ,<ID_FLUIG, int,>
+           ,<PERCENT_DESCONTO_CHUVA, int,>
+           ,<PERCENT_DESCONTO_DIAS_PARADO, int,>
+           ,<DATA_ASSINATURA, date,>);
+
+INSERT INTO [dbo].[TCNT_AUXILIAR_ITENS]
+           ([ID_TCNT_AUXILIAR]
+           ,[NSEQITEMCNT]
+           ,[PREFIXO]
+           ,[TIPO]
+           ,[DESCRICAO]
+           ,[VALOR]
+           ,[UN]
+           ,[ATIVO]
+           ,[ENDERECO])
+     VALUES
+           (<ID_TCNT_AUXILIAR, int,>
+           ,<NSEQITEMCNT, int,>
+           ,<PREFIXO, varchar(10),>
+           ,<TIPO, varchar(255),>
+           ,<DESCRICAO, varchar(255),>
+           ,<VALOR, float,>
+           ,<UN, varchar(10),>
+           ,<ATIVO, bit,>
+           ,<ENDERECO, varchar(255),>)
+
+
+
+
+INSERT INTO [dbo].[MEDICOES_AUXILIAR]
+           ([CODCOLIGADA]
+           ,[CODCCUSTO]
+           ,[CODCFO]
+           ,[CODCOLCFO]
+           ,[IDCNT]
+           ,[CODIGOCONTRATO]
+           ,[PERIODOINICIAL]
+           ,[PERIODOFINAL]
+           ,[NUMEROMEDICAO]
+           ,[ACUMULADOANTERIOR]
+           ,[PRESENTEMEDICAO]
+           ,[ACUMULADOATUAL]
+           ,[DESCONTOANTERIOR]
+           ,[DESCONTOATUAL]
+           ,[NUMPROCES]
+           ,[STATUS]
+           ,[PRODUTO]
+           ,[POSSUIRETENCAO]
+           ,[ULTIMOPDFID]
+           ,[RETENCAOANTERIOR]
+           ,[RETENCAOATUAL]
+           ,[POSSUIREIDI]
+           ,[TAXAREIDI]
+           ,[REIDIANTERIOR]
+           ,[REIDIATUAL]
+           ,[OPTANTEPELOSIMPLES]
+           ,[CREATEDAT]
+           ,[DESCONTOS_EXTRA]
+           ,[ACUMULADO_DESCONTOS_EXTRA])
+     VALUES
+           (<CODCOLIGADA, tinyint,>
+           ,<CODCCUSTO, varchar(7),>
+           ,<CODCFO, varchar(255),>
+           ,<CODCOLCFO, int,>
+           ,<IDCNT, int,>
+           ,<CODIGOCONTRATO, varchar(14),>
+           ,<PERIODOINICIAL, date,>
+           ,<PERIODOFINAL, date,>
+           ,<NUMEROMEDICAO, int,>
+           ,<ACUMULADOANTERIOR, decimal(18,2),>
+           ,<PRESENTEMEDICAO, decimal(18,2),>
+           ,<ACUMULADOATUAL, decimal(18,2),>
+           ,<DESCONTOANTERIOR, decimal(18,2),>
+           ,<DESCONTOATUAL, decimal(18,2),>
+           ,<NUMPROCES, int,>
+           ,<STATUS, int,>
+           ,<PRODUTO, varchar(255),>
+           ,<POSSUIRETENCAO, bit,>
+           ,<ULTIMOPDFID, int,>
+           ,<RETENCAOANTERIOR, decimal(15,2),>
+           ,<RETENCAOATUAL, decimal(15,2),>
+           ,<POSSUIREIDI, bit,>
+           ,<TAXAREIDI, decimal(5,2),>
+           ,<REIDIANTERIOR, decimal(15,2),>
+           ,<REIDIATUAL, decimal(15,2),>
+           ,<OPTANTEPELOSIMPLES, bit,>
+           ,<CREATEDAT, datetime,>
+           ,<DESCONTOS_EXTRA, float,>
+           ,<ACUMULADO_DESCONTOS_EXTRA, float,>);
+
+
+
+INSERT INTO [dbo].[MEDICOESITENS_AUXILIAR]
+           ([ID_MEDICAO]
+           ,[ID_ITEMCONTRATO]
+           ,[DESCRICAO]
+           ,[UNIDADE]
+           ,[ACUMULADOFISICOANT]
+           ,[ACUMULADOFINANCEIROANT]
+           ,[DIASTRABALHADOS]
+           ,[VALORUNITARIO]
+           ,[ACUMULADOFISICOATUAL]
+           ,[ACUMULADOFINANCEIROATUAL]
+           ,[EQUIPLOCID]
+           ,[CREATEDAT]
+           ,[PRESENTEFISICO]
+           ,[PRESENTEFINANCEIRO])
+     VALUES
+           (<ID_MEDICAO, int,>
+           ,<ID_ITEMCONTRATO, int,>
+           ,<DESCRICAO, varchar(255),>
+           ,<UNIDADE, varchar(20),>
+           ,<ACUMULADOFISICOANT, decimal(18,2),>
+           ,<ACUMULADOFINANCEIROANT, decimal(18,2),>
+           ,<DIASTRABALHADOS, int,>
+           ,<VALORUNITARIO, decimal(18,2),>
+           ,<ACUMULADOFISICOATUAL, decimal(18,2),>
+           ,<ACUMULADOFINANCEIROATUAL, decimal(18,2),>
+           ,<EQUIPLOCID, int,>
+           ,<CREATEDAT, datetime,>
+           ,<PRESENTEFISICO, decimal(18,2),>
+           ,<PRESENTEFINANCEIRO, decimal(18,2),>);
+
+
+
+
+
+

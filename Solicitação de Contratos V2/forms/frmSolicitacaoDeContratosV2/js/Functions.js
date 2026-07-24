@@ -72,6 +72,7 @@ function buscaBancos() {
         },
     });
 }
+
 function preencherObrasDoUsuario() {
     const userCode = $("#solicitante").val();
     if (!userCode) {
@@ -85,6 +86,7 @@ function preencherObrasDoUsuario() {
     }
 
     try {
+    	//grupos que possuem permissão geral
         var dsGrupos = DatasetFactory.getDataset("colleagueGroup", null, [
             DatasetFactory.createConstraint("colleagueId", userCode, userCode, ConstraintType.MUST),
             DatasetFactory.createConstraint("groupId", "Controladoria",    "Controladoria",    ConstraintType.SHOULD),
@@ -92,8 +94,8 @@ function preencherObrasDoUsuario() {
             DatasetFactory.createConstraint("groupId", "Comprador",        "Comprador",        ConstraintType.SHOULD),
             DatasetFactory.createConstraint("groupId", "Juridico",         "Juridico",         ConstraintType.SHOULD),
         ], null);
+        
         var permissaoGeral = dsGrupos.values.length > 0;
-
         const permissoes = buscaObrasPorPermissaoDoUsuario(userCode, permissaoGeral);
         if (permissoes.length == 0) {
             FLUIGC.toast({
@@ -108,8 +110,7 @@ function preencherObrasDoUsuario() {
         permissoes.forEach((ccusto) => {
             if (!selectObra[0].selectize.optgroups[ccusto.NOMEFANTASIA]) {
                 $("#obra")[0].selectize.addOptionGroup(ccusto.CODCOLIGADA, { value: ccusto.CODCOLIGADA, label: `${ccusto.CODCOLIGADA} - ${ccusto.NOMEFANTASIA}` });
-            }
-
+            }           
             const optionValue = `${ccusto.CODCOLIGADA} - ${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
             const optionLabel = `${ccusto.CODCCUSTO} - ${ccusto.perfil}`;
             selectObra[0].selectize.addOption({ value: optionValue, label: optionLabel, optgroup: ccusto.CODCOLIGADA });
@@ -386,7 +387,7 @@ async function enviarSolicitacao() {
             Swal.close();
             parent.$("#send-process-button").click();
         } else {
-        	parent.$("#send-process-button").click();
+            parent.$("#send-process-button").click();
         }
     }
     else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {
@@ -396,9 +397,10 @@ async function enviarSolicitacao() {
             await promiseAtualizaDocumentoNoGED(pdf, $("#contratoPdfId").val(), geraNomeDoArquivo() + ".pdf", pastaDeAnexos);
         }
         parent.$("#send-process-button").click();
+
     }
     else {
-    	parent.$("#send-process-button").click();
+        parent.$("#send-process-button").click();
     }
 }
 function validaCampos() {

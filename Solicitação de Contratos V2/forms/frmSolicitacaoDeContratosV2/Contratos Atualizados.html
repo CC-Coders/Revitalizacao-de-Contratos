@@ -696,7 +696,7 @@
                               </div>
                            </div>
                            <div class="row">
-                              <div class="col-md-6 campoLocacaoEquipamento">
+                              <div id="divRetencao" class="col-md-6 campoLocacaoEquipamento">
                                  <div>
                                     <label for="">Retenção?</label>
                                     <select name="temRetencao" id="temRetencao" class="form-control">
@@ -872,9 +872,16 @@
                      </div>
                   </div>
                   <!-- Botões -->
+                  <div id="divInputFileSubstituirWord"></div>
                   <div id="divBotoesEdicaoContrato" style="text-align: center; margin-top: 20px; display: none;">
                      <button type="button" class="btn btn-primary" id="btnEditarArquivo">
                      <i class="flaticon flaticon-edit-square icon-sm" aria-hidden="true"></i>Editar Arquivo
+                     </button>
+                     <button type="button" class="btn btn-primary" id="btnSubstituirWord">
+                     <i class="flaticon flaticon-upload icon-sm" aria-hidden="true"></i>Substituir Word
+                     </button>
+                     <button type="button" class="btn btn-primary" id="btnBaixarWord">
+                     <i class="flaticon flaticon-download icon-sm" aria-hidden="true"></i>Baixar Word
                      </button>
                      <button type="button" class="btn btn-primary" id="btnVisualizarArquivo">
                      <i class="flaticon flaticon-documents icon-sm" aria-hidden="true"></i>Abrir Arquivo
