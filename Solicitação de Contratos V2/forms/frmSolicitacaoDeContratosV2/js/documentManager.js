@@ -16,6 +16,7 @@ const codigosModelos = {
         "Locação de Imóvel - PF": 2316784,
         "Locação de Equipamento": 2070416,
         "Locação de Equipamento - Com Mão de Obra": 2070417,
+        "Transporte de Materiais": 249702,
 
         // Aditivos
         "Locação de Equipamento - Alteração de Valor": 2245474,
