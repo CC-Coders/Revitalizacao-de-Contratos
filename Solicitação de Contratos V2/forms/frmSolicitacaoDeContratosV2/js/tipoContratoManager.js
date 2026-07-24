@@ -30,7 +30,8 @@ function onChangeTipoContrato(that) {
             // Redesenha a tabela ( draw )
             dataTableEquipamentosAditivoRescisao.columns.adjust().draw();
 
-        } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" || tipoContrato == "Locação de Equipamento - Exclusão de Equipamentos") {
+        } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" || tipoContrato == "Locação de Equipamento - Exclusão de Equipamentos" ||
+            tipoContrato == "Transporte de Materiais - Inclusão de Equipamento" || tipoContrato == "Transporte de Materiais - Exclusão de Equipamento") {
             // Oculta a coluna na posição 10 ( "Valor Reajustado" )
             dataTableEquipamentosAditivoRescisao.column(10).visible(false);
 
@@ -81,16 +82,23 @@ function onChangeTipoContrato(that) {
         }
 
     } else if (tipoContrato.includes("Transporte de Materiais")) {
-        if (origemContrato == "Aditivos") {
-            // Só a seleção do contrato principal + os campos de Dados Contratuais.
-            // A lista de equipamentos ainda não é montada para Transporte de Materiais
-            // (preencheListaDeEquipamentos_aditivosRescisao só trata os tipos de Locação),
-            // então a página fica oculta para não exibir uma tabela vazia.
-            $("#divTableEquipamentos, #divTableEquipamentosAditivoRescisao, #paginationEquipamentos").addClass("hidden").hide();
+        //paginação (contrato principal / equipamentos / anexos) por origem e tipo de alteração
+        if (origemContrato == "Aditivos" || origemContrato == "Rescisões") {
+            $("#divTableEquipamentos").addClass("hidden").hide();
             $("#paginationContratoPrincipal").removeClass("hidden").show();
 
-            // Mesma regra dos aditivos de Locação de Equipamento: aqui não se pede anexo.
-            $("#paginationAnexos").addClass("hidden").hide();
+            if (tipoContrato == "Transporte de Materiais - Inclusão de Equipamento" ||
+                tipoContrato == "Transporte de Materiais - Exclusão de Equipamento") {
+                $("#paginationEquipamentos, #divTableEquipamentosAditivoRescisao").removeClass("hidden").show();
+            } else {
+                $("#paginationEquipamentos, #divTableEquipamentosAditivoRescisao").addClass("hidden").hide();
+            }
+
+            if (origemContrato == "Aditivos") {
+                $("#paginationAnexos").addClass("hidden").hide();
+            } else {
+                $("#paginationAnexos").removeClass("hidden").show();
+            }
 
         } else {
             $("#paginationContratoPrincipal, #divTableEquipamentosAditivoRescisao").addClass("hidden").hide();
@@ -253,10 +261,9 @@ function onChangeTipoContrato(that) {
             $(".campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento").show();
         }
         else if (tipoContrato.includes("Transporte de Materiais")) {
+            //mostra o grupo de campos de Dados Contratuais conforme o Tipo de Alteração
             $("#dadosContrato").show();
 
-            // Data de Reajuste é digitada em todos os aditivos de Transporte de Materiais,
-            // igual ao que já acontece nos aditivos de Locação.
             $("#dataReajuste").removeAttr("readonly");
 
             if (tipoContrato === "Transporte de Materiais - Alteração de Valor") {
@@ -270,9 +277,12 @@ function onChangeTipoContrato(that) {
             }
             else if (tipoContrato === "Transporte de Materiais - Inclusão de Equipamento") {
                 $(".campoTransporteAditivo_inclusaoEquipamento").show();
+                //após exibir o grupo, aplica o Formato de Cobrança para mostrar só o campo de valor certo
+                toggleFormatoCobrancaAditivoTransporte();
             }
             else if (tipoContrato === "Transporte de Materiais - Exclusão de Equipamento") {
                 $(".campoTransporteAditivo_exclusaoEquipamento").show();
+                toggleFormatoCobrancaAditivoTransporte();
             }
         }
         else {
@@ -282,7 +292,10 @@ function onChangeTipoContrato(that) {
     else if (origemContrato == "Rescisões") {
         $(`
             .campoLocacaoImovel, .campoLocacaoEquipamento, .divDadosPagamento, .campoLocacaoImovelAditivo_alteracaoValor, .campoLocacaoImovelAditivo_alteracaoPrazo,
-            .campoLocacaoEquipamento_alteracaoValor, .campoLocacaoEquipamento_rescisao, .campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento`
+            .campoLocacaoEquipamento_alteracaoValor, .campoLocacaoEquipamento_rescisao, .campoLocacaoEquipamento_inclusaoEquipamento_exclusaoEquipamento,
+            .campoTransporteMateriais, .campoTransporteRescisao,
+            .campoTransporteAditivo_alteracaoValor, .campoTransporteAditivo_alteracaoPrazo,
+            .campoTransporteAditivo_inclusaoEquipamento, .campoTransporteAditivo_exclusaoEquipamento`
         ).hide();
         $("#percentualRetencao").closest("div").hide();
         $("#dadosContrato, .divDadosContratuais").show();
@@ -311,6 +324,12 @@ function onChangeTipoContrato(that) {
 
             // Adiciona class para obrigar digitar o RG do Fornecedor, pois precisa para usar no contrato de aditivo/rescisão.
             $("#rgFornecedor").addClass("inputInfoChamado");
+
+        } else if (tipoContrato == "Transporte de Materiais (Rescisões)") {
+            //rescisão de Transporte mostra só os Dados Gerais (sem Valor Mensal)
+            $(".campoTransporteRescisao").show();
+
+            $(".divDadosContratuais").hide();
 
         } else {
             $("#dadosContrato").hide();
@@ -342,6 +361,7 @@ const alteracoesPorTipoContratoBase = {
     "Inclusão de Equipamento",
     "Exclusão de Equipamento"
   ],
+  //alterações permitidas para aditivo de Transporte de Materiais
   "Transporte de Materiais": [
     "Alteração de Valor",
     "Alteração de Prazo",
@@ -447,34 +467,28 @@ function atualizaTipoContratoHidden() {
     } else if (tipoContratobase == "Locação de Equipamento - Com Mão de Obra") {
         $("#tipoContrato").val("Locação de Equipamento - Com Mão de Obra (Rescisões)").trigger("change");
         return;
+
+    } else if (tipoContratobase == "Transporte de Materiais") {
+        //compõe o tipo de rescisão de Transporte
+        $("#tipoContrato").val("Transporte de Materiais (Rescisões)").trigger("change");
+        return;
     }
   }
 
-  // Se a origem for "Novos", também não existe composição com alteração.
-  // O valor final é o próprio tipo base.
   if (origemContrato === "Novos") {
     $("#tipoContrato").val(tipoContratobase).trigger("change");
     return;
   }
 
-  // Se chegou aqui, a origem é "Aditivos".
-  // Em Aditivos, o valor final depende de escolher também o tipo de alteração.
-  // Se ainda não escolheu alteração, deixa o hidden vazio e dispara "change"
-  // (evita gerar uma frase incompleta e evita que regras antigas rodem com valor errado).
+
   if (!tipoAlteracao) {
     $("#tipoContrato").val("").trigger("change");
     return;
   }
 
-  // Monta a frase completa no formato usado pelo projeto:
-  // "Tipo Base - Tipo Alteração"
-  // Ex.: "Locação de Equipamento - Alteração de Valor"
-  // e dispara "change" para reaproveitar a lógica existente do sistema.
   $("#tipoContrato").val(`${tipoContratobase} - ${tipoAlteracao}`).trigger("change");
 }
 
-// Ordena os campos quando tipoContrato == "Locação de Equipamento - Alteração de Prazo"
-// A pedido do Flavio
 function ordenaCamposNoFormPorTipoContrato() {
     var tipoContrato = $("#tipoContrato").val();
 

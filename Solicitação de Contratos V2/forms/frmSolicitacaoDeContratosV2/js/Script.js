@@ -217,9 +217,10 @@ function bindings() {
         ) {
             anexosPorTipoDeContrato("Locação de Equipamento");
 
-        }else if (tipoContrato == "Transporte de Materiais") {   
-            anexosPorTipoDeContrato("Transporte de Materiais");   
-        } 
+        } else if (tipoContrato == "Transporte de Materiais" || tipoContrato == "Transporte de Materiais (Rescisões)") {
+            // A rescisão reaproveita a lista do tipo base, igual à rescisão de Locação de Equipamento.
+            anexosPorTipoDeContrato("Transporte de Materiais");
+        }
 
         if (tipoContrato == "Locação de Equipamento - Alteração de Prazo") {
             anexosPorTipoDeContrato("Locação de Equipamento - Alteração de Prazo");
@@ -235,26 +236,27 @@ function bindings() {
 
         }
 
-        // Caso o usuário alterou tipoAlterção ou tipoContratoBase e não altere a Obra/Fornecedor
-        // Já atualiza a tabela, sem precisar o usuário ter que selecionar novamente Obra/Fornecedor
-        // Só roda se tiver valor em tipoContrato porque quando Aditivo 
-        // precisa que seja preenchido tanto #tipoContratoBase quanto #tipoAlteracao
-        // Feito isso para não mostrar window de erro de datatable
         if (tipoContrato) {
             atualizaDatatableContratoPrincipal();
         }
 
         if (atividade == ATIVIDADES.INICIO || atividade == ATIVIDADES.INICIO_0) {
-            if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+            //título dinâmico "Equipamentos Disponíveis" + página de Inclusão/Exclusão
+            if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
+                tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
                 $("#tituloExclusaoEquip").hide();
                 $("#divEquipamentosParaInclusaoExclusao, #tituloInclusaoEquip").show();
+                $("#tituloPaginaEquipamentos").text("Equipamentos Disponíveis");
 
-            } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+            } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" ||
+                tipoContrato == "Transporte de Materiais - Exclusão de Equipamento") {
                 $("#tituloInclusaoEquip").hide();
                 $("#divEquipamentosParaInclusaoExclusao, #tituloExclusaoEquip").show();
+                $("#tituloPaginaEquipamentos").text("Equipamentos Vinculados ao Contrato");
 
             } else {
-                $("#divEquipamentosParaInclusaoExclusao, #tituloInclusaoEquip, #divEquipamentosParaInclusaoExclusao, #tituloExclusaoEquip").hide();
+                $("#divEquipamentosParaInclusaoExclusao, #tituloInclusaoEquip, #tituloExclusaoEquip").hide();
+                $("#tituloPaginaEquipamentos").text("Equipamentos");
             }
         }
     });
@@ -646,7 +648,8 @@ function bindings() {
         // Sempre limpa a tabela
         dataTableEquipamentosAditivoRescisao.clear().draw();
 
-        if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" && obra && locador) {
+        if ((tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
+            tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") && obra && locador) {
             preencheListaDeEquipamentos_aditivosRescisao();
 
         } else if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Transporte de Materiais" || tipoContrato == "Locação de Equipamento - Com Mão de Obra" && obra && locador) {
@@ -738,41 +741,80 @@ function bindings() {
         $("#dataFimTransporte").val(("0" + d2.getDate()).slice(-2) + "/" + ("0" + (d2.getMonth() + 1)).slice(-2) + "/" + d2.getFullYear());
     });
 
-    // Transporte de Materiais (Aditivos) - Máscaras de Dinheiro
-    $("#valorModalidadeTransporte, #valorMensalExclusaoTransporte").maskMoney({
+    // máscaras de dinheiro, bloqueio do Valor por Modalidade e cálculo de meses
+    $("#valorModalidadeTransporte, #valorMensalAditivoTransporte, #valorTAditivoTransporte").maskMoney({
         prefix: "R$ ", thousands: ".", decimal: ",", allowZero: true, affixesStay: true,
     });
 
-    // Transporte de Materiais (Aditivos) - Cálculo de meses
-    $("#novaDataFimTransporte").on("change", atualizaMesesAditivoTransporte);
+    function _bloqueiaValorPorModalidadeTransporte() {
+        var temModalidade = !!$("#modalidadeValorTransporte").val();
+        $("#valorModalidadeTransporte").prop("disabled", !temModalidade);
+        if (!temModalidade) { $("#valorModalidadeTransporte").val(""); }
+    }
+    _bloqueiaValorPorModalidadeTransporte(); // estado inicial (Modalidade = "Selecione" → desabilitado)
+    $("#modalidadeValorTransporte").off("change.transporte").on("change.transporte", _bloqueiaValorPorModalidadeTransporte);
+
+    //Formato de Cobrança dos aditivos de Inclusão/Exclusão (2 modos, igual ao Novos)
+    $("#formatoCobrancaAditivo").off("change.transporte").on("change.transporte", toggleFormatoCobrancaAditivoTransporte);
+    $("#novaDataFimTransporte").off("change.transporte").on("change.transporte", function () {
+        clearTimeout(window._debounceNovaDataFimTransporte);
+        window._debounceNovaDataFimTransporte = setTimeout(function () {
+            validaNovaDataFimTransporte();
+            atualizaMesesAditivoTransporte();
+        }, 350);
+    });
 }
 
-// Prazo do contrato de Transporte de Materiais já considerando a prorrogação do aditivo:
-// conta do início original (vindo do RM) até a nova data de fim.
-function atualizaMesesAditivoTransporte() {
-    var inicio = $("#dataInicioContratoTransporte").val();
-    var novoFim = $("#novaDataFimTransporte").val();
-
-    if (!inicio || !novoFim) { $("#mesesAditivoTransporte").val(""); return; }
-
-    var d1 = parseDataBR(inicio);
-    var d2 = parseDataBR(novoFim);
-
-    if (!d1 || !d2) {
-        FLUIGC.toast({ title: "", message: "Data inválida! Use o formato dd/mm/aaaa.", type: "warning", timeout: 4000 });
-        $("#novaDataFimTransporte").val(""); $("#mesesAditivoTransporte").val(""); return;
-    }
+//alerta imediato quando a nova data de fim é inválida ou <= data de fim atual.
+function validaNovaDataFimTransporte() {
+    var novoFimStr = $("#novaDataFimTransporte").val();
+    if (!novoFimStr) { return; } // nada digitado ainda
 
     var fimAtual = parseDataBR($("#dataFimContratoTransporte").val());
+    var novoFim  = parseDataBR(novoFimStr);
 
-    if (fimAtual && d2 <= fimAtual) {
-        FLUIGC.toast({ title: "", message: "A nova data de fim precisa ser maior que a data de fim atual do contrato!", type: "warning", timeout: 4000 });
-        $("#novaDataFimTransporte").val(""); $("#mesesAditivoTransporte").val(""); return;
+    if (!novoFim) {
+        FLUIGC.toast({ title: "", message: "Data inválida! Use o formato dd/mm/aaaa.", type: "warning", timeout: 4000 });
+        $("#novaDataFimTransporte").val(""); $("#mesesAditivoTransporte").val("");
+        return;
     }
 
-    var meses = (d2.getFullYear() - d1.getFullYear()) * 12 + (d2.getMonth() - d1.getMonth());
-    if (d2.getDate() < d1.getDate()) { meses--; }
+    if (fimAtual && novoFim <= fimAtual) {
+        FLUIGC.toast({ title: "", message: "A nova data de fim precisa ser maior que a data de fim atual do contrato!", type: "warning", timeout: 4000 });
+        $("#novaDataFimTransporte").val(""); $("#mesesAditivoTransporte").val("");
+    }
+}
+
+
+
+//meses de contrato = diferença entre a data de fim atual e a nova data de fim
+function atualizaMesesAditivoTransporte() {
+    var fimAtualStr = $("#dataFimContratoTransporte").val();
+    var novoFimStr  = $("#novaDataFimTransporte").val();
+
+    if (!fimAtualStr || !novoFimStr) { $("#mesesAditivoTransporte").val(""); return; }
+
+    var fimAtual = parseDataBR(fimAtualStr);
+    var novoFim  = parseDataBR(novoFimStr);
+
+    if (!fimAtual || !novoFim || novoFim <= fimAtual) {
+        $("#mesesAditivoTransporte").val("");
+        return;
+    }
+
+    // Meses de contrato = diferença entre a data de fim atual e a nova data de fim.
+    var meses = (novoFim.getFullYear() - fimAtual.getFullYear()) * 12 + (novoFim.getMonth() - fimAtual.getMonth());
+    if (novoFim.getDate() < fimAtual.getDate()) { meses--; }
     $("#mesesAditivoTransporte").val(meses + (meses === 1 ? " mês" : " meses"));
+}
+
+//mostra o campo de valor conforme o Formato de Cobrança do aditivo (Incl/Excl).
+function toggleFormatoCobrancaAditivoTransporte() {
+    var formato = $("#formatoCobrancaAditivo").val();
+    $("#divValorMensalAditivoTransporte").toggle(formato === "Valor Fixo");
+    $("#divValorTAditivoTransporte, #divKmAditivoTransporte").toggle(formato === "Valor por Parâmetro");
+    if (formato !== "Valor Fixo")        { $("#valorMensalAditivoTransporte").val(""); }
+    if (formato !== "Valor por Parâmetro") { $("#valorTAditivoTransporte").val(""); $("#kmAditivoTransporte").val(""); }
 }
 
 function parseDataBR(s) {
@@ -815,9 +857,10 @@ async function loadTelaInicio() {
     initDataTableEquipamentos_aditivoRescisao();
     initDataTableEquipamentosParaInclusaoExclusao();
     preencheListaDeEquipamentos_aditivosRescisao();
-
     $("#temRetencao").attr("readonly", "readonly");
     $("#selectTestemunha").selectize();
+    asyncAtualizaListaDeAssinantes();
+    carregaTestemunhas();
     asyncAtualizaListaDeAssinantes();
     preencherCamposViaSessionStorage();
 }

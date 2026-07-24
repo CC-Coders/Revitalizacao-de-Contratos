@@ -94,6 +94,10 @@ function beforeTaskSave_inicio() {
             insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"));
             atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
 
+        } else if (tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
+           
+            insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"));
+
         }
 
         // Cria/insere somente quando contratos novos.
@@ -186,9 +190,6 @@ function beforeTaskSave_diretoria() {
 }
 function beforeTaskSave_statusAssinaturaEletronica() {
 
-    // Aqui não atualiza dataAssinatura na base CastilhoCustom porque já é feito isso em ...intermediateconditional58.js
-    // Mas qundo assinatura manual, atualiza a dataAssinatura através da função beforeTaskSave_obraRecebeViasOriginais / atividade obraRecebeViasOriginais
-
     if (hAPI.getCardValue("statusAssinatura") == "Assinado") {
         alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "ATIVO");
         regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();
@@ -196,20 +197,27 @@ function beforeTaskSave_statusAssinaturaEletronica() {
 }
 function beforeTaskSave_obraRecebeViasOriginais() {
     var ID_TCNT_AUXILIAR = hAPI.getCardValue("ID_TCNT_AUXILIAR");
+    var origemContrato = hAPI.getCardValue("origemContrato");
 
-    if (hAPI.getCardValue("origemContrato") == "Novos") {
+    var DATA_ASSINATURA = getDateTimeNow();
+    hAPI.setCardValue("dataAssinatura", DATA_ASSINATURA);
+
+    // Só grava com ID_TCNT_AUXILIAR válido (Transporte podia vir como "   -   ").
+    var idAux = parseInt(ID_TCNT_AUXILIAR, 10);
+    if (!isNaN(idAux) && idAux > 0) {
+        updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, idAux);
+    } else {
+        log.warn("obraRecebeViasOriginais - ID_TCNT_AUXILIAR inválido, pulando update de dataAssinatura: " + ID_TCNT_AUXILIAR);
+    }
+
+
+    if (origemContrato == "Novos") {
         var IDCNT = hAPI.getCardValue("IDCNT");
-        var DATA_ASSINATURA = getDateTimeNow();
-        hAPI.setCardValue("dataAssinatura", DATA_ASSINATURA);
-        updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR);
         alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "ATIVO");
-        
     }
     regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();
 }
 
-// Centraliza as regras que beforeTaskSave_statusAssinaturaEletronica e beforeTaskSave_obraRecebeViasOriginais usam
-// Antes se repetia as lógicas nas 2 funções (Assinatura eletrônica/manual) o que dificultava manutenção
 function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {
 
     // Formata valor monetario para float
@@ -302,6 +310,14 @@ function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {
 
             // Desativa equipamentos no SISMA
             updateSISMA_statusEquipamento();
+
+        } else if (tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
+
+            updateTcntAuxiliarItens_statusEquipNoContrato("1", ID_TCNT_AUXILIAR);
+
+        } else if (tipoContrato == "Transporte de Materiais - Exclusão de Equipamento") {
+            // MELHORIA TRANSPORTE — desativa (ATIVO=0) os equipamentos selecionados para exclusão do contrato.
+            updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR);
 
         }
     } catch (error) {
@@ -1388,36 +1404,40 @@ function getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR) {
 
             return parseInt(result[0].NSEQITEMCNT);
 
+        } else if (tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
+
+            var query = "SELECT COALESCE(MAX(NSEQITEMCNT), -1) + 1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?"
+
+            var result = executaQuery(query, [
+                { type: "int", value: ID_TCNT_AUXILIAR }
+            ], "/jdbc/CastilhoCustom");
+
+            return parseInt(result[0].NSEQITEMCNT);
+
         } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
 
 
         }
 
     } catch (error) {
-        // O bloco catch captura qualquer erro lançado dentro do try.
-        // Em JavaScript/TypeScript, o valor capturado pode ser qualquer coisa
-        // (Error, string, objeto, número, etc).
+
 
         if (error instanceof Error) {
-            // Se o erro já for uma instância da classe Error,
-            // simplesmente relança o mesmo erro.
+            
             throw error;
         } else {
-            // Caso o erro NÃO seja um Error (ex: string, objeto, número),
-            // criamos um novo Error para padronizar o tipo de erro lançado.
+
 
             throw new Error(
-                // Se for uma string, usamos diretamente como mensagem
+              
                 typeof error === "string"
                     ? error
-                    // Caso contrário, convertemos o valor para JSON
-                    // para gerar uma mensagem legível.
                     : JSON.stringify(error)
             );
         }
     }
 }
-function updateSISMA_statusEquipamento() { // Exclusão/Rescisão do Contrato de Equip
+function updateSISMA_statusEquipamento() { 
     try {
         var dataAtual = getDateNow() + " 00:00:00";
 
@@ -1449,24 +1469,18 @@ function updateSISMA_statusEquipamento() { // Exclusão/Rescisão do Contrato de
         }
 
     } catch (error) {
-        // O bloco catch captura qualquer erro lançado dentro do try.
-        // Em JavaScript/TypeScript, o valor capturado pode ser qualquer coisa
-        // (Error, string, objeto, número, etc).
+
 
         if (error instanceof Error) {
-            // Se o erro já for uma instância da classe Error,
-            // simplesmente relança o mesmo erro.
+            
             throw error;
         } else {
-            // Caso o erro NÃO seja um Error (ex: string, objeto, número),
-            // criamos um novo Error para padronizar o tipo de erro lançado.
+            
 
             throw new Error(
-                // Se for uma string, usamos diretamente como mensagem
                 typeof error === "string"
                     ? error
-                    // Caso contrário, convertemos o valor para JSON
-                    // para gerar uma mensagem legível.
+                    //
                     : JSON.stringify(error)
             );
         }

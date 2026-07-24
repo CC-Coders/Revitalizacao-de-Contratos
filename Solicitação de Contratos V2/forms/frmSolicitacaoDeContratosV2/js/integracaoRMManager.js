@@ -122,8 +122,20 @@ function preencheCamposAutomaticamente() {
             codigoProduto = 1727;
         }
 
+    
+        //valor do item no RM = Valor por Tonelada × KM Rodado
+        var valorItemRM = valorMensalLocacao;
+        if (TIPO_CONTRATO == "Transporte de Materiais") {
+            if ($("#formatoCobrancaTransporte").val() == "Valor por Parâmetro") {
+                var _valorTon = moneyToFloat($("#valorM3Transporte").val()) || 0;   
+                var _kmRodado = parseFloat($("#kmTransporte").val()) || 0; 
+                valorItemRM = floatToMoney(_valorTon * _kmRodado);
+            } else {
+                valorItemRM = $("#valorMensalTransporte").val();                    // Valor Fixo
+            }
+        }
         // Insere item do Produto
-        await insereItem(codigoProduto, valorMensalLocacao, '1.3.03');
+        await insereItem(codigoProduto, valorItemRM, '1.3.03');
 
         if (temRetencao) {
             // Se tem retenção gera o item de retenção
@@ -162,6 +174,7 @@ function preencheCamposAutomaticamente() {
     }
 }
 
+//lista central dos tipos de Transporte, aplicada às 5 coligadas em regraRepresentantes
 const TIPOS_TRANSPORTE_MATERIAIS = [
     "Transporte de Material - S/M.O", // Nome usado pelo RM
     "Transporte de Materiais",
@@ -170,6 +183,7 @@ const TIPOS_TRANSPORTE_MATERIAIS = [
     "Transporte de Materiais - Alteração de Prazo e Valor",
     "Transporte de Materiais - Inclusão de Equipamento",
     "Transporte de Materiais - Exclusão de Equipamento",
+    "Transporte de Materiais (Rescisões)",
 ];
 function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
     if (CODCOLIGADA == 1) {
@@ -355,10 +369,11 @@ function regraTipoDeContrato() {
         return "04"
     }
     if (tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
-        return "09" // Antes era 04
+        return "09" 
     }
     if (tipoContrato == "Transporte de Materiais") {
-        return "11" // TTCN.DESCRICAO = "Transporte de Material - S/M.O."
+        //CODTCN fixo do Transporte no RM
+        return "11" 
     }
 
 

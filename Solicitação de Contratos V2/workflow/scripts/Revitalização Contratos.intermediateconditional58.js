@@ -14,16 +14,20 @@ function intermediateconditional58() {
         log.info(status);
         hAPI.setCardValue("statusAssinatura", status);
 
-        // Se o status da assinatura for igual a "Assinado"
+
         if (status == "Assinado") {
 
-            // Pega a data de assinatura do form "ds_form_aux_wesign" do campo dataAssinatura (mesmo nome)
             var dataAssinado = ds.getValue(i, "dataAssinatura");
 
-            // Se dataAssinatura (do form "ds_form_aux_wesign") não estiver como "null" então seta a data no campo dataAssinatura do form de Revitalização de Contrato.
             if (dataAssinado !== "null") {
                 hAPI.setCardValue("dataAssinatura", dataAssinado);
-                updateTcntAuxiliar_dataAssinatura(dataAssinado, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
+
+                var idTcntAuxiliar = parseInt(hAPI.getCardValue("ID_TCNT_AUXILIAR"), 10);
+                if (!isNaN(idTcntAuxiliar) && idTcntAuxiliar > 0) {
+                    updateTcntAuxiliar_dataAssinatura(dataAssinado, idTcntAuxiliar);
+                } else {
+                    log.warn("intermediate58 - ID_TCNT_AUXILIAR inválido, pulando update de dataAssinatura: " + hAPI.getCardValue("ID_TCNT_AUXILIAR"));
+                }
             }
             
             log.info("intermediate58 - antes do return true");
