@@ -40,10 +40,10 @@ function preencheCamposAutomaticamente() {
 
         var TIPO_CONTRATO = $("#tipoContrato").val();
         $("#novoContratoObjeto").val(TIPO_CONTRATO);
-        if (TIPO_CONTRATO == "Locação de Imóvel" || TIPO_CONTRATO == "Locação de Equipamento" || TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
+        if (TIPO_CONTRATO == "Locação de Imóvel" || TIPO_CONTRATO == "Locação de Equipamento" ||
+            TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra" || TIPO_CONTRATO == "Transporte de Materiais") {
             $("#novoContratoTipoContrato").val(regraTipoDeContrato());
         }
-        
         var CCUSTO = $("#CODCCUSTO").val();
         $("#novoContratoCCUSTO").val(CCUSTO);
 
@@ -55,7 +55,7 @@ function preencheCamposAutomaticamente() {
             }
         });
 
-         if (TIPO_CONTRATO == "Locação de Imóvel" ) {
+        if (TIPO_CONTRATO == "Locação de Imóvel" ) {
             var periodo = $("#periodoLocacao").val();
             var [periodoInit, periodoEnd] = periodo.split(" até ");
             $("#novoContratoDataInicio").val(periodoInit);
@@ -64,6 +64,12 @@ function preencheCamposAutomaticamente() {
         else  if (TIPO_CONTRATO == "Locação de Equipamento" || TIPO_CONTRATO == "Locação de Equipamento - Com Mão de Obra") {
             var periodoInit = $("#dataInicioLocacao").val();
             var periodoEnd = $("#dataFimLocacao").val();
+            $("#novoContratoDataInicio").val(periodoInit);
+            $("#novoContratoDataFim").val(periodoEnd);
+        }
+        else  if (TIPO_CONTRATO == "Transporte de Materiais") {
+            var periodoInit = $("#dataInicioTransporte").val();
+            var periodoEnd = $("#dataFimTransporte").val();
             $("#novoContratoDataInicio").val(periodoInit);
             $("#novoContratoDataFim").val(periodoEnd);
         }
@@ -116,8 +122,20 @@ function preencheCamposAutomaticamente() {
             codigoProduto = 1727;
         }
 
+    
+        //valor do item no RM = Valor por Tonelada × KM Rodado
+        var valorItemRM = valorMensalLocacao;
+        if (TIPO_CONTRATO == "Transporte de Materiais") {
+            if ($("#formatoCobrancaTransporte").val() == "Valor por Parâmetro") {
+                var _valorTon = moneyToFloat($("#valorM3Transporte").val()) || 0;   
+                var _kmRodado = parseFloat($("#kmTransporte").val()) || 0; 
+                valorItemRM = floatToMoney(_valorTon * _kmRodado);
+            } else {
+                valorItemRM = $("#valorMensalTransporte").val();                    // Valor Fixo
+            }
+        }
         // Insere item do Produto
-        await insereItem(codigoProduto, valorMensalLocacao, '1.3.03');
+        await insereItem(codigoProduto, valorItemRM, '1.3.03');
 
         if (temRetencao) {
             // Se tem retenção gera o item de retenção
@@ -155,6 +173,18 @@ function preencheCamposAutomaticamente() {
         });
     }
 }
+
+//lista central dos tipos de Transporte, aplicada às 5 coligadas em regraRepresentantes
+const TIPOS_TRANSPORTE_MATERIAIS = [
+    "Transporte de Material - S/M.O", // Nome usado pelo RM
+    "Transporte de Materiais",
+    "Transporte de Materiais - Alteração de Valor",
+    "Transporte de Materiais - Alteração de Prazo",
+    "Transporte de Materiais - Alteração de Prazo e Valor",
+    "Transporte de Materiais - Inclusão de Equipamento",
+    "Transporte de Materiais - Exclusão de Equipamento",
+    "Transporte de Materiais (Rescisões)",
+];
 function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
     if (CODCOLIGADA == 1) {
         var representantes = representantesCastilho();
@@ -183,11 +213,11 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
             {
                 representante: "Jerson Godoy Leski Junior",
                 tipos: [
-                    "Locação de Equipamentos - S/M.O", 
-                    "Locação de Equipamento - Com Mão de Obra", 
-                    "Transporte de Material - S/M.O", 
+                    "Locação de Equipamentos - S/M.O",
+                    "Locação de Equipamento - Com Mão de Obra",
+                    ...TIPOS_TRANSPORTE_MATERIAIS,
                     "Locação de Equipamento",
-                    "Locação de Equipamento - Alteração de Valor", 
+                    "Locação de Equipamento - Alteração de Valor",
                     "Locação de Equipamento - Alteração de Prazo",
                     "Locação de Equipamento - Alteração de Prazo e Valor",
                     "Locação de Equipamento - Inclusão de Equipamento",
@@ -220,10 +250,10 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
             {
                 representante: "Jerson Godoy Leski Junior",
                 tipos: [
-                    "Locação de Equipamentos - S/M.O", 
-                    "Locação de Equipamento - Com Mão de Obra", 
-                    "Transporte de Material - S/M.O",
-                    "Locação de Equipamento - Alteração de Valor", 
+                    "Locação de Equipamentos - S/M.O",
+                    "Locação de Equipamento - Com Mão de Obra",
+                    ...TIPOS_TRANSPORTE_MATERIAIS,
+                    "Locação de Equipamento - Alteração de Valor",
                     "Locação de Equipamento - Alteração de Prazo",
                     "Locação de Equipamento - Alteração de Prazo e Valor",
                     "Locação de Equipamento - Com Mão de Obra (Rescisões)",
@@ -248,9 +278,9 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
             {
                 representante: "Jerson Godoy Leski Junior",
                 tipos: [
-                    "Locação de Equipamentos - S/M.O", 
-                    "Locação de Equipamento - Com Mão de Obra", 
-                    "Transporte de Material - S/M.O",
+                    "Locação de Equipamentos - S/M.O",
+                    "Locação de Equipamento - Com Mão de Obra",
+                    ...TIPOS_TRANSPORTE_MATERIAIS,
                     "Locação de Equipamento - Alteração de Valor",
                     "Locação de Equipamento - Alteração de Prazo",
                     "Locação de Equipamento - Alteração de Prazo e Valor",
@@ -278,7 +308,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
             {
                 representante: "Mario Rogers de Castilho",
                 tipos: [
-                    "Locação de Equipamento - Com Mão de Obra", 
+                    "Locação de Equipamento - Com Mão de Obra",
                     "Locação de Equipamento",
                     "Locação de Equipamento - Alteração de Valor",
                     "Locação de Equipamento - Alteração de Prazo",
@@ -288,7 +318,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                     "Locação de Equipamento - Com Mão de Obra (Rescisões)",
                     "Locação de Equipamento (Rescisões)",
 
-                    "Transporte de Material - S/M.O",
+                    ...TIPOS_TRANSPORTE_MATERIAIS,
                     "Prestação de Serviços - Sub-Empreiteiros",
                     "Prestação de Serviços",
                     "Prestação de Serviços - Vigilância",
@@ -315,7 +345,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                     "Locação de Equipamento - Com Mão de Obra (Rescisões)",
                     "Locação de Equipamento (Rescisões)",
 
-                    "Transporte de Material - S/M.O",
+                    ...TIPOS_TRANSPORTE_MATERIAIS,
                     "Prestação de Serviços - Sub-Empreiteiros",
                     "Prestação de Serviços",
                     "Prestação de Serviços - Vigilância",
@@ -339,7 +369,11 @@ function regraTipoDeContrato() {
         return "04"
     }
     if (tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
-        return "09" // Antes era 04
+        return "09" 
+    }
+    if (tipoContrato == "Transporte de Materiais") {
+        //CODTCN fixo do Transporte no RM
+        return "11" 
     }
 
 

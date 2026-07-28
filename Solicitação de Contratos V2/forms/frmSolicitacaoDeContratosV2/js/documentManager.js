@@ -16,6 +16,7 @@ const codigosModelos = {
         "Locação de Imóvel - PF": 2316784,
         "Locação de Equipamento": 2070416,
         "Locação de Equipamento - Com Mão de Obra": 2070417,
+        "Transporte de Materiais": 249702,
 
         // Aditivos
         "Locação de Equipamento - Alteração de Valor": 2245474,
@@ -42,6 +43,7 @@ const codigosModelos = {
         "Locação de Imóvel": 39635,
         "Locação de Equipamento": 39636,
         "Locação de Equipamento - Com Mão de Obra": 39959,
+        "Transporte de Materiais": 44178,
 
         // Aditivos
         "Locação de Equipamento - Alteração de Valor": 40819,
@@ -49,24 +51,26 @@ const codigosModelos = {
         "Locação de Equipamento - Alteração de Prazo e Valor": 40818,
         "Locação de Equipamento - Inclusão de Equipamento": 40858,
         "Locação de Equipamento - Exclusão de Equipamento": 40889,
-
         "Locação de Imóvel PF - Alteração de Valor": 40813,
         "Locação de Imóvel PF - Alteração de Prazo": 40812,
         "Locação de Imóvel PF - Alteração de Prazo e Valor": 40816,
         "Locação de Imóvel PJ - Alteração de Prazo": 40811,
         "Locação de Imóvel PJ - Alteração de Valor": 40815,
         "Locação de Imóvel PJ - Alteração de Prazo e Valor": 40810,
+        "Transporte de Materiais (Aditivos)": 43957,
 
         // Rescisões
         "Locação de Equipamento (Rescisões)": 40928,
         "Locação de Equipamento - Com Mão de Obra (Rescisões)": 40939,
         "Locação de Imóvel (Rescisões)": 40814,
+        "Transporte de Materiais (Rescisão)": 43958,
     },
     DESENVOLVIMENTO: {
         // Novos
         "Locação de Imóvel": 32778,
         "Locação de Equipamento": 32779,
         "Locação de Equipamento - Com Mão de Obra": 32791,
+        "Transporte de Materiais": 35284,
 
         // Aditivos
         "Locação de Equipamento - Alteração de Valor": 32828,
@@ -275,6 +279,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             FABRICANTE: e.FABRICANTE,
             MODELO: e.MODELO,
             PLACA: e.PLACA,
+            CHASSI: e.CHASSI,
             POTENCIAHP: e.POTENCIAHP,
             UN_DESMOBILIZACAO: e.UN_DESMOBILIZACAO,
             VALOR_DESMOBILIZACAO: floatToMoney(e.VALOR_DESMOBILIZACAO),
@@ -339,6 +344,73 @@ async function buscaDadosDoFormulario(tipoContrato) {
             LOCALIZACAO: $("#localizacaoServico").val()
         };
 
+    }
+    
+    //Transporte de Materiais
+    else if (TIPO_MODELO == "Transporte de Materiais") {
+        var prazo_inicio = $("#dataInicioTransporte").val().split("/").reverse().join("-");
+        var prazo_fim    = $("#dataFimTransporte").val().split("/").reverse().join("-");
+        var valorMensalFloat = parseFloat($("#valorMensalTransporte").val().replace(/[R$\s.]/g, "").replace(",", ".")) || 0;
+        var pctParado = parseFloat($("#descontoPorDiaParadoTransporte").val().replace("%", "").trim()) || 0;
+        var pctChuva  = parseFloat($("#descontoPorDiaChuvaTransporte").val().replace("%", "").trim()) || 0;
+        var valorDiario = valorMensalFloat / 30;
+
+        var equipamentos = await asyncConsultaEquipamentosSelecionados();
+        var EQUIPAMENTOS = equipamentos.map(e => ({
+            PREFIXO:        e.PREFIXO,
+            DESCRICAO:      e.DESCRICAO,
+            MODELO:         e.MODELO,
+            PLACA:          e.PLACA,
+            FABRICANTE:     e.FABRICANTE,
+            ANO_FABRICACAO: e.ANO_FABRICACAO,
+            ANO_MODELO:     e.ANO_MODELO,
+            POTENCIAHP:     e.POTENCIAHP,
+            CAPACIDADE:     e.CAPACIDADE,
+            CHASSI:         e.CHASSI,
+        }));
+
+        var retorno = {
+            CODIGO_DO_CONTRATO:    $("#novoContratoCodigo").val() || "_",
+            FORNECEDOR:            $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_CNPJ:       $("#hiddenCGCCFO").val(),
+            FORNECEDOR_ENDERECO:   `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$("#cidadeFornecedor").val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            FORNECEDOR_NOME_REPRESENTANTE: $("#administradorFornecedor").val(),
+            FORNECEDOR_CPF_REPRESENTANTE:  $("#cpfAdministrador").val(),
+            ADMINISTRADOR:         $("#administradorTransporte").val(),
+            CONTRATANTE_PRINCIPAL: $("#contratantePrincipal").val(),
+
+            PERIODOINICIO:         $("#dataInicioTransporte").val(),
+            PERIODOFIM:            $("#dataFimTransporte").val(),
+            MESES:         		   $("#mesesContratoTransporte").val(),
+
+            FORMATO_COBRANCA:      $("#formatoCobrancaTransporte").val(),
+            VALOR_MENSAL:          $("#valorMensalTransporte").val(),   
+            VALOR_M3:              $("#valorM3Transporte").val(),        
+            KM:                    $("#kmTransporte").val(),             
+            EH_VALOR_FIXO:         $("#formatoCobrancaTransporte").val() == "Valor Fixo",
+            EH_VALOR_PARAMETRO:    $("#formatoCobrancaTransporte").val() == "Valor por Parâmetro",
+            DESCONTO_QUEBRADO: "R$ " + (valorDiario * pctParado / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+            DESCONTO_CHUVA:    "R$ " + (valorDiario * pctChuva  / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+            EQUIPAMENTOS:          EQUIPAMENTOS,
+
+            OBRA:                  $("#NOMECCUSTO").val(),
+            CODIGO_CENTRO_DE_CUSTO: `${$("#CODCCUSTO").val()} - ${$("#NOMECCUSTO").val()}`,
+            LOCALIZACAO: $("#localizacaoServico").val(),
+            DIA:                   dia,
+            MES:                   meses[parseInt(mes)],
+            ANO:                   ano,
+            TIPO_PAGAMENTO:        $("#tipoPagamento").val() == "Depósito" ? "depósito bancário" : "boleto bancário",
+            FORMA_PAGAMENTO:       $("#tipoPagamento").val() == "Depósito",   // true = Depósito | false = Boleto
+            BANCO:                 $("#banco").val() || "",
+            BANCO_AGENCIA:         $("#tipoPagamento").val() == "Depósito" ? ($("#agencia").val() || "") : "",
+            BANCO_CONTA_CORRENTE:  $("#tipoPagamento").val() == "Depósito" ? ($("#contaCorrente").val() || "") : "",
+            NOME_COLIGADA:         dadosColigada.nome,
+            ENDERECO_COLIGADA:     dadosColigada.endereco,
+            CNPJ_COLIGADA:         dadosColigada.cnpj,
+            NOME_REPRESENTANTE:    dadosRepresentante.nome,
+            CPF_REPRESENTANTE:     dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE:   dadosRepresentante.cargo,
+        };
     }
 
     // Aditivos
@@ -779,6 +851,80 @@ async function buscaDadosDoFormulario(tipoContrato) {
         };
     }
 
+    // Aditivos de Transporte de Materiais
+    else if (TIPO_MODELO.indexOf("Transporte de Materiais - ") === 0) {
+        var EQUIPAMENTOS_ADITIVO = [];
+        if (TIPO_MODELO == "Transporte de Materiais - Inclusão de Equipamento" ||
+            TIPO_MODELO == "Transporte de Materiais - Exclusão de Equipamento") {
+            var equipsSelecionados = await asyncConsultaEquipamentosSelecionados();
+            EQUIPAMENTOS_ADITIVO = equipsSelecionados.map(e => ({
+                PREFIXO:        e.PREFIXO,
+                DESCRICAO:      e.DESCRICAO,
+                MODELO:         e.MODELO,
+                ANO_FABRICACAO: e.ANO_FABRICACAO,
+                PLACA:          e.PLACA,
+                CHASSI:         e.CHASSI,
+            }));
+        }
+
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$("#cidadeFornecedor").val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo,
+
+            // Específicos da alteração — o modelo atual ainda não tem estas tags.
+            CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
+            DATA_REAJUSTE: $("#dataReajuste").val(),
+            DATA_ASSINATURA: $("#dataAssinaturaTransporte").val(),
+            VALOR: $("#valorModalidadeTransporte").val(),
+            MODALIDADE_VALOR: $("#modalidadeValorTransporte").val(),
+            PERIODOINICIO: $("#dataInicioContratoTransporte").val(),
+            PERIODOFIM: $("#dataFimContratoTransporte").val(),
+            NOVA_DATA_FIM: $("#novaDataFimTransporte").val(),
+            MESES: $("#mesesAditivoTransporte").val(),
+            //Inclusão/Exclusão agora usam Formato de Cobrança
+            FORMATO_COBRANCA: $("#formatoCobrancaAditivo").val(),
+            VALOR_MENSAL: $("#valorMensalAditivoTransporte").val(),
+            VALOR_T: $("#valorTAditivoTransporte").val(),
+            KM: $("#kmAditivoTransporte").val(),
+            EH_VALOR_FIXO: $("#formatoCobrancaAditivo").val() == "Valor Fixo",
+            EH_VALOR_PARAMETRO: $("#formatoCobrancaAditivo").val() == "Valor por Parâmetro",
+            EQUIPAMENTOS: EQUIPAMENTOS_ADITIVO,
+
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+        };
+    }
+
+    // Rescisão de Transporte de Materiais
+    else if (TIPO_MODELO == "Transporte de Materiais (Rescisões)") {
+        var retorno = {
+            CODIGO_DO_CONTRATO: $("#codigoContratoPrincipal").val() || "___________",
+            FORNECEDOR: $("#hiddenFORNECEDOR").val(),
+            FORNECEDOR_CNPJ: $("#hiddenCGCCFO").val(),
+            FORNECEDOR_ENDERECO: `${$("#ruaFornecedor").val()}, nº ${$("#numeroFornecedor").val()}, bairro ${$("#bairroFornecedor").val()}, na cidade de ${$("#cidadeFornecedor").val()}, no estado ${$("#estadoFornecedor").val()} - CEP: ${$("#cepFornecedor").val()}`,
+            NOME_COLIGADA: dadosColigada.nome,
+            ENDERECO_COLIGADA: dadosColigada.endereco,
+            CNPJ_COLIGADA: dadosColigada.cnpj,
+            NOME_REPRESENTANTE: dadosRepresentante.nome,
+            CPF_REPRESENTANTE: dadosRepresentante.cpf,
+            CARGO_REPRESENTANTE: dadosRepresentante.cargo,
+            DATA_CELEBRADA: $("#dataAssinatura").val(),
+
+            DIA: dia,
+            MES: meses[parseInt(mes)],
+            ANO: ano,
+        };
+    }
+
     return retorno;
 }
 async function modalDadosDoFormulario() {
@@ -851,7 +997,19 @@ async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
         tipoContrato = "Locação de Imóvel - PF";
     }
 
-    const documentIdModelo = codigosModelos[env][tipoContrato];
+    //Aditivos
+    var chaveModelo = tipoContrato;
+    if (tipoContrato.indexOf("Transporte de Materiais - ") === 0) {
+        chaveModelo = "Transporte de Materiais (Aditivos)";
+    } else if (tipoContrato == "Transporte de Materiais (Rescisões)") {
+        chaveModelo = "Transporte de Materiais (Rescisão)";
+    }
+
+    const documentIdModelo = codigosModelos[env][chaveModelo];
+
+    if (!documentIdModelo) {
+        throw `Não há modelo de contrato cadastrado para "${chaveModelo}" no ambiente ${env}.`;
+    }
 
     var url = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentIdModelo);
 
@@ -862,9 +1020,11 @@ async function asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao() {
     });
     var documentId = await promiseCriaDocFluig_retornaDocumentId(file, pastaDeAnexos);
     $("#contratoDocumentId").val(documentId);
-
+    console.log("### Iniciando preenchimento do documento...");
     var filePreenchido = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
+    console.log("### Documento preenchido, convertendo para PDF...")
     var pdf = await convertDocxToPdf(filePreenchido);
+    console.log("### PDF gerado, salvando...")
     const filePdf = new File([pdf], geraNomeDoArquivo() + ".pdf", {
         type: blob.type,
     });
@@ -1085,8 +1245,28 @@ async function geraPreContrato() {
             Swal.showLoading();
         },
     });
-    var file = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
-    var pdf = await convertDocxToPdf(file);
+    try {
+        var file = await asyncPreencheDocumentoComDadosDoFormulario($("#contratoDocumentId").val());
+        var pdf = await convertDocxToPdf(file);
+    } catch (error) {
+        // Mesmo motivo do enviarSolicitacao: sem o catch o modal de carregamento
+        // fica girando e a falha some no "Uncaught (in promise)".
+        console.error("Erro ao gerar o pré-contrato: ", error);
+
+        // Desliga o loader e devolve o botão de fechar, que o Swal de carregamento
+        // havia removido — o popup é o mesmo, reaproveitado.
+        Swal.hideLoading();
+        Swal.fire({
+            icon: "error",
+            title: "Erro ao gerar o pré-contrato",
+            text: error && error.message ? error.message : error,
+            showConfirmButton: true,
+            allowEscapeKey: true,
+            allowOutsideClick: true,
+        });
+        return;
+    }
+
     Swal.close();
     saveAs(pdf, "teste.pdf");
 }

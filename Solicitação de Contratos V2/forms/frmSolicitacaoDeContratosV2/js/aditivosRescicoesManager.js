@@ -184,50 +184,29 @@ async function onClickCheckContratoPrincipal(that) {
         $("#percentualRetencao").val(data.PERCENT_RETENCAO);
         if (data.DESCRICAO_IMOVEL.trim() == "-") {
             $("#descricaoImovel").val("");
-            
+
         } else {
             $("#descricaoImovel").val(data.DESCRICAO_IMOVEL);
         }
 
-        // Quando selecionar o contrato principal, busca todos os equipamentos
-        // já vinculados ao contrato via ConsultaEquipPorContrato e soma:
-        // VALOR_LOCACAO + MAODEOBRA
-        //
-        // Esse valor será a base do #valorMensalLocacao.
-        // Depois, sempre que o usuário incluir novos equipamentos, os valores deles serão somados sobre essa base.
+        // MELHORIA TRANSPORTE: aditivos de Transporte de Materiais mostram a vigência atual do contrato
+        if (tipoContrato.includes("Transporte de Materiais")) {
+            $("#dataInicioContratoTransporte").val(formataDataDoRM(data.DATAINICIO));
+            $("#dataFimContratoTransporte").val(formataDataDoRM(data.DATAFIM));
+            $("#dataAssinaturaTransporte").val(formataDataDoRM(data.DATA_ASSINATURA));
+            // MELHORIA TRANSPORTE: pré-preenche o Valor Mensal (novo campo do Formato de Cobrança) com o valor do RM
+            $("#valorMensalAditivoTransporte").val(floatToMoney(parseFloat(data.VALOR) || 0));
+
+            atualizaMesesAditivoTransporte();
+        }
+
+    
         if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
 
-            // Chama a função assíncrona que consulta o dataset
-            // dsConsultaEquipamentosPendentes com OPERACAO ConsultaEquipPorContrato
-            // e retorna a soma de VALOR_LOCACAO + MAODEOBRA de todos os equipamentos
-            // já vinculados ao contrato principal.
+           
             var valorMensalBaseContrato = await asyncConsultaValorMensalPorContratoPrincipal(data.ID_TCNT_AUXILIAR);
 
-            // .data() é um recurso do jQuery que permite armazenar dados
-            // temporários associados a um elemento do DOM.
-            //
-            // Nesse caso salva no input #valorMensalLocacao
-            // uma informação chamada "valor-base-contrato".
-            //
-            // Funciona como um pequeno "cache" em memória:
-            //
-            // #valorMensalLocacao
-            // ├─ valor exibido no campo: ex: 12.500,00
-            // └─ data("valor-base-contrato"): 9800
-            //
-            // Dessa forma, quando for recalcular o valor mensal depois
-            // (ao incluir ou remover equipamentos), não precisamos consultar
-            // o dataset novamente. Basta recuperar esse valor salvo com:
-            //
-            // Isso evita várias consultas ao dataset.
             $("#valorMensalLocacao").data("valor-base-contrato", valorMensalBaseContrato);
-
-
-            // Nesse momento o campo recebe apenas o valor base do contrato
-            // principal (sem considerar ainda as inclusões de equipamentos).
-            //
-            // A função floatToMoney() apenas formata o número para padrão
-            // monetário (ex: 9500 → "9.500,00").
             $("#valorMensalLocacao").val(floatToMoney(valorMensalBaseContrato));
         }
     } else {
@@ -237,7 +216,28 @@ async function onClickCheckContratoPrincipal(that) {
         // Limpa a base salva quando desmarcar o contrato principal
         $("#valorMensalLocacao").data("valor-base-contrato", 0);
         $("#valorMensalLocacao").val(floatToMoney(0));
+
+        if (tipoContrato.includes("Transporte de Materiais")) {
+            $("#dataInicioContratoTransporte, #dataFimContratoTransporte, #dataAssinaturaTransporte").val("");
+            // MELHORIA TRANSPORTE: limpa os campos do Formato de Cobrança do aditivo ao desmarcar o contrato
+            $("#valorMensalAditivoTransporte, #valorTAditivoTransporte, #kmAditivoTransporte, #mesesAditivoTransporte").val("");
+            $("#formatoCobrancaAditivo").val("").trigger("change.transporte");
+        }
     }
+}
+
+//trata data vazia do RM
+function formataDataDoRM(valor) {
+    if (!valor || valor.trim() == "-" || valor.trim() == "") {
+        return "";
+    }
+
+    var data = moment(valor);
+    if (!data.isValid() || data.year() <= 1900) {
+        return "";
+    }
+
+    return data.format("DD/MM/YYYY");
 }
 function salva_excluiDadosContratoSelecionadoNoHidden(data) {
 
@@ -269,7 +269,11 @@ function carregaTabelaContratoPrincipalSelecionado() {
 
 function buscaContratos(CODCOLIGADA, CCUSTO, CNPJ, tipoContrato){
 
-    if (tipoContrato.includes("Locação de Imóvel")) { // Caso a opção do usuario CONTENHA o texto "Locação de Imóvel"
+    //mapeia o tipo do formulário 
+    if (tipoContrato.includes("Transporte de Materiais")) {
+        tipoContrato = "'Transporte de Material - S/M.O.'" 
+
+    } else if (tipoContrato.includes("Locação de Imóvel")) { // Caso a opção do usuario CONTENHA o texto "Locação de Imóvel"
         tipoContrato = "'Aluguel Imóveis', 'Locação de Imóvel', 'Aluguel'" // Passa valores que o RM usa
 
     } else if (tipoContrato == "Locação de Equipamento (Rescisões)") {

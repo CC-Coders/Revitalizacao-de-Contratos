@@ -171,6 +171,21 @@ function initDataTableEquipamentos(){
         return list;
     }
 }
+//async function preencheListaDeEquipamentos(){
+//    try {
+//        const CODCOLIGADA = $("#CODCOLIGADA").val();
+//        const CCUSTO = $("#CODCCUSTO").val();
+//        const CNPJ = $("#hiddenCGCCFO").val();
+//
+//        var equipamentos = await consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ);
+//        dataTableEquipamentos.clear().draw();
+//        dataTableEquipamentos.rows.add(equipamentos); // Add new data
+//        dataTableEquipamentos.columns.adjust().draw(); // Redraw the DataTable
+//    } catch (error) {
+//        console.error(error);
+//    }
+//}
+
 async function preencheListaDeEquipamentos(){
     try {
         const CODCOLIGADA = $("#CODCOLIGADA").val();
@@ -178,13 +193,22 @@ async function preencheListaDeEquipamentos(){
         const CNPJ = $("#hiddenCGCCFO").val();
 
         var equipamentos = await consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ);
+
+        var tipoContrato = $("#tipoContrato").val();
+        if (tipoContrato === "Transporte de Materiais") {
+            equipamentos = equipamentos.filter(function (e) {
+                return e.CATEGORIA && e.CATEGORIA.toUpperCase() === "PA";
+            });
+        }
+
         dataTableEquipamentos.clear().draw();
-        dataTableEquipamentos.rows.add(equipamentos); // Add new data
-        dataTableEquipamentos.columns.adjust().draw(); // Redraw the DataTable
+        dataTableEquipamentos.rows.add(equipamentos);
+        dataTableEquipamentos.columns.adjust().draw();
     } catch (error) {
         console.error(error);
     }
 }
+
 function consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ){
     return new Promise((resolve, reject)=>{
         DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
@@ -366,6 +390,7 @@ async function onClickDetailsEquipamento(that) {
             return html;
         }
         async function htmlNovoAnexo(documentId, documentName) {
+            if (!documentName) { return ""; }
             var html =
                 `<div class="btn btn-default btnAnexo">
             <b><a target="_blank" href=${documentId == "#" ? "#" : await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId)}>${documentName}</a></b>
@@ -430,6 +455,7 @@ async function onClickCheckEquipamento(that) {
     }
 }
 async function modalAlterarEquipamento(data) {
+     var isTransporteMateriais = $("#tipoContratoBase").val() == "Transporte de Materiais"
     var html = 
     `<div style="min-height:200px">
         <div class="row">
@@ -439,7 +465,7 @@ async function modalAlterarEquipamento(data) {
                     <option></option>
                     <option>CNPJ</option>
                     <option>Valor de Locação</option>
-                    <option>Valor de Mão de Obra</option>
+                    ${isTransporteMateriais ? "" : "<option>Valor de Mão de Obra</option>"}
                 </select>
             </div>
             <div class="col-md-4">
@@ -733,48 +759,29 @@ function initDataTableEquipamentos_aditivoRescisao(){
 
         function aplicaValoresReajusteSalvos() {
 
-            // Percorre todos os inputs de valor reajustado exibidos na grid (DataTable)
-            // Cada input representa o valor de reajuste de um equipamento na interface
             $(".inputValorLocacaoReajustado").each(function () {
 
-                // Pega o prefixo do equipamento da linha atual da grid
-                // O equipamento exibido na grid com a linha correspondente na tabela pai-filho
                 var prefixo = $(this).data("prefixo");
 
-                // Busca na tabela pai-filho a linha correspondente ao equipamento atual
-                // Primeiro seleciona todas as linhas da tabela (ignorando a primeira linha padrão do Fluig)
-                // Depois utiliza .filter() para manter somente a linha cujo campo "equipSelecionado_aditivos" possui o mesmo prefixo do equipamento da grid
                 var valorSalvo = $("#tableEquipamentosSelecionados_aditivos>tbody>tr:not(:first)")
                     .filter(function () {
 
-                        // Dentro do filter, "this" representa cada linha da tabela pai-filho
-                        // Aqui verificamos se o prefixo salvo nessa linha é igual ao prefixo da grid
                         return $(this).find(".equipSelecionado_aditivos").val() == prefixo;
 
                     })
 
-                    // Após encontrar a linha correta, busca dentro dela o campo que armazena o valor reajustado do equipamento
                     .find(".equipSelecionado_aditivoValorReajustado")
 
-                    // Obtém o valor salvo
                     .val();
 
-                // Se existir valor salvo para esse equipamento
-                // reaplica o valor no input correspondente da grid
                 if (valorSalvo) {
 
-                    // Define o valor no input
                     $(this).val(valorSalvo)
 
-                    // Dispara o evento change para que as regras já existentes no formulário
-                    // (como atualização de totais) sejam executadas automaticamente
                     .trigger("change");
                 }
             });
 
-            // Após reaplicar todos os valores individuais,
-            // recalcula o valor total do campo "Valor Locação Reajustado"
-            // que é a soma de todos os equipamentos
             atualizaValorMensal_valorReajustado();
         }
 }
@@ -783,17 +790,23 @@ function initDataTableEquipamentosParaInclusaoExclusao() {
     var atividade = parseInt($("#atividade").val());
     var tipoContrato = $("#tipoContrato").val();
 
+    //título dinâmico e páginas de Inclusão/Exclusão de equipamento no Transporte
     if (atividade == ATIVIDADES.INICIO || atividade == ATIVIDADES.INICIO_0) {
-        if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+        if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
+            tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
             $("#tituloExclusaoEquip").hide();
             $("#divEquipamentosParaInclusaoExclusao, #tituloInclusaoEquip").show();
+            $("#tituloPaginaEquipamentos").text("Equipamentos Disponíveis");
 
-        } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+        } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" ||
+            tipoContrato == "Transporte de Materiais - Exclusão de Equipamento") {
             $("#tituloInclusaoEquip").hide();
             $("#divEquipamentosParaInclusaoExclusao, #tituloExclusaoEquip").show();
+            $("#tituloPaginaEquipamentos").text("Equipamentos Vinculados ao Contrato");
 
         } else {
-            $("#divEquipamentosParaInclusaoExclusao, #tituloInclusaoEquip, #divEquipamentosParaInclusaoExclusao, #tituloExclusaoEquip").hide();
+            $("#divEquipamentosParaInclusaoExclusao, #tituloInclusaoEquip, #tituloExclusaoEquip").hide();
+            $("#tituloPaginaEquipamentos").text("Equipamentos");
         }
     }
 
@@ -904,8 +917,10 @@ function onClickCheckEquipamento_aditivoRescisao(that) {
     var data = row.data();
     console.log(data);
 
-    if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || 
-        tipoContrato == "Locação de Equipamento - Inclusão de Equipamento"
+    if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" ||
+        tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
+        tipoContrato == "Transporte de Materiais - Inclusão de Equipamento" ||
+        tipoContrato == "Transporte de Materiais - Exclusão de Equipamento"
     ) {
         if ($(that).is(":checked")) {
             adicionarEquipParaInclusaoExclusao(that);
@@ -1040,13 +1055,15 @@ function btnRemoverEquip(btn) {
 function consultaEquipamentos(ID_TCNT_AUXILIAR){
     var tipoContrato = $("#tipoContrato").val();
 
-    if (tipoContrato == "Locação de Equipamento - Alteração de Valor" || 
+    if (tipoContrato == "Locação de Equipamento - Alteração de Valor" ||
         tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
-        tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" || 
-        tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || 
-        tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)"
+        tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" ||
+        tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" ||
+        tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)" ||
+        tipoContrato == "Transporte de Materiais - Exclusão de Equipamento"
     )
     {
+        //consulta reaproveitada para Transporte (Exclusão usa esta; Inclusão usa a de baixo)
         return new Promise((resolve, reject)=>{
             DatasetFactory.getDataset("dsConsultaEquipamentosPendentes", null, [
                 DatasetFactory.createConstraint("OPERACAO","ConsultaEquipPorContrato","ConsultaEquipPorContrato",ConstraintType.MUST),
@@ -1062,9 +1079,10 @@ function consultaEquipamentos(ID_TCNT_AUXILIAR){
                 error:e=>reject(e)
             });
         });
-        
-    
-    } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+
+
+    } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
+        tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
         var CCUSTO = $("#CODCCUSTO").val();
         var CNPJ = $("#hiddenCGCCFO").val();
 
@@ -1096,8 +1114,9 @@ async function preencheListaDeEquipamentos_aditivosRescisao() {
     // Limpa tabela de equip(s) selecionados aditivo/rescisao antes de remontar, para não ficar equipamentos de outros contratos ou duplicado.
     $("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").empty();
     
-    if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
-        
+    if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
+        tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
+
         // Sempre limpa a tabela
         dataTableEquipamentosAditivoRescisao.clear().draw();
 
@@ -1112,16 +1131,18 @@ async function preencheListaDeEquipamentos_aditivosRescisao() {
 
             // Recalcula o valor mensal considerando:
             // base do contrato principal + inclusões já selecionadas
+            // (para Transporte é no-op: a função é guardada por tipoContrato)
             atualizaValorMensal_valorReajustado();
         } catch (error) {
             console.error(error);
         }
 
-    } else if (tipoContrato == "Locação de Equipamento - Alteração de Valor" || 
+    } else if (tipoContrato == "Locação de Equipamento - Alteração de Valor" ||
         tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
         tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" ||
-        tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || 
-        tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)")
+        tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" ||
+        tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)" ||
+        tipoContrato == "Transporte de Materiais - Exclusão de Equipamento")
     {
         // Sempre limpa a tabela
         dataTableEquipamentosAditivoRescisao.clear().draw();
@@ -1143,13 +1164,14 @@ async function preencheListaDeEquipamentos_aditivosRescisao() {
             dataTableEquipamentosAditivoRescisao.columns.adjust().draw(); // Redraw the DataTable
             atualizaValorMensal_valorReajustado();
             
-            if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+            if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" ||
+                tipoContrato == "Transporte de Materiais - Exclusão de Equipamento") {
                 carregarTabelaEquipParaIncluirExcluir();
 
-            } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo" || 
+            } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
             tipoContrato == "Locação de Equipamento (Rescisões)" ||
             tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)") {
-                
+
                 preencheTabelaDeAditivo();
             }
 
@@ -1769,20 +1791,30 @@ function geraCabecalhoEquipamentos(){
 
     var origemContrato = $("#origemContrato").val() ? $("#origemContrato").val():$("#origemContrato").text();
     var tipoContrato = $("#tipoContrato").val() ? $("#tipoContrato").val():$("#tipoContrato").text();
-
+    var valMensal = $("#valorMensalTransporte").val();
+    var valorTotalTransporte = tipoContrato != "Transporte de Materiais" ? 0
+        : valMensal ? (parseFloat(valMensal.replace(/[^\d,]/g, '').replace(',', '.')) || 0) * (parseFloat($("#mesesContratoTransporte").val()) || 0)
+        : (parseFloat($("#valorM3Transporte").val().replace(/[^\d,]/g, '').replace(',', '.')) || 0);
+        
     if ($("#formMode").val() == "VIEW") {
         $("#obraHeaderEquipamentos").text($("#NOMECCUSTO").val());
         $("#tipoContratoHeaderEquipamentos").text($("#tipoContrato").text() || $("#tipoContrato").val());
-        $("#periodoHeaderEquipamentos").text($("#prazoLocacao").text());
-        $("#valorMensalHeaderEquipamentos").text($("#valorMensalLocacao").text());
-        $("#valorTotalHeaderEquipamentos").text($("#valorTotalLocacao").text());
+//        $("#periodoHeaderEquipamentos").text($("#prazoLocacao").text());
+//        $("#valorMensalHeaderEquipamentos").text($("#valorMensalLocacao").text());
+//        $("#valorTotalHeaderEquipamentos").text($("#valorTotalLocacao").text());
+        $("#periodoHeaderEquipamentos").text(tipoContrato == "Transporte de Materiais" ? $("#mesesContratoTransporte").val() : $("#prazoLocacao").text());
+        $("#valorMensalHeaderEquipamentos").text(tipoContrato == "Transporte de Materiais" ? $("#valorMensalTransporte").val() : $("#valorMensalLocacao").text());
+        $("#valorTotalHeaderEquipamentos").text(tipoContrato == "Transporte de Materiais" ? valorTotalTransporte.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : $("#valorTotalLocacao").text());
 
     } else {
         $("#obraHeaderEquipamentos").val($("#NOMECCUSTO").val());
         $("#tipoContratoHeaderEquipamentos").val($("#tipoContrato").val());
-        $("#periodoHeaderEquipamentos").val($("#prazoLocacao").val());
-        $("#valorMensalHeaderEquipamentos").val($("#valorMensalLocacao").val());
-        $("#valorTotalHeaderEquipamentos").val($("#valorTotalLocacao").val());
+//        $("#periodoHeaderEquipamentos").val($("#prazoLocacao").val());
+//        $("#valorMensalHeaderEquipamentos").val($("#valorMensalLocacao").val());
+//        $("#valorTotalHeaderEquipamentos").val($("#valorTotalLocacao").val());
+        $("#periodoHeaderEquipamentos").val(tipoContrato == "Transporte de Materiais" ? $("#mesesContratoTransporte").val() : $("#prazoLocacao").val());
+        $("#valorMensalHeaderEquipamentos").val(tipoContrato == "Transporte de Materiais" ? $("#valorMensalTransporte").val() : $("#valorMensalLocacao").val());
+        $("#valorTotalHeaderEquipamentos").val(tipoContrato == "Transporte de Materiais" ? valorTotalTransporte.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : $("#valorTotalLocacao").val());
     }
 
     if (origemContrato == "Aditivos") {
@@ -1795,7 +1827,8 @@ function geraCabecalhoEquipamentos(){
         } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor") {
             $("#valorTotalHeaderEquipamentos, #negociacaoHeaderEquipamentos").closest("div").hide();
 
-        } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" || tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+        } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" || tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" ||
+            tipoContrato == "Transporte de Materiais - Inclusão de Equipamento" || tipoContrato == "Transporte de Materiais - Exclusão de Equipamento") {
             $("#periodoHeaderEquipamentos, #valorTotalHeaderEquipamentos, #negociacaoHeaderEquipamentos").closest("div").hide();
         }
 
@@ -1983,6 +2016,8 @@ async function asyncConsultaValorMensalPorContratoPrincipal(ID_TCNT_AUXILIAR) {
 // Util
 function promiseGetDocumentDescription(documentId){
     return new Promise((resolve, reject)=> {
+         documentId = (documentId || "").trim();
+       if (!/^\d+$/.test(documentId)) { resolve(null); return; }
         $.ajax({
             url: `/content-management/api/v2/documents/${documentId}`,
             contentType: "application/json",
@@ -1991,7 +2026,7 @@ function promiseGetDocumentDescription(documentId){
                 console.log(x);
                 console.log(e);
                 FLUIGC.toast({
-                    message: "Erro ao buscar documento: " + e,
+                   message: "Erro ao buscar documento " + documentId + " (HTTP " + x.status + ")",
                     type: "warning"
                 });
                 reject("Erro ao buscar boletim de medição!");
@@ -2008,24 +2043,24 @@ function calculaDiferencaEmMeses(diaInicio, diaFim){
 
     return Math.round(Math.abs(init.diff(end, 'months', true)))
 }
-function promiseGetDocumentDescription(documentId){
-    return new Promise((resolve, reject)=> {
-        $.ajax({
-            url: `/content-management/api/v2/documents/${documentId}`,
-            contentType: "application/json",
-            method: "GET",
-            error: function (x, e) {
-                console.log(x);
-                console.log(e);
-                FLUIGC.toast({
-                    message: "Erro ao buscar documento: " + e,
-                    type: "warning"
-                });
-                reject("Erro ao buscar boletim de medição!");
-            },
-            success: function (data) {
-                resolve(data.description);
-            }
-        });
-    });
-}
+// function promiseGetDocumentDescription(documentId){
+//     return new Promise((resolve, reject)=> {
+//         $.ajax({
+//             url: `/content-management/api/v2/documents/${documentId}`,
+//             contentType: "application/json",
+//             method: "GET",
+//             error: function (x, e) {
+//                 console.log(x);
+//                 console.log(e);
+//                 FLUIGC.toast({
+//                     message: "Erro ao buscar documento: " + e,
+//                     type: "warning"
+//                 });
+//                 reject("Erro ao buscar boletim de medição!");
+//             },
+//             success: function (data) {
+//                 resolve(data.description);
+//             }
+//         });
+//     });
+// }

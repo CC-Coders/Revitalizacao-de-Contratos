@@ -3,6 +3,7 @@ function inicializarCalendario() {
     FLUIGC.calendar(".date", {
         pickDate: true,
         pickTime: false,
+        useCurrent: false,
         minDate: "01/01/2024",
         maxDate: "12/31/2030",
         language: "pt-br",
@@ -293,13 +294,14 @@ async function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFo
 
                     } else if (
                         tipoContrato.includes("Locação de Equipamento") &&
-                        tipoContrato != "Locação de Equipamento - Alteração de Prazo" ||
-                        tipoContrato != "Locação de Equipamento - Alteração de Valor" ||
-                        tipoContrato != "Locação de Equipamento - Alteração de Prazo e Valor" ||
+                        tipoContrato != "Locação de Equipamento - Alteração de Prazo" &&
+                        tipoContrato != "Locação de Equipamento - Alteração de Valor" &&
+                        tipoContrato != "Locação de Equipamento - Alteração de Prazo e Valor" &&
                         tipoContrato != "Locação de Equipamento - Inclusão de Equipamento"
                     ) {
                         anexosPorTipoDeContrato("Locação de Equipamento");
-
+                    } else if (tipoContrato == "Transporte de Materiais") {   
+                        anexosPorTipoDeContrato("Transporte de Materiais");
                     }
 
                     if (tipoContrato == "Locação de Equipamento - Alteração de Prazo") {
@@ -313,7 +315,6 @@ async function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFo
 
                     } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
                         anexosPorTipoDeContrato("Locação de Equipamento - Inclusão de Equipamento");
-
                     }
 
                     resolve(tipoPessoa);
@@ -363,7 +364,26 @@ async function enviarSolicitacao() {
                     Swal.showLoading();
                 },
             });
-            await asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao();
+
+            try {
+                await asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao();
+            } catch (error) {
+
+                console.error("Erro ao gerar o contrato: ", error);
+
+                Swal.hideLoading();
+                Swal.fire({
+                    icon: "error",
+                    title: "Erro ao gerar o contrato",
+                    text: error && error.message ? error.message : error,
+                    showConfirmButton: true,
+                    allowEscapeKey: true,
+                    allowOutsideClick: true,
+                });
+
+                return;
+            }
+
             Swal.close();
             parent.$("#send-process-button").click();
         } else {
@@ -430,19 +450,17 @@ function validaCampos() {
             if (!origemContrato || !tipoContrato || !tipoContrato || !$("#tipoAlteracao").val()) {
                 mensagens.push("Preencha todos os campos de Dados Iniciais")
             }
-            /*
-                Locação de Equipamento
-            */
-            if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" || tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
-                // Tabela de Equipamentos selecioandos para criar o inclusão/exclusão de equip no contrato
-                // Se não tem nenhum prefixo adicionado para inclusão/exclusão e contrato principal selecionado (hidden preenchido)
+        
+            //exige ao menos 1 equipamento também na Inclusão/Exclusão de Transporte
+            if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" || tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" ||
+                tipoContrato == "Transporte de Materiais - Inclusão de Equipamento" || tipoContrato == "Transporte de Materiais - Exclusão de Equipamento") {
+
                 if ($("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").length == 0 && $("#contratoSelecCodigo").val()) {
                     toastSeparado.push("Selecione pelo menos 1 equipamento!");
                     valida = false;
                 }
             } else if (tipoContrato == "Locação de Equipamento - Alteração de Valor") {
-                // Tabela de Equipamentos selecioandos, usada para guardar prefixos que foram informados valor de reajuste
-                // Se não tem nenhum prefixo com valor reajustado preenchdio e contrato principal selecionado (hidden preenchido)
+                
                 if ($("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").length == 0 && $("#contratoSelecCodigo").val()) {
 
                     toastSeparado.push("Informe reajuste de valor em pelo menos 1 equipamento!");
@@ -530,11 +548,21 @@ function validaCampos() {
             mensagens.push("Cláusulas alteradas");
             valida = false;
         }
-        // Data de reajuste, se estiver visivel  
+        // Data de reajuste, se estiver visivel
         if ($("#dataReajuste").is(":visible") && !$("#dataReajuste").val()) {
             $("#dataReajuste").addClass("has-error");
             mensagens.push("Data de reajuste");
             valida = false;
+        }
+        //nova data de fim precisa ser maior que a data de fim atual do contrato.
+        if ($("#novaDataFimTransporte").is(":visible") && $("#novaDataFimTransporte").val()) {
+            var fimAtualTM = parseDataBR($("#dataFimContratoTransporte").val());
+            var novoFimTM  = parseDataBR($("#novaDataFimTransporte").val());
+            if (fimAtualTM && novoFimTM && novoFimTM <= fimAtualTM) {
+                $("#novaDataFimTransporte").addClass("has-error");
+                mensagens.push("A nova data de fim precisa ser maior que a data de fim atual do contrato");
+                valida = false;
+            }
         }
         // Valor Mensal Locação, se for origemContrato Novos, se estiver visivel
         if (origemContrato == "Novos") {
@@ -648,8 +676,43 @@ function validaCampos() {
             valida = false;
             mensagens.push("Anexo do contrato fora do modelo");
         }
-    }
 
+        if ($("#tipoContratoBase").val() == "Transporte de Materiais" && origemContrato == "Novos") {
+            var formatoCobranca = $("#formatoCobrancaTransporte").val();
+            var camposTransporte = [
+                //campo Administrador removido do form, então saiu da validação
+                { id: "dataInicioTransporte",            label: "Data inicial (transporte)" },
+                { id: "dataFimTransporte",               label: "Data final (transporte)" },
+                { id: "descontoPorDiaChuvaTransporte",   label: "Desconto por dia de chuva" },
+                { id: "descontoPorDiaParadoTransporte",  label: "Desconto por dia parado" },
+                { id: "formatoCobrancaTransporte",       label: "Formato de cobrança" }
+            ];
+
+            if (formatoCobranca == "Valor Fixo") {
+                camposTransporte.push({ id: "valorMensalTransporte", label: "Valor mensal (transporte)" });
+            } else if (formatoCobranca == "Valor por Parâmetro") {
+                camposTransporte.push({ id: "valorM3Transporte", label: "Valor por Tonelada" });
+                camposTransporte.push({ id: "kmTransporte", label: "KM Rodado" });
+            }
+
+            camposTransporte.forEach(function (campo) {               
+                if (!$("#" + campo.id).val()) {
+                    $("#" + campo.id).addClass("has-error");
+                    mensagens.push(campo.label);
+                    valida = false;
+                }
+            });
+        }
+    }
+ if (atividade == ATIVIDADES.CONTROLADORIA && origemContrato == "Novos") {
+        $("[name^='novoContratoItemProduto___']").each(function (i) {
+            if (!$(this).val()) {
+                if (this.selectize) { this.selectize.$control.css("border", "1px solid #FF0000"); }
+                mensagens.push("Favor preencher o campo \"Produto\" (Item " + (i + 1) + ")");
+                valida = false;
+            }
+        });
+    }
     if (isRetornar) {
         var destinoRetorno = $("#destinoRetorno").val();
         if (destinoRetorno == null || destinoRetorno == undefined || destinoRetorno == "") {
@@ -782,7 +845,30 @@ function validaAnexosPorTipoContrato() {
             faltando.push("Cartão QSA");
         }
     }
+    else if (tipoContrato == "Transporte de Materiais") {
+        if (!documentos["Cartão CNPJ"]) {
+            faltando.push("Cartão CNPJ");
+        }
+        if (!documentos["QSA"]) {
+            faltando.push("QSA");
+        }
+        if (!documentos["NF de Remessa"]) {
+            faltando.push("NF de Remessa");
+        }
+        if (!documentos["Certidão de regularidade FGTS"]) {
+            faltando.push("Certidão de regularidade FGTS");
+        }
+        if (!documentos["CNDs (municipal, estadual, federal e trabalhista)"]) {
+            faltando.push("CNDs (municipal, estadual, federal e trabalhista)");
+        }
+        var temCNH = !!documentos["CNH"];
+        var temRG  = !!documentos["RG"];
+        var temCPF = !!documentos["CPF"];
+        if (!temCNH && !(temRG && temCPF)) {
+            faltando.push("CNH ou RG + CPF");
+        }
 
+    }
     if (faltando.length > 0) {
         FLUIGC.toast({
             title: "Anexos obrigatórios pendentes",
@@ -945,6 +1031,16 @@ function bloqueiaCamposAprovacao() {
     $("#rgFornecedor").attr("readonly", "readonly");
     $("#nacionalidadeFornecedor").attr("readonly", "readonly");
     $("#estadoCivilFornecedor").attr("readonly", "readonly");
+    
+    $("#administradorTransporte").attr("readonly", "readonly")
+    $("#dataInicioTransporte").attr("readonly", "readonly");
+    $("#dataFimTransporte").attr("readonly", "readonly");
+    $("#descontoPorDiaChuvaTransporte").attr("readonly", "readonly");
+    $("#descontoPorDiaParadoTransporte").attr("readonly", "readonly");
+    $("#formatoCobrancaTransporte").attr("readonly", "readonly");
+    $("#valorMensalTransporte").attr("readonly", "readonly");
+    $("#valorM3Transporte").attr("readonly", "readonly");
+    $("#kmTransporte").attr("readonly", "readonly");
 }
 function popularDestinoRetorno() {
     const ATIVIDADE_ATUAL = $("#atividade").val();
@@ -1094,12 +1190,13 @@ async function renderizarAnexosEtapaAprovacao() {
     }
 }
 function anexosPorTipoDeContrato(tipoDoContrato) {
+	   console.log("[ANEXOS] chamado com:", tipoDoContrato); 
     const listaAnexosPorTipoDeContrato = {
         "Locação de Equipamento": ["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
         "Locação de Equipamento - Com Mão de Obra": ["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
         "Locação de Imóvel - PF": ["Termo de Solicitação de Imóvel", "CNH", "RG", "CPF"],
         "Locação de Imóvel - PJ": ["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
-
+        "Transporte de Materiais": ["Cartão CNPJ", "QSA", "NF de Remessa", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF", "Outros"],
         // Aditivos
         "Locação de Equipamento - Alteração de Prazo": ["Proposta Comercial"],
         "Locação de Equipamento - Alteração de Valor": ["Proposta Comercial"],
