@@ -237,7 +237,10 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                     "Prestação de Serviços",
                     "Prestação de Serviços - Vigilância",
                     "Prestação de Serviços - Sub/Retenção",
-                    "Locação de Imóvel",
+                    "Locação de Imóvel", 
+                    "Locação de Imóvel - Alteração de Valor", 
+                    "Locação de Imóvel - Alteração de Prazo", 
+                    "Locação de Imóvel - Alteração de Prazo e Valor",
                     "Locação de Imóvel (Rescisões)"
                 ],
             },
@@ -267,7 +270,10 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                     "Prestação de Serviços",
                     "Prestação de Serviços - Vigilância",
                     "Prestação de Serviços - Sub/Retenção",
-                    "Locação de Imóvel",
+                    "Locação de Imóvel", 
+                    "Locação de Imóvel - Alteração de Valor", 
+                    "Locação de Imóvel - Alteração de Prazo", 
+                    "Locação de Imóvel - Alteração de Prazo e Valor",
                     "Locação de Imóvel (Rescisões)"
                 ],
             },
@@ -294,7 +300,10 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                     "Prestação de Serviços - Vigilância",
                     "Prestação de Serviços - Sub/Retenção",
                     
-                    "Locação de Imóvel",
+                   "Locação de Imóvel", 
+                    "Locação de Imóvel - Alteração de Valor", 
+                    "Locação de Imóvel - Alteração de Prazo", 
+                    "Locação de Imóvel - Alteração de Prazo e Valor",
                     "Locação de Imóvel (Rescisões)"
                 ],
             },
@@ -321,7 +330,10 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
                     "Prestação de Serviços - Vigilância",
                     "Prestação de Serviços - Sub/Retenção",
 
-                    "Locação de Imóvel",
+                    "Locação de Imóvel", 
+                    "Locação de Imóvel - Alteração de Valor", 
+                    "Locação de Imóvel - Alteração de Prazo", 
+                    "Locação de Imóvel - Alteração de Prazo e Valor",
                     "Locação de Imóvel (Rescisões)"
                 ],
             },
