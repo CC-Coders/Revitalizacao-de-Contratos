@@ -24,7 +24,7 @@ const codigosModelos = {
         "Locação de Equipamento - Alteração de Prazo e Valor": 2245463,
         "Locação de Equipamento - Inclusão de Equipamento": 2245476,
         "Locação de Equipamento - Exclusão de Equipamento": 2245475,
-        "Transporte de Materiais (Aditivos)": 250618,
+        "Transporte de Materiais (Aditivos)": 2506918,
 
         "Locação de Imóvel PF - Alteração de Valor": 2245471,
         "Locação de Imóvel PF - Alteração de Prazo": 2245466,
