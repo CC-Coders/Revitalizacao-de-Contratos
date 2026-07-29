@@ -319,6 +319,19 @@ function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {
             // MELHORIA TRANSPORTE — desativa (ATIVO=0) os equipamentos selecionados para exclusão do contrato.
             updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR);
 
+        } else if (tipoContrato == "Transporte de Materiais - Alteração de Valor") {
+            //MELHORIA TRANSPORTE — grava o novo valor do aditivo no item do contrato no RM
+            updateTCNT_alteracaoValor_transporte(IDCNT);
+
+        } else if (tipoContrato == "Transporte de Materiais - Alteração de Prazo") {
+            //MELHORIA TRANSPORTE — grava a nova data fim no contrato no RM (reaproveita a função de prazo, que é genérica: IDCNT + data)
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, hAPI.getCardValue("novaDataFimTransporte"));
+
+        } else if (tipoContrato == "Transporte de Materiais - Alteração de Prazo e Valor") {
+            //MELHORIA TRANSPORTE — grava a nova data fim E o novo valor no contrato no RM
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, hAPI.getCardValue("novaDataFimTransporte"));
+            updateTCNT_alteracaoValor_transporte(IDCNT);
+
         }
     } catch (error) {
         throw error;
@@ -881,6 +894,57 @@ function updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT) {
 
     if (retorno.values[0][0] == "false") {
         throw "Erro ao alterar valor: " + retorno.values[0][1];
+    }
+}
+//MELHORIA TRANSPORTE: grava no RM o novo valor do item do contrato para o aditivo de Alteração de Valor de Transporte
+function updateTCNT_alteracaoValor_transporte(IDCNT) {
+    var CODCOLIGADA = hAPI.getCardValue("CODCOLIGADA");
+
+    //calcula o novo valor conforme o Formato de Cobrança escolhido no aditivo
+    var formato = hAPI.getCardValue("formatoCobrancaAditivo");
+    var novoValor = 0;
+    if (formato == "Valor por Parâmetro") {
+        //Valor por Km por T = Valor por Tonelada x KM Rodado
+        var valorTonelada = ValorToFloat(hAPI.getCardValue("valorTAditivoTransporte"));
+        var kmRodado = parseFloat(String(hAPI.getCardValue("kmAditivoTransporte") || "0").replace(",", "."));
+        novoValor = valorTonelada * kmRodado;
+    } else {
+        //Valor Mensal
+        novoValor = ValorToFloat(hAPI.getCardValue("valorMensalAditivoTransporte"));
+    }
+
+    //monta o XML para atualizar o PRECOFATURAMENTO do item principal (NSEQITMCNT = 1) do contrato
+    var xml = "";
+    xml += "<CTRCNT>";
+    xml += "  <TCNT>";
+    xml += "    <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "    <IDCNT>" + IDCNT + "</IDCNT>";
+    xml += "  </TCNT>";
+    xml += "  <TITMCNT>";
+    xml += "    <CODCOLIGADA>" + CODCOLIGADA + "</CODCOLIGADA>";
+    xml += "    <IDCNT>" + IDCNT + "</IDCNT>";
+    xml += "    <NSEQITMCNT>1</NSEQITMCNT>";
+    xml += "    <PRECOFATURAMENTO>" + novoValor.toString().replace(".", ",") + "</PRECOFATURAMENTO>";
+    xml += "  </TITMCNT>";
+    xml += "</CTRCNT>";
+
+    var contexto = "CODSISTEMA=G;CODCOLIGADA=" + CODCOLIGADA + ";CODUSUARIO=fluig";
+
+    //reaproveita o mesmo web service usado pela criação/alteração de contrato no RM
+    var retorno = DatasetFactory.getDataset(
+        "InsereContratoRM",
+        null,
+        [
+            DatasetFactory.createConstraint("coligada", CODCOLIGADA, CODCOLIGADA, ConstraintType.MUST),
+            DatasetFactory.createConstraint("idContrato", IDCNT, IDCNT, ConstraintType.MUST),
+            DatasetFactory.createConstraint("contexto", contexto, contexto, ConstraintType.MUST),
+            DatasetFactory.createConstraint("xml", xml, xml, ConstraintType.MUST),
+        ],
+        null
+    );
+
+    if (retorno.values[0][0] == "false") {
+        throw "Erro ao alterar valor do aditivo de Transporte: " + retorno.values[0][1];
     }
 }
 function updateSISMA_alteracaoAluguelContrato_equipamento() {

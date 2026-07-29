@@ -16,7 +16,7 @@ const codigosModelos = {
         "Locação de Imóvel - PF": 2316784,
         "Locação de Equipamento": 2070416,
         "Locação de Equipamento - Com Mão de Obra": 2070417,
-        "Transporte de Materiais": 249702,
+        "Transporte de Materiais": 2497902,
 
         // Aditivos
         "Locação de Equipamento - Alteração de Valor": 2245474,
@@ -24,6 +24,7 @@ const codigosModelos = {
         "Locação de Equipamento - Alteração de Prazo e Valor": 2245463,
         "Locação de Equipamento - Inclusão de Equipamento": 2245476,
         "Locação de Equipamento - Exclusão de Equipamento": 2245475,
+        "Transporte de Materiais (Aditivos)": 2506918,
 
         "Locação de Imóvel PF - Alteração de Valor": 2245471,
         "Locação de Imóvel PF - Alteração de Prazo": 2245466,
@@ -57,7 +58,7 @@ const codigosModelos = {
         "Locação de Imóvel PJ - Alteração de Prazo": 40811,
         "Locação de Imóvel PJ - Alteração de Valor": 40815,
         "Locação de Imóvel PJ - Alteração de Prazo e Valor": 40810,
-        "Transporte de Materiais (Aditivos)": 43957,
+        "Transporte de Materiais (Aditivos)": 44261,
 
         // Rescisões
         "Locação de Equipamento (Rescisões)": 40928,
@@ -883,8 +884,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             CLAUSULA_NUMERO: $("#clausulaAlterada").val(),
             DATA_REAJUSTE: $("#dataReajuste").val(),
             DATA_ASSINATURA: $("#dataAssinaturaTransporte").val(),
-            VALOR: $("#valorModalidadeTransporte").val(),
-            MODALIDADE_VALOR: $("#modalidadeValorTransporte").val(),
+            //MELHORIA TRANSPORTE: Alteração de Valor agora usa Formato de Cobrança — o valor sai em VALOR_MENSAL / VALOR_T / KM (abaixo)
             PERIODOINICIO: $("#dataInicioContratoTransporte").val(),
             PERIODOFIM: $("#dataFimContratoTransporte").val(),
             NOVA_DATA_FIM: $("#novaDataFimTransporte").val(),
