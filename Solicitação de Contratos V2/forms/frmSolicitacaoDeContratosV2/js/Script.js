@@ -752,18 +752,10 @@ function bindings() {
         $("#dataFimTransporte").val(("0" + d2.getDate()).slice(-2) + "/" + ("0" + (d2.getMonth() + 1)).slice(-2) + "/" + d2.getFullYear());
     });
 
-    // máscaras de dinheiro, bloqueio do Valor por Modalidade e cálculo de meses
-    $("#valorModalidadeTransporte, #valorMensalAditivoTransporte, #valorTAditivoTransporte").maskMoney({
+    //MELHORIA TRANSPORTE: máscara de dinheiro nos campos de valor do aditivo (Valor Mensal e Valor por Tonelada)
+    $("#valorMensalAditivoTransporte, #valorTAditivoTransporte").maskMoney({
         prefix: "R$ ", thousands: ".", decimal: ",", allowZero: true, affixesStay: true,
     });
-
-    function _bloqueiaValorPorModalidadeTransporte() {
-        var temModalidade = !!$("#modalidadeValorTransporte").val();
-        $("#valorModalidadeTransporte").prop("disabled", !temModalidade);
-        if (!temModalidade) { $("#valorModalidadeTransporte").val(""); }
-    }
-    _bloqueiaValorPorModalidadeTransporte(); // estado inicial (Modalidade = "Selecione" → desabilitado)
-    $("#modalidadeValorTransporte").off("change.transporte").on("change.transporte", _bloqueiaValorPorModalidadeTransporte);
 
     //Formato de Cobrança dos aditivos de Inclusão/Exclusão (2 modos, igual ao Novos)
     $("#formatoCobrancaAditivo").off("change.transporte").on("change.transporte", toggleFormatoCobrancaAditivoTransporte);

@@ -551,31 +551,6 @@
                                  <br>
                               </div>
 
-                              <!-- NOVOS CAMPOS DE DADOS CONTRATUAIS COM A ADIÇÃO DO TRANSPORTE DE MATERIAIS-->
-                              <!-- MELHORIA TRANSPORTE: Modalidade (esq) e Valor (dir) na mesma linha; Data de Assinatura movida para depois -->
-                              <div class="col-md-6 campoTransporteAditivo_alteracaoValor">
-                                 <div>
-                                    <label>Modalidade do Valor:</label><strong class="strongAlert">*</strong>
-                                    <select id="modalidadeValorTransporte" name="modalidadeValorTransporte" class="form-control inputInfoChamado">
-                                       <option value="">Selecione</option>
-                                       <option value="Por Hora">Por Hora</option>
-                                       <option value="Diário">Diário</option>
-                                       <option value="Mensal">Mensal</option>
-                                       <option value="Anual">Anual</option>
-                                       <option value="Total">Total</option>
-                                    </select>
-                                 </div>
-                                 <br>
-                              </div>
-                              <div class="col-md-6 campoTransporteAditivo_alteracaoValor">
-                                 <div>
-                                    <label>Valor:</label><strong class="strongAlert">*</strong>
-                                    <!-- MELHORIA TRANSPORTE: bloqueio do Valor até escolher a Modalidade é feito via disabled no Script.js (depois do maskMoney) -->
-                                    <input type="text" id="valorModalidadeTransporte" name="valorModalidadeTransporte" class="form-control inputInfoChamado" placeholder="R$ 0,00" />
-                                 </div>
-                                 <br>
-                              </div>
-                              <!-- MELHORIA TRANSPORTE: Data de Assinatura do Contrato agora é oculta (não aparece no form), mas continua sendo preenchida do RM e salva -->
                               <input type="hidden" id="dataAssinaturaTransporte" name="dataAssinaturaTransporte" />
                               <div class="col-md-6 campoTransporteAditivo_alteracaoPrazo campoTransporteAditivo_exclusaoEquipamento">
                                  <div>
@@ -606,8 +581,8 @@
                                  </div>
                                  <br>
                               </div>
-                              <!-- MELHORIA TRANSPORTE: Formato de Cobrança (2 modos) para Inclusão e Exclusão de equipamento (substitui o antigo Valor Mensal) -->
-                              <div class="col-md-12 campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento">
+                              <!-- MELHORIA TRANSPORTE: Formato de Cobrança (2 modos) usado por Inclusão, Exclusão e Alteração de Valor -->
+                              <div class="col-md-12 campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento campoTransporteAditivo_alteracaoValor">
                                  <div>
                                     <label>Formato de Cobrança:</label><strong class="strongAlert">*</strong>
                                     <select id="formatoCobrancaAditivo" name="formatoCobrancaAditivo" class="form-control inputInfoChamado">
@@ -618,21 +593,21 @@
                                  </div>
                                  <br>
                               </div>
-                              <div class="col-md-12 campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento" id="divValorMensalAditivoTransporte" style="display:none;">
+                              <div class="col-md-12 campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento campoTransporteAditivo_alteracaoValor" id="divValorMensalAditivoTransporte" style="display:none;">
                                  <div>
                                     <label>Valor Mensal:</label><strong class="strongAlert">*</strong>
                                     <input type="text" id="valorMensalAditivoTransporte" name="valorMensalAditivoTransporte" class="form-control inputInfoChamado" placeholder="R$ 0,00" />
                                  </div>
                                  <br>
                               </div>
-                              <div class="col-md-6 campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento" id="divValorTAditivoTransporte" style="display:none;">
+                              <div class="col-md-6 campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento campoTransporteAditivo_alteracaoValor" id="divValorTAditivoTransporte" style="display:none;">
                                  <div>
                                     <label>Valor por Tonelada:</label><strong class="strongAlert">*</strong>
                                     <input type="text" id="valorTAditivoTransporte" name="valorTAditivoTransporte" class="form-control inputInfoChamado" placeholder="R$ 0,00" />
                                  </div>
                                  <br>
                               </div>
-                              <div class="col-md-6 campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento" id="divKmAditivoTransporte" style="display:none;">
+                              <div class="col-md-6 campoTransporteAditivo_inclusaoEquipamento campoTransporteAditivo_exclusaoEquipamento campoTransporteAditivo_alteracaoValor" id="divKmAditivoTransporte" style="display:none;">
                                  <div>
                                    <label>KM Rodado:</label><strong class="strongAlert">*</strong>
                                     <input type="number" id="kmAditivoTransporte" name="kmAditivoTransporte" class="form-control inputInfoChamado" placeholder="Ex: 150" min="0" />

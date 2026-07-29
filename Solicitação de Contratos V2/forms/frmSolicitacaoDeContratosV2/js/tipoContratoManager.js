@@ -276,12 +276,16 @@ function onChangeTipoContrato(that) {
 
             if (tipoContrato === "Transporte de Materiais - Alteração de Valor") {
                 $(".campoTransporteAditivo_alteracaoValor").show();
+                //MELHORIA TRANSPORTE: Alteração de Valor usa o Formato de Cobrança (Valor Mensal / Valor por Km por T)
+                toggleFormatoCobrancaAditivoTransporte();
             }
             else if (tipoContrato === "Transporte de Materiais - Alteração de Prazo") {
                 $(".campoTransporteAditivo_alteracaoPrazo").show();
             }
             else if (tipoContrato === "Transporte de Materiais - Alteração de Prazo e Valor") {
                 $(".campoTransporteAditivo_alteracaoPrazo, .campoTransporteAditivo_alteracaoValor").show();
+                //MELHORIA TRANSPORTE: Prazo e Valor também mostra o Formato de Cobrança
+                toggleFormatoCobrancaAditivoTransporte();
             }
             else if (tipoContrato === "Transporte de Materiais - Inclusão de Equipamento") {
                 $(".campoTransporteAditivo_inclusaoEquipamento").show();
