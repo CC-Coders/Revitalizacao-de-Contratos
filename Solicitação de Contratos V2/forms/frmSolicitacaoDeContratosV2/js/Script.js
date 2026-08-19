@@ -334,6 +334,7 @@ function bindings() {
     $("#descontoPorDiaChuva").mask("000%", { reverse: true });
     $("#descontoPorDiaParado").mask("000%", { reverse: true });
     $(".cpfAdministrador").mask("000.000.000-00");
+    $("#cpfRepresentanteFornecedor").mask("000.000.000-00");
 
     // Validações
     // blur dispara quando o usuário sai do campo
