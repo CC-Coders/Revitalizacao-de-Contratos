@@ -288,7 +288,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             VALOR_MOBILIZADO: floatToMoney(e.VALOR_MOBILIZADO),
             UN_EXTRA: e.UN_EXTRA,
             VALOR_EXTRA: floatToMoney(e.VALOR_EXTRA),
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0)),
             VALOR_LOCACAO: floatToMoney(e.VALOR_LOCACAO),
         }));
 
@@ -510,7 +510,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             RENAVAM: e.RENAVAM,
             CHASSI: e.CHASSI,
             MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0)),
             VALOR_REAJUSTADO: floatToMoney(moneyToFloat($(".inputvalorLocacaoReajustado[data-prefixo='" + e.PREFIXO + "']").val() || '0'))
         }));
 
@@ -595,7 +595,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             RENAVAM: e.RENAVAM,
             CHASSI: e.CHASSI,
             MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0)),
             VALOR_REAJUSTADO: floatToMoney(moneyToFloat($(".inputvalorLocacaoReajustado[data-prefixo='" + e.PREFIXO + "']").val() || '0'))
         }));
 
@@ -637,7 +637,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             RENAVAM: e.RENAVAM,
             CHASSI: e.CHASSI,
             MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0))
         }));
 
         var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
@@ -649,7 +649,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             RENAVAM: e.RENAVAM,
             CHASSI: e.CHASSI,
             MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0))
         }));
 
 
@@ -715,7 +715,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             RENAVAM: e.RENAVAM,
             CHASSI: e.CHASSI,
             MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0))
         }));
 
 
@@ -789,7 +789,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             RENAVAM: e.RENAVAM,
             CHASSI: e.CHASSI,
             MODELO: e.MODELO + " - " + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0))
         }));
 
         var retorno = {
@@ -826,7 +826,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             RENAVAM: e.RENAVAM,
             CHASSI: e.CHASSI,
             MODELO: e.MODELO + " - " + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0))
         }));
 
         var retorno = {
