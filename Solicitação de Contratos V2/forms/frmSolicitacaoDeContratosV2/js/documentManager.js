@@ -272,15 +272,15 @@ async function buscaDadosDoFormulario(tipoContrato) {
             ANO_FABRICACAO: e.ANO_FABRICACAO,
             ANO_MODELO: e.ANO_MODELO,
             CAPACIDADE_COMBUSTIVEL: e.CAPACIDADE_COMBUSTIVEL,
-            CHASSI: e.CHASSI,
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
             CLASSEMECANICA: e.CLASSEMECANICA,
             CLASSEOPERACIONAL: e.CLASSEOPERACIONAL,
             COMBUSTIVEL: e.COMBUSTIVEL,
             DESCRICAO: e.DESCRICAO,
             FABRICANTE: e.FABRICANTE,
-            MODELO: e.MODELO,
+            MODELO: e.MODELO == 'null' ? '-' : (e.MODELO || '-'),
             PLACA: e.PLACA,
-            CHASSI: e.CHASSI,
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
             POTENCIAHP: e.POTENCIAHP,
             UN_DESMOBILIZACAO: e.UN_DESMOBILIZACAO,
             VALOR_DESMOBILIZACAO: floatToMoney(e.VALOR_DESMOBILIZACAO),
@@ -288,7 +288,7 @@ async function buscaDadosDoFormulario(tipoContrato) {
             VALOR_MOBILIZADO: floatToMoney(e.VALOR_MOBILIZADO),
             UN_EXTRA: e.UN_EXTRA,
             VALOR_EXTRA: floatToMoney(e.VALOR_EXTRA),
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0)),
             VALOR_LOCACAO: floatToMoney(e.VALOR_LOCACAO),
         }));
 
@@ -360,14 +360,14 @@ async function buscaDadosDoFormulario(tipoContrato) {
         var EQUIPAMENTOS = equipamentos.map(e => ({
             PREFIXO:        e.PREFIXO,
             DESCRICAO:      e.DESCRICAO,
-            MODELO:         e.MODELO,
+            MODELO:         e.MODELO == 'null' ? '-' : (e.MODELO || '-'),
             PLACA:          e.PLACA,
             FABRICANTE:     e.FABRICANTE,
             ANO_FABRICACAO: e.ANO_FABRICACAO,
             ANO_MODELO:     e.ANO_MODELO,
             POTENCIAHP:     e.POTENCIAHP,
             CAPACIDADE:     e.CAPACIDADE,
-            CHASSI:         e.CHASSI,
+            CHASSI:         e.CHASSI== 'null' ? '-' : (e.CHASSI|| '-'),
         }));
 
         var retorno = {
@@ -507,10 +507,10 @@ async function buscaDadosDoFormulario(tipoContrato) {
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
-            RENAVAM: e.RENAVAM,
-            CHASSI: e.CHASSI,
-            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)),
+            RENAVAM: ('' + e.RENAVAM).replace(/null|undefined/g, '-'),
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
+            MODELO: (e.MODELO + ' - ' + e.ANO_MODELO).replace(/null|undefined/g, '-'),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0)),
             VALOR_REAJUSTADO: floatToMoney(moneyToFloat($(".inputvalorLocacaoReajustado[data-prefixo='" + e.PREFIXO + "']").val() || '0'))
         }));
 
@@ -549,9 +549,9 @@ async function buscaDadosDoFormulario(tipoContrato) {
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
-            RENAVAM: e.RENAVAM,
-            CHASSI: e.CHASSI,
-            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
+            RENAVAM: ('' + e.RENAVAM).replace(/null|undefined/g, '-'),
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
+            MODELO: (e.MODELO + ' - ' + e.ANO_MODELO).replace(/null|undefined/g, '-'),
             VALOR_LOCACAO: floatToMoney(e.VALOR_LOCACAO),
         }));
 
@@ -592,10 +592,10 @@ async function buscaDadosDoFormulario(tipoContrato) {
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
-            RENAVAM: e.RENAVAM,
-            CHASSI: e.CHASSI,
-            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)),
+            RENAVAM: ('' + e.RENAVAM).replace(/null|undefined/g, '-'),
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
+            MODELO: (e.MODELO + ' - ' + e.ANO_MODELO).replace(/null|undefined/g, '-'),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0)),
             VALOR_REAJUSTADO: floatToMoney(moneyToFloat($(".inputvalorLocacaoReajustado[data-prefixo='" + e.PREFIXO + "']").val() || '0'))
         }));
 
@@ -634,10 +634,10 @@ async function buscaDadosDoFormulario(tipoContrato) {
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
-            RENAVAM: e.RENAVAM,
-            CHASSI: e.CHASSI,
-            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+            RENAVAM: ('' + e.RENAVAM).replace(/null|undefined/g, '-'),
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
+            MODELO: (e.MODELO + ' - ' + e.ANO_MODELO).replace(/null|undefined/g, '-'),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0))
         }));
 
         var equipamentos = await asyncConsultaEquipamentosSelecionados_aditivos();
@@ -646,10 +646,10 @@ async function buscaDadosDoFormulario(tipoContrato) {
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
-            RENAVAM: e.RENAVAM,
-            CHASSI: e.CHASSI,
-            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+            RENAVAM: ('' + e.RENAVAM).replace(/null|undefined/g, '-'),
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
+            MODELO: (e.MODELO + ' - ' + e.ANO_MODELO).replace(/null|undefined/g, '-'),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0))
         }));
 
 
@@ -698,9 +698,9 @@ async function buscaDadosDoFormulario(tipoContrato) {
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
-            RENAVAM: e.RENAVAM,
-            CHASSI: e.CHASSI,
-            MODELO: e.MODELO + " - " + e.ANO_MODELO,
+            RENAVAM: ('' + e.RENAVAM).replace(/null|undefined/g, '-'),
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
+            MODELO: (e.MODELO + ' - ' + e.ANO_MODELO).replace(/null|undefined/g, '-'),
             VALOR_TOTAL: floatToMoney(
                 parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0)
             )
@@ -712,10 +712,10 @@ async function buscaDadosDoFormulario(tipoContrato) {
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
-            RENAVAM: e.RENAVAM,
-            CHASSI: e.CHASSI,
-            MODELO: e.MODELO + ' - ' + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+            RENAVAM: ('' + e.RENAVAM).replace(/null|undefined/g, '-'),
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
+            MODELO: (e.MODELO + ' - ' + e.ANO_MODELO).replace(/null|undefined/g, '-'),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0))
         }));
 
 
@@ -786,10 +786,10 @@ async function buscaDadosDoFormulario(tipoContrato) {
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
-            RENAVAM: e.RENAVAM,
-            CHASSI: e.CHASSI,
-            MODELO: e.MODELO + " - " + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+            RENAVAM: ('' + e.RENAVAM).replace(/null|undefined/g, '-'),
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
+            MODELO: (e.MODELO + ' - ' + e.ANO_MODELO).replace(/null|undefined/g, '-'),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0))
         }));
 
         var retorno = {
@@ -823,10 +823,10 @@ async function buscaDadosDoFormulario(tipoContrato) {
             PREFIXO: e.PREFIXO,
             FABRICANTE: e.FABRICANTE,
             PLACA: e.PLACA,
-            RENAVAM: e.RENAVAM,
-            CHASSI: e.CHASSI,
-            MODELO: e.MODELO + " - " + e.ANO_MODELO,
-            VALOR_TOTAL: floatToMoney(parseFloat(e.VALOR_LOCACAO || 0) + parseFloat(e.MAODEOBRA || 0))
+            RENAVAM: ('' + e.RENAVAM).replace(/null|undefined/g, '-'),
+            CHASSI:  ('' + e.CHASSI).replace(/null|undefined/g, '-'),
+            MODELO: (e.MODELO + ' - ' + e.ANO_MODELO).replace(/null|undefined/g, '-'),
+            VALOR_TOTAL: floatToMoney((parseFloat(e.VALOR_LOCACAO) || 0) + (parseFloat(e.MAODEOBRA) || 0))
         }));
 
         var retorno = {
@@ -861,10 +861,10 @@ async function buscaDadosDoFormulario(tipoContrato) {
             EQUIPAMENTOS_ADITIVO = equipsSelecionados.map(e => ({
                 PREFIXO:        e.PREFIXO,
                 DESCRICAO:      e.DESCRICAO,
-                MODELO:         e.MODELO,
+                MODELO:         e.MODELO == 'null' ? '-' : (e.MODELO || '-'),
                 ANO_FABRICACAO: e.ANO_FABRICACAO,
                 PLACA:          e.PLACA,
-                CHASSI:         e.CHASSI,
+                CHASSI:         e.CHASSI== 'null' ? '-' : (e.CHASSI|| '-'),
             }));
         }
 
