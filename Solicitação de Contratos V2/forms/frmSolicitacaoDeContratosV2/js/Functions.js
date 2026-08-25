@@ -705,44 +705,155 @@ function validaCampos() {
         }
     }
  if (atividade == ATIVIDADES.CONTROLADORIA && origemContrato == "Novos") {
+        // Produto
         $("[name^='novoContratoItemProduto___']").each(function (i) {
             if (!$(this).val()) {
                 if (this.selectize) { this.selectize.$control.css("border", "1px solid #FF0000"); }
-                mensagens.push("Favor preencher o campo \"Produto\" (Item " + (i + 1) + ")");
+                mensagens.push("Produto (Item " + (i + 1) + ")");
                 valida = false;
             }
         });
+
+        // Valor Produto
+        $("[name^='novoContratoItemValor___']").each(function (i) {
+            if (!$(this).val()) {
+                $($(this)).addClass("has-error");
+                mensagens.push("Valor (Item " + (i + 1) + ")");
+                valida = false;
+            }
+        });
+
+        // Coligada
+        if (!$("#novoContratoColigada").val()) {
+            $("#novoContratoColigada").addClass("has-error");
+            mensagens.push("Coligada");
+            valida = false;
+        }
+        // Filial
+        if (!$("#novoContratoFilial").val()) {
+            $("#novoContratoFilial").addClass("has-error");
+            mensagens.push("Filial");
+            valida = false;
+        }
+        // Filial
+        if (!$("#novoContratoTipoContrato").val()) {
+            $("#novoContratoTipoContrato").addClass("has-error");
+            mensagens.push("Tipo Contrato");
+            valida = false;
+        }
+        // Centro de Custo
+        if (!$("#novoContratoCCUSTO").val()) {
+            $("#novoContratoCCUSTO").addClass("has-error");
+            mensagens.push("Centro de Custo");
+            valida = false;
+        }
+        // Código Contrato
+        if (!$("#novoContratoCodigo").val()) {
+            $("#novoContratoCodigo").addClass("has-error");
+            mensagens.push("Código Contrato");
+            valida = false;
+        }
+        // Local de Estoque
+        if (!$("#novoContratoLocalDeEstoque").val()) {
+            $("#novoContratoLocalDeEstoque").addClass("has-error");
+            mensagens.push("Local de Estoque");
+            valida = false;
+        }
+        // Status Contrato
+        if (!$("#novoContratoSTATUS").val()) {
+            $("#novoContratoSTATUS").addClass("has-error");
+            mensagens.push("Status Contrato");
+            valida = false;
+        }
+        // Condição de Pagamento
+        if (!$("#novoContratoCondicaoPagamento").val()) {
+            $("#novoContratoCondicaoPagamento").addClass("has-error");
+            mensagens.push("Condição de Pagamento");
+            valida = false;
+        }
+        // Representante
+        if (!$("#novoContratoRepresentante").val()) {
+            $("#novoContratoRepresentante").addClass("has-error");
+            mensagens.push("Representante");
+            valida = false;
+        }
+        // Data Inicio
+        if (!$("#novoContratoDataInicio").val()) {
+            $("#novoContratoDataInicio").addClass("has-error");
+            mensagens.push("Data Inicio");
+            valida = false;
+        }
+        // Data Fim
+        if (!$("#novoContratoDataFim").val()) {
+            $("#novoContratoDataFim").addClass("has-error");
+            mensagens.push("Data Fim");
+            valida = false;
+        }
+        // Objeto do Contrato
+        if (!$("#novoContratoObjeto").val()) {
+            $("#novoContratoObjeto").addClass("has-error");
+            mensagens.push("Objeto do Contrato");
+            valida = false;
+        }
+        // Tipo de Faturamento
+        if (!$("#novoContratoTipoFaturamento").val()) {
+            $("#novoContratoTipoFaturamento").addClass("has-error");
+            mensagens.push("Tipo de Faturamento");
+            valida = false;
+        }
+
+        // ------------- //
+
+        // Item
+        $(".divNovoContratoTableRateiosItens").each(function() {
+            // Titulo do item, exemplo: Item 1
+            var nomeItem = $(this).closest("tr").find(".titleCounterItem").text();
+
+            $(this).find("tbody tr").each(function (indice) {
+                var linha = indice + 1;
+                var selectizeDepto = $(this).find(".selectDepartamentoNovoContratoItemRateio");
+                var inputValor = $(this).find(".inputValorNovoContratoItemRateio");
+
+                // Departamento
+                if (!selectizeDepto.val()) {
+                    if (selectizeDepto[0].selectize.$control.css("border", "1px solid #FF0000"));
+                    mensagens.push("Departamento (" + nomeItem + ", Linha " + linha + ")");
+                    valida = false;
+                }
+
+                // Valor
+                if (!inputValor.val()) {
+                    inputValor.addClass("has-error");
+                    mensagens.push("Valor (" + nomeItem + ", Linha " + linha + ")");
+                    valida = false;
+                }
+            });
+        });
+        
     }
     if (isRetornar) {
         var destinoRetorno = $("#destinoRetorno").val();
         if (destinoRetorno == null || destinoRetorno == undefined || destinoRetorno == "") {
             $("#destinoRetorno").addClass("has-error");
             mensagens.push("Destino do retorno");
+            valida = false;
         }
 
         var observacoes = $("#observacoes").val().trim();
         if (observacoes == null || observacoes == undefined || observacoes == "") {
             $("#observacoes").addClass("has-error");
             mensagens.push("Observações");
+            valida = false;
         }
     }
 
     if (!valida && mensagens.length > 0) {
-        FLUIGC.toast({
-            title: "Campo(s) não preenchido(s)",
-            message: "<br>" + mensagens.join("<br>"),
-            type: "warning",
-        });
+        mostraToast("Campo(s) não preenchido(s)", mensagens.join("<br>"), "warning");
     }
 
     // Todos os toasts separados
     toastSeparado.forEach(function (mensagem) {
-        FLUIGC.toast({
-            title: "",
-            message: mensagem,
-            type: "warning",
-            timeout: 4000
-        });
+        mostraToast("", mensagem, "warning");
     });
 
     return valida;
@@ -880,87 +991,6 @@ function validaAnexosPorTipoContrato() {
 
     return true;
 }
-/* validaCampos original
-function validaCampos() {
-    var atividade = parseInt(document.getElementById("atividade").value);
-    var valida = true;
-    var isRetornar = document.getElementById("decisaoCancelar").checked;
-    console.log(isRetornar)
-    if (atividade == 0) {
-        $("input.inputInfoChamado, select.inputInfoChamado").each(function () {
-            if ($(this).is(":visible") && ($(this).val() == null || $(this).val() == undefined || $(this).val() == "")) {
-                $(this).addClass("has-error");
-                if (valida) {
-                    valida = false;
-                    FLUIGC.toast({
-                        message: "Campo não preenchido!",
-                        type: "warning",
-                    });
-                    $([document.documentElement, document.body]).animate(
-                        {
-                            scrollTop: $(this).offset().top - screen.height * 0.15,
-                        },
-                        700
-                    );
-                }
-            }
-        });
-        if ($("#modeloContrato").val()=="Contrato fora do modelo" && $("#contratoPdfId").val() == "") {
-            FLUIGC.toast({
-                message: "Necessário anexar o Contrato fora do Modelo!",
-                type: "warning",
-            });
-            valida = false;
-        }
-    }
-    if (isRetornar) {
-        var destinoRetorno = $("#destinoRetorno").val();
-        if (destinoRetorno == null || destinoRetorno == undefined || destinoRetorno == "") {
-            $("#destinoRetorno").addClass("has-error");
-            if (valida) {
-                valida = false;
-                FLUIGC.toast({
-                    message: "Selecione o destino do retorno!",
-                    type: "warning",
-                });
-                $([document.documentElement, document.body]).animate(
-                    {
-                        scrollTop: $("#destinoRetorno").offset().top - screen.height * 0.15,
-                    },
-                    700
-                );
-            }
-        }
-        var observacoes = $("#observacoes").val().trim();
-        if (observacoes == null || observacoes == undefined || observacoes == "") {
-            $("#observacoes").addClass("has-error");
-            if (valida) {
-                valida = false;
-                FLUIGC.toast({
-                    message: "Preencha as observações!",
-                    type: "warning",
-                });
-                $([document.documentElement, document.body]).animate(
-                    {
-                        scrollTop: $("#observacoes").offset().top - screen.height * 0.15,
-                    },
-                    700
-                );
-            }
-        }
-    }
-    
-    if (!valida) {
-        FLUIGC.toast({
-            message: "Preencha todos os campos obrigatórios!",
-            type: "warning",
-        });
-        
-    }
-    
-    return valida;
-}
-*/
 function bloqueiaCamposAprovacao() {
     $("#origemContrato").attr("readonly", "readonly");
     $("#modeloContrato").attr("readonly", "readonly");
@@ -1042,6 +1072,105 @@ function bloqueiaCamposAprovacao() {
     $("#valorM3Transporte").attr("readonly", "readonly");
     $("#kmTransporte").attr("readonly", "readonly");
 }
+function bloqueiaCamposPagIntegracaoRM_antesDeGeradoContratoRM() {
+
+    // Não roda função caso já tenha sido criado contrato
+    // Nesse caso vai rodar a função bloqueiaCamposPagIntegacaoRM_seJaGeradoContratoRM()
+    if ($("#IDCNT").val()) {
+        return;
+    }
+
+    var inputsTexto = [
+        "#novoContratoColigada",
+        "#novoContratoFilial",
+        "#novoContratoCCUSTO",
+        "#novoContratoLocalDeEstoque"
+    ];
+
+    bloqueiaCampos_inputsTexto();
+
+    // Utils
+    function bloqueiaCampos_inputsTexto() {
+        inputsTexto.forEach(function (campo) {
+            $(campo).attr("readonly", "readonly");
+        });
+    }
+}
+function bloqueiaCamposPagIntegacaoRM_seJaGeradoContratoRM() {
+
+    if (!$("#IDCNT").val()) {
+        return;
+    }
+
+    var selectsSelectize = [
+        "[name^='novoContratoItemProduto___']",
+        ".selectDepartamentoNovoContratoItemRateio"
+    ];
+
+    var botoes = [
+        "#btnAdicionarItem",
+        ".btnRemoverItemNovoContrato",
+        ".btnAdicionarRateio",
+        ".btnRemoverLinhaRateioNovoItem"
+    ];
+
+    var inputsTexto = [
+        "#novoContratoCodigo",
+        "#novoContratoDataInicio",
+        "#novoContratoDataFim",
+        "#novoContratoObjeto",
+        ".novoContratoItemValor",
+        ".inputValorNovoContratoItemRateio"
+    ];
+
+    var selectsNativos = [
+        "#novoContratoColigada",
+        "#novoContratoFilial",
+        "#novoContratoTipoContrato",
+        "#novoContratoCCUSTO",
+        "#novoContratoLocalDeEstoque",
+        "#novoContratoSTATUS",
+        "#novoContratoCondicaoPagamento",
+        "#novoContratoRepresentante",
+        "#novoContratoTipoFaturamento"
+    ];
+
+
+    bloqueiaSelectize();
+    desativaBotoes();
+    bloqueiaCampos_inputsTexto();
+    bloqueiaCamposEDesativaClick_selectsNativos();
+
+    // Utils
+    function bloqueiaSelectize() {
+        selectsSelectize.forEach(function (campo) {
+            $(campo).each(function () {
+
+                if (this.selectize) {
+                    this.selectize.lock();
+                }
+            });
+        });
+    }
+    function desativaBotoes() {
+        botoes.forEach(function (campo) {
+            $(campo).prop("disabled", true);
+        });
+    }
+    function bloqueiaCampos_inputsTexto() {
+        inputsTexto.forEach(function (campo) {
+            $(campo).attr("readonly", "readonly");
+        });
+    }
+    function bloqueiaCamposEDesativaClick_selectsNativos() {
+        selectsNativos.forEach(function (campo) {
+            $(campo).attr("readonly", "readonly"); // Readonly
+            $(campo).on("mousedown", function(e) {
+                e.preventDefault() // Não permite abri as options
+            });
+        });
+    }
+}
 function popularDestinoRetorno() {
     const ATIVIDADE_ATUAL = $("#atividade").val();
     const $select = $("#destinoRetorno");
@@ -1102,6 +1231,212 @@ function obraPermiteReidi(CODCOLIGADA, CODCCUSTO) {
 }
 
 
+// Opções de Aprovação/Envio
+function controlaBotoesAprovacao_porAtividade(atividadeAtual) {
+
+    if (atividadeAtual == ATIVIDADES.INICIO || atividadeAtual == ATIVIDADES.INICIO_0) {
+        $("#divDecisaoAprovar, #divDecisaoCancelar").hide();
+
+    } else {
+        $("#divDecisaoAprovar, #divDecisaoCancelar").show();
+    }
+}
+
+
+// Modal Manual Contrato
+function modalManualContrato_modeloCastilho() { // Modelo Castilho
+    var modal = FLUIGC.modal({
+        title: "Manual de Contratos - Padrão Castilho",
+        size: "full",
+        content: 
+            `<p>Leia atentamente o <b>Manual de Contrato</b> a seguir antes de continuar a solicitação: </p>
+
+             <div class="viewerPdf">
+                 <embed id="pdfManualContrato" src="" type="application/pdf">
+                 <br>
+                 <div class="col-md-12 custom-checkbox custom-checkbox-success checkboxAceite custom-checkbox-lg">
+                     <input type="checkbox" id="checkAceitaManual">
+                     <label class="form-check-label" for="checkAceitaManual"> Estou de acordo com o Manual de Contrato</label>
+                 </div>
+                 <br>
+             </div>
+
+            <div class="btnArea">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Alterar Modelo Contrato</button>
+                
+                <button type="button" class="btn btn-success" data-dismiss="modal" disabled id="btnSalvar">Continuar</button>
+            </div>`
+
+    }, function (error) {
+        
+        if (error)  {
+            console.log(error);
+
+        // Se sucesso
+        } else {
+            $(".close").hide(); // Oculta o botão X de fechar do Modal
+
+            // PDF
+            exibePDFManualContrato_modeloCastilho().then(function(url) {
+                $("#pdfManualContrato").attr("src", url + "#view=FitV");
+            });
+
+            $("#checkAceitaManual").change(function() {
+                var isChecked = $(this).prop("checked");
+
+                $("#btnSalvar").prop("disabled", !isChecked);
+            });
+
+            // Se clicou em "Continuar" então marcou o aceite
+            $("#btnSalvar").on("click", function() {
+                $("#usuarioDeAcordoManualContrato").val("SIM");
+                controlaBlockCampoTipoContrato_seUsuarioDeAcordoManualContrato($("#usuarioDeAcordoManualContrato").val());
+            });
+
+            // Fecha o modal, pois foi marcado o checkbox
+            $(".close").on("click", function() {
+                location.reload();
+            });
+        }
+    });
+
+    return modal;
+
+
+    // Utils
+    function exibePDFManualContrato_modeloCastilho() { // Modelo Castilho
+
+        var urlAtual = retornaUrlAmbienteFluigAtual();
+        var idGED_manualPorAmbiente = idsGED_manuaisContratosCastilho_porAmbiente[ambiente];
+
+        // dentro de exibePDFManualContrato_modeloCastilho(), no lugar do $.ajax atual
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                type: "GET",
+                url: urlAtual + "/api/public/ecm/document/downloadURL/" + idGED_manualPorAmbiente,
+                success: function (data) {
+                    // data.content = URL de download do PDF no GED
+                    fetch(data.content)
+                        .then(function (r) { return r.blob(); })
+                        .then(function (blob) {
+                            var pdfBlob = blob.type === "application/pdf"
+                                ? blob
+                                : new Blob([blob], { type: "application/pdf" });
+                            resolve(URL.createObjectURL(pdfBlob));
+                        })
+                        .catch(function (e) {
+                            mostraToast("Erro ao carregar Manual: ", e, "warning");
+                            reject(e);
+                        });
+                },
+                error: function (x, error) {
+                    mostraToast("Erro ao exibir Manual: ", error, "warning");
+                    reject("Erro ao exibir Manual");
+                },
+            });
+        });
+    }
+}
+function modalContrato_modeloForaPadrao() {
+    var modalForaPadrao = FLUIGC.modal({
+        title: "Manual de Contratos - Fora do Modelo Castilho",
+        size: "full",
+        content: 
+        `<p>Leia atentamente o <b>Manual de Contrato</b> a seguir antes de continuar a solicitação:</p>
+
+        <div class="viewerPdf">
+            <embed id="pdfManualContrato" src="" type="application/pdf">
+            <br>
+            <div class="col-md-12 custom-checkbox custom-checkbox-success checkboxAceite custom-checkbox-lg">
+            <input type="checkbox" id="checkAceitaManual">
+            <label class="form-check-label" for="checkAceitaManual"> Estou de acordo com o Manual de Contrato</label>
+            </div>
+            <br>
+        </div>
+
+        <div class="btnArea">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Alterar Modelo Contrato</button>
+            
+            <button type="button" class="btn btn-success" data-dismiss="modal" disabled id="btnSalvar">Continuar</button>
+        </div>`
+
+    }, function(error) {
+        if (error) {
+            console.log(error);
+
+        // Se sucesso
+        } else {
+            $(".close").hide(); // Oculta o botão X de fechar do Modal
+
+            // PDF
+            exibePDFManualContrato_modeloForaPadrao().then(function(url) {
+                $("#pdfManualContrato").attr("src", url + "#view=FitV");
+            });
+
+            $("#checkAceitaManual").change(function() {
+                var isChecked = $(this).prop("checked");
+
+                $("#btnSalvar").prop("disabled", !isChecked);
+            });
+
+            // Se clicou em "Continuar" então marcou o aceite
+            $("#btnSalvar").on("click", function() {
+                $("#usuarioDeAcordoManualContrato").val("SIM");
+                controlaBlockCampoTipoContrato_seUsuarioDeAcordoManualContrato($("#usuarioDeAcordoManualContrato").val());
+            });
+
+            // Fecha o modal, pois foi marcado o checkbox
+            $(".close").on("click", function() {
+                location.reload();
+            });
+        }
+    });
+
+    return modalForaPadrao;
+
+
+    // Utils
+    function exibePDFManualContrato_modeloForaPadrao() { // Modelo Fora Padrão
+
+        var urlAtual = retornaUrlAmbienteFluigAtual();
+        var idGED_manualPorAmbiente = idsGED_manuaisContratosForaPadrao_porAmbiente[ambiente];
+
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: urlAtual + "/api/public/ecm/document/downloadURL/" + idGED_manualPorAmbiente,
+            
+                success: function(data) {
+                    resolve(data.content);
+                },
+
+                error: function(x, error) {
+                    console.log(x);
+                    console.log(error);
+
+                    mostraToast("Erro ao exibir Manual: ", error, "warning");
+
+                    reject("Erro ao exibir Manual");
+                },
+            });
+        });
+    }
+}
+function controlaBlockCampoTipoContrato_seUsuarioDeAcordoManualContrato(checkboxAceite) {
+
+    if (checkboxAceite == "SIM") {
+        $("#tipoContratoBase").removeAttr("readonly","readonly");
+
+    } else if (checkboxAceite == "NAO") {
+        $("#tipoContratoBase").attr("readonly","readonly");
+    }
+}
+function limpaCampoTipoContrato() {
+    $("#tipoContratoBase").val("").trigger("change");
+}
+
+
 // Historico
 async function asyncMontaHistorico() {
     var linhasHistorico = getLinhasHistorico();
@@ -1121,27 +1456,40 @@ async function asyncMontaHistorico() {
         var retorno = [];
         $("#tableHistorico>tbody>tr:not(:first)").each(function () {
             retorno.push({
-                USUARIO: $(this).find(".tableHistoricoUsuario").val(),
-                DATA: $(this).find(".tableHistoricoData").val(),
+                USUARIO:    $(this).find(".tableHistoricoUsuario").val(),
+                DATA:       $(this).find(".tableHistoricoData").val(),
                 OBSERVACAO: $(this).find(".tableHistoricoObservacao").val(),
-                ACAO: $(this).find(".tableHistoricoAcao").val(),
-                ATIVIDADE: $(this).find(".tableHistoricoAtividade").val(),
+                ACAO:       $(this).find(".tableHistoricoAcao").val(),
+                ATIVIDADE:  $(this).find(".tableHistoricoAtividade").val()
             });
         });
         return retorno;
     }
     function geraHtmlHistorico(linha) {
         var DATA = linha.DATA.split(" ");
+        var textoObs = (linha.OBSERVACAO || "").replace(/^(<br\s*\/?>|\s)*/gi, "").trim();
         DATA = DATA[0].split("-").reverse().join("/") + " " + DATA[1];
 
+        if (linha.ATIVIDADE === "Abertura Solicitação" && !textoObs) {
+            textoObs = "Abertura da Solicitação";
+        }
+
+        var estiloBorda =
+            linha.ACAO == "Aprovado" ? "border:solid 1px green;" // Aprovado
+            : linha.ACAO == "Reprovado" ? "border:solid 1px red;" // Reprovado
+            : ""; // Outro
+
         var html = `<div class="card">
-                <div class="card-body" style="${linha.ACAO == "Aprovado" ? "border:solid 1px green;" : linha.ACAO == "Reprovado" ? "border:solid 1px red;" : ""} ">
+                <div class="card-body" style="${estiloBorda}">
                     <div style="display:flex;">
                         <div class="divImageUser" style="margin-right:20px;"></div>
                         <div>
-                            <h3 class="card-title" style="margin-bottom:0px; color:black;">${BuscaNomeUsuario(linha.USUARIO)} <small>${linha.ACAO}</small></h3>
+                            <h3 
+                                class="card-title" style="margin-bottom:0px; color:black;">${BuscaNomeUsuario(linha.USUARIO)} 
+                                <small>${linha.ATIVIDADE}</small>
+                            </h3>
                             <small>${DATA}</small>
-                            <p class="card-text">${linha.OBSERVACAO && linha.OBSERVACAO.trim() ? linha.OBSERVACAO : "Aprovado"}</p>
+                            <p class="card-text">${textoObs ? textoObs : (linha.ACAO || "")}</p>
                         </div>
                     </div>
                 </div>
@@ -1151,10 +1499,10 @@ async function asyncMontaHistorico() {
     }
     function promiseBuscaImagemUsuario(usuario) {
         return new Promise(async (resolve, reject) => {
-            const res = await fetch("/api/public/social/image/" + usuario);
+            const res  = await fetch("/api/public/social/image/" + usuario);
             const blob = await res.blob();
-            const img = new Image();
-            img.width = "60";
+            const img  = new Image();
+            img.width  = "60";
             img.height = "60";
             img.classList.add("userImage");
             img.src = URL.createObjectURL(blob);
@@ -1171,6 +1519,19 @@ const documentosPorTipo = {
     J: ["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
 };
 var documentosAnexados = {};
+const TIPOS_MULTIPLOS_ANEXOS = ["CNDs (municipal, estadual, federal e trabalhista)"];
+
+function isTipoAnexoMultiplo(tipo) {
+    return TIPOS_MULTIPLOS_ANEXOS.includes(tipo);
+}
+function temAnexoDoTipo(documentos, tipo) {
+    var valor = documentos[tipo];
+
+    if (Array.isArray(valor)) {
+        return valor.length > 0;
+    }
+    return !!valor;
+}
 async function renderizarAnexosEtapaAprovacao() {
     const hiddenValue = document.getElementById("hiddenDocumentosAnexados").value;
     if (!hiddenValue) return;
@@ -1180,17 +1541,45 @@ async function renderizarAnexosEtapaAprovacao() {
         const lista = document.getElementById("listaAnexos");
         lista.innerHTML = "";
 
-        for (const [tipo, docId] of Object.entries(anexos)) {
-            if (!docId) continue;
-            const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
-            lista.innerHTML += `<li><span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">Visualizar</a></span></li>`;
+        for (const [tipo, valor] of Object.entries(anexos)) {
+            const ids = [].concat(valor);
+
+            if (!ids.length) {
+                continue;
+            }
+
+            if (isTipoAnexoMultiplo(tipo)) {
+                // Segue o mesmo modelo aplicado em insereDocumentoCriado
+                // Nome do Tipo de Arquivo
+                // Anexos
+                var html = `<li><span>✅ <b>${tipo}:</b></span>`;
+                for (const docId  of ids) {
+                    const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
+                    html += `<div style="margin-left:20px"><a href="${link}" target="_blank">Visualizar</a></div>`;
+                }
+                html += `</li>`;
+                lista.innerHTML += html;
+
+            // Para arquivos unicos
+            } else {
+                if (ids[0]) {
+                    const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(ids[0]);
+                    lista.innerHTML += `<li><span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">Visualizar</a></span></li>`;
+                }
+            }
         }
     } catch (e) {
         console.error("Erro ao carregar anexos:", e);
     }
 }
 function anexosPorTipoDeContrato(tipoDoContrato) {
-	   console.log("[ANEXOS] chamado com:", tipoDoContrato); 
+    
+    // Se a lista já está renderizada para este mesmo tipo, não reconstrói de novo.
+    if ($("#listaAnexos").data("tipoRenderizado") === tipoDoContrato) {
+        return;
+    }
+
+	console.log("[ANEXOS] chamado com:", tipoDoContrato); 
     const listaAnexosPorTipoDeContrato = {
         "Locação de Equipamento": ["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
         "Locação de Equipamento - Com Mão de Obra": ["Cartão CNPJ", "Cartão QSA", "Formulario de Tributação", "Certidão de regularidade FGTS", "CNDs (municipal, estadual, federal e trabalhista)", "CNH", "RG", "CPF"],
@@ -1214,30 +1603,77 @@ function anexosPorTipoDeContrato(tipoDoContrato) {
         html += `<option value="${anexo}">${anexo}</option>`;
         htmlListaAnexos += `<li id="item-${anexo.split(" ").join("-").split("(")[0]}"><span>❌</span> <b>${anexo}</b></li>`;
     }
-    $("#tipoDocumentacao").html(html);
-    $("#listaAnexos").html(htmlListaAnexos);
+    $("#tipoDocumentacao").html(html); // Preenche o <select> de tipos de documentação
+
+    // No final, marca o tipo renderizado junto com o html
+    $("#listaAnexos").html(htmlListaAnexos).data("tipoRenderizado", tipoDoContrato); // (Re)desenha a lista inteira do zero, todos os itens começam com ❌ 
+
+    // Re-marca os anexos já enviados sempre que a lista é reconstruída,
+    // evitando que callbacks assíncronos (ex.: busca do fornecedor) apaguem os ✅.
+    renderizaAnexosJaEnviados();
+
+    // Util
+    async function renderizaAnexosJaEnviados() {
+
+        // Não segue se não tem anexos anteriores
+        if (!documentosAnexados) {
+            return;
+        }
+
+        for (const tipo in documentosAnexados) { // Pecorre cada tipo de anexo já enviado antes
+            var ids = [].concat(documentosAnexados[tipo]); // Pega o ID do documento no Fluig desse tipo
+
+            for (const docId of ids) {
+                try {
+                    const dataAnexo = await asyncGetDocumentDetails(docId); // Busca os detalhes do doc no Fluig (Nome/Descricao)
+                    
+                    // Troca o ❌ por ✅ + link do arquivo
+                    insereDocumentoCriado(tipo, documentosAnexados, dataAnexo.data.description, docId); 
+
+                // Se a busca falhar, mostra erro no log
+                } catch (error) {
+                    console.error("Erro ao reaplicar anexo:", tipo, error);
+                }   
+            }
+        }
+    };
 }
 async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
     const tipo = $("#tipoDocumentacao").val();
-    const file = this.files[0];
-    if (!file || !tipo) {
+    const selecioandos = Array.from(this.files || []);
+
+    if (!selecioandos.length || !tipo) {
         return;
     }
+
+    // Tipo de anexo unico considera só o primeiro arquivo
+    const arquivos = isTipoAnexoMultiplo(tipo) ? selecioandos : [selecioandos[0]];
 
     try {
         const listaCarregar = $("#listaAnexos");
         const itemId = `item-${tipo.split(" ").join("-").split("(")[0]}`;
 
-        insereLabelCarregando(tipo, itemId, listaCarregar);
+        for (const file of arquivos) {
+            insereLabelCarregando(tipo, itemId, listaCarregar);
 
-        const docId = await criaDocFluigRetornaDocumentId(file, pastaDeAnexos);
+            const docId = await criaDocFluigRetornaDocumentId(file, pastaDeAnexos);
 
-        documentosAnexados[tipo] = docId;
-        // Primeiro deixa a função ajustar as regras entre CNH / RG / CPF
-        await insereDocumentoCriado(tipo, documentosAnexados, file.name, docId);
+            if (isTipoAnexoMultiplo(tipo)) {
 
-        // Só depois salva no hidden o objeto já corrigido
-        $("#hiddenDocumentosAnexados").val(JSON.stringify(documentosAnexados));
+                if (!Array.isArray(documentosAnexados[tipo])) {
+                    documentosAnexados[tipo] = [];
+                }
+                documentosAnexados[tipo].push(docId);
+
+            } else {
+                documentosAnexados[tipo] = docId;
+            }
+            // Primeiro deixa a função ajustar as regras entre CNH / RG / CPF
+            await insereDocumentoCriado(tipo, documentosAnexados, file.name, docId);
+
+            // Só depois salva no hidden o objeto já corrigido
+            $("#hiddenDocumentosAnexados").val(JSON.stringify(documentosAnexados));
+        }
 
         $("#inputAnexo").val("");
     } catch (e) {
@@ -1246,6 +1682,18 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
     }
 
     function insereLabelCarregando(tipo, itemId, listaCarregar) {
+
+        if (isTipoAnexoMultiplo(tipo)) {
+            var itemMult = $("#" + itemId);
+
+            if (!itemMult.data("pronto")) {
+                itemMult.html("<span>✅ <b>" + tipo + ":</b></span>").data("pronto", true);
+            }
+
+            itemMult.append('<div id="' + itemId + '-loading" style="margin-left:20px">⏳ carregando...</div>');
+            return;
+        }
+
         if (["CNH", "RG", "CPF"].includes(tipo)) {
             let item = $("#" + itemId);
 
@@ -1312,6 +1760,24 @@ async function insereDocumentoCriado(tipo, documentosAnexados, name, docId) {
             $("#item-identidade-rg-cnh").remove();
             $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
         }
+
+    } else if (isTipoAnexoMultiplo(tipo)) {
+        var itemId = "item-" + tipo.split(" ").join("-").split("(")[0];
+        var item = $("#" + itemId);
+
+        if (!item.data("pronto")) {
+            item.html("<span>✅ <b>" + tipo + ":</b></span>").data("pronto", true);
+        }
+
+        $("#" + itemId + "-loading").remove(); // Tira a linha "carregando..."
+
+        item.append(
+            '<div class="anexo-multiplo" data-tipo="' + tipo + '" data-docid="' + docId + '" style="margin-left:20px">' +
+                '<a href="' + link + '" target="_blank">' + name + '</a> ' +
+                '<a href="#" class="btn-remove-anexo" title="Remover">🗑️</a>' +
+            '</div>'
+        );
+
     } else {
         $(`#item-${tipo.split(" ").join("-").split("(")[0]}`).html(`<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${name}</a></span>`);
     }
@@ -1358,6 +1824,36 @@ function anexarDocumentoAoProcesso(docId) {
         console.error("Erro ao anexar documento ao processo:", e);
     }
 }
+function onClickRemoveAnexo(e) {
+    e.preventDefault();
+
+    var linha = $(this).closest(".anexo-multiplo");
+    var tipo = linha.data("tipo");
+    var docId = linha.data("docid");
+
+    // Remove o docId do array do tipo
+    if (Array.isArray(documentosAnexados[tipo])) {
+        documentosAnexados[tipo] = documentosAnexados[tipo].filter(function(id) {
+            return String(id) != String(docId);
+        });
+
+        if (documentosAnexados[tipo].length == 0) {
+            delete documentosAnexados[tipo];
+        }
+    }
+
+    // Atualiza o hidden de anexos
+    $("#hiddenDocumentosAnexados").val(JSON.stringify(documentosAnexados));
+
+    // Atualiza a tela
+    var item = linha.closest("li");
+    linha.remove();
+
+    // Se não tiver nenhum aquivo, volta icone de ❌ e libera anexo
+    if (item.find(".anexo-multiplo").length == 0) {
+        item.data("pronto", false).html("<span>❌</span> <b>" + tipo + "</b>");
+    }
+}
 
 
 // Utils
@@ -1401,6 +1897,34 @@ function criaDocFluigRetornaDocumentId(file, parentId) {
 }
 async function asyncGetDocumentDetails(documentId) {
     return await axios.get(`/content-management/api/v2/documents/${documentId}`);
+}
+function getServerURL() {
+    var ds = DatasetFactory.getDataset("dsGetServerURL", null, null, null);
+    return ds.values[0].URL;
+}
+function retornaUrlAmbienteFluigAtual() {
+
+    if (ambiente == "PRODUCAO") {
+        return "http://fluig.castilho.com.br:1010";
+
+    } else if (ambiente == "HOMOLOGACAO") {
+        return "http://homologacao.castilho.com.br:2020";
+
+    } else if (ambiente == "DESENVOLVIMENTO") {
+        return "http://desenvolvimento.castilho.com.br:3232";
+    }
+}
+function mostraToast(title, message, type) {
+
+    /*
+        Titulo (Alinhado a esquerda (pois tem diferença de DEV para HML/PROD), em negrito)
+        Mensagem 
+    */
+
+    FLUIGC.toast({
+        message: '<div style="text-align:left;"><strong>' + title + '</strong><br>' + message + '</div>',
+        type: type
+    });
 }
 
 
