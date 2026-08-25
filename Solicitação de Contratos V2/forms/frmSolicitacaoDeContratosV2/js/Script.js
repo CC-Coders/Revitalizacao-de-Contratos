@@ -18,6 +18,24 @@ const ATIVIDADES = {
     FIM: [37, 62, 83]
 };
 
+const url = getServerURL();
+const ambiente =
+    url.includes("fluig.castilho.com.br") ? "PRODUCAO" :
+    url.includes("homologacao.castilho.com.br") ? "HOMOLOGACAO" :
+    "DESENVOLVIMENTO";
+
+// Manuais Contratos
+const idsGED_manuaisContratosCastilho_porAmbiente = {
+    PRODUCAO: 950990,
+    HOMOLOGACAO: 46216,
+    DESENVOLVIMENTO: 0,
+};
+const idsGED_manuaisContratosForaPadrao_porAmbiente = {
+    PRODUCAO: 950991,
+    HOMOLOGACAO: 46260,
+    DESENVOLVIMENTO: 0,
+};
+
 $(document).ready(function () {
     bindings();
     const ATIVIDADE_ATUAL = parseInt($("#atividade").val());
@@ -162,14 +180,27 @@ function bindings() {
 
     // Aba Dados Gerais
     $("#modeloContrato").on("change", function () {
+
+        // Quando houver change, seta como "NAO" para bloquear o campo de "Tipo Contrato"
+        // Pois pode acontecer de o usuário selecionar um modelo Castilho por exemplo
+        // E aceitar o manual, e em seguida alterar para modelo fora do padrão por exemplo
+        // E nesse caso iria ficar livre o campo de "Tipo Contrato" por causa de ter aceitado o contrato da Castilho antes
+        $("#usuarioDeAcordoManualContrato").val("NAO");
+        controlaBlockCampoTipoContrato_seUsuarioDeAcordoManualContrato($("#usuarioDeAcordoManualContrato").val());
+
+        limpaCampoTipoContrato();
+
         if ($(this).val() == "Contrato fora do modelo") {
             $("#btnAnexarContrato").show();
+            modalContrato_modeloForaPadrao();
+
         } else {
+            modalManualContrato_modeloCastilho();
             $("#btnAnexarContrato").hide();
         }
     });
 
-    if ($("#origemContrato").val() ? $("#origemContrato").val() : $("#origemContrato").text() == "Aditivos") {
+    if ($("#origemContrato").val() == "Aditivos") {
         $(".divTipoAlteracao").show();
 
     } else {
@@ -335,6 +366,9 @@ function bindings() {
     $("#descontoPorDiaParado").mask("000%", { reverse: true });
     $(".cpfAdministrador").mask("000.000.000-00");
     $("#cpfRepresentanteFornecedor").mask("000.000.000-00");
+    $("#novoContratoDataInicio").mask("00/00/0000");
+    $("#novoContratoDataFim").mask("00/00/0000");
+    $("#novoContratoCodigo").mask("0.0.000-000/00");
 
     // Validações
     // blur dispara quando o usuário sai do campo
@@ -698,6 +732,7 @@ function bindings() {
     // Anexos
     $("#btnAnexarDocumento").on("click", function () { $("#inputAnexo").click() });
     $("#inputAnexo").on("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
+    $("#listaAnexos").on("click", ".btn-remove-anexo", onClickRemoveAnexo);
     
     // Transporte de Materiais - Abrir Formato de Cobrança
     $("#formatoCobrancaTransporte").on("change", function () {
@@ -869,6 +904,12 @@ async function loadTelaInicio() {
     preencherCamposViaSessionStorage();
 }
 async function loadTelaInicioRetorno() {
+    // Inicializa documentosAnexados a partir do hidden
+    var hiddenAnexos = $("#hiddenDocumentosAnexados").val();
+    documentosAnexados = hiddenAnexos ? JSON.parse(hiddenAnexos) : {};
+
+    controlaBlockCampoTipoContrato_seUsuarioDeAcordoManualContrato();
+    $("#historico, #divDecisaoAprovar, #divDecisaoCancelar").hide();
     $(".panelAprovacao").hide();
     $("#divTipoAssinaturaContrato").show();
     $("#dadosContrato").show();
@@ -944,18 +985,6 @@ async function loadTelaInicioRetorno() {
         $("#btnAnexarContrato").hide();
     }
 
-    const hiddenValue = $("#hiddenDocumentosAnexados").val();
-    const anexos = JSON.parse(hiddenValue);
-    documentosAnexados = anexos;
-
-    anexosPorTipoDeContrato($("#tipoContratoBase").val());
-
-    for (const anexo in documentosAnexados) {
-        var dataAnexo = await asyncGetDocumentDetails(documentosAnexados[anexo]);
-
-        insereDocumentoCriado(anexo, documentosAnexados, dataAnexo.data.description, documentosAnexados[anexo]);
-    }
-
     var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
 
     if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
@@ -970,7 +999,6 @@ function loadTelaJuridico() {
     $(".panelAprovacao").show();
     $("#rowAnexosSelecao").hide();
     $("#formContainer").show();
-    $("#divBtnEnviar").hide();
     $("#tableEquipamentos, #tableEquipamentosAditivoRescisao").hide();
 
     // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
@@ -1057,6 +1085,9 @@ async function loadTelaControladoria() {
     await asyncPreencheOptionsColigada();
     preencheCamposAutomaticamente();
 
+    bloqueiaCamposPagIntegracaoRM_antesDeGeradoContratoRM();
+    bloqueiaCamposPagIntegacaoRM_seJaGeradoContratoRM();
+
     geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
     onChangeTipoContrato($("#tipoContrato"));
@@ -1124,7 +1155,7 @@ async function loadTelaControladoria() {
         fnWdkRemoveChild($(this).closest("tr")[0]);
     });
 }
-function loadTelaAprovacao() {
+async function loadTelaAprovacao() {
     parent.$("#workflowActions").hide();
     $(".panelAprovacao, #formContainer").show();
     $("#rowAnexosSelecao").hide();
@@ -1153,7 +1184,7 @@ function loadTelaAprovacao() {
 
     asyncMontaHistorico();
     mostrarPagina("0");
-    geraEquipamentosSelecionados();
+    await geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
     renderizarAnexosEtapaAprovacao();
     $("#paginationIntegracaoRM").remove();
