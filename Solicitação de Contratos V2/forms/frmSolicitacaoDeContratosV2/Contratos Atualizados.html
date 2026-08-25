@@ -69,6 +69,7 @@
    <body>
       <div class="fluig-style-guide">
          <form name="form" role="form" >
+            <!-- Campos Hiddens -->
             <div class="hidden" style="display: none">
                <!-- Parametros Formulario -->
                <input type="hidden" id="atividade" name="atividade" />
@@ -115,6 +116,14 @@
                <input type="hidden" id="contratoSelecStatus" name="contratoSelecStatus">
                <input type="hidden" id="contratoSelecDataInicio" name="contratoSelecDataInicio">
                <input type="hidden" id="contratoSelecDataFim" name="contratoSelecDataFim">
+
+               <!-- Manual Contrato -->
+               <input type="hidden" id="pdfManualContratoField" name="pdfManualContrato">
+               <input type="hidden" id="usuarioDeAcordoManualContrato" name="usuarioDeAcordoManualContrato">
+
+               <!-- Campo auxiliar para decidir se passa ou não pela a analise do Suprimentos -->
+               <input type="hidden" id="seEquipPassaPorAnaliseSup" name="seEquipPassaPorAnaliseSup">
+
                <!-- Tabela Historico -->
                <div>
                   <table id="tableHistorico" tablename="tableHistorico" noaddbutton="true" nodeletebutton="true">
@@ -246,7 +255,7 @@
                            </div>
                            <div class="col-md-3">
                               <label for="tipoContratoBase">Tipo de Contrato:</label>
-                              <select name="tipoContratoBase" id="tipoContratoBase" class="form-control inputInfoChamado">
+                              <select name="tipoContratoBase" id="tipoContratoBase" class="form-control inputInfoChamado" readonly>
                                  <option value="">Selecione</option>
                                  <option value="Locação de Equipamento" data-origem="Novos,Aditivos,Rescisões">Locação de Equipamento</option>
                                  <option value="Locação de Equipamento - Com Mão de Obra" data-origem="Novos,Rescisões">Locação de Equipamento - Com Mão de Obra</option>
@@ -295,15 +304,6 @@
                                  </div>
                                  <br>
                               </div>
-                              <!-- <div class="col-md-12 campoAditivo">
-                                 <div class="form-group">
-                                     <label>Tipo aditivo:</label><strong class="strongAlert">*</strong>
-                                     <select name="tipoAditivo" id="tipoAditivo"
-                                         class="inputInfoChamado form-control">
-                                         <option value="Alteração de Valor">Alteração de Valor</option>
-                                     </select>
-                                 </div>
-                                 </div> -->
                            </div>
                            <div class="row endereco-fornecedor" style="display: none">
                               <div class="col-md-12">
@@ -976,7 +976,7 @@
                                     <option value="">Selecione um Locador</option>
                                  </select>
                                  <button type="button" class="btn btn-primary" id="btnAnexarDocumento">Anexar</button>
-                                 <input type="file" id="inputAnexo" name="anexoGenerico" style="display: none;" />
+                                 <input type="file" id="inputAnexo" name="anexoGenerico" multiple style="display: none;" />
                               </div>
                            </div>
                         </div>
@@ -1146,49 +1146,84 @@
                   </div>
                </div>
                <div id="pagina-historico" data-index="4" class="pagina">
-                  <div style="margin-top: 60px;">
+                  <div id="divPaginaHistorico" style="margin-top: 65px;">
                      <h2>Histórico</h2>
-                     <div id="panelHistorico">
-                        <div id="divLinhasHistorico"></div>
-                        <hr>
-                     </div>
-                     <div id="tabInfoChamado">
-                        <div class="form-input">
-                           <label>Observações: </label>
-                           <textarea name="observacoes" id="observacoes" class="form-control inputCurso inputOpcional"
-                              rows="4"></textarea>
-                           <div></div>
-                           <br />
+
+                     <!-- Decisão: Aprovar / Retornar + Destino + Enviar -->
+                     <div class="row" id="tabInfoChamado">
+                        <div class="col-md-12">
+                           <div id="divResolucaoChamado" style="text-align: center;">
+
+                              <div>
+                                 <!-- Switch Aprovar -->
+                                 <div id="divDecisaoAprovar" style="display: inline-block">
+                                    <label for="decisaoAprovar" style="margin-right: 2%; padding-top: 2px">Aprovar</label>
+                                    <div class="switch switch-success switch-lg">
+                                       <input class="switch-input" type="radio" name="decisao" id="decisaoAprovar"
+                                          value="Aprovar" />
+                                       <label class="switch-button switchRedGreen" for="decisaoAprovar">Toggle</label>
+                                    </div>
+                                 </div>
+
+                                 <!-- Switch Retornar -->
+                                 <div id="divDecisaoCancelar" style="display: inline-block">
+                                    <label for="decisaoCancelar" style="margin-right: 2%; padding-top: 2px">Retornar</label>
+                                    <div class="switch switch-danger switch-lg">
+                                       <input class="switch-input inputCheckbox" type="radio" name="decisao"
+                                          id="decisaoCancelar" value="Retornar" />
+                                       <label class="switch-button switchRedGreen" for="decisaoCancelar">Toggle</label>
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <!-- Select Destino do Retorno (centralizado) -->
+                              <div class="col-md-6 col-md-offset-3" style="text-align: left;">
+                                 <div class="form-input" style="display: none" id="divDestinoRetorno">
+                                    <label> Selecionar Destino do Retorno: </label>
+                                    <select name="destinoRetorno" id="destinoRetorno" class="form-control inputInfoChamado">
+                                       <option value="">Selecione</option>
+                                    </select>
+                                    <br>
+                                 </div>
+                              </div>
+
+                              <!-- Botão de Enviar -->
+                              <div style="clear: both;" id="divBtnEnviar">
+                                 <button class="btn btn-primary" id="btnEnviarSolicitacao" type="button">Enviar</button>
+                              </div>
+
+                           </div>
                         </div>
-                        <div id="divResolucaoChamado" style="text-align: center; margin-top: 20px">
-                           <div id="divDecisaoAprovar" style="display: inline-block">
-                              <label for="decisaoAprovar" style="margin-right: 2%; padding-top: 2px">Aprovar</label>
-                              <div class="switch switch-success">
-                                 <input class="switch-input" type="radio" name="decisao" id="decisaoAprovar"
-                                    value="Aprovar" />
-                                 <label class="switch-button switchRedGreen" for="decisaoAprovar">Toggle</label>
+                     </div>
+
+                     <!-- Text Area: Observações -->
+                     <div class="row">
+                        <div class="col-md-12">
+                           <div class="form-input">
+                              <label>Observações: </label>
+                              <textarea name="observacoes" id="observacoes" class="form-control inputCurso inputOpcional" rows="4"></textarea>
+                              <div></div>
+                              <br>
+                           </div>
+                        </div>
+                     </div>
+
+                     <!-- Painel de Histórico -->
+                     <div class="row">
+                        <div class="col-md-12">
+                           <div class="panel panel-default" id="historico">
+                              <div class="panel-heading" style="background-color: #eaeaea;">
+                                 <h4 class="panel-title" style="color: #58595b;">Histórico</h4>
+                              </div>
+                              <div class="panel-body">
+                                 <div id="panelHistorico">
+                                    <div id="divLinhasHistorico"></div>
+                                 </div>
                               </div>
                            </div>
-                           <div id="divDecisaoCancelar" style="display: inline-block">
-                              <label for="decisaoCancelar" style="margin-right: 2%; padding-top: 2px">Retornar</label>
-                              <div class="switch switch-danger">
-                                 <input class="switch-input inputCheckbox" type="radio" name="decisao"
-                                    id="decisaoCancelar" value="Retornar" />
-                                 <label class="switch-button switchRedGreen" for="decisaoCancelar">Toggle</label>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="form-input" style="display: none" id="divDestinoRetorno">
-                           <label> Selecionar Destino do Retorno: </label>
-                           <select name="destinoRetorno" id="destinoRetorno" class="form-control inputInfoChamado">
-                              <option value="">Selecione</option>
-                           </select>
-                           <br />
                         </div>
                      </div>
-                     <div style="text-align: center" id="divBtnEnviar">
-                        <button class="btn btn-primary" id="btnEnviarSolicitacao" type="button">Enviar</button>
-                     </div>
+
                   </div>
                </div>
                <div id="paginaEquipamentos" data-index="5" class="pagina">
