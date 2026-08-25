@@ -111,7 +111,7 @@ function beforeTaskSave_inicio() {
         if (pdfIdContrato) {
             anexaDocumentoNoProcesso(pdfIdContrato);
         }
-        insereHistorico(hAPI.getCardValue("observacoes"), "Início", "Início");
+        insereHistorico(hAPI.getCardValue("observacoes"), "Enviado", "Início");
     } catch (error) {
         throw error;   
     }
@@ -1561,7 +1561,6 @@ var codigoStatusEquipamentos = {
     "Equipamento_desmobilizado":5,
     "Contrato_encerrado":6,
 }
-
 function atualizaStatusEquipamento(status){
     var origemContrato = hAPI.getCardValue("origemContrato");
 
@@ -1620,7 +1619,6 @@ function atualizaStatusEquipamento(status){
         }
     }
 }
-
 function buscaCategoriaPorPrefixo(PREFIXO){
     try {
         var query = "SELECT CATEGORIA FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE PREFIXO = ?";
@@ -1744,6 +1742,25 @@ function buscaDadosDoArquivo(documentId){
 function insereHistorico(observacao, acao, atividade) {
     var USER = getValue("WKUser");
     var DATA = getDateTimeNow();
+
+    // Quando não estiver sendo movimentada (false), não executa inserção de histórico
+    if (getValue("WKCompletTask") == "false") {
+        return;
+    }
+
+    // Quando for iniciar a solicit
+    if (hAPI.getCardValue("formMode") == "ADD") {
+        acao = "Abertura Solicitação"
+    }
+
+    // Trata textos de ações, para ficar melhor (texto) no historico.
+    // Alterado somente aqui, e não no campo original para não ter que alterar em varios outros lugares que usam por exemplo "Aprovar"
+    if (acao == "Aprovar") {
+        acao = "Aprovado";
+    }
+    if (acao == "Retornar") {
+        acao = "Reprovado"
+    }
 
     var novaLinha = new java.util.HashMap();
     novaLinha.put("tableHistoricoUsuario", USER);
