@@ -171,21 +171,6 @@ function initDataTableEquipamentos(){
         return list;
     }
 }
-//async function preencheListaDeEquipamentos(){
-//    try {
-//        const CODCOLIGADA = $("#CODCOLIGADA").val();
-//        const CCUSTO = $("#CODCCUSTO").val();
-//        const CNPJ = $("#hiddenCGCCFO").val();
-//
-//        var equipamentos = await consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ);
-//        dataTableEquipamentos.clear().draw();
-//        dataTableEquipamentos.rows.add(equipamentos); // Add new data
-//        dataTableEquipamentos.columns.adjust().draw(); // Redraw the DataTable
-//    } catch (error) {
-//        console.error(error);
-//    }
-//}
-
 async function preencheListaDeEquipamentos(){
     try {
         const CODCOLIGADA = $("#CODCOLIGADA").val();
@@ -340,7 +325,7 @@ async function onClickDetailsEquipamento(that) {
             <hr>
             <div class="row">
                 <div class="col-md-12" style="text-align:center;">
-                    <button class="btn btn-primary btnAnexosEquipamento">
+                    <button class="btn btn-primary btnAnexosEquipamento" ${validaSeEquipamentoTemPeloMenosUmAnexo(data) ? "" : "disabled title='Não há anexos'"}>
                         <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
                         Anexos
                     </button>
@@ -546,10 +531,12 @@ async function modalAlterarEquipamento(data) {
             });
 
             $("[data-alterar]").on("click", function(){
-                var retorno = alteraDadosEquipamento(data.IDEQUI, data.PREFIXO);
+                var retorno = alteraDadosEquipamento(data.IDEQUI, data.PREFIXO, data.CATEGORIA);
+
                 if (retorno!="SUCCESS") {
                     showMessage("Erro ao atualizar equipamento: ",retorno,"warning");
-                }else{
+
+                } else {
                     showMessage("Equipamento alterado!","","success");
                     preencheListaDeEquipamentos();
                 }
@@ -558,29 +545,48 @@ async function modalAlterarEquipamento(data) {
         }
     });
 }
-function alteraDadosEquipamento(IDEQUI, PREFIXO){
-    const campo = $(".selectCampoAlteracao").val()
-    const VALORATUAL = $(".atualValorAlteracao").val()
-    var valor = $(".novoValorAlteracao").val()
+function alteraDadosEquipamento(IDEQUI, PREFIXO, CATEGORIA){
+    const campo = $(".selectCampoAlteracao").val();
+    const VALORATUAL = $(".atualValorAlteracao").val();
+    var novoValor = $(".novoValorAlteracao").val();
 
-
-    if (campo == "Valor de Locação" || campo == "Valor de Mão de Obra") {
-        valor = moneyToFloat(valor);
-    }else{
-        valor = valor.split(" - ")[1];
-    }
+    formataMoedaParaFloat(); // Alteração de Valor (R$)
+    pegaSomenteCnpjDoDadoDoFornecedor(); // Troca de CNPJ
 
     var ds = DatasetFactory.getDataset("dsAlteraDadosEquipamento", null,[
-        DatasetFactory.createConstraint("CAMPO",campo,campo,ConstraintType.MUST),
-        DatasetFactory.createConstraint("VALOR",valor,valor,ConstraintType.MUST),
-        DatasetFactory.createConstraint("VALORATUAL",VALORATUAL,VALORATUAL,ConstraintType.MUST),
-        DatasetFactory.createConstraint("IDEQUI",IDEQUI,IDEQUI,ConstraintType.MUST),
-        DatasetFactory.createConstraint("PREFIXO",PREFIXO,PREFIXO,ConstraintType.MUST),
+        DatasetFactory.createConstraint("CAMPO", campo, campo, ConstraintType.MUST),
+        DatasetFactory.createConstraint("VALOR", novoValor, novoValor, ConstraintType.MUST),
+        DatasetFactory.createConstraint("VALORATUAL", VALORATUAL, VALORATUAL, ConstraintType.MUST),
+        DatasetFactory.createConstraint("IDEQUI", IDEQUI, IDEQUI, ConstraintType.MUST),
+        DatasetFactory.createConstraint("PREFIXO", PREFIXO, PREFIXO, ConstraintType.MUST),
+        DatasetFactory.createConstraint("CATEGORIA", CATEGORIA, CATEGORIA, ConstraintType.MUST),
     ],null);
+
     if (ds.values[0].STATUS == "SUCCESS") {
         return "SUCCESS";
-    }else{
+
+    } else {
         return ds.values[0].MENSAGEM;
+    }
+
+    // Utils
+    function formataMoedaParaFloat() {
+        if (campo == "Valor de Locação" || campo == "Valor de Mão de Obra") {
+            novoValor = moneyToFloat(novoValor);
+
+        } else {
+            novoValor = novoValor.split(" - ")[1];
+        }
+
+        return novoValor;
+    }
+    function pegaSomenteCnpjDoDadoDoFornecedor() {
+        if (campo == "CNPJ") {
+            // Retorna somente o CNPJ, mantendo o formato ex: '27.996.441/0001-41'
+            novoValor = (novoValor.match(/\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/) || [""])[0];
+        }
+
+        return novoValor;
     }
 }
 function atualizaValorTotalLocacao_prazo(){
@@ -1518,8 +1524,18 @@ async function geraEquipamentosSelecionados(){
             $("#tableEquipamentos").hide();
             var equipamentos = await asyncConsultaEquipamentosSelecionados();
 
+            if (equipamentos.length > 0) {
+                var todosAnalisados = equipamentos.every(eq => eq.NEGOCIACAO_SUPRIMENTOS == "S");
+                console.log("todosAnalisados: " + todosAnalisados);
+
+                // Preenche campo "Negociação Realizada pelo Suprimentos" com "Sim" (se ja foi analisado tudo) ou "Não"
+                usaValOuText_comBaseModoFluig("#negociacaoHeaderEquipamentos", todosAnalisados ? "Sim" : "Não");
+
+                // Preenche campo hidden se precisa (SIM) ou não (NAO) passar por analise do Suprimentos
+                marcaSeEquipPassaPorAnaliseSup_comBaseSeJaFoiAnalisado(todosAnalisados ? "Não" : "Sim");
+            }
+
             for (const equipamento of equipamentos) {
-                $("#negociacaoHeaderEquipamentos").val(equipamento.NEGOCIACAO_SUPRIMENTOS == "S" ? "Sim":equipamento.NEGOCIACAO_SUPRIMENTOS == "N" ? "Não":"");
                 $("#divEquipamentosSelecionados").append(await geraHtmlEquipamento(equipamento));
                 $(".btnAnexosEquipamento:last").on("click", {equipamento:equipamento}, async function(event){
                     console.log(event)
@@ -1719,7 +1735,7 @@ async function geraEquipamentosSelecionados(){
                         </div>
                         <hr>
                         <div style="text-align:center;">
-                            <button class="btn btn-primary btnAnexosEquipamento">
+                            <button class="btn btn-primary btnAnexosEquipamento" ${validaSeEquipamentoTemPeloMenosUmAnexo(equipamento) ? "" : "disabled title='Não há anexos'"}>
                                 <i class="flaticon flaticon-paperclip icon-sm" aria-hidden="true"></i>
                                 Anexos
                             </button>
@@ -1733,7 +1749,16 @@ async function geraEquipamentosSelecionados(){
             </div>
         </div>`;
 
-        return html;
+        return html;        
+    }
+    function usaValOuText_comBaseModoFluig(campo, valor) {
+
+        if ($("#formMode").val() == "VIEW") {
+            $(campo).text(valor); // Campo vira span, por isso text
+
+        } else {
+            $(campo).val(valor); // Campo se mantem input, por isso val
+        }
     }
 }
 async function geraHtmlAnexos(equipamento) {
@@ -1779,9 +1804,26 @@ async function geraHtmlAnexos(equipamento) {
     return html;
 }
 async function htmlNovoAnexo(documentId, documentName) {
+
+    // Adicionado essa condição para não quebrar modal de "Anexos" do equip
+    // Pois acontece casos de o equip não ter todos os anexos, e um ID inválido quebrava o modal por "Documento não encontrado"
+    if (!documentId || documentId == "#") {
+        return "";
+    }
+
+    var href;
+
+    try {
+        href = await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId);
+
+    } catch (error) {
+        console.error("Anexo indisponivel no GED, docId: " + documentId);
+        return ""; // Adicionado essa condição para não quebrar modal de "Anexos" do equip
+    }
+
     var html =
         `<div class="btn btn-default btnAnexo">
-            <b><a target="_blank" href=${documentId == "#" ? "#" : await promiseBuscaDownloadUrlDocumentoNoFLuig(documentId)}>${documentName}</a></b>
+            <b><a target="_blank" href=${href}>${documentName}</a></b>
         </div>`;
 
     return html;
@@ -1799,9 +1841,6 @@ function geraCabecalhoEquipamentos(){
     if ($("#formMode").val() == "VIEW") {
         $("#obraHeaderEquipamentos").text($("#NOMECCUSTO").val());
         $("#tipoContratoHeaderEquipamentos").text($("#tipoContrato").text() || $("#tipoContrato").val());
-//        $("#periodoHeaderEquipamentos").text($("#prazoLocacao").text());
-//        $("#valorMensalHeaderEquipamentos").text($("#valorMensalLocacao").text());
-//        $("#valorTotalHeaderEquipamentos").text($("#valorTotalLocacao").text());
         $("#periodoHeaderEquipamentos").text(tipoContrato == "Transporte de Materiais" ? $("#mesesContratoTransporte").val() : $("#prazoLocacao").text());
         $("#valorMensalHeaderEquipamentos").text(tipoContrato == "Transporte de Materiais" ? $("#valorMensalTransporte").val() : $("#valorMensalLocacao").text());
         $("#valorTotalHeaderEquipamentos").text(tipoContrato == "Transporte de Materiais" ? valorTotalTransporte.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : $("#valorTotalLocacao").text());
@@ -1809,9 +1848,6 @@ function geraCabecalhoEquipamentos(){
     } else {
         $("#obraHeaderEquipamentos").val($("#NOMECCUSTO").val());
         $("#tipoContratoHeaderEquipamentos").val($("#tipoContrato").val());
-//        $("#periodoHeaderEquipamentos").val($("#prazoLocacao").val());
-//        $("#valorMensalHeaderEquipamentos").val($("#valorMensalLocacao").val());
-//        $("#valorTotalHeaderEquipamentos").val($("#valorTotalLocacao").val());
         $("#periodoHeaderEquipamentos").val(tipoContrato == "Transporte de Materiais" ? $("#mesesContratoTransporte").val() : $("#prazoLocacao").val());
         $("#valorMensalHeaderEquipamentos").val(tipoContrato == "Transporte de Materiais" ? $("#valorMensalTransporte").val() : $("#valorMensalLocacao").val());
         $("#valorTotalHeaderEquipamentos").val(tipoContrato == "Transporte de Materiais" ? valorTotalTransporte.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : $("#valorTotalLocacao").val());
@@ -2043,24 +2079,23 @@ function calculaDiferencaEmMeses(diaInicio, diaFim){
 
     return Math.round(Math.abs(init.diff(end, 'months', true)))
 }
-// function promiseGetDocumentDescription(documentId){
-//     return new Promise((resolve, reject)=> {
-//         $.ajax({
-//             url: `/content-management/api/v2/documents/${documentId}`,
-//             contentType: "application/json",
-//             method: "GET",
-//             error: function (x, e) {
-//                 console.log(x);
-//                 console.log(e);
-//                 FLUIGC.toast({
-//                     message: "Erro ao buscar documento: " + e,
-//                     type: "warning"
-//                 });
-//                 reject("Erro ao buscar boletim de medição!");
-//             },
-//             success: function (data) {
-//                 resolve(data.description);
-//             }
-//         });
-//     });
-// }
+function validaSeEquipamentoTemPeloMenosUmAnexo(equipamento) {
+    var campos = ["ANEXOS_FOTOS", "ANEXOS_DOCUMENTACAO", "ANEXOS_LAUDO", "ANEXOS_PLANO_MANUTENCAO", "ANEXOS_ART"];
+
+    return campos.some(function (campo) {
+        return (equipamento[campo] || "").split(",").some(function (id) {
+            return /^\d+$/.test(id.trim()); // pelo menos um id
+        });
+    });
+}
+function marcaSeEquipPassaPorAnaliseSup_comBaseSeJaFoiAnalisado(jaFoiAnalisado) { // 'SIM' ou 'NAO'
+
+    // Se ja foi todos analisados
+    if (jaFoiAnalisado == "Sim") {
+        $("#seEquipPassaPorAnaliseSup").val("SIM"); // Não passa por Analise
+
+    // Se não foi analisado todos
+    } else if ("Não") {
+        $("#seEquipPassaPorAnaliseSup").val("NAO"); // Passa por Analise
+    }
+}
