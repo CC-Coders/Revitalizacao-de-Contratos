@@ -371,13 +371,6 @@
   z-index: 100000;
 }
 
-
-.divImageUser>img{
-	border-radius: 50%;
-}
-#divLinhasHistorico{
-}
-
 .selectize-dropdown .active:not(.selected){
     background-color: lightgray !important;
     color: black !important;
@@ -599,3 +592,53 @@
   color: rgb(88, 89, 91) !important; /* Cor que o Fluig usa para os campos */
   cursor: not-allowed; /* Cursor de "proibido" ao passar o mouse no campo */
 }
+
+/* =========================== 
+  PDF Manual Contrato
+*/
+#pdfManualContrato {
+    min-height: 100vh;
+    width: 103%;
+}
+.viewerPdf {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.btnArea {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+.checkboxAceite {
+    margin-top: 1.4em;
+}
+/* =========================== 
+*/
+
+
+/* =========================== 
+  Readonly
+*/
+
+/* Inputs */
+.fluig-style-guide input.form-control[readonly] {
+    color: rgb(88, 89, 91) !important; /* Cor que o Fluig usa para os campos */
+    background-color: #eeeeee !important; /* Cor de fundo do campo */
+    cursor: not-allowed !important; /* Cursor de "proibido" ao passar o mouse no campo */
+}
+
+
+/* Select */
+.fluig-style-guide select.form-control[readonly],
+select.form-control[readonly] {
+    background-color: #EEEEEE !important;
+    color: #555 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* =========================== 
+*/
