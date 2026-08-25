@@ -86,16 +86,15 @@ function beforeTaskSave_inicio() {
         var tipoContrato = hAPI.getCardValue("tipoContrato");
         
         if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
-            atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
+            atualizaStatusEquipamento_quandoAberturaSolicit("Contrato_em_Andamento_com_análise_pendente");
             hAPI.setCardValue("dataCriadoEm", getDateNow());
 
         } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
             // Insere o(s) equip(s) na tabela para poder ver na Analise do Suprimentos, mas insere com Status Desativado
             insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"));
-            atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
+            atualizaStatusEquipamento_quandoAberturaSolicit("Contrato_em_Andamento_com_análise_pendente");
 
         } else if (tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
-           
             insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"));
 
         }
@@ -287,7 +286,7 @@ function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {
 
             // Atualiza o ATIVO para ativado ( 1 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo
             updateTcntAuxiliarItens_statusEquipNoContrato("1", ID_TCNT_AUXILIAR);
-            atualizaStatusEquipamento("Contrato_Vigente");
+            atualizaStatusEquipamento_quandoAberturaSolicit("Contrato_Vigente");
 
         } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
@@ -298,7 +297,7 @@ function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {
 
             // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo
             updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR);
-            atualizaStatusEquipamento("Equipamento_desmobilizado");
+            atualizaStatusEquipamento_quandoAberturaSolicit("Equipamento_desmobilizado");
 
         } else if (tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)") {
             // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.
@@ -306,7 +305,7 @@ function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {
 
             // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado essa rescisão
             updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR);
-            atualizaStatusEquipamento("Equipamento_desmobilizado");
+            atualizaStatusEquipamento_quandoAberturaSolicit("Equipamento_desmobilizado");
 
             // Desativa equipamentos no SISMA
             updateSISMA_statusEquipamento();
@@ -1561,8 +1560,15 @@ var codigoStatusEquipamentos = {
     "Equipamento_desmobilizado":5,
     "Contrato_encerrado":6,
 }
-function atualizaStatusEquipamento(status){
+function atualizaStatusEquipamento_quandoAberturaSolicit(status){
     var origemContrato = hAPI.getCardValue("origemContrato");
+
+    // Quando a solicitção retornar para o Inicio não roda UPDATE's novamente
+    // Isso porque se caso o equip já foi analisado antes (nessa solicitação) então não será preciso analisar novamente
+    // Somente quando for a abertura da solicitação (ADD)
+    if (hAPI.getCardValue("formMode") != "ADD") {
+        return;
+    }
 
     if (origemContrato == "Novos") {
         try {
