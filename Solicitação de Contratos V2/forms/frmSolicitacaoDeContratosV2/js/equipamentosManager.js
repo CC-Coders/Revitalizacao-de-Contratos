@@ -114,16 +114,29 @@ function initDataTableEquipamentos(){
                 className: "alignCenter",
                 orderable: false,
                 render: function (data, type, row) {
-                    //if (row.STATUS == 1 || row.STATUS == 5) { // Status 5 porque são equipamentos com Contrato rescindido // Testes
+                    
+                    /*
+                        Data: 25/08/26
+                        Tabela: EQUIPAMENTOS_CONTRATOS_AUXILIAR_STATUS
+
+                        1	Pendente Contrato
+                        2	Contrato em Andamento com análise pendente
+                        3	Contrato em Andamento com análise realizada
+                        4	Contrato Vigente
+                        5	Equipamento desmobilizado
+                        6	Contrato encerrado
+                        7	Análise em andamento
+                    */
+
                     if (row.STATUS == 1) { // "Equipamento cadastrado e disponível para seleção no processo de Contratos"
                         return `<input type="checkbox" class="checkboxSelecionaEquipamento" />`;
-                    }
-                    else if(row.STATUS == 2){ // STATUS 2 = Contrato em Andamento com análise pendente
+
+                    } else if(row.STATUS == 2 || row.STATUS == 3) {
                         var  list = retornaListaComEquipamentosSelecionadosPeloUsuario();
                         if (list.includes(row.PREFIXO)) {
                             return `<input type="checkbox" checked class="checkboxSelecionaEquipamento" />`;
-                        }
-                        else{
+
+                        } else{
                             return `<a taget="_blanck" href="/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=${row.NUMPROCES_CONTRATO}" class="btn btn-primary">Em Andamento</a>`;
                         }
                     }
