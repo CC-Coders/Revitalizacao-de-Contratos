@@ -878,6 +878,9 @@ async function loadTelaInicioRetorno() {
     buscaBancos();
     inicializarCalendario();
     inicializarPeriodoLocacao();
+    $("#selectTestemunha").selectize();
+    asyncAtualizaListaDeAssinantes();
+    carregaTestemunhas();
     initDataTableContratoPrincipal();
 
     initDataTableEquipamentos_aditivoRescisao();
