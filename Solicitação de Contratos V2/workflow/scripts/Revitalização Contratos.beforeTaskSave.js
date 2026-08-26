@@ -1745,6 +1745,11 @@ function insereHistorico(observacao, acao, atividade) {
     var USER = getValue("WKUser");
     var DATA = getDateTimeNow();
 
+    // Quando não estiver sendo movimentada (false), não executa inserção de histórico
+    if (getValue("WKCompletTask") == "false") {
+        return;
+    }
+
     var novaLinha = new java.util.HashMap();
     novaLinha.put("tableHistoricoUsuario", USER);
     novaLinha.put("tableHistoricoData", DATA);
