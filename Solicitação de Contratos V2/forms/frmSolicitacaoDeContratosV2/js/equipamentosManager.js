@@ -1111,8 +1111,13 @@ async function preencheListaDeEquipamentos_aditivosRescisao() {
     // Limpa tabela de Inclusão/Exclusão antes de remontar, para não ficar equipamentos de outros contratos.
     $("#tableEquipamentosParaInclusaoExclusao tbody").empty();
     
-    // Limpa tabela de equip(s) selecionados aditivo/rescisao antes de remontar, para não ficar equipamentos de outros contratos ou duplicado.
-    $("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").empty();
+    // Pega todo o tbody
+    var tbodyEquip = $("#tableEquipamentosSelecionados_aditivos > tbody")[0];
+
+    // Remove cada <tr> (menos a primeira)
+    $("#tableEquipamentosSelecionados_aditivos > tbody > tr:not(:first)").each(function () {
+        tbodyEquip.removeChild(this);
+    });
     
     if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
         tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
