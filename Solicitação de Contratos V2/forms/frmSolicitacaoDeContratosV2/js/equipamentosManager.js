@@ -53,7 +53,7 @@ function initDataTableEquipamentos(){
         columns: [
             {
                 render:function(data,type,row){
-                    return `<button type="button" class="btn btn-success btnDetailsEquipamento"><i class="flaticon flaticon-circle-plus icon-md" aria-hidden="true"></i></button>`;
+                    return `<button type="button" name="btnDetailsEquipamento" class="btn btn-success btnDetailsEquipamento"><i class="flaticon flaticon-circle-plus icon-md" aria-hidden="true"></i></button>`;
                 }
             },
             {
@@ -128,18 +128,26 @@ function initDataTableEquipamentos(){
                         7	Análise em andamento
                     */
 
-                    if (row.STATUS == 1) { // "Equipamento cadastrado e disponível para seleção no processo de Contratos"
-                        return `<input type="checkbox" class="checkboxSelecionaEquipamento" />`;
+                    if ($("#IDCNT").val() && $("#origemContrato").val() == "Novos") {
+                        var  list = retornaListaComEquipamentosSelecionadosPeloUsuario();
+                        if (list.includes(row.PREFIXO)) {
+                            return `<input type="checkbox" name="chkEquip" checked class="checkboxSelecionaEquipamento" style="pointer-events: none; accent-color: #888;" />`;
+                        }
+                        
+                    } else if (row.STATUS == 1) { // "Equipamento cadastrado e disponível para seleção no processo de Contratos"
+                        return `<input type="checkbox" name="chkEquip" class="checkboxSelecionaEquipamento" />`;
 
                     } else if(row.STATUS == 2 || row.STATUS == 3) {
                         var  list = retornaListaComEquipamentosSelecionadosPeloUsuario();
                         if (list.includes(row.PREFIXO)) {
-                            return `<input type="checkbox" checked class="checkboxSelecionaEquipamento" />`;
+                            return `<input type="checkbox" name="chkEquip" checked class="checkboxSelecionaEquipamento" />`;
 
                         } else{
                             return `<a taget="_blanck" href="/portal/p/1/pageworkflowview?app_ecm_workflowview_detailsProcessInstanceID=${row.NUMPROCES_CONTRATO}" class="btn btn-primary">Em Andamento</a>`;
                         }
                     }
+
+                    return ""; // Evita o warning de "unknown parameter null"
                 },
             },
         ],
@@ -190,12 +198,29 @@ async function preencheListaDeEquipamentos(){
         const CCUSTO = $("#CODCCUSTO").val();
         const CNPJ = $("#hiddenCGCCFO").val();
 
+        // Não consulta se não tiver essas infos
+        // Evitando erros desnecessários no console
+        if (!CODCOLIGADA || !CCUSTO || !CNPJ) {
+            return;
+        }
+
         var equipamentos = await consultaEquipamentosPendentes(CODCOLIGADA, CCUSTO, CNPJ);
 
         var tipoContrato = $("#tipoContrato").val();
         if (tipoContrato === "Transporte de Materiais") {
             equipamentos = equipamentos.filter(function (e) {
                 return e.CATEGORIA && e.CATEGORIA.toUpperCase() === "PA";
+            });
+        }
+
+        // Quando o contrato já existe e a origem é "Novos", mostra só os selecionados
+        if ($("#IDCNT").val() && $("#origemContrato").val() == "Novos") {
+            var selecionados = [];
+            $(".equipamentoSelecionadoPrefixo:not(:first)").each(function () {
+                selecionados.push($(this).val());
+            });
+            equipamentos = equipamentos.filter(function (e) {
+                return selecionados.includes(e.PREFIXO);
             });
         }
 
@@ -713,7 +738,7 @@ function initDataTableEquipamentos_aditivoRescisao(){
                 orderable: false,
                 render: function (data, type, row) {
                     var list = retornaListaComEquipamentosSelecionadosAditivo();
-                    return `<input type="checkbox" class="checkboxSelecionaEquipamentoAditivo" ${list.includes(row.PREFIXO) ? "checked" : ""} />`;
+                    return `<input type="checkbox" name="chkEquipAditivo" class="checkboxSelecionaEquipamentoAditivo" ${list.includes(row.PREFIXO) ? "checked" : ""} />`;
                 },
             },
         ],
@@ -1537,6 +1562,7 @@ async function geraEquipamentosSelecionados(){
             $("#tableEquipamentos").hide();
             var equipamentos = await asyncConsultaEquipamentosSelecionados();
 
+            // Valida Negocição Suprimentos
             if (equipamentos.length > 0) {
                 var todosAnalisados = equipamentos.every(eq => eq.NEGOCIACAO_SUPRIMENTOS == "S");
                 console.log("todosAnalisados: " + todosAnalisados);
@@ -1545,7 +1571,26 @@ async function geraEquipamentosSelecionados(){
                 usaValOuText_comBaseModoFluig("#negociacaoHeaderEquipamentos", todosAnalisados ? "Sim" : "Não");
 
                 // Preenche campo hidden se precisa (SIM) ou não (NAO) passar por analise do Suprimentos
+                // Se foi todos analisados, não precisa passar por analise ("Não")
+                // Se NÃO foi todos analisados, precisa passar por analise ("Sim")
                 marcaSeEquipPassaPorAnaliseSup_comBaseSeJaFoiAnalisado(todosAnalisados ? "Não" : "Sim");
+            }
+
+            // Valida categoria (MA / PA)
+            if (equipamentos.length > 0) {
+                var todosCategoriaOutros = equipamentos.every(eq => eq.CATEGORIA == "Outros");
+                console.log("todosCategoriaOutros: " + todosCategoriaOutros);
+
+                // Se todos forem categoria "Outros" então não passará por analise
+                // Oculta campo "Negociação Realizada pelo Suprimentos"
+                if (todosCategoriaOutros) {
+                    $("#negociacaoHeaderEquipamentos").closest("div").hide();
+                }
+
+                // Preenche campo hidden se precisa (SIM) ou não (NAO) passar por analise do Suprimentos
+                // Se todos são 'Outros', não precisa passar por analise ("Não")
+                // Se todos NÃO forem 'Outros', precisa passar por analise ("Sim")
+                marcaSeEquipPassaPorAnaliseSup_comBaseSeJaFoiAnalisado(todosCategoriaOutros ? "Não" : "Sim");
             }
 
             for (const equipamento of equipamentos) {
