@@ -371,22 +371,38 @@ function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais(connCustom
     var origemContrato = hAPI.getCardValue("origemContrato");
     var dataFimLocacao = hAPI.getCardValue("dataFimLocacao");
 
+    // Locação de Equipamento
+    var tiposContratoLocacaoEquip_aditivo_rescisao = 
+        tipoContrato == "Locação de Equipamento - Alteração de Valor" || 
+        tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
+        tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" || 
+        tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
+        tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || 
+        tipoContrato == "Locação de Equipamento (Rescisões)" || 
+        tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)";
+
+    // Locação de Imóvel
+    var tiposContratoLocacaoImovel_aditivo_rescisao =
+        tipoContrato == "Locação de Imóvel - Alteração de Valor" || 
+        tipoContrato == "Locação de Imóvel - Alteração de Prazo" || 
+        tipoContrato == "Locação de Imóvel - Alteração de Prazo e Valor" ||
+        tipoContrato == "Locação de Imóvel (Rescisões)";
+
     try {
 
         if (origemContrato == "Aditivos" || origemContrato == "Rescisões") {
-            if (tipoContrato == "Locação de Equipamento - Alteração de Valor" || tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
-                tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" || tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
-                tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || tipoContrato == "Locação de Equipamento (Rescisões)" || 
-                tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)")
-            {
-                insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR, connCustom); // SQL
 
-            } else if (tipoContrato == "Locação de Imóvel - Alteração de Valor" || tipoContrato == "Locação de Imóvel - Alteração de Prazo" || 
-                tipoContrato == "Locação de Imóvel - Alteração de Prazo e Valor") 
-            {
+            // Locação de Equipamento
+            if (tiposContratoLocacaoEquip_aditivo_rescisao) {
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR, connCustom); // SQL
+            }
+
+            // Locação de Imóvel
+            else if (tiposContratoLocacaoImovel_aditivo_rescisao) {
                 insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR, connCustom); // SQL
             }
-                alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "ATIVO"); // RM
+
+            alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "ATIVO"); // RM
         }
         
         if (tipoContrato == "Locação de Imóvel - Alteração de Prazo") {
