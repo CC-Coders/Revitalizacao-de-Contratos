@@ -138,7 +138,7 @@ function beforeTaskSave_controladoria() {
 
                 // Dromos ou EPYA
                 } else if (codColigada == 12 || codColigada == 13) {
-                    hAPI.setCardValue("diretor", "mario")
+                    hAPI.setCardValue("diretor", "josemario");
                 }
             }
             var IDCNT = hAPI.getCardValue("IDCNT");
