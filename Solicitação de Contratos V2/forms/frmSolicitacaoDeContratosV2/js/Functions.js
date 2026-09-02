@@ -1202,7 +1202,9 @@ function bloqueiaCampos_seJaGeradoContratoRM() {
     var selectsNativos = [
         "#origemContrato",
         "#modeloContrato",
-        "#tipoContratoBase"
+        "#tipoContratoBase",
+        "#temRetencao",
+        "#percentualRetencao"
     ];
 
 
@@ -1306,8 +1308,16 @@ function obraPermiteReidi(CODCOLIGADA, CODCCUSTO) {
 
 // Opções de Aprovação/Envio
 function controlaBotoesAprovacao_porAtividade() {
-    const atividadeAtual = $("#atividade").val();
+    const atividadeAtual = parseInt($("#atividade").val());
 
+    // Atvds que somente "Enviam"
+    const atividadesAssinaturaManual = 
+        atividadeAtual == ATIVIDADES.ADM_OBRA ||
+        atividadeAtual == ATIVIDADES.CONTROLADORIA_RECEBIMENTO || 
+        atividadeAtual == ATIVIDADES.CONTROLADORIA_RECOLHE_ASSINATURA || 
+        atividadeAtual == ATIVIDADES.OBRA_RECEBE_VIAS;
+
+    // Regras
     if (atividadeAtual == ATIVIDADES.INICIO || atividadeAtual == ATIVIDADES.INICIO_0) {
         $("#divDecisaoAprovar, #divDecisaoReprovar, #divDestinoRetorno").hide();
         $("#divBtnEviar").show();
@@ -1315,6 +1325,16 @@ function controlaBotoesAprovacao_porAtividade() {
     } else if (atividadeAtual == ATIVIDADES.JURIDICO) {
         $("#divBtnEviar, #divDestinoRetorno").hide();
         $("#divDecisaoAprovar, #divDecisaoReprovar").show();
+
+    } else if (atividadeAtual == ATIVIDADES.INTERMEDIARIO_ANALISE_EQUIPS) {
+        $("#divDecisaoAprovar, #divDecisaoReprovar, #divDestinoRetorno").hide();
+
+    } else if (atividadesAssinaturaManual) {
+        $("#divDecisaoAprovar, #divDecisaoReprovar, #divDestinoRetorno").hide();
+        $("#divBtnEviar").show();
+
+    } else if (ATIVIDADES.FIM.includes(atividadeAtual)) {
+        $("#divDecisaoAprovar, #divDecisaoReprovar, #divDestinoRetorno").hide();
 
     } else {
         $("#divBtnEviar").hide();
