@@ -312,7 +312,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
     function representantesDromos() {
         return [
             {
-                representante: "Mario Rogers de Castilho",
+                representante: "José Mario de Castilho",
                 tipos: [
                     "Locação de Equipamento - Com Mão de Obra",
                     "Locação de Equipamento",
@@ -342,7 +342,7 @@ function regraRepresentantes(CODCOLIGADA, TIPO_CONTRATO) {
     function representantesEpya() {
         return [
             {
-                representante: "Mario Rogers de Castilho",
+                representante: "José Mario de Castilho",
                 tipos: [
                     "Locação de Equipamento - Com Mão de Obra", 
                     "Locação de Equipamento",
