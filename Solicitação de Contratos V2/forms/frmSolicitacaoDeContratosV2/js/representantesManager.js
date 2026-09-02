@@ -291,12 +291,27 @@ function carregaTestemunhas(){
             <td>${testemunha.nome}</td>
             <td>${testemunha.email}</td>
             <td>${testemunha.cpf}</td>
-            <td></td>
+            <td style="text-align:center;">
+                <button class="btn btn-danger btnDeleteTestemunha">
+                    <i class="flaticon flaticon-trash icon-md" aria-hidden="true"></i>
+                </button>
+            </td>
         </tr>`;
         
     }
     
     $("#tableTestemunhas>tbody").html(html);
+
+    bloqueiaBtnDeleteQuandoDiferenteAtvdInicio();
+
+
+    // Util
+    function bloqueiaBtnDeleteQuandoDiferenteAtvdInicio() {
+
+        if ($("#atividade").val() != ATIVIDADES.INICIO && $("#atividade").val() != ATIVIDADES.INICIO_0) {
+            $(".btnDeleteTestemunha").prop("disabled", true); // Destiva btn
+        }
+    }
 }
 
 // Utils
