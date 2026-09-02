@@ -51,7 +51,7 @@ function nomeAtividadePorCodigo(codigoAtividade) {
         return "Controladoria Aguarda Recebimento";
 
     }  else if (codigoAtividade == ATIVIDADES.CONTROLADORIA_RECEBE_ASSINATURAS) {
-        return "Controladoria  Recolhe Assinaturas";
+        return "Controladoria Recolhe Assinaturas";
 
     } else if (codigoAtividade == ATIVIDADES.OBRA_RECEBE_VIAS_ORIGINAIS) {
         return "Obra Recebe Vias Originais"
