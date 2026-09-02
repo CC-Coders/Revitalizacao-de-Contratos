@@ -85,6 +85,7 @@
                <input type="hidden" id="contratoDocumentId" name="contratoDocumentId" />
                <input type="hidden" id="contratoPdfId" name="contratoPdfId" />
                <input type="hidden" id="numProces" name="numProces" />
+               <input type="hidden" id="decisao" name="decisao">
                <!-- TODO -->
                <input type="hidden" id="CODCOLIGADA" name="CODCOLIGADA" />
                <input type="hidden" id="CODCCUSTO" name="CODCCUSTO" />
@@ -141,6 +142,7 @@
                            <td><input type="hidden" class="tableHistoricoUsuario" name="tableHistoricoUsuario" id="tableHistoricoUsuario" /></td>
                            <td><input type="hidden" class="tableHistoricoData" name="tableHistoricoData" id="tableHistoricoData" /></td>
                            <td><input type="hidden" class="tableHistoricoAtividade" name="tableHistoricoAtividade" id="tableHistoricoAtividade" /></td>
+                           <td><input type="hidden" class="tableHistoricoProximaAtividade" name="tableHistoricoProximaAtividade" id="tableHistoricoProximaAtividade"></td>
                            <td><input type="hidden" class="tableHistoricoObservacao" name="tableHistoricoObservacao" id="tableHistoricoObservacao" /></td>
                            <td><input type="hidden" class="tableHistoricoAcao" name="tableHistoricoAcao" id="tableHistoricoAcao" /></td>
                         </tr>
@@ -200,7 +202,7 @@
                <div class="step active" data-html="true" data-toggle="popover" title=""
                   data-content="<h1>Obra</h1> <p>A Obra é responsável por dar início no processo, informando os dados do Contrato, a Obra também acompanha o andamento do Processo realizando as tratativas com o Fornecedor quando necessário.</p>"
                   data-original-title="Popover title">
-                  Obra
+                  Solicitante
                </div>
                <div class="step" data-html="true" data-toggle="popover" title=""
                   data-content="<h1>Jurídico</h1> <p>O Jurídico é responsável por Validar e Editar o Contrato.</p>"
@@ -222,8 +224,15 @@
                   data-original-title="Popover title">
                   Assinatura
                </div>
+               <div class="step" data-toggle="tooltip" title="" data-html="true"
+                  data-content="<h1>Assinatura</h1> <p>Fim da solicitação.</p>"
+                  data-original-title="Popover title">
+                  Fim
+               </div>
             </div>
             <div id="formContainer" style="margin-bottom: 20px; margin-top: 30px">
+
+               <!-- Página: Dados Gerais -->
                <div id="pagina-1" data-index="0" class="pagina">
                   <div class="row  panelInput" id="informacoesIniciais" style="margin-top: 20px;">
                      <!-- Dados Iniciais -->
@@ -255,7 +264,7 @@
                            </div>
                            <div class="col-md-3">
                               <label for="tipoContratoBase">Tipo de Contrato:</label>
-                              <select name="tipoContratoBase" id="tipoContratoBase" class="form-control inputInfoChamado" readonly>
+                              <select name="tipoContratoBase" id="tipoContratoBase" class="form-control inputInfoChamado">
                                  <option value="">Selecione</option>
                                  <option value="Locação de Equipamento" data-origem="Novos,Aditivos,Rescisões">Locação de Equipamento</option>
                                  <option value="Locação de Equipamento - Com Mão de Obra" data-origem="Novos,Rescisões">Locação de Equipamento - Com Mão de Obra</option>
@@ -538,7 +547,7 @@
                               </div>
                               <div class="col-md-6 campoLocacaoEquipamento">
                                  <div>
-                                    <label for="">Valor Total da Locação:</label>
+                                    <label>Valor Total da Locação:</label>
                                     <input type="text" name="valorTotalLocacao" id="valorTotalLocacao" readonly class="form-control">
                                  </div>
                                  <br>
@@ -633,7 +642,7 @@
                            <div class="row">
                               <div class="col-md-6 campoLocacaoEquipamento">
                                  <div>
-                                    <label for="">Reajuste?:</label>
+                                    <label>Reajuste?:</label>
                                     <select name="temReajuste" id="temReajuste" class="form-control">
                                        <option value=""></option>
                                        <option value="Sim">Sim</option>
@@ -644,7 +653,7 @@
                               </div>
                               <div class="col-md-6" id="divCampoReajuste" style="display: none;">
                                  <div>
-                                    <label for="">Índice de Reajuste:</label>
+                                    <label>Índice de Reajuste:</label>
                                     <select name="indiceReajuste" id="indiceReajuste" class="form-control">
                                        <option value=""></option>
                                        <option value="IGPM" selected>IGPM</option>
@@ -673,7 +682,7 @@
                            <div class="row">
                               <div id="divRetencao" class="col-md-6 campoLocacaoEquipamento">
                                  <div>
-                                    <label for="">Retenção?</label>
+                                    <label>Retenção?</label>
                                     <select name="temRetencao" id="temRetencao" class="form-control">
                                        <option value="">Selecione</option>
                                        <option value="Sim">Sim</option>
@@ -684,7 +693,7 @@
                               </div>
                               <div class="col-md-6" id="divPercentualRetencao" style="display: none;">
                                  <div>
-                                    <label for="">Percentual de Retenção:</label>
+                                    <label>Percentual de Retenção:</label>
                                     <input type="text" name="percentualRetencao" id="percentualRetencao" class="form-control" value="5%">
                                  </div>
                               </div>
@@ -692,7 +701,7 @@
                            <div class="row">
                               <div class="col-md-6 campoLocacaoEquipamento">
                                  <div>
-                                    <label for="">REIDI?</label>
+                                    <label>REIDI?</label>
                                     <select name="temREIDI" id="temREIDI" class="form-control">
                                        <option value="">Selecione</option>
                                        <option value="Sim">Sim</option>
@@ -703,7 +712,7 @@
                               </div>
                               <div class="col-md-6" id="divPercentualReidi" style="display: none;">
                                  <div>
-                                    <label for="">Percentual do REIDI</label>
+                                    <label>Percentual do REIDI</label>
                                     <select name="percentualREIDI" id="percentualREIDI" class="form-control">
                                        <option value=""></option>
                                        <option value="3.65">3,65%</option>
@@ -867,6 +876,8 @@
                      <button type="button" class="btn btn-primary" id="btnVisualizarPreContrato" style="display: none;">Abrir Pré-Contrato</button>
                   </div>
                </div>
+
+               <!-- Página: Assinatura -->
                <div id="paginaAssinatura" data-index="1" class="pagina">
                   <div id="divQuadroStatusAssinaturaEletronica" class="row" style="display: none;margin-top: 20px;">
                      <div class="col-md-12">
@@ -964,6 +975,8 @@
                      </div>
                   </div>
                </div>
+
+               <!-- Página: Anexos -->
                <div id="pagina-anexos" data-index="2" class="pagina">
                   <div class="row panelInput" style="margin-top: 20px;">
                      <div class="col-md-12">
@@ -986,80 +999,82 @@
                      </div>
                   </div>
                </div>
+
+               <!-- Página: Integração RM -->
                <div id="pagina-integracaoRM" data-index="3" class="pagina">
                   <h2 style="margin-top: 60px;">Integração RM</h2>
                   <div id="dadosRMNovoContrato" style="display: none">
                      <div class="row">
                         <div class="col-md-4">
-                           <label for="">Coligada</label>
+                           <label>Coligada</label>
                            <select name="novoContratoColigada" id="novoContratoColigada"
                               class="form-control"></select>
                         </div>
                         <div class="col-md-4">
-                           <label for="">Filial</label>
+                           <label>Filial</label>
                            <select name="novoContratoFilial" id="novoContratoFilial"
                               class="form-control"></select>
                         </div>
                         <div class="col-md-4">
-                           <label for="">Tipo do Contrato</label>
+                           <label>Tipo do Contrato</label>
                            <select name="novoContratoTipoContrato" id="novoContratoTipoContrato"
                               class="form-control"></select>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-md-4">
-                           <label for="">Centro de Custo</label>
+                           <label>Centro de Custo</label>
                            <select name="novoContratoCCUSTO" id="novoContratoCCUSTO" class="form-control">
                            </select>
                         </div>
                         <div class="col-md-4">
-                           <label for="">Código</label>
+                           <label>Código</label>
                            <input name="novoContratoCodigo" id="novoContratoCodigo" class="form-control" />
                         </div>
                         <div class="col-md-4">
-                           <label for="">Local de estoque</label>
+                           <label>Local de estoque</label>
                            <select name="novoContratoLocalDeEstoque" id="novoContratoLocalDeEstoque"
                               class="form-control"></select>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-md-4">
-                           <label for="">STATUS</label>
+                           <label>STATUS</label>
                            <select name="novoContratoSTATUS" id="novoContratoSTATUS"
                               class="form-control"></select>
                         </div>
                         <div class="col-md-4">
-                           <label for="">Condição de Pagamento</label>
+                           <label>Condição de Pagamento</label>
                            <select name="novoContratoCondicaoPagamento" id="novoContratoCondicaoPagamento"
                               class="form-control"></select>
                         </div>
                         <div class="col-md-4">
-                           <label for="">Representante</label>
+                           <label>Representante</label>
                            <select name="novoContratoRepresentante" id="novoContratoRepresentante"
                               class="form-control"></select>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-md-4">
-                           <label for="">Data Início</label>
+                           <label>Data Início</label>
                            <input type="text" name="novoContratoDataInicio" id="novoContratoDataInicio"
                               class="form-control" />
                         </div>
                         <div class="col-md-4">
-                           <label for="">Data Fim</label>
+                           <label>Data Fim</label>
                            <input type="text" name="novoContratoDataFim" id="novoContratoDataFim"
                               class="form-control" />
                         </div>
                         <div class="col-md-4">
                            <!-- No RM esse campo tem limite de 40 caracteres -->
-                           <label for="">Objeto do Contrato</label>
+                           <label>Objeto do Contrato</label>
                            <input type="text" name="novoContratoObjeto" id="novoContratoObjeto"
                               class="form-control" />
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-md-4">
-                           <label for="">Tipo de Faturamento</label>
+                           <label>Tipo de Faturamento</label>
                            <select name="novoContratoTipoFaturamento" id="novoContratoTipoFaturamento"
                               class="form-control">
                               <option value=""></option>
@@ -1069,18 +1084,18 @@
                            </select>
                         </div>
                         <div class="col-md-4">
-                           <label for="">Dia de Faturamento</label>
+                           <label>Dia de Faturamento</label>
                            <input type="text" name="novoContratoDiaFaturamento"
                               id="novoContratoDiaFaturamento" class="form-control" />
                         </div>
                         <div class="col-md-4">
-                           <label for="">Qtde. de Faturamentos</label>
+                           <label>Qtde. de Faturamentos</label>
                            <input type="text" name="novoContratoQtdeFaturamento" id="novoContratoQtdeFaturamento" class="form-control" />
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-md-12">
-                           <label for="">Fornecedor</label>
+                           <label>Fornecedor</label>
                            <input name="novoContratoFornecedor" id="novoContratoFornecedor" readonly
                               class="form-control" />
                         </div>
@@ -1115,11 +1130,11 @@
                                           <div class="panel-body">
                                              <div class="row">
                                                 <div class="col-md-8">
-                                                   <label for="" style="color: black !important">Produto:</label>
+                                                   <label style="color: black !important">Produto:</label>
                                                    <select name="novoContratoItemProduto"id="novoContratoItemProduto" class="novoContratoItemProduto"autocomplete="off"></select>
                                                 </div>
                                                 <div class="col-md-4">
-                                                   <label for=""style="color: black !important">Valor:
+                                                   <labelstyle="color: black !important">Valor:
                                                    </label>
                                                    <input type="text" name="novoContratoItemValor"id="novoContratoItemValor"class="form-control novoContratoItemValor" />
                                                 </div>
@@ -1145,54 +1160,56 @@
                      </div>
                   </div>
                </div>
+
+               <!-- Página: Histórico e Decisão -->
                <div id="pagina-historico" data-index="4" class="pagina">
                   <div id="divPaginaHistorico" style="margin-top: 65px;">
                      <h2>Histórico</h2>
 
-                     <!-- Decisão: Aprovar / Retornar + Destino + Enviar -->
+                     <!-- Decisão: Aprovar / Reprovar + Destino + Enviar -->
                      <div class="row" id="tabInfoChamado">
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="margin-bottom: -15px;">
                            <div id="divResolucaoChamado" style="text-align: center;">
 
-                              <div>
-                                 <!-- Switch Aprovar -->
-                                 <div id="divDecisaoAprovar" style="display: inline-block">
-                                    <label for="decisaoAprovar" style="margin-right: 2%; padding-top: 2px">Aprovar</label>
-                                    <div class="switch switch-success switch-lg">
-                                       <input class="switch-input" type="radio" name="decisao" id="decisaoAprovar"
-                                          value="Aprovar" />
-                                       <label class="switch-button switchRedGreen" for="decisaoAprovar">Toggle</label>
+                           <!-- Botões de Decisão -->
+                           <div id="divBotoesDecisao"
+                              style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 10px;">
+
+                              <!-- Aprovar -->
+                              <div id="divDecisaoAprovar" style="flex: 1; max-width: 300px;">
+                                 <button type="button" class="btn btn-success btn-block btnDecisao" id="btnDecisaoAprovar">
+                                    Aprovar
+                                 </button>
+                              </div>
+
+                              <!-- Enviar -->
+                              <div id="divBtnEviar" style="flex: 1; max-width: 300px; display: none;">
+                                 <button type="button" class="btn btn-info btn-block" id="btnEnviarSolicitacao">
+                                    Enviar
+                                 </button>
+                              </div>
+
+                              <!-- Reprovar -->
+                              <div id="divDecisaoReprovar" style="flex: 1; max-width: 300px;">
+                                 <button type="button" class="btn btn-danger btn-block" disabled id="btnDecisaoReprovar">
+                                    Reprovar
+                                 </button>
+                              </div>
+
+                              </div>
+                                 <div class="col-md-4"></div>
+                                 <!-- Select Destino do Retorno (centralizado) -->
+                                 <div class="col-md-4" style="text-align: left;">
+                                    <div class="form-input" style="display: none" id="divDestinoRetorno">
+                                       <label>Destino da Reprovação:</label>
+                                       <select name="destinoRetorno" id="destinoRetorno" class="form-control inputInfoChamado">
+                                          <option value="">Selecione</option>
+                                       </select>
+                                       <br>
                                     </div>
                                  </div>
-
-                                 <!-- Switch Retornar -->
-                                 <div id="divDecisaoCancelar" style="display: inline-block">
-                                    <label for="decisaoCancelar" style="margin-right: 2%; padding-top: 2px">Retornar</label>
-                                    <div class="switch switch-danger switch-lg">
-                                       <input class="switch-input inputCheckbox" type="radio" name="decisao"
-                                          id="decisaoCancelar" value="Retornar" />
-                                       <label class="switch-button switchRedGreen" for="decisaoCancelar">Toggle</label>
-                                    </div>
-                                 </div>
+                                 <div class="col-md-4"></div>
                               </div>
-
-                              <!-- Select Destino do Retorno (centralizado) -->
-                              <div class="col-md-6 col-md-offset-3" style="text-align: left;">
-                                 <div class="form-input" style="display: none" id="divDestinoRetorno">
-                                    <label> Selecionar Destino do Retorno: </label>
-                                    <select name="destinoRetorno" id="destinoRetorno" class="form-control inputInfoChamado">
-                                       <option value="">Selecione</option>
-                                    </select>
-                                    <br>
-                                 </div>
-                              </div>
-
-                              <!-- Botão de Enviar -->
-                              <div style="clear: both;" id="divBtnEnviar">
-                                 <button class="btn btn-primary" id="btnEnviarSolicitacao" type="button">Enviar</button>
-                              </div>
-
-                           </div>
                         </div>
                      </div>
 
@@ -1226,6 +1243,8 @@
 
                   </div>
                </div>
+
+               <!-- Página: Equipamentos -->
                <div id="paginaEquipamentos" data-index="5" class="pagina">
                   <h2 id="tituloPaginaEquipamentos" style="margin-top: 60px;">Equipamentos</h2>
                   <div id="divHeaderEquipamentos" style="display: none;">
@@ -1343,6 +1362,8 @@
                      </div>
                   </div>
                </div>
+
+               <!-- Página: Contrato Principal -->
                <div id="paginaContratoPrincipal" data-index="6" class="pagina" style="padding-top: 50px;">
                   <table class="table table-bordered" id="tableContratoPrincipal">
                      <thead>
