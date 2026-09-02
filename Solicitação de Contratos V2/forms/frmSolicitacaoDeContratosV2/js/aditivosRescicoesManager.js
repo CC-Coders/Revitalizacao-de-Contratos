@@ -104,6 +104,8 @@ function initDataTableContratoPrincipal(){
 }
 
 async function atualizaDatatableContratoPrincipal(){
+    if (isForModeView()) return;
+
     try {
         var tipoContrato = $("#tipoContrato").val();
         var CODCOLIGADA = $("#CODCOLIGADA").val();
