@@ -215,7 +215,9 @@ function bindings() {
         }
     });
 
-    if ($("#origemContrato").val() == "Aditivos") {
+    // Guard com text pelo o modo VIEW
+    var origemContratoSelecionado = $("#origemContrato").val() ? $("#origemContrato").val() : $("#origemContrato").text()
+    if (origemContratoSelecionado == "Aditivos") {
         $(".divTipoAlteracao").show();
 
     } else {
