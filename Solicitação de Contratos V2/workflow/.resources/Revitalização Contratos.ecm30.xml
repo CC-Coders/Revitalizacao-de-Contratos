@@ -29,10 +29,11 @@
     <processDefinitionVersionPK>
       <companyId>1</companyId>
       <processId>Revitalização Contratos</processId>
-      <version>165</version>
+      <version>224</version>
     </processDefinitionVersionPK>
     <versionDescription></versionDescription>
-    <formId>39220</formId>
+    <formId>29166</formId>
+    <formIdV2>0</formIdV2>
     <editionMode>true</editionMode>
     <updateAttachmentsVersion>false</updateAttachmentsVersion>
     <controlsAttachmentsSecurity>false</controlsAttachmentsSecurity>
@@ -1034,10 +1035,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>32</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1046,10 +1047,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>30</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>4</destinationSequenceId>
       <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;BaseActivity&gt;4&lt;/BaseActivity&gt;&lt;Returns&gt;Last&lt;/Returns&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
       <engineAllocationId>Executor Atividade</engineAllocationId>
@@ -1060,10 +1061,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>43</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1072,10 +1073,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>5</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1084,10 +1085,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>34</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>4</destinationSequenceId>
       <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;BaseActivity&gt;4&lt;/BaseActivity&gt;&lt;Returns&gt;Last&lt;/Returns&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
       <engineAllocationId>Executor Atividade</engineAllocationId>
@@ -1098,10 +1099,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>55</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1110,10 +1111,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>48</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1122,11 +1123,13 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>4</destinationSequenceId>
+      <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;BaseActivity&gt;4&lt;/BaseActivity&gt;&lt;Returns&gt;Last&lt;/Returns&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
+      <engineAllocationId>Executor Atividade</engineAllocationId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
     <ConditionProcessState>
@@ -1134,10 +1137,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>5</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1146,10 +1149,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>5</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>46</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>32</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1158,10 +1161,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>4</destinationSequenceId>
       <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;BaseActivity&gt;4&lt;/BaseActivity&gt;&lt;Returns&gt;Last&lt;/Returns&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
       <engineAllocationId>Executor Atividade</engineAllocationId>
@@ -1172,10 +1175,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>32</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1184,10 +1187,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>5</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1196,10 +1199,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>58</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1208,10 +1211,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>5</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>55</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>64</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1220,7 +1223,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1232,7 +1235,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>60</sequence>
       </conditionProcessStatePK>
       <condition>false</condition>
@@ -1244,7 +1247,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>68</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1256,7 +1259,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>68</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1268,10 +1271,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>1</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition>  hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot; &amp;&amp;&#xd;
+      <condition>  hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovado&quot; &amp;&amp; hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot; &amp;&amp;&#xd;
   (hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento&quot; || hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Com Mão de Obra&quot;) &amp;&amp; hAPI.getCardValue(&quot;seEquipPassaPorAnaliseSup&quot;) == &quot;SIM&quot;</condition>
       <destinationSequenceId>104</destinationSequenceId>
       <conditionType>0</conditionType>
@@ -1281,10 +1284,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>2</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition>  hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot; &amp;&amp;&#xd;
+      <condition>  hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovado&quot; &amp;&amp; hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot; &amp;&amp;&#xd;
   (hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento&quot; || hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Com Mão de Obra&quot;) &amp;&amp; hAPI.getCardValue(&quot;seEquipPassaPorAnaliseSup&quot;) == &quot;NAO&quot;</condition>
       <destinationSequenceId>53</destinationSequenceId>
       <conditionType>0</conditionType>
@@ -1294,7 +1297,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>3</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Aditivos&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;</condition>
@@ -1306,7 +1309,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>4</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition>hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Aditivos&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) == &quot;Locação de Equipamento - Inclusão de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;seEquipPassaPorAnaliseSup&quot;) == &quot;NAO&quot;</condition>
@@ -1318,7 +1321,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>5</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -1330,10 +1333,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>6</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition>hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;origemContrato&quot;) != &quot;Novos&quot; &amp;&amp; (hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot;)</condition>
+      <condition>hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovado&quot; &amp;&amp; hAPI.getCardValue(&quot;origemContrato&quot;) != &quot;Novos&quot; &amp;&amp; (hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot;)</condition>
       <destinationSequenceId>55</destinationSequenceId>
       <conditionType>0</conditionType>
     </ConditionProcessState>
@@ -1342,10 +1345,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>7</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>4</destinationSequenceId>
       <engineAllocationConfiguration>&lt;AssignmentController&gt;&lt;BaseActivity&gt;4&lt;/BaseActivity&gt;&lt;Returns&gt;Last&lt;/Returns&gt;&lt;/AssignmentController&gt;</engineAllocationConfiguration>
       <engineAllocationId>Executor Atividade</engineAllocationId>
@@ -1356,10 +1359,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>8</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>5</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1368,10 +1371,10 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>9</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
-      <condition>false</condition>
+      <condition></condition>
       <destinationSequenceId>32</destinationSequenceId>
       <conditionType>1</conditionType>
     </ConditionProcessState>
@@ -1380,7 +1383,7 @@
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
         <expressionOrder>10</expressionOrder>
-        <version>165</version>
+        <version>224</version>
         <sequence>88</sequence>
       </conditionProcessStatePK>
       <condition></condition>
@@ -2083,45 +2086,97 @@
         <version>1</version>
       </workflowProcessEventPK>
       <eventDescription>function intermediateconditional104() {&#xd;
-  var returnAnalisePendente = false;&#xd;
-    var returnAnaliseCompleta = true;&#xd;
-&#xd;
-    var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);&#xd;
-    for (var i = 0; i &lt; indexes.length; i++) {&#xd;
-        var id = indexes[i];&#xd;
-        var PREFIXO = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);&#xd;
-&#xd;
-        var query = &quot;SELECT STATUS FROM EQUIPAMENTOS_CONTRATOS_AUXILIAR WHERE PREFIXO = ?&quot;;&#xd;
-        var retorno = executaQuery(query,[&#xd;
-            {type:&quot;varchar&quot;, value:PREFIXO}&#xd;
-        ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
-&#xd;
-        log.info(&quot;Verifica status equipamentos&quot;);&#xd;
-        if (retorno.length == 0) {&#xd;
-            log.info(&quot;Prefixo &quot; + PREFIXO + &quot; não encontrado.&quot;);&#xd;
-            continue;&#xd;
-        }&#xd;
-&#xd;
-        log.dir(retorno);&#xd;
-        log.dir(retorno[0].STATUS);&#xd;
-        log.dir(retorno.STATUS);&#xd;
-        if (retorno[0].STATUS != &quot;3&quot;) {&#xd;
-            log.info(&quot;Returno analise pendente&quot;);&#xd;
-            return returnAnalisePendente;&#xd;
-        }&#xd;
-    }&#xd;
-&#xd;
-    log.info(&quot;Returno analise concluida&quot;);&#xd;
-    return returnAnaliseCompleta;&#xd;
-}&#xd;
-function executaQuery(query, constraints, dataSource) {&#xd;
     try {&#xd;
-        var dataSource = dataSource;&#xd;
-        var ic = new javax.naming.InitialContext();&#xd;
-        var ds = ic.lookup(dataSource);&#xd;
+        var returnAnalisePendente = false;&#xd;
+        var returnAnaliseCompleta = true;&#xd;
 &#xd;
-        var conn = ds.getConnection();&#xd;
-        var stmt = conn.prepareStatement(query);&#xd;
+        // Abre UMA conexão para a transação. Todos os INSERT/UPDATE da abertura&#xd;
+        // usam essa mesma conexão, então ou grava tudo (commit) ou nada (rollback).&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+        var connCustom = ic.lookup(&quot;/jdbc/CastilhoCustom&quot;).getConnection();&#xd;
+        connCustom.setAutoCommit(false);&#xd;
+&#xd;
+        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);&#xd;
+        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+            var id = indexes[i];&#xd;
+            var PREFIXO = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);&#xd;
+&#xd;
+            var query = &quot;SELECT STATUS FROM EQUIPAMENTOS_CONTRATOS_AUXILIAR WHERE PREFIXO = ?&quot;;&#xd;
+            var retorno = executaQuery(query,[&#xd;
+                {type:&quot;varchar&quot;, value:PREFIXO}&#xd;
+            ], connCustom);&#xd;
+&#xd;
+            log.info(&quot;Verifica status equipamentos&quot;);&#xd;
+            if (retorno.length == 0) {&#xd;
+                log.info(&quot;Prefixo &quot; + PREFIXO + &quot; não encontrado.&quot;);&#xd;
+                continue;&#xd;
+            }&#xd;
+&#xd;
+            log.dir(retorno);&#xd;
+            log.dir(retorno[0].STATUS);&#xd;
+            log.dir(retorno.STATUS);&#xd;
+            if (retorno[0].STATUS != &quot;3&quot;) {&#xd;
+                log.info(&quot;Returno analise pendente&quot;);&#xd;
+                return returnAnalisePendente;&#xd;
+            }&#xd;
+        }&#xd;
+&#xd;
+        // Chegou até aqui = todos os INSERT&apos;s / UPDATE&apos;s rodaram sem erro. Grava tudo de uma vez.&#xd;
+        connCustom.commit();&#xd;
+&#xd;
+        log.info(&quot;Returno analise concluida&quot;);&#xd;
+        return returnAnaliseCompleta;&#xd;
+&#xd;
+    } catch (error) {&#xd;
+        // Qualquer erro desfaz todos os INSERT&apos;s / UPDATE&apos;s da abertura&#xd;
+        log.error(&quot;## Revitalização Contratos intermediateconditional58: erro em algum INSERT/UPDATE, iniciando rollback. Erro: &quot;);&#xd;
+        log.dir(error);&#xd;
+&#xd;
+        // Rollback Castilho Custom&#xd;
+        try {  connCustom.rollback() } catch (e) { log.error(&quot;## Erro no rollback do Custom: &quot; + e) }&#xd;
+&#xd;
+        throw error;&#xd;
+        &#xd;
+    } finally {&#xd;
+        // O bloco finally sempre executa, com erro ou sem.&#xd;
+        // Garantimos que as conexões são fechadas independente se deu erro ou não.&#xd;
+        // Se não fechar, o banco fica com conexões presas e para de responder com o tempo.&#xd;
+&#xd;
+        try { connCustom.close() } catch (e) {}&#xd;
+    }&#xd;
+}&#xd;
+function executaQuery(query, constraints, dataSourceOrConn) {&#xd;
+    // O terceiro parâmetro era sempre uma string com o nome do banco (ex: &quot;/jdbc/Sisma&quot;).&#xd;
+    // Renomeamos para dataSourceOrConn porque agora pode ser duas coisas:&#xd;
+    //   - Uma string &quot;/jdbc/Sisma&quot; -&gt; comportamento antigo, abre e fecha conexão aqui dentro&#xd;
+    //   - Um objeto de conexão já aberta -&gt; usa ela e NÃO fecha (quem abriu é responsável)&#xd;
+&#xd;
+    try {&#xd;
+        log.info(&quot;executandoQuery&quot;);&#xd;
+        log.info(query);&#xd;
+        log.dir(constraints);&#xd;
+&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+&#xd;
+        log.error(&quot;## DEBUG conn -&gt; typeof=&quot; + (typeof dataSourceOrConn)&#xd;
+            + &quot; | isString=&quot; + (typeof dataSourceOrConn === &quot;string&quot;)&#xd;
+            + &quot; | instConn=&quot; + (dataSourceOrConn instanceof Packages.java.sql.Connection)&#xd;
+            + &quot; | valor=&quot; + dataSourceOrConn);&#xd;
+&#xd;
+        // dataSourceOrConn pode ser:&#xd;
+        //   - String com o nome do datasource (&quot;/jdbc/Sisma&quot;) -&gt; abrimos e fechamos aqui&#xd;
+        //   - Conexão já aberta (modo transação)              -&gt; usamos e NÃO fechamos&#xd;
+        var isConexaoCompartilhada = (dataSourceOrConn instanceof Packages.java.sql.Connection);&#xd;
+        var ownConn = !isConexaoCompartilhada;&#xd;
+&#xd;
+        if (ownConn) {&#xd;
+            var ds = ic.lookup(dataSourceOrConn);&#xd;
+            conn = ds.getConnection();&#xd;
+        } else {&#xd;
+            conn = dataSourceOrConn;   // usa a conexão da transação&#xd;
+        }&#xd;
+&#xd;
+        var stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);&#xd;
 &#xd;
         var counter = 1;&#xd;
         for (var i = 0; i &lt; constraints.length; i++) {&#xd;
@@ -2164,9 +2219,80 @@ function executaQuery(query, constraints, dataSource) {&#xd;
         if (stmt != null) {&#xd;
             stmt.close();&#xd;
         }&#xd;
-        if (conn != null) {&#xd;
+        // Só fecha conexão se foi a gente que abriu (ownConn = true)&#xd;
+        // Se veio de fora (ownConn = false), deixa aberta - quem abriu fecha&#xd;
+        // Fecha antes do commit/rollback cancela a transação inteira, evitando cadastro &quot;quebrado&quot;&#xd;
+        if (ownConn &amp;&amp; conn != null) {&#xd;
             conn.close();&#xd;
         }&#xd;
+    }&#xd;
+}</eventDescription>
+    </WorkflowProcessEvent>
+    <WorkflowProcessEvent>
+      <workflowProcessEventPK>
+        <companyId>1</companyId>
+        <eventId>afterStateEntry</eventId>
+        <processId>Revitalização Contratos</processId>
+        <version>1</version>
+      </workflowProcessEventPK>
+      <eventDescription>function afterStateEntry(sequenceId) {&#xd;
+&#xd;
+    // Atualiza somente o nome da atividade de destino no historico na aba &quot;Histórico e Decisão&quot;&#xd;
+    atualizaProximaAtividadeUltimoHistorico(sequenceId);&#xd;
+}&#xd;
+&#xd;
+// Historico&#xd;
+function atualizaProximaAtividadeUltimoHistorico(sequenceId) {&#xd;
+    var nomeAtividadeAtual = nomeAtividadePorCodigo(sequenceId);&#xd;
+&#xd;
+    var indexes = hAPI.getChildrenIndexes(&quot;tableHistorico&quot;);&#xd;
+    var ultimoIndex = indexes[indexes.length - 1];&#xd;
+&#xd;
+    hAPI.setCardValue(&quot;tableHistoricoProximaAtividade___&quot; + ultimoIndex, nomeAtividadeAtual);&#xd;
+}&#xd;
+&#xd;
+// Utils&#xd;
+function nomeAtividadePorCodigo(codigoAtividade) {&#xd;
+&#xd;
+    if (codigoAtividade == ATIVIDADES.INICIO || codigoAtividade == ATIVIDADES.INICIO_0) {&#xd;
+        return &quot;Solicitante&quot;;&#xd;
+&#xd;
+    } else if (codigoAtividade == ATIVIDADES.JURIDICO) {&#xd;
+        return &quot;Jurídico&quot;;&#xd;
+&#xd;
+    } else if (codigoAtividade == ATIVIDADES.CONTROLADORIA) {&#xd;
+        return &quot;Controladoria&quot;;&#xd;
+&#xd;
+    }  else if (codigoAtividade == ATIVIDADES.ENGENHEIRO) {&#xd;
+        return &quot;Aprovação Engenheiro&quot;;&#xd;
+&#xd;
+    }  else if (codigoAtividade == ATIVIDADES.COORDENADOR_OBRAS) {&#xd;
+        return &quot;Aprovação Coord. Obras&quot;;&#xd;
+&#xd;
+    }  else if (codigoAtividade == ATIVIDADES.ANALISE_EQUIPAMENTO) {&#xd;
+        return &quot;Análise de Equipamentos&quot;;&#xd;
+&#xd;
+    }  else if (codigoAtividade == ATIVIDADES.DIRETORIA) {&#xd;
+        return &quot;Aprovação Diretoria&quot;;&#xd;
+&#xd;
+    }  else if (codigoAtividade == ATIVIDADES.STATUS_ASSINATURA_ELETRONICA) {&#xd;
+        return &quot;Aguardando Assinatura Eletrônica&quot;;&#xd;
+&#xd;
+    }  else if (codigoAtividade == ATIVIDADES.STATUS_ASSINATURA_ELETRONICA) {&#xd;
+        return &quot;Assinatura Eletrônica Assinada&quot;;&#xd;
+&#xd;
+    }  else if (codigoAtividade == ATIVIDADES.ADM_OBRA) {&#xd;
+        return &quot;Adm. Obra&quot;;&#xd;
+&#xd;
+    }  else if (codigoAtividade == ATIVIDADES.CONTROLADORIA_AGUARDA_RECEBIMENTO) {&#xd;
+        return &quot;Controladoria Aguarda Recebimento&quot;;&#xd;
+&#xd;
+    }  else if (codigoAtividade == ATIVIDADES.CONTROLADORIA_RECEBE_ASSINATURAS) {&#xd;
+        return &quot;Controladoria Recebe Vias Originais&quot;;&#xd;
+&#xd;
+    }  else if (ATIVIDADES.FIM.indexOf(codigoAtividade) !== -1) {&#xd;
+        return &quot;Fim&quot;;&#xd;
+&#xd;
     }&#xd;
 }</eventDescription>
     </WorkflowProcessEvent>
@@ -2178,34 +2304,62 @@ function executaQuery(query, constraints, dataSource) {&#xd;
         <version>1</version>
       </workflowProcessEventPK>
       <eventDescription>function beforeCancelProcess(colleagueId,processId){&#xd;
-    var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
-    &#xd;
-    if (tipoContrato == &quot;Locação de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
-        resetaStatusDosEquipamentosParaPendenteContrato();&#xd;
+    try {&#xd;
+        // Abre UMA conexão para a transação. Todos os INSERT/UPDATE da abertura&#xd;
+        // usam essa mesma conexão, então ou grava tudo (commit) ou nada (rollback).&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+        var connCustom = ic.lookup(&quot;/jdbc/CastilhoCustom&quot;).getConnection();&#xd;
+        connCustom.setAutoCommit(false);&#xd;
+&#xd;
+        var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+&#xd;
+        if (tipoContrato == &quot;Locação de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
+            resetaStatusDosEquipamentosParaPendenteContrato(connCustom);&#xd;
+        }&#xd;
+&#xd;
+        // Chegou até aqui = todos os INSERT&apos;s / UPDATE&apos;s rodaram sem erro. Grava tudo de uma vez.&#xd;
+        connCustom.commit();&#xd;
+&#xd;
+    } catch (error) {&#xd;
+&#xd;
+        // Qualquer erro desfaz todos os INSERT&apos;s / UPDATE&apos;s da abertura&#xd;
+        log.error(&quot;## Revitalização Contratos beforeCancelProcess: erro em algum UPDATE, iniciando rollback. Erro: &quot;);&#xd;
+        log.dir(error);&#xd;
+&#xd;
+        // Rollback Castilho Custom&#xd;
+        try {  connCustom.rollback() } catch (e) { log.error(&quot;## Erro no rollback do Custom: &quot; + e) }&#xd;
+&#xd;
+        throw error;&#xd;
+&#xd;
+    } finally {&#xd;
+        // O bloco finally sempre executa, com erro ou sem.&#xd;
+        // Garantimos que as conexões são fechadas independente se deu erro ou não.&#xd;
+        // Se não fechar, o banco fica com conexões presas e para de responder com o tempo.&#xd;
+        try { connCustom.close() } catch (e) {}&#xd;
     }&#xd;
 }&#xd;
 &#xd;
-function resetaStatusDosEquipamentosParaPendenteContrato(){&#xd;
+function resetaStatusDosEquipamentosParaPendenteContrato(conn){&#xd;
     try {&#xd;
         var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados&quot;);&#xd;
         for (var i = 0; i &lt; indexes.length; i++) {&#xd;
             var id = indexes[i];&#xd;
             var PREFIXO = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);&#xd;
 &#xd;
-            var isMAouOutros = buscaCategoriaPorPrefixo(PREFIXO);&#xd;
+            var isMAouOutros = buscaCategoriaPorPrefixo(PREFIXO, conn);&#xd;
             if (isMAouOutros[0].CATEGORIA != &quot;Outros&quot;) {&#xd;
                 var query = &quot;&quot;;&#xd;
                 query += &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET STATUS = 1 WHERE PREFIXO = ?&quot;;&#xd;
                 executaUpdate(query,[&#xd;
                     {type:&quot;varchar&quot;, value:PREFIXO}&#xd;
-                ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+                ], conn);&#xd;
             }&#xd;
             else{&#xd;
                 var query = &quot;&quot;;&#xd;
                 query += &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR_OUTROS SET STATUS = 1 WHERE PREFIXO = ?&quot;;&#xd;
                 executaUpdate(query,[&#xd;
                     {type:&quot;varchar&quot;, value:PREFIXO}&#xd;
-                ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+                ], conn);&#xd;
             }&#xd;
 &#xd;
         }&#xd;
@@ -2213,14 +2367,33 @@ function resetaStatusDosEquipamentosParaPendenteContrato(){&#xd;
         throw error;    &#xd;
     }&#xd;
 }&#xd;
-function executaUpdate(query, constraints, dataSource) {&#xd;
-    try {&#xd;
-        var dataSource = dataSource;&#xd;
-        var ic = new javax.naming.InitialContext();&#xd;
-        var ds = ic.lookup(dataSource);&#xd;
+function executaUpdate(query, constraints, dataSourceOrConn) {&#xd;
+    // O terceiro parâmetro era sempre uma string com o nome do banco (ex: &quot;/jdbc/Sisma&quot;).&#xd;
+    // Renomeamos para dataSourceOrConn porque agora pode ser duas coisas:&#xd;
+    //   - Uma string &quot;/jdbc/Sisma&quot; -&gt; comportamento antigo, abre e fecha conexão aqui dentro&#xd;
+    //   - Um objeto de conexão já aberta -&gt; usa ela e NÃO fecha (quem abriu é responsável)&#xd;
 &#xd;
-        var conn = ds.getConnection();&#xd;
-        var stmt = conn.prepareStatement(query);&#xd;
+    try {&#xd;
+        log.info(&quot;executandoQuery&quot;);&#xd;
+        log.info(query);&#xd;
+        log.dir(constraints);&#xd;
+&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+&#xd;
+        // dataSourceOrConn pode ser:&#xd;
+        //   - String com o nome do datasource (&quot;/jdbc/Sisma&quot;) -&gt; abrimos e fechamos aqui&#xd;
+        //   - Conexão já aberta (modo transação)              -&gt; usamos e NÃO fechamos&#xd;
+        var isConexaoCompartilhada = (dataSourceOrConn instanceof Packages.java.sql.Connection);&#xd;
+        var ownConn = !isConexaoCompartilhada;&#xd;
+&#xd;
+        if (ownConn) {&#xd;
+            var ds = ic.lookup(dataSourceOrConn);&#xd;
+            conn = ds.getConnection();&#xd;
+        } else {&#xd;
+            conn = dataSourceOrConn;   // usa a conexão da transação&#xd;
+        }&#xd;
+&#xd;
+        var stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);&#xd;
 &#xd;
         var counter = 1;&#xd;
         for (var i = 0; i &lt; constraints.length; i++) {&#xd;
@@ -2252,7 +2425,10 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
         if (stmt != null) {&#xd;
             stmt.close();&#xd;
         }&#xd;
-        if (conn != null) {&#xd;
+        // Só fecha conexão se foi a gente que abriu (ownConn = true)&#xd;
+        // Se veio de fora (ownConn = false), deixa aberta - quem abriu fecha&#xd;
+        // Fecha antes do commit/rollback cancela a transação inteira, evitando cadastro &quot;quebrado&quot;&#xd;
+        if (ownConn &amp;&amp; conn != null) {&#xd;
             conn.close();&#xd;
         }&#xd;
     }&#xd;
@@ -2265,11 +2441,39 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
         <processId>Revitalização Contratos</processId>
         <version>1</version>
       </workflowProcessEventPK>
-      <eventDescription>function afterProcessFinish(processId){&#xd;
-    var TIPO_CONTRATO = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+      <eventDescription>function afterProcessFinish(processId) {&#xd;
+    try {&#xd;
+        // Abre UMA conexão para a transação. Todos os INSERT/UPDATE da abertura&#xd;
+        // usam essa mesma conexão, então ou grava tudo (commit) ou nada (rollback).&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+        var connCustom = ic.lookup(&quot;/jdbc/CastilhoCustom&quot;).getConnection();&#xd;
+        connCustom.setAutoCommit(false);&#xd;
 &#xd;
-    if (TIPO_CONTRATO == &quot;Locação de Equipamento&quot; || TIPO_CONTRATO == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
-        atualizaStatusEquipamento(&quot;Contrato_Vigente&quot;);&#xd;
+        var TIPO_CONTRATO = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+&#xd;
+        if (TIPO_CONTRATO == &quot;Locação de Equipamento&quot; || TIPO_CONTRATO == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
+            atualizaStatusEquipamento(&quot;Contrato_Vigente&quot;, connCustom);&#xd;
+        }&#xd;
+&#xd;
+        // Chegou até aqui = todos os INSERT&apos;s / UPDATE&apos;s rodaram sem erro. Grava tudo de uma vez.&#xd;
+        connCustom.commit();&#xd;
+&#xd;
+    } catch (error) {&#xd;
+&#xd;
+        // Qualquer erro desfaz todos os INSERT&apos;s / UPDATE&apos;s da abertura&#xd;
+        log.error(&quot;## Revitalização Contratos afterProcessFinish: erro em algum UPDATE, iniciando rollback. Erro: &quot;);&#xd;
+        log.dir(error);&#xd;
+&#xd;
+        // Rollback Castilho Custom&#xd;
+        try {  connCustom.rollback() } catch (e) { log.error(&quot;## Erro no rollback do Custom: &quot; + e) }&#xd;
+&#xd;
+        throw error;&#xd;
+&#xd;
+    } finally {&#xd;
+        // O bloco finally sempre executa, com erro ou sem.&#xd;
+        // Garantimos que as conexões são fechadas independente se deu erro ou não.&#xd;
+        // Se não fechar, o banco fica com conexões presas e para de responder com o tempo.&#xd;
+        try { connCustom.close() } catch (e) {}&#xd;
     }&#xd;
 }</eventDescription>
     </WorkflowProcessEvent>
@@ -2290,10 +2494,15 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
     CONTROLADORIA: 32,&#xd;
     ENGENHEIRO: 43,&#xd;
     COORDENADOR_OBRAS: 48,&#xd;
+    ANALISE_EQUIPAMENTO: 104,&#xd;
     DIRETORIA: 53,&#xd;
     STATUS_ASSINATURA_ELETRONICA: 58,&#xd;
     ASSINATURA_ELETRONICA: 66,&#xd;
+    ADM_OBRA: 64,&#xd;
+    CONTROLADORIA_AGUARDA_RECEBIMENTO: 74,&#xd;
+    CONTROLADORIA_RECEBE_ASSINATURAS: 72, &#xd;
     OBRA_RECEBE_VIAS_ORIGINAIS: 76,&#xd;
+    FIM : [37, 62, 83]&#xd;
 };&#xd;
 &#xd;
 var STATUS_CONTRATOS = {&#xd;
@@ -2336,78 +2545,192 @@ var TIPOS_FATURAMENTO = {&#xd;
     &quot;Por Medição&quot;: 2,&#xd;
 };&#xd;
 &#xd;
+var codigoStatusEquipamentos = {&#xd;
+    &quot;Pendente_Contrato&quot;:1,&#xd;
+    &quot;Contrato_em_Andamento_com_análise_pendente&quot;:2,&#xd;
+    &quot;Contrato_em_Andamento_com_análise_realizada&quot;:3,&#xd;
+    &quot;Contrato_Vigente&quot;:4,&#xd;
+    &quot;Equipamento_desmobilizado&quot;:5,&#xd;
+    &quot;Contrato_encerrado&quot;:6,&#xd;
+}&#xd;
+&#xd;
 function beforeTaskSave(colleagueId, nextSequenceId, userList) {&#xd;
     try {&#xd;
         var ATIVIDADE_ATUAL = getValue(&quot;WKNumState&quot;);&#xd;
 &#xd;
+        var connSisma = null;&#xd;
+        var connCustom = null;&#xd;
+&#xd;
+        var atividadesComSQL = validaSeAtividadeExecutaSQL(ATIVIDADE_ATUAL);&#xd;
+        if (atividadesComSQL) {&#xd;
+            // Abre UMA conexão para a transação. Todos os INSERT/UPDATE da abertura&#xd;
+            // usam essa mesma conexão, então ou grava tudo (commit) ou nada (rollback).&#xd;
+            var ic = new javax.naming.InitialContext();&#xd;
+            connSisma = ic.lookup(&quot;/jdbc/Sisma&quot;).getConnection();&#xd;
+            connCustom = ic.lookup(&quot;/jdbc/CastilhoCustom&quot;).getConnection();&#xd;
+            connSisma.setAutoCommit(false);&#xd;
+            connCustom.setAutoCommit(false);&#xd;
+        }&#xd;
+&#xd;
         if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {&#xd;
-            beforeTaskSave_inicio();&#xd;
+            beforeTaskSave_inicio(connCustom, connSisma);&#xd;
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.JURIDICO) {&#xd;
-            beforeTaskSave_juridico();&#xd;
+            beforeTaskSave_juridico(hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;), connCustom);&#xd;
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {&#xd;
-            beforeTaskSave_controladoria();&#xd;
+            beforeTaskSave_controladoria(hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;), connCustom);&#xd;
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.ENGENHEIRO) {&#xd;
             beforeTaskSave_engenheiro();&#xd;
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.COORDENADOR_OBRAS) {&#xd;
             beforeTaskSave_coordenadorObras();&#xd;
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.ANALISE_EQUIPAMENTO) {&#xd;
+            beforeTaskSave_analiseEquipamentos();&#xd;
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {&#xd;
             beforeTaskSave_diretoria();&#xd;
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.OBRA_RECEBE_VIAS_ORIGINAIS) { // Tipo de assinatura manual&#xd;
-            beforeTaskSave_obraRecebeViasOriginais();&#xd;
+            beforeTaskSave_obraRecebeViasOriginais(connCustom, connSisma);&#xd;
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.STATUS_ASSINATURA_ELETRONICA) { // Tipo de assintaura eletrônica, com status &quot;Assinado&quot;&#xd;
-            beforeTaskSave_statusAssinaturaEletronica();&#xd;
+            beforeTaskSave_statusAssinaturaEletronica(connCustom, connSisma);&#xd;
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA_AGUARDA_RECEBIMENTO) {&#xd;
+            beforeTaskSave_controladoriaAguardaRecebimento();&#xd;
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA_RECEBE_ASSINATURAS) {&#xd;
+            beforeTaskSave_controladoriaRecolheAssinaturas();&#xd;
         }&#xd;
+&#xd;
+        if (atividadesComSQL) {&#xd;
+            // Chegou até aqui = todos os INSERT&apos;s / UPDATE&apos;s rodaram sem erro. Grava tudo de uma vez.&#xd;
+            connSisma.commit();&#xd;
+            connCustom.commit();&#xd;
+        }&#xd;
+&#xd;
     } catch (error) {&#xd;
+&#xd;
+        if (atividadesComSQL) {&#xd;
+            // Qualquer erro desfaz todos os INSERT&apos;s / UPDATE&apos;s da abertura&#xd;
+            log.error(&quot;## Revitalização Contratos beforeTaskSave: erro em algum INSERT/UPDATE, iniciando rollback. Erro: &quot;);&#xd;
+            log.dir(error);&#xd;
+&#xd;
+            // Rollback SISMA&#xd;
+            try { connSisma.rollback() } catch (e) { log.error(&quot;## Erro no rollback do Sisma: &quot; + e) }&#xd;
+&#xd;
+            // Rollback Castilho Custom&#xd;
+            try {  connCustom.rollback() } catch (e) { log.error(&quot;## Erro no rollback do Custom: &quot; + e) }&#xd;
+        }&#xd;
+&#xd;
         throw error;&#xd;
+&#xd;
+    } finally {&#xd;
+        // O bloco finally sempre executa, com erro ou sem.&#xd;
+        // Garantimos que as conexões são fechadas independente se deu erro ou não.&#xd;
+        // Se não fechar, o banco fica com conexões presas e para de responder com o tempo.&#xd;
+&#xd;
+        // Fecha somente as que abriram&#xd;
+        if (connSisma != null) {&#xd;
+            try {  connSisma.close() } catch (e) {}&#xd;
+        }&#xd;
+        if (connCustom != null) {&#xd;
+            try { connCustom.close() } catch (e) {}&#xd;
+        }&#xd;
+    }&#xd;
+&#xd;
+&#xd;
+    // Util&#xd;
+    function validaSeAtividadeExecutaSQL(atividade) {&#xd;
+        return atividade == ATIVIDADES.INICIO&#xd;
+            || atividade == ATIVIDADES.INICIO_0&#xd;
+            || atividade == ATIVIDADES.JURIDICO&#xd;
+            || atividade == ATIVIDADES.CONTROLADORIA&#xd;
+            || atividade == ATIVIDADES.STATUS_ASSINATURA_ELETRONICA&#xd;
+            || atividade == ATIVIDADES.OBRA_RECEBE_VIAS_ORIGINAIS;&#xd;
     }&#xd;
 }&#xd;
 &#xd;
-function beforeTaskSave_inicio() {&#xd;
+function beforeTaskSave_inicio(connCustom, connSisma) { // COM SQL&#xd;
     try {&#xd;
         hAPI.setCardValue(&quot;numProces&quot;, getValue(&quot;WKNumProces&quot;));&#xd;
+        var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
         var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
-        &#xd;
-        if (tipoContrato == &quot;Locação de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
-            atualizaStatusEquipamento_quandoAberturaSolicit(&quot;Contrato_em_Andamento_com_análise_pendente&quot;);&#xd;
-            hAPI.setCardValue(&quot;dataCriadoEm&quot;, getDateNow());&#xd;
 &#xd;
-        } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
-            // Insere o(s) equip(s) na tabela para poder ver na Analise do Suprimentos, mas insere com Status Desativado&#xd;
-            insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
-            atualizaStatusEquipamento_quandoAberturaSolicit(&quot;Contrato_em_Andamento_com_análise_pendente&quot;);&#xd;
+        // Função centralizada&#xd;
+        INSERTs_UPDATEs_tabelasAuxiliares_aberturaSolicitacao(connCustom, connSisma);&#xd;
 &#xd;
-        } else if (tipoContrato == &quot;Transporte de Materiais - Inclusão de Equipamento&quot;) {&#xd;
-            insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+        log.info(&quot;## beforeTaskSave_inicio&quot;);&#xd;
+        log.info(&quot;## Resultado solicitacaoEstaSendoAberta: &quot; + solicitacaoEstaSendoAberta());&#xd;
 &#xd;
-        }&#xd;
-&#xd;
-        // Cria/insere somente quando contratos novos.&#xd;
-        if (hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot;) {&#xd;
-            var id = insereDadosNaTabelaAuxiliar();&#xd;
-            insereDadosNaTabelaAuxiliarItens(id);&#xd;
-            hAPI.setCardValue(&quot;ID_TCNT_AUXILIAR&quot;, id);&#xd;
+        // Se não for abertura, faz UPDATE&apos;s&#xd;
+        if (!solicitacaoEstaSendoAberta()) {&#xd;
+            updateTcntAuxiliarCompleto_quandoContratoNovo(hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;), connCustom);&#xd;
+            atualizaDadosTabelasAuxiliares_porOrigemContratoTipoContrato(origemContrato, tipoContrato, connCustom);&#xd;
         }&#xd;
         &#xd;
         var pdfIdContrato = hAPI.getCardValue(&quot;contratoPdfId&quot;);&#xd;
         if (pdfIdContrato) {&#xd;
             anexaDocumentoNoProcesso(pdfIdContrato);&#xd;
         }&#xd;
-        insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), &quot;Enviado&quot;, &quot;Início&quot;);&#xd;
+        insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), &quot;Enviado&quot;, &quot;Obra&quot;);&#xd;
+&#xd;
     } catch (error) {&#xd;
         throw error;   &#xd;
     }&#xd;
-}&#xd;
-function beforeTaskSave_juridico() {&#xd;
-    insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Jurídico&quot;);&#xd;
-}&#xd;
-function beforeTaskSave_controladoria() {&#xd;
-    try {&#xd;
-        insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Controladoria&quot;);&#xd;
-        if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot;) {&#xd;
-            var tipo = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
-            var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
-            var codColigada = hAPI.getCardValue(&quot;CODCOLIGADA&quot;);&#xd;
 &#xd;
+&#xd;
+    // Util&#xd;
+    function INSERTs_UPDATEs_tabelasAuxiliares_aberturaSolicitacao() {&#xd;
+        try {&#xd;
+&#xd;
+            if (!solicitacaoEstaSendoAberta()) {&#xd;
+                return;&#xd;
+            }&#xd;
+&#xd;
+            var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+            &#xd;
+            if (tipoContrato == &quot;Locação de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
+                atualizaStatusEquipamento(&quot;Contrato_em_Andamento_com_análise_pendente&quot;, connCustom);&#xd;
+                hAPI.setCardValue(&quot;dataCriadoEm&quot;, getDateNow());&#xd;
+            &#xd;
+            } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
+                // Insere o(s) equip(s) na tabela para poder ver na Analise do Suprimentos, mas insere com Status Desativado&#xd;
+                insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;), connCustom);&#xd;
+                atualizaStatusEquipamento(&quot;Contrato_em_Andamento_com_análise_pendente&quot;, connCustom);&#xd;
+            &#xd;
+            } else if (tipoContrato == &quot;Transporte de Materiais - Inclusão de Equipamento&quot;) {&#xd;
+                insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;), connCustom);&#xd;
+            &#xd;
+            }&#xd;
+&#xd;
+            // Cria/insere somente quando contratos novos.&#xd;
+            if (hAPI.getCardValue(&quot;origemContrato&quot;) == &quot;Novos&quot;) {&#xd;
+                var id = insereDadosNaTabelaAuxiliar(connCustom);&#xd;
+                insereDadosNaTabelaAuxiliarItens(id, connCustom);&#xd;
+                hAPI.setCardValue(&quot;ID_TCNT_AUXILIAR&quot;, id);&#xd;
+            }&#xd;
+&#xd;
+        } catch (error) {&#xd;
+            // Lança erro e trava abertura da solicitação.&#xd;
+            throw error;&#xd;
+        }&#xd;
+    }&#xd;
+}&#xd;
+function beforeTaskSave_juridico(ID_TCNT_AUXILIAR, connCustom) { // COM SQL&#xd;
+    var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
+    var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+&#xd;
+    insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Jurídico&quot;);&#xd;
+&#xd;
+    updateTcntAuxiliarCompleto_quandoContratoNovo(ID_TCNT_AUXILIAR, connCustom);&#xd;
+    atualizaDadosTabelasAuxiliares_porOrigemContratoTipoContrato(origemContrato, tipoContrato, connCustom);&#xd;
+}&#xd;
+function beforeTaskSave_controladoria(ID_TCNT_AUXILIAR, connCustom) { // COM SQL&#xd;
+    try {&#xd;
+        var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
+        var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+        var codColigada = hAPI.getCardValue(&quot;CODCOLIGADA&quot;);&#xd;
+&#xd;
+        insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Controladoria&quot;);&#xd;
+&#xd;
+        updateTcntAuxiliarCompleto_quandoContratoNovo(ID_TCNT_AUXILIAR, connCustom);&#xd;
+        atualizaDadosTabelasAuxiliares_porOrigemContratoTipoContrato(origemContrato, tipoContrato, connCustom);&#xd;
+&#xd;
+        if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovado&quot;) {&#xd;
             // Seta Diretor conforme Coligada, para Contratos Novos de Locação de Equipamento&#xd;
             if (tipoContrato == &quot;Locação de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
 &#xd;
@@ -2423,17 +2746,17 @@ function beforeTaskSave_controladoria() {&#xd;
                 }&#xd;
             }&#xd;
             var IDCNT = hAPI.getCardValue(&quot;IDCNT&quot;);&#xd;
-            if (tipo == &quot;Novos&quot; &amp;&amp; IDCNT == &quot;&quot;) {&#xd;
-                var IDCNT = criaNovoContrato();&#xd;
+            if (origemContrato == &quot;Novos&quot; &amp;&amp; IDCNT == &quot;&quot;) {&#xd;
+                var IDCNT = criaNovoContrato(); // RM&#xd;
                 hAPI.setCardValue(&quot;IDCNT&quot;, IDCNT);&#xd;
-                updateTcntAuxiliar_IDCNT(IDCNT, hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+                updateTcntAuxiliar_IDCNT(IDCNT, hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;), connCustom); // SQL&#xd;
 &#xd;
-            } else if (tipo == &quot;Aditivos&quot;) {&#xd;
-                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;PENDENTE OBRA&quot;);&#xd;
+            } else if (origemContrato == &quot;Aditivos&quot;) {&#xd;
+                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;PENDENTE OBRA&quot;); // RM&#xd;
                 // TODO - Inserir relação do Aditivo com o Contrato na tabela Custom de Contratos&#xd;
 &#xd;
-            } else if (tipo == &quot;Rescisões&quot;) {&#xd;
-                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;RESCISÃO EM ANDAMENTO&quot;);&#xd;
+            } else if (origemContrato == &quot;Rescisões&quot;) {&#xd;
+                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;RESCISÃO EM ANDAMENTO&quot;); // RM&#xd;
                 // TODO - Inserir relação da Rescisão com o Contrato na tabela Custom de Contratos&#xd;
             }&#xd;
         }&#xd;
@@ -2441,10 +2764,10 @@ function beforeTaskSave_controladoria() {&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function beforeTaskSave_engenheiro() {&#xd;
+function beforeTaskSave_engenheiro() { // SEM SQL&#xd;
     insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Aprovação Engenheiro&quot;);&#xd;
 &#xd;
-    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot;) {&#xd;
+    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovado&quot;) {&#xd;
         if (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot; &amp;&amp; hAPI.getCardValue(&quot;coordenador&quot;) == &quot;&quot;) {&#xd;
             // Se não tiver coordenador vai para assinatura eletrônica&#xd;
             criaAssinaturaEletronica();&#xd;
@@ -2455,28 +2778,32 @@ function beforeTaskSave_engenheiro() {&#xd;
         }&#xd;
     }&#xd;
 }&#xd;
-function beforeTaskSave_coordenadorObras() {&#xd;
+function beforeTaskSave_coordenadorObras() { // SEM SQL&#xd;
     insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Aprovação Coordenador&quot;);&#xd;
 &#xd;
-    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot;)) {&#xd;
+    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovado&quot; &amp;&amp; (hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento&quot; &amp;&amp; hAPI.getCardValue(&quot;tipoContrato&quot;) != &quot;Locação de Equipamento - Com Mão de Obra&quot;)) {&#xd;
         criaAssinaturaEletronica();&#xd;
     }&#xd;
 }&#xd;
-function beforeTaskSave_diretoria() {&#xd;
+function beforeTaskSave_analiseEquipamentos() { // SEM SQL&#xd;
+    insereHistorico(&quot;&quot;, &quot;Enviado&quot;, &quot;Análise de Equipamentos&quot;);&#xd;
+}&#xd;
+function beforeTaskSave_diretoria() { // SEM SQL&#xd;
     insereHistorico(hAPI.getCardValue(&quot;observacoes&quot;), hAPI.getCardValue(&quot;decisao&quot;), &quot;Aprovação Diretoria&quot;);&#xd;
 &#xd;
-    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovar&quot; &amp;&amp; hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot;){&#xd;
+    if (hAPI.getCardValue(&quot;decisao&quot;) == &quot;Aprovado&quot; &amp;&amp; hAPI.getCardValue(&quot;assinaturaContrato&quot;) == &quot;Eletrônica&quot;){&#xd;
         criaAssinaturaEletronica();&#xd;
     }&#xd;
 }&#xd;
-function beforeTaskSave_statusAssinaturaEletronica() {&#xd;
+function beforeTaskSave_statusAssinaturaEletronica(connCustom, connSisma) { // COM SQL&#xd;
+    insereHistorico(&quot;&quot;, &quot;Enviado&quot;, &quot;Agurdando Assinatura Eletrônica&quot;);&#xd;
 &#xd;
     if (hAPI.getCardValue(&quot;statusAssinatura&quot;) == &quot;Assinado&quot;) {&#xd;
         alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), hAPI.getCardValue(&quot;IDCNT&quot;), &quot;ATIVO&quot;);&#xd;
-        regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();&#xd;
+        regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais(connCustom, connSisma);&#xd;
     }&#xd;
 }&#xd;
-function beforeTaskSave_obraRecebeViasOriginais() {&#xd;
+function beforeTaskSave_obraRecebeViasOriginais(connCustom, connSisma) { // COM SQL&#xd;
     var ID_TCNT_AUXILIAR = hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;);&#xd;
     var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
 &#xd;
@@ -2486,7 +2813,7 @@ function beforeTaskSave_obraRecebeViasOriginais() {&#xd;
     // Só grava com ID_TCNT_AUXILIAR válido (Transporte podia vir como &quot;   -   &quot;).&#xd;
     var idAux = parseInt(ID_TCNT_AUXILIAR, 10);&#xd;
     if (!isNaN(idAux) &amp;&amp; idAux &gt; 0) {&#xd;
-        updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, idAux);&#xd;
+        updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, idAux, connCustom); // SQl&#xd;
     } else {&#xd;
         log.warn(&quot;obraRecebeViasOriginais - ID_TCNT_AUXILIAR inválido, pulando update de dataAssinatura: &quot; + ID_TCNT_AUXILIAR);&#xd;
     }&#xd;
@@ -2496,10 +2823,18 @@ function beforeTaskSave_obraRecebeViasOriginais() {&#xd;
         var IDCNT = hAPI.getCardValue(&quot;IDCNT&quot;);&#xd;
         alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
     }&#xd;
-    regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();&#xd;
+    regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais(connCustom, connSisma);&#xd;
+}&#xd;
+function beforeTaskSave_controladoriaAguardaRecebimento() { // SEM SQL&#xd;
+    insereHistorico(&quot;&quot;, &quot;Enviado&quot;, &quot;Controladoria Aguarda Recebimento&quot;);&#xd;
+}&#xd;
+function beforeTaskSave_controladoriaRecolheAssinaturas() { // SEM SQL&#xd;
+    insereHistorico(&quot;&quot;, &quot;Enviado&quot;, &quot;Controladoria Recolhe Assinaturas&quot;);&#xd;
 }&#xd;
 &#xd;
-function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {&#xd;
+&#xd;
+// Centralização Funções - Assinatura Eletronica &amp; Assinatura Manual&#xd;
+function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais(connCustom, connSisma) {&#xd;
 &#xd;
     // Formata valor monetario para float&#xd;
     var valorLocacaoReajustado = ValorToFloat(hAPI.getCardValue(&quot;valorLocacaoReajustado&quot;));&#xd;
@@ -2518,103 +2853,104 @@ function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {&#xd;
                 tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot; || tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; || &#xd;
                 tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;)&#xd;
             {&#xd;
-                insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR, connCustom); // SQL&#xd;
 &#xd;
             } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot; || tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot; || &#xd;
                 tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) &#xd;
             {&#xd;
-                insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR, connCustom); // SQL&#xd;
             }&#xd;
-                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;);&#xd;
+                alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;ATIVO&quot;); // RM&#xd;
         }&#xd;
         &#xd;
         if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo&quot;) {&#xd;
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue(&quot;dataFimLocacao&quot;));&#xd;
+            updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue(&quot;dataFimLocacao&quot;)); // RM&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Valor&quot;) {&#xd;
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
-            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
+            updateTcntAuxiliarItens_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;), connCustom); // SQL&#xd;
+            updateTCNT_alteracaoValorAluguel_imovel(IDCNT); // RM&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Locação de Imóvel - Alteração de Prazo e Valor&quot;) {&#xd;
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao);&#xd;
-            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;));&#xd;
-            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);&#xd;
+            updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao); // RM&#xd;
+            updateTcntAuxiliarItens_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue(&quot;NSEQITEMCNT&quot;), connCustom); // SQL&#xd;
+            updateTCNT_alteracaoValorAluguel_imovel(IDCNT); // RM&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Locação de Imóvel (Rescisões)&quot;) { // Rescisão&#xd;
             // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
-            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
+            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;); // RM&#xd;
         &#xd;
         } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo&quot;) {&#xd;
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao); // RM&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Valor&quot;) {&#xd;
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
-            updateSISMA_alteracaoAluguelContrato_equipamento();&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT); // RM&#xd;
+            updateSISMA_alteracaoAluguelContrato_equipamento(connSisma); // SQL&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Locação de Equipamento - Alteração de Prazo e Valor&quot;) {&#xd;
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);&#xd;
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
-            updateSISMA_alteracaoAluguelContrato_equipamento();&#xd;
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao); // RM&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT); // RM&#xd;
+            updateSISMA_alteracaoAluguelContrato_equipamento(connSisma); // SQL&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT); // RM&#xd;
 &#xd;
             // Atualiza o ATIVO para ativado ( 1 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
-            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;1&quot;, ID_TCNT_AUXILIAR);&#xd;
-            atualizaStatusEquipamento_quandoAberturaSolicit(&quot;Contrato_Vigente&quot;);&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;1&quot;, ID_TCNT_AUXILIAR, connCustom); // SQL&#xd;
+            atualizaStatusEquipamento(&quot;Contrato_Vigente&quot;, connCustom); // SQL&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.&#xd;
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);&#xd;
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT); // RM&#xd;
 &#xd;
             // Desativa equipamentos no SISMA&#xd;
-            updateSISMA_statusEquipamento();&#xd;
+            updateSISMA_statusEquipamento(connSisma); // SQL&#xd;
 &#xd;
             // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo&#xd;
-            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
-            atualizaStatusEquipamento_quandoAberturaSolicit(&quot;Equipamento_desmobilizado&quot;);&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR, connCustom); // SQL&#xd;
+            atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;, connCustom);&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Locação de Equipamento (Rescisões)&quot; || tipoContrato == &quot;Locação de Equipamento - Com Mão de Obra (Rescisões)&quot;) {&#xd;
             // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.&#xd;
-            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;);&#xd;
+            alteraStatusContrato_RM(hAPI.getCardValue(&quot;CODCOLIGADA&quot;), IDCNT, &quot;CANCELADO&quot;); // RM&#xd;
 &#xd;
             // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado essa rescisão&#xd;
-            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
-            atualizaStatusEquipamento_quandoAberturaSolicit(&quot;Equipamento_desmobilizado&quot;);&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR, connCustom); // SQl&#xd;
+            atualizaStatusEquipamento(&quot;Equipamento_desmobilizado&quot;, connCustom);&#xd;
 &#xd;
             // Desativa equipamentos no SISMA&#xd;
-            updateSISMA_statusEquipamento();&#xd;
+            updateSISMA_statusEquipamento(connSisma); // SQL&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Transporte de Materiais - Inclusão de Equipamento&quot;) {&#xd;
 &#xd;
-            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;1&quot;, ID_TCNT_AUXILIAR);&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;1&quot;, ID_TCNT_AUXILIAR, connCustom); // SQL&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Transporte de Materiais - Exclusão de Equipamento&quot;) {&#xd;
             // MELHORIA TRANSPORTE — desativa (ATIVO=0) os equipamentos selecionados para exclusão do contrato.&#xd;
-            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR);&#xd;
+            updateTcntAuxiliarItens_statusEquipNoContrato(&quot;0&quot;, ID_TCNT_AUXILIAR, connCustom); // SQL&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Transporte de Materiais - Alteração de Valor&quot;) {&#xd;
             //MELHORIA TRANSPORTE — grava o novo valor do aditivo no item do contrato no RM&#xd;
-            updateTCNT_alteracaoValor_transporte(IDCNT);&#xd;
+            updateTCNT_alteracaoValor_transporte(IDCNT); // RM&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Transporte de Materiais - Alteração de Prazo&quot;) {&#xd;
             //MELHORIA TRANSPORTE — grava a nova data fim no contrato no RM (reaproveita a função de prazo, que é genérica: IDCNT + data)&#xd;
-            updateTCNT_alteracaoPrazo_equipamento(IDCNT, hAPI.getCardValue(&quot;novaDataFimTransporte&quot;));&#xd;
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, hAPI.getCardValue(&quot;novaDataFimTransporte&quot;)); // RM&#xd;
 &#xd;
         } else if (tipoContrato == &quot;Transporte de Materiais - Alteração de Prazo e Valor&quot;) {&#xd;
             //MELHORIA TRANSPORTE — grava a nova data fim E o novo valor no contrato no RM&#xd;
-            updateTCNT_alteracaoPrazo_equipamento(IDCNT, hAPI.getCardValue(&quot;novaDataFimTransporte&quot;));&#xd;
-            updateTCNT_alteracaoValor_transporte(IDCNT);&#xd;
-&#xd;
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, hAPI.getCardValue(&quot;novaDataFimTransporte&quot;)); // RM&#xd;
+            updateTCNT_alteracaoValor_transporte(IDCNT); // RM&#xd;
         }&#xd;
+&#xd;
     } catch (error) {&#xd;
+        // Lança erro&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
@@ -2795,15 +3131,6 @@ function validaParametros(parametros) {&#xd;
         erroRetorno.push(&quot;ITENS&quot;);&#xd;
     }&#xd;
 &#xd;
-    // try {&#xd;
-    //     log.info(parametros.ITENS);&#xd;
-    //     parametros.ITENS = JSONUtil.toJSON(parametros.ITENS);&#xd;
-    // } catch (error) {&#xd;
-    //     log.info(&quot;Erro no parse do JSON ITENS&quot;);&#xd;
-    //     log.dir(error);&#xd;
-    //     erroRetorno.push(&quot;ITENS&quot;);&#xd;
-    // }&#xd;
-&#xd;
     for (var i = 0; i &lt; parametros.ITENS.length; i++) {&#xd;
         var item = parametros.ITENS[i];&#xd;
 &#xd;
@@ -2855,6 +3182,8 @@ function validaParametros(parametros) {&#xd;
     }&#xd;
 }&#xd;
 &#xd;
+&#xd;
+// XML&apos;s&#xd;
 function montaXMLCriacaoDeContrato(parametros) {&#xd;
     var xml = &quot;&quot;;&#xd;
     xml += &quot;&lt;CTRCNT&gt;&quot;;&#xd;
@@ -2976,6 +3305,9 @@ function geraXML_TITMCNTRATDEP(parametros) {&#xd;
     }&#xd;
     return xml;&#xd;
 }&#xd;
+&#xd;
+&#xd;
+// Update RM&#xd;
 function updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao) {&#xd;
 &#xd;
     var CODCOLIGADA = hAPI.getCardValue(&quot;CODCOLIGADA&quot;);&#xd;
@@ -3177,8 +3509,9 @@ function updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT) {&#xd
         throw &quot;Erro ao alterar valor: &quot; + retorno.values[0][1];&#xd;
     }&#xd;
 }&#xd;
-//MELHORIA TRANSPORTE: grava no RM o novo valor do item do contrato para o aditivo de Alteração de Valor de Transporte&#xd;
 function updateTCNT_alteracaoValor_transporte(IDCNT) {&#xd;
+    //MELHORIA TRANSPORTE: grava no RM o novo valor do item do contrato para o aditivo de Alteração de Valor de Transporte&#xd;
+&#xd;
     var CODCOLIGADA = hAPI.getCardValue(&quot;CODCOLIGADA&quot;);&#xd;
 &#xd;
     //calcula o novo valor conforme o Formato de Cobrança escolhido no aditivo&#xd;
@@ -3228,28 +3561,6 @@ function updateTCNT_alteracaoValor_transporte(IDCNT) {&#xd;
         throw &quot;Erro ao alterar valor do aditivo de Transporte: &quot; + retorno.values[0][1];&#xd;
     }&#xd;
 }&#xd;
-function updateSISMA_alteracaoAluguelContrato_equipamento() {&#xd;
-    try {&#xd;
-        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
-        var counter = 0;&#xd;
-        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
-            var id = indexes[i]&#xd;
-            var prefixo = hAPI.getCardValue(&quot;equipSelecionado_aditivos___&quot; + id);&#xd;
-            var valorReajustado = ValorToFloat(hAPI.getCardValue(&quot;valorReajustado_aditivos___&quot; + id));&#xd;
-            var valorMaoDeObra = ValorToFloat(hAPI.getCardValue(&quot;valorMaoDeObraAditivos___&quot; + id));&#xd;
-            var valorAluguelContrato = valorReajustado - valorMaoDeObra;&#xd;
-&#xd;
-            var query = &quot;UPDATE EQUIPAMENTO SET ALUGUEL_CONTRATO = ? WHERE NUMEEQUI = ?&quot;;&#xd;
-            executaUpdate(query, [&#xd;
-                {type:&quot;float&quot;, value: valorAluguelContrato},&#xd;
-                {type:&quot;varchar&quot;, value: prefixo},&#xd;
-            ], &quot;jdbc/Sisma&quot;);&#xd;
-            counter++;&#xd;
-        }&#xd;
-    } catch (error) {&#xd;
-        throw error;&#xd;
-    }&#xd;
-}&#xd;
 function alteraStatusContrato_RM(CODCOLIGADA, IDCNT, STATUS) {&#xd;
     try {&#xd;
         var CODSTACNT = STATUS_CONTRATOS[STATUS];&#xd;
@@ -3291,7 +3602,9 @@ function alteraStatusContrato_RM(CODCOLIGADA, IDCNT, STATUS) {&#xd;
     }&#xd;
 }&#xd;
 &#xd;
-function insereDadosNaTabelaAuxiliar(){ //Contratos Novos&#xd;
+&#xd;
+// INSERT Sql&#xd;
+function insereDadosNaTabelaAuxiliar(conn) { //Contratos Novos&#xd;
     try {&#xd;
         &#xd;
         var query = &quot;INSERT INTO TCNT_AUXILIAR (&quot;;&#xd;
@@ -3322,14 +3635,14 @@ function insereDadosNaTabelaAuxiliar(){ //Contratos Novos&#xd;
             {type:&quot;varchar&quot;, value:hAPI.getCardValue(&quot;descontoPorDiaChuva&quot;).replace(&quot;%&quot;,&quot;&quot;)},//PERCENT_DESCONTO_CHUVA&#xd;
             {type:&quot;varchar&quot;, value:hAPI.getCardValue(&quot;descontoPorDiaParado&quot;).replace(&quot;%&quot;,&quot;&quot;)},//PERCENT_DESCONTO_DIAS_PARADO&#xd;
             {type:&quot;int&quot;, value:getValue(&quot;WKNumProces&quot;)},//TIPO_CONTRATO&#xd;
-        ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+        ], conn);&#xd;
 &#xd;
         return id;&#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR) { //Tabela Historico de Aditivo/Rescisão&#xd;
+function insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR, conn) { //Tabela Historico de Aditivo/Rescisão&#xd;
     var valorMensalAluguel = hAPI.getCardValue(&quot;valorMensalAluguel&quot;);&#xd;
     var valorLocacaoReajustado = hAPI.getCardValue(&quot;valorLocacaoReajustado&quot;);&#xd;
     var dataInicioLocacao = hAPI.getCardValue(&quot;dataInicioLocacao&quot;);&#xd;
@@ -3370,14 +3683,14 @@ function insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCN
             {type:&quot;int&quot;, value: getValue(&quot;WKNumProces&quot;)}, // Nº da Solicitação Fluig&#xd;
             {type:&quot;date&quot;, value: dataAtual}, // Data atual do processo&#xd;
             {type:&quot;date&quot;, value: dataAtual}, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)&#xd;
-        ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+        ], conn);&#xd;
 &#xd;
         return id;&#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR) { //Tabela Historico de Aditivo/Rescisão&#xd;
+function insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR, conn) { //Tabela Historico de Aditivo/Rescisão&#xd;
     try {&#xd;
         var valorTotalContrato = ValorToFloat(hAPI.getCardValue(&quot;valorMensalLocacao&quot;));&#xd;
         var valorTotalContartoMask = hAPI.getCardValue(&quot;valorMensalLocacao&quot;);&#xd;
@@ -3483,13 +3796,13 @@ function insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, I
             {type:&quot;int&quot;, value: getValue(&quot;WKNumProces&quot;)}, // Nº da Solicitação Fluig&#xd;
             {type:&quot;date&quot;, value: dataReajuste}, // Data do reajuste informado no form&#xd;
             {type:&quot;date&quot;, value: dataAtual}, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)&#xd;
-        ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+        ], conn);&#xd;
         &#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclusão de Equip&#xd;
+function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR, conn) { //Inclusão de Equip&#xd;
     try {&#xd;
         var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
 &#xd;
@@ -3497,7 +3810,7 @@ function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclu
         var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
 &#xd;
         // Busca o próximo NSEQITEMCNT disponível para esse contrato auxiliar&#xd;
-        var proximoNSEQITEMCNT = getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR);&#xd;
+        var proximoNSEQITEMCNT = getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR, conn);&#xd;
 &#xd;
         // Pecorre cada linha da tabela&#xd;
         for (var i = 0; i &lt; indexes.length; i++) {&#xd;
@@ -3528,7 +3841,7 @@ function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclu
                 { type: &quot;int&quot;, value: proximoNSEQITEMCNT },&#xd;
                 { type: &quot;varchar&quot;, value: prefixo },&#xd;
                 { type: &quot;int&quot;, value: &apos;0&apos; }, // STATUS Desativado, vai ser reativado depois no final do Solict caso seja aprovado o Aditivo/Rescisão&#xd;
-            ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+            ], conn);&#xd;
 &#xd;
             // Próximo item já vai com a próxima sequência&#xd;
             proximoNSEQITEMCNT++;&#xd;
@@ -3558,18 +3871,18 @@ function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclu
         }&#xd;
     }&#xd;
 }&#xd;
-function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
+function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR, conn) { //Contratos novos&#xd;
     try {&#xd;
         var tipo_contrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
 &#xd;
         if (tipo_contrato == &quot;Locação de Equipamento&quot;) {&#xd;
-            insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR);&#xd;
+            insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR, conn);&#xd;
         }&#xd;
         if (tipo_contrato == &quot;Locação de Equipamento - Com Mão de Obra&quot;) {&#xd;
-            insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR);&#xd;
+            insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR, conn);&#xd;
         }&#xd;
         else if(tipo_contrato == &quot;Locação de Imóvel&quot;){&#xd;
-            insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR);&#xd;
+            insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR, conn);&#xd;
         }&#xd;
 &#xd;
        &#xd;
@@ -3577,7 +3890,7 @@ function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){ //Contratos novos&#
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
+function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR, conn) { //Contratos novos&#xd;
 &#xd;
     // Nos testes vai pode ser inserido mais de 1 PREFIXO igual para o mesmo ID_TCNT_AUXILIAR&#xd;
     // Mas em produção o PREFIXO será único, &#xd;
@@ -3601,14 +3914,14 @@ function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){ //Contratos novos&#x
                 {type:&quot;int&quot;, value:counter},//NSEQITEMCNT&#xd;
                 {type:&quot;varchar&quot;, value:prefixo},//PREFIXO&#xd;
                 {type:&quot;int&quot;, value: &quot;1&quot;}, // Ativado&#xd;
-            ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+            ], conn);&#xd;
             counter++;&#xd;
         }&#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
+function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR, conn) { //Contratos novos&#xd;
  try {        &#xd;
         var query = &quot;INSERT INTO TCNT_AUXILIAR_ITENS (&quot;;&#xd;
         query += &quot;ID_TCNT_AUXILIAR, &quot;;&#xd;
@@ -3628,36 +3941,150 @@ function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){ //Contratos novos&#xd;
             {type:&quot;float&quot;, value:ValorToFloat(hAPI.getCardValue(&quot;valorMensalAluguel&quot;)+&quot;&quot;)},//VALOR&#xd;
             {type:&quot;varchar&quot;, value:&quot;MES&quot;},//UN&#xd;
             {type:&quot;date&quot;, value:hAPI.getCardValue(&quot;enderecoImovel&quot;)},// ENDERECO&#xd;
-        ], &quot;/jdbc/CastilhoCustom&quot;);  &#xd;
+        ], conn);&#xd;
 &#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
 &#xd;
-function updateTcntAuxiliar_IDCNT(IDCNT, ID_TCNT_AUXILIAR){&#xd;
+&#xd;
+// UPDATE Sql | UPDATE RM&#xd;
+function updateTcntAuxiliarCompleto_quandoContratoNovo(ID_TCNT_AUXILIAR, connCustom) { // Tabela de Contrato&#xd;
+&#xd;
+    log.info(&quot;## updateTcntAuxiliarCompleto_quandoContratoNovo_eAntesContratoGeradoRM chamada.&quot;);&#xd;
+    log.info(&quot;Atividade: &quot; + hAPI.getCardValue(&quot;atividade&quot;));&#xd;
+&#xd;
+    if (hAPI.getCardValue(&quot;origemContrato&quot;) != &quot;Novos&quot; || !hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;)) {&#xd;
+        return; // Só continua se for &quot;Novos&quot; E tiver ID_TCNT_AUXILIAR&#xd;
+    }&#xd;
+&#xd;
+    // Campos do Form&#xd;
+    var CODCOLIGADA = hAPI.getCardValue(&quot;CODCOLIGADA&quot;);&#xd;
+    var modeloContrato = hAPI.getCardValue(&quot;modeloContrato&quot;) == &quot;Modelo Castilho&quot; ? 1 : 0;&#xd;
+    var temRetencao = hAPI.getCardValue(&quot;temRetencao&quot;) == &quot;Sim&quot; ? 1 : 0;&#xd;
+    var percentualRetencao = hAPI.getCardValue(&quot;percentualRetencao&quot;).replace(&quot;%&quot;,&quot;&quot;);&#xd;
+    var temREIDI = hAPI.getCardValue(&quot;temREIDI&quot;) == &quot;Sim&quot; ? 1 : 0;&#xd;
+    var percentualREIDI = hAPI.getCardValue(&quot;percentualREIDI&quot;);&#xd;
+    var tipoAssinatura = hAPI.getCardValue(&quot;assinaturaContrato&quot;);&#xd;
+    var tipoContrato = hAPI.getCardValue(&quot;tipoContrato&quot;);&#xd;
+    var percentualDescontoChuva = hAPI.getCardValue(&quot;descontoPorDiaChuva&quot;).replace(&quot;%&quot;,&quot;&quot;);&#xd;
+    var percentualDescontoDiasParado = hAPI.getCardValue(&quot;descontoPorDiaParado&quot;).replace(&quot;%&quot;,&quot;&quot;);&#xd;
+&#xd;
+    // Executa Update&#xd;
+    updateTcntAuxiliar_porID_TCNT_AUXILIAR({&#xd;
+        CODCOLIGADA:                    { type: &quot;int&quot;,     value: CODCOLIGADA },&#xd;
+        IS_MODELO_CASTILHO:             { type: &quot;int&quot;,     value: modeloContrato },&#xd;
+        IS_RETENCAO:                    { type: &quot;int&quot;,     value: temRetencao },&#xd;
+        PERCENT_RETENCAO:               { type: &quot;float&quot;,   value: percentualRetencao },&#xd;
+        IS_REIDI:                       { type: &quot;int&quot;,     value: temREIDI },&#xd;
+        PERCENT_REIDI:                  { type: &quot;float&quot;,   value: percentualREIDI },&#xd;
+        TIPO_ASSINATURA:                { type: &quot;varchar&quot;, value: tipoAssinatura },&#xd;
+        TIPO_CONTRATO:                  { type: &quot;varchar&quot;, value: tipoContrato },&#xd;
+        PERCENT_DESCONTO_CHUVA:         { type: &quot;varchar&quot;, value: percentualDescontoChuva },&#xd;
+        PERCENT_DESCONTO_DIAS_PARADO:   { type: &quot;varchar&quot;, value: percentualDescontoDiasParado }&#xd;
+    });&#xd;
+&#xd;
+&#xd;
+    // Util&#xd;
+    function updateTcntAuxiliar_porID_TCNT_AUXILIAR(campos) {&#xd;
+        try {&#xd;
+            var colunas = []; // Guarda as colunas que irá no SET&#xd;
+            var constraints = []; // Guarda os valores do SET, que são os  &quot;?&quot;&#xd;
+&#xd;
+            for (var coluna in campos) {&#xd;
+                colunas.push( coluna + &quot; = ?&quot; ); // Monta: &quot;NOME_COLUNA = ?&quot;, e add (push) na lista do SET&#xd;
+                constraints.push({ type: campos[coluna].type, value: campos[coluna].value }); // Empilha o tipo e o valor daquela coluna&#xd;
+            }&#xd;
+&#xd;
+            // Junta os pedaços da colunas com virgula e monta o UPDATE completo, com o WHERE pel o ID&#xd;
+            var query = &quot;UPDATE TCNT_AUXILIAR SET &quot; + colunas.join(&quot;, &quot;) + &quot; WHERE ID = ?&quot;;&#xd;
+&#xd;
+            // Adiciona por ultimo o valor do &quot;?&quot;  WHERE&#xd;
+            constraints.push({ type: &quot;int&quot;, value: ID_TCNT_AUXILIAR });&#xd;
+&#xd;
+            // Executa o UPDATE&#xd;
+            executaUpdate(query, constraints, connCustom);&#xd;
+            log.info(&quot;## updateTcntAuxiliar_porID_TCNT_AUXILIAR, query: &quot;);&#xd;
+            log.dir(query);&#xd;
+&#xd;
+        } catch (error) {&#xd;
+            throw error;&#xd;
+        }&#xd;
+    }&#xd;
+}&#xd;
+function atualizaDadosTabelasAuxiliares_porOrigemContratoTipoContrato(origemContrato, tipoContrato, connCustom) {&#xd;
+&#xd;
+    log.info(&quot;## atualizaDadosTabelasAuxiliares_porOrigemContratoTipoContrato chamada.&quot;);&#xd;
+    log.info(&quot;Atividade: &quot; + hAPI.getCardValue(&quot;atividade&quot;));&#xd;
+&#xd;
+    var ID_TCNT_AUXILIAR = hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;);&#xd;
+&#xd;
+    // Formata valor monetario para float&#xd;
+    var valorLocacaoReajustado = ValorToFloat(hAPI.getCardValue(&quot;valorLocacaoReajustado&quot;));&#xd;
+&#xd;
+    // ============================&#xd;
+    // Origem Contrato: NOVOS&#xd;
+    // ============================&#xd;
+&#xd;
+    if (origemContrato == &quot;Novos&quot;) {&#xd;
+        // Locação de Imóvel&#xd;
+        if (tipoContrato == &quot;Locação de Imóvel&quot;) {&#xd;
+            updateTcntAuxiliarItens_locacaoDeImovel(ID_TCNT_AUXILIAR, connCustom); // SQL&#xd;
+        }&#xd;
+    }&#xd;
+&#xd;
+&#xd;
+    // Utils&#xd;
+    function updateTcntAuxiliarItens_locacaoDeImovel(ID_TCNT_AUXILIAR, connCustom) { // Locação de Imóvel&#xd;
+        try {&#xd;
+            var query = &quot;UPDATE TCNT_AUXILIAR_ITENS SET &quot;;&#xd;
+            query += &quot;TIPO = ?, &quot;;&#xd;
+            query += &quot;DESCRICAO = ?, &quot;;&#xd;
+            query += &quot;VALOR = ?, &quot;;&#xd;
+            query += &quot;ENDERECO = ? &quot;;&#xd;
+            query += &quot;WHERE ID_TCNT_AUXILIAR = ? AND NSEQITEMCNT = ?&quot;;&#xd;
+&#xd;
+            executaUpdate(query,[&#xd;
+                { type: &quot;varchar&quot;, value: hAPI.getCardValue(&quot;finalidadeLocacao&quot;) }, //TIPO&#xd;
+                { type: &quot;varchar&quot;, value: hAPI.getCardValue(&quot;descricaoImovel&quot;) }, //DESCRICAO&#xd;
+                { type: &quot;float&quot;, value: ValorToFloat(hAPI.getCardValue(&quot;valorMensalAluguel&quot;)+&quot;&quot;) }, //VALOR&#xd;
+                { type: &quot;date&quot;, value: hAPI.getCardValue(&quot;enderecoImovel&quot;) }, // ENDERECO&#xd;
+                { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR }, // ID_TCNT_AUXILIAR&#xd;
+                { type: &quot;int&quot;, value: &quot;0&quot; }, // NSEQITEMCNT, Imóvel é fixo 0 (somente 1 item)&#xd;
+            ], connCustom);&#xd;
+&#xd;
+        } catch (error) {&#xd;
+            throw error;&#xd;
+        }&#xd;
+    }&#xd;
+}&#xd;
+&#xd;
+&#xd;
+// UPDATE Sql - Geral&#xd;
+function updateTcntAuxiliar_IDCNT(IDCNT, ID_TCNT_AUXILIAR, conn){&#xd;
     try {&#xd;
         var query = &quot;UPDATE TCNT_AUXILIAR SET IDCNT = ? WHERE ID = ?&quot;;&#xd;
         executaUpdate(query, [&#xd;
             {type:&quot;int&quot;, value:IDCNT},&#xd;
             {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},&#xd;
-        ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+        ], conn);&#xd;
     } catch (error) {&#xd;
         throw error;   &#xd;
     }&#xd;
 }&#xd;
-function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR){&#xd;
+function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR, conn){&#xd;
     try {&#xd;
         var query = &quot;UPDATE TCNT_AUXILIAR SET DATA_ASSINATURA = ? WHERE ID = ?&quot;;&#xd;
         executaUpdate(query, [&#xd;
             {type:&quot;date&quot;, value:DATA_ASSINATURA},&#xd;
             {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},&#xd;
-        ], &quot;jdbc/CastilhoCustom&quot;);&#xd;
+        ], conn);&#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, NSEQITEMCNT) {&#xd;
+function updateTcntAuxiliarItens_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, NSEQITEMCNT, conn) {&#xd;
     try {&#xd;
         // Inicia um bloco de proteção contra erros, se algo der errado durante a execução, o erro será capturado.&#xd;
 &#xd;
@@ -3675,7 +4102,7 @@ function updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado,
             // Terceiro &quot;?&quot; &gt; numero de sequencia do item do contrato&#xd;
             {type: &quot;int&quot;, value: NSEQITEMCNT},&#xd;
 &#xd;
-        ], &quot;jdbc/CastilhoCustom&quot;); &#xd;
+        ], conn);&#xd;
         // &quot;jdbc/CastilhoCustom&quot; é o nome da conexão usada para acessar o banco.&#xd;
 &#xd;
     } catch (error) {&#xd;
@@ -3685,7 +4112,7 @@ function updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado,
         throw error;&#xd;
     }&#xd;
 }&#xd;
-function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR) { //Inclusão/Exclusão de Equip&#xd;
+function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR, conn) { //Inclusão/Exclusão de Equip&#xd;
     try {&#xd;
         // hAPI.getChildrenIndexes retorna uma array de indexes que contém na tabela, exemplo [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]&#xd;
         var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
@@ -3711,7 +4138,7 @@ function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR) 
                 { type: &quot;int&quot;, value: ATIVO },&#xd;
                 { type: &quot;varchar&quot;, value: prefixo },&#xd;
                 { type : &quot;int&quot;, value: ID_TCNT_AUXILIAR }&#xd;
-            ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+            ], conn);&#xd;
         }&#xd;
 &#xd;
     } catch (error) {&#xd;
@@ -3738,51 +4165,7 @@ function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR) 
         }&#xd;
     }&#xd;
 }&#xd;
-function getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR) {&#xd;
-    try {&#xd;
-        if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
-            var query = &quot;SELECT MAX(NSEQITEMCNT) +1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?&quot;&#xd;
-&#xd;
-            var result = executaQuery(query, [&#xd;
-                { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR }&#xd;
-            ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
-&#xd;
-            return parseInt(result[0].NSEQITEMCNT);&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Transporte de Materiais - Inclusão de Equipamento&quot;) {&#xd;
-&#xd;
-            var query = &quot;SELECT COALESCE(MAX(NSEQITEMCNT), -1) + 1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?&quot;&#xd;
-&#xd;
-            var result = executaQuery(query, [&#xd;
-                { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR }&#xd;
-            ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
-&#xd;
-            return parseInt(result[0].NSEQITEMCNT);&#xd;
-&#xd;
-        } else if (tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
-&#xd;
-&#xd;
-        }&#xd;
-&#xd;
-    } catch (error) {&#xd;
-&#xd;
-&#xd;
-        if (error instanceof Error) {&#xd;
-            &#xd;
-            throw error;&#xd;
-        } else {&#xd;
-&#xd;
-&#xd;
-            throw new Error(&#xd;
-              &#xd;
-                typeof error === &quot;string&quot;&#xd;
-                    ? error&#xd;
-                    : JSON.stringify(error)&#xd;
-            );&#xd;
-        }&#xd;
-    }&#xd;
-}&#xd;
-function updateSISMA_statusEquipamento() { &#xd;
+function updateSISMA_statusEquipamento(conn) { &#xd;
     try {&#xd;
         var dataAtual = getDateNow() + &quot; 00:00:00&quot;;&#xd;
 &#xd;
@@ -3810,7 +4193,7 @@ function updateSISMA_statusEquipamento() { &#xd;
                 { type: &quot;int&quot;, value: &apos;1&apos; },&#xd;
                 { type: &quot;datetime&quot;, value: dataAtual },&#xd;
                 { type: &quot;varchar&quot;, value: prefixo }&#xd;
-            ], &quot;/jdbc/Sisma&quot;);&#xd;
+            ], conn);&#xd;
         }&#xd;
 &#xd;
     } catch (error) {&#xd;
@@ -3831,26 +4214,30 @@ function updateSISMA_statusEquipamento() { &#xd;
         }&#xd;
     }&#xd;
 }&#xd;
+function updateSISMA_alteracaoAluguelContrato_equipamento(conn) {&#xd;
+    try {&#xd;
+        var indexes = hAPI.getChildrenIndexes(&quot;tableEquipamentosSelecionados_aditivos&quot;);&#xd;
+        var counter = 0;&#xd;
+        for (var i = 0; i &lt; indexes.length; i++) {&#xd;
+            var id = indexes[i]&#xd;
+            var prefixo = hAPI.getCardValue(&quot;equipSelecionado_aditivos___&quot; + id);&#xd;
+            var valorReajustado = ValorToFloat(hAPI.getCardValue(&quot;valorReajustado_aditivos___&quot; + id));&#xd;
+            var valorMaoDeObra = ValorToFloat(hAPI.getCardValue(&quot;valorMaoDeObraAditivos___&quot; + id));&#xd;
+            var valorAluguelContrato = valorReajustado - valorMaoDeObra;&#xd;
 &#xd;
-&#xd;
-// Equipamentos&#xd;
-var codigoStatusEquipamentos = {&#xd;
-    &quot;Pendente_Contrato&quot;:1,&#xd;
-    &quot;Contrato_em_Andamento_com_análise_pendente&quot;:2,&#xd;
-    &quot;Contrato_em_Andamento_com_análise_realizada&quot;:3,&#xd;
-    &quot;Contrato_Vigente&quot;:4,&#xd;
-    &quot;Equipamento_desmobilizado&quot;:5,&#xd;
-    &quot;Contrato_encerrado&quot;:6,&#xd;
-}&#xd;
-function atualizaStatusEquipamento_quandoAberturaSolicit(status){&#xd;
-    var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
-&#xd;
-    // Quando a solicitção retornar para o Inicio não roda UPDATE&apos;s novamente&#xd;
-    // Isso porque se caso o equip já foi analisado antes (nessa solicitação) então não será preciso analisar novamente&#xd;
-    // Somente quando for a abertura da solicitação (ADD)&#xd;
-    if (hAPI.getCardValue(&quot;formMode&quot;) != &quot;ADD&quot;) {&#xd;
-        return;&#xd;
+            var query = &quot;UPDATE EQUIPAMENTO SET ALUGUEL_CONTRATO = ? WHERE NUMEEQUI = ?&quot;;&#xd;
+            executaUpdate(query, [&#xd;
+                {type:&quot;float&quot;, value: valorAluguelContrato},&#xd;
+                {type:&quot;varchar&quot;, value: prefixo},&#xd;
+            ], conn);&#xd;
+            counter++;&#xd;
+        }&#xd;
+    } catch (error) {&#xd;
+        throw error;&#xd;
     }&#xd;
+}&#xd;
+function atualizaStatusEquipamento(status, conn){&#xd;
+    var origemContrato = hAPI.getCardValue(&quot;origemContrato&quot;);&#xd;
 &#xd;
     if (origemContrato == &quot;Novos&quot;) {&#xd;
         try {&#xd;
@@ -3860,7 +4247,8 @@ function atualizaStatusEquipamento_quandoAberturaSolicit(status){&#xd;
                 var id = indexes[i]&#xd;
                 var prefixo = hAPI.getCardValue(&quot;equipamentoSelecionadoPrefixo&quot; + &quot;___&quot; + id);&#xd;
 &#xd;
-                var isMAouOutros = buscaCategoriaPorPrefixo(prefixo);&#xd;
+                // MA / PA&#xd;
+                var isMAouOutros = buscaCategoriaPorPrefixo(prefixo, conn);&#xd;
                 if (isMAouOutros[0].CATEGORIA != &quot;Outros&quot;) {&#xd;
                     var query = &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET &quot;;&#xd;
                     query += &quot;STATUS = ? &quot;;&#xd;
@@ -3869,8 +4257,10 @@ function atualizaStatusEquipamento_quandoAberturaSolicit(status){&#xd;
                     executeInsert(query, [&#xd;
                         {type:&quot;int&quot;, value:codigoStatusEquipamentos[status]},&#xd;
                         {type:&quot;varchar&quot;, value:prefixo},&#xd;
-                    ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
-                }else{&#xd;
+                    ], conn);&#xd;
+&#xd;
+                // Outros&#xd;
+                } else {&#xd;
                     var query = &quot;UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR_OUTROS SET &quot;;&#xd;
                     query += &quot;STATUS = ? &quot;;&#xd;
                     query +=&quot;WHERE PREFIXO = ?&quot;;&#xd;
@@ -3878,7 +4268,7 @@ function atualizaStatusEquipamento_quandoAberturaSolicit(status){&#xd;
                     executeInsert(query, [&#xd;
                         {type:&quot;int&quot;, value:codigoStatusEquipamentos[status]},&#xd;
                         {type:&quot;varchar&quot;, value:prefixo},&#xd;
-                    ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+                    ], conn);&#xd;
                 }&#xd;
             }&#xd;
         } catch (error) {&#xd;
@@ -3899,7 +4289,7 @@ function atualizaStatusEquipamento_quandoAberturaSolicit(status){&#xd;
                 executeInsert(query, [&#xd;
                     {type:&quot;int&quot;, value:codigoStatusEquipamentos[status]},&#xd;
                     {type:&quot;varchar&quot;, value:prefixo},&#xd;
-                ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+                ], conn);&#xd;
                 &#xd;
             }&#xd;
         } catch (error) {&#xd;
@@ -3907,16 +4297,63 @@ function atualizaStatusEquipamento_quandoAberturaSolicit(status){&#xd;
         }&#xd;
     }&#xd;
 }&#xd;
-function buscaCategoriaPorPrefixo(PREFIXO){&#xd;
+&#xd;
+&#xd;
+// SELECT sql&#xd;
+function buscaCategoriaPorPrefixo(PREFIXO, conn){&#xd;
     try {&#xd;
         var query = &quot;SELECT CATEGORIA FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE PREFIXO = ?&quot;;&#xd;
         var retorno = executaQuery(query, [&#xd;
             {type:&quot;varchar&quot;, value:PREFIXO}&#xd;
-        ], &quot;/jdbc/CastilhoCustom&quot;);&#xd;
+        ], conn);&#xd;
 &#xd;
         return retorno;&#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
+    }&#xd;
+}&#xd;
+function getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR, conn) {&#xd;
+    try {&#xd;
+        if (tipoContrato == &quot;Locação de Equipamento - Inclusão de Equipamento&quot;) {&#xd;
+            var query = &quot;SELECT MAX(NSEQITEMCNT) +1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?&quot;&#xd;
+&#xd;
+            var result = executaQuery(query, [&#xd;
+                { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR }&#xd;
+            ], conn);&#xd;
+&#xd;
+            return parseInt(result[0].NSEQITEMCNT);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Transporte de Materiais - Inclusão de Equipamento&quot;) {&#xd;
+&#xd;
+            var query = &quot;SELECT COALESCE(MAX(NSEQITEMCNT), -1) + 1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?&quot;&#xd;
+&#xd;
+            var result = executaQuery(query, [&#xd;
+                { type: &quot;int&quot;, value: ID_TCNT_AUXILIAR }&#xd;
+            ], conn);&#xd;
+&#xd;
+            return parseInt(result[0].NSEQITEMCNT);&#xd;
+&#xd;
+        } else if (tipoContrato == &quot;Locação de Equipamento - Exclusão de Equipamento&quot;) {&#xd;
+&#xd;
+&#xd;
+        }&#xd;
+&#xd;
+    } catch (error) {&#xd;
+&#xd;
+&#xd;
+        if (error instanceof Error) {&#xd;
+            &#xd;
+            throw error;&#xd;
+        } else {&#xd;
+&#xd;
+&#xd;
+            throw new Error(&#xd;
+              &#xd;
+                typeof error === &quot;string&quot;&#xd;
+                    ? error&#xd;
+                    : JSON.stringify(error)&#xd;
+            );&#xd;
+        }&#xd;
     }&#xd;
 }&#xd;
 &#xd;
@@ -4026,10 +4463,11 @@ function buscaDadosDoArquivo(documentId){&#xd;
 }&#xd;
 &#xd;
 &#xd;
-// Utils&#xd;
+// Historico&#xd;
 function insereHistorico(observacao, acao, atividade) {&#xd;
     var USER = getValue(&quot;WKUser&quot;);&#xd;
     var DATA = getDateTimeNow();&#xd;
+    var atividadeAtual = getValue(&quot;WKNumState&quot;);&#xd;
 &#xd;
     // Quando não estiver sendo movimentada (false), não executa inserção de histórico&#xd;
     if (getValue(&quot;WKCompletTask&quot;) == &quot;false&quot;) {&#xd;
@@ -4037,29 +4475,31 @@ function insereHistorico(observacao, acao, atividade) {&#xd;
     }&#xd;
 &#xd;
     // Quando for iniciar a solicit&#xd;
-    if (hAPI.getCardValue(&quot;formMode&quot;) == &quot;ADD&quot;) {&#xd;
+    if (solicitacaoEstaSendoAberta()) {&#xd;
         acao = &quot;Abertura Solicitação&quot;&#xd;
     }&#xd;
 &#xd;
-    // Trata textos de ações, para ficar melhor (texto) no historico.&#xd;
-    // Alterado somente aqui, e não no campo original para não ter que alterar em varios outros lugares que usam por exemplo &quot;Aprovar&quot;&#xd;
-    if (acao == &quot;Aprovar&quot;) {&#xd;
-        acao = &quot;Aprovado&quot;;&#xd;
-    }&#xd;
-    if (acao == &quot;Retornar&quot;) {&#xd;
-        acao = &quot;Reprovado&quot;&#xd;
+    // Quando atvd &quot;Análise de Equipamentos&quot;&#xd;
+    if (atividadeAtual == ATIVIDADES.ANALISE_EQUIPAMENTO) {&#xd;
+        // Usa o usuário do Fluig&#xd;
+        // Para constar no historico o Fluig como se o Fluig tivesse movimentado&#xd;
+        // Por que é movimentado automático quando passa por analise&#xd;
+        USER = &quot;fluig&quot;;&#xd;
     }&#xd;
 &#xd;
     var novaLinha = new java.util.HashMap();&#xd;
     novaLinha.put(&quot;tableHistoricoUsuario&quot;, USER);&#xd;
     novaLinha.put(&quot;tableHistoricoData&quot;, DATA);&#xd;
     novaLinha.put(&quot;tableHistoricoAtividade&quot;, atividade);&#xd;
+    novaLinha.put(&quot;tableHistoricoProximaAtividade&quot;, &quot;&quot;);&#xd;
     novaLinha.put(&quot;tableHistoricoObservacao&quot;, observacao);&#xd;
     novaLinha.put(&quot;tableHistoricoAcao&quot;, acao);&#xd;
 &#xd;
     hAPI.addCardChild(&quot;tableHistorico&quot;, novaLinha);&#xd;
 }&#xd;
 &#xd;
+&#xd;
+// Utils&#xd;
 function getDateTimeNow() {&#xd;
     var date = new Date();&#xd;
     var dia = date.getDate();&#xd;
@@ -4168,14 +4608,33 @@ function BuscaNomeUsuario(CodUsuario) {&#xd;
 &#xd;
     return ds.getValue(0, &quot;colleagueName&quot;);&#xd;
 }&#xd;
-function executaQuery(query, constraints, dataSource) {&#xd;
-    try {&#xd;
-        var dataSource = dataSource;&#xd;
-        var ic = new javax.naming.InitialContext();&#xd;
-        var ds = ic.lookup(dataSource);&#xd;
+function executaQuery(query, constraints, dataSourceOrConn) {&#xd;
+    // O terceiro parâmetro era sempre uma string com o nome do banco (ex: &quot;/jdbc/Sisma&quot;).&#xd;
+    // Renomeamos para dataSourceOrConn porque agora pode ser duas coisas:&#xd;
+    //   - Uma string &quot;/jdbc/Sisma&quot; -&gt; comportamento antigo, abre e fecha conexão aqui dentro&#xd;
+    //   - Um objeto de conexão já aberta -&gt; usa ela e NÃO fecha (quem abriu é responsável)&#xd;
 &#xd;
-        var conn = ds.getConnection();&#xd;
-        var stmt = conn.prepareStatement(query);&#xd;
+    try {&#xd;
+        log.info(&quot;executandoQuery&quot;);&#xd;
+        log.info(query);&#xd;
+        log.dir(constraints);&#xd;
+&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+&#xd;
+        // dataSourceOrConn pode ser:&#xd;
+        //   - String com o nome do datasource (&quot;/jdbc/Sisma&quot;) -&gt; abrimos e fechamos aqui&#xd;
+        //   - Conexão já aberta (modo transação)              -&gt; usamos e NÃO fechamos&#xd;
+        var isConexaoCompartilhada = (dataSourceOrConn instanceof Packages.java.sql.Connection);&#xd;
+        var ownConn = !isConexaoCompartilhada;&#xd;
+&#xd;
+        if (ownConn) {&#xd;
+            var ds = ic.lookup(dataSourceOrConn);&#xd;
+            conn = ds.getConnection();&#xd;
+        } else {&#xd;
+            conn = dataSourceOrConn;   // usa a conexão da transação&#xd;
+        }&#xd;
+&#xd;
+        var stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);&#xd;
 &#xd;
         var counter = 1;&#xd;
         for (var i = 0; i &lt; constraints.length; i++) {&#xd;
@@ -4218,25 +4677,41 @@ function executaQuery(query, constraints, dataSource) {&#xd;
         if (stmt != null) {&#xd;
             stmt.close();&#xd;
         }&#xd;
-        if (conn != null) {&#xd;
+        // Só fecha conexão se foi a gente que abriu (ownConn = true)&#xd;
+        // Se veio de fora (ownConn = false), deixa aberta - quem abriu fecha&#xd;
+        // Fecha antes do commit/rollback cancela a transação inteira, evitando cadastro &quot;quebrado&quot;&#xd;
+        if (ownConn &amp;&amp; conn != null) {&#xd;
             conn.close();&#xd;
         }&#xd;
     }&#xd;
 }&#xd;
-function executeInsert(query, constraints, dataSource) {&#xd;
-    var conn = null;&#xd;
-    var stmt = null;&#xd;
-    var insertedId = null;&#xd;
+function executeInsert(query, constraints, dataSourceOrConn) {&#xd;
+    // O terceiro parâmetro era sempre uma string com o nome do banco (ex: &quot;/jdbc/Sisma&quot;).&#xd;
+    // Renomeamos para dataSourceOrConn porque agora pode ser duas coisas:&#xd;
+    //   - Uma string &quot;/jdbc/Sisma&quot; -&gt; comportamento antigo, abre e fecha conexão aqui dentro&#xd;
+    //   - Um objeto de conexão já aberta -&gt; usa ela e NÃO fecha (quem abriu é responsável)&#xd;
+&#xd;
     try {&#xd;
         log.info(&quot;executandoQuery&quot;);&#xd;
         log.info(query);&#xd;
         log.dir(constraints);&#xd;
 &#xd;
         var ic = new javax.naming.InitialContext();&#xd;
-        var ds = ic.lookup(dataSource);&#xd;
 &#xd;
-        conn = ds.getConnection();&#xd;
-        stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);&#xd;
+        // dataSourceOrConn pode ser:&#xd;
+        //   - String com o nome do datasource (&quot;/jdbc/Sisma&quot;) -&gt; abrimos e fechamos aqui&#xd;
+        //   - Conexão já aberta (modo transação)              -&gt; usamos e NÃO fechamos&#xd;
+        var isConexaoCompartilhada = (dataSourceOrConn instanceof Packages.java.sql.Connection);&#xd;
+        var ownConn = !isConexaoCompartilhada;&#xd;
+&#xd;
+        if (ownConn) {&#xd;
+            var ds = ic.lookup(dataSourceOrConn);&#xd;
+            conn = ds.getConnection();&#xd;
+        } else {&#xd;
+            conn = dataSourceOrConn;   // usa a conexão da transação&#xd;
+        }&#xd;
+&#xd;
+        var stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);&#xd;
 &#xd;
         var counter = 1;&#xd;
         for (var i = 0; i &lt; constraints.length; i++) {&#xd;
@@ -4258,71 +4733,49 @@ function executeInsert(query, constraints, dataSource) {&#xd;
             counter++;&#xd;
         }&#xd;
 &#xd;
-        // Use executeUpdate for INSERT and then try getGeneratedKeys&#xd;
-        var rowsAffected = stmt.executeUpdate();&#xd;
-        log.info(&quot;rowsAffected: &quot; + rowsAffected);&#xd;
 &#xd;
-        var rsKeys = stmt.getGeneratedKeys();&#xd;
-        if (rsKeys != null) {&#xd;
-            try {&#xd;
-                if (rsKeys.next()) {&#xd;
-                    insertedId = rsKeys.getInt(1);&#xd;
-                    log.info(&quot;generated id (getGeneratedKeys): &quot; + insertedId);&#xd;
-                }&#xd;
-            } finally {&#xd;
-                try { rsKeys.close(); } catch (e) { }&#xd;
-            }&#xd;
+        stmt.execute();&#xd;
+&#xd;
+        var generatedKeys = stmt.getGeneratedKeys();&#xd;
+        if (generatedKeys.next()) {&#xd;
+            var id = generatedKeys.getInt(1);&#xd;
+            log.info(&quot;ID gerado: &quot; + id);&#xd;
+            return id;&#xd;
         }&#xd;
-&#xd;
-        // Fallback for SQL Server when driver doesn&apos;t return generated keys&#xd;
-        if (insertedId == null) {&#xd;
-            try {&#xd;
-                var fallbackSql = &quot;SELECT SCOPE_IDENTITY() AS ID&quot;;&#xd;
-                var fallbackStmt = conn.prepareStatement(fallbackSql);&#xd;
-                var rsScope = fallbackStmt.executeQuery();&#xd;
-                try {&#xd;
-                    if (rsScope.next()) {&#xd;
-                        insertedId = rsScope.getInt(&quot;ID&quot;);&#xd;
-                        log.info(&quot;generated id (SCOPE_IDENTITY): &quot; + insertedId);&#xd;
-                    }&#xd;
-                } finally {&#xd;
-                    try { rsScope.close(); } catch (e) { }&#xd;
-                    try { fallbackStmt.close(); } catch (e) { }&#xd;
-                }&#xd;
-            } catch (e) {&#xd;
-                log.info(&quot;SCOPE_IDENTITY fallback failed: &quot; + e);&#xd;
-            }&#xd;
-        }&#xd;
-&#xd;
     } catch (error) {&#xd;
         var msg = &quot;&quot;;&#xd;
-        if (error &amp;&amp; error.javaException) {&#xd;
-            msg = error.javaException.getMessage();&#xd;
-        } else if (error &amp;&amp; error.message) {&#xd;
-            if (error.message.Error) {&#xd;
+            // Try to extract useful message safely&#xd;
+            if (error &amp;&amp; error.javaException) {&#xd;
+                msg = error.javaException.getMessage();&#xd;
+            } else if (error &amp;&amp; error.message) {&#xd;
+                if (error.message.Error) {&#xd;
+                }else{&#xd;
+                    msg = error.message;&#xd;
+                }&#xd;
+&#xd;
+&#xd;
             } else {&#xd;
-                msg = error.message;&#xd;
+                msg = String(error);&#xd;
             }&#xd;
-        } else {&#xd;
-            msg = String(error);&#xd;
-        }&#xd;
 &#xd;
-        log.error(&quot;ERRO==============&gt; &quot; + msg);&#xd;
-        log.error(&quot;Type of error: &quot; + typeof error);&#xd;
-        log.error(&quot;Type of msg: &quot; + typeof msg);&#xd;
+            log.error(&quot;ERRO==============&gt; &quot; + msg);&#xd;
+            log.error(&quot;Type of error: &quot; + typeof error);&#xd;
+            log.error(&quot;Type of msg: &quot; + typeof msg);&#xd;
 &#xd;
-        throw &quot;Erro ao executar Dataset: &quot; + msg;&#xd;
+            // Safely rethrow as standard JS error&#xd;
+            throw &quot;Erro ao executar Dataset: &quot; + msg;&#xd;
 &#xd;
     } finally {&#xd;
         if (stmt != null) {&#xd;
-            try { stmt.close(); } catch (e) { }&#xd;
+            stmt.close();&#xd;
         }&#xd;
-        if (conn != null) {&#xd;
-            try { conn.close(); } catch (e) { }&#xd;
+        // Só fecha conexão se foi a gente que abriu (ownConn = true)&#xd;
+        // Se veio de fora (ownConn = false), deixa aberta - quem abriu fecha&#xd;
+        // Fecha antes do commit/rollback cancela a transação inteira, evitando cadastro &quot;quebrado&quot;&#xd;
+        if (ownConn &amp;&amp; conn != null) {&#xd;
+            conn.close();&#xd;
         }&#xd;
     }&#xd;
-&#xd;
-    return insertedId;&#xd;
 }&#xd;
 function anexaDocumentoNoProcesso(documentId){&#xd;
     var attachments = hAPI.listAttachments();&#xd;
@@ -4337,6 +4790,25 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
     if (!isAnexado) {&#xd;
         hAPI.attachDocument(documentId);&#xd;
     }&#xd;
+}&#xd;
+function solicitacaoEstaSendoAberta() {&#xd;
+&#xd;
+    /*&#xd;
+        Form Modes Fluig&#xd;
+&#xd;
+        ADD: O formulário está em modo de criação (nova solicitação).&#xd;
+        MOD: O formulário está em modo de edição (uma solicitação existente sendo alterada ou movimentada).&#xd;
+        VIEW: O formulário está em modo de apenas visualização (consulta).&#xd;
+    */&#xd;
+    &#xd;
+    if (hAPI.getCardValue(&quot;formMode&quot;) == &quot;ADD&quot;) {&#xd;
+        log.info(&quot;## function solicitacaoEstaSendoAberta&quot;);&#xd;
+        log.info(&quot;formMode: &quot; + hAPI.getCardValue(&quot;formMode&quot;));&#xd;
+        return true;&#xd;
+&#xd;
+    } else {&#xd;
+        return false&#xd;
+    }&#xd;
 }</eventDescription>
     </WorkflowProcessEvent>
     <WorkflowProcessEvent>
@@ -4347,69 +4819,114 @@ function anexaDocumentoNoProcesso(documentId){&#xd;
         <version>1</version>
       </workflowProcessEventPK>
       <eventDescription>function intermediateconditional58() {&#xd;
-    var numProcess = getValue(&quot;WKNumProces&quot;);&#xd;
-    var ds = DatasetFactory.getDataset(&quot;ds_form_aux_wesign&quot;, null, [&#xd;
-        DatasetFactory.createConstraint(&quot;numSolic&quot;,numProcess,numProcess,ConstraintType.MUST)&#xd;
-    ], null);&#xd;
+    try {&#xd;
+        // Abre UMA conexão para a transação. Todos os INSERT/UPDATE da abertura&#xd;
+        // usam essa mesma conexão, então ou grava tudo (commit) ou nada (rollback).&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+        var connCustom = ic.lookup(&quot;/jdbc/CastilhoCustom&quot;).getConnection();&#xd;
+        connCustom.setAutoCommit(false);&#xd;
 &#xd;
-    log.info(&quot;verificaStatusAssinatura&quot;);&#xd;
-    log.dir(ds);&#xd;
+        var numProcess = getValue(&quot;WKNumProces&quot;);&#xd;
+        var ds = DatasetFactory.getDataset(&quot;ds_form_aux_wesign&quot;, null, [&#xd;
+            DatasetFactory.createConstraint(&quot;numSolic&quot;,numProcess,numProcess,ConstraintType.MUST)&#xd;
+        ], null);&#xd;
+&#xd;
+        log.info(&quot;verificaStatusAssinatura&quot;);&#xd;
+        log.dir(ds);&#xd;
+&#xd;
+        for (var i = 0; i &lt; ds.rowsCount; i++) {&#xd;
+            var status = ds.getValue(i, &quot;statusAssinatura&quot;);&#xd;
+            log.info(&quot;status&quot;);&#xd;
+            log.info(status);&#xd;
+            hAPI.setCardValue(&quot;statusAssinatura&quot;, status);&#xd;
 &#xd;
 &#xd;
-    for (var i = 0; i &lt; ds.rowsCount; i++) {&#xd;
-        var status = ds.getValue(i, &quot;statusAssinatura&quot;);&#xd;
-        log.info(&quot;status&quot;);&#xd;
-        log.info(status);&#xd;
-        hAPI.setCardValue(&quot;statusAssinatura&quot;, status);&#xd;
+            if (status == &quot;Assinado&quot;) {&#xd;
 &#xd;
+                var dataAssinado = ds.getValue(i, &quot;dataAssinatura&quot;);&#xd;
 &#xd;
-        if (status == &quot;Assinado&quot;) {&#xd;
+                if (dataAssinado !== &quot;null&quot;) {&#xd;
+                    hAPI.setCardValue(&quot;dataAssinatura&quot;, dataAssinado);&#xd;
 &#xd;
-            var dataAssinado = ds.getValue(i, &quot;dataAssinatura&quot;);&#xd;
-&#xd;
-            if (dataAssinado !== &quot;null&quot;) {&#xd;
-                hAPI.setCardValue(&quot;dataAssinatura&quot;, dataAssinado);&#xd;
-&#xd;
-                var idTcntAuxiliar = parseInt(hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;), 10);&#xd;
-                if (!isNaN(idTcntAuxiliar) &amp;&amp; idTcntAuxiliar &gt; 0) {&#xd;
-                    updateTcntAuxiliar_dataAssinatura(dataAssinado, idTcntAuxiliar);&#xd;
-                } else {&#xd;
-                    log.warn(&quot;intermediate58 - ID_TCNT_AUXILIAR inválido, pulando update de dataAssinatura: &quot; + hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+                    var idTcntAuxiliar = parseInt(hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;), 10);&#xd;
+                    if (!isNaN(idTcntAuxiliar) &amp;&amp; idTcntAuxiliar &gt; 0) {&#xd;
+                        updateTcntAuxiliar_dataAssinatura(dataAssinado, idTcntAuxiliar, connCustom);&#xd;
+                    } else {&#xd;
+                        log.warn(&quot;intermediate58 - ID_TCNT_AUXILIAR inválido, pulando update de dataAssinatura: &quot; + hAPI.getCardValue(&quot;ID_TCNT_AUXILIAR&quot;));&#xd;
+                    }&#xd;
                 }&#xd;
-            }&#xd;
             &#xd;
-            log.info(&quot;intermediate58 - antes do return true&quot;);&#xd;
-            return true;&#xd;
-        }&#xd;
+                log.info(&quot;intermediate58 - antes do return true&quot;);&#xd;
+                return true;&#xd;
+            }&#xd;
 &#xd;
-        if (status == &quot;Pendente Assinatura&quot;) {&#xd;
-            return false;&#xd;
+            if (status == &quot;Pendente Assinatura&quot;) {&#xd;
+                return false;&#xd;
+            }&#xd;
         }&#xd;
+        // Chegou até aqui = todos os INSERT&apos;s / UPDATE&apos;s rodaram sem erro. Grava tudo de uma vez.&#xd;
+        connCustom.commit();&#xd;
+&#xd;
+        return true;&#xd;
+&#xd;
+    } catch (error) {&#xd;
+        // Qualquer erro desfaz todos os INSERT&apos;s / UPDATE&apos;s da abertura&#xd;
+        log.error(&quot;## Revitalização Contratos intermediateconditional58: erro em algum INSERT/UPDATE, iniciando rollback. Erro: &quot;);&#xd;
+        log.dir(error);&#xd;
+&#xd;
+        // Rollback Castilho Custom&#xd;
+        try {  connCustom.rollback() } catch (e) { log.error(&quot;## Erro no rollback do Custom: &quot; + e) }&#xd;
+&#xd;
+        throw error;&#xd;
+&#xd;
+    } finally {&#xd;
+        // O bloco finally sempre executa, com erro ou sem.&#xd;
+        // Garantimos que as conexões são fechadas independente se deu erro ou não.&#xd;
+        // Se não fechar, o banco fica com conexões presas e para de responder com o tempo.&#xd;
+&#xd;
+        try { connCustom.close() } catch (e) {}&#xd;
     }&#xd;
-&#xd;
-    return true;&#xd;
 }&#xd;
 &#xd;
-function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR){&#xd;
+function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR, conn){&#xd;
     try {&#xd;
         var query = &quot;UPDATE TCNT_AUXILIAR SET DATA_ASSINATURA = ? WHERE ID = ?&quot;;&#xd;
         executaUpdate(query, [&#xd;
             {type:&quot;date&quot;, value:DATA_ASSINATURA},&#xd;
             {type:&quot;int&quot;, value:ID_TCNT_AUXILIAR},&#xd;
-        ], &quot;jdbc/CastilhoCustom&quot;);&#xd;
+        ], conn);&#xd;
     } catch (error) {&#xd;
         throw error;&#xd;
     }&#xd;
 }&#xd;
 &#xd;
-function executaUpdate(query, constraints, dataSource) {&#xd;
-    try {&#xd;
-        var dataSource = dataSource;&#xd;
-        var ic = new javax.naming.InitialContext();&#xd;
-        var ds = ic.lookup(dataSource);&#xd;
+function executaUpdate(query, constraints, dataSourceOrConn) {&#xd;
+    // O terceiro parâmetro era sempre uma string com o nome do banco (ex: &quot;/jdbc/Sisma&quot;).&#xd;
+    // Renomeamos para dataSourceOrConn porque agora pode ser duas coisas:&#xd;
+    //   - Uma string &quot;/jdbc/Sisma&quot; -&gt; comportamento antigo, abre e fecha conexão aqui dentro&#xd;
+    //   - Um objeto de conexão já aberta -&gt; usa ela e NÃO fecha (quem abriu é responsável)&#xd;
 &#xd;
-        var conn = ds.getConnection();&#xd;
-        var stmt = conn.prepareStatement(query);&#xd;
+    try {&#xd;
+        log.info(&quot;executandoQuery&quot;);&#xd;
+        log.info(query);&#xd;
+        log.dir(constraints);&#xd;
+&#xd;
+        var ic = new javax.naming.InitialContext();&#xd;
+&#xd;
+        // dataSourceOrConn pode ser:&#xd;
+        //   - String com o nome do datasource (&quot;/jdbc/Sisma&quot;) -&gt; abrimos e fechamos aqui&#xd;
+        //   - Conexão já aberta (modo transação)              -&gt; usamos e NÃO fechamos&#xd;
+        var isConexaoCompartilhada = (dataSourceOrConn instanceof Packages.java.sql.Connection);&#xd;
+        var ownConn = !isConexaoCompartilhada;&#xd;
+&#xd;
+        if (ownConn) {&#xd;
+            var ds = ic.lookup(dataSourceOrConn);&#xd;
+            conn = ds.getConnection();&#xd;
+        } else {&#xd;
+            conn = dataSourceOrConn;   // usa a conexão da transação&#xd;
+        }&#xd;
+&#xd;
+        var stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);&#xd;
 &#xd;
         var counter = 1;&#xd;
         for (var i = 0; i &lt; constraints.length; i++) {&#xd;
@@ -4441,7 +4958,10 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
         if (stmt != null) {&#xd;
             stmt.close();&#xd;
         }&#xd;
-        if (conn != null) {&#xd;
+        // Só fecha conexão se foi a gente que abriu (ownConn = true)&#xd;
+        // Se veio de fora (ownConn = false), deixa aberta - quem abriu fecha&#xd;
+        // Fecha antes do commit/rollback cancela a transação inteira, evitando cadastro &quot;quebrado&quot;&#xd;
+        if (ownConn &amp;&amp; conn != null) {&#xd;
             conn.close();&#xd;
         }&#xd;
     }&#xd;
@@ -4538,7 +5058,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>36</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4549,7 +5069,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>36</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4560,7 +5080,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>36</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -4571,7 +5091,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>39</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4582,7 +5102,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>39</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4593,7 +5113,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>71</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4604,7 +5124,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>71</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4615,7 +5135,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>73</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4626,7 +5146,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>78</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4637,7 +5157,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>78</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4648,7 +5168,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>78</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -4659,7 +5179,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>79</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4670,7 +5190,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>79</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4681,7 +5201,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>80</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4692,7 +5212,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>80</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4703,7 +5223,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>82</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4714,7 +5234,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>82</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4725,7 +5245,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>85</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4736,7 +5256,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>85</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4747,7 +5267,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>86</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4758,7 +5278,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>86</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4769,7 +5289,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>86</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -4780,7 +5300,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>87</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4791,7 +5311,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>87</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4802,7 +5322,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>87</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -4813,7 +5333,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>91</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4824,7 +5344,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>91</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4835,7 +5355,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>91</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -4846,7 +5366,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>92</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4857,7 +5377,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>92</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4868,7 +5388,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>92</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -4879,7 +5399,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>93</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4890,7 +5410,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>93</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4901,7 +5421,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>94</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4912,7 +5432,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>94</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4923,7 +5443,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>94</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -4934,7 +5454,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>95</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4945,7 +5465,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>95</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4956,7 +5476,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>95</linkSequence>
         <bendSequence>3</bendSequence>
       </processLinkBendPK>
@@ -4967,7 +5487,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>107</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -4978,7 +5498,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>107</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -4989,7 +5509,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>108</linkSequence>
         <bendSequence>1</bendSequence>
       </processLinkBendPK>
@@ -5000,7 +5520,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processLinkBendPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <linkSequence>108</linkSequence>
         <bendSequence>2</bendSequence>
       </processLinkBendPK>
@@ -5013,7 +5533,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <stateSequence>58</stateSequence>
         <triggerSequence>0</triggerSequence>
       </processStateTriggerPK>
@@ -5027,7 +5547,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <processStateTriggerPK>
         <companyId>1</companyId>
         <processId>Revitalização Contratos</processId>
-        <version>165</version>
+        <version>224</version>
         <stateSequence>104</stateSequence>
         <triggerSequence>1</triggerSequence>
       </processStateTriggerPK>
@@ -5096,7 +5616,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>1</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Aprovar</value>
+      <value>Aprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5105,16 +5625,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>2</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
-      <operator>1</operator>
-      <valueType>1</valueType>
-    </ConditionProcessAutomaticRules>
-    <ConditionProcessAutomaticRules>
-      <sequence>30</sequence>
-      <expressionOrder>2</expressionOrder>
-      <ruleOrder>2</ruleOrder>
-      <field>destinoRetorno</field>
-      <value>OBRA</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5123,7 +5634,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>1</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Aprovar</value>
+      <value>Aprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5132,7 +5643,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>2</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5150,7 +5661,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>3</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5159,7 +5670,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>3</expressionOrder>
       <ruleOrder>2</ruleOrder>
       <field>destinoRetorno</field>
-      <value>OBRA</value>
+      <value>SOLICITANTE</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5168,7 +5679,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>1</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Aprovar</value>
+      <value>Aprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5195,7 +5706,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>2</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Aprovar</value>
+      <value>Aprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5204,7 +5715,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>3</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5213,7 +5724,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>3</expressionOrder>
       <ruleOrder>2</ruleOrder>
       <field>destinoRetorno</field>
-      <value>OBRA</value>
+      <value>SOLICITANTE</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5222,7 +5733,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>4</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5240,7 +5751,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>5</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5258,7 +5769,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>1</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5267,7 +5778,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>1</expressionOrder>
       <ruleOrder>2</ruleOrder>
       <field>destinoRetorno</field>
-      <value>OBRA</value>
+      <value>SOLICITANTE</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5276,7 +5787,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>2</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5294,7 +5805,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>3</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5312,7 +5823,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>4</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Aprovar</value>
+      <value>Aprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5330,7 +5841,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>5</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Aprovar</value>
+      <value>Aprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5366,7 +5877,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>1</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Aprovar</value>
+      <value>Aprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5375,7 +5886,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>2</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5402,7 +5913,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>5</expressionOrder>
       <ruleOrder>3</ruleOrder>
       <field>decisao</field>
-      <value>Aprovar</value>
+      <value>Aprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5411,7 +5922,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>7</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5420,7 +5931,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>7</expressionOrder>
       <ruleOrder>2</ruleOrder>
       <field>destinoRetorno</field>
-      <value>OBRA</value>
+      <value>SOLICITANTE</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5429,7 +5940,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>8</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5447,7 +5958,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>9</expressionOrder>
       <ruleOrder>1</ruleOrder>
       <field>decisao</field>
-      <value>Retornar</value>
+      <value>Reprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
@@ -5483,7 +5994,7 @@ function executaUpdate(query, constraints, dataSource) {&#xd;
       <expressionOrder>10</expressionOrder>
       <ruleOrder>3</ruleOrder>
       <field>decisao</field>
-      <value>Aprovar</value>
+      <value>Aprovado</value>
       <operator>1</operator>
       <valueType>1</valueType>
     </ConditionProcessAutomaticRules>
