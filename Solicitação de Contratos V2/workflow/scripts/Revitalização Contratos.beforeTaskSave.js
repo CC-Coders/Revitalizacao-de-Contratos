@@ -100,14 +100,16 @@ function beforeTaskSave(colleagueId, nextSequenceId, userList) {
             beforeTaskSave_analiseEquipamentos();
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {
             beforeTaskSave_diretoria();
-        } else if (ATIVIDADE_ATUAL == ATIVIDADES.OBRA_RECEBE_VIAS_ORIGINAIS) { // Tipo de assinatura manual
-            beforeTaskSave_obraRecebeViasOriginais(connCustom, connSisma);
-        } else if (ATIVIDADE_ATUAL == ATIVIDADES.STATUS_ASSINATURA_ELETRONICA) { // Tipo de assintaura eletrônica, com status "Assinado"
-            beforeTaskSave_statusAssinaturaEletronica(connCustom, connSisma);
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.ADM_OBRA) {
+            beforeTaskSave_admObra();
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA_AGUARDA_RECEBIMENTO) {
             beforeTaskSave_controladoriaAguardaRecebimento();
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA_RECEBE_ASSINATURAS) {
             beforeTaskSave_controladoriaRecolheAssinaturas();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.OBRA_RECEBE_VIAS_ORIGINAIS) { // Tipo de assinatura manual
+            beforeTaskSave_obraRecebeViasOriginais(connCustom, connSisma);
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.STATUS_ASSINATURA_ELETRONICA) { // Tipo de assintaura eletrônica, com status "Assinado"
+            beforeTaskSave_statusAssinaturaEletronica(connCustom, connSisma);
         }
 
         if (atividadesComSQL) {
@@ -165,7 +167,7 @@ function beforeTaskSave_inicio(connCustom, connSisma) { // COM SQL
         var tipoContrato = hAPI.getCardValue("tipoContrato");
 
         // Função centralizada
-        INSERTs_UPDATEs_tabelasAuxiliares_aberturaSolicitacao(connCustom, connSisma);
+        INSERTs_UPDATEs_tabelasAuxiliares(connCustom, connSisma);
 
         log.info("## beforeTaskSave_inicio");
         log.info("## Resultado solicitacaoEstaSendoAberta: " + solicitacaoEstaSendoAberta());
@@ -188,16 +190,16 @@ function beforeTaskSave_inicio(connCustom, connSisma) { // COM SQL
 
 
     // Util
-    function INSERTs_UPDATEs_tabelasAuxiliares_aberturaSolicitacao() {
+    function INSERTs_UPDATEs_tabelasAuxiliares() {
         try {
-
-            if (!solicitacaoEstaSendoAberta()) {
-                return;
-            }
-
             var tipoContrato = hAPI.getCardValue("tipoContrato");
             
             if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
+
+                if (!solicitacaoEstaSendoAberta()) {
+                    return;
+                }
+
                 atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente", connCustom);
                 hAPI.setCardValue("dataCriadoEm", getDateNow());
             
@@ -213,6 +215,11 @@ function beforeTaskSave_inicio(connCustom, connSisma) { // COM SQL
 
             // Cria/insere somente quando contratos novos.
             if (hAPI.getCardValue("origemContrato") == "Novos") {
+
+                if (!solicitacaoEstaSendoAberta()) {
+                    return;
+                }
+
                 var id = insereDadosNaTabelaAuxiliar(connCustom);
                 insereDadosNaTabelaAuxiliarItens(id, connCustom);
                 hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
@@ -309,6 +316,15 @@ function beforeTaskSave_diretoria() { // SEM SQL
         criaAssinaturaEletronica();
     }
 }
+function beforeTaskSave_admObra() { // SEM SQL
+    insereHistorico("", "Enviado", "Adm. Obra");
+}
+function beforeTaskSave_controladoriaAguardaRecebimento() { // SEM SQL
+    insereHistorico("", "Enviado", "Controladoria Aguarda Recebimento");
+}
+function beforeTaskSave_controladoriaRecolheAssinaturas() { // SEM SQL
+    insereHistorico("", "Enviado", "Controladoria Recolhe Assinaturas");
+}
 function beforeTaskSave_statusAssinaturaEletronica(connCustom, connSisma) { // COM SQL
     insereHistorico("", "Enviado", "Agurdando Assinatura Eletrônica");
 
@@ -324,6 +340,8 @@ function beforeTaskSave_obraRecebeViasOriginais(connCustom, connSisma) { // COM 
     var DATA_ASSINATURA = getDateTimeNow();
     hAPI.setCardValue("dataAssinatura", DATA_ASSINATURA);
 
+    insereHistorico("", "Enviado", "Obra Recebe Vias Originais");
+
     // Só grava com ID_TCNT_AUXILIAR válido (Transporte podia vir como "   -   ").
     var idAux = parseInt(ID_TCNT_AUXILIAR, 10);
     if (!isNaN(idAux) && idAux > 0) {
@@ -338,12 +356,6 @@ function beforeTaskSave_obraRecebeViasOriginais(connCustom, connSisma) { // COM 
         alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "ATIVO");
     }
     regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais(connCustom, connSisma);
-}
-function beforeTaskSave_controladoriaAguardaRecebimento() { // SEM SQL
-    insereHistorico("", "Enviado", "Controladoria Aguarda Recebimento");
-}
-function beforeTaskSave_controladoriaRecolheAssinaturas() { // SEM SQL
-    insereHistorico("", "Enviado", "Controladoria Recolhe Assinaturas");
 }
 
 
