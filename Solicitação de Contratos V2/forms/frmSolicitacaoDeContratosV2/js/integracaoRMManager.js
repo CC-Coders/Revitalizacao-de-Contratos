@@ -219,6 +219,8 @@ function preencheCamposAutomaticamente() {
             await insereItem(item.produto, item.valor, item.rateio);
         }
 
+        renumeraItensNovoContrato();
+
         // Itens renderizados. Se o Contrato RM já foi gerado, bloqueia os campos.
         bloqueiaCamposPagIntegacaoRM_seJaGeradoContratoRM();
     }
@@ -650,6 +652,7 @@ async function asyncAdicionarItemNovoContrato() {
     $(".titleCounterItem:last").html("Item " + id);
     $(".btnRemoverItemNovoContrato:last").off("click").on("click", function () {
         fnWdkRemoveChild($(this).closest("tr")[0]);
+        renumeraItensNovoContrato();
     });
 
     $("#novoContratoItemProduto" + "___" + id).html(await promiseRetornaHtmlOptionsProdutosDeItemDeContrato());
@@ -747,6 +750,15 @@ async function asyncInsereNovaLinhaReteio() {
         </tr>`;
         return html;
     }
+}
+function renumeraItensNovoContrato() {
+
+    // Renumera para começar do numero 1, já que o "Item" usa o índice interno do wdkAddChild....
+    // que é cumulativo e não reinicia ao remover/recriar as linhas na reconstrução,
+    // fazendo o primeiro item aparecer como "Item 2". Aqui é renumerado pela posição real.
+    $("[name^='novoContratoItemProduto___']").each(function (i) {
+        $(this).closest(".panel").find(".titleCounterItem").html("Item " + (i + 1));
+    });
 }
 function salvaJSONRateio() {
     var json = [];
