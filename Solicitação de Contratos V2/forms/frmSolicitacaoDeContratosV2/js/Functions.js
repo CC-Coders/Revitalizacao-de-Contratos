@@ -1,5 +1,11 @@
 // Init
 function inicializarCalendario() {
+    if (isForModeView()) return;
+
+    if (isContratoNovo_eJaGeradoContratoRM()) {
+        return;
+    }
+
     FLUIGC.calendar(".date", {
         pickDate: true,
         pickTime: false,
@@ -72,8 +78,9 @@ function buscaBancos() {
         },
     });
 }
-
 function preencherObrasDoUsuario() {
+    if (isForModeView()) return;
+
     const userCode = $("#solicitante").val();
     if (!userCode) {
         console.error("O valor de 'solicitante' está vazio ou não foi encontrado.");
@@ -125,8 +132,9 @@ function preencherObrasDoUsuario() {
         });
     }
 }
-
 function buscaFornecedores_preencheOptionsDoCampoLocador() {
+    if (isForModeView()) return;
+
     var selectizeLocador = $("#locador")[0].selectize;
 
     // Guarda o valor atual antes de inserir a opção temporária.
@@ -174,6 +182,11 @@ function buscaFornecedores_preencheOptionsDoCampoLocador() {
                 }
             }
 
+            // Se já tiver sido gerado Contrato (IDCNT) e for um novo Contrato, não desbloqueia campo de "Locador"
+            if ($("#IDCNT").val() && $("#origemContrato").val() == "Novos") {
+                return;
+            }
+
             // Libera novamente o campo para uso normal.
             selectizeLocador.unlock();
         },
@@ -195,8 +208,6 @@ function buscaFornecedores_preencheOptionsDoCampoLocador() {
     }
     );
 }
-
-
 async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value) {
     if (!value) {
         $("#CODCOLIGADA").val("");
@@ -254,7 +265,6 @@ async function salvaDadosDaObraSelecionadaComoHiddenInput_buscaAprovadores(value
         return { engenherio, coordenador, diretor };
     }
 }
-
 async function buscaInfosFornecedor_verificaSeFornecedorPfOuPj_PreencheDadosDoFornecedorNoFormulario_AlteraAnexosNecessarios(cgccfo) {
     // Nome da função alterado para descrever as resposabilidades da função corretamente
     // Necessário quebrar a função em várias funções, cada uma com uma responsabilidade
@@ -408,7 +418,7 @@ function validaCampos() {
     var origemContrato = $("#origemContrato").val();
     var tipoContrato = $("#tipoContrato").val();
     var valida = true;
-    var isRetornar = document.getElementById("decisaoCancelar").checked;
+    var isReprovado = $("#decisao").val() == "Reprovado";
     var mensagens = [];
     var toastSeparado = [];
 
@@ -831,11 +841,13 @@ function validaCampos() {
         });
         
     }
-    if (isRetornar) {
+    if (isReprovado) {
+        // Juridico reprova somente para o Inicio
+
         var destinoRetorno = $("#destinoRetorno").val();
-        if (destinoRetorno == null || destinoRetorno == undefined || destinoRetorno == "") {
+        if (destinoRetorno == null || destinoRetorno == undefined || destinoRetorno == "" && atividade != ATIVIDADES.JURIDICO) {
             $("#destinoRetorno").addClass("has-error");
-            mensagens.push("Destino do retorno");
+            mensagens.push("Destino reprovação");
             valida = false;
         }
 
@@ -1171,21 +1183,82 @@ function bloqueiaCamposPagIntegacaoRM_seJaGeradoContratoRM() {
         });
     }
 }
+function bloqueiaCampos_seJaGeradoContratoRM() {
+
+    if (!isContratoNovo_eJaGeradoContratoRM()) {
+        return;
+    }
+
+    var selectsSelectize = [
+        "#obra",
+        "#locador",
+    ];
+
+    var inputsTexto = [
+        "#dataInicioLocacao",
+        "#dataFimLocacao"
+    ];
+
+    var selectsNativos = [
+        "#origemContrato",
+        "#modeloContrato",
+        "#tipoContratoBase"
+    ];
+
+
+    bloqueiaSelectize();
+    bloqueiaCamposEDesativaClick_inputsTexto();
+    bloqueiaCamposEDesativaClick_selectsNativos();
+
+    // Utils
+    function bloqueiaSelectize() {
+        selectsSelectize.forEach(function (campo) {
+            $(campo).each(function () {
+
+                if (this.selectize) {
+                    this.selectize.lock();
+                }
+            });
+        });
+    }
+    function bloqueiaCamposEDesativaClick_inputsTexto() {
+        inputsTexto.forEach(function (campo) {
+            $(campo).attr("readonly", "readonly");
+            $(campo).on("focus click", function (e) {
+                e.preventDefault();
+                this.blur(); // tira o foco para não disparar o datepicker
+            });
+        });
+    }
+    function bloqueiaCamposEDesativaClick_selectsNativos() {
+        selectsNativos.forEach(function (campo) {
+            $(campo).attr("readonly", "readonly"); // Readonly
+            $(campo).on("mousedown", function(e) {
+                e.preventDefault() // Não permite abri as options
+            });
+        });
+    }
+}
 function popularDestinoRetorno() {
     const ATIVIDADE_ATUAL = $("#atividade").val();
     const $select = $("#destinoRetorno");
+
+    if ($("#formMode").val() == "VIEW") {
+        return;
+    }
+
     $select.empty().append('<option value="">Selecione o destino</option>');
     let opcoes = [];
     switch (parseInt(ATIVIDADE_ATUAL)) {
         case ATIVIDADES.JURIDICO:
             opcoes = [
-                { value: "OBRA", text: "Obra" }
+                { value: "SOLICITANTE", text: "Solicitante" }
             ];
             break;
         case ATIVIDADES.CONTROLADORIA:
             opcoes = [
                 { value: "JURIDICO", text: "Jurídico" },
-                { value: "OBRA", text: "Obra" }
+                { value: "SOLICITANTE", text: "Solicitante" }
             ];
             break;
         case ATIVIDADES.ENGENHEIRO:
@@ -1194,7 +1267,7 @@ function popularDestinoRetorno() {
             opcoes = [
                 { value: "CONTROLADORIA", text: "Controladoria" },
                 { value: "JURIDICO", text: "Jurídico" },
-                { value: "OBRA", text: "Obra" }
+                { value: "SOLICITANTE", text: "Solicitante" }
             ];
             break;
     }
@@ -1232,13 +1305,39 @@ function obraPermiteReidi(CODCOLIGADA, CODCCUSTO) {
 
 
 // Opções de Aprovação/Envio
-function controlaBotoesAprovacao_porAtividade(atividadeAtual) {
+function controlaBotoesAprovacao_porAtividade() {
+    const atividadeAtual = $("#atividade").val();
 
     if (atividadeAtual == ATIVIDADES.INICIO || atividadeAtual == ATIVIDADES.INICIO_0) {
-        $("#divDecisaoAprovar, #divDecisaoCancelar").hide();
+        $("#divDecisaoAprovar, #divDecisaoReprovar, #divDestinoRetorno").hide();
+        $("#divBtnEviar").show();
+    
+    } else if (atividadeAtual == ATIVIDADES.JURIDICO) {
+        $("#divBtnEviar, #divDestinoRetorno").hide();
+        $("#divDecisaoAprovar, #divDecisaoReprovar").show();
 
     } else {
-        $("#divDecisaoAprovar, #divDecisaoCancelar").show();
+        $("#divBtnEviar").hide();
+        $("#divDecisaoAprovar, #divDecisaoReprovar, #divDestinoRetorno").show();
+        popularDestinoRetorno();
+    }
+}
+function controlaBtnReprovar_comBaseNaSelecaoAtividadeRetorno_ouPorAtividadeAtual(atividadeDestino, atividadeAtual) {
+
+    // ====== Por Atividade Atual ========
+    if (atividadeAtual == ATIVIDADES.JURIDICO) {
+        $("#btnDecisaoReprovar").attr("disabled", false); // Habilita btn
+        return;
+    }
+
+
+    // ====== Por Seleção Atividade Destino Reprovação ========
+    if (atividadeDestino != "") {
+        $("#btnDecisaoReprovar").attr("disabled", false); // Habilita btn
+
+    // Se usuário selecionou uma opção valida
+    } else {
+        $("#btnDecisaoReprovar").attr("disabled", true); // Desabilita btn
     }
 }
 
@@ -1262,7 +1361,7 @@ function modalManualContrato_modeloCastilho() { // Modelo Castilho
              </div>
 
             <div class="btnArea">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Alterar Modelo Contrato</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" id="btnAlterarModelo">Alterar Modelo Contrato</button>
                 
                 <button type="button" class="btn btn-success" data-dismiss="modal" disabled id="btnSalvar">Continuar</button>
             </div>`
@@ -1285,6 +1384,11 @@ function modalManualContrato_modeloCastilho() { // Modelo Castilho
                 var isChecked = $(this).prop("checked");
 
                 $("#btnSalvar").prop("disabled", !isChecked);
+            });
+
+            // Se clicou em "Alterar Modelo de Contrato"
+            $("#btnAlterarModelo").on("click", function() {
+                $("#modeloContrato").val(""); // Limpa seleção de Modelo
             });
 
             // Se clicou em "Continuar" então marcou o aceite
@@ -1355,7 +1459,7 @@ function modalContrato_modeloForaPadrao() {
         </div>
 
         <div class="btnArea">
-            <button type="button" class="btn btn-info" data-dismiss="modal">Alterar Modelo Contrato</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnAlterarModelo">Alterar Modelo Contrato</button>
             
             <button type="button" class="btn btn-success" data-dismiss="modal" disabled id="btnSalvar">Continuar</button>
         </div>`
@@ -1377,6 +1481,11 @@ function modalContrato_modeloForaPadrao() {
                 var isChecked = $(this).prop("checked");
 
                 $("#btnSalvar").prop("disabled", !isChecked);
+            });
+
+            // Se clicou em "Alterar Modelo de Contrato"
+            $("#btnAlterarModelo").on("click", function() {
+                $("#modeloContrato").val(""); // Limpa seleção de Modelo
             });
 
             // Se clicou em "Continuar" então marcou o aceite
@@ -1460,7 +1569,8 @@ async function asyncMontaHistorico() {
                 DATA:       $(this).find(".tableHistoricoData").val(),
                 OBSERVACAO: $(this).find(".tableHistoricoObservacao").val(),
                 ACAO:       $(this).find(".tableHistoricoAcao").val(),
-                ATIVIDADE:  $(this).find(".tableHistoricoAtividade").val()
+                ATIVIDADE:  $(this).find(".tableHistoricoAtividade").val(),
+                PROXIMA_ATIVIDADE: $(this).find(".tableHistoricoProximaAtividade").val()
             });
         });
         return retorno;
@@ -1487,6 +1597,8 @@ async function asyncMontaHistorico() {
                             <h3 
                                 class="card-title" style="margin-bottom:0px; color:black;">${BuscaNomeUsuario(linha.USUARIO)} 
                                 <small>${linha.ATIVIDADE}</small>
+                                <i class="flaticon flaticon-arrow-right icon-xs" aria-hidden="true"></i>
+                                <small>${linha.PROXIMA_ATIVIDADE}</small>
                             </h3>
                             <small>${DATA}</small>
                             <p class="card-text">${textoObs ? textoObs : (linha.ACAO || "")}</p>
@@ -1519,7 +1631,21 @@ const documentosPorTipo = {
     J: ["Termo de Solicitação de Imóvel", "Cartão CNPJ", "Cartão QSA"],
 };
 var documentosAnexados = {};
-const TIPOS_MULTIPLOS_ANEXOS = ["CNDs (municipal, estadual, federal e trabalhista)"];
+const TIPOS_MULTIPLOS_ANEXOS = [
+    "Cartão CNPJ",
+    "Cartão QSA",
+    "QSA",
+    "Formulario de Tributação",
+    "Certidão de regularidade FGTS",
+    "CNDs (municipal, estadual, federal e trabalhista)",
+    "Termo de Solicitação de Imóvel",
+    "NF de Remessa",
+    "Proposta Comercial",
+    "Outros",
+    "CNH", 
+    "RG",
+    "CPF"
+];
 
 function isTipoAnexoMultiplo(tipo) {
     return TIPOS_MULTIPLOS_ANEXOS.includes(tipo);
@@ -1542,18 +1668,19 @@ async function renderizarAnexosEtapaAprovacao() {
         lista.innerHTML = "";
 
         for (const [tipo, valor] of Object.entries(anexos)) {
-            const ids = [].concat(valor);
-
+            const ids = [].concat(valor).filter(id => id && id !== "null" && id !== "#");
+            
             if (!ids.length) {
-                continue;
-            }
+                 continue; // Pula RG/CPF
+            } 
 
             if (isTipoAnexoMultiplo(tipo)) {
                 // Segue o mesmo modelo aplicado em insereDocumentoCriado
                 // Nome do Tipo de Arquivo
                 // Anexos
-                var html = `<li><span>✅ <b>${tipo}:</b></span>`;
+                var html = `<li> <i class="flaticon flaticon-done icon-md" aria-hidden="true"></i> <span><b>${tipo}:</b></span>`;
                 for (const docId  of ids) {
+                    if (!docId || docId === "null" || docId === "#") continue; // Pula docIds invalidos/vazios
                     const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
                     html += `<div style="margin-left:20px"><a href="${link}" target="_blank">Visualizar</a></div>`;
                 }
@@ -1564,7 +1691,7 @@ async function renderizarAnexosEtapaAprovacao() {
             } else {
                 if (ids[0]) {
                     const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(ids[0]);
-                    lista.innerHTML += `<li><span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">Visualizar</a></span></li>`;
+                    lista.innerHTML += `<li> <i class="flaticon flaticon-done icon-md" aria-hidden="true"></i> <span><b>${tipo}:</b> <a href="${link}" target="_blank">Visualizar</a></span></li>`;
                 }
             }
         }
@@ -1596,17 +1723,25 @@ function anexosPorTipoDeContrato(tipoDoContrato) {
         //"Transporte de Materiais/Funcionários" ...
     };
 
-    var anexos = listaAnexosPorTipoDeContrato[tipoDoContrato];
-    var html = `<option value="">Selecione</option>`;
-    var htmlListaAnexos = "";
-    for (const anexo of anexos) {
-        html += `<option value="${anexo}">${anexo}</option>`;
-        htmlListaAnexos += `<li id="item-${anexo.split(" ").join("-").split("(")[0]}"><span>❌</span> <b>${anexo}</b></li>`;
-    }
-    $("#tipoDocumentacao").html(html); // Preenche o <select> de tipos de documentação
+    if (!isForModeView()) {
+        var anexos = listaAnexosPorTipoDeContrato[tipoDoContrato];
+        var html = `<option value="">Selecione</option>`;
+        var htmlListaAnexos = "";
+        for (const anexo of anexos) {
+            // Se for Anexo Mulitplo -> adiciona " (Vários)" ao final do nome da option
+            // Ex: "Cartão CNPJ (Vários)"
+            //
+            // Se for Anexo Unico -> adiciona " (Único)" ao final do nome da option
+            // Ex: "CPF (Único)"
+            html += `<option value="${anexo}">${anexo}</option>`;
 
-    // No final, marca o tipo renderizado junto com o html
-    $("#listaAnexos").html(htmlListaAnexos).data("tipoRenderizado", tipoDoContrato); // (Re)desenha a lista inteira do zero, todos os itens começam com ❌ 
+            htmlListaAnexos += `<li id="item-${anexo.split(" ").join("-").split("(")[0]}"><i class="flaticon flaticon-close icon-md" aria-hidden="true"></i> <b>${anexo}</b></li>`;
+        }
+        $("#tipoDocumentacao").html(html); // Preenche o <select> de tipos de documentação
+
+        // No final, marca o tipo renderizado junto com o html
+        $("#listaAnexos").html(htmlListaAnexos).data("tipoRenderizado", tipoDoContrato); // (Re)desenha a lista inteira do zero, todos os itens começam com ❌   
+    } 
 
     // Re-marca os anexos já enviados sempre que a lista é reconstruída,
     // evitando que callbacks assíncronos (ex.: busca do fornecedor) apaguem os ✅.
@@ -1683,15 +1818,20 @@ async function onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig() {
 
     function insereLabelCarregando(tipo, itemId, listaCarregar) {
 
-        if (isTipoAnexoMultiplo(tipo)) {
-            var itemMult = $("#" + itemId);
+        if (isTipoAnexoMultiplo(tipo)) { // Fluxo de tipos com múltiplos anexos
+            var itemMult = $("#" + itemId); // Procura a linha do tipo na lista
 
-            if (!itemMult.data("pronto")) {
-                itemMult.html("<span>✅ <b>" + tipo + ":</b></span>").data("pronto", true);
+            if (itemMult.length === 0) {  // Se a linha não existir (foi removida pela exclusão CNH/RG/CPF)...
+                $(listaCarregar).append('<li id="' + itemId + '"></li>'); // ...recria a linha vazia
+                itemMult = $("#" + itemId); // ...e recupera a referência recém-criada
             }
 
-            itemMult.append('<div id="' + itemId + '-loading" style="margin-left:20px">⏳ carregando...</div>');
-            return;
+            if (!itemMult.data("pronto")) { // Se ainda não tem o cabeçalho "✅ Tipo:"...
+                itemMult.html('<i class="flaticon flaticon-done icon-md" aria-hidden="true"></i>' + "<span><b>" + tipo + ":</b></span>").data("pronto", true); // ...coloca o cabeçalho (só na 1ª vez)
+            }
+
+            itemMult.append('<div id="' + itemId + '-loading" style="margin-left:20px">⏳ carregando...</div>'); // Mostra "carregando" enquanto envia o arquivo
+            return; // Encerra aqui (não cai nos fluxos de tipo único abaixo)
         }
 
         if (["CNH", "RG", "CPF"].includes(tipo)) {
@@ -1719,67 +1859,63 @@ async function insereDocumentoCriado(tipo, documentosAnexados, name, docId) {
     const lista = $("#listaAnexos");
     const link = await promiseBuscaDownloadUrlDocumentoNoFLuig(docId);
 
-    if (tipo === "CNH") {
+    // CNH
+    if (tipo == "CNH") {
         documentosAnexados["RG"] = null;
         documentosAnexados["CPF"] = null;
 
-        $("#item-identidade-rg-cnh").remove();
-        $("#item-identidade-cpf-cnh").remove();
-        $("#item-RG").remove();
-        $("#item-CPF").remove();
-        const item = $("#item-CNH");
-        if (item) {
-            $(item).html(`<span>✅ <b>CNH:</b> <a href="${link}" target="_blank">${name}</a></span>`);
-        }
-    } else if (tipo === "RG") {
+        // Remove as linhas de RG e CPF da tela
+        $("#item-RG, #item-CPF").remove();
+
+        $("#item-identidade-rg-cnh, #item-identidade-cpf-cnh").remove(); // Remove eventuais placeholders "RG ou CNH"/"CPF ou CNH"
+        appendAnexoMultiplo("CNH", "item-CNH"); // Renderiza a CNH no formato de múltiplos
+
+    // RG ou CPF
+    } else if (tipo == "RG" || tipo == "CPF") {
         documentosAnexados["CNH"] = null;
-        $("#item-identidade-rg-cnh").remove();
+
+        // Remove a linha de CNH da tela
         $("#item-CNH").remove();
+        $("#item-identidade-" + tipo.toLowerCase() + "-cnh").remove(); // Remove o placeholder deste próprio tipo (ex.: "CPF ou CNH" ao anexar CPF)
+        appendAnexoMultiplo(tipo, "item-" + tipo); // Renderiza o RG/CPF no formato de múltiplos
 
-        // ALTERAÇÃO:
-        // Antes estava usando append(), o que criava um NOVO item de CPF na lista.
-        // Isso fazia o "CPF carregando..." continuar aparecendo junto com o novo.
-        // Agora usa html() para SUBSTITUIR o item existente (mesma lógica aplicada no RG).
-        $("#item-RG").html(`<span>✅ <b>RG:</b> <a href="${link}" target="_blank">${name}</a></span>`);
+        var par = (tipo === "RG") ? "CPF" : "RG"; // Descobre qual é o par que ainda pode faltar
 
-        if (!documentosAnexados["CPF"]) {
-            $("#item-identidade-cpf-cnh").remove();
-            $(lista).append(`<li id="item-identidade-cpf-cnh"><span>❌ <b>CPF ou CNH</b></span></li>`);
-        }
-    } else if (tipo === "CPF") {
-        documentosAnexados["CNH"] = null;
-        $("#item-identidade-cpf-cnh").remove();
-        $("#item-CNH").remove();
-
-        // ALTERAÇÃO:
-        // Substitui o conteúdo do item existente ao invés de criar outro com append()
-        // Isso evita duplicidade (CPF carregando + CPF anexado)
-        $("#item-CPF").html(`<span>✅ <b>CPF:</b> <a href="${link}" target="_blank">${name}</a></span>`);
-
-        if (!documentosAnexados["RG"]) {
-            $("#item-identidade-rg-cnh").remove();
-            $(lista).append(`<li id="item-identidade-rg-cnh"><span>❌ <b>RG ou CNH</b></span></li>`);
+        if (!temAnexoDoTipo(documentosAnexados, par) && $("#item-" + par).length === 0) { // Se o par não foi anexado e não está na tela...
+            var phId = "item-identidade-" + par.toLowerCase() + "-cnh"; // ...monta o id do placeholder do par
+            $("#" + phId).remove(); // ...evita duplicar (remove se já existir)
+            lista.append('<li id="' + phId + '"><i class="flaticon flaticon-close icon-md" aria-hidden="true"></i> <b>' + par + ' ou CNH</b></li>'); // ...mostra "RG ou CNH" / "CPF ou CNH"
         }
 
     } else if (isTipoAnexoMultiplo(tipo)) {
-        var itemId = "item-" + tipo.split(" ").join("-").split("(")[0];
-        var item = $("#" + itemId);
-
-        if (!item.data("pronto")) {
-            item.html("<span>✅ <b>" + tipo + ":</b></span>").data("pronto", true);
-        }
-
-        $("#" + itemId + "-loading").remove(); // Tira a linha "carregando..."
-
-        item.append(
-            '<div class="anexo-multiplo" data-tipo="' + tipo + '" data-docid="' + docId + '" style="margin-left:20px">' +
-                '<a href="' + link + '" target="_blank">' + name + '</a> ' +
-                '<a href="#" class="btn-remove-anexo" title="Remover">🗑️</a>' +
-            '</div>'
-        );
+        appendAnexoMultiplo(tipo, "item-" + tipo.split(" ").join("-").split("(")[0]); // Renderiza no formato de múltiplos
 
     } else {
-        $(`#item-${tipo.split(" ").join("-").split("(")[0]}`).html(`<span>✅ <b>${tipo}:</b> <a href="${link}" target="_blank">${name}</a></span>`);
+        $(`#item-${tipo.split(" ").join("-").split("(")[0]}`).html(`<i class="flaticon flaticon-done icon-md" aria-hidden="true"></i> <span><b>${tipo}:</b> <a href="${link}" target="_blank">${name}</a></span>`); // Substitui pela linha única
+    }
+
+    // Util
+    function appendAnexoMultiplo(tipo, itemId) {
+        var item = $("#" + itemId); // Procura a linha do tipo
+
+        if (item.length === 0) { // Se não existir (foi removida pela exclusão mútua)...
+            lista.append('<li id="' + itemId + '"></li>'); // ...recria a linha vazia
+            item = $("#" + itemId); // ...recupera a referência
+        }
+
+        if (!item.data("pronto")) {                                    // Se a linha ainda não tem o cabeçalho "✅ Tipo:"...
+            item.html('<i class="flaticon flaticon-done icon-md" aria-hidden="true"></i>' + "<span><b>" + tipo + ":</b></span>").data("pronto", true); // ...coloca o cabeçalho (só 1ª vez)
+        }
+
+        $("#" + itemId + "-loading").remove();                         // Remove o "⏳ carregando..." desse tipo
+
+        // Acrescenta o arquivo (mantém os anteriores)
+        item.append(
+            '<div class="anexo-multiplo" data-tipo="' + tipo + '" data-docid="' + docId + '" style="margin-left:20px">' + // guarda tipo/docId p/ remoção
+                '<a href="' + link + '" target="_blank">' + name + '</a> ' +       // Link para abrir/baixar
+                '<span class="btn-remove-anexo" title="Remover" style="cursor:pointer"><i class="flaticon flaticon-trash icon-md" aria-hidden="true"></i></span>' + // Botão de remover só este arquivo
+            '</div>'
+        );
     }
 }
 function handleFileUpload(inputId, descricaoArquivo) {
@@ -1851,8 +1987,55 @@ function onClickRemoveAnexo(e) {
 
     // Se não tiver nenhum aquivo, volta icone de ❌ e libera anexo
     if (item.find(".anexo-multiplo").length == 0) {
-        item.data("pronto", false).html("<span>❌</span> <b>" + tipo + "</b>");
+        item.data("pronto", false).html('<i class="flaticon flaticon-close icon-md" aria-hidden="true"></i> <b>' + tipo + "</b>");
     }
+}
+
+
+// Haver com Transporte
+function validaNovaDataFimTransporte() { //alerta imediato quando a nova data de fim é inválida ou <= data de fim atual.
+    var novoFimStr = $("#novaDataFimTransporte").val();
+    if (!novoFimStr) { return; } // nada digitado ainda
+
+    var fimAtual = parseDataBR($("#dataFimContratoTransporte").val());
+    var novoFim  = parseDataBR(novoFimStr);
+
+    if (!novoFim) {
+        FLUIGC.toast({ title: "", message: "Data inválida! Use o formato dd/mm/aaaa.", type: "warning", timeout: 4000 });
+        $("#novaDataFimTransporte").val(""); $("#mesesAditivoTransporte").val("");
+        return;
+    }
+
+    if (fimAtual && novoFim <= fimAtual) {
+        FLUIGC.toast({ title: "", message: "A nova data de fim precisa ser maior que a data de fim atual do contrato!", type: "warning", timeout: 4000 });
+        $("#novaDataFimTransporte").val(""); $("#mesesAditivoTransporte").val("");
+    }
+}
+function atualizaMesesAditivoTransporte() { //meses de contrato = diferença entre a data de fim atual e a nova data de fim
+    var fimAtualStr = $("#dataFimContratoTransporte").val();
+    var novoFimStr  = $("#novaDataFimTransporte").val();
+
+    if (!fimAtualStr || !novoFimStr) { $("#mesesAditivoTransporte").val(""); return; }
+
+    var fimAtual = parseDataBR(fimAtualStr);
+    var novoFim  = parseDataBR(novoFimStr);
+
+    if (!fimAtual || !novoFim || novoFim <= fimAtual) {
+        $("#mesesAditivoTransporte").val("");
+        return;
+    }
+
+    // Meses de contrato = diferença entre a data de fim atual e a nova data de fim.
+    var meses = (novoFim.getFullYear() - fimAtual.getFullYear()) * 12 + (novoFim.getMonth() - fimAtual.getMonth());
+    if (novoFim.getDate() < fimAtual.getDate()) { meses--; }
+    $("#mesesAditivoTransporte").val(meses + (meses === 1 ? " mês" : " meses"));
+}
+function toggleFormatoCobrancaAditivoTransporte() { //mostra o campo de valor conforme o Formato de Cobrança do aditivo (Incl/Excl).
+    var formato = $("#formatoCobrancaAditivo").val();
+    $("#divValorMensalAditivoTransporte").toggle(formato === "Valor Fixo");
+    $("#divValorTAditivoTransporte, #divKmAditivoTransporte").toggle(formato === "Valor por Parâmetro");
+    if (formato !== "Valor Fixo")        { $("#valorMensalAditivoTransporte").val(""); }
+    if (formato !== "Valor por Parâmetro") { $("#valorTAditivoTransporte").val(""); $("#kmAditivoTransporte").val(""); }
 }
 
 
@@ -1926,8 +2109,19 @@ function mostraToast(title, message, type) {
         type: type
     });
 }
+function parseDataBR(s) {
+    var digits = (s || "").replace(/\D/g, "");
+    if (digits.length !== 8) { return null; }
 
+    var dia = parseInt(digits.substring(0, 2), 10);
+    var mes = parseInt(digits.substring(2, 4), 10);
+    var ano = parseInt(digits.substring(4, 8), 10);
 
+    var d = new Date(ano, mes - 1, dia);
+    if (d.getFullYear() !== ano || d.getMonth() !== mes - 1 || d.getDate() !== dia) { return null; }
+
+    return d;
+}
 function preencherCamposViaSessionStorage() {
     var dadosRaw = sessionStorage.getItem("rescisaoContrato");
     if (!dadosRaw) return;
@@ -1968,4 +2162,20 @@ function preencherCamposViaSessionStorage() {
         }
     }, 500);
     sessionStorage.removeItem("rescisaoContrato");
+}
+function isForModeView() {
+
+    if ($("#formMode").val() == "VIEW") {
+        return true;
+    } else {
+        return false;
+    }
+}
+function isContratoNovo_eJaGeradoContratoRM() {
+    if ($("#IDCNT").val() && $("#origemContrato").val() == "Novos") {
+        return true;
+
+    } else {
+        return false;
+    }
 }
