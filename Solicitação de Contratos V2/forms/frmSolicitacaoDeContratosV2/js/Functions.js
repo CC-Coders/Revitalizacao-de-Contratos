@@ -1132,7 +1132,9 @@ function bloqueiaCamposPagIntegacaoRM_seJaGeradoContratoRM() {
         "#novoContratoDataFim",
         "#novoContratoObjeto",
         ".novoContratoItemValor",
-        ".inputValorNovoContratoItemRateio"
+        ".inputValorNovoContratoItemRateio",
+        "#novoContratoDiaFaturamento",
+        "#novoContratoQtdeFaturamento"
     ];
 
     var selectsNativos = [
