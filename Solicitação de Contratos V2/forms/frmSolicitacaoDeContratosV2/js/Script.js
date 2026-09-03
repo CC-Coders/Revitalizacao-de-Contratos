@@ -148,6 +148,11 @@ function bindings() {
                 } else {
                     $("#temREIDI").closest("div.row").show();
                 }
+            },
+            // Quando abrir options de Obra
+            onDropdownOpen: function() {
+                // Fecha options de "Locador" para são se sobreporem
+                $("#locador")[0].selectize.close(); 
             }
         });
 
@@ -172,6 +177,11 @@ function bindings() {
                     $(".endereco-fornecedor").slideUp();
                 }
             },
+            // Quando abrir options de Locador
+            onDropdownOpen: function() {
+                // Fecha options de "Obra" para são se sobreporem
+                $("#obra")[0].selectize.close(); 
+            }
         });
 
         $("#banco").selectize();
@@ -320,6 +330,17 @@ function bindings() {
         }
     });
 
+    // Ao sair do campo (blur) haver com CPF, valida CPF
+    $("#cpfAdministrador, #cpfRepresentanteFornecedor").on("blur", function() {
+        var CPF = $(this).val();
+
+        // Se não valido
+        if (CPF && !validaCPF($(this).val())) {
+            mostraToast("Erro: ", "CPF inválido", "warning"); // Lança toast
+            $(this).val(""); // Limpa o campo que disparou o evento de blur
+        }
+    });
+
     // Seleciona todos os inputs de valor reajustado da grid
     $(".inputValorLocacaoReajustado")
 
@@ -366,17 +387,22 @@ function bindings() {
             $("#divPagamento, #divBanco").hide();
         }
     });
-    $("#valorCaucao, #valorMensalAluguel, #valorLocacaoReajustado").maskMoney({
-        prefix: "R$ ",
-        thousands: ".",
-        decimal: ",",
-        allowZero: true,
-        affixesStay: true,
+
+    // Mask's
+    $("#valorCaucao, #valorMensalAluguel, #valorLocacaoReajustado").maskMoney({ prefix: "R$ ", thousands: ".", decimal: ",", allowZero: true, affixesStay: true, });
+    $("#agencia").mask("000000000000000-A", { // Alfanumerico
+        reverse: true,
+        placeholder: "____-_",
+        onComplete: function(val) {
+            $("#agencia").val(val.toUpperCase());
+        }
     });
-    $("#agencia").mask("000000000000000-0", {reverse:true, placeholder: "____-_" });
-    $("#contaCorrente").mask("000000000000000-0", {
-        placeholder: "_____-_",
-        reverse:true,
+    $("#contaCorrente").mask("000000000000000-A", { // Alfanumerico
+        reverse: true,
+        placeholder: "____-_",
+        onComplete: function(val) {
+            $("#contaCorrente").val(val.toUpperCase());
+        }
     });
     $("#percentualRetencao").mask("000%", { reverse: true });
     $("#descontoPorDiaChuva").mask("000%", { reverse: true });
