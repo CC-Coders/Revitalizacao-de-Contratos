@@ -1562,35 +1562,19 @@ async function geraEquipamentosSelecionados(){
             $("#tableEquipamentos").hide();
             var equipamentos = await asyncConsultaEquipamentosSelecionados();
 
-            // Valida Negocição Suprimentos
+            // Valida Categoria MA
             if (equipamentos.length > 0) {
-                var todosAnalisados = equipamentos.every(eq => eq.NEGOCIACAO_SUPRIMENTOS == "S");
-                console.log("todosAnalisados: " + todosAnalisados);
+                var temPeloMenosUm_categoriaMA = equipamentos.some(eq => eq.CATEGORIA == "MA");
 
-                // Preenche campo "Negociação Realizada pelo Suprimentos" com "Sim" (se ja foi analisado tudo) ou "Não"
-                usaValOuText_comBaseModoFluig("#negociacaoHeaderEquipamentos", todosAnalisados ? "Sim" : "Não");
-
-                // Preenche campo hidden se precisa (SIM) ou não (NAO) passar por analise do Suprimentos
-                // Se foi todos analisados, não precisa passar por analise ("Não")
-                // Se NÃO foi todos analisados, precisa passar por analise ("Sim")
-                marcaSeEquipPassaPorAnaliseSup_comBaseSeJaFoiAnalisado(todosAnalisados ? "Não" : "Sim");
-            }
-
-            // Valida categoria (MA / PA)
-            if (equipamentos.length > 0) {
-                var todosCategoriaOutros = equipamentos.every(eq => eq.CATEGORIA == "Outros");
-                console.log("todosCategoriaOutros: " + todosCategoriaOutros);
-
-                // Se todos forem categoria "Outros" então não passará por analise
-                // Oculta campo "Negociação Realizada pelo Suprimentos"
-                if (todosCategoriaOutros) {
+                // Se não houver pelo menos um MA, oculta campo "Negociação Realizada pelo Suprimentos"
+                if (!temPeloMenosUm_categoriaMA) {
                     $("#negociacaoHeaderEquipamentos").closest("div").hide();
                 }
 
                 // Preenche campo hidden se precisa (SIM) ou não (NAO) passar por analise do Suprimentos
-                // Se todos são 'Outros', não precisa passar por analise ("Não")
-                // Se todos NÃO forem 'Outros', precisa passar por analise ("Sim")
-                marcaSeEquipPassaPorAnaliseSup_comBaseSeJaFoiAnalisado(todosCategoriaOutros ? "Não" : "Sim");
+                // Se tiver pelo menos um "MA" precisa passar por analise ("Sim")
+                // Se não tiver nenhum "MA", não passa por analise ("Não")
+                marcaSeEquipPassaPorAnaliseSup_comBaseSeJaFoiAnalisado(temPeloMenosUm_categoriaMA ? "Sim" : "Não");
             }
 
             for (const equipamento of equipamentos) {
