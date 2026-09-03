@@ -1308,6 +1308,79 @@ function obraPermiteReidi(CODCOLIGADA, CODCCUSTO) {
 }
 
 
+// Validação
+function validaCPF(cpf) {
+    // Garante que 'cpf' seja string (se vier null/undefined vira "") e remove
+    // tudo que não for dígito: pontos, traço, espaços. Sobram só os números.
+    cpf = (cpf || "").replace(/\D/g, "");
+
+    // Um CPF válido tem exatamente 11 dígitos. Se tiver mais ou menos, já é inválido.
+    if (cpf.length !== 11) {
+        return false;
+    }
+
+    // Não aceita sequência de digitos iguais
+    // Exemplo: 000.000.000-00
+    // A regex \1{10} exige que o 1º dígito capturado se repita outras 10 vezes.
+    if (/^(\d)\1{10}$/.test(cpf)) {
+        return false;
+    }
+
+    // Transforma a string "1245678909" num array de números [1,2,3,4,5,6...,9]
+    // Assim é possivel acessar cada digito por indíce (d[0] a d[10])
+    var d = cpf.split("").map(Number);
+
+    // Acumulador de soma ponderada dos 9 primeiros digitos
+    var soma1 = 0;
+
+    // Pecorre os 9 primeiros digitos (indices de 0 a 8).
+    // O peso começa em 10 e diminui a cada posição (10 - i) - > 10, 9, 8, ...., 2
+    for (var i = 0; i < 9; i++) {
+        soma1 += d[i] * (10 - i);
+    }
+
+    // Multiplica a soma por 10 e pega o resto da divisão por 11
+    var resto1 = (soma1 * 10) % 11;
+
+    // Se o resto for 10 ou 11, o digito verificador correspondente é 0.
+    if (resto1 == 10 || resto1 == 11) {
+        resto1 = 0;
+    }
+
+    // Compara o digito calculado com o 10º digito informado (d[9])
+    // Se for diferente, é inválido
+    if (resto1 != d[9]) {
+        return false;
+    }
+
+    // Nova soma ponderada, agora incluindo o 1º digito verificador (usa 10 digitos)
+    var soma2 = 0;
+
+    // Pecorre os 10 primeiros digitos (indices 0 a 9)
+    // O peso começa com 11 e diminui, (11 - i) -> 11, 10, 9, ..., 2
+    for (var i = 0; i < 10; i++) {
+        soma2 += d[i] * (11 - i);
+    }
+
+    // Mesma regra, soma vezes 10, resto da divisão por 11.
+    var resto2 = (soma2 * 10) % 11;
+
+    // Resto 10 ou 11 também vira 0.
+    if (resto2 == 10 || resto2 == 11) {
+        resto2 = 0;
+    }
+
+    // Compara com o 11º digito informado (d[10])
+    // Se for diferente, é inválido
+    if (resto2 != d[10]) {
+        return false;
+    }
+
+    // Se passou por tudo sem problema, o CPF é valido.
+    return true;
+}
+
+
 // Opções de Aprovação/Envio
 function controlaBotoesAprovacao_porAtividade() {
     const atividadeAtual = parseInt($("#atividade").val());
