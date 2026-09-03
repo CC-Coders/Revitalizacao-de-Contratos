@@ -146,12 +146,23 @@ function onChangeTipoContrato(that) {
         else if(tipoContrato === "Locação de Equipamento"  || tipoContrato === "Locação de Equipamento - Com Mão de Obra"){
             if ( tipoContrato === "Locação de Equipamento - Com Mão de Obra") {
                 $("#divRetencao").show();
-                $("#temRetencao").val("Sim").change();
-                $("#percentualRetencao").val("5%");
-            }else{
-                $("#divRetencao").hide();
-                $("#temRetencao").val("Não").change();
-                $("#percentualRetencao").val("0%");
+
+                // Somente em formMode "ADD" por ser abertura do processo
+                // Sem isso, o que foi marcado (SIM/NÃO) e porcentagem iria ser sobrescrito
+                if ($("#fomMode").val() == "ADD") {
+                    $("#temRetencao").val("Sim").change();
+                    $("#percentualRetencao").val("5%");
+                }
+
+            } else {
+
+                // Somente em formMode "ADD" por ser abertura do processo
+                // Sem isso, o que foi marcado (SIM/NÃO) e porcentagem iria ser sobrescrito
+                if ($("#fomMode").val() == "ADD") {
+                    $("#divRetencao").hide();
+                    $("#temRetencao").val("Não").change();
+                    $("#percentualRetencao").val("0%");
+                }
             }
 
             $("#dadosContrato").show();

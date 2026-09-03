@@ -13,7 +13,7 @@ function initDataTableContratoPrincipal(){
                 className: "alignCenter",
                 orderable: false,
                 render: function (data, type, row) {
-                  return `<input type="checkbox" class="checkboxContratoPrincipal"/>`
+                  return `<input type="checkbox" name="chkContratoPrincipal" class="checkboxContratoPrincipal"/>`
                 },
             },
             {
@@ -104,6 +104,8 @@ function initDataTableContratoPrincipal(){
 }
 
 async function atualizaDatatableContratoPrincipal(){
+    if (isForModeView()) return;
+
     try {
         var tipoContrato = $("#tipoContrato").val();
         var CODCOLIGADA = $("#CODCOLIGADA").val();

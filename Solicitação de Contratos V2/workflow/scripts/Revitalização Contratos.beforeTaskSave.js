@@ -8,10 +8,15 @@ var ATIVIDADES = {
     CONTROLADORIA: 32,
     ENGENHEIRO: 43,
     COORDENADOR_OBRAS: 48,
+    ANALISE_EQUIPAMENTO: 104,
     DIRETORIA: 53,
     STATUS_ASSINATURA_ELETRONICA: 58,
     ASSINATURA_ELETRONICA: 66,
+    ADM_OBRA: 64,
+    CONTROLADORIA_AGUARDA_RECEBIMENTO: 74,
+    CONTROLADORIA_RECEBE_ASSINATURAS: 72, 
     OBRA_RECEBE_VIAS_ORIGINAIS: 76,
+    FIM : [37, 62, 83]
 };
 
 var STATUS_CONTRATOS = {
@@ -54,79 +59,199 @@ var TIPOS_FATURAMENTO = {
     "Por Medição": 2,
 };
 
+var codigoStatusEquipamentos = {
+    "Pendente_Contrato":1,
+    "Contrato_em_Andamento_com_análise_pendente":2,
+    "Contrato_em_Andamento_com_análise_realizada":3,
+    "Contrato_Vigente":4,
+    "Equipamento_desmobilizado":5,
+    "Contrato_encerrado":6,
+}
+
 function beforeTaskSave(colleagueId, nextSequenceId, userList) {
     try {
         var ATIVIDADE_ATUAL = getValue("WKNumState");
 
+        var connSisma = null;
+        var connCustom = null;
+
+        var atividadesComSQL = validaSeAtividadeExecutaSQL(ATIVIDADE_ATUAL);
+        if (atividadesComSQL) {
+            // Abre UMA conexão para a transação. Todos os INSERT/UPDATE da abertura
+            // usam essa mesma conexão, então ou grava tudo (commit) ou nada (rollback).
+            var ic = new javax.naming.InitialContext();
+            connSisma = ic.lookup("/jdbc/Sisma").getConnection();
+            connCustom = ic.lookup("/jdbc/CastilhoCustom").getConnection();
+            connSisma.setAutoCommit(false);
+            connCustom.setAutoCommit(false);
+        }
+
         if (ATIVIDADE_ATUAL == ATIVIDADES.INICIO || ATIVIDADE_ATUAL == ATIVIDADES.INICIO_0) {
-            beforeTaskSave_inicio();
+            beforeTaskSave_inicio(connCustom, connSisma);
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.JURIDICO) {
-            beforeTaskSave_juridico();
+            beforeTaskSave_juridico(hAPI.getCardValue("ID_TCNT_AUXILIAR"), connCustom);
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA) {
-            beforeTaskSave_controladoria();
+            beforeTaskSave_controladoria(hAPI.getCardValue("ID_TCNT_AUXILIAR"), connCustom);
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.ENGENHEIRO) {
             beforeTaskSave_engenheiro();
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.COORDENADOR_OBRAS) {
             beforeTaskSave_coordenadorObras();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.ANALISE_EQUIPAMENTO) {
+            beforeTaskSave_analiseEquipamentos();
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {
             beforeTaskSave_diretoria();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.ADM_OBRA) {
+            beforeTaskSave_admObra();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA_AGUARDA_RECEBIMENTO) {
+            beforeTaskSave_controladoriaAguardaRecebimento();
+        } else if (ATIVIDADE_ATUAL == ATIVIDADES.CONTROLADORIA_RECEBE_ASSINATURAS) {
+            beforeTaskSave_controladoriaRecolheAssinaturas();
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.OBRA_RECEBE_VIAS_ORIGINAIS) { // Tipo de assinatura manual
-            beforeTaskSave_obraRecebeViasOriginais();
+            beforeTaskSave_obraRecebeViasOriginais(connCustom, connSisma);
         } else if (ATIVIDADE_ATUAL == ATIVIDADES.STATUS_ASSINATURA_ELETRONICA) { // Tipo de assintaura eletrônica, com status "Assinado"
-            beforeTaskSave_statusAssinaturaEletronica();
+            beforeTaskSave_statusAssinaturaEletronica(connCustom, connSisma);
         }
+
+        if (atividadesComSQL) {
+            // Chegou até aqui = todos os INSERT's / UPDATE's rodaram sem erro. Grava tudo de uma vez.
+            connSisma.commit();
+            connCustom.commit();
+        }
+
     } catch (error) {
+
+        if (atividadesComSQL) {
+            // Qualquer erro desfaz todos os INSERT's / UPDATE's da abertura
+            log.error("## Revitalização Contratos beforeTaskSave: erro em algum INSERT/UPDATE, iniciando rollback. Erro: ");
+            log.dir(error);
+
+            // Rollback SISMA
+            try { connSisma.rollback() } catch (e) { log.error("## Erro no rollback do Sisma: " + e) }
+
+            // Rollback Castilho Custom
+            try {  connCustom.rollback() } catch (e) { log.error("## Erro no rollback do Custom: " + e) }
+        }
+
         throw error;
+
+    } finally {
+        // O bloco finally sempre executa, com erro ou sem.
+        // Garantimos que as conexões são fechadas independente se deu erro ou não.
+        // Se não fechar, o banco fica com conexões presas e para de responder com o tempo.
+
+        // Fecha somente as que abriram
+        if (connSisma != null) {
+            try {  connSisma.close() } catch (e) {}
+        }
+        if (connCustom != null) {
+            try { connCustom.close() } catch (e) {}
+        }
+    }
+
+
+    // Util
+    function validaSeAtividadeExecutaSQL(atividade) {
+        return atividade == ATIVIDADES.INICIO
+            || atividade == ATIVIDADES.INICIO_0
+            || atividade == ATIVIDADES.JURIDICO
+            || atividade == ATIVIDADES.CONTROLADORIA
+            || atividade == ATIVIDADES.STATUS_ASSINATURA_ELETRONICA
+            || atividade == ATIVIDADES.OBRA_RECEBE_VIAS_ORIGINAIS;
     }
 }
 
-function beforeTaskSave_inicio() {
+function beforeTaskSave_inicio(connCustom, connSisma) { // COM SQL
     try {
         hAPI.setCardValue("numProces", getValue("WKNumProces"));
+        var origemContrato = hAPI.getCardValue("origemContrato");
         var tipoContrato = hAPI.getCardValue("tipoContrato");
-        
-        if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
-            atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
-            hAPI.setCardValue("dataCriadoEm", getDateNow());
 
-        } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
-            // Insere o(s) equip(s) na tabela para poder ver na Analise do Suprimentos, mas insere com Status Desativado
-            insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"));
-            atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente");
+        // Função centralizada
+        INSERTs_UPDATEs_tabelasAuxiliares(connCustom, connSisma);
 
-        } else if (tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
-           
-            insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"));
+        log.info("## beforeTaskSave_inicio");
+        log.info("## Resultado solicitacaoEstaSendoAberta: " + solicitacaoEstaSendoAberta());
 
-        }
-
-        // Cria/insere somente quando contratos novos.
-        if (hAPI.getCardValue("origemContrato") == "Novos") {
-            var id = insereDadosNaTabelaAuxiliar();
-            insereDadosNaTabelaAuxiliarItens(id);
-            hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
+        // Se não for abertura, faz UPDATE's
+        if (!solicitacaoEstaSendoAberta()) {
+            updateTcntAuxiliarCompleto_quandoContratoNovo(hAPI.getCardValue("ID_TCNT_AUXILIAR"), connCustom);
+            atualizaDadosTabelasAuxiliares_porOrigemContratoTipoContrato(origemContrato, tipoContrato, connCustom);
         }
         
         var pdfIdContrato = hAPI.getCardValue("contratoPdfId");
         if (pdfIdContrato) {
             anexaDocumentoNoProcesso(pdfIdContrato);
         }
-        insereHistorico(hAPI.getCardValue("observacoes"), "Início", "Início");
+        insereHistorico(hAPI.getCardValue("observacoes"), "Enviado", "Obra");
+
     } catch (error) {
         throw error;   
     }
-}
-function beforeTaskSave_juridico() {
-    insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Jurídico");
-}
-function beforeTaskSave_controladoria() {
-    try {
-        insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Controladoria");
-        if (hAPI.getCardValue("decisao") == "Aprovar") {
-            var tipo = hAPI.getCardValue("origemContrato");
-            var tipoContrato = hAPI.getCardValue("tipoContrato");
-            var codColigada = hAPI.getCardValue("CODCOLIGADA");
 
+
+    // Util
+    function INSERTs_UPDATEs_tabelasAuxiliares() {
+        try {
+            var tipoContrato = hAPI.getCardValue("tipoContrato");
+            
+            if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
+
+                if (!solicitacaoEstaSendoAberta()) {
+                    return;
+                }
+
+                atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente", connCustom);
+                hAPI.setCardValue("dataCriadoEm", getDateNow());
+            
+            } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+                // Insere o(s) equip(s) na tabela para poder ver na Analise do Suprimentos, mas insere com Status Desativado
+                insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"), connCustom);
+                atualizaStatusEquipamento("Contrato_em_Andamento_com_análise_pendente", connCustom);
+            
+            } else if (tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
+                insereNaTabelaAuxiliarItens_equipNoContrato(hAPI.getCardValue("ID_TCNT_AUXILIAR"), connCustom);
+            
+            }
+
+            // Cria/insere somente quando contratos novos.
+            if (hAPI.getCardValue("origemContrato") == "Novos") {
+
+                if (!solicitacaoEstaSendoAberta()) {
+                    return;
+                }
+
+                var id = insereDadosNaTabelaAuxiliar(connCustom);
+                insereDadosNaTabelaAuxiliarItens(id, connCustom);
+                hAPI.setCardValue("ID_TCNT_AUXILIAR", id);
+            }
+
+        } catch (error) {
+            // Lança erro e trava abertura da solicitação.
+            throw error;
+        }
+    }
+}
+function beforeTaskSave_juridico(ID_TCNT_AUXILIAR, connCustom) { // COM SQL
+    var origemContrato = hAPI.getCardValue("origemContrato");
+    var tipoContrato = hAPI.getCardValue("tipoContrato");
+
+    insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Jurídico");
+
+    updateTcntAuxiliarCompleto_quandoContratoNovo(ID_TCNT_AUXILIAR, connCustom);
+    atualizaDadosTabelasAuxiliares_porOrigemContratoTipoContrato(origemContrato, tipoContrato, connCustom);
+}
+function beforeTaskSave_controladoria(ID_TCNT_AUXILIAR, connCustom) { // COM SQL
+    try {
+        var origemContrato = hAPI.getCardValue("origemContrato");
+        var tipoContrato = hAPI.getCardValue("tipoContrato");
+        var codColigada = hAPI.getCardValue("CODCOLIGADA");
+
+        insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Controladoria");
+
+        updateTcntAuxiliarCompleto_quandoContratoNovo(ID_TCNT_AUXILIAR, connCustom);
+        atualizaDadosTabelasAuxiliares_porOrigemContratoTipoContrato(origemContrato, tipoContrato, connCustom);
+
+        if (hAPI.getCardValue("decisao") == "Aprovado") {
             // Seta Diretor conforme Coligada, para Contratos Novos de Locação de Equipamento
             if (tipoContrato == "Locação de Equipamento" || tipoContrato == "Locação de Equipamento - Com Mão de Obra") {
 
@@ -142,17 +267,17 @@ function beforeTaskSave_controladoria() {
                 }
             }
             var IDCNT = hAPI.getCardValue("IDCNT");
-            if (tipo == "Novos" && IDCNT == "") {
-                var IDCNT = criaNovoContrato();
+            if (origemContrato == "Novos" && IDCNT == "") {
+                var IDCNT = criaNovoContrato(); // RM
                 hAPI.setCardValue("IDCNT", IDCNT);
-                updateTcntAuxiliar_IDCNT(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"));
+                updateTcntAuxiliar_IDCNT(IDCNT, hAPI.getCardValue("ID_TCNT_AUXILIAR"), connCustom); // SQL
 
-            } else if (tipo == "Aditivos") {
-                alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "PENDENTE OBRA");
+            } else if (origemContrato == "Aditivos") {
+                alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "PENDENTE OBRA"); // RM
                 // TODO - Inserir relação do Aditivo com o Contrato na tabela Custom de Contratos
 
-            } else if (tipo == "Rescisões") {
-                alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "RESCISÃO EM ANDAMENTO");
+            } else if (origemContrato == "Rescisões") {
+                alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "RESCISÃO EM ANDAMENTO"); // RM
                 // TODO - Inserir relação da Rescisão com o Contrato na tabela Custom de Contratos
             }
         }
@@ -160,10 +285,10 @@ function beforeTaskSave_controladoria() {
         throw error;
     }
 }
-function beforeTaskSave_engenheiro() {
+function beforeTaskSave_engenheiro() { // SEM SQL
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Engenheiro");
 
-    if (hAPI.getCardValue("decisao") == "Aprovar") {
+    if (hAPI.getCardValue("decisao") == "Aprovado") {
         if (hAPI.getCardValue("assinaturaContrato") == "Eletrônica" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento - Com Mão de Obra" && hAPI.getCardValue("coordenador") == "") {
             // Se não tiver coordenador vai para assinatura eletrônica
             criaAssinaturaEletronica();
@@ -174,38 +299,53 @@ function beforeTaskSave_engenheiro() {
         }
     }
 }
-function beforeTaskSave_coordenadorObras() {
+function beforeTaskSave_coordenadorObras() { // SEM SQL
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Coordenador");
 
-    if (hAPI.getCardValue("decisao") == "Aprovar" && (hAPI.getCardValue("assinaturaContrato") == "Eletrônica" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento - Com Mão de Obra")) {
+    if (hAPI.getCardValue("decisao") == "Aprovado" && (hAPI.getCardValue("assinaturaContrato") == "Eletrônica" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento" && hAPI.getCardValue("tipoContrato") != "Locação de Equipamento - Com Mão de Obra")) {
         criaAssinaturaEletronica();
     }
 }
-function beforeTaskSave_diretoria() {
+function beforeTaskSave_analiseEquipamentos() { // SEM SQL
+    insereHistorico("", "Enviado", "Análise de Equipamentos");
+}
+function beforeTaskSave_diretoria() { // SEM SQL
     insereHistorico(hAPI.getCardValue("observacoes"), hAPI.getCardValue("decisao"), "Aprovação Diretoria");
 
-    if (hAPI.getCardValue("decisao") == "Aprovar" && hAPI.getCardValue("assinaturaContrato") == "Eletrônica"){
+    if (hAPI.getCardValue("decisao") == "Aprovado" && hAPI.getCardValue("assinaturaContrato") == "Eletrônica"){
         criaAssinaturaEletronica();
     }
 }
-function beforeTaskSave_statusAssinaturaEletronica() {
+function beforeTaskSave_admObra() { // SEM SQL
+    insereHistorico("", "Enviado", "Adm. Obra");
+}
+function beforeTaskSave_controladoriaAguardaRecebimento() { // SEM SQL
+    insereHistorico("", "Enviado", "Controladoria Aguarda Recebimento");
+}
+function beforeTaskSave_controladoriaRecolheAssinaturas() { // SEM SQL
+    insereHistorico("", "Enviado", "Controladoria Recolhe Assinaturas");
+}
+function beforeTaskSave_statusAssinaturaEletronica(connCustom, connSisma) { // COM SQL
+    insereHistorico("", "Enviado", "Agurdando Assinatura Eletrônica");
 
     if (hAPI.getCardValue("statusAssinatura") == "Assinado") {
         alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), hAPI.getCardValue("IDCNT"), "ATIVO");
-        regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();
+        regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais(connCustom, connSisma);
     }
 }
-function beforeTaskSave_obraRecebeViasOriginais() {
+function beforeTaskSave_obraRecebeViasOriginais(connCustom, connSisma) { // COM SQL
     var ID_TCNT_AUXILIAR = hAPI.getCardValue("ID_TCNT_AUXILIAR");
     var origemContrato = hAPI.getCardValue("origemContrato");
 
     var DATA_ASSINATURA = getDateTimeNow();
     hAPI.setCardValue("dataAssinatura", DATA_ASSINATURA);
 
+    insereHistorico("", "Enviado", "Obra Recebe Vias Originais");
+
     // Só grava com ID_TCNT_AUXILIAR válido (Transporte podia vir como "   -   ").
     var idAux = parseInt(ID_TCNT_AUXILIAR, 10);
     if (!isNaN(idAux) && idAux > 0) {
-        updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, idAux);
+        updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, idAux, connCustom); // SQl
     } else {
         log.warn("obraRecebeViasOriginais - ID_TCNT_AUXILIAR inválido, pulando update de dataAssinatura: " + ID_TCNT_AUXILIAR);
     }
@@ -215,10 +355,12 @@ function beforeTaskSave_obraRecebeViasOriginais() {
         var IDCNT = hAPI.getCardValue("IDCNT");
         alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "ATIVO");
     }
-    regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais();
+    regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais(connCustom, connSisma);
 }
 
-function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {
+
+// Centralização Funções - Assinatura Eletronica & Assinatura Manual
+function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais(connCustom, connSisma) {
 
     // Formata valor monetario para float
     var valorLocacaoReajustado = ValorToFloat(hAPI.getCardValue("valorLocacaoReajustado"));
@@ -229,111 +371,128 @@ function regrasParaStatusAssinaturaEletronica_obraRecebeViasOriginais() {
     var origemContrato = hAPI.getCardValue("origemContrato");
     var dataFimLocacao = hAPI.getCardValue("dataFimLocacao");
 
+    // Locação de Equipamento
+    var tiposContratoLocacaoEquip_aditivo_rescisao = 
+        tipoContrato == "Locação de Equipamento - Alteração de Valor" || 
+        tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
+        tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" || 
+        tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
+        tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || 
+        tipoContrato == "Locação de Equipamento (Rescisões)" || 
+        tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)";
+
+    // Locação de Imóvel
+    var tiposContratoLocacaoImovel_aditivo_rescisao =
+        tipoContrato == "Locação de Imóvel - Alteração de Valor" || 
+        tipoContrato == "Locação de Imóvel - Alteração de Prazo" || 
+        tipoContrato == "Locação de Imóvel - Alteração de Prazo e Valor" ||
+        tipoContrato == "Locação de Imóvel (Rescisões)";
+
     try {
 
         if (origemContrato == "Aditivos" || origemContrato == "Rescisões") {
-            if (tipoContrato == "Locação de Equipamento - Alteração de Valor" || tipoContrato == "Locação de Equipamento - Alteração de Prazo" ||
-                tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor" || tipoContrato == "Locação de Equipamento - Inclusão de Equipamento" ||
-                tipoContrato == "Locação de Equipamento - Exclusão de Equipamento" || tipoContrato == "Locação de Equipamento (Rescisões)" || 
-                tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)")
-            {
-                insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR);
 
-            } else if (tipoContrato == "Locação de Imóvel - Alteração de Valor" || tipoContrato == "Locação de Imóvel - Alteração de Prazo" || 
-                tipoContrato == "Locação de Imóvel - Alteração de Prazo e Valor") 
-            {
-                insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR);
+            // Locação de Equipamento
+            if (tiposContratoLocacaoEquip_aditivo_rescisao) {
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR, connCustom); // SQL
             }
-                alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "ATIVO");
+
+            // Locação de Imóvel
+            else if (tiposContratoLocacaoImovel_aditivo_rescisao) {
+                insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR, connCustom); // SQL
+            }
+
+            alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "ATIVO"); // RM
         }
         
         if (tipoContrato == "Locação de Imóvel - Alteração de Prazo") {
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
-            updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue("dataFimLocacao"));
+            updateTCNT_alteracaoPrazo_imovel(IDCNT, hAPI.getCardValue("dataFimLocacao")); // RM
 
         } else if (tipoContrato == "Locação de Imóvel - Alteração de Valor") {
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
-            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue("NSEQITEMCNT"));
-            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);
+            updateTcntAuxiliarItens_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue("NSEQITEMCNT"), connCustom); // SQL
+            updateTCNT_alteracaoValorAluguel_imovel(IDCNT); // RM
 
         } else if (tipoContrato == "Locação de Imóvel - Alteração de Prazo e Valor") {
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
-            updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao);
-            updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue("NSEQITEMCNT"));
-            updateTCNT_alteracaoValorAluguel_imovel(IDCNT);
+            updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao); // RM
+            updateTcntAuxiliarItens_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, hAPI.getCardValue("NSEQITEMCNT"), connCustom); // SQL
+            updateTCNT_alteracaoValorAluguel_imovel(IDCNT); // RM
 
         } else if (tipoContrato == "Locação de Imóvel (Rescisões)") { // Rescisão
             // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.
-            alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "CANCELADO");
+            alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "CANCELADO"); // RM
         
         } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo") {
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
-            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao); // RM
 
         } else if (tipoContrato == "Locação de Equipamento - Alteração de Valor") {
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);
-            updateSISMA_alteracaoAluguelContrato_equipamento();
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT); // RM
+            updateSISMA_alteracaoAluguelContrato_equipamento(connSisma); // SQL
 
         } else if (tipoContrato == "Locação de Equipamento - Alteração de Prazo e Valor") {
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
-            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao);
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);
-            updateSISMA_alteracaoAluguelContrato_equipamento();
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, dataFimLocacao); // RM
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT); // RM
+            updateSISMA_alteracaoAluguelContrato_equipamento(connSisma); // SQL
 
         } else if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT); // RM
 
             // Atualiza o ATIVO para ativado ( 1 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo
-            updateTcntAuxiliarItens_statusEquipNoContrato("1", ID_TCNT_AUXILIAR);
-            atualizaStatusEquipamento("Contrato_Vigente");
+            updateTcntAuxiliarItens_statusEquipNoContrato("1", ID_TCNT_AUXILIAR, connCustom); // SQL
+            atualizaStatusEquipamento("Contrato_Vigente", connCustom); // SQL
 
         } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
             // Chama a função de UPDATE e passa os parametros/dados esperados pela a função.
-            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT);
+            updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT); // RM
 
             // Desativa equipamentos no SISMA
-            updateSISMA_statusEquipamento();
+            updateSISMA_statusEquipamento(connSisma); // SQL
 
             // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado esse aditivo
-            updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR);
-            atualizaStatusEquipamento("Equipamento_desmobilizado");
+            updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR, connCustom); // SQL
+            atualizaStatusEquipamento("Equipamento_desmobilizado", connCustom);
 
         } else if (tipoContrato == "Locação de Equipamento (Rescisões)" || tipoContrato == "Locação de Equipamento - Com Mão de Obra (Rescisões)") {
             // Chama a função de UPDATE/INSERT e passa os parametros/dados esperados pela a função.
-            alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "CANCELADO");
+            alteraStatusContrato_RM(hAPI.getCardValue("CODCOLIGADA"), IDCNT, "CANCELADO"); // RM
 
             // Atualiza o ATIVO para desativado ( 0 ) do(s) equip(s), porque aqui já estará aprovado essa rescisão
-            updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR);
-            atualizaStatusEquipamento("Equipamento_desmobilizado");
+            updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR, connCustom); // SQl
+            atualizaStatusEquipamento("Equipamento_desmobilizado", connCustom);
 
             // Desativa equipamentos no SISMA
-            updateSISMA_statusEquipamento();
+            updateSISMA_statusEquipamento(connSisma); // SQL
 
         } else if (tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
 
-            updateTcntAuxiliarItens_statusEquipNoContrato("1", ID_TCNT_AUXILIAR);
+            updateTcntAuxiliarItens_statusEquipNoContrato("1", ID_TCNT_AUXILIAR, connCustom); // SQL
 
         } else if (tipoContrato == "Transporte de Materiais - Exclusão de Equipamento") {
             // MELHORIA TRANSPORTE — desativa (ATIVO=0) os equipamentos selecionados para exclusão do contrato.
-            updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR);
+            updateTcntAuxiliarItens_statusEquipNoContrato("0", ID_TCNT_AUXILIAR, connCustom); // SQL
 
         } else if (tipoContrato == "Transporte de Materiais - Alteração de Valor") {
             //MELHORIA TRANSPORTE — grava o novo valor do aditivo no item do contrato no RM
-            updateTCNT_alteracaoValor_transporte(IDCNT);
+            updateTCNT_alteracaoValor_transporte(IDCNT); // RM
 
         } else if (tipoContrato == "Transporte de Materiais - Alteração de Prazo") {
             //MELHORIA TRANSPORTE — grava a nova data fim no contrato no RM (reaproveita a função de prazo, que é genérica: IDCNT + data)
-            updateTCNT_alteracaoPrazo_equipamento(IDCNT, hAPI.getCardValue("novaDataFimTransporte"));
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, hAPI.getCardValue("novaDataFimTransporte")); // RM
 
         } else if (tipoContrato == "Transporte de Materiais - Alteração de Prazo e Valor") {
             //MELHORIA TRANSPORTE — grava a nova data fim E o novo valor no contrato no RM
-            updateTCNT_alteracaoPrazo_equipamento(IDCNT, hAPI.getCardValue("novaDataFimTransporte"));
-            updateTCNT_alteracaoValor_transporte(IDCNT);
-
+            updateTCNT_alteracaoPrazo_equipamento(IDCNT, hAPI.getCardValue("novaDataFimTransporte")); // RM
+            updateTCNT_alteracaoValor_transporte(IDCNT); // RM
         }
+
     } catch (error) {
+        // Lança erro
         throw error;
     }
 }
@@ -514,15 +673,6 @@ function validaParametros(parametros) {
         erroRetorno.push("ITENS");
     }
 
-    // try {
-    //     log.info(parametros.ITENS);
-    //     parametros.ITENS = JSONUtil.toJSON(parametros.ITENS);
-    // } catch (error) {
-    //     log.info("Erro no parse do JSON ITENS");
-    //     log.dir(error);
-    //     erroRetorno.push("ITENS");
-    // }
-
     for (var i = 0; i < parametros.ITENS.length; i++) {
         var item = parametros.ITENS[i];
 
@@ -574,6 +724,8 @@ function validaParametros(parametros) {
     }
 }
 
+
+// XML's
 function montaXMLCriacaoDeContrato(parametros) {
     var xml = "";
     xml += "<CTRCNT>";
@@ -695,6 +847,9 @@ function geraXML_TITMCNTRATDEP(parametros) {
     }
     return xml;
 }
+
+
+// Update RM
 function updateTCNT_alteracaoPrazo_imovel(IDCNT, dataFimLocacao) {
 
     var CODCOLIGADA = hAPI.getCardValue("CODCOLIGADA");
@@ -896,8 +1051,9 @@ function updateTCNT_alteracaoValorLocacao_equipamento(tipoContrato, IDCNT) {
         throw "Erro ao alterar valor: " + retorno.values[0][1];
     }
 }
-//MELHORIA TRANSPORTE: grava no RM o novo valor do item do contrato para o aditivo de Alteração de Valor de Transporte
 function updateTCNT_alteracaoValor_transporte(IDCNT) {
+    //MELHORIA TRANSPORTE: grava no RM o novo valor do item do contrato para o aditivo de Alteração de Valor de Transporte
+
     var CODCOLIGADA = hAPI.getCardValue("CODCOLIGADA");
 
     //calcula o novo valor conforme o Formato de Cobrança escolhido no aditivo
@@ -947,28 +1103,6 @@ function updateTCNT_alteracaoValor_transporte(IDCNT) {
         throw "Erro ao alterar valor do aditivo de Transporte: " + retorno.values[0][1];
     }
 }
-function updateSISMA_alteracaoAluguelContrato_equipamento() {
-    try {
-        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
-        var counter = 0;
-        for (var i = 0; i < indexes.length; i++) {
-            var id = indexes[i]
-            var prefixo = hAPI.getCardValue("equipSelecionado_aditivos___" + id);
-            var valorReajustado = ValorToFloat(hAPI.getCardValue("valorReajustado_aditivos___" + id));
-            var valorMaoDeObra = ValorToFloat(hAPI.getCardValue("valorMaoDeObraAditivos___" + id));
-            var valorAluguelContrato = valorReajustado - valorMaoDeObra;
-
-            var query = "UPDATE EQUIPAMENTO SET ALUGUEL_CONTRATO = ? WHERE NUMEEQUI = ?";
-            executaUpdate(query, [
-                {type:"float", value: valorAluguelContrato},
-                {type:"varchar", value: prefixo},
-            ], "jdbc/Sisma");
-            counter++;
-        }
-    } catch (error) {
-        throw error;
-    }
-}
 function alteraStatusContrato_RM(CODCOLIGADA, IDCNT, STATUS) {
     try {
         var CODSTACNT = STATUS_CONTRATOS[STATUS];
@@ -1010,7 +1144,9 @@ function alteraStatusContrato_RM(CODCOLIGADA, IDCNT, STATUS) {
     }
 }
 
-function insereDadosNaTabelaAuxiliar(){ //Contratos Novos
+
+// INSERT Sql
+function insereDadosNaTabelaAuxiliar(conn) { //Contratos Novos
     try {
         
         var query = "INSERT INTO TCNT_AUXILIAR (";
@@ -1041,14 +1177,14 @@ function insereDadosNaTabelaAuxiliar(){ //Contratos Novos
             {type:"varchar", value:hAPI.getCardValue("descontoPorDiaChuva").replace("%","")},//PERCENT_DESCONTO_CHUVA
             {type:"varchar", value:hAPI.getCardValue("descontoPorDiaParado").replace("%","")},//PERCENT_DESCONTO_DIAS_PARADO
             {type:"int", value:getValue("WKNumProces")},//TIPO_CONTRATO
-        ], "/jdbc/CastilhoCustom");
+        ], conn);
 
         return id;
     } catch (error) {
         throw error;
     }
 }
-function insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR) { //Tabela Historico de Aditivo/Rescisão
+function insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCNT_AUXILIAR, conn) { //Tabela Historico de Aditivo/Rescisão
     var valorMensalAluguel = hAPI.getCardValue("valorMensalAluguel");
     var valorLocacaoReajustado = hAPI.getCardValue("valorLocacaoReajustado");
     var dataInicioLocacao = hAPI.getCardValue("dataInicioLocacao");
@@ -1089,14 +1225,14 @@ function insereDadosNaTabelaAuxiliar_aditivoRescisao_imovel(tipoContrato, ID_TCN
             {type:"int", value: getValue("WKNumProces")}, // Nº da Solicitação Fluig
             {type:"date", value: dataAtual}, // Data atual do processo
             {type:"date", value: dataAtual}, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)
-        ], "/jdbc/CastilhoCustom");
+        ], conn);
 
         return id;
     } catch (error) {
         throw error;
     }
 }
-function insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR) { //Tabela Historico de Aditivo/Rescisão
+function insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, ID_TCNT_AUXILIAR, conn) { //Tabela Historico de Aditivo/Rescisão
     try {
         var valorTotalContrato = ValorToFloat(hAPI.getCardValue("valorMensalLocacao"));
         var valorTotalContartoMask = hAPI.getCardValue("valorMensalLocacao");
@@ -1202,13 +1338,13 @@ function insereDadosNaTabelaAuxiliar_aditivoRescisao_equipamento(tipoContrato, I
             {type:"int", value: getValue("WKNumProces")}, // Nº da Solicitação Fluig
             {type:"date", value: dataReajuste}, // Data do reajuste informado no form
             {type:"date", value: dataAtual}, // Data de assinatura (Data atual considerando assinado já que foi aprovado/finalizado o processo)
-        ], "/jdbc/CastilhoCustom");
+        ], conn);
         
     } catch (error) {
         throw error;
     }
 }
-function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclusão de Equip
+function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR, conn) { //Inclusão de Equip
     try {
         var tipoContrato = hAPI.getCardValue("tipoContrato");
 
@@ -1216,7 +1352,7 @@ function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclu
         var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
 
         // Busca o próximo NSEQITEMCNT disponível para esse contrato auxiliar
-        var proximoNSEQITEMCNT = getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR);
+        var proximoNSEQITEMCNT = getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR, conn);
 
         // Pecorre cada linha da tabela
         for (var i = 0; i < indexes.length; i++) {
@@ -1247,7 +1383,7 @@ function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclu
                 { type: "int", value: proximoNSEQITEMCNT },
                 { type: "varchar", value: prefixo },
                 { type: "int", value: '0' }, // STATUS Desativado, vai ser reativado depois no final do Solict caso seja aprovado o Aditivo/Rescisão
-            ], "/jdbc/CastilhoCustom");
+            ], conn);
 
             // Próximo item já vai com a próxima sequência
             proximoNSEQITEMCNT++;
@@ -1277,18 +1413,18 @@ function insereNaTabelaAuxiliarItens_equipNoContrato(ID_TCNT_AUXILIAR) { //Inclu
         }
     }
 }
-function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){ //Contratos novos
+function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR, conn) { //Contratos novos
     try {
         var tipo_contrato = hAPI.getCardValue("tipoContrato");
 
         if (tipo_contrato == "Locação de Equipamento") {
-            insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR);
+            insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR, conn);
         }
         if (tipo_contrato == "Locação de Equipamento - Com Mão de Obra") {
-            insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR);
+            insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR, conn);
         }
         else if(tipo_contrato == "Locação de Imóvel"){
-            insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR);
+            insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR, conn);
         }
 
        
@@ -1296,7 +1432,7 @@ function insereDadosNaTabelaAuxiliarItens(ID_TCNT_AUXILIAR){ //Contratos novos
         throw error;
     }
 }
-function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){ //Contratos novos
+function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR, conn) { //Contratos novos
 
     // Nos testes vai pode ser inserido mais de 1 PREFIXO igual para o mesmo ID_TCNT_AUXILIAR
     // Mas em produção o PREFIXO será único, 
@@ -1320,14 +1456,14 @@ function insereItensLocacaoDeEquipamento(ID_TCNT_AUXILIAR){ //Contratos novos
                 {type:"int", value:counter},//NSEQITEMCNT
                 {type:"varchar", value:prefixo},//PREFIXO
                 {type:"int", value: "1"}, // Ativado
-            ], "/jdbc/CastilhoCustom");
+            ], conn);
             counter++;
         }
     } catch (error) {
         throw error;
     }
 }
-function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){ //Contratos novos
+function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR, conn) { //Contratos novos
  try {        
         var query = "INSERT INTO TCNT_AUXILIAR_ITENS (";
         query += "ID_TCNT_AUXILIAR, ";
@@ -1347,36 +1483,150 @@ function insereItensLocacaoDeImovel(ID_TCNT_AUXILIAR){ //Contratos novos
             {type:"float", value:ValorToFloat(hAPI.getCardValue("valorMensalAluguel")+"")},//VALOR
             {type:"varchar", value:"MES"},//UN
             {type:"date", value:hAPI.getCardValue("enderecoImovel")},// ENDERECO
-        ], "/jdbc/CastilhoCustom");  
+        ], conn);
 
     } catch (error) {
         throw error;
     }
 }
 
-function updateTcntAuxiliar_IDCNT(IDCNT, ID_TCNT_AUXILIAR){
+
+// UPDATE Sql | UPDATE RM
+function updateTcntAuxiliarCompleto_quandoContratoNovo(ID_TCNT_AUXILIAR, connCustom) { // Tabela de Contrato
+
+    log.info("## updateTcntAuxiliarCompleto_quandoContratoNovo_eAntesContratoGeradoRM chamada.");
+    log.info("Atividade: " + hAPI.getCardValue("atividade"));
+
+    if (hAPI.getCardValue("origemContrato") != "Novos" || !hAPI.getCardValue("ID_TCNT_AUXILIAR")) {
+        return; // Só continua se for "Novos" E tiver ID_TCNT_AUXILIAR
+    }
+
+    // Campos do Form
+    var CODCOLIGADA = hAPI.getCardValue("CODCOLIGADA");
+    var modeloContrato = hAPI.getCardValue("modeloContrato") == "Modelo Castilho" ? 1 : 0;
+    var temRetencao = hAPI.getCardValue("temRetencao") == "Sim" ? 1 : 0;
+    var percentualRetencao = hAPI.getCardValue("percentualRetencao").replace("%","");
+    var temREIDI = hAPI.getCardValue("temREIDI") == "Sim" ? 1 : 0;
+    var percentualREIDI = hAPI.getCardValue("percentualREIDI");
+    var tipoAssinatura = hAPI.getCardValue("assinaturaContrato");
+    var tipoContrato = hAPI.getCardValue("tipoContrato");
+    var percentualDescontoChuva = hAPI.getCardValue("descontoPorDiaChuva").replace("%","");
+    var percentualDescontoDiasParado = hAPI.getCardValue("descontoPorDiaParado").replace("%","");
+
+    // Executa Update
+    updateTcntAuxiliar_porID_TCNT_AUXILIAR({
+        CODCOLIGADA:                    { type: "int",     value: CODCOLIGADA },
+        IS_MODELO_CASTILHO:             { type: "int",     value: modeloContrato },
+        IS_RETENCAO:                    { type: "int",     value: temRetencao },
+        PERCENT_RETENCAO:               { type: "float",   value: percentualRetencao },
+        IS_REIDI:                       { type: "int",     value: temREIDI },
+        PERCENT_REIDI:                  { type: "float",   value: percentualREIDI },
+        TIPO_ASSINATURA:                { type: "varchar", value: tipoAssinatura },
+        TIPO_CONTRATO:                  { type: "varchar", value: tipoContrato },
+        PERCENT_DESCONTO_CHUVA:         { type: "varchar", value: percentualDescontoChuva },
+        PERCENT_DESCONTO_DIAS_PARADO:   { type: "varchar", value: percentualDescontoDiasParado }
+    });
+
+
+    // Util
+    function updateTcntAuxiliar_porID_TCNT_AUXILIAR(campos) {
+        try {
+            var colunas = []; // Guarda as colunas que irá no SET
+            var constraints = []; // Guarda os valores do SET, que são os  "?"
+
+            for (var coluna in campos) {
+                colunas.push( coluna + " = ?" ); // Monta: "NOME_COLUNA = ?", e add (push) na lista do SET
+                constraints.push({ type: campos[coluna].type, value: campos[coluna].value }); // Empilha o tipo e o valor daquela coluna
+            }
+
+            // Junta os pedaços da colunas com virgula e monta o UPDATE completo, com o WHERE pel o ID
+            var query = "UPDATE TCNT_AUXILIAR SET " + colunas.join(", ") + " WHERE ID = ?";
+
+            // Adiciona por ultimo o valor do "?"  WHERE
+            constraints.push({ type: "int", value: ID_TCNT_AUXILIAR });
+
+            // Executa o UPDATE
+            executaUpdate(query, constraints, connCustom);
+            log.info("## updateTcntAuxiliar_porID_TCNT_AUXILIAR, query: ");
+            log.dir(query);
+
+        } catch (error) {
+            throw error;
+        }
+    }
+}
+function atualizaDadosTabelasAuxiliares_porOrigemContratoTipoContrato(origemContrato, tipoContrato, connCustom) {
+
+    log.info("## atualizaDadosTabelasAuxiliares_porOrigemContratoTipoContrato chamada.");
+    log.info("Atividade: " + hAPI.getCardValue("atividade"));
+
+    var ID_TCNT_AUXILIAR = hAPI.getCardValue("ID_TCNT_AUXILIAR");
+
+    // Formata valor monetario para float
+    var valorLocacaoReajustado = ValorToFloat(hAPI.getCardValue("valorLocacaoReajustado"));
+
+    // ============================
+    // Origem Contrato: NOVOS
+    // ============================
+
+    if (origemContrato == "Novos") {
+        // Locação de Imóvel
+        if (tipoContrato == "Locação de Imóvel") {
+            updateTcntAuxiliarItens_locacaoDeImovel(ID_TCNT_AUXILIAR, connCustom); // SQL
+        }
+    }
+
+
+    // Utils
+    function updateTcntAuxiliarItens_locacaoDeImovel(ID_TCNT_AUXILIAR, connCustom) { // Locação de Imóvel
+        try {
+            var query = "UPDATE TCNT_AUXILIAR_ITENS SET ";
+            query += "TIPO = ?, ";
+            query += "DESCRICAO = ?, ";
+            query += "VALOR = ?, ";
+            query += "ENDERECO = ? ";
+            query += "WHERE ID_TCNT_AUXILIAR = ? AND NSEQITEMCNT = ?";
+
+            executaUpdate(query,[
+                { type: "varchar", value: hAPI.getCardValue("finalidadeLocacao") }, //TIPO
+                { type: "varchar", value: hAPI.getCardValue("descricaoImovel") }, //DESCRICAO
+                { type: "float", value: ValorToFloat(hAPI.getCardValue("valorMensalAluguel")+"") }, //VALOR
+                { type: "date", value: hAPI.getCardValue("enderecoImovel") }, // ENDERECO
+                { type: "int", value: ID_TCNT_AUXILIAR }, // ID_TCNT_AUXILIAR
+                { type: "int", value: "0" }, // NSEQITEMCNT, Imóvel é fixo 0 (somente 1 item)
+            ], connCustom);
+
+        } catch (error) {
+            throw error;
+        }
+    }
+}
+
+
+// UPDATE Sql - Geral
+function updateTcntAuxiliar_IDCNT(IDCNT, ID_TCNT_AUXILIAR, conn){
     try {
         var query = "UPDATE TCNT_AUXILIAR SET IDCNT = ? WHERE ID = ?";
         executaUpdate(query, [
             {type:"int", value:IDCNT},
             {type:"int", value:ID_TCNT_AUXILIAR},
-        ], "/jdbc/CastilhoCustom");
+        ], conn);
     } catch (error) {
         throw error;   
     }
 }
-function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR){
+function updateTcntAuxiliar_dataAssinatura(DATA_ASSINATURA, ID_TCNT_AUXILIAR, conn){
     try {
         var query = "UPDATE TCNT_AUXILIAR SET DATA_ASSINATURA = ? WHERE ID = ?";
         executaUpdate(query, [
             {type:"date", value:DATA_ASSINATURA},
             {type:"int", value:ID_TCNT_AUXILIAR},
-        ], "jdbc/CastilhoCustom");
+        ], conn);
     } catch (error) {
         throw error;
     }
 }
-function updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, NSEQITEMCNT) {
+function updateTcntAuxiliarItens_alteracaoValorAluguel_imovel(valorLocacaoReajustado, ID_TCNT_AUXILIAR, NSEQITEMCNT, conn) {
     try {
         // Inicia um bloco de proteção contra erros, se algo der errado durante a execução, o erro será capturado.
 
@@ -1394,7 +1644,7 @@ function updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado,
             // Terceiro "?" > numero de sequencia do item do contrato
             {type: "int", value: NSEQITEMCNT},
 
-        ], "jdbc/CastilhoCustom"); 
+        ], conn);
         // "jdbc/CastilhoCustom" é o nome da conexão usada para acessar o banco.
 
     } catch (error) {
@@ -1404,7 +1654,7 @@ function updateTcntAuxiliar_alteracaoValorAluguel_imovel(valorLocacaoReajustado,
         throw error;
     }
 }
-function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR) { //Inclusão/Exclusão de Equip
+function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR, conn) { //Inclusão/Exclusão de Equip
     try {
         // hAPI.getChildrenIndexes retorna uma array de indexes que contém na tabela, exemplo ["1", "2", "3"]
         var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
@@ -1430,7 +1680,7 @@ function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR) 
                 { type: "int", value: ATIVO },
                 { type: "varchar", value: prefixo },
                 { type : "int", value: ID_TCNT_AUXILIAR }
-            ], "/jdbc/CastilhoCustom");
+            ], conn);
         }
 
     } catch (error) {
@@ -1457,51 +1707,7 @@ function updateTcntAuxiliarItens_statusEquipNoContrato(ATIVO, ID_TCNT_AUXILIAR) 
         }
     }
 }
-function getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR) {
-    try {
-        if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
-            var query = "SELECT MAX(NSEQITEMCNT) +1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?"
-
-            var result = executaQuery(query, [
-                { type: "int", value: ID_TCNT_AUXILIAR }
-            ], "/jdbc/CastilhoCustom");
-
-            return parseInt(result[0].NSEQITEMCNT);
-
-        } else if (tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
-
-            var query = "SELECT COALESCE(MAX(NSEQITEMCNT), -1) + 1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?"
-
-            var result = executaQuery(query, [
-                { type: "int", value: ID_TCNT_AUXILIAR }
-            ], "/jdbc/CastilhoCustom");
-
-            return parseInt(result[0].NSEQITEMCNT);
-
-        } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
-
-
-        }
-
-    } catch (error) {
-
-
-        if (error instanceof Error) {
-            
-            throw error;
-        } else {
-
-
-            throw new Error(
-              
-                typeof error === "string"
-                    ? error
-                    : JSON.stringify(error)
-            );
-        }
-    }
-}
-function updateSISMA_statusEquipamento() { 
+function updateSISMA_statusEquipamento(conn) { 
     try {
         var dataAtual = getDateNow() + " 00:00:00";
 
@@ -1529,7 +1735,7 @@ function updateSISMA_statusEquipamento() {
                 { type: "int", value: '1' },
                 { type: "datetime", value: dataAtual },
                 { type: "varchar", value: prefixo }
-            ], "/jdbc/Sisma");
+            ], conn);
         }
 
     } catch (error) {
@@ -1550,19 +1756,29 @@ function updateSISMA_statusEquipamento() {
         }
     }
 }
+function updateSISMA_alteracaoAluguelContrato_equipamento(conn) {
+    try {
+        var indexes = hAPI.getChildrenIndexes("tableEquipamentosSelecionados_aditivos");
+        var counter = 0;
+        for (var i = 0; i < indexes.length; i++) {
+            var id = indexes[i]
+            var prefixo = hAPI.getCardValue("equipSelecionado_aditivos___" + id);
+            var valorReajustado = ValorToFloat(hAPI.getCardValue("valorReajustado_aditivos___" + id));
+            var valorMaoDeObra = ValorToFloat(hAPI.getCardValue("valorMaoDeObraAditivos___" + id));
+            var valorAluguelContrato = valorReajustado - valorMaoDeObra;
 
-
-// Equipamentos
-var codigoStatusEquipamentos = {
-    "Pendente_Contrato":1,
-    "Contrato_em_Andamento_com_análise_pendente":2,
-    "Contrato_em_Andamento_com_análise_realizada":3,
-    "Contrato_Vigente":4,
-    "Equipamento_desmobilizado":5,
-    "Contrato_encerrado":6,
+            var query = "UPDATE EQUIPAMENTO SET ALUGUEL_CONTRATO = ? WHERE NUMEEQUI = ?";
+            executaUpdate(query, [
+                {type:"float", value: valorAluguelContrato},
+                {type:"varchar", value: prefixo},
+            ], conn);
+            counter++;
+        }
+    } catch (error) {
+        throw error;
+    }
 }
-
-function atualizaStatusEquipamento(status){
+function atualizaStatusEquipamento(status, conn){
     var origemContrato = hAPI.getCardValue("origemContrato");
 
     if (origemContrato == "Novos") {
@@ -1573,7 +1789,8 @@ function atualizaStatusEquipamento(status){
                 var id = indexes[i]
                 var prefixo = hAPI.getCardValue("equipamentoSelecionadoPrefixo" + "___" + id);
 
-                var isMAouOutros = buscaCategoriaPorPrefixo(prefixo);
+                // MA / PA
+                var isMAouOutros = buscaCategoriaPorPrefixo(prefixo, conn);
                 if (isMAouOutros[0].CATEGORIA != "Outros") {
                     var query = "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET ";
                     query += "STATUS = ? ";
@@ -1582,8 +1799,10 @@ function atualizaStatusEquipamento(status){
                     executeInsert(query, [
                         {type:"int", value:codigoStatusEquipamentos[status]},
                         {type:"varchar", value:prefixo},
-                    ], "/jdbc/CastilhoCustom");
-                }else{
+                    ], conn);
+
+                // Outros
+                } else {
                     var query = "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR_OUTROS SET ";
                     query += "STATUS = ? ";
                     query +="WHERE PREFIXO = ?";
@@ -1591,7 +1810,7 @@ function atualizaStatusEquipamento(status){
                     executeInsert(query, [
                         {type:"int", value:codigoStatusEquipamentos[status]},
                         {type:"varchar", value:prefixo},
-                    ], "/jdbc/CastilhoCustom");
+                    ], conn);
                 }
             }
         } catch (error) {
@@ -1612,7 +1831,7 @@ function atualizaStatusEquipamento(status){
                 executeInsert(query, [
                     {type:"int", value:codigoStatusEquipamentos[status]},
                     {type:"varchar", value:prefixo},
-                ], "/jdbc/CastilhoCustom");
+                ], conn);
                 
             }
         } catch (error) {
@@ -1621,16 +1840,62 @@ function atualizaStatusEquipamento(status){
     }
 }
 
-function buscaCategoriaPorPrefixo(PREFIXO){
+
+// SELECT sql
+function buscaCategoriaPorPrefixo(PREFIXO, conn){
     try {
         var query = "SELECT CATEGORIA FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE PREFIXO = ?";
         var retorno = executaQuery(query, [
             {type:"varchar", value:PREFIXO}
-        ], "/jdbc/CastilhoCustom");
+        ], conn);
 
         return retorno;
     } catch (error) {
         throw error;
+    }
+}
+function getNSEQITEMCNT_porID_TCNT_AUXILIAR(tipoContrato, ID_TCNT_AUXILIAR, conn) {
+    try {
+        if (tipoContrato == "Locação de Equipamento - Inclusão de Equipamento") {
+            var query = "SELECT MAX(NSEQITEMCNT) +1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?"
+
+            var result = executaQuery(query, [
+                { type: "int", value: ID_TCNT_AUXILIAR }
+            ], conn);
+
+            return parseInt(result[0].NSEQITEMCNT);
+
+        } else if (tipoContrato == "Transporte de Materiais - Inclusão de Equipamento") {
+
+            var query = "SELECT COALESCE(MAX(NSEQITEMCNT), -1) + 1 AS NSEQITEMCNT FROM TCNT_AUXILIAR_ITENS WHERE ID_TCNT_AUXILIAR = ?"
+
+            var result = executaQuery(query, [
+                { type: "int", value: ID_TCNT_AUXILIAR }
+            ], conn);
+
+            return parseInt(result[0].NSEQITEMCNT);
+
+        } else if (tipoContrato == "Locação de Equipamento - Exclusão de Equipamento") {
+
+
+        }
+
+    } catch (error) {
+
+
+        if (error instanceof Error) {
+            
+            throw error;
+        } else {
+
+
+            throw new Error(
+              
+                typeof error === "string"
+                    ? error
+                    : JSON.stringify(error)
+            );
+        }
     }
 }
 
@@ -1740,21 +2005,43 @@ function buscaDadosDoArquivo(documentId){
 }
 
 
-// Utils
+// Historico
 function insereHistorico(observacao, acao, atividade) {
     var USER = getValue("WKUser");
     var DATA = getDateTimeNow();
+    var atividadeAtual = getValue("WKNumState");
+
+    // Quando não estiver sendo movimentada (false), não executa inserção de histórico
+    if (getValue("WKCompletTask") == "false") {
+        return;
+    }
+
+    // Quando for iniciar a solicit
+    if (solicitacaoEstaSendoAberta()) {
+        acao = "Abertura Solicitação"
+    }
+
+    // Quando atvd "Análise de Equipamentos"
+    if (atividadeAtual == ATIVIDADES.ANALISE_EQUIPAMENTO) {
+        // Usa o usuário do Fluig
+        // Para constar no historico o Fluig como se o Fluig tivesse movimentado
+        // Por que é movimentado automático quando passa por analise
+        USER = "fluig";
+    }
 
     var novaLinha = new java.util.HashMap();
     novaLinha.put("tableHistoricoUsuario", USER);
     novaLinha.put("tableHistoricoData", DATA);
     novaLinha.put("tableHistoricoAtividade", atividade);
+    novaLinha.put("tableHistoricoProximaAtividade", "");
     novaLinha.put("tableHistoricoObservacao", observacao);
     novaLinha.put("tableHistoricoAcao", acao);
 
     hAPI.addCardChild("tableHistorico", novaLinha);
 }
 
+
+// Utils
 function getDateTimeNow() {
     var date = new Date();
     var dia = date.getDate();
@@ -1863,14 +2150,33 @@ function BuscaNomeUsuario(CodUsuario) {
 
     return ds.getValue(0, "colleagueName");
 }
-function executaQuery(query, constraints, dataSource) {
-    try {
-        var dataSource = dataSource;
-        var ic = new javax.naming.InitialContext();
-        var ds = ic.lookup(dataSource);
+function executaQuery(query, constraints, dataSourceOrConn) {
+    // O terceiro parâmetro era sempre uma string com o nome do banco (ex: "/jdbc/Sisma").
+    // Renomeamos para dataSourceOrConn porque agora pode ser duas coisas:
+    //   - Uma string "/jdbc/Sisma" -> comportamento antigo, abre e fecha conexão aqui dentro
+    //   - Um objeto de conexão já aberta -> usa ela e NÃO fecha (quem abriu é responsável)
 
-        var conn = ds.getConnection();
-        var stmt = conn.prepareStatement(query);
+    try {
+        log.info("executandoQuery");
+        log.info(query);
+        log.dir(constraints);
+
+        var ic = new javax.naming.InitialContext();
+
+        // dataSourceOrConn pode ser:
+        //   - String com o nome do datasource ("/jdbc/Sisma") -> abrimos e fechamos aqui
+        //   - Conexão já aberta (modo transação)              -> usamos e NÃO fechamos
+        var isConexaoCompartilhada = (dataSourceOrConn instanceof Packages.java.sql.Connection);
+        var ownConn = !isConexaoCompartilhada;
+
+        if (ownConn) {
+            var ds = ic.lookup(dataSourceOrConn);
+            conn = ds.getConnection();
+        } else {
+            conn = dataSourceOrConn;   // usa a conexão da transação
+        }
+
+        var stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);
 
         var counter = 1;
         for (var i = 0; i < constraints.length; i++) {
@@ -1913,25 +2219,41 @@ function executaQuery(query, constraints, dataSource) {
         if (stmt != null) {
             stmt.close();
         }
-        if (conn != null) {
+        // Só fecha conexão se foi a gente que abriu (ownConn = true)
+        // Se veio de fora (ownConn = false), deixa aberta - quem abriu fecha
+        // Fecha antes do commit/rollback cancela a transação inteira, evitando cadastro "quebrado"
+        if (ownConn && conn != null) {
             conn.close();
         }
     }
 }
-function executeInsert(query, constraints, dataSource) {
-    var conn = null;
-    var stmt = null;
-    var insertedId = null;
+function executeInsert(query, constraints, dataSourceOrConn) {
+    // O terceiro parâmetro era sempre uma string com o nome do banco (ex: "/jdbc/Sisma").
+    // Renomeamos para dataSourceOrConn porque agora pode ser duas coisas:
+    //   - Uma string "/jdbc/Sisma" -> comportamento antigo, abre e fecha conexão aqui dentro
+    //   - Um objeto de conexão já aberta -> usa ela e NÃO fecha (quem abriu é responsável)
+
     try {
         log.info("executandoQuery");
         log.info(query);
         log.dir(constraints);
 
         var ic = new javax.naming.InitialContext();
-        var ds = ic.lookup(dataSource);
 
-        conn = ds.getConnection();
-        stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);
+        // dataSourceOrConn pode ser:
+        //   - String com o nome do datasource ("/jdbc/Sisma") -> abrimos e fechamos aqui
+        //   - Conexão já aberta (modo transação)              -> usamos e NÃO fechamos
+        var isConexaoCompartilhada = (dataSourceOrConn instanceof Packages.java.sql.Connection);
+        var ownConn = !isConexaoCompartilhada;
+
+        if (ownConn) {
+            var ds = ic.lookup(dataSourceOrConn);
+            conn = ds.getConnection();
+        } else {
+            conn = dataSourceOrConn;   // usa a conexão da transação
+        }
+
+        var stmt = conn.prepareStatement(query, Packages.java.sql.Statement.RETURN_GENERATED_KEYS);
 
         var counter = 1;
         for (var i = 0; i < constraints.length; i++) {
@@ -1953,71 +2275,49 @@ function executeInsert(query, constraints, dataSource) {
             counter++;
         }
 
-        // Use executeUpdate for INSERT and then try getGeneratedKeys
-        var rowsAffected = stmt.executeUpdate();
-        log.info("rowsAffected: " + rowsAffected);
 
-        var rsKeys = stmt.getGeneratedKeys();
-        if (rsKeys != null) {
-            try {
-                if (rsKeys.next()) {
-                    insertedId = rsKeys.getInt(1);
-                    log.info("generated id (getGeneratedKeys): " + insertedId);
-                }
-            } finally {
-                try { rsKeys.close(); } catch (e) { }
-            }
+        stmt.execute();
+
+        var generatedKeys = stmt.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            var id = generatedKeys.getInt(1);
+            log.info("ID gerado: " + id);
+            return id;
         }
-
-        // Fallback for SQL Server when driver doesn't return generated keys
-        if (insertedId == null) {
-            try {
-                var fallbackSql = "SELECT SCOPE_IDENTITY() AS ID";
-                var fallbackStmt = conn.prepareStatement(fallbackSql);
-                var rsScope = fallbackStmt.executeQuery();
-                try {
-                    if (rsScope.next()) {
-                        insertedId = rsScope.getInt("ID");
-                        log.info("generated id (SCOPE_IDENTITY): " + insertedId);
-                    }
-                } finally {
-                    try { rsScope.close(); } catch (e) { }
-                    try { fallbackStmt.close(); } catch (e) { }
-                }
-            } catch (e) {
-                log.info("SCOPE_IDENTITY fallback failed: " + e);
-            }
-        }
-
     } catch (error) {
         var msg = "";
-        if (error && error.javaException) {
-            msg = error.javaException.getMessage();
-        } else if (error && error.message) {
-            if (error.message.Error) {
+            // Try to extract useful message safely
+            if (error && error.javaException) {
+                msg = error.javaException.getMessage();
+            } else if (error && error.message) {
+                if (error.message.Error) {
+                }else{
+                    msg = error.message;
+                }
+
+
             } else {
-                msg = error.message;
+                msg = String(error);
             }
-        } else {
-            msg = String(error);
-        }
 
-        log.error("ERRO==============> " + msg);
-        log.error("Type of error: " + typeof error);
-        log.error("Type of msg: " + typeof msg);
+            log.error("ERRO==============> " + msg);
+            log.error("Type of error: " + typeof error);
+            log.error("Type of msg: " + typeof msg);
 
-        throw "Erro ao executar Dataset: " + msg;
+            // Safely rethrow as standard JS error
+            throw "Erro ao executar Dataset: " + msg;
 
     } finally {
         if (stmt != null) {
-            try { stmt.close(); } catch (e) { }
+            stmt.close();
         }
-        if (conn != null) {
-            try { conn.close(); } catch (e) { }
+        // Só fecha conexão se foi a gente que abriu (ownConn = true)
+        // Se veio de fora (ownConn = false), deixa aberta - quem abriu fecha
+        // Fecha antes do commit/rollback cancela a transação inteira, evitando cadastro "quebrado"
+        if (ownConn && conn != null) {
+            conn.close();
         }
     }
-
-    return insertedId;
 }
 function anexaDocumentoNoProcesso(documentId){
     var attachments = hAPI.listAttachments();
@@ -2031,5 +2331,24 @@ function anexaDocumentoNoProcesso(documentId){
 
     if (!isAnexado) {
         hAPI.attachDocument(documentId);
+    }
+}
+function solicitacaoEstaSendoAberta() {
+
+    /*
+        Form Modes Fluig
+
+        ADD: O formulário está em modo de criação (nova solicitação).
+        MOD: O formulário está em modo de edição (uma solicitação existente sendo alterada ou movimentada).
+        VIEW: O formulário está em modo de apenas visualização (consulta).
+    */
+    
+    if (hAPI.getCardValue("formMode") == "ADD") {
+        log.info("## function solicitacaoEstaSendoAberta");
+        log.info("formMode: " + hAPI.getCardValue("formMode"));
+        return true;
+
+    } else {
+        return false
     }
 }

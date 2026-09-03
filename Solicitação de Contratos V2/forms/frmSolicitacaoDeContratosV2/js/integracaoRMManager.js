@@ -134,12 +134,22 @@ function preencheCamposAutomaticamente() {
                 valorItemRM = $("#valorMensalTransporte").val();                    // Valor Fixo
             }
         }
-        // Insere item do Produto
-        await insereItem(codigoProduto, valorItemRM, '1.3.03');
 
-        if (temRetencao) {
-            // Se tem retenção gera o item de retenção
-            await insereItem(4650, floatToMoney(valorRetencao), "1.3.81");
+        // Se houver pelo menos um item, não adiciona mais automaticamente
+        // Evitando duplicar itens a cada chegada na atvd da Controladoria
+        var temPeloMenosUmItem = $("[name^='novoContratoItemProduto___']").length > 0;
+        if (!temPeloMenosUmItem) {
+            // Insere item do Produto
+            await insereItem(codigoProduto, valorItemRM, [{ CODDEPTO: '1.3.03', PERCENTUAL: "100%" }]);
+
+            if (temRetencao) {
+                // Se tem retenção gera o item de retenção
+                await insereItem(4650, floatToMoney(valorRetencao), [{ CODDEPTO: "1.3.81", PERCENTUAL: "100%" }]);
+            }
+
+        // Caso contrário, TEM item(s) salvo, então carrega
+        } else {
+            redenrizaItensSalvos();
         }
 
         promiseBuscaCodigoDoContrato(CODCOLIGADA, CCUSTO).then(ds=>{
@@ -152,25 +162,67 @@ function preencheCamposAutomaticamente() {
         });
     }, 1000);
 
-    async function insereItem(IDProduto, valorItem, CODDEPTO){
+    async function insereItem(IDProduto, valorItem, rateio){
         return new Promise((resolve,reject)=>{
             try {
                 $("#btnAdicionarItem").click();
-                setTimeout(() => {
+                setTimeout(async () => {
                     $(".novoContratoItemValor:last").val(valorItem);
                     $("[name^='novoContratoItemProduto___']:last")[0].selectize.setValue(IDProduto);
-                    $(".btnAdicionarRateio:last").click();
-                    setTimeout(() => {
-                        $("select.selectDepartamentoNovoContratoItemRateio:last")[0].selectize.setValue(CODDEPTO);
-                        $(".inputValorNovoContratoItemRateio:last").val("100%");
-                        $(".inputValorNovoContratoItemRateio:last").change();
-                        resolve();
-                    }, 1000);
+
+                    var table = $(".divNovoContratoTableRateiosItens:last");
+
+                    for (const linha of rateio) {
+                        await new Promise((res) => {
+                            table.find(".btnAdicionarRateio").click(); // Add mais uma linha no rateio
+                            setTimeout(() => {
+                                var tr = table.find("tbody tr:last");
+
+                                tr.find("select.selectDepartamentoNovoContratoItemRateio")[0].selectize.setValue(linha.CODDEPTO);
+                                tr.find(".inputValorNovoContratoItemRateio").val(linha.PERCENTUAL).change();
+                                res();
+                            }, 1000);
+                        });
+                    }
+                    resolve();
                 }, 1000);
             } catch (error) {
                 reject(error);
             }
         });
+    }
+    async function redenrizaItensSalvos() {
+        // 1 - Lê os dados dos itens
+        var itensSalvos = [];
+        $("[name^='novoContratoItemProduto___']").each(function () {
+            var panel = $(this).closest(".panel");
+
+            itensSalvos.push({
+                produto: $(this).val(),
+                valor:   panel.find("[name^='novoContratoItemValor___']").val(),
+                rateio:  JSON.parse(panel.find("[name^='novoContratoJsonRateiosItem___']").val() || "[]")
+            });
+        });
+
+        // Nada salvo, deixa o preenchimento automático rodar
+        if (itensSalvos.length === 0) {
+            return; 
+        }
+
+        // 2 - Remove as linhas cruas
+        $("[name^='novoContratoItemProduto___']").each(function () {
+            fnWdkRemoveChild($(this).closest("tr")[0]);
+        });
+
+        // 3 - Recria cada item já inicializado, com o rateio
+        for (const item of itensSalvos) {
+            await insereItem(item.produto, item.valor, item.rateio);
+        }
+
+        renumeraItensNovoContrato();
+
+        // Itens renderizados. Se o Contrato RM já foi gerado, bloqueia os campos.
+        bloqueiaCamposPagIntegacaoRM_seJaGeradoContratoRM();
     }
 }
 
@@ -600,6 +652,7 @@ async function asyncAdicionarItemNovoContrato() {
     $(".titleCounterItem:last").html("Item " + id);
     $(".btnRemoverItemNovoContrato:last").off("click").on("click", function () {
         fnWdkRemoveChild($(this).closest("tr")[0]);
+        renumeraItensNovoContrato();
     });
 
     $("#novoContratoItemProduto" + "___" + id).html(await promiseRetornaHtmlOptionsProdutosDeItemDeContrato());
@@ -665,7 +718,19 @@ async function asyncInsereNovaLinhaReteio() {
         .find("tbody")
         .find(".btnRemoverLinhaRateioNovoItem")
         .on("click", function () {
+            var tbody = $(this).closest("tbody"); // Pega antes de remover a linha
             $(this).closest("tr").remove();
+
+            // .call(tbody) define o "this" da função como o tbody, para remontar o JSON só com as linhas restantes
+            salvaJSONRateio.call(tbody);
+
+            /*
+                salvaJSONRateio() sozinho -> this seria o objeto errado, e a função não acharia as linhas certas.
+                salvaJSONRateio.call(tbody) -> força o this a ser exatamente o <tbody> daquela tabela de rateio.
+
+                Guardar var tbody antes do .remove(): depois que a linha (tr) é removida do DOM, o $(this) do botão fica "solto" e closest("tbody") retornaria vazio. 
+                Por isso pega a referência antes.
+            */
         });
 
     async function asyncGeraLinhaTabela() {
@@ -685,6 +750,15 @@ async function asyncInsereNovaLinhaReteio() {
         </tr>`;
         return html;
     }
+}
+function renumeraItensNovoContrato() {
+
+    // Renumera para começar do numero 1, já que o "Item" usa o índice interno do wdkAddChild....
+    // que é cumulativo e não reinicia ao remover/recriar as linhas na reconstrução,
+    // fazendo o primeiro item aparecer como "Item 2". Aqui é renumerado pela posição real.
+    $("[name^='novoContratoItemProduto___']").each(function (i) {
+        $(this).closest(".panel").find(".titleCounterItem").html("Item " + (i + 1));
+    });
 }
 function salvaJSONRateio() {
     var json = [];

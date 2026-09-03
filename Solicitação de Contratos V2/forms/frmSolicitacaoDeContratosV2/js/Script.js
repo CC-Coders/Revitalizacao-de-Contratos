@@ -8,6 +8,7 @@ const ATIVIDADES = {
     CONTROLADORIA: 32,
     ENGENHEIRO: 43,
     COORDENADOR_OBRAS: 48,
+    ANALISE_EQUIPAMENTO: 104,
     DIRETORIA: 53,
     INTERMEDIARIO_ASSINATURA_ELETRONICA: 58,
     ASSINATURA_ELETRONICA: 66,
@@ -16,6 +17,24 @@ const ATIVIDADES = {
     CONTROLADORIA_RECOLHE_ASSINATURA: 72,
     OBRA_RECEBE_VIAS: 76,
     FIM: [37, 62, 83]
+};
+
+const url = getServerURL();
+const ambiente =
+    url.includes("fluig.castilho.com.br") ? "PRODUCAO" :
+    url.includes("homologacao.castilho.com.br") ? "HOMOLOGACAO" :
+    "DESENVOLVIMENTO";
+
+// Manuais Contratos
+const idsGED_manuaisContratosCastilho_porAmbiente = {
+    PRODUCAO: 950990,
+    HOMOLOGACAO: 46216,
+    DESENVOLVIMENTO: 36689,
+};
+const idsGED_manuaisContratosForaPadrao_porAmbiente = {
+    PRODUCAO: 950991,
+    HOMOLOGACAO: 46260,
+    DESENVOLVIMENTO: 36688,
 };
 
 $(document).ready(function () {
@@ -32,15 +51,17 @@ $(document).ready(function () {
         loadTelaControladoria();
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.ENGENHEIRO || ATIVIDADE_ATUAL == ATIVIDADES.COORDENADOR_OBRAS || ATIVIDADE_ATUAL == ATIVIDADES.DIRETORIA) {
         loadTelaAprovacao();
+    } else if (ATIVIDADE_ATUAL == ATIVIDADES.ANALISE_EQUIPAMENTO) {
+        loadTelaAnaliseEquipamentos();
     } else if (ATIVIDADE_ATUAL == ATIVIDADES.ASSINATURA_ELETRONICA || ATIVIDADE_ATUAL == ATIVIDADES.INTERMEDIARIO_ASSINATURA_ELETRONICA) {
         loadTelaAssinaturaEletronica();
     } else if ([ATIVIDADES.ADM_OBRA, ATIVIDADES.CONTROLADORIA_RECEBIMENTO, ATIVIDADES.CONTROLADORIA_RECOLHE_ASSINATURA, ATIVIDADES.OBRA_RECEBE_VIAS].includes(ATIVIDADE_ATUAL)) {
         // Se for atividade de Assinatura Manual
         loadTelaAssinaturaManual();
-    } else {
-        loadTelaAprovacao();
+    } else if (ATIVIDADES.FIM.includes(ATIVIDADE_ATUAL)) {
+        setAtividadeAtivaProgresso(5);
+        loadTelaFim();
     }
-
 });
 
 
@@ -56,6 +77,10 @@ var beforeSendValidate = function (numState, nextState) {
 function bindings() {
     FLUIGC.popover('.step', { trigger: 'hover', placement: 'auto' });
 
+    // Select Atividade Destino Reprovação
+    $("#destinoRetorno").on("change", function() {
+        controlaBtnReprovar_comBaseNaSelecaoAtividadeRetorno_ouPorAtividadeAtual($(this).val(), "");
+    });
 
     // Amarra eventos e elementos do HTML, mantendo todas definições de evento agrupadas
     $("#btnGerarArquivo").on("click", asyncGeraCopiaDoModeloDoContratoEAnexaNaSolicitacao);
@@ -73,8 +98,22 @@ function bindings() {
     $("#btnBaixarWord").on("click", baixaDocxDoContrato);
     $("#btnSalvarArquivo").on("click", salvaModeloAlterado);
     $("#btnVisualizarArquivo").on("click", visualizaDocumento);
-    $("#btnEnviarSolicitacao").on("click", enviarSolicitacao);
     $("#btnVisualizarPreContrato").on("click", geraPreContrato);
+
+    // btn Aprovar
+    $("#btnDecisaoAprovar").on("click", function() {
+        $("#decisao").val("Aprovado");
+        enviarSolicitacao();
+    });
+    // btn Enviar
+    $("#btnEnviarSolicitacao").on("click", function() {
+        enviarSolicitacao();
+    });
+    // btn Reprovar
+    $("#btnDecisaoReprovar").on("click", function() {
+        $("#decisao").val("Reprovado");
+        enviarSolicitacao();
+    });
 
     if ($("#formMode").val() != "VIEW") {
         $("#obra").selectize({
@@ -141,15 +180,6 @@ function bindings() {
         $(".endereco-fornecedor").show();
     }
 
-    $("input[name='decisao']").on("change", function () {
-        if ($(this).val() == "Aprovar") {
-            $("#divDestinoRetorno").hide();
-        }
-        else if ($(this).val() == "Retornar") {
-            $("#divDestinoRetorno").show();
-            popularDestinoRetorno()
-        }
-    });
     $("#tipoDocumentacao").on("change", function () {
         const tipo = $(this).val();
         const inputAnexo = document.getElementById("inputAnexo");
@@ -162,14 +192,32 @@ function bindings() {
 
     // Aba Dados Gerais
     $("#modeloContrato").on("change", function () {
+
+        // Quando houver change, seta como "NAO" para bloquear o campo de "Tipo Contrato"
+        // Pois pode acontecer de o usuário selecionar um modelo Castilho por exemplo
+        // E aceitar o manual, e em seguida alterar para modelo fora do padrão por exemplo
+        // E nesse caso iria ficar livre o campo de "Tipo Contrato" por causa de ter aceitado o contrato da Castilho antes
+        $("#usuarioDeAcordoManualContrato").val("NAO");
+        controlaBlockCampoTipoContrato_seUsuarioDeAcordoManualContrato($("#usuarioDeAcordoManualContrato").val());
+
+        limpaCampoTipoContrato();
+
         if ($(this).val() == "Contrato fora do modelo") {
             $("#btnAnexarContrato").show();
+            modalContrato_modeloForaPadrao();
+
+        } else if ($(this).val() == "Modelo Castilho") {
+            modalManualContrato_modeloCastilho();
+            $("#btnAnexarContrato").hide();
+
         } else {
             $("#btnAnexarContrato").hide();
         }
     });
 
-    if ($("#origemContrato").val() ? $("#origemContrato").val() : $("#origemContrato").text() == "Aditivos") {
+    // Guard com text pelo o modo VIEW
+    var origemContratoSelecionado = $("#origemContrato").val() ? $("#origemContrato").val() : $("#origemContrato").text()
+    if (origemContratoSelecionado == "Aditivos") {
         $(".divTipoAlteracao").show();
 
     } else {
@@ -334,6 +382,10 @@ function bindings() {
     $("#descontoPorDiaChuva").mask("000%", { reverse: true });
     $("#descontoPorDiaParado").mask("000%", { reverse: true });
     $(".cpfAdministrador").mask("000.000.000-00");
+    $("#cpfRepresentanteFornecedor").mask("000.000.000-00");
+    $("#novoContratoDataInicio").mask("00/00/0000");
+    $("#novoContratoDataFim").mask("00/00/0000");
+    $("#novoContratoCodigo").mask("0.0.000-000/00");
 
     // Validações
     // blur dispara quando o usuário sai do campo
@@ -641,6 +693,11 @@ function bindings() {
         });
     });
 
+    $("#tableTestemunhas").on("click", ".btnDeleteTestemunha", function() {
+        $(this).closest("tr").remove();
+        salvaTestemunhasNoCampoHidden();
+    });
+
     // Paginacao
     $("#btn-avancar").on("click", avancarPagina);
     $("#btn-voltar").on("click", voltarPagina);
@@ -697,6 +754,7 @@ function bindings() {
     // Anexos
     $("#btnAnexarDocumento").on("click", function () { $("#inputAnexo").click() });
     $("#inputAnexo").on("change", onChangeInputAnexo_alteraListagemDeAnexos_criaDocNoFluig);
+    $("#listaAnexos").on("click", ".btn-remove-anexo", onClickRemoveAnexo);
     
     // Transporte de Materiais - Abrir Formato de Cobrança
     $("#formatoCobrancaTransporte").on("change", function () {
@@ -768,83 +826,23 @@ function bindings() {
     });
 }
 
-//alerta imediato quando a nova data de fim é inválida ou <= data de fim atual.
-function validaNovaDataFimTransporte() {
-    var novoFimStr = $("#novaDataFimTransporte").val();
-    if (!novoFimStr) { return; } // nada digitado ainda
 
-    var fimAtual = parseDataBR($("#dataFimContratoTransporte").val());
-    var novoFim  = parseDataBR(novoFimStr);
-
-    if (!novoFim) {
-        FLUIGC.toast({ title: "", message: "Data inválida! Use o formato dd/mm/aaaa.", type: "warning", timeout: 4000 });
-        $("#novaDataFimTransporte").val(""); $("#mesesAditivoTransporte").val("");
-        return;
-    }
-
-    if (fimAtual && novoFim <= fimAtual) {
-        FLUIGC.toast({ title: "", message: "A nova data de fim precisa ser maior que a data de fim atual do contrato!", type: "warning", timeout: 4000 });
-        $("#novaDataFimTransporte").val(""); $("#mesesAditivoTransporte").val("");
-    }
-}
-
-
-
-//meses de contrato = diferença entre a data de fim atual e a nova data de fim
-function atualizaMesesAditivoTransporte() {
-    var fimAtualStr = $("#dataFimContratoTransporte").val();
-    var novoFimStr  = $("#novaDataFimTransporte").val();
-
-    if (!fimAtualStr || !novoFimStr) { $("#mesesAditivoTransporte").val(""); return; }
-
-    var fimAtual = parseDataBR(fimAtualStr);
-    var novoFim  = parseDataBR(novoFimStr);
-
-    if (!fimAtual || !novoFim || novoFim <= fimAtual) {
-        $("#mesesAditivoTransporte").val("");
-        return;
-    }
-
-    // Meses de contrato = diferença entre a data de fim atual e a nova data de fim.
-    var meses = (novoFim.getFullYear() - fimAtual.getFullYear()) * 12 + (novoFim.getMonth() - fimAtual.getMonth());
-    if (novoFim.getDate() < fimAtual.getDate()) { meses--; }
-    $("#mesesAditivoTransporte").val(meses + (meses === 1 ? " mês" : " meses"));
-}
-
-//mostra o campo de valor conforme o Formato de Cobrança do aditivo (Incl/Excl).
-function toggleFormatoCobrancaAditivoTransporte() {
-    var formato = $("#formatoCobrancaAditivo").val();
-    $("#divValorMensalAditivoTransporte").toggle(formato === "Valor Fixo");
-    $("#divValorTAditivoTransporte, #divKmAditivoTransporte").toggle(formato === "Valor por Parâmetro");
-    if (formato !== "Valor Fixo")        { $("#valorMensalAditivoTransporte").val(""); }
-    if (formato !== "Valor por Parâmetro") { $("#valorTAditivoTransporte").val(""); $("#kmAditivoTransporte").val(""); }
-}
-
-function parseDataBR(s) {
-    var digits = (s || "").replace(/\D/g, "");
-    if (digits.length !== 8) { return null; }
-
-    var dia = parseInt(digits.substring(0, 2), 10);
-    var mes = parseInt(digits.substring(2, 4), 10);
-    var ano = parseInt(digits.substring(4, 8), 10);
-
-    var d = new Date(ano, mes - 1, dia);
-    if (d.getFullYear() !== ano || d.getMonth() !== mes - 1 || d.getDate() !== dia) { return null; }
-
-    return d;
-}
-
-
+// Telas
 async function loadTelaInicio() {
     parent.$("#workflowActions").hide();
 
-    $(".panelAprovacao").hide();
+    // Quando abertura da solicitação
+    if ($("#formMode").val() == "ADD") {
+        // Trava campo Tipo Contrato
+        controlaBlockCampoTipoContrato_seUsuarioDeAcordoManualContrato("NAO");
+    }
+
     $(".panelInput").show();
     $("#divTipoAssinaturaContrato").show();
 
     $("#paginationIntegracaoRM").remove();
 
-    $("#historico, #divDecisaoAprovar, #divDecisaoCancelar").hide();
+    controlaBotoesAprovacao_porAtividade();
     mostrarPagina("0");
     setAtividadeAtivaProgresso(0);
     preencherObrasDoUsuario();
@@ -868,16 +866,25 @@ async function loadTelaInicio() {
     preencherCamposViaSessionStorage();
 }
 async function loadTelaInicioRetorno() {
-    $(".panelAprovacao").hide();
+    // Inicializa documentosAnexados a partir do hidden
+    var hiddenAnexos = $("#hiddenDocumentosAnexados").val();
+    documentosAnexados = hiddenAnexos ? JSON.parse(hiddenAnexos) : {};
+
+    controlaBlockCampoTipoContrato_seUsuarioDeAcordoManualContrato();
+    controlaBotoesAprovacao_porAtividade();
     $("#divTipoAssinaturaContrato").show();
     $("#dadosContrato").show();
     $("#paginationIntegracaoRM").remove();
     setAtividadeAtivaProgresso(0);
     preencherObrasDoUsuario();
     buscaFornecedores_preencheOptionsDoCampoLocador();
+    bloqueiaCampos_seJaGeradoContratoRM();
     buscaBancos();
     inicializarCalendario();
     inicializarPeriodoLocacao();
+    $("#selectTestemunha").selectize();
+    asyncAtualizaListaDeAssinantes();
+    carregaTestemunhas();
     initDataTableContratoPrincipal();
 
     initDataTableEquipamentos_aditivoRescisao();
@@ -943,18 +950,6 @@ async function loadTelaInicioRetorno() {
         $("#btnAnexarContrato").hide();
     }
 
-    const hiddenValue = $("#hiddenDocumentosAnexados").val();
-    const anexos = JSON.parse(hiddenValue);
-    documentosAnexados = anexos;
-
-    anexosPorTipoDeContrato($("#tipoContratoBase").val());
-
-    for (const anexo in documentosAnexados) {
-        var dataAnexo = await asyncGetDocumentDetails(documentosAnexados[anexo]);
-
-        insereDocumentoCriado(anexo, documentosAnexados, dataAnexo.data.description, documentosAnexados[anexo]);
-    }
-
     var tipoPessoa = $("#FORNECEDOR_PF_PJ").val();
 
     if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
@@ -966,11 +961,13 @@ async function loadTelaInicioRetorno() {
     }
 }
 function loadTelaJuridico() {
-    $(".panelAprovacao").show();
     $("#rowAnexosSelecao").hide();
     $("#formContainer").show();
-    $("#divBtnEnviar").hide();
     $("#tableEquipamentos, #tableEquipamentosAditivoRescisao").hide();
+
+    controlaBotoesAprovacao_porAtividade();
+    controlaBtnReprovar_comBaseNaSelecaoAtividadeRetorno_ouPorAtividadeAtual("", $("#atividade").val());
+    bloqueiaCampos_seJaGeradoContratoRM();
 
     // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
     $("#tableContratoPrincipalSelecionado").show();
@@ -1033,9 +1030,11 @@ function loadTelaJuridico() {
 }
 async function loadTelaControladoria() {
     parent.$("#workflowActions").hide();
-    $(".panelAprovacao").show();
     $("#rowAnexosSelecao").hide();
     $("#formContainer").show();
+
+    controlaBotoesAprovacao_porAtividade();
+    controlaBtnReprovar_comBaseNaSelecaoAtividadeRetorno_ouPorAtividadeAtual("", $("#atividade").val());
 
     // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
     $("#tableContratoPrincipalSelecionado").show();
@@ -1055,6 +1054,9 @@ async function loadTelaControladoria() {
     $("#dadosRMNovoContrato").show();
     await asyncPreencheOptionsColigada();
     preencheCamposAutomaticamente();
+
+    bloqueiaCamposPagIntegracaoRM_antesDeGeradoContratoRM();
+    bloqueiaCamposPagIntegacaoRM_seJaGeradoContratoRM();
 
     geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
@@ -1123,18 +1125,19 @@ async function loadTelaControladoria() {
         fnWdkRemoveChild($(this).closest("tr")[0]);
     });
 }
-function loadTelaAprovacao() {
+async function loadTelaAprovacao() {
     parent.$("#workflowActions").hide();
-    $(".panelAprovacao, #formContainer").show();
+    $("#formContainer").show();
     $("#rowAnexosSelecao").hide();
     setAtividadeAtivaProgresso(3);
+
+    controlaBotoesAprovacao_porAtividade();
+    controlaBtnReprovar_comBaseNaSelecaoAtividadeRetorno_ouPorAtividadeAtual("", $("#atividade").val());
 
     //PAOLA
     const select = $("#assinaturaContrato");
     select.removeAttr("readonly");
     select.find('option[value="Já Assinado"]').removeAttr("hidden");
-    
-    
     
     // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
     $("#tableContratoPrincipalSelecionado").show();
@@ -1152,7 +1155,75 @@ function loadTelaAprovacao() {
 
     asyncMontaHistorico();
     mostrarPagina("0");
-    geraEquipamentosSelecionados();
+    await geraEquipamentosSelecionados();
+    geraCabecalhoEquipamentos();
+    renderizarAnexosEtapaAprovacao();
+    $("#paginationIntegracaoRM").remove();
+    $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").remove();
+    bloqueiaCamposAprovacao();
+    $(".endereco-fornecedor").slideDown();
+    
+
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
+        $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").hide();
+        $("#btnVisualizarPreContrato").hide();
+    }
+
+    if ($("#temRetencao").val() == "Sim") {
+        $("#divPercentualRetencao").show();
+    } else {
+        $("#divPercentualRetencao").hide();
+    }
+    if ($("#temREIDI").val() == "Sim") {
+        $("#divPercentualReidi").show();
+    } else {
+        $("#divPercentualReidi").hide();
+    }
+    if ($("#temReajuste").val() == "Sim") {
+        $("#divCampoReajuste").show();
+    } else {
+        $("#divCampoReajuste").hide();
+    }
+    $("#divAdicionarTestemunha").hide();
+    carregaTestemunhas();
+
+    if ($("#tipoPagamento").val() == "Depósito") {
+        $("#divPagamento, #divBanco").show();
+    }
+
+    if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
+        $("#temREIDI").closest("div.row").hide();
+        $("#temREIDI").val("Não");
+        $("#percentualREIDI").val("");
+    } else {
+        $("#temREIDI").closest("div.row").show();
+    }
+}
+async function loadTelaAnaliseEquipamentos() {
+    parent.$("#workflowActions").hide();
+    $("#formContainer").show();
+    $("#rowAnexosSelecao").hide();
+    setAtividadeAtivaProgresso(3);
+
+    controlaBotoesAprovacao_porAtividade();
+    controlaBtnReprovar_comBaseNaSelecaoAtividadeRetorno_ouPorAtividadeAtual("", $("#atividade").val());
+    
+    // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
+    $("#tableContratoPrincipalSelecionado").show();
+    // Carrega dados do Contrato Principal selecionado
+    carregaTabelaContratoPrincipalSelecionado();
+    // Oculta Tabela Principal para selecionar o contrato (mostra somente na Inicio)
+    $("#tableContratoPrincipal").hide();
+
+    onChangeTipoContrato($("#tipoContrato"));
+
+    $("#divBotoesEdicaoContrato").show();
+    $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").hide();
+    $("#btnVisualizarPreContrato").hide();
+
+    asyncMontaHistorico();
+    mostrarPagina("0");
+    await geraEquipamentosSelecionados();
     geraCabecalhoEquipamentos();
     renderizarAnexosEtapaAprovacao();
     $("#paginationIntegracaoRM").remove();
@@ -1197,6 +1268,7 @@ function loadTelaAprovacao() {
     }
 }
 function loadTelaAssinaturaManual() {
+    parent.$("#workflowActions").hide();
     $(".panelAprovacao, #formContainer, #dadosContrato").show();
     $("#rowAnexosSelecao").hide();
     setAtividadeAtivaProgresso(4);
@@ -1206,6 +1278,8 @@ function loadTelaAssinaturaManual() {
     geraCabecalhoEquipamentos();
     $("#paginationIntegracaoRM").remove();
     $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").remove();
+
+    controlaBotoesAprovacao_porAtividade();
 
     // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
     $("#tableContratoPrincipalSelecionado").show();
@@ -1223,8 +1297,6 @@ function loadTelaAssinaturaManual() {
     onChangeTipoContrato($("#tipoContrato"));
     bloqueiaCamposAprovacao();
     renderizarAnexosEtapaAprovacao();
-
-    $("#divResolucaoChamado").hide();
 
     if ($("#temRetencao").val() == "Sim") {
         $("#divPercentualRetencao").show();
@@ -1310,6 +1382,65 @@ function loadTelaAssinaturaEletronica() {
 
     $("#divAdicionarTestemunha").hide();
     carregaTestemunhas();
+
+    if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
+        $("#temREIDI").closest("div.row").hide();
+        $("#temREIDI").val("Não");
+        $("#percentualREIDI").val("");
+    } else {
+        $("#temREIDI").closest("div.row").show();
+    }
+}
+function loadTelaFim() {
+    parent.$("#workflowActions").hide();
+    $(".panelAprovacao, #formContainer, #dadosContrato").show();
+    $("#rowAnexosSelecao").hide();
+    setAtividadeAtivaProgresso(4);
+    controlaBotoesAprovacao_porAtividade();
+    asyncMontaHistorico();
+    geraEquipamentosSelecionados();
+    geraCabecalhoEquipamentos();
+    mostrarPagina("0");
+    $("#paginationIntegracaoRM").remove();
+    $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").remove();
+
+    // Mostra a tabela de Contrato Principal Selecionado para Aditivo/Rescisão
+    $("#tableContratoPrincipalSelecionado").show();
+    // Carrega dados do Contrato Principal selecionado
+    carregaTabelaContratoPrincipalSelecionado();
+    // Oculta Tabela Principal para selecionar o contrato (mostra somente na Inicio)
+    $("#tableContratoPrincipal").hide();
+
+    if ($("#modeloContrato").val() == "Contrato fora do modelo") {
+        $("#btnEditarArquivo, #btnSubstituirWord, #btnBaixarWord").hide();
+        $("#btnVisualizarPreContrato").hide();
+    }
+    $(".endereco-fornecedor").slideDown();
+
+    onChangeTipoContrato($("#tipoContrato"));
+    renderizarAnexosEtapaAprovacao();
+
+    if ($("#temRetencao").val() == "Sim") {
+        $("#divPercentualRetencao").show();
+    } else {
+        $("#divPercentualRetencao").hide();
+    }
+    if ($("#temREIDI").val() == "Sim") {
+        $("#divPercentualReidi").show();
+    } else {
+        $("#divPercentualReidi").hide();
+    }
+    if ($("#temReajuste").val() == "Sim") {
+        $("#divCampoReajuste").show();
+    } else {
+        $("#divCampoReajuste").hide();
+    }
+    $("#divAdicionarTestemunha").hide();
+    carregaTestemunhas();
+
+    if ($("#tipoPagamento").val() == "Depósito") {
+        $("#divPagamento, #divBanco").show();
+    }
 
     if (!obraPermiteReidi(CODCOLIGADA, CODCCUSTO)) {
         $("#temREIDI").closest("div.row").hide();

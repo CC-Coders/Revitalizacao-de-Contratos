@@ -371,13 +371,6 @@
   z-index: 100000;
 }
 
-
-.divImageUser>img{
-	border-radius: 50%;
-}
-#divLinhasHistorico{
-}
-
 .selectize-dropdown .active:not(.selected){
     background-color: lightgray !important;
     color: black !important;
@@ -599,3 +592,124 @@
   color: rgb(88, 89, 91) !important; /* Cor que o Fluig usa para os campos */
   cursor: not-allowed; /* Cursor de "proibido" ao passar o mouse no campo */
 }
+
+/* =========================== 
+  PDF Manual Contrato
+*/
+#pdfManualContrato {
+    min-height: 100vh;
+    width: 100%;
+}
+.viewerPdf {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.btnArea {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+.checkboxAceite {
+    margin-top: 1.4em;
+}
+/* =========================== 
+*/
+
+
+/* =========================== 
+  Readonly
+*/
+
+/* Inputs */
+.fluig-style-guide input.form-control[readonly] {
+    color: rgb(88, 89, 91) !important; /* Cor que o Fluig usa para os campos */
+    background-color: #eeeeee !important; /* Cor de fundo do campo */
+    cursor: not-allowed !important; /* Cursor de "proibido" ao passar o mouse no campo */
+}
+
+
+/* Select */
+.fluig-style-guide select.form-control[readonly],
+select.form-control[readonly] {
+    background-color: #EEEEEE !important;
+    color: #555 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* =========================== 
+*/
+
+
+/* ============================
+   Lista de Anexos
+*/
+#listaAnexos {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+/* Cada linha do documento: ícone + texto centralizados */
+#listaAnexos > li {
+    display: flex;
+    align-items: center;   /* centraliza ícone e texto verticalmente */
+    gap: 2px !important;              /* espaço entre ícone e nome (dispensa o " " no HTML) */
+    flex-wrap: wrap;        /* deixa os anexos (Visualizar/lixeira) quebrarem p/ baixo */
+    padding: 3px 0;
+}
+
+/* O cabeçalho "✅ Tipo:" também vira flex para alinhar o ícone com o <b> */
+#listaAnexos > li > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px !important;
+}
+
+/* Os glifos flaticon: mesma altura da linha, sem deslocamento */
+#listaAnexos .flaticon,
+#listaAnexos [class^="flaticon-"],
+#listaAnexos [class*=" flaticon-"] {
+    line-height: 1;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Qualquer filho div (carregando / anexo) ocupa a linha toda e recua */
+#listaAnexos > li > div {
+    flex-basis: 100%; /* Força quebra para a própria linha */
+    margin-left: 28px !important; /* Alinha sob o texto, depois do ícone */
+}
+
+/* Anexos filhos (Visualizar / 🗑️) recuados e alinhados */
+#listaAnexos .anexo-multiplo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+    margin-left: 28px !important; /* Alinha sob o texto, depois do ícone */
+}
+
+#listaAnexos .flaticon-close {
+    color: #e84444;
+    -webkit-text-stroke: 1.0px #e84444;
+    font-size: 20px;
+}
+
+#listaAnexos .flaticon-done {
+    color: #2ed02e;
+    -webkit-text-stroke: 1.1px #2ed02e;
+    font-size: 20px;
+}
+
+#listaAnexos .flaticon-trash {
+    color: #d42323;
+	font-size: 20px;
+}
+
+/* =========================== 
+*/

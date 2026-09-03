@@ -10,7 +10,21 @@ function createDataset(fields, constraints, sortFields) {
         if (operacao == "ConsultaEquipPorCcustoFornecedor") {
             lancaErroSeConstraintsObrigatoriasNaoInformadas(c, ["CCUSTO", "CNPJ"]);
 
-            query = "SELECT * FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE (STATUS = 1 OR STATUS = 2) AND CCUSTO = ? AND FORNECEDOR_CNPJ = ?;";
+            /*  
+                Base: castilho_custom
+                Tabela: EQUIPAMENTOS_CONTRATOS_AUXILIAR_STATUS
+                Data: 25/08/26
+
+                1	Pendente Contrato
+                2	Contrato em Andamento com análise pendente
+                3	Contrato em Andamento com análise realizada
+                4	Contrato Vigente
+                5	Equipamento desmobilizado
+                6	Contrato encerrado
+                7	Análise em andamento
+            */
+           
+            query = "SELECT * FROM VIEW_EQUIPAMENTOS_CONTRATOS WHERE (STATUS = 1 OR STATUS = 2 OR STATUS = 3) AND CCUSTO = ? AND FORNECEDOR_CNPJ = ?;";
 
             params = [
                 {type: "varchar", value: c.CCUSTO},

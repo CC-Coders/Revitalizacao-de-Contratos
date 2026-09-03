@@ -1,30 +1,44 @@
 function createDataset(fields, constraints, sortFields) {
     try {
         var constraints = getConstraints(constraints);
-        lancaErroSeConstraintsObrigatoriasNaoInformadas(constraints, ["CAMPO","VALOR", "VALORATUAL", "IDEQUI", "PREFIXO"]);
+        lancaErroSeConstraintsObrigatoriasNaoInformadas(constraints, ["CAMPO", "VALOR", "VALORATUAL", "IDEQUI", "PREFIXO"]);
 
+        // CNPJ
         if (constraints.CAMPO == "CNPJ") {
-            var query = "";
-            query += "UPDATE EQUIPAMENTO SET ";
-            query += "    CODIPROP =	CASE ";
-            query += "                    WHEN CODIESPE = 1 THEN (SELECT CODIPROP FROM PROPRIETARIO WHERE INSCFEDERAL = ?) ";
-            query += "                ELSE 0 ";
-            query += "                END, ";
-            query += "    CODITERC = CASE ";
-            query += "                    WHEN CODIESPE = 5 THEN (SELECT CODITERC FROM TERCEIRO WHERE INSCFEDERAL = ?) ";
-            query += "                    ELSE 0 ";
-            query += "                END ";
-            query += "WHERE IDEQUI = ? ";
 
+            // MA
+            if (constraints.CATEGORIA == "MA") {
+                var CODIPROP = buscaCodigoFornecedorSISMAporCNPJ_categoriaMA(constraints.VALOR);
 
-            executeInsert(query,[
-                {"type":"varchar", value:constraints.VALOR},
-                {"type":"varchar", value:constraints.VALOR},
-                {"type":"int", value:constraints.IDEQUI},
-            ], "/jdbc/Sisma");
+                var query;
+                query =  "UPDATE EQUIPAMENTO SET ";
+                query += "CODIPROP = ? ";
+                query += "WHERE IDEQUI = ?";
 
-        }
-        else if(constraints.CAMPO == "Valor de Locação"){
+                // Update
+                executeInsert(query,[
+                    { "type":"int", value: CODIPROP },
+                    { "type":"int", value: constraints.IDEQUI }
+                ], "/jdbc/Sisma");
+
+            // PA
+            } else if (constraints.CATEGORIA == "PA") {
+                var CODITERC = buscaCodigoFornecedorSISMAporCNPJ_categoriaPA(constraints.VALOR);
+
+                var query;
+                query =  "UPDATE EQUIPAMENTO SET ";
+                query += "CODITERC = ? ";
+                query += "WHERE IDEQUI = ?";
+
+                // Update
+                executeInsert(query,[
+                    { "type":"varchar", value: CODITERC },
+                    { "type":"int", value: constraints.IDEQUI }
+                ], "/jdbc/Sisma");
+            }
+
+        // Valor de Locação
+        } else if(constraints.CAMPO == "Valor de Locação"){
             var query = "";
             query += "UPDATE EQUIPAMENTO SET ";
             query += "ALUGUEL_CONTRATO = ? ";
@@ -34,8 +48,10 @@ function createDataset(fields, constraints, sortFields) {
                 {"type":"float", value:constraints.VALOR},
                 {"type":"int", value:constraints.IDEQUI},
             ], "/jdbc/Sisma");
-        }
-        else if(constraints.CAMPO == "Valor de Mão de Obra"){
+
+
+        // Valor de Mão de Obra
+        } else if(constraints.CAMPO == "Valor de Mão de Obra"){
             var query = "";
             query += "UPDATE EQUIPAMENTOS_CONTRATOS_AUXILIAR SET ";
             query += "MAODEOBRA = ? ";
@@ -114,6 +130,28 @@ function notificaAlteracaoNoEquipamento(PREFIXO, CAMPO, VALORANTIGO, VALORNOVO){
     }
 }
 
+// Select SISMA
+function buscaCodigoFornecedorSISMAporCNPJ_categoriaMA(CNPJ) {
+    var query;
+    query = "SELECT CODIPROP FROM PROPRIETARIO WHERE INSCFEDERAL = ?";
+
+    var retorno = executaQuery(query, [
+        { type: "varchar", value: CNPJ }
+    ], "/jdbc/Sisma");
+
+    return retorno[0].CODIPROP;
+}
+function buscaCodigoFornecedorSISMAporCNPJ_categoriaPA(CNPJ) {
+    var query;
+    query = "SELECT CODITERC FROM TERCEIRO WHERE INSCFEDERAL = ?";
+
+    var retorno = executaQuery(query, [
+        { type: "varchar", value: CNPJ }
+    ], "/jdbc/Sisma");
+
+    return retorno[0].CODITERC;
+}
+
 
 // Utils
 function getConstraints(constraints) {
@@ -148,6 +186,61 @@ function lancaErroSeConstraintsObrigatoriasNaoInformadas(constraints, listConstr
         }
     } catch (error) {
         throw error;
+    }
+}
+function executaQuery(query, constraints, dataSource) {
+    try {
+        var dataSource = dataSource;
+        var ic = new javax.naming.InitialContext();
+        var ds = ic.lookup(dataSource);
+
+        var conn = ds.getConnection();
+        var stmt = conn.prepareStatement(query);
+
+        var counter = 1;
+        for (var i = 0; i < constraints.length; i++) {
+            var val = constraints[i];
+            if (val.type == "int") {
+                stmt.setInt(counter, val.value);
+            }
+            else if (val.type == "float") {
+                stmt.setFloat(counter, val.value);
+            }
+            else if (val.type == "date") {
+                stmt.setString(counter, val.value);
+            }
+            else if (val.type == "datetime") {
+                stmt.setString(counter, val.value);
+            } else {
+                stmt.setString(counter, val.value);
+            }
+            counter++;
+        }
+
+        var rs = stmt.executeQuery();
+        var columnCount = rs.getMetaData().getColumnCount();
+        var retorno = [];
+
+        while (rs.next()) {
+            var linha = {};
+            for (var j = 1; j < columnCount + 1; j++) {
+                linha[rs.getMetaData().getColumnName(j)] = rs.getObject(rs.getMetaData().getColumnName(j)) + "";
+            }
+            retorno.push(linha);
+        }
+
+        return retorno;
+
+    } catch (e) {
+        log.error("ERRO==============> " + e.message);
+        throw e;
+    } finally {
+        if (stmt != null) {
+            stmt.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
     }
 }
 function executeInsert(query, constraints, dataSource) {
